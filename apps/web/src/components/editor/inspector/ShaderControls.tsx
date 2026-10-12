@@ -8,6 +8,7 @@ import {
   type MotionShaderParamDef,
   type MotionShaderParamValue,
 } from "@openreel/core";
+import { t } from "@/i18n";
 import { PropertySlider } from "./shell/PropertySlider";
 import { ColorSelector } from "../../../motion/components/primitives";
 
@@ -39,7 +40,7 @@ export function groupShaderDefsByCollection(
   const buckets = new Map<string, Array<{ value: string; label: string }>>();
 
   for (const def of defs) {
-    const title = def.collection ?? "Built-in";
+    const title = def.collection ?? t("visual.presets.shaderGroups.builtIn");
     const bucket = buckets.get(title);
     const option = {
       value: def.id,
@@ -63,7 +64,7 @@ export function groupShaderDefsByCollection(
   return [
     {
       type: "section" as const,
-      title: "General",
+      title: t("visual.presets.shaderGroups.general"),
       options: leading,
     },
     ...sections,
@@ -106,7 +107,7 @@ const ShaderColorField: React.FC<{
       <ColorSelector
         value={value}
         onChange={onChange}
-        label={`Select ${label.toLowerCase()}`}
+        label={t("visual.shader.selectColor", { label: label.toLowerCase() })}
       />
     </div>
   </div>

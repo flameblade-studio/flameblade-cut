@@ -323,7 +323,7 @@ export const EffectsTab: React.FC<EffectsTabProps> = ({
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <Text type="supporting" color="secondary" className="text-[10px]">
-                Enable
+                {t("visual.tabs.enable")}
               </Text>
               <MockToggle
                 ariaLabel={t("inspector.sections.enableChromaKey")}
@@ -335,7 +335,7 @@ export const EffectsTab: React.FC<EffectsTabProps> = ({
               <>
                 <div className="flex items-center justify-between">
                   <Text type="supporting" color="secondary" className="text-[10px]">
-                    Key Color
+                    {t("inspector.sections.keyColor")}
                   </Text>
                   <ToolcraftTextInputControl
                     label={t("inspector.sections.keyColor")}

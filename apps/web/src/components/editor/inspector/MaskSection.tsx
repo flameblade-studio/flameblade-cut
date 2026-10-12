@@ -220,7 +220,7 @@ const MaskItem: React.FC<{
                       {index + 1}
                     </Text>
                     <NumberInput
-                      ariaLabel={`Point ${index + 1} X percent`}
+                      ariaLabel={t("visual.mask.pointX", { index: index + 1 })}
                       size="sm"
                       value={point.x * 100}
                       min={0}
@@ -236,7 +236,7 @@ const MaskItem: React.FC<{
                       }}
                     />
                     <NumberInput
-                      ariaLabel={`Point ${index + 1} Y percent`}
+                      ariaLabel={t("visual.mask.pointY", { index: index + 1 })}
                       size="sm"
                       value={point.y * 100}
                       min={0}
@@ -270,7 +270,7 @@ const MaskItem: React.FC<{
                 ))}
               </div>
               <Text type="supporting" color="secondary" className="text-[8px] leading-tight">
-                X and Y are composition percentages. Adjust points for precise custom cutouts.
+                {t("visual.mask.pointsHint")}
               </Text>
             </div>
           )}
@@ -306,7 +306,7 @@ const MaskItem: React.FC<{
                   {(["bounds", "alpha", "luminance"] as const).map((m) => (
                     <Button
                       key={m}
-                      label={m}
+                      label={t(`visual.mask.channels.${m}`)}
                       onClick={() =>
                         onSetMatteSource(mask.sourceClipId ?? "", m)
                       }
@@ -323,9 +323,9 @@ const MaskItem: React.FC<{
                 </div>
               </div>
               <Text type="supporting" color="secondary" className="text-[8.5px] leading-tight">
-                The chosen clip&apos;s {mask.matteSource ?? "bounds"}{" "}
-                drive the visible region of this clip. Animate the source
-                clip&apos;s transform to animate the mask.
+                {t("visual.mask.matteHint", {
+                  channel: t(`visual.mask.channels.${mask.matteSource ?? "bounds"}`),
+                })}
               </Text>
             </div>
           )}
@@ -415,17 +415,19 @@ export const MaskSection: React.FC<MaskSectionProps> = ({ clipId }) => {
       }
     }
     try {
-      for (const t of getAllTextClips()) {
+      for (const textClip of getAllTextClips()) {
         opts.push({
-          id: t.id,
-          label: `Text • "${t.text.slice(0, 20)}${t.text.length > 20 ? "…" : ""}"`,
+          id: textClip.id,
+          label: t("visual.mask.textSource", {
+            text: `${textClip.text.slice(0, 20)}${textClip.text.length > 20 ? "…" : ""}`,
+          }),
         });
       }
     } catch {
       /* getAllTextClips may not be available for some clip contexts */
     }
     return opts;
-  }, [project, getAllTextClips]);
+  }, [project, getAllTextClips, t]);
 
   useEffect(() => {
     let cancelled = false;
@@ -764,7 +766,7 @@ export const MaskSection: React.FC<MaskSectionProps> = ({ clipId }) => {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <Text type="supporting" color="secondary" className="text-[10px] font-medium">
-              Masks ({masks.length})
+              {t("visual.mask.count", { count: masks.length })}
             </Text>
             <Button
               label={t("inspector.mask.clearAll")}

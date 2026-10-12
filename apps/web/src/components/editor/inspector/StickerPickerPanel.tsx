@@ -5,6 +5,7 @@ import { ToolcraftCard as Card } from "@openreel/ui";
 import { ToolcraftClickableCard as ClickableCard } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
 import { ToolcraftTextInputControl } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
 import { useProjectStore } from "../../../stores/project-store";
 import { useTimelineStore } from "../../../stores/timeline-store";
 import { useUIStore } from "../../../stores/ui-store";
@@ -23,9 +24,11 @@ interface EmojiButtonProps {
   onAdd: () => void;
 }
 
-const EmojiButton: React.FC<EmojiButtonProps> = ({ emoji, onAdd }) => (
+const EmojiButton: React.FC<EmojiButtonProps> = ({ emoji, onAdd }) => {
+  const { t } = useTranslation();
+  return (
   <ClickableCard
-    label={`Add ${emoji.name}`}
+    label={t("visual.stickers.addItem", { name: emoji.name })}
     onClick={onAdd}
     width={40}
     height={40}
@@ -35,16 +38,19 @@ const EmojiButton: React.FC<EmojiButtonProps> = ({ emoji, onAdd }) => (
   >
     {emoji.emoji}
   </ClickableCard>
-);
+  );
+};
 
 interface StickerCardProps {
   sticker: StickerItem;
   onAdd: () => void;
 }
 
-const StickerCard: React.FC<StickerCardProps> = ({ sticker, onAdd }) => (
+const StickerCard: React.FC<StickerCardProps> = ({ sticker, onAdd }) => {
+  const { t } = useTranslation();
+  return (
   <ClickableCard
-    label={`Add ${sticker.name}`}
+    label={t("visual.stickers.addItem", { name: sticker.name })}
     onClick={onAdd}
     padding={2}
     variant="muted"
@@ -65,9 +71,11 @@ const StickerCard: React.FC<StickerCardProps> = ({ sticker, onAdd }) => (
       {sticker.name}
     </Text>
   </ClickableCard>
-);
+  );
+};
 
 export const StickerPickerPanel: React.FC = () => {
+  const { t } = useTranslation();
   const project = useProjectStore((state) => state.project);
   const createStickerClip = useProjectStore((state) => state.createStickerClip);
   const playheadPosition = useTimelineStore((state) => state.playheadPosition);
@@ -158,11 +166,11 @@ export const StickerPickerPanel: React.FC = () => {
       setImportMessage(null);
       setImportError(null);
       if (!file.type.startsWith("image/")) {
-        setImportError("Choose a PNG, JPEG, WebP, GIF, or SVG image.");
+        setImportError(t("visual.stickers.errorType"));
         return;
       }
       if (file.size > 15 * 1024 * 1024) {
-        setImportError("Sticker files must be smaller than 15 MB.");
+        setImportError(t("visual.stickers.errorSize", { size: 15 }));
         return;
       }
 
@@ -177,21 +185,24 @@ export const StickerPickerPanel: React.FC = () => {
         setSearchQuery("");
         const created = await handleAddSticker(sticker);
         if (!created) {
-          setImportError("The sticker was imported but could not be added to the timeline.");
+          setImportError(t("visual.stickers.errorAdd"));
           return;
         }
         setImportMessage(
-          `${sticker.name} added at ${formatStickerTime(playheadPosition)}`,
+          t("visual.stickers.added", {
+            name: sticker.name,
+            time: formatStickerTime(playheadPosition),
+          }),
         );
       } catch (error) {
         console.error("Failed to import custom sticker", error);
-        setImportError("Could not read this image. Try exporting it as PNG or WebP.");
+        setImportError(t("visual.stickers.errorRead"));
       } finally {
         setIsImporting(false);
         if (fileInputRef.current) fileInputRef.current.value = "";
       }
     },
-    [handleAddSticker, playheadPosition],
+    [handleAddSticker, playheadPosition, t],
   );
 
   return (
@@ -204,17 +215,17 @@ export const StickerPickerPanel: React.FC = () => {
         <Smile size={16} className="text-primary" aria-hidden />
         <div className="flex flex-col gap-0.5 min-w-0">
           <Text type="body" color="primary" weight="bold" display="block" className="text-[11px]">
-            Stickers & Emojis
+            {t("visual.stickers.title")}
           </Text>
           <Text type="supporting" color="secondary" display="block" className="text-[9px]">
-            Add fun elements to your video
+            {t("visual.stickers.subtitle")}
           </Text>
         </div>
       </Card>
 
       <div className="flex gap-1">
         <Button
-          label="Emojis"
+          label={t("visual.stickers.emojis")}
           icon={<Smile size={12} aria-hidden />}
           variant={activeTab === "emojis" ? "primary" : "secondary"}
           size="sm"
@@ -222,7 +233,7 @@ export const StickerPickerPanel: React.FC = () => {
           className="flex-1"
         />
         <Button
-          label="Stickers"
+          label={t("visual.stickers.stickers")}
           icon={<Sticker size={12} aria-hidden />}
           variant={activeTab === "stickers" ? "primary" : "secondary"}
           size="sm"
@@ -233,12 +244,14 @@ export const StickerPickerPanel: React.FC = () => {
 
       <div className="relative">
         <ToolcraftTextInputControl
-          label={activeTab === "emojis" ? "Search emojis" : "Search stickers"}
+          label={activeTab === "emojis" ? t("visual.stickers.searchEmojis") : t("visual.stickers.searchStickers")}
           isLabelHidden
           size="sm"
           width="100%"
           placeholder={
-            activeTab === "emojis" ? "Search emojis..." : "Search stickers..."
+            activeTab === "emojis"
+              ? t("visual.stickers.searchEmojisPlaceholder")
+              : t("visual.stickers.searchStickersPlaceholder")
           }
           value={searchQuery}
           onChange={setSearchQuery}
@@ -251,7 +264,7 @@ export const StickerPickerPanel: React.FC = () => {
           {emojiCategories.map((cat) => (
             <Button
               key={cat.id}
-              label={`${cat.emojis[0]?.emoji || "😀"} ${cat.name}`}
+              label={`${cat.emojis[0]?.emoji || "😀"} ${t(`visual.presets.emojiCategories.${cat.id}`, { defaultValue: cat.name })}`}
               onClick={() => setSelectedCategory(cat.id)}
               variant={selectedCategory === cat.id ? "primary" : "secondary"}
               size="sm"
@@ -288,7 +301,7 @@ export const StickerPickerPanel: React.FC = () => {
                 aria-hidden
               />
               <Text type="supporting" color="secondary" className="text-[10px]">
-                No emojis found
+                {t("visual.stickers.noEmojis")}
               </Text>
             </div>
           ) : (
@@ -313,10 +326,10 @@ export const StickerPickerPanel: React.FC = () => {
                 aria-hidden
               />
               <Text type="supporting" color="secondary" className="text-[10px]">
-                No stickers yet
+                {t("visual.stickers.noStickers")}
               </Text>
               <Text type="supporting" color="secondary" className="text-[9px] mt-1">
-                Import custom stickers below
+                {t("visual.stickers.importHint")}
               </Text>
             </div>
           ) : (
@@ -338,14 +351,14 @@ export const StickerPickerPanel: React.FC = () => {
           ref={fileInputRef}
           type="file"
           accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml"
-          aria-label="Choose custom sticker image"
+          aria-label={t("visual.stickers.chooseImage")}
           className="sr-only"
           onChange={(event) =>
             void handleImportSticker(event.currentTarget.files?.[0])
           }
         />
         <Button
-          label={isImporting ? "Importing sticker…" : "Import & Add Sticker"}
+          label={isImporting ? t("visual.stickers.importing") : t("visual.stickers.import")}
           icon={<Plus size={12} aria-hidden />}
           variant="secondary"
           size="sm"
@@ -373,8 +386,8 @@ export const StickerPickerPanel: React.FC = () => {
 
       <Text type="supporting" color="secondary" className="block text-[9px] text-center">
         {activeTab === "emojis"
-          ? `${stickerLibrary.getAllEmojis().length} emojis available`
-          : `${allStickers.length} stickers available`}
+          ? t("visual.stickers.emojiCount", { count: stickerLibrary.getAllEmojis().length })
+          : t("visual.stickers.stickerCount", { count: allStickers.length })}
       </Text>
     </div>
   );

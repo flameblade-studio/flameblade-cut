@@ -172,7 +172,18 @@
     "start": "立即启动",
     "libraryDefault": "默认：视频\\Flameblade Cut",
     "libraryReset": "恢复默认",
-    "libraryHint": "之后生成的视频都保存在这里，每天一个子文件夹。单个视频也可以用“另存为”保存到任意位置。"
+    "libraryHint": "之后生成的视频都保存在这里，每天一个子文件夹。单个视频也可以用“另存为”保存到任意位置。",
+    "model": {
+      "label": "主模型",
+      "options": {
+        "auto": "自动（按显卡选择已安装的模型）",
+        "nvfp4": "NVFP4・RTX 50 系列专用，最快",
+        "int8": "INT8・RTX 30／40 系列等其他 NVIDIA 显卡",
+        "bf16": "BF16・原始精度，文件最大（约 42 GB）"
+      },
+      "autoHint": "RTX 50 系列优先用 NVFP4，其他显卡用 INT8，找不到时改用 BF16。预估时间以 RTX 5060 Ti＋NVFP4 实测为准，其他组合会不同。",
+      "fileHint": "需要模型文件 {{file}}（放在 ComfyUI 的 models/diffusion_models）。"
+    }
   },
   "time": {
     "justNow": "刚刚",
@@ -188,7 +199,7 @@
     "engine": "翻译引擎",
     "engineLocal": "本地翻译・免费",
     "engineOpenai": "OpenAI",
-    "openaiNoKey": "尚未设置 OpenAI 密钥，请先在设置页输入",
+    "openaiNoKey": "尚未设置 OpenAI 密钥，请到“设置 → API 密钥”输入",
     "localNote": "首次使用会下载翻译模型（{{size}}），之后可离线使用",
     "preview": "英文提示词",
     "previewButton": "预览翻译",
@@ -201,5 +212,11 @@
     "sentChip": "英文",
     "sentTitle": "实际发送的英文：{{prompt}}（点击复制）",
     "directorHint": "每个镜头都会按此设置分别翻译"
+  },
+  "errors": {
+    "model": {
+      "missing": "找不到 LTX-2.5 主模型文件。请到 Hugging Face 的 Lightricks/LTX-2.5 下载适合你显卡的版本（RTX 50 系列用 NVFP4，其他用 INT8），放进 ComfyUI 的 models/diffusion_models，或在 AI 引擎设置中改选已安装的模型。",
+      "nvfp4-unsupported": "你的显卡不支持 NVFP4 模型（仅 RTX 50 系列可用）。请下载 INT8 版主模型，或在 AI 引擎设置中改选 INT8。"
+    }
   }
 }

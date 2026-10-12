@@ -2,8 +2,11 @@ import type { Plugin } from "vite";
 import { readFileSync, writeFileSync, rmSync, existsSync } from "node:fs";
 import { join } from "node:path";
 
+// Families the editor UI itself uses (tailwind `sans` / `mono`) must stay
+// curated, or the desktop app falls back to the OS default font for them.
 const CURATED = new Set([
   "Geist",
+  "Geist Mono",
   "Inter",
   "Poppins",
   "Montserrat",

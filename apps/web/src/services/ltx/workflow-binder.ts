@@ -37,6 +37,8 @@ export interface BinderInputs {
   lastImage: ComfyFileRef | null;
   /** Uploaded reference sheet (ref2v); omitted or null for every other mode. */
   referenceSheet?: ComfyFileRef | null;
+  /** LTX-2.5 transformer file the UNETLoader loads (see `model-choice.ts`). */
+  transformerFile: string;
 }
 
 export class WorkflowBindingError extends Error {
@@ -204,9 +206,16 @@ function setInput(key: string, value: unknown): (node: ComfyApiNode) => void {
   };
 }
 
-/** Bindings every template shares: the seed and the output file name. */
+/** Bindings every template shares: the model file, the seed and the output file name. */
 function commonBindings(request: GenerationRequest, inputs: BinderInputs): Binding[] {
   return [
+    {
+      label: "UNETLoader",
+      classType: "UNETLoader",
+      matches: () => true,
+      cardinality: "single",
+      apply: setInput("unet_name", inputs.transformerFile),
+    },
     {
       label: "RandomNoise",
       classType: "RandomNoise",

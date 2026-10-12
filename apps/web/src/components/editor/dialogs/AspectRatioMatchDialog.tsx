@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Maximize2 } from "@/icons/lucide-compat";
 import { ToolcraftButton as Button } from "@openreel/ui";
 import { ToolcraftCard as Card } from "@openreel/ui";
@@ -25,6 +26,7 @@ export const AspectRatioMatchDialog: React.FC<AspectRatioMatchDialogProps> = ({
   onConfirm,
   onCancel,
 }) => {
+  const { t } = useTranslation();
   const videoAspect = (videoWidth / videoHeight).toFixed(2);
   const currentAspect = (currentWidth / currentHeight).toFixed(2);
 
@@ -38,8 +40,8 @@ export const AspectRatioMatchDialog: React.FC<AspectRatioMatchDialogProps> = ({
       <Layout
         header={
           <DialogHeader
-            title="Match Video Dimensions?"
-            subtitle="The video you're adding has different dimensions than your current project settings."
+            title={t("tools.aspectMatch.title")}
+            subtitle={t("tools.aspectMatch.subtitle")}
             onOpenChange={(open) => !open && onCancel()}
             startContent={<Maximize2 size={20} className="text-primary" aria-hidden />}
           />
@@ -51,13 +53,13 @@ export const AspectRatioMatchDialog: React.FC<AspectRatioMatchDialogProps> = ({
             <Card variant="muted" padding={3}>
               <div>
                 <Text type="supporting" color="secondary" display="block" className="mb-1">
-                  Video Dimensions
+                  {t("tools.aspectMatch.video")}
                 </Text>
                 <Text type="label" weight="bold" display="block">
                   {videoWidth} x {videoHeight}
                 </Text>
                 <Text type="supporting" color="secondary" display="block" className="mt-0.5">
-                  Aspect Ratio: {videoAspect}
+                  {t("tools.aspectMatch.ratio", { ratio: videoAspect })}
                 </Text>
               </div>
             </Card>
@@ -65,22 +67,20 @@ export const AspectRatioMatchDialog: React.FC<AspectRatioMatchDialogProps> = ({
             <Card variant="default" padding={3} className="border border-border/50">
               <div>
                 <Text type="supporting" color="secondary" display="block" className="mb-1">
-                  Current Project
+                  {t("tools.aspectMatch.project")}
                 </Text>
                 <Text type="label" weight="bold" display="block">
                   {currentWidth} x {currentHeight}
                 </Text>
                 <Text type="supporting" color="secondary" display="block" className="mt-0.5">
-                  Aspect Ratio: {currentAspect}
+                  {t("tools.aspectMatch.ratio", { ratio: currentAspect })}
                 </Text>
               </div>
             </Card>
           </div>
 
           <Text type="supporting" color="secondary" display="block">
-            Match the project dimensions to this video for a clean fit, or keep
-            the current canvas. Your video will be placed at its original size
-            so you can resize it freely.
+            {t("tools.aspectMatch.hint")}
           </Text>
         </div>
           </LayoutContent>
@@ -89,13 +89,13 @@ export const AspectRatioMatchDialog: React.FC<AspectRatioMatchDialogProps> = ({
           <LayoutFooter hasDivider>
             <div className="flex gap-3">
               <Button
-                label="Keep Current"
+                label={t("tools.aspectMatch.keep")}
                 variant="secondary"
                 className="flex-1"
                 onClick={onCancel}
               />
               <Button
-                label="Match Video"
+                label={t("tools.aspectMatch.match")}
                 variant="primary"
                 className="flex-1"
                 onClick={onConfirm}

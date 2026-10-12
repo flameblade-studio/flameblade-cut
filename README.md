@@ -18,7 +18,7 @@
 
 ---
 
-> **開發中（0.1.0 預覽版）。** 功能與介面仍在打磨，歡迎回報問題。
+> **開發中（0.2.0 預覽版）。** 功能與介面仍在打磨，歡迎回報問題。
 
 ## 能做什麼
 
@@ -38,16 +38,16 @@
 
 - Windows 10／11（64 位元）
 - **只剪輯**：一般電腦即可。
-- **AI 生成影片**：NVIDIA **RTX 50 系列**顯示卡（預設流程使用 NVFP4 主模型；建議 16 GB 顯示記憶體以上）、64 GB 系統記憶體，並自行安裝：
+- **AI 生成影片**：NVIDIA 顯示卡（建議 16 GB 顯示記憶體以上）、64 GB 系統記憶體，並自行安裝：
   - [ComfyUI](https://github.com/comfyanonymous/ComfyUI)（git 版或免安裝版皆可）
   - LTX-2.5 模型檔（需在 [Hugging Face](https://huggingface.co/Lightricks) 同意 Lightricks 的授權條款後下載，依 ComfyUI 官方 LTX-2.5 範本的說明放進對應的 `models` 子資料夾）：
-    - `ltx-2.5-22b-distilled-transformer-nvfp4.safetensors`
+    - 主模型三選一，依顯示卡挑選：RTX 50 系列用 `ltx-2.5-22b-distilled-transformer-nvfp4.safetensors`（18.7 GB，最快）；RTX 30／40 系列等其他顯示卡用 `ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors`（21.5 GB）；或原始精度 `ltx-2.5-22b-distilled-transformer-bf16.safetensors`（42 GB）
     - `gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors`、`gemma4_e2b_it_int8_convrot.safetensors`
     - `ltx-2.5-video-vae-conv-bf16.safetensors`、`ltx-2.5-audio-vae-bf16.safetensors`
     - `ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors`
     - 參考生影片另需：`ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors` 與 [ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo) 擴充節點
 
-  安裝好之後，在「AI 生成」頁右上角的齒輪設定 ComfyUI 資料夾即可。**你不需要自己開 ComfyUI**，炎劍剪輯會在需要時自動在背景啟動、離開時自動關閉。其他顯示卡（RTX 40 系列等）的模型選擇將在之後的版本提供。
+  安裝好之後，在「AI 生成」頁右上角的齒輪設定 ComfyUI 資料夾即可。**你不需要自己開 ComfyUI**，炎劍剪輯會在需要時自動在背景啟動、離開時自動關閉。主模型預設為「自動」：RTX 50 系列用 NVFP4、其他顯示卡用 INT8，也可以在同一個設定視窗手動指定。INT8 與 BF16 版目前只確認過流程正確，尚未在 RTX 30／40 系列實機測過速度。
 
 ## 安裝
 

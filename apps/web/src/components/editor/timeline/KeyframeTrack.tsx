@@ -1,4 +1,5 @@
 import React, { useMemo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import type { Keyframe, Clip } from "@openreel/core";
 import { KeyframeMarker } from "./KeyframeMarker";
 import { EasingCurve } from "./EasingCurve";
@@ -14,15 +15,8 @@ const PROPERTY_COLORS: Record<string, string> = {
   default: "#64748b",
 };
 
-const PROPERTY_LABELS: Record<string, string> = {
-  "position.x": "Position X",
-  "position.y": "Position Y",
-  "scale.x": "Scale X",
-  "scale.y": "Scale Y",
-  rotation: "Rotation",
-  opacity: "Opacity",
-  borderRadius: "Border Radius",
-};
+/** Animated properties with a translated label (tools.keyframeEditor.properties). */
+const LABELLED_PROPERTIES = new Set(["position.x", "position.y", "scale.x", "scale.y", "rotation", "opacity", "borderRadius"]);
 
 interface KeyframeTrackProps {
   clip: Clip;
@@ -48,6 +42,7 @@ export const KeyframeTrack: React.FC<KeyframeTrackProps> = ({
   onKeyframeDelete,
   selectedKeyframeIds,
 }) => {
+  const { t } = useTranslation();
 
   const propertyGroups = useMemo((): PropertyGroup[] => {
     const groups = new Map<string, Keyframe[]>();
@@ -63,10 +58,12 @@ export const KeyframeTrack: React.FC<KeyframeTrackProps> = ({
         property,
         keyframes: keyframes.sort((a, b) => a.time - b.time),
         color: PROPERTY_COLORS[property] || PROPERTY_COLORS.default,
-        label: PROPERTY_LABELS[property] || property,
+        label: LABELLED_PROPERTIES.has(property)
+          ? t(`tools.keyframeEditor.properties.${property.replace(/\./g, "_")}`)
+          : property,
       }))
       .sort((a, b) => a.label.localeCompare(b.label));
-  }, [clip.keyframes]);
+  }, [clip.keyframes, t]);
 
   const handleKeyframeMove = useCallback(
     (keyframeId: string, deltaPixels: number) => {
@@ -83,7 +80,7 @@ export const KeyframeTrack: React.FC<KeyframeTrackProps> = ({
   if (propertyGroups.length === 0) {
     return (
       <div className="h-8 flex items-center justify-center text-[9px] text-text-muted">
-        No keyframes
+        {t("tools.timelineItems.noKeyframes")}
       </div>
     );
   }

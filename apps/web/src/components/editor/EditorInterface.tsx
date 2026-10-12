@@ -441,7 +441,7 @@ export const EditorInterface: React.FC = () => {
                 <React.Suspense
                   fallback={
                     <div className="grid h-full place-items-center text-xs text-fg-muted">
-                      Loading AI Editor…
+                      {t("tools.editorChrome.loadingAiEditor")}
                     </div>
                   }
                 >

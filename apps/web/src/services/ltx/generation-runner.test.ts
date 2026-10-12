@@ -8,6 +8,7 @@ import {
   launchArgsWithMain,
 } from "./generation-runner";
 import { FakeComfyTransport } from "./fake-comfy-transport";
+import { LTX_TRANSFORMER_FILES, modelErrorKind } from "./model-choice";
 import type { ComfyApiPrompt } from "./workflow-binder";
 import type { ReferenceSheetComposer } from "./reference-sheet";
 import {
@@ -163,6 +164,29 @@ describe("GenerationRunner", () => {
       finishedAt: NOW.toISOString(),
       error: null,
     });
+  });
+
+  it("loads the INT8 model automatically on an RTX 40 card", async () => {
+    const h = harness();
+    h.transport.unetNames = [LTX_TRANSFORMER_FILES.nvfp4, LTX_TRANSFORMER_FILES.int8];
+    h.transport.gpuName = "cuda:0 NVIDIA GeForce RTX 4090 : cudaMallocAsync";
+    h.add(record("rec-1", request()));
+    h.runner.enqueue("rec-1");
+    await flush();
+
+    const loaders = Object.values(h.postedPrompt()).filter((node) => node.class_type === "UNETLoader");
+    expect(loaders.map((node) => node.inputs.unet_name)).toEqual([LTX_TRANSFORMER_FILES.int8]);
+  });
+
+  it("fails with a model error before queueing when no LTX model is installed", async () => {
+    const h = harness({ model: "int8" });
+    h.add(record("rec-1", request()));
+    h.runner.enqueue("rec-1");
+    await flush();
+
+    expect(h.transport.requestsTo("POST", "/prompt")).toEqual([]);
+    expect(h.records.get("rec-1")?.status).toBe("failed");
+    expect(modelErrorKind(h.records.get("rec-1")?.error ?? null)).toBe("missing");
   });
 
   it("falls back to /history polling when websocket messages are missed", async () => {

@@ -3,6 +3,8 @@ import { ToolcraftButton as Button } from "@openreel/ui";
 import { ToolcraftCard as Card } from "@openreel/ui";
 import { ToolcraftClickableCard as ClickableCard } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import { PropertySlider } from "./shell/PropertySlider";
 import { Film, Camera, Moon, Palette, Wand2, Check } from "@/icons/lucide-compat";
 import { useProjectStore } from "../../../stores/project-store";
@@ -24,6 +26,16 @@ const CATEGORY_ICONS: Record<string, React.ElementType> = {
   stylized: Wand2,
 };
 
+function filterPresetName(t: TFunction, preset: FilterPreset): string {
+  return t(`visual.presets.filters.${preset.id}.name`, { defaultValue: preset.name });
+}
+
+function filterPresetDescription(t: TFunction, preset: FilterPreset): string {
+  return t(`visual.presets.filters.${preset.id}.description`, {
+    defaultValue: preset.description,
+  });
+}
+
 interface PresetCardProps {
   preset: FilterPreset;
   isApplied: boolean;
@@ -35,9 +47,11 @@ const PresetCard: React.FC<PresetCardProps> = ({
   isApplied,
   onApply,
 }) => {
+  const { t } = useTranslation();
+  const name = filterPresetName(t, preset);
   return (
     <ClickableCard
-      label={`Apply ${preset.name} filter preset`}
+      label={t("visual.filterPresets.applyPreset", { name })}
       onClick={onApply}
       className={`relative w-full p-3 rounded-lg border transition-all text-left ${
         isApplied
@@ -49,12 +63,12 @@ const PresetCard: React.FC<PresetCardProps> = ({
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <Text type="supporting" color="primary" weight="medium">
-              {preset.name}
+              {name}
             </Text>
             {isApplied && <Check size={12} className="text-primary" />}
           </div>
           <Text type="supporting" color="secondary" display="block" className="mt-0.5 text-[9px]">
-            {preset.description}
+            {filterPresetDescription(t, preset)}
           </Text>
         </div>
       </div>
@@ -90,6 +104,7 @@ interface FilterPresetsPanelProps {
 export const FilterPresetsPanel: React.FC<FilterPresetsPanelProps> = ({
   clipId,
 }) => {
+  const { t } = useTranslation();
   const selectedClipIds = useUIStore((state) => state.getSelectedClipIds());
   const addVideoEffect = useProjectStore((state) => state.addVideoEffect);
   const getVideoEffects = useProjectStore((state) => state.getVideoEffects);
@@ -124,9 +139,12 @@ export const FilterPresetsPanel: React.FC<FilterPresetsPanelProps> = ({
       }
 
       setAppliedPresetId(preset.id);
-      toast.success("Filter Applied", `${preset.name} preset applied`);
+      toast.success(
+        t("visual.filterPresets.appliedTitle"),
+        t("visual.filterPresets.appliedBody", { name: filterPresetName(t, preset) }),
+      );
     },
-    [targetClipId, addVideoEffect, getVideoEffects, removeVideoEffect],
+    [targetClipId, addVideoEffect, getVideoEffects, removeVideoEffect, t],
   );
 
   const handleClearEffects = useCallback(async () => {
@@ -138,15 +156,15 @@ export const FilterPresetsPanel: React.FC<FilterPresetsPanelProps> = ({
     }
 
     setAppliedPresetId(null);
-    toast.info("Effects Cleared");
-  }, [targetClipId, getVideoEffects, removeVideoEffect]);
+    toast.info(t("visual.filterPresets.cleared"));
+  }, [targetClipId, getVideoEffects, removeVideoEffect, t]);
 
   if (!targetClipId) {
     return (
       <div className="p-4 text-center">
         <Palette size={24} className="mx-auto mb-2 text-fg-3" />
         <Text type="supporting" color="secondary">
-          Select a video clip to apply filters
+          {t("visual.filterPresets.noClip")}
         </Text>
       </div>
     );
@@ -158,10 +176,10 @@ export const FilterPresetsPanel: React.FC<FilterPresetsPanelProps> = ({
         <Palette size={16} className="text-primary" />
         <div className="flex flex-col gap-0.5">
           <Text type="supporting" color="primary" weight="medium" display="block">
-            Filter Presets
+            {t("visual.filterPresets.title")}
           </Text>
           <Text type="supporting" color="secondary" display="block" className="text-[9px]">
-            One-click color grades
+            {t("visual.filterPresets.subtitle")}
           </Text>
         </div>
       </div>
@@ -172,7 +190,7 @@ export const FilterPresetsPanel: React.FC<FilterPresetsPanelProps> = ({
           return (
             <Button
               key={category.id}
-              label={category.name}
+              label={t(`visual.filterPresets.categories.${category.id}`, { defaultValue: category.name })}
               size="sm"
               variant={selectedCategory === category.id ? "primary" : "secondary"}
               icon={<Icon size={12} aria-hidden />}
@@ -201,7 +219,7 @@ export const FilterPresetsPanel: React.FC<FilterPresetsPanelProps> = ({
       {appliedPresetId && (
         <Card variant="muted" padding={3} className="space-y-3">
           <PropertySlider
-            label="Intensity"
+            label={t("visual.filterPresets.intensity")}
             min={0}
             max={100}
             step={1}
@@ -210,7 +228,7 @@ export const FilterPresetsPanel: React.FC<FilterPresetsPanelProps> = ({
             formatValue={(value) => `${value}%`}
           />
           <Button
-            label="Remove All Effects"
+            label={t("visual.filterPresets.removeAll")}
             size="sm"
             variant="destructive"
             onClick={handleClearEffects}
@@ -220,8 +238,10 @@ export const FilterPresetsPanel: React.FC<FilterPresetsPanelProps> = ({
       )}
 
       <Text type="supporting" color="secondary" className="text-center text-[9px]">
-        {FILTER_PRESETS.length} presets across {FILTER_CATEGORIES.length}{" "}
-        categories
+        {t("visual.filterPresets.summary", {
+          count: FILTER_PRESETS.length,
+          categories: FILTER_CATEGORIES.length,
+        })}
       </Text>
     </div>
   );

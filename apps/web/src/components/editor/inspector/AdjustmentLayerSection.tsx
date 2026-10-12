@@ -17,6 +17,7 @@ import { ToolcraftClickableCard as ClickableCard } from "@openreel/ui";
 import { ToolcraftIconButton as IconButton } from "@openreel/ui";
 import { ToolcraftPopover as Popover } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
 import { PropertySlider } from "./shell/PropertySlider";
 import { useEngineStore } from "../../../stores/engine-store";
 import { useProjectStore } from "../../../stores/project-store";
@@ -33,6 +34,7 @@ const EFFECT_PRESETS: Array<{
   controls: readonly {
     param: string;
     label: string;
+    labelKey: string;
     min: number;
     max: number;
     step: number;
@@ -43,85 +45,85 @@ const EFFECT_PRESETS: Array<{
     id: "brightness",
     name: "Brightness",
     effect: { type: "brightness", params: { value: 12 }, enabled: true },
-    controls: [{ param: "value", label: "Brightness", min: -100, max: 100, step: 1, format: "percent-value" }],
+    controls: [{ param: "value", label: "Brightness", labelKey: "brightness", min: -100, max: 100, step: 1, format: "percent-value" }],
   },
   {
     id: "contrast",
     name: "Contrast",
     effect: { type: "contrast", params: { value: 1.15 }, enabled: true },
-    controls: [{ param: "value", label: "Contrast", min: 0, max: 3, step: 0.01 }],
+    controls: [{ param: "value", label: "Contrast", labelKey: "contrast", min: 0, max: 3, step: 0.01 }],
   },
   {
     id: "saturation",
     name: "Saturation",
     effect: { type: "saturation", params: { value: 1.15 }, enabled: true },
-    controls: [{ param: "value", label: "Saturation", min: 0, max: 3, step: 0.01 }],
+    controls: [{ param: "value", label: "Saturation", labelKey: "saturation", min: 0, max: 3, step: 0.01 }],
   },
   {
     id: "grayscale",
     name: "Grayscale",
     effect: { type: "grayscale", params: { amount: 1 }, enabled: true },
-    controls: [{ param: "amount", label: "Amount", min: 0, max: 1, step: 0.01, format: "percent" }],
+    controls: [{ param: "amount", label: "Amount", labelKey: "amount", min: 0, max: 1, step: 0.01, format: "percent" }],
   },
   {
     id: "sepia",
     name: "Sepia",
     effect: { type: "sepia", params: { amount: 1 }, enabled: true },
-    controls: [{ param: "amount", label: "Amount", min: 0, max: 1, step: 0.01, format: "percent" }],
+    controls: [{ param: "amount", label: "Amount", labelKey: "amount", min: 0, max: 1, step: 0.01, format: "percent" }],
   },
   {
     id: "invert",
     name: "Invert",
     effect: { type: "invert", params: { amount: 1 }, enabled: true },
-    controls: [{ param: "amount", label: "Amount", min: 0, max: 1, step: 0.01, format: "percent" }],
+    controls: [{ param: "amount", label: "Amount", labelKey: "amount", min: 0, max: 1, step: 0.01, format: "percent" }],
   },
   {
     id: "hue",
     name: "Hue Rotate",
     effect: { type: "hue", params: { rotation: 20 }, enabled: true },
-    controls: [{ param: "rotation", label: "Rotation", min: -180, max: 180, step: 1, format: "degrees" }],
+    controls: [{ param: "rotation", label: "Rotation", labelKey: "rotation", min: -180, max: 180, step: 1, format: "degrees" }],
   },
   {
     id: "blur",
     name: "Blur",
     effect: { type: "blur", params: { radius: 6 }, enabled: true },
-    controls: [{ param: "radius", label: "Radius", min: 0, max: 40, step: 0.5, format: "pixels" }],
+    controls: [{ param: "radius", label: "Radius", labelKey: "radius", min: 0, max: 40, step: 0.5, format: "pixels" }],
   },
   {
     id: "sharpen",
     name: "Sharpen",
     effect: { type: "sharpen", params: { amount: 0.6 }, enabled: true },
-    controls: [{ param: "amount", label: "Amount", min: 0, max: 3, step: 0.05 }],
+    controls: [{ param: "amount", label: "Amount", labelKey: "amount", min: 0, max: 3, step: 0.05 }],
   },
   {
     id: "vignette",
     name: "Vignette",
     effect: { type: "vignette", params: { amount: 0.45, midpoint: 0.55, feather: 0.35 }, enabled: true },
     controls: [
-      { param: "amount", label: "Amount", min: 0, max: 1, step: 0.01, format: "percent" },
-      { param: "midpoint", label: "Midpoint", min: 0, max: 1, step: 0.01, format: "percent" },
-      { param: "feather", label: "Feather", min: 0.01, max: 1, step: 0.01, format: "percent" },
+      { param: "amount", label: "Amount", labelKey: "amount", min: 0, max: 1, step: 0.01, format: "percent" },
+      { param: "midpoint", label: "Midpoint", labelKey: "midpoint", min: 0, max: 1, step: 0.01, format: "percent" },
+      { param: "feather", label: "Feather", labelKey: "feather", min: 0.01, max: 1, step: 0.01, format: "percent" },
     ],
   },
   {
     id: "temperature",
     name: "Temperature",
     effect: { type: "temperature", params: { value: 20 }, enabled: true },
-    controls: [{ param: "value", label: "Warm / Cool", min: -100, max: 100, step: 1 }],
+    controls: [{ param: "value", label: "Warm / Cool", labelKey: "warmCool", min: -100, max: 100, step: 1 }],
   },
   {
     id: "tint",
     name: "Tint",
     effect: { type: "tint", params: { value: 15 }, enabled: true },
-    controls: [{ param: "value", label: "Green / Magenta", min: -100, max: 100, step: 1 }],
+    controls: [{ param: "value", label: "Green / Magenta", labelKey: "greenMagenta", min: -100, max: 100, step: 1 }],
   },
   {
     id: "grain",
     name: "Film Grain",
     effect: { type: "grain", params: { amount: 0.08, size: 1 }, enabled: true },
     controls: [
-      { param: "amount", label: "Amount", min: 0, max: 0.5, step: 0.01, format: "percent" },
-      { param: "size", label: "Size", min: 0.5, max: 4, step: 0.1 },
+      { param: "amount", label: "Amount", labelKey: "amount", min: 0, max: 0.5, step: 0.01, format: "percent" },
+      { param: "size", label: "Size", labelKey: "size", min: 0.5, max: 4, step: 0.1 },
     ],
   },
 ];
@@ -167,6 +169,9 @@ function adjustmentEffectPreviewStyle(type: string): React.CSSProperties {
 export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
   clipId,
 }) => {
+  const { t } = useTranslation();
+  const effectName = (id: string | undefined, fallback: string): string =>
+    id ? t(`visual.adjustment.effects.${id}`, { defaultValue: fallback }) : fallback;
   const getAdjustmentLayerEngine = useEngineStore(
     (state) => state.getAdjustmentLayerEngine,
   );
@@ -236,12 +241,12 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
     const layer = adjustmentLayerEngine.createAdjustmentLayer(
       currentTrack.id,
       startTime,
-      { duration, name: `Adjustment ${allLayers.length + 1}` },
+      { duration, name: t("visual.adjustment.defaultName", { index: allLayers.length + 1 }) },
     );
 
     setExpandedLayer(layer.id);
     void persistLayers(adjustmentLayerEngine);
-  }, [adjustmentLayerEngine, currentTrack, clipId, allLayers.length, persistLayers]);
+  }, [adjustmentLayerEngine, currentTrack, clipId, allLayers.length, persistLayers, t]);
 
   const handleDeleteLayer = useCallback(
     (layerId: string) => {
@@ -404,8 +409,9 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
 
   const renderLayerItem = (layer: AdjustmentLayer) => {
     const isExpanded = expandedLayer === layer.id;
-    const selectedBlendMode =
-      BLEND_MODES.find((mode) => mode.id === layer.blendMode)?.name || "Normal";
+    const selectedBlendMode = t(
+      `visual.adjustment.blendModes.${BLEND_MODES.some((mode) => mode.id === layer.blendMode) ? layer.blendMode : "normal"}`,
+    );
 
     return (
       <Card
@@ -417,7 +423,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
         <div className="flex items-center gap-1 p-1">
           <button
             type="button"
-            aria-label={`${isExpanded ? "Collapse" : "Expand"} ${layer.name}`}
+            aria-label={t(isExpanded ? "visual.adjustment.collapse" : "visual.adjustment.expand", { name: layer.name })}
             aria-expanded={isExpanded}
             onClick={() => setExpandedLayer(isExpanded ? null : layer.id)}
             className="flex min-w-0 flex-1 items-center gap-2 rounded-md p-1 text-left outline-none transition-colors hover:bg-bg-2 focus-visible:ring-2 focus-visible:ring-ring"
@@ -439,7 +445,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
             </Text>
           </button>
           <IconButton
-            label={layer.enabled ? "Hide layer" : "Show layer"}
+            label={layer.enabled ? t("visual.adjustment.hideLayer") : t("visual.adjustment.showLayer")}
             icon={layer.enabled ? <Eye size={12} aria-hidden /> : <EyeOff size={12} aria-hidden />}
             variant="ghost"
             size="sm"
@@ -451,7 +457,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
         {isExpanded && (
           <div className="px-2 pb-2 space-y-3">
             <PropertySlider
-              label="Opacity"
+              label={t("visual.adjustment.opacity")}
               min={0}
               max={100}
               step={1}
@@ -463,22 +469,22 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
             />
             <div className="grid grid-cols-2 gap-2">
               <PropertySlider
-                label="Start"
+                label={t("visual.adjustment.start")}
                 min={0}
                 max={Math.max(project.timeline.duration, layer.startTime + layer.duration)}
                 step={1 / project.settings.frameRate}
                 value={layer.startTime}
                 onChange={(value) => handleTimingChange(layer.id, "startTime", value)}
-                formatValue={(value) => `${value.toFixed(2)}s`}
+                formatValue={(value) => t("visual.shell.seconds", { value: value.toFixed(2) })}
               />
               <PropertySlider
-                label="Duration"
+                label={t("visual.adjustment.duration")}
                 min={1 / project.settings.frameRate}
                 max={Math.max(project.timeline.duration, layer.duration)}
                 step={1 / project.settings.frameRate}
                 value={layer.duration}
                 onChange={(value) => handleTimingChange(layer.id, "duration", value)}
-                formatValue={(value) => `${value.toFixed(2)}s`}
+                formatValue={(value) => t("visual.shell.seconds", { value: value.toFixed(2) })}
               />
             </div>
 
@@ -489,7 +495,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
                 className="flex items-center gap-1 text-[10px]"
               >
                 <Palette size={10} aria-hidden />
-                Blend Mode
+                {t("visual.adjustment.blendMode")}
               </Text>
               <Popover
                 isOpen={showBlendModes}
@@ -497,27 +503,27 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
                 placement="below"
                 alignment="start"
                 width={220}
-                label="Blend mode"
+                label={t("visual.adjustment.blendMode")}
                 content={
                   <div className="max-h-48 overflow-y-auto p-1.5">
                     {BLEND_MODES.map((mode) => (
                       <ClickableCard
                         key={mode.id}
-                        label={`Use ${mode.name} blend mode`}
+                        label={t("visual.adjustment.useBlendMode", { name: t(`visual.adjustment.blendModes.${mode.id}`) })}
                         padding={2}
                         variant={layer.blendMode === mode.id ? "green" : "transparent"}
                         onClick={() => handleBlendModeChange(layer.id, mode.id)}
                       >
                         <div className="flex items-center justify-between gap-3">
                           <Text type="supporting" color="primary">
-                            {mode.name}
+                            {t(`visual.adjustment.blendModes.${mode.id}`)}
                           </Text>
                           <Text
                             type="supporting"
                             color="secondary"
                             className="text-[9px]"
                           >
-                            {mode.group}
+                            {t(`visual.adjustment.blendGroups.${mode.group.toLowerCase()}`)}
                           </Text>
                         </div>
                       </ClickableCard>
@@ -542,7 +548,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
                 className="flex items-center gap-1 text-[10px]"
               >
                 <Droplet size={10} aria-hidden />
-                Effects ({layer.effects.length})
+                {t("visual.adjustment.effectCount", { count: layer.effects.length })}
               </Text>
               {layer.effects.length > 0 && (
                 <div className="space-y-1">
@@ -550,15 +556,16 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
                     const preset = EFFECT_PRESETS.find(
                       (candidate) => candidate.effect.type === effect.type,
                     );
+                    const name = effectName(preset?.id, effect.type);
                     return (
                       <Card key={effect.id} variant="transparent" padding={2} className="space-y-2 bg-bg-1">
                         <div className="flex items-center justify-between gap-2">
                           <Text type="supporting" color="primary" className="text-[9px] font-semibold">
-                            {preset?.name ?? effect.type}
+                            {name}
                           </Text>
                           <div className="flex items-center gap-0.5">
                             <IconButton
-                              label={`${effect.enabled === false ? "Enable" : "Disable"} ${preset?.name ?? effect.type} effect`}
+                              label={t(effect.enabled === false ? "visual.adjustment.enableEffect" : "visual.adjustment.disableEffect", { name })}
                               icon={effect.enabled === false ? <EyeOff size={10} aria-hidden /> : <Eye size={10} aria-hidden />}
                               variant="ghost"
                               size="sm"
@@ -566,7 +573,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
                               className={effect.enabled === false ? "text-fg-muted" : "text-fg"}
                             />
                             <IconButton
-                              label={`Remove ${preset?.name ?? effect.type} effect`}
+                              label={t("visual.adjustment.removeEffect", { name })}
                               icon={<Trash2 size={10} aria-hidden />}
                               variant="ghost"
                               size="sm"
@@ -581,7 +588,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
                           return (
                             <PropertySlider
                               key={control.param}
-                              label={control.label}
+                              label={t(`visual.adjustment.controls.${control.labelKey}`, { defaultValue: control.label })}
                               min={control.min}
                               max={control.max}
                               step={control.step}
@@ -612,7 +619,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
                 {EFFECT_PRESETS.map((preset) => (
                   <ClickableCard
                     key={preset.id}
-                    label={`+ ${preset.name}`}
+                    label={t("visual.adjustment.addEffect", { name: effectName(preset.id, preset.name) })}
                     onClick={() => handleAddEffect(layer.id, preset.id)}
                     variant="muted"
                     padding={1}
@@ -631,11 +638,11 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
                         }}
                       />
                       <span className="absolute inset-y-0 left-1/2 w-px bg-white/70" />
-                      <span className="absolute bottom-0.5 left-1 text-[7px] font-bold uppercase text-white/75">Before</span>
-                      <span className="absolute bottom-0.5 right-1 text-[7px] font-bold uppercase text-white/90">Effect</span>
+                      <span className="absolute bottom-0.5 left-1 text-[7px] font-bold uppercase text-white/75">{t("visual.adjustment.before")}</span>
+                      <span className="absolute bottom-0.5 right-1 text-[7px] font-bold uppercase text-white/90">{t("visual.adjustment.after")}</span>
                     </span>
                     <Text type="supporting" color="primary" className="block truncate text-[9px] font-semibold">
-                      {preset.name}
+                      {effectName(preset.id, preset.name)}
                     </Text>
                   </ClickableCard>
                 ))}
@@ -644,7 +651,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
 
             <div className="flex gap-1 pt-2 border-t border-border">
               <Button
-                label="Duplicate"
+                label={t("visual.adjustment.duplicate")}
                 icon={<Copy size={10} aria-hidden />}
                 variant="secondary"
                 size="sm"
@@ -652,7 +659,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
                 className="flex-1"
               />
               <Button
-                label="Delete"
+                label={t("visual.adjustment.delete")}
                 icon={<Trash2 size={10} aria-hidden />}
                 variant="secondary"
                 size="sm"
@@ -676,16 +683,16 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
         <Layers size={16} className="text-primary" aria-hidden />
         <div className="flex flex-1 flex-col gap-0.5">
           <Text type="body" color="primary" weight="bold" className="block text-[11px]">
-            Adjustment Layers
+            {t("visual.adjustment.title")}
           </Text>
           <Text type="supporting" color="secondary" className="block text-[9px]">
-            Non-destructive effects on clips below
+            {t("visual.adjustment.subtitle")}
           </Text>
         </div>
       </Card>
 
       <Button
-        label="Add Adjustment Layer"
+        label={t("visual.adjustment.add")}
         icon={<Plus size={14} aria-hidden />}
         variant={currentTrack ? "primary" : "secondary"}
         size="md"
@@ -697,7 +704,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
       {trackLayers.length > 0 && (
         <div className="space-y-2">
           <Text type="supporting" color="secondary" weight="bold">
-            Track Layers ({trackLayers.length})
+            {t("visual.adjustment.trackLayers", { count: trackLayers.length })}
           </Text>
           <div className="space-y-1.5">{trackLayers.map(renderLayerItem)}</div>
         </div>
@@ -706,7 +713,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
       {allLayers.length > trackLayers.length && (
         <div className="space-y-2 pt-2 border-t border-border">
           <Text type="supporting" color="secondary" weight="bold">
-            Other Layers
+            {t("visual.adjustment.otherLayers")}
           </Text>
           <div className="space-y-1.5">
             {allLayers
@@ -718,7 +725,7 @@ export const AdjustmentLayerSection: React.FC<AdjustmentLayerSectionProps> = ({
 
       <div className="pt-2 border-t border-border">
         <Text type="supporting" color="secondary" className="block text-[9px] text-center">
-          Apply color, effects to all clips below
+          {t("visual.adjustment.footer")}
         </Text>
       </div>
     </div>

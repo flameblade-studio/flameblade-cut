@@ -18,6 +18,7 @@ import { TranscriptSearch } from "../../components/highlights/TranscriptSearch";
 import { useHighlightRunner } from "../../components/highlights/use-highlight-runner";
 import { NoSpeechError } from "../../services/highlights/analyze";
 import { getOpenAiTextBridge } from "../../services/highlights/openai-highlights";
+import { useCloudKeyStatus } from "../../services/cloud-keys/cloud-key-store";
 import { sendRangesToEditor, VERTICAL_FORMAT, type FrameFormat } from "../../services/highlights/send-ranges-to-editor";
 import { toast } from "../../stores/notification-store";
 import { useProjectStore } from "../../stores/project-store";
@@ -27,25 +28,9 @@ const VIDEO_FILTERS = [{ name: "Video", extensions: ["mp4", "mov", "m4v", "webm"
 const FALLBACK_FORMAT: FrameFormat = { width: 1920, height: 1080 };
 
 function useOpenAiAvailability(): OpenAiAvailability {
-  const [availability, setAvailability] = useState<OpenAiAvailability>("hidden");
-  useEffect(() => {
-    const bridge = getOpenAiTextBridge();
-    if (!bridge) return;
-    let alive = true;
-    bridge.keyStatus().then(
-      ({ configured }) => {
-        if (alive) setAvailability(configured ? "ready" : "no-key");
-      },
-      (error: unknown) => {
-        console.warn("[highlights] OpenAI key status failed", error);
-        if (alive) setAvailability("no-key");
-      },
-    );
-    return () => {
-      alive = false;
-    };
-  }, []);
-  return availability;
+  const status = useCloudKeyStatus();
+  if (!getOpenAiTextBridge() || status === null) return "hidden";
+  return status.openai ? "ready" : "no-key";
 }
 
 function EmptyState(): JSX.Element {

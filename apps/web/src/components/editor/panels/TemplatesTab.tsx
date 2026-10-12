@@ -187,7 +187,7 @@ export const TemplatesTab: React.FC = () => {
               </div>
               {applying === template.id && (
                 <div className="absolute inset-0 bg-background-primary/80 rounded-lg flex items-center justify-center">
-                  <span className="text-[10px] text-primary">Applying...</span>
+                  <span className="text-[10px] text-primary">{t("tools.recipesTab.applying")}</span>
                 </div>
               )}
             </Button>

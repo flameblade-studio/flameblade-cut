@@ -4,7 +4,10 @@ import { ToolcraftSelectControl as Selector } from "@openreel/ui";
 import { ToolcraftSliderControl } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
 import { ToolcraftTextInputControl } from "@openreel/ui";
-import type { EditingTemplate, EditingTemplatePrimitive } from "@openreel/core";
+import type { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
+import { BUILT_IN_EDITING_TEMPLATES } from "@openreel/core";
+import type { EditingTemplate, EditingTemplateControlDefinition, EditingTemplatePrimitive } from "@openreel/core";
 
 export const getEditingTemplateDefaultControlValues = (
   template: EditingTemplate,
@@ -37,6 +40,24 @@ export const mergeEditingTemplateControlValues = (
   return values;
 };
 
+const BUILT_IN_RECIPE_IDS = new Set(BUILT_IN_EDITING_TEMPLATES.map((template) => template.id));
+
+/** Localized name/description of a built-in recipe; user-made recipes keep their own text. */
+export function recipeText(template: EditingTemplate, field: "name" | "description", t: TFunction): string {
+  if (!BUILT_IN_RECIPE_IDS.has(template.id)) return template[field];
+  return t(`tools.recipes.templates.${template.id}.${field}`, { defaultValue: template[field] });
+}
+
+/** Localized control label of a built-in recipe; user-made recipes keep their own text. */
+export function recipeControlLabel(
+  template: EditingTemplate,
+  control: EditingTemplateControlDefinition,
+  t: TFunction,
+): string {
+  if (!BUILT_IN_RECIPE_IDS.has(template.id)) return control.label;
+  return t(`tools.recipes.controls.${control.id}`, { defaultValue: control.label });
+}
+
 interface EditingTemplateControlsProps {
   template: EditingTemplate;
   values: Record<string, EditingTemplatePrimitive>;
@@ -52,6 +73,7 @@ export const EditingTemplateControls: React.FC<EditingTemplateControlsProps> = (
   disabled = false,
   className,
 }) => {
+  const { t } = useTranslation();
   if (!template.controls || template.controls.length === 0) {
     return null;
   }
@@ -60,20 +82,21 @@ export const EditingTemplateControls: React.FC<EditingTemplateControlsProps> = (
     <div className={className || "space-y-3"}>
       {template.controls.map((control) => {
         const value = values[control.id] ?? control.defaultValue;
+        const label = recipeControlLabel(template, control, t);
 
         if (control.type === "number") {
           return (
             <div key={control.id} className="space-y-2">
               <div className="flex items-center justify-between gap-3">
                 <Text type="label" weight="bold" display="block" className="text-[11px]">
-                  {control.label}
+                  {label}
                 </Text>
                 <span className="rounded-full bg-background-tertiary px-2 py-0.5 text-[10px] text-text-secondary">
                   {value}
                 </span>
               </div>
               <ToolcraftSliderControl
-                label={control.label}
+                label={label}
                 isLabelHidden
                 min={control.min ?? 0}
                 max={control.max ?? 100}
@@ -92,10 +115,10 @@ export const EditingTemplateControls: React.FC<EditingTemplateControlsProps> = (
           return (
             <div key={control.id} className="flex items-center justify-between gap-3">
               <Text type="label" weight="bold" display="block" className="text-[11px]">
-                {control.label}
+                {label}
               </Text>
               <ToolcraftSwitchControl
-                ariaLabel={control.label}
+                ariaLabel={label}
                 checked={Boolean(value)}
                 disabled={disabled}
                 onCheckedChange={(nextValue) => onChange(control.id, nextValue)}
@@ -115,10 +138,10 @@ export const EditingTemplateControls: React.FC<EditingTemplateControlsProps> = (
           return (
             <div key={control.id} className="space-y-2">
               <Text type="label" weight="bold" display="block" className="text-[11px]">
-                {control.label}
+                {label}
               </Text>
               <Selector
-                label={control.label}
+                label={label}
                 isLabelHidden
                 width="100%"
                 value={`${selectedIndex}`}
@@ -143,7 +166,7 @@ export const EditingTemplateControls: React.FC<EditingTemplateControlsProps> = (
           return (
             <div key={control.id} className="space-y-2">
               <Text type="label" weight="bold" display="block" className="text-[11px]">
-                {control.label}
+                {label}
               </Text>
               <div className="flex items-center gap-3">
                 <span
@@ -152,7 +175,7 @@ export const EditingTemplateControls: React.FC<EditingTemplateControlsProps> = (
                   aria-hidden
                 />
                 <ToolcraftTextInputControl
-                  label={control.label}
+                  label={label}
                   isLabelHidden
                   value={String(value)}
                   isDisabled={disabled}
@@ -167,10 +190,10 @@ export const EditingTemplateControls: React.FC<EditingTemplateControlsProps> = (
         return (
           <div key={control.id} className="space-y-2">
             <Text type="label" weight="bold" display="block" className="text-[11px]">
-              {control.label}
+              {label}
             </Text>
             <ToolcraftTextInputControl
-              label={control.label}
+              label={label}
               isLabelHidden
               value={String(value)}
               isDisabled={disabled}

@@ -6,6 +6,7 @@ import { ToolcraftLayout as Layout, ToolcraftLayoutContent as LayoutContent } fr
 import { useSettingsStore, type SettingsTab } from "../../../stores/settings-store";
 import { GeneralPanel } from "./GeneralPanel";
 import { ApiKeysPanel } from "./ApiKeysPanel";
+import { CloudKeysSection } from "./CloudKeysSection";
 import { McpPanel } from "./McpPanel";
 import { useTranslation } from "react-i18next";
 
@@ -87,7 +88,20 @@ export const SettingsDialog: React.FC = () => {
               className="mt-4"
             >
               {settingsTab === "general" && <GeneralPanel />}
-              {settingsTab === "api-keys" && <ApiKeysPanel />}
+              {settingsTab === "api-keys" && (
+                <div className="space-y-6">
+                  <CloudKeysSection />
+                  <section className="space-y-3" aria-labelledby="other-services-title">
+                    <div>
+                      <h3 id="other-services-title" className="text-[14px] font-bold text-fg">
+                        {t("tools.otherServices.title")}
+                      </h3>
+                      <p className="text-[12px] text-fg-3">{t("tools.otherServices.description")}</p>
+                    </div>
+                    <ApiKeysPanel />
+                  </section>
+                </div>
+              )}
               {settingsTab === "mcp" && <McpPanel />}
             </div>
           </LayoutContent>

@@ -57,6 +57,10 @@ export async function sendToEditor(
   aspect: GenerationAspect,
   readBytes: (path: string) => Promise<Uint8Array<ArrayBuffer>>,
 ): Promise<number> {
+  // Start auto-save before touching the project: it only saves changes it
+  // observes, and the editor (which also starts it) may not have opened yet.
+  // Without this, a project built here is never saved and is lost on quit.
+  await useProjectStore.getState().initializeAutoSave();
   const store = useProjectStore.getState();
   if (!store.hasOpenProject) {
     store.createNewProject("AI 影片", { ...FORMAT_FOR_ASPECT[aspect], frameRate: 24 });

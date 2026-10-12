@@ -10,12 +10,30 @@
       "tools": "ツール"
     },
     "cards": {
-      "voiceover": { "title": "ナレーション", "description": "テキストを音声にしてタイムラインへ" },
-      "captions": { "title": "自動字幕", "description": "音声から字幕を自動生成" },
-      "templates": { "title": "プロジェクトテンプレート", "description": "用意された構成から始める" },
-      "filters": { "title": "フィルタープリセット", "description": "映画風のカラーグレードをすぐに適用" },
-      "music": { "title": "音楽と効果音", "description": "ロイヤリティフリーの音源を探す" },
-      "multicam": { "title": "マルチカメラ編集", "description": "複数アングルを同期して切り替え" }
+      "voiceover": {
+        "title": "ナレーション",
+        "description": "テキストを音声にしてタイムラインへ"
+      },
+      "captions": {
+        "title": "自動字幕",
+        "description": "音声から字幕を自動生成"
+      },
+      "templates": {
+        "title": "プロジェクトテンプレート",
+        "description": "用意された構成から始める"
+      },
+      "filters": {
+        "title": "フィルタープリセット",
+        "description": "映画風のカラーグレードをすぐに適用"
+      },
+      "music": {
+        "title": "音楽と効果音",
+        "description": "ロイヤリティフリーの音源を探す"
+      },
+      "multicam": {
+        "title": "マルチカメラ編集",
+        "description": "複数アングルを同期して切り替え"
+      }
     },
     "footer": "AI 機能は今後も追加予定です",
     "unsavedTitle": "未保存の音声を破棄しました",
@@ -71,7 +89,6 @@
       "failed": "{{index}} 行目で失敗しました（{{placed}} / {{total}} 行完了）：{{message}}"
     },
     "setup": {
-      "title": "キーとリージョンの設定",
       "configured": "設定済み",
       "notConfigured": "未設定",
       "azureKey": "Azure Speech キー",
@@ -87,7 +104,7 @@
       "keyHint": "キーはこのパソコンに Windows で暗号化して保存され、再表示されません。"
     },
     "errors": {
-      "missing-key": "キーが未設定です。下の「キーとリージョンの設定」で入力してください。",
+      "missing-key": "キーが未設定です。「設定 → API キー」で入力してください。",
       "invalid-region": "Azure リージョンの形式が正しくありません（例：eastasia）。",
       "unsupported-platform": "Windows 標準の音声は Windows でのみ使えます。",
       "voice-missing": "選択した声がこのパソコンにありません。別の声を選んでください。",
@@ -101,5 +118,16 @@
       "noProject": "先にプロジェクトを開いてください。",
       "placement": "ナレーションをタイムラインに配置できませんでした。"
     }
+  },
+  "keys": {
+    "title": "クラウドサービスのキー",
+    "description": "ナレーション、プロンプト翻訳、AI ハイライトで使います。これらのクラウド機能を使うときだけ通信します。",
+    "use": {
+      "openai": "OpenAI の音声、プロンプト翻訳、AI ハイライト用",
+      "azure": "Azure クラウド音声用（リージョンの入力も必要）"
+    },
+    "needKey": "この音声エンジンにはキーが必要です",
+    "needRegion": "Azure リージョンの入力が必要です",
+    "openSettings": "設定を開く"
   }
 }

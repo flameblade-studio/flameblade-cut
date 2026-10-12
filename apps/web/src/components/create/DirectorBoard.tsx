@@ -70,7 +70,7 @@ function ShotCard({ shot, index, count, record }: { shot: StoryboardShot; index:
       <div className="flex min-w-0 flex-col gap-3">
         <div className="flex items-center gap-2">
           <span className="fc-chip fc-chip--flame">{t("create.director.shot", { index: index + 1 })}</span>
-          {done ? <CheckCircle2 size={15} className="text-[oklch(0.75_0.17_150)]" aria-hidden /> : null}
+          {done ? <CheckCircle2 size={15} className="text-[var(--ok)]" aria-hidden /> : null}
           <div className="ml-auto flex items-center gap-1">
             <button type="button" className="fc-action !h-7 !px-2" disabled={index === 0} onClick={() => moveShot(shot.id, index - 1)} aria-label={t("create.director.moveUp")}>
               <ArrowUp size={13} aria-hidden />
@@ -238,7 +238,7 @@ export function DirectorSidebar({ onSendAll }: { onSendAll: (records: Generation
         <section className="rounded-[12px] border border-border bg-bg/60 px-4 py-3 text-[12.5px] text-fg-2">
           {t("create.director.total", { count: shots.length, seconds: totalSeconds })}
           {allDone ? (
-            <div className="mt-1.5 flex items-center gap-1.5 font-semibold text-[oklch(0.75_0.17_150)]">
+            <div className="mt-1.5 flex items-center gap-1.5 font-semibold text-[var(--ok)]">
               <CheckCircle2 size={14} aria-hidden />
               {t("create.director.allDone")}
             </div>

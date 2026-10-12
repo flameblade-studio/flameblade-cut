@@ -23,7 +23,7 @@
     "engine": "分析方法",
     "engineLocal": "ローカル分析・無料",
     "engineOpenai": "OpenAI・より賢く",
-    "openaiNoKey": "ナレーションパネルの「キーとリージョンの設定」で OpenAI キーを登録すると使えます。",
+    "openaiNoKey": "「設定 → API キー」で OpenAI キーを登録すると使えます。",
     "openaiUnavailable": "このバージョンでは OpenAI 分析は使えません。"
   },
   "run": "見どころを探す",

@@ -18,7 +18,7 @@
 
 ---
 
-> **開発中（0.1.0 プレビュー版）。** 機能と画面はまだ磨き込み中です。不具合の報告を歓迎します。
+> **開発中（0.2.0 プレビュー版）。** 機能と画面はまだ磨き込み中です。不具合の報告を歓迎します。
 
 ## できること
 
@@ -38,16 +38,16 @@
 
 - Windows 10／11（64 ビット）
 - **編集のみ**：一般的な PC で動作します。
-- **AI 動画生成**：NVIDIA **RTX 50 シリーズ**の GPU（標準ワークフローは NVFP4 のメインモデルを使用。VRAM 16 GB 以上を推奨）、システムメモリ 64 GB、および以下を各自でインストールしてください：
+- **AI 動画生成**：NVIDIA の GPU（VRAM 16 GB 以上を推奨）、システムメモリ 64 GB、および以下を各自でインストールしてください：
   - [ComfyUI](https://github.com/comfyanonymous/ComfyUI)（git 版・ポータブル版どちらでも可）
   - LTX-2.5 のモデルファイル（[Hugging Face](https://huggingface.co/Lightricks) で Lightricks のライセンスに同意してからダウンロードし、ComfyUI 公式 LTX-2.5 テンプレートの説明に従って `models` 内の該当フォルダーに配置）：
-    - `ltx-2.5-22b-distilled-transformer-nvfp4.safetensors`
+    - メインモデルは GPU に合わせて 1 つ：RTX 50 シリーズは `ltx-2.5-22b-distilled-transformer-nvfp4.safetensors`（18.7 GB、最速）、RTX 30／40 シリーズなどその他の GPU は `ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors`（21.5 GB）、または元の精度の `ltx-2.5-22b-distilled-transformer-bf16.safetensors`（42 GB）
     - `gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors`、`gemma4_e2b_it_int8_convrot.safetensors`
     - `ltx-2.5-video-vae-conv-bf16.safetensors`、`ltx-2.5-audio-vae-bf16.safetensors`
     - `ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors`
     - 参考画像からの動画生成には、さらに `ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors` と [ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo) のカスタムノードが必要です
 
-  インストール後、「AI 生成」ページ右上の歯車ボタンで ComfyUI のフォルダーを設定するだけです。**ComfyUI を自分で起動する必要はありません。** 炎劍剪輯が必要なときにバックグラウンドで起動し、終了時に自動で閉じます。その他の GPU（RTX 40 シリーズなど）向けのモデル選択は今後のバージョンで提供予定です。
+  インストール後、「AI 生成」ページ右上の歯車ボタンで ComfyUI のフォルダーを設定するだけです。**ComfyUI を自分で起動する必要はありません。** 炎劍剪輯が必要なときにバックグラウンドで起動し、終了時に自動で閉じます。メインモデルの初期設定は「自動」で、RTX 50 シリーズでは NVFP4、その他の GPU では INT8 を使います。同じ設定画面で手動指定もできます。INT8 版と BF16 版はワークフローの動作確認のみで、RTX 30／40 シリーズでの速度はまだ実測していません。
 
 ## インストール
 

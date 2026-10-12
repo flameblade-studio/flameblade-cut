@@ -72,6 +72,7 @@ export {
 export { ScrollArea, ScrollBar } from "./components/scroll-area"
 export { Skeleton } from "./components/skeleton"
 export { Slider } from "./components/slider"
+export { DEFAULT_UI_STRINGS, UiStringsProvider, useUiStrings, type UiStrings } from "./components/ui-strings"
 export { LabeledSlider, InspectorSlider, type LabeledSliderProps, type InspectorSliderProps } from "./components/labeled-slider"
 export {
   ToolcraftBadge,

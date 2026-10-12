@@ -360,7 +360,8 @@ const ASPECT_PRESETS: Array<{
   { label: "21:9", width: 2560, height: 1080 },
 ];
 
-const aspectLabelFor = (width: number, height: number): string => {
+/** Closest common aspect ratio label, or null when none is near. */
+const aspectLabelFor = (width: number, height: number): string | null => {
   const ratio = width / height;
   let closest = ASPECT_PRESETS[0];
   let smallestDelta = Infinity;
@@ -371,7 +372,7 @@ const aspectLabelFor = (width: number, height: number): string => {
       closest = preset;
     }
   }
-  return smallestDelta < 0.01 ? closest.label : "Custom";
+  return smallestDelta < 0.01 ? closest.label : null;
 };
 
 // Draws `source` cover-fit and Gaussian-blurred across the whole canvas — the
@@ -7915,7 +7916,7 @@ export const Preview: React.FC = () => {
                 }`}
                 onClick={() => setLockAspectRatio(!lockAspectRatio)}
               >
-                {lockAspectRatio ? "🔒 Locked" : "🔓 Free"}
+                {lockAspectRatio ? t("tools.previewLock.locked") : t("tools.previewLock.free")}
               </Button>
 
               {/* Corner resize handles */}
@@ -7990,7 +7991,7 @@ export const Preview: React.FC = () => {
                 }`}
                 onClick={() => setLockAspectRatio(!lockAspectRatio)}
               >
-                {lockAspectRatio ? "🔒 Locked" : "🔓 Free"}
+                {lockAspectRatio ? t("tools.previewLock.locked") : t("tools.previewLock.free")}
               </Button>
 
               {/* Corner resize handles */}
@@ -8066,7 +8067,7 @@ export const Preview: React.FC = () => {
                 }`}
                 onClick={() => setLockAspectRatio(!lockAspectRatio)}
               >
-                {lockAspectRatio ? "🔒 Locked" : "🔓 Free"}
+                {lockAspectRatio ? t("tools.previewLock.locked") : t("tools.previewLock.free")}
               </Button>
 
               {/* Corner resize handles */}
@@ -8266,7 +8267,7 @@ export const Preview: React.FC = () => {
             >
               <div className="flex items-center gap-1">
                 <Proportions size={12} />
-                <span>{aspectLabelFor(settings.width, settings.height)}</span>
+                <span>{aspectLabelFor(settings.width, settings.height) ?? t("tools.editorChrome.aspectCustom")}</span>
               </div>
             </Button>
             {showAspectMenu && (

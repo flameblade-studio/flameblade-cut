@@ -113,15 +113,15 @@ export const TextToSpeechPanel: React.FC = () => {
           <Mic size={16} className="text-primary" aria-hidden />
           <div className="flex flex-col gap-0.5 min-w-0">
             <Text type="body" color="primary" weight="bold" display="block" className="text-[11px]">
-              Text to Speech
+              {t("advanced.tts.title")}
             </Text>
             <Text type="supporting" color="secondary" display="block" className="text-[9px]">
-              User-keyed ElevenLabs voice generation
+              {t("advanced.tts.subtitle")}
             </Text>
           </div>
         </div>
         <IconButton
-          label="API Key Settings"
+          label={t("advanced.tts.keySettings")}
           icon={<Settings size={14} aria-hidden />}
           variant="ghost"
           size="sm"
@@ -144,13 +144,13 @@ export const TextToSpeechPanel: React.FC = () => {
 
       <div className="space-y-2">
         <ToolcraftTextAreaControl
-          label="Text"
+          label={t("advanced.tts.text")}
           value={text}
           onChange={(value) => {
             setText(value);
             setEnhancedPreview(null);
           }}
-          placeholder="Enter the text you want to convert to speech..."
+          placeholder={t("advanced.tts.textPlaceholder")}
           maxLength={maxChars}
           rows={4}
           width="100%"
@@ -158,7 +158,7 @@ export const TextToSpeechPanel: React.FC = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5">
             <MockToggle
-              ariaLabel="Enhance for TTS"
+              ariaLabel={t("advanced.tts.enhanceForTts")}
               checked={enhanceText}
               onChange={setEnhanceText}
             />
@@ -169,7 +169,7 @@ export const TextToSpeechPanel: React.FC = () => {
               onClick={() => setEnhanceText(!enhanceText)}
             >
               <Sparkles size={10} className={enhanceText ? "text-amber-400" : ""} aria-hidden />
-              Enhance for TTS
+              {t("advanced.tts.enhanceForTts")}
             </Text>
           </div>
           <Text
@@ -207,7 +207,7 @@ export const TextToSpeechPanel: React.FC = () => {
           </Text>
           {(error.includes("API key") || error.includes("Session locked") || error.includes("Unlock")) && (
             <Button
-              label="Open Settings"
+              label={t("advanced.tts.openSettings")}
               variant="secondary"
               size="sm"
               onClick={() => openSettings("api-keys")}
@@ -227,7 +227,7 @@ export const TextToSpeechPanel: React.FC = () => {
 
       {enhanceText && !enhancedPreview && (
         <Button
-          label={isEnhancing ? "Enhancing..." : "Enhance Text"}
+          label={isEnhancing ? t("advanced.tts.enhancing") : t("advanced.tts.enhanceText")}
           icon={
             isEnhancing ? (
               <Loader2 size={14} className="animate-spin" aria-hidden />
@@ -245,7 +245,7 @@ export const TextToSpeechPanel: React.FC = () => {
       )}
 
       <Button
-        label={isGenerating ? "Generating..." : "Generate Speech"}
+        label={isGenerating ? t("advanced.tts.generating") : t("advanced.tts.generate")}
         icon={
           isGenerating ? (
             <Loader2 size={14} className="animate-spin" aria-hidden />
@@ -269,7 +269,7 @@ export const TextToSpeechPanel: React.FC = () => {
         >
           <AlertTriangle size={12} className="text-amber-400 shrink-0" aria-hidden />
           <Text type="supporting" className="text-[9px] text-amber-400">
-            Unsaved audio — save to media, add to timeline, or download to keep it.
+            {t("advanced.tts.unsaved")}
           </Text>
         </Card>
       )}
@@ -288,7 +288,7 @@ export const TextToSpeechPanel: React.FC = () => {
       )}
 
       <Text type="supporting" color="secondary" className="block text-[9px] text-center">
-        Powered by ElevenLabs · {getSelectedModelName()}
+        {t("advanced.tts.poweredBy", { model: getSelectedModelName() })}
       </Text>
     </div>
   );

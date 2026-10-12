@@ -3,7 +3,6 @@ export { containsChinese } from "./segments";
 export {
   disposeLocalTranslator,
   onLocalModelProgress,
-  openAiKeyConfigured,
   translatePrompt,
 } from "./translate-prompt";
 export {

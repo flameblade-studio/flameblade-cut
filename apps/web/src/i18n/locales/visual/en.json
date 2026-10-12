@@ -1,0 +1,688 @@
+{
+  "shell": {
+    "seconds": "{{value}}s",
+    "tabError": "This panel hit an error. Switch tabs and back to retry."
+  },
+  "tabs": {
+    "enable": "Enable"
+  },
+  "behindSubject": {
+    "title": "Place Behind Subject",
+    "hint": "Text appears behind people in the video",
+    "loading": "Loading AI model...",
+    "modelFailed": "Failed to load AI model. Check your connection."
+  },
+  "shader": {
+    "selectColor": "Select {{label}}"
+  },
+  "filterPresets": {
+    "applyPreset": "Apply {{name}} filter preset",
+    "appliedTitle": "Filter Applied",
+    "appliedBody": "{{name}} preset applied",
+    "cleared": "Effects Cleared",
+    "noClip": "Select a video clip to apply filters",
+    "title": "Filter Presets",
+    "subtitle": "One-click color grades",
+    "intensity": "Intensity",
+    "removeAll": "Remove All Effects",
+    "summary_one": "{{count}} preset across {{categories}} categories",
+    "summary_other": "{{count}} presets across {{categories}} categories",
+    "categories": {
+      "cinematic": "Cinematic",
+      "vintage": "Vintage",
+      "mood": "Mood",
+      "color": "Color",
+      "stylized": "Stylized"
+    }
+  },
+  "presets": {
+    "filters": {
+      "cinematic-teal-orange": {
+        "name": "Teal & Orange",
+        "description": "Classic Hollywood color grade"
+      },
+      "cinematic-noir": {
+        "name": "Film Noir",
+        "description": "High contrast black & white"
+      },
+      "cinematic-blockbuster": {
+        "name": "Blockbuster",
+        "description": "Bold, punchy Hollywood look"
+      },
+      "vintage-70s": {
+        "name": "70s Retro",
+        "description": "Warm, faded 1970s aesthetic"
+      },
+      "vintage-polaroid": {
+        "name": "Polaroid",
+        "description": "Classic instant photo look"
+      },
+      "vintage-vhs": {
+        "name": "VHS",
+        "description": "Nostalgic VHS tape effect"
+      },
+      "vintage-sepia": {
+        "name": "Sepia",
+        "description": "Classic sepia tone"
+      },
+      "mood-dreamy": {
+        "name": "Dreamy",
+        "description": "Soft, ethereal atmosphere"
+      },
+      "mood-moody": {
+        "name": "Moody",
+        "description": "Dark, atmospheric feel"
+      },
+      "mood-golden-hour": {
+        "name": "Golden Hour",
+        "description": "Warm sunset lighting"
+      },
+      "mood-cold": {
+        "name": "Cold Blue",
+        "description": "Cool, icy atmosphere"
+      },
+      "color-vibrant": {
+        "name": "Vibrant",
+        "description": "Punchy, saturated colors"
+      },
+      "color-muted": {
+        "name": "Muted",
+        "description": "Soft, desaturated palette"
+      },
+      "color-bw-classic": {
+        "name": "B&W Classic",
+        "description": "Timeless black & white"
+      },
+      "color-bw-high-contrast": {
+        "name": "B&W High Contrast",
+        "description": "Dramatic black & white"
+      },
+      "stylized-cyberpunk": {
+        "name": "Cyberpunk",
+        "description": "Neon-lit futuristic look"
+      },
+      "stylized-comic": {
+        "name": "Comic Book",
+        "description": "Bold, graphic novel style"
+      },
+      "stylized-soft-glow": {
+        "name": "Soft Glow",
+        "description": "Romantic soft focus effect"
+      },
+      "cinematic-bleach-bypass": {
+        "name": "Bleach Bypass",
+        "description": "Gritty, desaturated high contrast"
+      },
+      "cinematic-day-for-night": {
+        "name": "Day for Night",
+        "description": "Cool moonlit night look"
+      },
+      "vintage-faded-film": {
+        "name": "Faded Film",
+        "description": "Washed-out lifted blacks"
+      },
+      "vintage-super8": {
+        "name": "Super 8",
+        "description": "Warm grainy home-movie feel"
+      },
+      "mood-sunset": {
+        "name": "Sunset",
+        "description": "Warm golden glow"
+      },
+      "mood-winter-chill": {
+        "name": "Winter Chill",
+        "description": "Cold, crisp blue tone"
+      },
+      "mood-dramatic": {
+        "name": "Dramatic",
+        "description": "Moody high-contrast with vignette"
+      },
+      "color-pop": {
+        "name": "Pop",
+        "description": "Vivid, punchy colors"
+      },
+      "color-pastel": {
+        "name": "Pastel",
+        "description": "Soft, airy low-contrast tones"
+      },
+      "stylized-dreamscape": {
+        "name": "Dreamscape",
+        "description": "Hazy, glowing dream look"
+      },
+      "stylized-hdr": {
+        "name": "Crisp HDR",
+        "description": "Hyper-detailed punchy clarity"
+      },
+      "stylized-matrix": {
+        "name": "Matrix",
+        "description": "Green-tinted digital dystopia"
+      }
+    },
+    "emojiCategories": {
+      "smileys": "Smileys & Emotion",
+      "gestures": "Gestures",
+      "objects": "Objects",
+      "symbols": "Symbols",
+      "nature": "Nature"
+    },
+    "shaderGroups": {
+      "builtIn": "Built-in",
+      "general": "General"
+    },
+    "templates": {
+      "builtin-youtube-intro": "YouTube Intro",
+      "builtin-tiktok-promo": "TikTok Promo",
+      "builtin-lower-third": "Lower Third",
+      "builtin-slideshow": "Photo Slideshow",
+      "builtin-instagram-reel": "Instagram Reel",
+      "builtin-youtube-shorts": "YouTube Short",
+      "builtin-quote-card": "Quote Card",
+      "builtin-product-promo": "Product Promo",
+      "builtin-countdown": "Countdown Timer"
+    },
+    "particles": {
+      "dissolve-soft": "Soft Dissolve",
+      "explode-burst": "Explosion Burst",
+      "implode-gather": "Implode Gather",
+      "confetti-celebration": "Celebration Confetti",
+      "dust-ambient": "Ambient Dust",
+      "sparkle-magic": "Magic Sparkles",
+      "disintegrate-thanos": "Disintegration",
+      "pixelate-retro": "Pixel Break",
+      "shatter-glass": "Glass Shatter",
+      "morph-transform": "Shape Morph",
+      "fire-trail": "Fire Trail",
+      "snow-fall": "Snowfall"
+    },
+    "particleTypes": {
+      "dissolve": "dissolve",
+      "explode": "explode",
+      "implode": "implode",
+      "confetti": "confetti",
+      "dust": "dust",
+      "sparkle": "sparkle",
+      "disintegrate": "disintegrate",
+      "pixelate": "pixelate",
+      "shatter": "shatter",
+      "morph": "morph"
+    },
+    "svgAnimations": {
+      "none": "None",
+      "fade": "Fade",
+      "slide-left": "Slide from Right",
+      "slide-right": "Slide from Left",
+      "slide-up": "Slide from Bottom",
+      "slide-down": "Slide from Top",
+      "scale": "Scale",
+      "rotate": "Rotate",
+      "bounce": "Bounce",
+      "pop": "Pop",
+      "draw": "Draw",
+      "wipe-left": "Wipe Left",
+      "wipe-right": "Wipe Right",
+      "wipe-up": "Wipe Up",
+      "wipe-down": "Wipe Down",
+      "reveal-center": "Reveal Center",
+      "reveal-edges": "Reveal Edges",
+      "elastic": "Elastic",
+      "flip-horizontal": "Flip Horizontal",
+      "flip-vertical": "Flip Vertical"
+    }
+  },
+  "mask": {
+    "pointX": "Point {{index}} X percent",
+    "pointY": "Point {{index}} Y percent",
+    "matteHint": "The chosen clip's {{channel}} drive the visible region of this clip. Animate the source clip's transform to animate the mask.",
+    "textSource": "Text • \"{{text}}\"",
+    "count_one": "Masks ({{count}})",
+    "count_other": "Masks ({{count}})",
+    "pointsHint": "X and Y are composition percentages. Adjust points for precise custom cutouts.",
+    "channels": {
+      "bounds": "bounds",
+      "alpha": "alpha",
+      "luminance": "luminance"
+    }
+  },
+  "bgRemoval": {
+    "useColor": "Use {{color}} background color"
+  },
+  "stickers": {
+    "addItem": "Add {{name}}",
+    "errorType": "Choose a PNG, JPEG, WebP, GIF, or SVG image.",
+    "errorSize": "Sticker files must be smaller than {{size}} MB.",
+    "errorAdd": "The sticker was imported but could not be added to the timeline.",
+    "errorRead": "Could not read this image. Try exporting it as PNG or WebP.",
+    "added": "{{name}} added at {{time}}",
+    "title": "Stickers & Emojis",
+    "subtitle": "Add fun elements to your video",
+    "emojis": "Emojis",
+    "stickers": "Stickers",
+    "searchEmojis": "Search emojis",
+    "searchStickers": "Search stickers",
+    "searchEmojisPlaceholder": "Search emojis...",
+    "searchStickersPlaceholder": "Search stickers...",
+    "noEmojis": "No emojis found",
+    "noStickers": "No stickers yet",
+    "importHint": "Import custom stickers below",
+    "chooseImage": "Choose custom sticker image",
+    "importing": "Importing sticker…",
+    "import": "Import & Add Sticker",
+    "emojiCount_one": "{{count}} emoji available",
+    "emojiCount_other": "{{count}} emojis available",
+    "stickerCount_one": "{{count}} sticker available",
+    "stickerCount_other": "{{count}} stickers available"
+  },
+  "shape": {
+    "style": "Style",
+    "shapeClip": "Shape clip",
+    "noClip": "No shape clip selected",
+    "fill": "Fill",
+    "fillType": "Fill Type",
+    "solid": "Solid",
+    "shader": "Shader",
+    "color": "Color",
+    "opacity": "Opacity",
+    "stroke": "Stroke",
+    "width": "Width",
+    "corners": "Corners",
+    "radius": "Radius",
+    "shadow": "Shadow",
+    "offsetX": "Offset X",
+    "offsetY": "Offset Y",
+    "blur": "Blur",
+    "shaderFill": "Shader Fill",
+    "types": {
+      "rectangle": "rectangle",
+      "circle": "circle",
+      "ellipse": "ellipse",
+      "triangle": "triangle",
+      "star": "star",
+      "polygon": "polygon",
+      "arrow": "arrow"
+    }
+  },
+  "adjustment": {
+    "defaultName": "Adjustment {{index}}",
+    "collapse": "Collapse {{name}}",
+    "expand": "Expand {{name}}",
+    "hideLayer": "Hide layer",
+    "showLayer": "Show layer",
+    "opacity": "Opacity",
+    "start": "Start",
+    "duration": "Duration",
+    "blendMode": "Blend Mode",
+    "useBlendMode": "Use {{name}} blend mode",
+    "effectCount_one": "Effects ({{count}})",
+    "effectCount_other": "Effects ({{count}})",
+    "enableEffect": "Enable {{name}} effect",
+    "disableEffect": "Disable {{name}} effect",
+    "removeEffect": "Remove {{name}} effect",
+    "addEffect": "+ {{name}}",
+    "before": "Before",
+    "after": "Effect",
+    "duplicate": "Duplicate",
+    "delete": "Delete",
+    "title": "Adjustment Layers",
+    "subtitle": "Non-destructive effects on clips below",
+    "add": "Add Adjustment Layer",
+    "trackLayers_one": "Track Layers ({{count}})",
+    "trackLayers_other": "Track Layers ({{count}})",
+    "otherLayers": "Other Layers",
+    "footer": "Apply color, effects to all clips below",
+    "effects": {
+      "brightness": "Brightness",
+      "contrast": "Contrast",
+      "saturation": "Saturation",
+      "grayscale": "Grayscale",
+      "sepia": "Sepia",
+      "invert": "Invert",
+      "hue": "Hue Rotate",
+      "blur": "Blur",
+      "sharpen": "Sharpen",
+      "vignette": "Vignette",
+      "temperature": "Temperature",
+      "tint": "Tint",
+      "grain": "Film Grain"
+    },
+    "controls": {
+      "brightness": "Brightness",
+      "contrast": "Contrast",
+      "saturation": "Saturation",
+      "amount": "Amount",
+      "rotation": "Rotation",
+      "radius": "Radius",
+      "midpoint": "Midpoint",
+      "feather": "Feather",
+      "warmCool": "Warm / Cool",
+      "greenMagenta": "Green / Magenta",
+      "size": "Size"
+    },
+    "blendModes": {
+      "normal": "Normal",
+      "multiply": "Multiply",
+      "screen": "Screen",
+      "overlay": "Overlay",
+      "darken": "Darken",
+      "lighten": "Lighten",
+      "color-dodge": "Color Dodge",
+      "color-burn": "Color Burn",
+      "hard-light": "Hard Light",
+      "soft-light": "Soft Light",
+      "difference": "Difference",
+      "exclusion": "Exclusion",
+      "hue": "Hue",
+      "saturation": "Saturation",
+      "color": "Color",
+      "luminosity": "Luminosity"
+    },
+    "blendGroups": {
+      "basic": "Basic",
+      "darken": "Darken",
+      "lighten": "Lighten",
+      "contrast": "Contrast",
+      "inversion": "Inversion",
+      "component": "Component"
+    }
+  },
+  "nested": {
+    "title": "Nested Sequences",
+    "subtitle": "Create compound clips from selections",
+    "clipCount_one": "{{count}} clip",
+    "clipCount_other": "{{count}} clips",
+    "trackCount_one": "{{count}} track",
+    "trackCount_other": "{{count}} tracks",
+    "flatten": "Flatten",
+    "duplicate": "Duplicate",
+    "create": "Create Compound Clip",
+    "selected_one": "{{count}} clip selected",
+    "selected_other": "{{count}} clips selected",
+    "selectHint": "Select {{min}}+ clips to create a compound clip",
+    "library": "Compound Clips Library",
+    "nameLabel": "Compound clip name",
+    "instances_one": "{{count}} instance",
+    "instances_other": "{{count}} instances",
+    "confirmRename": "Confirm rename",
+    "cancelRename": "Cancel rename",
+    "rename": "Rename",
+    "cannotDelete": "Cannot delete - has instances",
+    "delete": "Delete",
+    "footer": "Group clips into reusable compound clips"
+  },
+  "templates": {
+    "builtIn": "Built-in",
+    "cloud": "Cloud",
+    "placeholders_one": "{{count}} placeholder",
+    "placeholders_other": "{{count}} placeholders",
+    "use": "Use This Template",
+    "notFound": "Template not found",
+    "missing": "Missing required: {{names}}",
+    "applyFailed": "Failed to apply template",
+    "back": "Back to Templates",
+    "configure": "Configure template variables",
+    "title": "Templates",
+    "subtitle": "Start with a pre-made project",
+    "all": "All",
+    "empty": "No templates in this category",
+    "saveCurrent": "Save Current Project as Template",
+    "count_one": "{{count}} template available",
+    "count_other": "{{count}} templates available",
+    "categories": {
+      "social-media": "Social Media",
+      "youtube": "YouTube",
+      "tiktok": "TikTok",
+      "instagram": "Instagram",
+      "business": "Business",
+      "personal": "Personal",
+      "slideshow": "Slideshow",
+      "intro-outro": "Intro/Outro",
+      "lower-third": "Lower Third",
+      "motion": "Motion",
+      "custom": "Custom"
+    }
+  },
+  "templateVars": {
+    "resetDefault": "Reset to default",
+    "reset": "Reset",
+    "enterText": "Enter text...",
+    "characters_one": "{{count}} / {{max}} character",
+    "characters_other": "{{count}} / {{max}} characters",
+    "noMedia": "No media available",
+    "importMedia": "Import media to use here",
+    "enterSubtitle": "Enter subtitle text...",
+    "noTemplate": "Select a template to edit variables",
+    "title": "Template Variables",
+    "resetAll": "Reset All",
+    "none": "This template has no editable variables",
+    "missing": "Fill in required fields: {{names}}",
+    "apply": "Apply Template"
+  },
+  "multiClip": {
+    "selected_one": "{{count}} clip selected",
+    "selected_other": "{{count}} clips selected",
+    "syncHint": "Batch changes stay synchronized with the timeline",
+    "batchTransform": "Batch Transform",
+    "nudge": "Nudge",
+    "nudgeLeft": "Nudge clips left",
+    "nudgeUp": "Nudge clips up",
+    "nudgeDown": "Nudge clips down",
+    "nudgeRight": "Nudge clips right",
+    "align": "Align",
+    "alignLeft": "Align positions left",
+    "alignCenter": "Align positions center",
+    "alignRight": "Align positions right",
+    "alignTop": "Align positions top",
+    "alignMiddle": "Align positions middle",
+    "alignBottom": "Align positions bottom",
+    "distributeH": "Distribute horizontally",
+    "distributeV": "Distribute vertically",
+    "scale": "Scale",
+    "rotation": "Rotation",
+    "rotationLabel": "Selected clips rotation",
+    "opacity": "Opacity",
+    "batchText": "Batch Text",
+    "batchEffects": "Batch Effects",
+    "effectsHint_one": "Copy from the first selected visual layer, then apply the stack to all {{count}} selected visual layers.",
+    "effectsHint_other": "Copy from the first selected visual layer, then apply the stack to all {{count}} selected visual layers.",
+    "copyEffects": "Copy first effect stack",
+    "appendEffects": "Append effects to selection",
+    "replaceEffects": "Replace effects on selection",
+    "clearEffects": "Clear effects from selection",
+    "actions": "Selection Actions",
+    "resetTransforms": "Reset transforms",
+    "copy_one": "Copy {{count}} selected clip",
+    "copy_other": "Copy {{count}} selected clips",
+    "paste": "Paste clipboard at {{time}}s",
+    "duplicate_one": "Duplicate {{count}} selected clip",
+    "duplicate_other": "Duplicate {{count}} selected clips",
+    "delete": "Delete selected clips",
+    "compound": "Compound Clip",
+    "mixed": "Mixed"
+  },
+  "clipTransition": {
+    "incoming": "Incoming Transition",
+    "incomingHint": "From the previous clip into this clip",
+    "outgoing": "Outgoing Transition",
+    "outgoingHint": "From this clip into the next clip",
+    "intro": "Intro Transition",
+    "introHint": "From the project background into this clip",
+    "outro": "Outro Transition",
+    "outroHint": "From this clip into the project background",
+    "appliedTitle": "Clip Animation Applied",
+    "appliedBoth": "Entry: {{entry}}, Exit: {{exit}}",
+    "appliedEntry": "Entry: {{entry}}",
+    "appliedExit": "Exit: {{exit}}",
+    "cleared": "Animations Cleared",
+    "entry": "Entry Animation",
+    "exit": "Exit Animation",
+    "setEntry": "Set entry animation to {{name}}",
+    "setExit": "Set exit animation to {{name}}",
+    "duration": "Duration",
+    "easing": "Easing",
+    "apply": "Apply Entry/Exit Animations",
+    "single": "Single-Clip Transitions",
+    "singleUnavailable": "Single-clip transitions are available for video and image clips.",
+    "clipToClip": "Clip-to-Clip Transitions",
+    "noAdjacent": "No adjacent clips are available on this track.",
+    "clipToClipUnavailable": "Clip-to-clip transitions are available for timeline media clips.",
+    "presets": {
+      "none": "None",
+      "fade": "Fade",
+      "slide-left": "Slide Left",
+      "slide-right": "Slide Right",
+      "slide-up": "Slide Up",
+      "slide-down": "Slide Down",
+      "zoom-in": "Zoom In",
+      "zoom-out": "Zoom Out",
+      "rotate": "Rotate",
+      "blur": "Blur",
+      "iris-circle": "Iris Circle",
+      "iris-rectangle": "Iris Rect",
+      "iris-diamond": "Iris Diamond",
+      "iris-star": "Iris Star"
+    },
+    "easings": {
+      "linear": "Linear",
+      "ease-in": "Ease In",
+      "ease-out": "Ease Out",
+      "ease-in-out": "Ease In Out"
+    }
+  },
+  "multicam": {
+    "angleName": "Camera angle name",
+    "cutTo": "Cut to {{name}} at playhead",
+    "removeAngle": "Remove angle",
+    "offset": "Offset:",
+    "angleOffset": "Angle offset",
+    "sec": "sec",
+    "angles_one": "{{count}} angle",
+    "angles_other": "{{count}} angles",
+    "syncAudio": "Sync Audio",
+    "autoEdit": "Auto Edit",
+    "deleteGroup": "Delete camera group",
+    "importManifest": "Import manifest",
+    "exportManifest": "Export manifest",
+    "cutReview": "Cut review",
+    "cuts_one": "{{count}} cut",
+    "cuts_other": "{{count}} cuts",
+    "manual": "manual",
+    "reject": "Reject",
+    "accept": "Accept",
+    "accepted": "Accepted",
+    "editableHint": "The generated output track remains fully editable on the timeline.",
+    "exportOtio": "Export OTIO",
+    "exportOrma": "Export .orma",
+    "findClips": "Find clips",
+    "loadFailed": "Camera tools could not load",
+    "trackFallback": "Track {{id}}",
+    "saveGroupFailed": "Could not save the camera group.",
+    "decoding": "Decoding {{name}}…",
+    "decodeFailed": "Could not decode audio for {{name}}.",
+    "groupGone": "Camera group is no longer available.",
+    "defaultGroupName": "Multi-Cam {{index}}",
+    "createFailedTitle": "Camera group failed",
+    "createFailed": "Could not create the camera group.",
+    "removeAngleFailed": "Could not remove angle",
+    "renameAngleFailed": "Could not rename angle",
+    "saveOffsetFailed": "Could not save offset",
+    "projectChanged": "The project changed during analysis. Run the camera analysis again.",
+    "synchronizing": "Synchronizing camera audio…",
+    "synced": "Audio synchronized · {{percent}}% confidence",
+    "syncedTitle": "Camera audio synchronized",
+    "syncFailedDetail": "Audio sync failed.",
+    "syncFailed": "Audio sync failed",
+    "noOverlap": "The camera recordings do not have enough overlapping audio.",
+    "runningVad": "Running local Silero voice detection…",
+    "voiceDetection": "Voice detection · {{name}} · {{percent}}%",
+    "missingAudio": "Missing decoded audio for {{name}}.",
+    "calibrating": "Calibrating room noise and microphone bleed…",
+    "analyzing": "Analyzing speakers and microphone bleed…",
+    "noSpeakers": "No usable speaker activity was detected.",
+    "cutsUnmapped": "The detected cuts could not be mapped to source clips.",
+    "applying_one": "Applying {{count}} cut…",
+    "applying_other": "Applying {{count}} cuts…",
+    "applyFailed": "Could not apply the automatic edit.",
+    "shotsCreated_one": "{{count}} shot created on “{{name}} Auto Edit”",
+    "shotsCreated_other": "{{count}} shots created on “{{name}} Auto Edit”",
+    "autoEditCreated": "Automatic multicam edit created",
+    "autoEditDetail_one": "{{count}} cut · one undo step",
+    "autoEditDetail_other": "{{count}} cuts · one undo step",
+    "autoEditFailedDetail": "Automatic edit failed.",
+    "autoEditFailed": "Automatic edit failed",
+    "analysisUnavailable": "Analysis unavailable",
+    "runAutoEditExport": "Run Auto Edit before exporting the .orma artifact.",
+    "runAutoEditSocial": "Run Auto Edit before finding social clips.",
+    "mapCameraFailed": "Could not map camera {{id}} ({{file}}) to a selected angle.",
+    "manifestImported": "Multicam manifest imported",
+    "manifestDetail_one": "{{participants}} participants · {{count}} camera",
+    "manifestDetail_other": "{{participants}} participants · {{count}} cameras",
+    "manifestFailed": "Manifest import failed",
+    "socialMarker": "Social · {{title}}",
+    "socialAdded": "Social clip candidates added",
+    "markers_one": "{{count}} timeline marker",
+    "markers_other": "{{count}} timeline markers",
+    "reviewFailed": "Could not update cut review.",
+    "playheadOutside": "Move the playhead inside the camera group",
+    "groupRange": "Group range: {{start}}s – {{end}}s",
+    "cameraUnavailable": "This camera is unavailable at the playhead.",
+    "cutAdded": "Camera cut added at {{time}}s · Undo restores the previous edit",
+    "switchFailed": "Could not switch camera",
+    "acceptFailed": "Could not accept cut",
+    "rejectFailed": "Could not reject cut",
+    "nudgeFailed": "Could not nudge cut",
+    "deleteFailed": "Could not delete group",
+    "title": "Multi-Camera Editing",
+    "subtitle": "Choose recordings of the same event, create a group, then sync audio or cut between cameras at the playhead.",
+    "groups": "Camera Groups",
+    "createNew": "Create New Group",
+    "createHint": "Choose {{min}} or more recordings of the same event. Use separate tracks for camera sources; source tracks are hidden and muted when the edit is created.",
+    "noClips": "Add video clips to unlocked timeline tracks to use multi-camera editing",
+    "createGroup_one": "Create Group ({{count}} selected)",
+    "createGroup_other": "Create Group ({{count}} selected)",
+    "settings": "Automatic edit settings",
+    "syncFirst": "Sync cameras before Auto Edit (turn off to use manual offsets)",
+    "policy": "Automatic edit policy",
+    "preset": "Preset",
+    "overlap": "Overlapping speakers",
+    "sustained": "Sustained overlap",
+    "minShot": "Minimum shot",
+    "maxShot": "Maximum shot",
+    "maxShotHint": "Maximum shot length triggers a listener reaction or wide reset.",
+    "transcripts": "Add per-channel local Whisper transcripts to the .orma artifact",
+    "reactions": "Add local MediaPipe face/reaction cues (slower)",
+    "footer": "Automatic edits create an editable timeline track and undo in one step",
+    "presets": {
+      "custom": "Custom",
+      "conversation": "Conversation",
+      "energetic": "Energetic",
+      "panel": "Panel"
+    },
+    "strategies": {
+      "hold": "Hold current camera",
+      "winner": "Choose energy winner",
+      "priority": "Participant priority",
+      "wide": "Use wide shot",
+      "composite": "Split active speakers",
+      "progressive": "Progressive PiP"
+    },
+    "escalations": {
+      "wideShot": "Wide shot",
+      "energyWinner": "Energy winner",
+      "splitLayout": "Split layout"
+    },
+    "reasons": {
+      "speaker": "speaker",
+      "overlap-hold": "overlap hold",
+      "overlap-winner": "overlap winner",
+      "silence-hold": "silence hold",
+      "max-shot": "max shot",
+      "backchannel-hold": "backchannel hold",
+      "turn-collision-winner": "turn collision winner",
+      "successful-interruption": "successful interruption",
+      "sustained-overlap": "sustained overlap",
+      "group-reaction": "group reaction",
+      "reaction-shot": "reaction shot",
+      "layout-budget": "layout budget",
+      "directive": "directive"
+    }
+  }
+}

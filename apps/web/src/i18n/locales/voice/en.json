@@ -10,12 +10,30 @@
       "tools": "Tools"
     },
     "cards": {
-      "voiceover": { "title": "Voiceover", "description": "Turn text into speech right on the timeline" },
-      "captions": { "title": "Auto Captions", "description": "Automatically generate subtitles from audio" },
-      "templates": { "title": "Project Templates", "description": "Start with pre-built project structures" },
-      "filters": { "title": "Filter Presets", "description": "Apply cinematic color grades instantly" },
-      "music": { "title": "Music & Sound Effects", "description": "Browse royalty-free audio for your projects" },
-      "multicam": { "title": "Multi-Camera Editing", "description": "Sync and switch between multiple angles" }
+      "voiceover": {
+        "title": "Voiceover",
+        "description": "Turn text into speech right on the timeline"
+      },
+      "captions": {
+        "title": "Auto Captions",
+        "description": "Automatically generate subtitles from audio"
+      },
+      "templates": {
+        "title": "Project Templates",
+        "description": "Start with pre-built project structures"
+      },
+      "filters": {
+        "title": "Filter Presets",
+        "description": "Apply cinematic color grades instantly"
+      },
+      "music": {
+        "title": "Music & Sound Effects",
+        "description": "Browse royalty-free audio for your projects"
+      },
+      "multicam": {
+        "title": "Multi-Camera Editing",
+        "description": "Sync and switch between multiple angles"
+      }
     },
     "footer": "More AI features coming soon",
     "unsavedTitle": "Unsaved audio discarded",
@@ -71,7 +89,6 @@
       "failed": "Line {{index}} failed ({{placed}} / {{total}} done): {{message}}"
     },
     "setup": {
-      "title": "Keys & region",
       "configured": "Configured",
       "notConfigured": "Not configured",
       "azureKey": "Azure Speech key",
@@ -87,7 +104,7 @@
       "keyHint": "Keys are encrypted by Windows on this computer and never shown again."
     },
     "errors": {
-      "missing-key": "No key is configured. Enter it under “Keys & region” below.",
+      "missing-key": "No key is configured. Enter it in Settings → API Keys.",
       "invalid-region": "Invalid Azure region, e.g. eastasia.",
       "unsupported-platform": "Windows built-in voices only work on Windows.",
       "voice-missing": "The selected voice is not installed on this computer. Choose another.",
@@ -101,5 +118,16 @@
       "noProject": "Open a project first.",
       "placement": "Could not place the voiceover on the timeline."
     }
+  },
+  "keys": {
+    "title": "Cloud service keys",
+    "description": "Used by voiceover, prompt translation and AI highlights. The app only connects when you use these cloud features.",
+    "use": {
+      "openai": "For OpenAI voices, prompt translation and AI highlights",
+      "azure": "For Azure cloud voices (also needs a region)"
+    },
+    "needKey": "This voice engine needs a key",
+    "needRegion": "An Azure region is still needed",
+    "openSettings": "Open Settings"
   }
 }

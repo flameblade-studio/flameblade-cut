@@ -20,6 +20,7 @@ import {
 import { ToolcraftButton as Button } from "@openreel/ui";
 import { ToolcraftSelectableCard as SelectableCard } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
 import { useEngineStore } from "../../../stores/engine-store";
 import { useProjectStore } from "../../../stores/project-store";
 import {
@@ -59,6 +60,7 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
   onSelect,
   onApply,
 }) => {
+  const { t } = useTranslation();
   const Icon = CATEGORY_ICONS[template.category] || FolderOpen;
 
   return (
@@ -81,35 +83,35 @@ const TemplateCard: React.FC<TemplateCardProps> = ({
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-[11px] font-medium text-fg truncate">
-              {template.name}
+              {t(`visual.presets.templates.${template.id}`, { defaultValue: template.name })}
             </span>
             {template.id.startsWith("builtin-") && (
               <span className="px-1.5 py-0.5 text-[8px] bg-status-info/20 text-status-info rounded shrink-0">
-                Built-in
+                {t("visual.templates.builtIn")}
               </span>
             )}
             {template.source === "cloud" && (
               <span className="px-1.5 py-0.5 text-[8px] bg-primary/20 text-primary rounded flex items-center gap-1 shrink-0">
                 <Cloud size={8} />
-                Cloud
+                {t("visual.templates.cloud")}
               </span>
             )}
           </div>
           <div className="flex items-center gap-3 mt-1">
             <div className="flex items-center gap-1 text-[9px] text-fg-3">
               <Layers size={10} />
-              <span>{template.placeholderCount} placeholders</span>
+              <span>{t("visual.templates.placeholders", { count: template.placeholderCount })}</span>
             </div>
             <div className="flex items-center gap-1 text-[9px] text-fg-3">
               <Clock size={10} />
-              <span>{template.duration}s</span>
+              <span>{t("visual.shell.seconds", { value: template.duration })}</span>
             </div>
           </div>
         </div>
       </div>
       {isSelected && (
         <Button
-          label="Use This Template"
+          label={t("visual.templates.use")}
           variant="primary"
           onClick={(e) => {
             e.stopPropagation();
@@ -129,6 +131,7 @@ interface TemplatesBrowserPanelProps {
 export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
   onTemplateApplied,
 }) => {
+  const { t } = useTranslation();
   const getTemplateEngine = useEngineStore((state) => state.getTemplateEngine);
   const getTitleEngine = useEngineStore((state) => state.getTitleEngine);
   const loadProject = useProjectStore((state) => state.loadProject);
@@ -243,7 +246,7 @@ export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
       }
 
       if (!template) {
-        setApplyError("Template not found");
+        setApplyError(t("visual.templates.notFound"));
         return;
       }
 
@@ -251,7 +254,7 @@ export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
         templateEngine.applyTemplate(template, placeholderValues);
 
       if (missingPlaceholders.length > 0) {
-        setApplyError(`Missing required: ${missingPlaceholders.join(", ")}`);
+        setApplyError(t("visual.templates.missing", { names: missingPlaceholders.join(", ") }));
       }
 
       loadProject(project);
@@ -304,7 +307,7 @@ export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
       onTemplateApplied?.();
     } catch (error) {
       setApplyError(
-        error instanceof Error ? error.message : "Failed to apply template",
+        error instanceof Error ? error.message : t("visual.templates.applyFailed"),
       );
     }
   }, [
@@ -316,6 +319,7 @@ export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
     loadedTemplate,
     placeholderValues,
     templates,
+    t,
   ]);
 
   if (isLoading) {
@@ -330,7 +334,7 @@ export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
     return (
       <div className="space-y-4 w-full min-w-0 max-w-full">
         <Button
-          label="Back to Templates"
+          label={t("visual.templates.back")}
           variant="ghost"
           icon={<ChevronLeft size={12} />}
           onClick={handleBackToTemplates}
@@ -344,7 +348,7 @@ export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
               {loadedTemplate.name}
             </span>
             <Text type="supporting" color="secondary" display="block" className="text-[9px]">
-              Configure template variables
+              {t("visual.templates.configure")}
             </Text>
           </div>
         </div>
@@ -373,17 +377,17 @@ export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
         <FolderOpen size={16} className="text-primary shrink-0" />
         <div className="min-w-0 flex-1">
           <span className="text-[11px] font-medium text-fg">
-            Templates
+            {t("visual.templates.title")}
           </span>
           <Text type="supporting" color="secondary" display="block" className="text-[9px]">
-            Start with a pre-made project
+            {t("visual.templates.subtitle")}
           </Text>
         </div>
       </div>
 
       <div className="flex gap-1 overflow-x-auto pb-1 -mx-1 px-1">
         <SelectableCard
-          label="All"
+          label={t("visual.templates.all")}
           isSelected={selectedCategory === "all"}
           onChange={() => setSelectedCategory("all")}
           onClick={() => setSelectedCategory("all")}
@@ -395,14 +399,14 @@ export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
               : "bg-bg-2 text-fg-2 hover:text-fg"
           }`}
         >
-          All
+          {t("visual.templates.all")}
         </SelectableCard>
         {TEMPLATE_CATEGORIES.map((category) => {
           const Icon = CATEGORY_ICONS[category.id] || FolderOpen;
           return (
             <SelectableCard
               key={category.id}
-              label={category.name}
+              label={t(`visual.templates.categories.${category.id}`, { defaultValue: category.name })}
               isSelected={selectedCategory === category.id}
               onChange={() => setSelectedCategory(category.id)}
               onClick={() => setSelectedCategory(category.id)}
@@ -415,7 +419,7 @@ export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
               }`}
             >
               <Icon size={12} />
-              {category.name}
+              {t(`visual.templates.categories.${category.id}`, { defaultValue: category.name })}
             </SelectableCard>
           );
         })}
@@ -437,7 +441,7 @@ export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
               className="mx-auto mb-2 text-fg-3 opacity-50"
             />
             <Text type="supporting" color="secondary" display="block" className="text-[10px]">
-              No templates in this category
+              {t("visual.templates.empty")}
             </Text>
           </div>
         ) : (
@@ -455,7 +459,7 @@ export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
 
       <div className="pt-2 border-t border-border">
         <Button
-          label="Save Current Project as Template"
+          label={t("visual.templates.saveCurrent")}
           variant="ghost"
           icon={<Plus size={12} />}
           onClick={() => setIsSaveDialogOpen(true)}
@@ -464,7 +468,7 @@ export const TemplatesBrowserPanel: React.FC<TemplatesBrowserPanelProps> = ({
       </div>
 
       <Text type="supporting" color="secondary" display="block" className="text-center text-[9px]">
-        {templates.length} templates available
+        {t("visual.templates.count", { count: templates.length })}
       </Text>
 
       <SaveTemplateDialog

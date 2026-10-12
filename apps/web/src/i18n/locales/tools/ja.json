@@ -1,0 +1,881 @@
+{
+  "autoEdit": {
+    "audioMissing": "音声ファイルが読み込まれていません",
+    "analyzeFailed": "音声を解析できませんでした",
+    "title": "ビート同期オート編集",
+    "empty": "オート編集を使うにはオーディオ トラックを追加してください",
+    "audioSource": "音声ソース",
+    "cutMode": "カット モード",
+    "modes": {
+      "beats": "ビート",
+      "downbeats": "強拍",
+      "segments": "セクション"
+    },
+    "sensitivity": "感度",
+    "minClip": "最短クリップ長",
+    "minClipAria": "最短クリップ長",
+    "analyzing": "ビートを解析中…",
+    "generate": "オート編集を生成",
+    "preview": "プレビュー",
+    "cuts": "カット数：",
+    "duration": "長さ：",
+    "apply": "オート編集を適用"
+  },
+  "crop": {
+    "title": "動画をトリミング",
+    "free": "フリー",
+    "reset": "トリミングをリセット",
+    "loading": "動画を読み込み中…",
+    "previewAlt": "トリミングのプレビュー"
+  },
+  "highlightExtractor": {
+    "mediaMissing": "メディアが見つからないか、読み込まれていません",
+    "decoding": "音声をデコード中…",
+    "failed": "解析に失敗しました",
+    "clips": "クリップ数",
+    "maxDuration": "最大の長さ",
+    "secondsUnit": "秒",
+    "progress": "{{phase}}（{{percent}}%）",
+    "find": "ハイライトを探す",
+    "preview": "ハイライトをプレビュー",
+    "apply_one": "{{count}} 件のハイライトを適用",
+    "apply_other": "{{count}} 件のハイライトを適用"
+  },
+  "aspectMatch": {
+    "title": "動画のサイズに合わせますか？",
+    "subtitle": "追加する動画のサイズが現在のプロジェクト設定と異なります。",
+    "video": "動画のサイズ",
+    "project": "現在のプロジェクト",
+    "ratio": "アスペクト比：{{ratio}}",
+    "hint": "プロジェクトのサイズをこの動画に合わせてぴったり収めるか、現在のキャンバスを維持します。動画は元のサイズで配置されるので、自由にサイズを変更できます。",
+    "keep": "現在のままにする",
+    "match": "動画に合わせる"
+  },
+  "easing": {
+    "linear": "リニア",
+    "easeInQuad": "イーズイン",
+    "easeOutQuad": "イーズアウト",
+    "easeInOutQuad": "イーズインアウト",
+    "easeInCubic": "イーズイン（3 次）",
+    "easeOutCubic": "イーズアウト（3 次）",
+    "easeInOutCubic": "イーズインアウト（3 次）",
+    "easeInQuart": "イーズイン（4 次）",
+    "easeOutQuart": "イーズアウト（4 次）",
+    "easeInOutQuart": "イーズインアウト（4 次）",
+    "easeInBack": "バック イン",
+    "easeOutBack": "バック アウト",
+    "easeInOutBack": "バック インアウト",
+    "easeInElastic": "エラスティック イン",
+    "easeOutElastic": "エラスティック アウト",
+    "easeInOutElastic": "エラスティック インアウト",
+    "easeInBounce": "バウンス イン",
+    "easeOutBounce": "バウンス アウト",
+    "easeInOutBounce": "バウンス インアウト"
+  },
+  "keyframeEditor": {
+    "empty": "編集するキーフレーム付きのクリップを選択してください",
+    "title": "キーフレーム エディター",
+    "close": "キーフレーム エディターを閉じる",
+    "property": "プロパティ",
+    "copy": "コピー",
+    "paste": "貼り付け",
+    "delete": "削除",
+    "easingPrefix": "イージング：",
+    "easing": "イージング",
+    "selected_one": "{{count}} 個のキーフレームを選択中",
+    "selected_other": "{{count}} 個のキーフレームを選択中",
+    "time": "時間",
+    "value": "値",
+    "properties": {
+      "position_x": "位置 X",
+      "position_y": "位置 Y",
+      "scale_x": "スケール X",
+      "scale_y": "スケール Y",
+      "rotation": "回転",
+      "opacity": "不透明度",
+      "borderRadius": "角の丸み"
+    }
+  },
+  "saveTemplate": {
+    "title": "テンプレートとして保存",
+    "nameRequired": "テンプレート名を入力してください",
+    "descriptionRequired": "説明を入力してください",
+    "uploadFailed": "クラウドにアップロードできませんでした",
+    "saveFailed": "テンプレートを保存できませんでした",
+    "saved": "テンプレートを保存しました！",
+    "name": "テンプレート名",
+    "namePlaceholder": "マイ テンプレート",
+    "characterCount_one": "{{count}}/{{max}} 文字",
+    "characterCount_other": "{{count}}/{{max}} 文字",
+    "description": "説明",
+    "descriptionPlaceholder": "このテンプレートの用途と使い方を説明してください…",
+    "category": "カテゴリ",
+    "tags": "タグ（カンマ区切り）",
+    "tagsPlaceholder": "イントロ, アニメーション, youtube",
+    "author": "作成者名",
+    "authorPlaceholder": "名前またはユーザー名",
+    "location": "保存先",
+    "cloud": "クラウド",
+    "local": "ローカル",
+    "cloudHint": "クラウドに保存され、どのデバイスからも使えます",
+    "localHint": "このデバイスのブラウザー ストレージに保存されます",
+    "saving": "保存中…",
+    "save": "テンプレートを保存"
+  },
+  "templateCategories": {
+    "social-media": "ソーシャルメディア",
+    "business": "ビジネス",
+    "personal": "パーソナル",
+    "slideshow": "スライドショー",
+    "intro-outro": "イントロ／アウトロ",
+    "lower-third": "ロワーサード",
+    "motion": "モーション",
+    "custom": "カスタム"
+  },
+  "scriptView": {
+    "title": "プロジェクト JSON",
+    "subtitle": "プロジェクトを JSON で書き出し・読み込み",
+    "mode": "プロジェクト JSON モード",
+    "exportTab": "JSON を書き出し",
+    "importTab": "読み込み",
+    "copy": "コピー",
+    "copied": "コピーしました！",
+    "download": "JSON をダウンロード",
+    "empty": "書き出せるプロジェクト データがありません。",
+    "file": "プロジェクト JSON ファイル",
+    "jsonOnly": ".json ファイルをアップロードしてください",
+    "dropPlaceholder": "JSON ファイルをここにドロップするか、クリックして選択",
+    "dropHint": ".json プロジェクト ファイルに対応",
+    "loaded_one": "{{formatted}} 文字を読み込みました",
+    "loaded_other": "{{formatted}} 文字を読み込みました",
+    "clear": "クリア",
+    "validating": "検証中…",
+    "revalidate": "再検証",
+    "valid": "有効なプロジェクト JSON です。読み込めます",
+    "errors": "エラー",
+    "warnings": "警告",
+    "missingAssets": "見つからない素材（{{count}}）",
+    "missingAssetsHint": "これらの素材はプレースホルダーとして読み込まれ、後で差し替えられます。",
+    "importProject": "プロジェクトを読み込む",
+    "validationError": "検証エラー：{{message}}",
+    "importError": "読み込みエラー：{{message}}",
+    "unknownError": "不明なエラー",
+    "needsRelink_one": "{{count}} 個の素材を再リンクする必要があります",
+    "needsRelink_other": "{{count}} 個の素材を再リンクする必要があります",
+    "needsRelinkHint": "「{{panel}}」パネルで「{{action}}」をクリックすると、見つからないメディアを復元できます。"
+  },
+  "estimate": {
+    "seconds_one": "約 {{count}} 秒",
+    "seconds_other": "約 {{count}} 秒",
+    "minutes_one": "約 {{count}} 分",
+    "minutes_other": "約 {{count}} 分",
+    "minutesSeconds": "約 {{minutes}} 分 {{seconds}} 秒",
+    "hoursMinutes": "約 {{hours}} 時間 {{minutes}} 分"
+  },
+  "export": {
+    "deviceSummary_one": "{{gpu}} · {{count}} コア",
+    "deviceSummary_other": "{{gpu}} · {{count}} コア",
+    "aspect": {
+      "vertical": "縦長（TikTok、Reels、Shorts）",
+      "square": "正方形（Instagram フィード）",
+      "horizontal": "横長（YouTube、Twitter）"
+    },
+    "platforms": {
+      "Broadcast": "放送",
+      "Web": "Web",
+      "Archive": "アーカイブ",
+      "Audio": "オーディオ",
+      "Custom": "カスタム"
+    },
+    "quality": "品質",
+    "noAudio": "音声なし",
+    "audioAutomatic": "自動",
+    "codecs": "コーデック",
+    "desktopEncoderRequired": "ProRes、透過、高ビット深度にはデスクトップ版のエンコーダーが必要です。このブラウザーでは透過なしの H.264 MP4 を書き出せます。",
+    "sizePresets": {
+      "email": "メール（{{size}} MB）",
+      "whatsapp": "WhatsApp（{{size}} MB）",
+      "discord": "Discord（{{size}} MB）"
+    },
+    "presets": {
+      "youtube-4k": {
+        "description": "YouTube 4K 向けの最高品質（50 Mbps）"
+      },
+      "youtube-4k-60": {
+        "description": "ゲームや動きの多い映像向け 4K 60fps（65 Mbps）"
+      },
+      "youtube-1080p": {
+        "description": "YouTube 向けの標準 HD 品質"
+      },
+      "youtube-shorts": {
+        "description": "YouTube Shorts 向けの縦長形式（最大 60 秒）"
+      },
+      "tiktok": {
+        "description": "TikTok 向けに最適化（最大 3 分）"
+      },
+      "instagram-reels": {
+        "description": "Reels 向けの縦長形式（最大 90 秒）"
+      },
+      "instagram-feed": {
+        "name": "Instagram フィード動画",
+        "description": "フィード投稿向けの正方形形式（最大 60 秒）"
+      },
+      "instagram-story": {
+        "name": "Instagram ストーリーズ",
+        "description": "ストーリーズ向けの縦長形式（1 クリップ 15 秒）"
+      },
+      "twitter": {
+        "description": "Twitter 向けに最適化（最大 2 分 20 秒）"
+      },
+      "facebook-feed": {
+        "name": "Facebook フィード",
+        "description": "Facebook フィード向けの標準形式"
+      },
+      "linkedin": {
+        "description": "LinkedIn 向けのプロ仕様形式（最大 10 分）"
+      },
+      "broadcast-4k-master": {
+        "name": "4K マスター品質",
+        "description": "最高品質の 4K（80 Mbps H.265）"
+      },
+      "broadcast-4k-prores-hq": {
+        "description": "編集・マスタリング向けのプロ仕様 ProRes"
+      },
+      "broadcast-4k-prores-4444": {
+        "description": "アルファ対応の最高品質 ProRes"
+      },
+      "broadcast-4k-60": {
+        "name": "4K 60fps ハイモーション",
+        "description": "スポーツやゲーム向け 4K 60fps（65 Mbps）"
+      },
+      "broadcast-4k": {
+        "name": "放送用 4K UHD",
+        "description": "4K 放送品質（50 Mbps）"
+      },
+      "broadcast-1080p-high": {
+        "name": "1080p 高品質",
+        "description": "高ビットレート 1080p（20 Mbps）"
+      },
+      "broadcast-1080p-prores": {
+        "description": "1080p 編集向けの ProRes HQ"
+      },
+      "broadcast-hd": {
+        "name": "放送用 HD 1080p",
+        "description": "標準の放送品質"
+      },
+      "web-hd": {
+        "name": "Web HD",
+        "description": "Web 埋め込み向けのバランス品質"
+      },
+      "web-small": {
+        "name": "Web 最適化",
+        "description": "ファイルを小さくして読み込みを高速化"
+      },
+      "webm-vp9": {
+        "description": "VP9 コーデックを使う最新の Web 形式（720p 推奨）"
+      },
+      "archive-4k-prores": {
+        "name": "アーカイブ 4K ProRes",
+        "description": "長期保存向けのロスレス 4K ProRes"
+      },
+      "archive-master": {
+        "name": "アーカイブ マスター H.265",
+        "description": "高品質 4K H.265（80 Mbps）"
+      },
+      "archive-1080p-prores": {
+        "name": "アーカイブ 1080p ProRes",
+        "description": "1080p 保存向けの ProRes HQ"
+      },
+      "archive-proxy": {
+        "name": "アーカイブ プロキシ",
+        "description": "編集用の低品質プロキシ"
+      }
+    }
+  },
+  "proxy": {
+    "presets": {
+      "low": "最大 540p · 高速",
+      "medium": "最大 720p · バランス",
+      "high": "最大 1080p · 高精細"
+    },
+    "badgeProxy": "プロキシでプレビュー",
+    "badgeOriginal": "オリジナルでプレビュー",
+    "badgeEncoding": "プロキシ {{percent}}%",
+    "badgeQueued": "プロキシ待機中",
+    "sectionAria": "{{name}} のプレビュー性能",
+    "title": "なめらかなプレビュー",
+    "recommended": "おすすめ",
+    "intro": "編集用に小さなコピーを作成します。書き出しには常に元の動画を使います。このタブにキャッシュされます（最大 {{size}} MB）。",
+    "quality": "プレビュー品質",
+    "qualityAria": "プロキシの品質",
+    "ready": "プロキシ準備完了 · {{width}} × {{height}} · {{size}} MB",
+    "queued": "待機中 — 1 本ずつ処理します",
+    "creating": "プロキシを作成中 · {{percent}}%",
+    "progressAria": "{{name}} のプロキシ進捗",
+    "cancel": "プロキシをキャンセル",
+    "sourceAria": "プレビューのソース",
+    "original": "オリジナル",
+    "proxy": "プロキシ",
+    "recreate": "プロキシを再作成",
+    "create": "プレビュー用プロキシを作成",
+    "remove": "キャッシュしたプロキシを削除"
+  },
+  "recording": {
+    "resume": "録画を再開",
+    "pause": "録画を一時停止",
+    "stop": "録画を停止",
+    "cancel": "録画をキャンセル",
+    "minimize": "コントロールを最小化"
+  },
+  "exportErrors": {
+    "emptyTimeline": "書き出す前に、タイムラインにクリップ、テキスト、またはグラフィックを追加してください。",
+    "invalidDimensions": "動画の有効な幅と高さを選択してください。",
+    "invalidFrameRate": "動画の有効なフレームレートを選択してください。",
+    "invalidBitrate": "有効な動画ビットレートを選択してください。",
+    "desktopEncoderRequired": "ProRes、透過、高ビット深度の書き出しにはデスクトップ版エンコーダーが必要です。ブラウザーで書き出す場合は H.264 を選択してください。",
+    "codecUnsupportedInContainer": "{{codec}} は {{format}} で書き出せません。WebM なら VP9、MP4 なら H.264 を選択してください。",
+    "videoEncodeUnsupported": "このブラウザーは {{width}}×{{height}} の {{codec}} をエンコードできません。H.264 / MP4、VP9 / WebM、または小さい解像度をお試しください。",
+    "audioEncodeUnsupported": "このブラウザーは {{format}} 用の音声をエンコードできません。Opus 音声の WebM か、別のブラウザーをお試しください。",
+    "checkFailed": "ブラウザーの書き出し対応を確認できませんでした：{{detail}}"
+  },
+  "editorChrome": {
+    "objects3d": "3D オブジェクト",
+    "loadingAiEditor": "AI エディターを読み込み中…",
+    "timelineTool": "タイムラインツール",
+    "trackLayers": "トラックレイヤー",
+    "recordingNow": "録画中...",
+    "resolutionHints": {
+      "720p": "1280×720 - ファイルが小さい",
+      "1080p": "1920×1080 - おすすめ",
+      "1440p": "2560×1440 - 高画質",
+      "4k": "3840×2160 - 最高画質"
+    },
+    "aspectCustom": "カスタム",
+    "fontOption": "{{font}}（{{category}}）",
+    "fontCategories": {
+      "Popular": "人気",
+      "DisplayHeadlines": "ディスプレイ・見出し",
+      "ElegantSerif": "エレガント・セリフ",
+      "ModernClean": "モダン・クリーン",
+      "HandwrittenScript": "手書き・筆記体",
+      "FunCreative": "ポップ・クリエイティブ",
+      "Monospace": "等幅",
+      "System": "システム",
+      "Custom": "カスタム"
+    },
+    "clipTypes": {
+      "video": "動画",
+      "audio": "オーディオ",
+      "image": "画像",
+      "text": "テキスト",
+      "shape": "シェイプ",
+      "svg": "SVG",
+      "sticker": "ステッカー",
+      "clip": "クリップ"
+    }
+  },
+  "processing": {
+    "title": "エフェクトを処理中",
+    "tasks_one": "{{count}} 件のタスクを処理中",
+    "tasks_other": "{{count}} 件のタスクを処理中",
+    "overall": "全体の進行状況",
+    "overallAria": "全体の進行状況",
+    "taskProgress": "{{name}}の進行状況",
+    "wait": "エフェクトを適用しています。しばらくお待ちください...",
+    "types": {
+      "background-removal": "背景除去",
+      "auto-reframe": "自動リフレーム",
+      "color-grading": "カラーグレーディング",
+      "effects": "動画エフェクト"
+    },
+    "status": {
+      "queued": "待機中",
+      "processing": "処理中",
+      "completed": "完了",
+      "failed": "失敗"
+    }
+  },
+  "timelineItems": {
+    "noKeyframes": "キーフレームなし",
+    "dropToAdd": "ドロップしてクリップを追加",
+    "placeAbove": "上に配置",
+    "applyingEffect": "エフェクトを適用中",
+    "emoji": "絵文字",
+    "sticker": "ステッカー",
+    "svg": "SVG",
+    "textFallback": "テキスト",
+    "transition": {
+      "menuTitle": "トランジション",
+      "remove": "トランジションを削除",
+      "addIntro": "イントロのトランジションを追加",
+      "addOutro": "アウトロのトランジションを追加",
+      "add": "トランジションを追加",
+      "badge": "{{name}} · {{seconds}} 秒",
+      "editIntro": "イントロのトランジションを編集：{{label}}",
+      "editOutro": "アウトロのトランジションを編集：{{label}}",
+      "editBetween": "クリップ間のトランジションを編集：{{label}}"
+    }
+  },
+  "recipesTab": {
+    "video": "動画",
+    "image": "画像",
+    "all": "すべて",
+    "selectedClip": "選択中のクリップ",
+    "summary_one": "{{duration}} 秒 • {{count}} 件のレシピを適用済み",
+    "summary_other": "{{duration}} 秒 • {{count}} 件のレシピを適用済み",
+    "applying": "適用中..."
+  },
+  "transitionDescriptions": {
+    "Crossfade": "なめらかな不透明度のブレンド",
+    "DiptoBlack": "黒を経由してフェード",
+    "DiptoWhite": "白を経由してフェード",
+    "Wipe": "くっきりした境界が画面を横切る",
+    "WipeLeft": "左へワイプして表示",
+    "WipeRight": "右へワイプして表示",
+    "WipeUp": "上へワイプして表示",
+    "WipeDown": "下へワイプして表示",
+    "Slide": "次のクリップがスライドイン",
+    "SlideLeft": "次のクリップを左へスライド",
+    "SlideRight": "次のクリップを右へスライド",
+    "SlideUp": "次のクリップを上へスライド",
+    "SlideDown": "次のクリップを下へスライド",
+    "Push": "前のクリップを押し出す",
+    "Zoom": "拡大してディゾルブ",
+    "CircleReveal": "中央から円形に表示",
+    "BlurDissolve": "ぼかしながら次のクリップへ",
+    "WhipPan": "モーションブラー付きの高速パン",
+    "RadialWipe": "時計の針のような回転ワイプ",
+    "Pixelate": "粗いピクセルモザイクで切り替え",
+    "GlitchCut": "カット点でデジタルなスライスのずれ",
+    "VenetianBlinds": "ブラインド状のスラットから次のショットを表示",
+    "DiamondReveal": "中央から広がるひし形",
+    "SpinClockwise": "回転と拡大縮小でなめらかにつなぐ",
+    "SpinCounterclockwise": "回転と拡大縮小でなめらかにつなぐ",
+    "FlipHorizontal": "ショット間をカードのように水平反転",
+    "FlipVertical": "ショット間をカードのように垂直反転",
+    "SplitHorizontal": "中央線から外側へ次のショットを表示",
+    "SplitVertical": "中央から外側へ次のショットを表示",
+    "FlashCut": "編集点を強い白フラッシュで切り替え",
+    "FilmBurn": "編集点に暖色系のアナログ光漏れ",
+    "RedFilmBurn": "ドラマチックなカット向けの濃い赤橙フレア",
+    "CoolLightLeak": "編集点に青白い光学フレア",
+    "MosaicReveal": "ランダムなタイルで次のショットを組み立てる",
+    "Ripple": "流れる波が前後のショットをゆがめる",
+    "PageTurnLeft": "前のショットを左へめくる",
+    "PageTurnRight": "前のショットを右へめくる",
+    "ColorSplit": "プリズムのような色チャンネルの残像が編集点で交差",
+    "LinearDissolve": "一定速度の不透明度ブレンド",
+    "SlowInDissolve": "カットに向かって加速するブレンド",
+    "SlowOutDissolve": "カット後にゆるやかに落ち着くブレンド",
+    "SoftWipeLeft": "ぼかし境界の方向ワイプ",
+    "SoftWipeRight": "ぼかし境界の方向ワイプ",
+    "DiagonalWipe": "角から斜めに表示",
+    "PushLeft": "両方のクリップが左へ移動",
+    "PushRight": "両方のクリップが右へ移動",
+    "PushUp": "両方のクリップが上へ移動",
+    "PushDown": "両方のクリップが下へ移動",
+    "ZoomTopLeft": "一点に寄るズームとディゾルブ",
+    "ZoomBottomRight": "一点に寄るズームとディゾルブ",
+    "PunchZoom": "一点に寄るズームとディゾルブ",
+    "WhipLeft": "モーションブラー付きで左へウィップ",
+    "WhipRight": "モーションブラー付きで右へウィップ",
+    "WhipUp": "モーションブラー付きで上へウィップ",
+    "WhipDown": "モーションブラー付きで下へウィップ"
+  },
+  "transitionTypes": {
+    "crossfade": {
+      "name": "クロスフェード",
+      "description": "クリップ間をなめらかにブレンド"
+    },
+    "dipToBlack": {
+      "name": "ディップ・トゥ・ブラック",
+      "description": "黒を経由してフェード"
+    },
+    "dipToWhite": {
+      "name": "ディップ・トゥ・ホワイト",
+      "description": "白を経由してフェード"
+    },
+    "wipe": {
+      "name": "ワイプ",
+      "description": "クリップからクリップへワイプ"
+    },
+    "slide": {
+      "name": "スライド",
+      "description": "次のクリップを前のクリップの上にスライド"
+    },
+    "zoom": {
+      "name": "ズーム",
+      "description": "クリップ間のズームトランジション"
+    },
+    "push": {
+      "name": "プッシュ",
+      "description": "次のクリップが前のクリップを押し出す"
+    },
+    "circleReveal": {
+      "name": "円形リビール",
+      "description": "中央から円形に表示"
+    },
+    "blur": {
+      "name": "ブラーディゾルブ",
+      "description": "ぼかしてから次のクリップへ戻す"
+    },
+    "whipPan": {
+      "name": "ウィップパン",
+      "description": "モーションブラー付きの高速パン"
+    },
+    "radialWipe": {
+      "name": "放射ワイプ",
+      "description": "時計の針のような回転ワイプ"
+    },
+    "pixelate": {
+      "name": "ピクセル化",
+      "description": "粗いピクセルモザイクで切り替え"
+    },
+    "glitch": {
+      "name": "グリッチカット",
+      "description": "デジタルなスライスのずれ"
+    },
+    "blinds": {
+      "name": "ブラインド",
+      "description": "ブラインド状のスラットで表示"
+    },
+    "diamondReveal": {
+      "name": "ダイヤモンドリビール",
+      "description": "中央から幾何学的に表示"
+    },
+    "spin": {
+      "name": "スピン",
+      "description": "回転と拡大縮小でつなぐ"
+    },
+    "flip": {
+      "name": "フリップ",
+      "description": "カードのような水平・垂直反転"
+    },
+    "splitReveal": {
+      "name": "スプリット表示",
+      "description": "中央から外側へ表示"
+    },
+    "flash": {
+      "name": "フラッシュカット",
+      "description": "強い白フラッシュの切り替え"
+    },
+    "filmBurn": {
+      "name": "フィルムバーン",
+      "description": "編集点に暖色系のアナログ光漏れ"
+    },
+    "mosaic": {
+      "name": "モザイクリビール",
+      "description": "ショット間をランダムなタイルで表示"
+    },
+    "ripple": {
+      "name": "リップル",
+      "description": "流れるような水平の波のゆがみ"
+    },
+    "pageTurn": {
+      "name": "ページめくり",
+      "description": "前のショットをページのようにめくる"
+    },
+    "colorSplit": {
+      "name": "カラースプリット",
+      "description": "プリズムのような色チャンネルの残像でカット"
+    }
+  },
+  "recipes": {
+    "categories": {
+      "cinema": {
+        "name": "シネマ",
+        "description": "レターボックス、粒子、ドラマチックな仕上げ。"
+      },
+      "glitch": {
+        "name": "グリッチ",
+        "description": "デジタルな崩れ、走査線、信号のずれ。"
+      },
+      "retro": {
+        "name": "レトロ",
+        "description": "テープ、CRT、古いフィルム風のルック。"
+      },
+      "social": {
+        "name": "ソーシャル",
+        "description": "録画オーバーレイ、カウントダウン、クリエイター向けフレーム。"
+      },
+      "branding": {
+        "name": "ブランディング",
+        "description": "透かし、ロワーサード、著作権表示。"
+      },
+      "color": {
+        "name": "カラー",
+        "description": "補正プリセットの重ねがけで雰囲気をすばやく変更。"
+      },
+      "overlay": {
+        "name": "オーバーレイ",
+        "description": "フレーム、フォーカスマーカー、雰囲気のあるグラフィックレイヤー。"
+      },
+      "text-effects": {
+        "name": "テキストエフェクト",
+        "description": "スタイリッシュな動くキャプションとタイトル装飾。"
+      },
+      "transitions": {
+        "name": "トランジション",
+        "description": "クリップ間のレシピトランジション用（予約）。"
+      },
+      "ads": {
+        "name": "広告",
+        "description": "再利用できる広告カード、商品プロモーション、ローンチシーン。"
+      },
+      "app-ui-demos": {
+        "name": "アプリ UI デモ",
+        "description": "アニメーション付きの画面紹介と製品 UI の見せ場。"
+      },
+      "lower-thirds": {
+        "name": "ロワーサード",
+        "description": "名前テロップ、肩書き、ブランド情報帯。"
+      },
+      "product-shots": {
+        "name": "商品ショット",
+        "description": "メディアのプレースホルダー、機能の吹き出し、洗練されたショーケース。"
+      },
+      "social-hooks": {
+        "name": "ソーシャルフック",
+        "description": "ショート動画向けのテンポのよい導入。"
+      },
+      "kinetic-typography": {
+        "name": "キネティックタイポグラフィ",
+        "description": "キャプション、引用、スローガン向けの動く文字。"
+      },
+      "logo-reveals": {
+        "name": "ロゴリビール",
+        "description": "ブランドのイントロ・アウトロ向けロゴアニメーションの土台。"
+      },
+      "end-screens": {
+        "name": "終了画面",
+        "description": "アニメーション付きのエンドカード、CTA、登録の呼びかけ。"
+      }
+    },
+    "templates": {
+      "cinema-letterbox": {
+        "name": "シネマティック・レターボックス",
+        "description": "粒子とビネット付きのワイドスクリーンバー。"
+      },
+      "cinema-light-frame": {
+        "name": "ライトフレーム",
+        "description": "シネマティックなショット向けの控えめな暖色フレーム。"
+      },
+      "cinema-warm-fade": {
+        "name": "ウォームフェード",
+        "description": "ライフスタイルや旅行動画向けのやわらかな暖色グレード。"
+      },
+      "glitch-digital": {
+        "name": "デジタルグリッチ",
+        "description": "RGB のずれと動く走査線のアクセント。"
+      },
+      "glitch-rgb-scan": {
+        "name": "RGB スキャン",
+        "description": "細い走査線とチャンネル分離。"
+      },
+      "glitch-static-frame": {
+        "name": "ノイズフレーム",
+        "description": "軽いゆがみを伴うノイズ状の枠。"
+      },
+      "retro-vhs": {
+        "name": "VHS テープ",
+        "description": "テープ特有のやわらかさと再生表示テキスト。"
+      },
+      "retro-crt-monitor": {
+        "name": "CRT モニター",
+        "description": "やわらかな角のフレームと緑色のターミナル風。"
+      },
+      "retro-old-film": {
+        "name": "古いフィルム",
+        "description": "粒子の強いモノクロとフィルムゲート風の文字。"
+      },
+      "retro-sepia-drift": {
+        "name": "セピアドリフト",
+        "description": "控えめなヴィンテージの暖かさとやわらかな枠。"
+      },
+      "social-recording": {
+        "name": "録画カメラ",
+        "description": "おなじみの REC 表示、タイマー、フレーム枠。"
+      },
+      "social-facecam-frame": {
+        "name": "フェイスカムフレーム",
+        "description": "リアクションやゲーム実況向けの角フレーム。"
+      },
+      "social-countdown-lead": {
+        "name": "カウントダウン導入",
+        "description": "チュートリアルや導入向けの短いカウントイン。"
+      },
+      "social-comment-pop": {
+        "name": "コメントポップ",
+        "description": "SNS での呼びかけ用の固定コメント吹き出し。"
+      },
+      "branding-watermark-drift": {
+        "name": "透かしドリフト",
+        "description": "ブランド保護のためにゆっくり動く角の透かし。"
+      },
+      "branding-copyright": {
+        "name": "流れる著作権表示",
+        "description": "納品動画向けの全幅で流れる著作権表示。"
+      },
+      "branding-lower-third": {
+        "name": "ロワーサード",
+        "description": "シンプルなブランド名札。"
+      },
+      "branding-subscribe-tag": {
+        "name": "登録タグ",
+        "description": "エンドカード用の登録バナー。"
+      },
+      "color-warm-pop": {
+        "name": "ウォームポップ",
+        "description": "柔らかなコントラストの金色の暖かさ。"
+      },
+      "color-cool-bloom": {
+        "name": "クールブルーム",
+        "description": "夜景やテック系映像向けのやわらかな寒色。"
+      },
+      "color-dramatic-noir": {
+        "name": "ドラマチック・ノワール",
+        "description": "ハイコントラストでムーディーなルック。"
+      },
+      "color-vintage-wash": {
+        "name": "ヴィンテージウォッシュ",
+        "description": "低コントラストで色あせたフィルムの質感。"
+      },
+      "overlay-focus-frame": {
+        "name": "フォーカスフレーム",
+        "description": "十字のアクセント付き中央ガイドフレーム。"
+      },
+      "overlay-soft-border": {
+        "name": "ソフトボーダー",
+        "description": "エディトリアル風の細く上品な枠。"
+      },
+      "overlay-spotlight-title": {
+        "name": "スポットライトタイトル",
+        "description": "見せ場向けの見出し演出。"
+      },
+      "text-kinetic-punch": {
+        "name": "キネティックパンチ",
+        "description": "トランジションや導入向けの太字テキストのパンチイン。"
+      },
+      "text-stamp-upper": {
+        "name": "アッパースタンプ",
+        "description": "チャプター表示向けの上部スタンプ。"
+      },
+      "text-neon-tag": {
+        "name": "ネオンタグ",
+        "description": "音楽やナイトライフ向けの明るいタグ。"
+      },
+      "social-live-badge": {
+        "name": "ライブバッジ",
+        "description": "配信風オーバーレイ用の点滅する LIVE 表示。"
+      },
+      "social-hashtag-strip": {
+        "name": "ハッシュタグバー",
+        "description": "SNS 動画投稿向けの下部ハッシュタグバー。"
+      },
+      "cinema-anamorphic-flare": {
+        "name": "アナモルフィックフレア",
+        "description": "上下のバーと青いレンズフレアのアクセント。"
+      },
+      "cinema-noir-bars": {
+        "name": "ノワールバー",
+        "description": "ドラマチックな場面向けの太いレターボックスと深いコントラスト。"
+      },
+      "overlay-grid-guide": {
+        "name": "グリッドガイド",
+        "description": "構図の目安になる三分割グリッド。"
+      },
+      "overlay-corner-brackets": {
+        "name": "コーナーブラケット",
+        "description": "シネマティックな注目を演出する上品な角マーカー。"
+      },
+      "text-subtitle-bar": {
+        "name": "字幕バー",
+        "description": "読みやすい暗い背景付きの下部字幕。"
+      },
+      "text-quote-block": {
+        "name": "引用ブロック",
+        "description": "装飾記号付きの中央引用。"
+      },
+      "color-teal-orange": {
+        "name": "ティール＆オレンジ",
+        "description": "ハリウッド風グレーディング：寒色のシャドウと暖色のハイライト。"
+      },
+      "color-monochrome": {
+        "name": "モノクロ",
+        "description": "黒を持ち上げたクリーンな白黒。"
+      },
+      "glitch-datamosh": {
+        "name": "データモッシュ",
+        "description": "強い粒子と色分離でカオスなエネルギーを演出。"
+      },
+      "branding-end-card": {
+        "name": "エンドカード",
+        "description": "名前と CTA を含む完全なアウトロカード。"
+      },
+      "social-viewer-count": {
+        "name": "視聴者数",
+        "description": "アニメーションする視聴者数・いいね数バッジ。"
+      },
+      "retro-polaroid": {
+        "name": "ポラロイド",
+        "description": "白い枠と暖かなヴィンテージトーン。"
+      },
+      "motion-saas-ad-card": {
+        "name": "SaaS 広告カード",
+        "description": "コピー、ブランドカラー、メディアのプレースホルダー、アニメーションの強さを編集できる商品広告のスターター。"
+      }
+    },
+    "controls": {
+      "name": "名前",
+      "grainAmount": "粒子",
+      "gridOpacity": "グリッドの不透明度",
+      "watermarkText": "透かし",
+      "headline": "見出し",
+      "glitchAmount": "グリッチ",
+      "quote": "引用",
+      "label": "ラベル",
+      "warmth": "暖かさ",
+      "media": "商品メディア",
+      "role": "役職",
+      "accent": "アクセント",
+      "brandColor": "ブランドカラー",
+      "cta": "CTA",
+      "frameOpacity": "フレームの不透明度",
+      "count": "数",
+      "tags": "ハッシュタグ",
+      "barOpacity": "バーの不透明度",
+      "brandKit": "ブランドキットを使用",
+      "watermarkOpacity": "不透明度",
+      "tag": "タグ",
+      "duration": "長さ",
+      "intensity": "アニメーションの強さ",
+      "caption": "キャプション",
+      "subtitle": "サブタイトル",
+      "channel": "チャンネル名"
+    }
+  },
+  "previewLock": {
+    "locked": "🔒 比率固定",
+    "free": "🔓 比率自由"
+  },
+  "uiControls": {
+    "sliderValue": "{{label}}の値",
+    "sliderValueGeneric": "値",
+    "editValue": "{{label}}の値を編集",
+    "editValueGeneric": "値を編集",
+    "clickToEdit": "クリックして値を入力",
+    "clickToEditOrReset": "クリックで値を入力、ダブルクリックで初期値に戻す",
+    "closeDialog": "ダイアログを閉じる"
+  },
+  "serviceDescriptions": {
+    "elevenlabs": "AI 音声生成とテキスト読み上げ",
+    "openai-compatible": "OpenAI 互換の API サービス（キーは任意）",
+    "anthropic-compatible": "Anthropic Messages 互換の API サービス（キーは任意）",
+    "kie-ai": "動画・画像の生成、高解像度化、編集をまとめた AI サービス",
+    "freepik": "画像生成、ベクター、クリエイティブ素材をまとめた AI サービス"
+  },
+  "otherServices": {
+    "title": "その他の AI サービス",
+    "description": "ElevenLabs やカスタム API など、その他のサービスのキーはマスターパスワードで暗号化して保存します。"
+  }
+}

@@ -1,0 +1,688 @@
+{
+  "shell": {
+    "seconds": "{{value}} 秒",
+    "tabError": "このパネルでエラーが発生しました。別のタブに切り替えてから戻ると再試行できます。"
+  },
+  "tabs": {
+    "enable": "有効"
+  },
+  "behindSubject": {
+    "title": "被写体の背後に配置",
+    "hint": "テキストを動画内の人物の背後に表示します",
+    "loading": "AI モデルを読み込み中…",
+    "modelFailed": "AI モデルを読み込めませんでした。接続を確認してください。"
+  },
+  "shader": {
+    "selectColor": "{{label}}を選択"
+  },
+  "filterPresets": {
+    "applyPreset": "フィルタープリセット「{{name}}」を適用",
+    "appliedTitle": "フィルターを適用しました",
+    "appliedBody": "プリセット「{{name}}」を適用しました",
+    "cleared": "エフェクトを消去しました",
+    "noClip": "フィルターを適用する動画クリップを選択してください",
+    "title": "フィルタープリセット",
+    "subtitle": "ワンクリックでカラーグレーディング",
+    "intensity": "強さ",
+    "removeAll": "すべてのエフェクトを削除",
+    "summary_one": "{{categories}} カテゴリ・{{count}} 件のプリセット",
+    "summary_other": "{{categories}} カテゴリ・{{count}} 件のプリセット",
+    "categories": {
+      "cinematic": "シネマティック",
+      "vintage": "ヴィンテージ",
+      "mood": "ムード",
+      "color": "カラー",
+      "stylized": "スタイライズ"
+    }
+  },
+  "presets": {
+    "filters": {
+      "cinematic-teal-orange": {
+        "name": "ティール＆オレンジ",
+        "description": "定番のハリウッド風カラーグレード"
+      },
+      "cinematic-noir": {
+        "name": "フィルム・ノワール",
+        "description": "ハイコントラストのモノクロ"
+      },
+      "cinematic-blockbuster": {
+        "name": "ブロックバスター",
+        "description": "力強くメリハリのあるハリウッド風"
+      },
+      "vintage-70s": {
+        "name": "70 年代レトロ",
+        "description": "温かく色あせた 1970 年代の雰囲気"
+      },
+      "vintage-polaroid": {
+        "name": "ポラロイド",
+        "description": "定番のインスタント写真風"
+      },
+      "vintage-vhs": {
+        "name": "VHS",
+        "description": "懐かしい VHS テープ風エフェクト"
+      },
+      "vintage-sepia": {
+        "name": "セピア",
+        "description": "定番のセピア調"
+      },
+      "mood-dreamy": {
+        "name": "ドリーミー",
+        "description": "柔らかく幻想的な雰囲気"
+      },
+      "mood-moody": {
+        "name": "ムーディー",
+        "description": "暗く雰囲気のある質感"
+      },
+      "mood-golden-hour": {
+        "name": "ゴールデンアワー",
+        "description": "温かな夕日の光"
+      },
+      "mood-cold": {
+        "name": "コールドブルー",
+        "description": "ひんやりと冷たい雰囲気"
+      },
+      "color-vibrant": {
+        "name": "ビビッド",
+        "description": "鮮やかで彩度の高い色"
+      },
+      "color-muted": {
+        "name": "ミュート",
+        "description": "柔らかく彩度を抑えた配色"
+      },
+      "color-bw-classic": {
+        "name": "クラシック白黒",
+        "description": "時代を超えるモノクロ"
+      },
+      "color-bw-high-contrast": {
+        "name": "ハイコントラスト白黒",
+        "description": "ドラマチックなモノクロ"
+      },
+      "stylized-cyberpunk": {
+        "name": "サイバーパンク",
+        "description": "ネオンきらめく近未来風"
+      },
+      "stylized-comic": {
+        "name": "コミック",
+        "description": "大胆なグラフィックノベル風"
+      },
+      "stylized-soft-glow": {
+        "name": "ソフトグロー",
+        "description": "ロマンチックなソフトフォーカス"
+      },
+      "cinematic-bleach-bypass": {
+        "name": "ブリーチバイパス",
+        "description": "ざらついた低彩度・ハイコントラスト"
+      },
+      "cinematic-day-for-night": {
+        "name": "デイ・フォー・ナイト",
+        "description": "涼しげな月夜の雰囲気"
+      },
+      "vintage-faded-film": {
+        "name": "退色フィルム",
+        "description": "黒を持ち上げた色あせ感"
+      },
+      "vintage-super8": {
+        "name": "スーパー8",
+        "description": "温かく粒子感のあるホームムービー風"
+      },
+      "mood-sunset": {
+        "name": "サンセット",
+        "description": "温かな黄金色の輝き"
+      },
+      "mood-winter-chill": {
+        "name": "ウィンターチル",
+        "description": "冷たく澄んだブルートーン"
+      },
+      "mood-dramatic": {
+        "name": "ドラマチック",
+        "description": "ビネット付きのムーディーなハイコントラスト"
+      },
+      "color-pop": {
+        "name": "ポップ",
+        "description": "鮮明でメリハリのある色"
+      },
+      "color-pastel": {
+        "name": "パステル",
+        "description": "柔らかく軽やかな低コントラストの色調"
+      },
+      "stylized-dreamscape": {
+        "name": "ドリームスケープ",
+        "description": "かすんで光る夢のような雰囲気"
+      },
+      "stylized-hdr": {
+        "name": "クリスプ HDR",
+        "description": "細部まで際立つ力強い鮮明さ"
+      },
+      "stylized-matrix": {
+        "name": "マトリックス",
+        "description": "緑がかったデジタル・ディストピア"
+      }
+    },
+    "emojiCategories": {
+      "smileys": "スマイリーと感情",
+      "gestures": "ジェスチャー",
+      "objects": "物",
+      "symbols": "記号",
+      "nature": "自然"
+    },
+    "shaderGroups": {
+      "builtIn": "組み込み",
+      "general": "一般"
+    },
+    "templates": {
+      "builtin-youtube-intro": "YouTube イントロ",
+      "builtin-tiktok-promo": "TikTok プロモ",
+      "builtin-lower-third": "ロワーサード",
+      "builtin-slideshow": "フォトスライドショー",
+      "builtin-instagram-reel": "Instagram リール",
+      "builtin-youtube-shorts": "YouTube ショート",
+      "builtin-quote-card": "引用カード",
+      "builtin-product-promo": "製品プロモ",
+      "builtin-countdown": "カウントダウンタイマー"
+    },
+    "particles": {
+      "dissolve-soft": "ソフトディゾルブ",
+      "explode-burst": "爆発バースト",
+      "implode-gather": "内側へ集束",
+      "confetti-celebration": "お祝いの紙吹雪",
+      "dust-ambient": "漂うほこり",
+      "sparkle-magic": "魔法のきらめき",
+      "disintegrate-thanos": "崩壊",
+      "pixelate-retro": "ピクセル崩し",
+      "shatter-glass": "ガラス破砕",
+      "morph-transform": "シェイプモーフ",
+      "fire-trail": "炎の軌跡",
+      "snow-fall": "降雪"
+    },
+    "particleTypes": {
+      "dissolve": "ディゾルブ",
+      "explode": "爆発",
+      "implode": "収束",
+      "confetti": "紙吹雪",
+      "dust": "ほこり",
+      "sparkle": "きらめき",
+      "disintegrate": "崩壊",
+      "pixelate": "ピクセル化",
+      "shatter": "破砕",
+      "morph": "モーフ"
+    },
+    "svgAnimations": {
+      "none": "なし",
+      "fade": "フェード",
+      "slide-left": "右からスライド",
+      "slide-right": "左からスライド",
+      "slide-up": "下からスライド",
+      "slide-down": "上からスライド",
+      "scale": "スケール",
+      "rotate": "回転",
+      "bounce": "バウンス",
+      "pop": "ポップ",
+      "draw": "描画",
+      "wipe-left": "左へワイプ",
+      "wipe-right": "右へワイプ",
+      "wipe-up": "上へワイプ",
+      "wipe-down": "下へワイプ",
+      "reveal-center": "中央から表示",
+      "reveal-edges": "端から中央へ",
+      "elastic": "エラスティック",
+      "flip-horizontal": "左右フリップ",
+      "flip-vertical": "上下フリップ"
+    }
+  },
+  "mask": {
+    "pointX": "ポイント {{index}} の X（%）",
+    "pointY": "ポイント {{index}} の Y（%）",
+    "matteHint": "選択したクリップの{{channel}}が、このクリップの表示領域を決めます。ソースクリップのトランスフォームをアニメートすると、マスクもアニメートされます。",
+    "textSource": "テキスト •「{{text}}」",
+    "count_one": "マスク（{{count}}）",
+    "count_other": "マスク（{{count}}）",
+    "pointsHint": "X と Y は画面サイズに対する割合です。点を調整して、正確なカスタム切り抜きを作れます。",
+    "channels": {
+      "bounds": "境界",
+      "alpha": "アルファ",
+      "luminance": "輝度"
+    }
+  },
+  "bgRemoval": {
+    "useColor": "背景色 {{color}} を使用"
+  },
+  "stickers": {
+    "addItem": "{{name}} を追加",
+    "errorType": "PNG、JPEG、WebP、GIF、SVG のいずれかの画像を選択してください。",
+    "errorSize": "ステッカーファイルは {{size}} MB 未満にしてください。",
+    "errorAdd": "ステッカーは読み込まれましたが、タイムラインに追加できませんでした。",
+    "errorRead": "この画像を読み込めませんでした。PNG または WebP で書き出してお試しください。",
+    "added": "{{time}} に {{name}} を追加しました",
+    "title": "ステッカーと絵文字",
+    "subtitle": "動画に楽しい要素を追加",
+    "emojis": "絵文字",
+    "stickers": "ステッカー",
+    "searchEmojis": "絵文字を検索",
+    "searchStickers": "ステッカーを検索",
+    "searchEmojisPlaceholder": "絵文字を検索…",
+    "searchStickersPlaceholder": "ステッカーを検索…",
+    "noEmojis": "絵文字が見つかりません",
+    "noStickers": "ステッカーはまだありません",
+    "importHint": "下からカスタムステッカーを読み込めます",
+    "chooseImage": "カスタムステッカー画像を選択",
+    "importing": "ステッカーを読み込み中…",
+    "import": "ステッカーを読み込んで追加",
+    "emojiCount_one": "{{count}} 個の絵文字を利用可能",
+    "emojiCount_other": "{{count}} 個の絵文字を利用可能",
+    "stickerCount_one": "{{count}} 個のステッカーを利用可能",
+    "stickerCount_other": "{{count}} 個のステッカーを利用可能"
+  },
+  "shape": {
+    "style": "スタイル",
+    "shapeClip": "シェイプクリップ",
+    "noClip": "シェイプクリップが選択されていません",
+    "fill": "塗り",
+    "fillType": "塗りの種類",
+    "solid": "単色",
+    "shader": "シェーダー",
+    "color": "色",
+    "opacity": "不透明度",
+    "stroke": "線",
+    "width": "幅",
+    "corners": "角",
+    "radius": "半径",
+    "shadow": "影",
+    "offsetX": "オフセット X",
+    "offsetY": "オフセット Y",
+    "blur": "ぼかし",
+    "shaderFill": "シェーダー塗り",
+    "types": {
+      "rectangle": "長方形",
+      "circle": "円",
+      "ellipse": "楕円",
+      "triangle": "三角形",
+      "star": "星",
+      "polygon": "多角形",
+      "arrow": "矢印"
+    }
+  },
+  "adjustment": {
+    "defaultName": "調整レイヤー {{index}}",
+    "collapse": "「{{name}}」を折りたたむ",
+    "expand": "「{{name}}」を展開",
+    "hideLayer": "レイヤーを非表示",
+    "showLayer": "レイヤーを表示",
+    "opacity": "不透明度",
+    "start": "開始",
+    "duration": "長さ",
+    "blendMode": "描画モード",
+    "useBlendMode": "描画モード「{{name}}」を使用",
+    "effectCount_one": "エフェクト（{{count}}）",
+    "effectCount_other": "エフェクト（{{count}}）",
+    "enableEffect": "「{{name}}」エフェクトを有効化",
+    "disableEffect": "「{{name}}」エフェクトを無効化",
+    "removeEffect": "「{{name}}」エフェクトを削除",
+    "addEffect": "+ {{name}}",
+    "before": "適用前",
+    "after": "適用後",
+    "duplicate": "複製",
+    "delete": "削除",
+    "title": "調整レイヤー",
+    "subtitle": "下のクリップに非破壊でエフェクトを適用",
+    "add": "調整レイヤーを追加",
+    "trackLayers_one": "このトラックのレイヤー（{{count}}）",
+    "trackLayers_other": "このトラックのレイヤー（{{count}}）",
+    "otherLayers": "その他のレイヤー",
+    "footer": "下のすべてのクリップに色とエフェクトを適用",
+    "effects": {
+      "brightness": "明るさ",
+      "contrast": "コントラスト",
+      "saturation": "彩度",
+      "grayscale": "グレースケール",
+      "sepia": "セピア",
+      "invert": "反転",
+      "hue": "色相回転",
+      "blur": "ぼかし",
+      "sharpen": "シャープ",
+      "vignette": "周辺減光",
+      "temperature": "色温度",
+      "tint": "色かぶり補正",
+      "grain": "フィルムグレイン"
+    },
+    "controls": {
+      "brightness": "明るさ",
+      "contrast": "コントラスト",
+      "saturation": "彩度",
+      "amount": "量",
+      "rotation": "回転",
+      "radius": "半径",
+      "midpoint": "中間点",
+      "feather": "ぼかし幅",
+      "warmCool": "暖色 / 寒色",
+      "greenMagenta": "グリーン / マゼンタ",
+      "size": "サイズ"
+    },
+    "blendModes": {
+      "normal": "通常",
+      "multiply": "乗算",
+      "screen": "スクリーン",
+      "overlay": "オーバーレイ",
+      "darken": "比較（暗）",
+      "lighten": "比較（明）",
+      "color-dodge": "覆い焼きカラー",
+      "color-burn": "焼き込みカラー",
+      "hard-light": "ハードライト",
+      "soft-light": "ソフトライト",
+      "difference": "差の絶対値",
+      "exclusion": "除外",
+      "hue": "色相",
+      "saturation": "彩度",
+      "color": "カラー",
+      "luminosity": "輝度"
+    },
+    "blendGroups": {
+      "basic": "基本",
+      "darken": "暗く",
+      "lighten": "明るく",
+      "contrast": "コントラスト",
+      "inversion": "反転",
+      "component": "コンポーネント"
+    }
+  },
+  "nested": {
+    "title": "ネストシーケンス",
+    "subtitle": "選択範囲から複合クリップを作成",
+    "clipCount_one": "{{count}} クリップ",
+    "clipCount_other": "{{count}} クリップ",
+    "trackCount_one": "{{count}} トラック",
+    "trackCount_other": "{{count}} トラック",
+    "flatten": "展開",
+    "duplicate": "複製",
+    "create": "複合クリップを作成",
+    "selected_one": "{{count}} 個のクリップを選択中",
+    "selected_other": "{{count}} 個のクリップを選択中",
+    "selectHint": "複合クリップを作成するには {{min}} 個以上のクリップを選択してください",
+    "library": "複合クリップライブラリ",
+    "nameLabel": "複合クリップ名",
+    "instances_one": "{{count}} インスタンス",
+    "instances_other": "{{count}} インスタンス",
+    "confirmRename": "名前の変更を確定",
+    "cancelRename": "名前の変更をキャンセル",
+    "rename": "名前を変更",
+    "cannotDelete": "削除できません：使用中のインスタンスがあります",
+    "delete": "削除",
+    "footer": "クリップを再利用できる複合クリップにまとめます"
+  },
+  "templates": {
+    "builtIn": "組み込み",
+    "cloud": "クラウド",
+    "placeholders_one": "プレースホルダー {{count}} 個",
+    "placeholders_other": "プレースホルダー {{count}} 個",
+    "use": "このテンプレートを使用",
+    "notFound": "テンプレートが見つかりません",
+    "missing": "必須項目が未入力です：{{names}}",
+    "applyFailed": "テンプレートを適用できませんでした",
+    "back": "テンプレート一覧に戻る",
+    "configure": "テンプレート変数を設定",
+    "title": "テンプレート",
+    "subtitle": "既成のプロジェクトから始める",
+    "all": "すべて",
+    "empty": "このカテゴリにテンプレートはありません",
+    "saveCurrent": "現在のプロジェクトをテンプレートとして保存",
+    "count_one": "{{count}} 件のテンプレートを利用可能",
+    "count_other": "{{count}} 件のテンプレートを利用可能",
+    "categories": {
+      "social-media": "ソーシャルメディア",
+      "youtube": "YouTube",
+      "tiktok": "TikTok",
+      "instagram": "Instagram",
+      "business": "ビジネス",
+      "personal": "パーソナル",
+      "slideshow": "スライドショー",
+      "intro-outro": "イントロ／アウトロ",
+      "lower-third": "ロワーサード",
+      "motion": "モーション",
+      "custom": "カスタム"
+    }
+  },
+  "templateVars": {
+    "resetDefault": "既定値に戻す",
+    "reset": "リセット",
+    "enterText": "テキストを入力…",
+    "characters_one": "{{count}} / {{max}} 文字",
+    "characters_other": "{{count}} / {{max}} 文字",
+    "noMedia": "利用できるメディアがありません",
+    "importMedia": "ここで使うにはメディアを読み込んでください",
+    "enterSubtitle": "字幕テキストを入力…",
+    "noTemplate": "変数を編集するテンプレートを選択してください",
+    "title": "テンプレート変数",
+    "resetAll": "すべてリセット",
+    "none": "このテンプレートには編集できる変数がありません",
+    "missing": "必須項目を入力してください：{{names}}",
+    "apply": "テンプレートを適用"
+  },
+  "multiClip": {
+    "selected_one": "{{count}} 個のクリップを選択中",
+    "selected_other": "{{count}} 個のクリップを選択中",
+    "syncHint": "一括変更はタイムラインと同期されます",
+    "batchTransform": "一括トランスフォーム",
+    "nudge": "微調整",
+    "nudgeLeft": "クリップを左へ微調整",
+    "nudgeUp": "クリップを上へ微調整",
+    "nudgeDown": "クリップを下へ微調整",
+    "nudgeRight": "クリップを右へ微調整",
+    "align": "整列",
+    "alignLeft": "左揃え",
+    "alignCenter": "左右中央揃え",
+    "alignRight": "右揃え",
+    "alignTop": "上揃え",
+    "alignMiddle": "上下中央揃え",
+    "alignBottom": "下揃え",
+    "distributeH": "左右に均等配置",
+    "distributeV": "上下に均等配置",
+    "scale": "拡大・縮小",
+    "rotation": "回転",
+    "rotationLabel": "選択クリップの回転",
+    "opacity": "不透明度",
+    "batchText": "一括テキスト",
+    "batchEffects": "一括エフェクト",
+    "effectsHint_one": "最初に選択したビジュアルレイヤーからコピーし、選択中の {{count}} 個すべてのビジュアルレイヤーに適用します。",
+    "effectsHint_other": "最初に選択したビジュアルレイヤーからコピーし、選択中の {{count}} 個すべてのビジュアルレイヤーに適用します。",
+    "copyEffects": "最初のエフェクトをコピー",
+    "appendEffects": "選択範囲にエフェクトを追加",
+    "replaceEffects": "選択範囲のエフェクトを置き換え",
+    "clearEffects": "選択範囲のエフェクトを消去",
+    "actions": "選択範囲の操作",
+    "resetTransforms": "トランスフォームをリセット",
+    "copy_one": "選択した {{count}} 個のクリップをコピー",
+    "copy_other": "選択した {{count}} 個のクリップをコピー",
+    "paste": "{{time}} 秒の位置にクリップボードを貼り付け",
+    "duplicate_one": "選択した {{count}} 個のクリップを複製",
+    "duplicate_other": "選択した {{count}} 個のクリップを複製",
+    "delete": "選択したクリップを削除",
+    "compound": "複合クリップ",
+    "mixed": "混在"
+  },
+  "clipTransition": {
+    "incoming": "イン側トランジション",
+    "incomingHint": "前のクリップからこのクリップへ",
+    "outgoing": "アウト側トランジション",
+    "outgoingHint": "このクリップから次のクリップへ",
+    "intro": "イントロトランジション",
+    "introHint": "プロジェクト背景からこのクリップへ",
+    "outro": "アウトロトランジション",
+    "outroHint": "このクリップからプロジェクト背景へ",
+    "appliedTitle": "クリップアニメーションを適用しました",
+    "appliedBoth": "イン：{{entry}}、アウト：{{exit}}",
+    "appliedEntry": "イン：{{entry}}",
+    "appliedExit": "アウト：{{exit}}",
+    "cleared": "アニメーションを消去しました",
+    "entry": "イン アニメーション",
+    "exit": "アウト アニメーション",
+    "setEntry": "イン アニメーションを「{{name}}」に設定",
+    "setExit": "アウト アニメーションを「{{name}}」に設定",
+    "duration": "長さ",
+    "easing": "イージング",
+    "apply": "イン／アウト アニメーションを適用",
+    "single": "単一クリップのトランジション",
+    "singleUnavailable": "単一クリップのトランジションは動画と画像のクリップで使用できます。",
+    "clipToClip": "クリップ間トランジション",
+    "noAdjacent": "このトラックに隣接するクリップはありません。",
+    "clipToClipUnavailable": "クリップ間トランジションはタイムラインのメディアクリップで使用できます。",
+    "presets": {
+      "none": "なし",
+      "fade": "フェード",
+      "slide-left": "左へスライド",
+      "slide-right": "右へスライド",
+      "slide-up": "上へスライド",
+      "slide-down": "下へスライド",
+      "zoom-in": "ズームイン",
+      "zoom-out": "ズームアウト",
+      "rotate": "回転",
+      "blur": "ぼかし",
+      "iris-circle": "アイリス（円）",
+      "iris-rectangle": "アイリス（矩形）",
+      "iris-diamond": "アイリス（ひし形）",
+      "iris-star": "アイリス（星）"
+    },
+    "easings": {
+      "linear": "リニア",
+      "ease-in": "イーズイン",
+      "ease-out": "イーズアウト",
+      "ease-in-out": "イーズインアウト"
+    }
+  },
+  "multicam": {
+    "angleName": "カメラアングル名",
+    "cutTo": "再生ヘッド位置で {{name}} に切り替え",
+    "removeAngle": "アングルを削除",
+    "offset": "オフセット：",
+    "angleOffset": "アングルのオフセット",
+    "sec": "秒",
+    "angles_one": "{{count}} アングル",
+    "angles_other": "{{count}} アングル",
+    "syncAudio": "音声を同期",
+    "autoEdit": "自動編集",
+    "deleteGroup": "カメラグループを削除",
+    "importManifest": "マニフェストを読み込む",
+    "exportManifest": "マニフェストを書き出す",
+    "cutReview": "カットの確認",
+    "cuts_one": "{{count}} カット",
+    "cuts_other": "{{count}} カット",
+    "manual": "手動",
+    "reject": "却下",
+    "accept": "採用",
+    "accepted": "採用済み",
+    "editableHint": "生成された出力トラックはタイムライン上で自由に編集できます。",
+    "exportOtio": "OTIO を書き出す",
+    "exportOrma": ".orma を書き出す",
+    "findClips": "クリップを探す",
+    "loadFailed": "カメラツールを読み込めませんでした",
+    "trackFallback": "トラック {{id}}",
+    "saveGroupFailed": "カメラグループを保存できませんでした。",
+    "decoding": "{{name}} をデコード中…",
+    "decodeFailed": "{{name}} の音声をデコードできませんでした。",
+    "groupGone": "カメラグループはもう存在しません。",
+    "defaultGroupName": "マルチカメラ {{index}}",
+    "createFailedTitle": "カメラグループの作成に失敗しました",
+    "createFailed": "カメラグループを作成できませんでした。",
+    "removeAngleFailed": "アングルを削除できませんでした",
+    "renameAngleFailed": "アングル名を変更できませんでした",
+    "saveOffsetFailed": "オフセットを保存できませんでした",
+    "projectChanged": "分析中にプロジェクトが変更されました。カメラ分析をもう一度実行してください。",
+    "synchronizing": "カメラ音声を同期中…",
+    "synced": "音声を同期しました · 信頼度 {{percent}}%",
+    "syncedTitle": "カメラ音声を同期しました",
+    "syncFailedDetail": "音声の同期に失敗しました。",
+    "syncFailed": "音声の同期に失敗しました",
+    "noOverlap": "カメラ録画の重なる音声が不足しています。",
+    "runningVad": "ローカルの Silero 音声検出を実行中…",
+    "voiceDetection": "音声検出 · {{name}} · {{percent}}%",
+    "missingAudio": "{{name}} のデコード済み音声がありません。",
+    "calibrating": "環境ノイズとマイクのかぶりを補正中…",
+    "analyzing": "話者とマイクのかぶりを分析中…",
+    "noSpeakers": "使用できる話者の発話が検出されませんでした。",
+    "cutsUnmapped": "検出したカットを元のクリップに対応付けできませんでした。",
+    "applying_one": "{{count}} カットを適用中…",
+    "applying_other": "{{count}} カットを適用中…",
+    "applyFailed": "自動編集を適用できませんでした。",
+    "shotsCreated_one": "「{{name}} Auto Edit」に {{count}} ショットを作成しました",
+    "shotsCreated_other": "「{{name}} Auto Edit」に {{count}} ショットを作成しました",
+    "autoEditCreated": "マルチカメラの自動編集を作成しました",
+    "autoEditDetail_one": "{{count}} カット · 1 回で元に戻せます",
+    "autoEditDetail_other": "{{count}} カット · 1 回で元に戻せます",
+    "autoEditFailedDetail": "自動編集に失敗しました。",
+    "autoEditFailed": "自動編集に失敗しました",
+    "analysisUnavailable": "分析結果がありません",
+    "runAutoEditExport": ".orma を書き出す前に自動編集を実行してください。",
+    "runAutoEditSocial": "SNS 向けクリップを探す前に自動編集を実行してください。",
+    "mapCameraFailed": "カメラ {{id}}（{{file}}）を選択したアングルに対応付けできませんでした。",
+    "manifestImported": "マルチカメラのマニフェストを読み込みました",
+    "manifestDetail_one": "参加者 {{participants}} 人 · カメラ {{count}} 台",
+    "manifestDetail_other": "参加者 {{participants}} 人 · カメラ {{count}} 台",
+    "manifestFailed": "マニフェストの読み込みに失敗しました",
+    "socialMarker": "SNS · {{title}}",
+    "socialAdded": "SNS 向けクリップ候補を追加しました",
+    "markers_one": "タイムラインマーカー {{count}} 個",
+    "markers_other": "タイムラインマーカー {{count}} 個",
+    "reviewFailed": "カットの確認を更新できませんでした。",
+    "playheadOutside": "再生ヘッドをカメラグループの範囲内に移動してください",
+    "groupRange": "グループ範囲：{{start}} 秒 – {{end}} 秒",
+    "cameraUnavailable": "再生ヘッドの位置ではこのカメラを使用できません。",
+    "cutAdded": "{{time}} 秒にカメラカットを追加しました · 元に戻すと前の編集に戻ります",
+    "switchFailed": "カメラを切り替えられませんでした",
+    "acceptFailed": "カットを採用できませんでした",
+    "rejectFailed": "カットを却下できませんでした",
+    "nudgeFailed": "カットを微調整できませんでした",
+    "deleteFailed": "グループを削除できませんでした",
+    "title": "マルチカメラ編集",
+    "subtitle": "同じイベントの録画を選んでグループを作成し、音声を同期するか再生ヘッド位置でカメラを切り替えます。",
+    "groups": "カメラグループ",
+    "createNew": "新しいグループを作成",
+    "createHint": "同じイベントの録画を {{min}} 本以上選んでください。カメラごとに別のトラックを使います。編集を作成すると元のトラックは非表示・ミュートになります。",
+    "noClips": "マルチカメラ編集を使うには、ロックされていないタイムラインのトラックに動画クリップを追加してください",
+    "createGroup_one": "グループを作成（{{count}} 件選択中）",
+    "createGroup_other": "グループを作成（{{count}} 件選択中）",
+    "settings": "自動編集の設定",
+    "syncFirst": "自動編集の前にカメラを同期（オフで手動オフセットを使用）",
+    "policy": "自動編集のポリシー",
+    "preset": "プリセット",
+    "overlap": "話者が重なったとき",
+    "sustained": "重なりが続くとき",
+    "minShot": "最短ショット",
+    "maxShot": "最長ショット",
+    "maxShotHint": "最長ショットに達すると、聞き手のリアクションか引きのショットに切り替えます。",
+    "transcripts": "チャンネルごとのローカル Whisper 文字起こしを .orma に追加",
+    "reactions": "ローカル MediaPipe の顔・リアクション手がかりを追加（低速）",
+    "footer": "自動編集は編集可能なタイムライントラックを作成し、1 回で元に戻せます",
+    "presets": {
+      "custom": "カスタム",
+      "conversation": "対談",
+      "energetic": "エネルギッシュ",
+      "panel": "パネル討論"
+    },
+    "strategies": {
+      "hold": "現在のカメラを維持",
+      "winner": "声が大きい方を選ぶ",
+      "priority": "参加者の優先順位",
+      "wide": "引きのショットを使う",
+      "composite": "話者を分割表示",
+      "progressive": "段階的ピクチャーインピクチャー"
+    },
+    "escalations": {
+      "wideShot": "引きのショット",
+      "energyWinner": "声が大きい方",
+      "splitLayout": "分割レイアウト"
+    },
+    "reasons": {
+      "speaker": "話者",
+      "overlap-hold": "重なり時は維持",
+      "overlap-winner": "重なり時は大きい声",
+      "silence-hold": "無音時は維持",
+      "max-shot": "最長ショット",
+      "backchannel-hold": "相づち時は維持",
+      "turn-collision-winner": "発話衝突の勝者",
+      "successful-interruption": "割り込み成功",
+      "sustained-overlap": "重なりが継続",
+      "group-reaction": "グループのリアクション",
+      "reaction-shot": "リアクションショット",
+      "layout-budget": "レイアウト上限",
+      "directive": "指示"
+    }
+  }
+}

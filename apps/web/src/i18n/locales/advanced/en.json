@@ -1,0 +1,953 @@
+{
+  "particles": {
+    "presetLabel": "Particle effect preset",
+    "presetPlaceholder": "Select effect preset...",
+    "add": "Add",
+    "previews": "Particle preset previews",
+    "emptyTitle": "No particle effects added",
+    "emptyHint": "Select a preset above to add effects",
+    "collapse": "Collapse effect",
+    "expand": "Expand effect",
+    "preview": "Preview effect",
+    "disable": "Disable effect",
+    "enable": "Enable effect",
+    "remove": "Remove effect",
+    "startTime": "Start Time",
+    "duration": "Duration",
+    "settings": "Particle Settings",
+    "count": "Particle Count",
+    "speed": "Speed",
+    "gravity": "Gravity",
+    "emissionRate": "Emission Rate",
+    "minSize": "Min Size",
+    "maxSize": "Max Size",
+    "turbulence": "Turbulence",
+    "blendMode": "Blend Mode",
+    "blend": {
+      "normal": "Normal",
+      "add": "Additive",
+      "multiply": "Multiply",
+      "screen": "Screen"
+    },
+    "colors": "Colors ({{count}})",
+    "addColor": "Add color",
+    "previewPreset": "Preview {{name}}",
+    "presetMeta": "{{type}} · Particles: {{count}}",
+    "editColor": "Edit color {{color}}",
+    "removeColor": "Remove color"
+  },
+  "pip": {
+    "presets": {
+      "top-left": "Top Left",
+      "top-right": "Top Right",
+      "bottom-left": "Bottom Left",
+      "bottom-right": "Bottom Right",
+      "split-left": "Split Left",
+      "split-right": "Split Right",
+      "split-top": "Split Top",
+      "split-bottom": "Split Bottom",
+      "center-small": "Center Small",
+      "center-medium": "Center Medium",
+      "fullscreen": "Full Screen"
+    },
+    "title": "Picture-in-Picture",
+    "subtitle": "Position and scale video overlay",
+    "corners": "Corner Positions",
+    "split": "Split Screen",
+    "center": "Center & Full",
+    "showAdvanced": "Show Advanced Controls",
+    "hideAdvanced": "Hide Advanced Controls",
+    "position": "Position",
+    "positionX": "X Position",
+    "positionY": "Y Position",
+    "scale": "Scale",
+    "uniformScale": "Uniform Scale",
+    "scaleX": "X Scale",
+    "scaleY": "Y Scale",
+    "appearance": "Appearance",
+    "borderRadius": "Border Radius",
+    "opacity": "Opacity",
+    "reset": "Reset to Default",
+    "dragHint": "Drag clip in preview to fine-tune position"
+  },
+  "motionTracking": {
+    "title": "Motion Tracking",
+    "subtitle": "Track objects to attach elements",
+    "region": "Tracking Region",
+    "positionX": "X Position",
+    "positionY": "Y Position",
+    "width": "Width",
+    "height": "Height",
+    "regionHint": "Draw region in preview or enter coordinates",
+    "advancedOptions": "Advanced Options",
+    "algorithm": "Algorithm",
+    "algorithmOption": "{{name}}: {{description}}",
+    "algorithms": {
+      "correlation": {
+        "name": "Correlation",
+        "description": "Best for high-contrast objects"
+      },
+      "optical-flow": {
+        "name": "Optical Flow",
+        "description": "Good for smooth motion"
+      },
+      "feature": {
+        "name": "Feature Match",
+        "description": "Works with complex textures"
+      }
+    },
+    "confidence": "Confidence Threshold",
+    "confidenceHint": "Higher = more accurate but may lose track easier",
+    "smoothing": "Path Smoothing",
+    "smoothingHint": "Reduces jitter in tracking path",
+    "start": "Start Tracking",
+    "inProgress": "Tracking in Progress",
+    "cancel": "Cancel Tracking",
+    "analyzing": "Analyzing frames...",
+    "lostFrames_one": "Lost tracking on {{count}} frame",
+    "lostFrames_other": "Lost tracking on {{count}} frames",
+    "failed": "Tracking Failed",
+    "complete": "Tracking Complete",
+    "keyframesCaptured_one": "{{count}} keyframe captured",
+    "keyframesCaptured_other": "{{count}} keyframes captured",
+    "framesLost_one": "{{count}} frame lost",
+    "framesLost_other": "{{count}} frames lost",
+    "positionOffset": "Position Offset",
+    "offsetX": "X Offset",
+    "offsetY": "Y Offset",
+    "transformOptions": "Transform Options",
+    "scale": "Scale",
+    "rotation": "Rotation",
+    "apply": "Apply Tracking to Clip",
+    "applied": "Tracking Applied",
+    "remove": "Remove Tracking",
+    "retrack": "Re-track with Different Settings",
+    "footer": "Track objects to pin graphics, text, or effects"
+  },
+  "markers": {
+    "defaultLabel": "Marker {{index}}",
+    "title": "Markers",
+    "add": "Add",
+    "emptyTitle": "No markers yet",
+    "emptyHint": "Press M at playhead to add markers",
+    "labelField": "Marker label",
+    "useColor": "Use marker color {{color}}",
+    "save": "Save",
+    "cancel": "Cancel",
+    "jumpTo": "Jump to {{label}}",
+    "edit": "Edit {{label}}",
+    "remove": "Remove {{label}}"
+  },
+  "transform3d": {
+    "noClip": "No clip selected",
+    "rotationX": "Rotation X",
+    "rotationY": "Rotation Y",
+    "rotationZ": "Rotation Z",
+    "perspective": "Perspective",
+    "style": "Transform Style",
+    "flat": "Flat",
+    "preserve3d": "Preserve 3D",
+    "flatHint": "Flattens children into the plane of this element",
+    "preserve3dHint": "Children positioned in 3D space",
+    "tip": "Tip: 3D rotations allow you to rotate layers along X, Y, and Z axes for depth effects. Adjust perspective to control the 3D depth perception."
+  },
+  "svg": {
+    "selectColor": "Select {{label}}",
+    "noClip": "No SVG clip selected",
+    "mode": "Mode",
+    "setMode": "Set SVG color mode to {{mode}}",
+    "modes": {
+      "none": "None",
+      "tint": "Tint",
+      "replace": "Replace"
+    },
+    "color": "Color",
+    "opacity": "Opacity",
+    "entryAnimation": "Entry Animation",
+    "exitAnimation": "Exit Animation",
+    "duration": "Duration"
+  },
+  "sceneNavigator": {
+    "fullTimeline": "Full Timeline",
+    "intro": "Intro",
+    "defaultLabel": "Scene {{index}}",
+    "previousScene": "Previous scene",
+    "nextScene": "Next scene",
+    "scene": "Scene",
+    "scenes": "Scenes",
+    "addScene": "Add Scene",
+    "add": "Add",
+    "title": "Scene Navigator",
+    "subtitle": "Navigate between sections",
+    "previous": "Previous",
+    "position": "Scene {{current}} of {{total}}",
+    "next": "Next"
+  },
+  "retouching": {
+    "setSourceHint": "Alt+Click to set clone source",
+    "cloneSource": "Clone Source",
+    "clear": "Clear",
+    "tools": {
+      "spotHeal": {
+        "label": "Spot Healing",
+        "description": "Remove blemishes by sampling surrounding pixels"
+      },
+      "cloneStamp": {
+        "label": "Clone Stamp",
+        "description": "Copy pixels from source to target"
+      },
+      "redEyeRemoval": {
+        "label": "Red-Eye Removal",
+        "description": "Remove red-eye from photos"
+      }
+    },
+    "title": "Retouching Tools",
+    "brushSettings": "Brush Settings",
+    "size": "Size",
+    "hardness": "Hardness",
+    "opacity": "Opacity",
+    "flow": "Flow",
+    "howTo": "How to use",
+    "instructions": {
+      "spotHeal": "Click and drag over blemishes to remove them. The tool samples surrounding pixels to blend seamlessly.",
+      "cloneStamp": "Alt+Click to set source point, then paint to copy pixels from source to target.",
+      "redEyeRemoval": "Click on red eyes to automatically detect and remove the red-eye effect."
+    }
+  },
+  "photoLayers": {
+    "blendMode": "Blend Mode",
+    "setBlendMode": "Set blend mode to {{mode}}",
+    "blendModes": {
+      "normal": "Normal",
+      "multiply": "Multiply",
+      "screen": "Screen",
+      "overlay": "Overlay",
+      "softLight": "Soft Light",
+      "hardLight": "Hard Light",
+      "colorDodge": "Color Dodge",
+      "colorBurn": "Color Burn",
+      "difference": "Difference",
+      "exclusion": "Exclusion",
+      "hue": "Hue",
+      "saturation": "Saturation",
+      "color": "Color",
+      "luminosity": "Luminosity"
+    },
+    "hideLayer": "Hide layer",
+    "showLayer": "Show layer",
+    "unlockLayer": "Unlock layer",
+    "lockLayer": "Lock layer",
+    "empty": "No layers",
+    "addLayer": "Add Layer",
+    "layersCount": "Layers ({{count}})",
+    "addNewLayer": "Add new layer",
+    "properties": "Layer Properties",
+    "opacity": "Opacity",
+    "duplicate": "Duplicate",
+    "delete": "Delete"
+  },
+  "musicLibrary": {
+    "stop": "Stop {{name}}",
+    "preview": "Preview {{name}}",
+    "addToTimeline": "Add {{name}} to timeline",
+    "title": "Music & SFX",
+    "subtitle": "Royalty-free sounds",
+    "music": "Music",
+    "sfx": "Sound FX",
+    "search": "Search sounds",
+    "searchPlaceholder": "Search sounds...",
+    "all": "All",
+    "genres": {
+      "electronic": "Electronic",
+      "cinematic": "Cinematic",
+      "pop": "Pop",
+      "rock": "Rock",
+      "hip-hop": "Hip-Hop",
+      "jazz": "Jazz",
+      "classical": "Classical",
+      "ambient": "Ambient",
+      "lofi": "Lo-Fi",
+      "corporate": "Corporate",
+      "upbeat": "Upbeat",
+      "dramatic": "Dramatic"
+    },
+    "sfxCategories": {
+      "transitions": "Transitions",
+      "whoosh": "Whoosh",
+      "impacts": "Impacts",
+      "ui": "UI Sounds",
+      "nature": "Nature",
+      "human": "Human",
+      "mechanical": "Mechanical",
+      "musical": "Musical",
+      "cartoon": "Cartoon",
+      "horror": "Horror",
+      "sci-fi": "Sci-Fi"
+    },
+    "moods": {
+      "happy": "Happy",
+      "sad": "Sad",
+      "energetic": "Energetic",
+      "calm": "Calm",
+      "tense": "Tense",
+      "romantic": "Romantic",
+      "inspiring": "Inspiring",
+      "mysterious": "Mysterious",
+      "playful": "Playful",
+      "dark": "Dark",
+      "bright": "Bright",
+      "nostalgic": "Nostalgic"
+    },
+    "emptyTitle": "No sounds found",
+    "emptyHint": "Try adjusting filters",
+    "tracksAvailable": "{{count}} tracks available",
+    "effectsAvailable": "{{count}} effects available"
+  },
+  "audioTextSync": {
+    "intro": "Trim and arrange video clips in order so each cut lands on a music beat.",
+    "progress": "Beat detection progress",
+    "detect": "Detect Beats",
+    "bpmDetected": "BPM Detected",
+    "beats": "Beats",
+    "selectTracks": "Select tracks to sync to beats:",
+    "noTracks": "No unlocked tracks with eligible clips found. Add video clips to the timeline first.",
+    "selectTrack": "Select {{name}}",
+    "deselectTrack": "Deselect {{name}}",
+    "clipCount_one": "{{count}} clip",
+    "clipCount_other": "{{count}} clips",
+    "cutEvery": "Cut every",
+    "beatCount_one": "{{count}} beat",
+    "beatCount_other": "{{count}} beats",
+    "cutHint": "Uses each video clip once, starting at its current in point. Music stays in place. Choose at least two video clips for a sequence. Undo restores the original timing.",
+    "willSync": "{{clips}} clips will be synced to {{beats}} beats",
+    "settings": "Sync Settings",
+    "syncMode": "Sync Mode",
+    "useMode": "Use {{mode}} sync mode",
+    "modes": {
+      "cutToBeats": {
+        "label": "Cut Video to Beats",
+        "description": "Arrange video clips with a cut every 1, 2, 4, or 8 beats"
+      },
+      "smart": {
+        "label": "Smart",
+        "description": "Adjust duration to fit nearest beat count"
+      },
+      "onePerBeat": {
+        "label": "One per Beat",
+        "description": "Each clip gets exactly one beat"
+      },
+      "preserveDuration": {
+        "label": "Preserve Duration",
+        "description": "Keep original duration, snap start to beat"
+      }
+    },
+    "subdivision": "Beat Subdivision",
+    "offset": "Offset",
+    "downbeatsOnly": "Downbeats Only",
+    "allBeats": "All Beats",
+    "downbeats": "Downbeats",
+    "preview": "Preview:",
+    "clipIndex": "Clip {{index}}",
+    "more": "...and {{count}} more",
+    "syncing": "Syncing...",
+    "applyCuts": "Apply Beat Cuts to {{count}} Clips",
+    "syncClips": "Sync {{count}} Clips to Beats",
+    "reanalyze": "Re-analyze Beats"
+  },
+  "tts": {
+    "title": "Text to Speech",
+    "subtitle": "User-keyed ElevenLabs voice generation",
+    "keySettings": "API Key Settings",
+    "text": "Text",
+    "textPlaceholder": "Enter the text you want to convert to speech...",
+    "enhanceForTts": "Enhance for TTS",
+    "openSettings": "Open Settings",
+    "enhancing": "Enhancing...",
+    "enhanceText": "Enhance Text",
+    "generating": "Generating...",
+    "generate": "Generate Speech",
+    "unsaved": "Unsaved audio — save to media, add to timeline, or download to keep it.",
+    "poweredBy": "Powered by ElevenLabs · {{model}}",
+    "model": "Model",
+    "favoriteModels": "Favorite Models",
+    "select": "Select {{name}}",
+    "toggleModels": "Toggle model list",
+    "loadingModels": "Loading models...",
+    "noModels": "No models available",
+    "languageCount_one": "{{count}} language",
+    "languageCount_other": "{{count}} languages",
+    "removeFavorite": "Remove from favorites",
+    "addFavorite": "Add to favorites",
+    "modelsAvailable_one": "{{count}} model available",
+    "modelsAvailable_other": "{{count}} models available",
+    "voiceName": "{{name}} Voice",
+    "pausePreview": "Pause preview",
+    "playPreview": "Play preview",
+    "saveToMedia": "Save to Media",
+    "addToTimeline": "Add to Timeline",
+    "download": "Download",
+    "enhancedHint": "Enhanced - edit below then Generate",
+    "discard": "Discard",
+    "enhancedPreview": "Enhanced preview",
+    "voice": "Voice",
+    "favorites": "Favorites",
+    "previewVoice": "Preview voice",
+    "hideVoices": "Hide voice browser",
+    "browseVoices": "Browse & search voices",
+    "searchVoices": "Search voices",
+    "searchPlaceholder": "Search by name, accent, gender...",
+    "loadingVoices": "Loading voices...",
+    "unlockVoices": "Unlock session to browse voices",
+    "noVoiceMatch": "No voices match your search",
+    "cloned": "Cloned",
+    "preview": "Preview"
+  },
+  "voiceOver": {
+    "title": "Record at playhead",
+    "startsAt": "Starts at {{seconds}}s on a new Voice Over track.",
+    "stop": "Stop & Add to Timeline",
+    "adding": "Adding Voice Over…",
+    "record": "Record Voice Over",
+    "footer": "Recorded audio stays in this project and exports with the rest of the mix.",
+    "emptyRecording": "The microphone recording was empty.",
+    "importFailed": "Could not import the recording.",
+    "notFound": "The recorded audio could not be found after import.",
+    "addFailed": "Could not add the voice over to the timeline.",
+    "unsupported": "Voice-over recording is not supported by this browser.",
+    "noFormat": "This browser does not provide a supported microphone recording format.",
+    "stoppedUnexpectedly": "The microphone recording stopped unexpectedly.",
+    "saveFailed": "Could not save the voice over.",
+    "allowMic": "Allow microphone access to record a voice over.",
+    "startFailed": "Could not start microphone recording."
+  },
+  "ducking": {
+    "trackFallback": "Track {{id}}",
+    "noOverlap": "No overlapping trigger clips were found for this clip.",
+    "noDecodable": "No decodable trigger audio was found on the selected source track.",
+    "persistFailed": "Failed to persist ducking on this clip."
+  },
+  "audioEffects": {
+    "wetDry": "Wet/Dry"
+  },
+  "easing": {
+    "use": "Use {{name}} easing",
+    "basicCategory": "Basic",
+    "curve": "{{direction}} {{family}}",
+    "withVariant": "{{label}} {{variant}}",
+    "direction": {
+      "In": "In",
+      "Out": "Out",
+      "InOut": "In Out"
+    },
+    "family": {
+      "Quad": "Quad",
+      "Cubic": "Cubic",
+      "Quart": "Quart",
+      "Quint": "Quint",
+      "Sine": "Sine",
+      "Expo": "Expo",
+      "Circ": "Circ",
+      "Back": "Back",
+      "Elastic": "Elastic",
+      "Bounce": "Bounce"
+    },
+    "variant": {
+      "Strong": "Strong",
+      "Soft": "Soft",
+      "Small": "Small"
+    },
+    "basic": {
+      "linear": "Linear",
+      "ease": "Ease",
+      "ease-in": "Ease In",
+      "ease-out": "Ease Out",
+      "ease-in-out": "Ease In Out",
+      "hold": "Hold",
+      "bezier": "Bezier",
+      "smoothstep": "Smoothstep",
+      "smootherstep": "Smootherstep",
+      "snappy": "Snappy",
+      "smooth": "Smooth"
+    }
+  },
+  "motionPath": {
+    "noClip": "No clip selected",
+    "title": "Motion Path",
+    "enable": "Enable motion path",
+    "showPathLabel": "Show Path",
+    "hidePath": "Hide path",
+    "showPath": "Show path",
+    "autoOrient": "Auto Orient",
+    "pathType": "Path Type",
+    "setPathType": "Set path type to {{type}}",
+    "types": {
+      "linear": "linear",
+      "bezier": "bezier",
+      "catmull-rom": "Smooth"
+    },
+    "pathPoints": "Path Points",
+    "pointCount_one": "{{count}} point",
+    "pointCount_other": "{{count}} points",
+    "addPoint": "Add point",
+    "clearPath": "Clear path",
+    "exitEdit": "Exit Edit Mode",
+    "editOnCanvas": "Edit Path on Canvas",
+    "editingLabel": "Editing:",
+    "editingHint": "Click on the path to add points. Drag points to move them. Right-click to remove. Drag handles to adjust curves.",
+    "tipLabel": "Tip:",
+    "tip": "Motion paths animate the clip's position along a curved path over time. Use bezier handles for smooth curves."
+  },
+  "textAnimation": {
+    "preset": "Animation Preset",
+    "previews": "Text animation previews",
+    "previewApply": "Preview and apply {{name}}",
+    "easing": "Easing",
+    "noClip": "No text clip selected",
+    "timing": "Timing",
+    "inDuration": "In Duration",
+    "outDuration": "Out Duration",
+    "previewTitle": "Preview",
+    "previewHint": "Animation will play during preview and export. Total animation time: {{seconds}}s",
+    "settings": {
+      "fade": "Fade Settings",
+      "slide": "Slide Settings",
+      "scale": "Scale Settings",
+      "bounce": "Bounce Settings",
+      "rotate": "Rotate Settings",
+      "wave": "Wave Settings",
+      "shake": "Shake Settings",
+      "pop": "Pop Settings",
+      "glitch": "Glitch Settings"
+    },
+    "params": {
+      "startOpacity": "Start Opacity",
+      "endOpacity": "End Opacity",
+      "distance": "Distance",
+      "scaleFrom": "Scale From",
+      "scaleTo": "Scale To",
+      "height": "Height",
+      "bounces": "Bounces",
+      "angle": "Angle",
+      "amplitude": "Amplitude",
+      "frequency": "Frequency",
+      "intensity": "Intensity",
+      "speed": "Speed",
+      "overshoot": "Overshoot"
+    },
+    "presets": {
+      "none": {
+        "name": "None",
+        "description": "No animation"
+      },
+      "typewriter": {
+        "name": "Typewriter",
+        "description": "Characters appear one by one"
+      },
+      "fade": {
+        "name": "Fade In",
+        "description": "Smooth opacity transition"
+      },
+      "slide-up": {
+        "name": "Slide Up",
+        "description": "Slides in from below"
+      },
+      "slide-down": {
+        "name": "Slide Down",
+        "description": "Slides in from above"
+      },
+      "slide-left": {
+        "name": "Slide Left",
+        "description": "Slides in from the right"
+      },
+      "slide-right": {
+        "name": "Slide Right",
+        "description": "Slides in from the left"
+      },
+      "scale": {
+        "name": "Scale In",
+        "description": "Grows from small to full size"
+      },
+      "blur": {
+        "name": "Blur In",
+        "description": "Fades in while unblurring"
+      },
+      "bounce": {
+        "name": "Bounce",
+        "description": "Bounces into place"
+      },
+      "rotate": {
+        "name": "Rotate In",
+        "description": "Spins while appearing"
+      },
+      "pop": {
+        "name": "Pop",
+        "description": "Pops in with overshoot"
+      },
+      "flip": {
+        "name": "Flip",
+        "description": "Flips into view"
+      },
+      "split": {
+        "name": "Split",
+        "description": "Characters split from center"
+      },
+      "word-by-word": {
+        "name": "Word by Word",
+        "description": "Words appear one at a time"
+      },
+      "rise": {
+        "name": "Rise",
+        "description": "Soft blurred rise with a subtle scale settle"
+      },
+      "drop": {
+        "name": "Drop",
+        "description": "Characters drop in and land with a soft bounce"
+      },
+      "elastic": {
+        "name": "Elastic",
+        "description": "Springy scale entrance with a controlled overshoot"
+      },
+      "swing": {
+        "name": "Swing",
+        "description": "Alternating hinged letters swing into place"
+      },
+      "zoom-blur": {
+        "name": "Zoom Blur",
+        "description": "Sharpens from a cinematic forward zoom"
+      },
+      "cascade": {
+        "name": "Cascade",
+        "description": "Staggered diagonal character entrance"
+      },
+      "wave": {
+        "name": "Wave",
+        "description": "Continuous wave motion"
+      },
+      "shake": {
+        "name": "Shake",
+        "description": "Continuous shaking"
+      },
+      "glitch": {
+        "name": "Glitch",
+        "description": "Digital glitch effect"
+      },
+      "rainbow": {
+        "name": "Rainbow",
+        "description": "Cycling rainbow colors"
+      }
+    }
+  },
+  "emphasis": {
+    "none": "None",
+    "reset": "Reset",
+    "speed": "Speed",
+    "intensity": "Intensity",
+    "loop": "Loop Animation",
+    "timing": "Timing",
+    "clipLength": "Clip: {{time}}",
+    "startTime": "Start Time",
+    "duration": "Duration",
+    "fullClip": "Full clip",
+    "resetFullClip": "Reset to full clip",
+    "focusSettings": "Focus Zoom Settings",
+    "zoomScale": "Zoom Scale",
+    "holdDuration": "Hold Duration",
+    "focusPoint": "Focus Point",
+    "xPosition": "X Position",
+    "yPosition": "Y Position",
+    "focusAt": "Focus {{position}}",
+    "focus": {
+      "tl": "top left",
+      "tc": "top center",
+      "tr": "top right",
+      "ml": "middle left",
+      "c": "center",
+      "mr": "middle right",
+      "bl": "bottom left",
+      "bc": "bottom center",
+      "br": "bottom right"
+    },
+    "focusShort": {
+      "tl": "TL",
+      "tc": "TC",
+      "tr": "TR",
+      "ml": "ML",
+      "c": "C",
+      "mr": "MR",
+      "bl": "BL",
+      "bc": "BC",
+      "br": "BR"
+    },
+    "footer": "Emphasis animations play while the clip is visible (not during entry/exit)",
+    "categories": {
+      "attention": "Attention",
+      "movement": "Movement",
+      "rotation": "Rotation",
+      "distortion": "Distortion",
+      "zoomPan": "Zoom & Pan"
+    },
+    "animations": {
+      "pulse": {
+        "name": "Pulse",
+        "description": "Gentle scale breathing effect"
+      },
+      "heartbeat": {
+        "name": "Heartbeat",
+        "description": "Double-beat pulse like a heart"
+      },
+      "flash": {
+        "name": "Flash",
+        "description": "Opacity pulsing effect"
+      },
+      "glow": {
+        "name": "Glow",
+        "description": "Scale and opacity pulse"
+      },
+      "breathe": {
+        "name": "Breathe",
+        "description": "Slow, calming scale effect"
+      },
+      "shake": {
+        "name": "Shake",
+        "description": "Quick side-to-side shake"
+      },
+      "bounce": {
+        "name": "Bounce",
+        "description": "Bouncing up and down"
+      },
+      "float": {
+        "name": "Float",
+        "description": "Gentle floating motion"
+      },
+      "vibrate": {
+        "name": "Vibrate",
+        "description": "Random small movements"
+      },
+      "wave": {
+        "name": "Wave",
+        "description": "Wave-like motion"
+      },
+      "spin": {
+        "name": "Spin",
+        "description": "Continuous rotation"
+      },
+      "swing": {
+        "name": "Swing",
+        "description": "Pendulum-like rotation"
+      },
+      "wobble": {
+        "name": "Wobble",
+        "description": "Wobbling with rotation"
+      },
+      "tilt": {
+        "name": "Tilt",
+        "description": "Slow tilting motion"
+      },
+      "tada": {
+        "name": "Tada",
+        "description": "Attention-grabbing wiggle"
+      },
+      "jello": {
+        "name": "Jello",
+        "description": "Jelly-like squish effect"
+      },
+      "rubber-band": {
+        "name": "Rubber Band",
+        "description": "Stretchy rubber effect"
+      },
+      "flicker": {
+        "name": "Flicker",
+        "description": "Random visibility flicker"
+      },
+      "zoom-pulse": {
+        "name": "Zoom Pulse",
+        "description": "Scale in and out"
+      },
+      "focus-zoom": {
+        "name": "Focus Zoom",
+        "description": "Zoom to point and back"
+      },
+      "ken-burns": {
+        "name": "Ken Burns",
+        "description": "Slow zoom with pan"
+      },
+      "pan-left": {
+        "name": "Pan Left",
+        "description": "Slow pan to the left"
+      },
+      "pan-right": {
+        "name": "Pan Right",
+        "description": "Slow pan to the right"
+      },
+      "pan-up": {
+        "name": "Pan Up",
+        "description": "Slow pan upward"
+      },
+      "pan-down": {
+        "name": "Pan Down",
+        "description": "Slow pan downward"
+      }
+    }
+  },
+  "motionPresets": {
+    "apply": "Apply {{name}}",
+    "applyShort": "Apply",
+    "appliedTitle": "Motion Preset Applied",
+    "appliedBody": "{{name}} added to clip",
+    "removed": "Preset Removed",
+    "selectClip": "Select a clip to apply motion presets",
+    "clipNotFound": "Clip not found",
+    "applied": "Applied Animations",
+    "removeEntry": "Entry x",
+    "removeExit": "Exit x",
+    "removeEmphasis": "Emphasis x",
+    "categories": {
+      "entrance": "In",
+      "exit": "Out",
+      "emphasis": "Emphasis",
+      "transition": "Transition"
+    },
+    "durationAria": "Motion preset duration",
+    "duration": "Duration",
+    "durationHint": "Sets how long {{category}} presets run. The last applied preset updates after you stop dragging.",
+    "presetCount_one": "{{count}} preset in {{category}}",
+    "presetCount_other": "{{count}} presets in {{category}}",
+    "presets": {
+      "fade-in": "Fade In",
+      "slide-in-left": "Slide In Left",
+      "slide-in-right": "Slide In Right",
+      "slide-in-top": "Slide In Top",
+      "slide-in-bottom": "Slide In Bottom",
+      "scale-in": "Scale In",
+      "pop": "Pop",
+      "bounce-in": "Bounce In",
+      "flip-in": "Flip In",
+      "blur-in": "Blur In",
+      "fade-out": "Fade Out",
+      "slide-out-left": "Slide Out Left",
+      "slide-out-right": "Slide Out Right",
+      "scale-out": "Scale Out",
+      "shrink": "Shrink",
+      "blur-out": "Blur Out",
+      "pulse": "Pulse",
+      "shake": "Shake",
+      "bounce": "Bounce",
+      "wiggle": "Wiggle",
+      "rubber-band": "Rubber Band",
+      "glow-pulse": "Glow Pulse",
+      "cross-dissolve": "Cross Dissolve",
+      "wipe-left": "Wipe Left",
+      "zoom-transition": "Zoom Transition"
+    }
+  },
+  "speedRamp": {
+    "canvasHint": "Click to add • Drag to move • Click a point to remove",
+    "effectiveDuration": "Effective duration: {{duration}}",
+    "playbackSpeed": "Playback Speed",
+    "reverse": "Reverse",
+    "pitchCorrect": "Pitch Correct",
+    "curvePresets": "Speed Curve Presets",
+    "ramping": "Speed Ramping",
+    "rampingWithCount_one": "Speed Ramping ({{count}} keyframe)",
+    "rampingWithCount_other": "Speed Ramping ({{count}} keyframes)",
+    "removeKeyframe": "Remove speed keyframe",
+    "freeze": "Freeze Frames",
+    "freezeWithCount_one": "Freeze Frames ({{count}} freeze)",
+    "freezeWithCount_other": "Freeze Frames ({{count}} freeze)",
+    "addFreeze": "Add Freeze Frame at Playhead",
+    "removeFreeze": "Remove freeze frame",
+    "reset": "Reset Speed & Effects",
+    "curves": {
+      "flash": "Flash",
+      "smooth-slow-mo": "Smooth Slow-Mo",
+      "jump-cut": "Jump Cut",
+      "montage": "Montage",
+      "hero-moment": "Hero Moment",
+      "bullet-time": "Bullet Time"
+    }
+  },
+  "noiseReduction": {
+    "emptyRange": "Clip audio range is empty",
+    "analyzingAudio": "Analyzing clip audio",
+    "sampling": "Sampling clip audio ({{index}}/{{total}})",
+    "analyzingSamples_one": "Analyzing {{count}} clip sample",
+    "analyzingSamples_other": "Analyzing {{count}} clip samples",
+    "analyzedSamples_one": "Analyzed {{count}} clip sample",
+    "analyzedSamples_other": "Analyzed {{count}} clip samples",
+    "analyzedAudio": "Analyzed clip audio",
+    "updateFailed": "Failed to update noise reduction",
+    "applyFailed": "Failed to apply noise reduction",
+    "clipNotFound": "Clip not found",
+    "noAudio": "No audio data available for this clip",
+    "preparing": "Preparing clip analysis",
+    "decodeFailed": "Failed to decode audio for analysis",
+    "analyzingSignature": "Analyzing noise signature",
+    "learningProfile": "Learning custom cleanup profile",
+    "recommendationReady": "Recommendation ready",
+    "applied": "{{name}} applied to this clip.",
+    "learnedApplied": "{{name}} learned and applied to this clip.",
+    "presetFailed": "Failed to apply noise reduction preset",
+    "analyzeFailed": "Failed to analyze this clip",
+    "recommendFailed": "Failed to apply recommended cleanup",
+    "analyzing": "Analyzing...",
+    "applyingCleanup": "Applying cleanup...",
+    "recommendationReadyButton": "Recommendation Ready",
+    "cleanupApplied": "Cleanup Applied",
+    "analysisFailed": "Analysis Failed",
+    "analyze": "Analyze & Recommend",
+    "collapse": "Collapse noise reduction",
+    "expand": "Expand noise reduction",
+    "title": "Noise Reduction",
+    "enable": "Enable noise reduction",
+    "intro": "Reduce white noise, wind, hum, room tone, and background music while keeping speech or the wanted audio in front.",
+    "usePreset": "Use {{name}} noise reduction",
+    "currentMode": "Current mode: {{name}}",
+    "statusApplied": "Applied",
+    "statusOff": "Off",
+    "recommendationLearned": "Detected noise best matches {{name}}. Apply {{percent}}% cleanup at {{threshold}} dB to save this profile on the clip.",
+    "recommendationPreset": "Detected noise best matches {{name}}. Apply {{percent}}% cleanup at {{threshold}} dB. A custom profile could not be isolated, so this recommendation uses the best preset match for the clip.",
+    "applying": "Applying...",
+    "applyRecommended": "Apply Recommended Cleanup",
+    "abPreview": "A/B Preview",
+    "hearOriginal": "Hear Original",
+    "hearCleaned": "Hear Cleaned",
+    "previewOnly": "Preview only. Export still uses the cleaned audio effect chain.",
+    "threshold": "Threshold",
+    "reduction": "Reduction",
+    "attack": "Attack",
+    "release": "Release",
+    "progress": "Noise analysis progress",
+    "profileActive": "Learned noise profile is active on this clip.",
+    "autoTuned": "Auto-tuned with {{name}} and reused for export cleanup.",
+    "presets": {
+      "balanced": {
+        "name": "Balanced",
+        "description": "General cleanup for moderate room noise without pushing too hard."
+      },
+      "speech": {
+        "name": "Speech Focus",
+        "description": "Preserve dialog presence while reducing hiss and ambient bed."
+      },
+      "whiteNoise": {
+        "name": "White Noise",
+        "description": "Aggressive broadband hiss removal for fans, air, camera preamp noise, and room tone."
+      },
+      "music": {
+        "name": "Music Bed",
+        "description": "Pushes background music down while keeping speech presence forward."
+      },
+      "heavy": {
+        "name": "Heavy Noise",
+        "description": "More aggressive broadband cleanup for loud air, fan, and street wash."
+      },
+      "wind": {
+        "name": "Wind & Rumble",
+        "description": "Targets low-end rumble, handling noise, and outdoor wind pressure."
+      },
+      "hum": {
+        "name": "Hum & HVAC",
+        "description": "Focused cleanup for tonal hum, AC drone, and power-line style noise."
+      }
+    }
+  }
+}

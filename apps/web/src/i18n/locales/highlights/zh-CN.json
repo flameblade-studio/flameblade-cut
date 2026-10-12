@@ -23,7 +23,7 @@
     "engine": "分析方式",
     "engineLocal": "本地分析・免费",
     "engineOpenai": "OpenAI・更聪明",
-    "openaiNoKey": "在配音面板的“密钥与区域设置”中填入 OpenAI 密钥后即可使用。",
+    "openaiNoKey": "在“设置 → API 密钥”填入 OpenAI 密钥后即可使用。",
     "openaiUnavailable": "此版本尚未开放 OpenAI 分析。"
   },
   "run": "找出精华",

@@ -207,11 +207,9 @@ export const ScreenRecorder: React.FC<ScreenRecorderProps> = ({
                   width="100%"
                 />
                 <Text type="supporting" color="secondary" display="block" className="mt-1 text-[10px]">
-                  {
-                    RESOLUTION_OPTIONS.find(
-                      (o) => o.value === options.video.resolution,
-                    )?.desc
-                  }
+                  {t(`tools.editorChrome.resolutionHints.${options.video.resolution}`, {
+                    defaultValue: RESOLUTION_OPTIONS.find((o) => o.value === options.video.resolution)?.desc ?? "",
+                  })}
                 </Text>
               </div>
 

@@ -3,6 +3,7 @@ import { ToolcraftButton as Button } from "@openreel/ui";
 import { ToolcraftClickableCard as ClickableCard } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
 import { RotateCcw, Target, Zap, Clock } from "@/icons/lucide-compat";
+import { useTranslation } from "react-i18next";
 import { MockSlider, MockToggle } from "./shell/InspectorControls";
 import { useProjectStore } from "../../../stores/project-store";
 import { useEngineStore } from "../../../stores/engine-store";
@@ -17,6 +18,28 @@ const formatTime = (seconds: number): string => {
 interface EmphasisAnimationSectionProps {
   clipId: string;
 }
+
+/** Maps the English category names below to their translation keys. */
+const CATEGORY_KEYS: Record<string, string> = {
+  Attention: "attention",
+  Movement: "movement",
+  Rotation: "rotation",
+  Distortion: "distortion",
+  "Zoom & Pan": "zoomPan",
+};
+
+/** Focus-point shortcuts; `id` is the translation key suffix. */
+const FOCUS_PRESETS = [
+  { x: 0, y: 0, id: "tl" },
+  { x: 0.5, y: 0, id: "tc" },
+  { x: 1, y: 0, id: "tr" },
+  { x: 0, y: 0.5, id: "ml" },
+  { x: 0.5, y: 0.5, id: "c" },
+  { x: 1, y: 0.5, id: "mr" },
+  { x: 0, y: 1, id: "bl" },
+  { x: 0.5, y: 1, id: "bc" },
+  { x: 1, y: 1, id: "br" },
+] as const;
 
 const EMPHASIS_ANIMATIONS: {
   category: string;
@@ -170,6 +193,7 @@ const ValueText: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 export const EmphasisAnimationSection: React.FC<
   EmphasisAnimationSectionProps
 > = ({ clipId }) => {
+  const { t } = useTranslation();
   const { project, updateClipEmphasisAnimation } = useProjectStore();
   const getTitleEngine = useEngineStore((state) => state.getTitleEngine);
   const getGraphicsEngine = useEngineStore((state) => state.getGraphicsEngine);
@@ -282,7 +306,7 @@ export const EmphasisAnimationSection: React.FC<
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-2">
         <Button
-          label="None"
+          label={t("advanced.emphasis.none")}
           variant={currentAnimation.type === "none" ? "primary" : "secondary"}
           size="sm"
           onClick={() => handleTypeChange("none")}
@@ -293,7 +317,7 @@ export const EmphasisAnimationSection: React.FC<
           }`}
         />
         <Button
-          label="Reset"
+          label={t("advanced.emphasis.reset")}
           icon={<RotateCcw size={10} />}
           variant="secondary"
           size="sm"
@@ -305,13 +329,13 @@ export const EmphasisAnimationSection: React.FC<
       {EMPHASIS_ANIMATIONS.map((category) => (
         <div key={category.category}>
           <Text type="supporting" color="secondary" className="mb-2 block text-[10px] font-medium">
-            {category.category}
+            {t(`advanced.emphasis.categories.${CATEGORY_KEYS[category.category]}`, { defaultValue: category.category })}
           </Text>
           <div className="grid grid-cols-2 gap-1.5">
             {category.animations.map((anim) => (
               <ClickableCard
                 key={anim.type}
-                label={anim.label}
+                label={t(`advanced.emphasis.animations.${anim.type}.name`, { defaultValue: anim.label })}
                 onClick={() => handleTypeChange(anim.type)}
                 className={`py-2 px-2 rounded-lg text-[10px] transition-all text-left ${
                   currentAnimation.type === anim.type
@@ -319,7 +343,7 @@ export const EmphasisAnimationSection: React.FC<
                     : "bg-bg-2 border border-border text-fg-2 hover:text-fg hover:border-primary/50"
                   }`}
               >
-                {anim.label}
+                {t(`advanced.emphasis.animations.${anim.type}.name`, { defaultValue: anim.label })}
               </ClickableCard>
             ))}
           </div>
@@ -331,14 +355,16 @@ export const EmphasisAnimationSection: React.FC<
           <div className="pt-3 border-t border-border space-y-3">
             {selectedAnimation && (
               <Text type="supporting" color="secondary" className="text-[10px] italic">
-                {selectedAnimation.description}
+                {t(`advanced.emphasis.animations.${selectedAnimation.type}.description`, {
+                  defaultValue: selectedAnimation.description,
+                })}
               </Text>
             )}
 
             <div className="space-y-1">
               <div className="flex items-center justify-between">
                 <Text type="supporting" color="secondary" className="text-[10px]">
-                  Speed
+                  {t("advanced.emphasis.speed")}
                 </Text>
                 <ValueText>
                   {currentAnimation.speed.toFixed(1)}x
@@ -358,7 +384,7 @@ export const EmphasisAnimationSection: React.FC<
             <div className="space-y-1">
               <div className="flex items-center justify-between">
                 <Text type="supporting" color="secondary" className="text-[10px]">
-                  Intensity
+                  {t("advanced.emphasis.intensity")}
                 </Text>
                 <ValueText>
                   {Math.round(currentAnimation.intensity * 100)}%
@@ -379,10 +405,10 @@ export const EmphasisAnimationSection: React.FC<
 
             <div className="flex items-center justify-between">
               <Text type="supporting" color="secondary" className="text-[10px]">
-                Loop Animation
+                {t("advanced.emphasis.loop")}
               </Text>
               <MockToggle
-                ariaLabel="Loop Animation"
+                ariaLabel={t("advanced.emphasis.loop")}
                 checked={currentAnimation.loop}
                 onChange={() =>
                   handleAnimationChange({ loop: !currentAnimation.loop })
@@ -395,17 +421,17 @@ export const EmphasisAnimationSection: React.FC<
             <div className="flex items-center gap-2 text-primary">
               <Clock size={12} />
               <Text type="supporting" className="text-[10px] font-medium text-primary">
-                Timing
+                {t("advanced.emphasis.timing")}
               </Text>
               <Text type="supporting" color="secondary" className="ml-auto text-[9px]">
-                Clip: {formatTime(clipDuration)}
+                {t("advanced.emphasis.clipLength", { time: formatTime(clipDuration) })}
               </Text>
             </div>
 
             <div className="space-y-1">
               <div className="flex items-center justify-between">
                 <Text type="supporting" color="secondary" className="text-[10px]">
-                  Start Time
+                  {t("advanced.emphasis.startTime")}
                 </Text>
                 <ValueText>
                   {formatTime(currentAnimation.startTime ?? 0)}
@@ -427,12 +453,12 @@ export const EmphasisAnimationSection: React.FC<
             <div className="space-y-1">
               <div className="flex items-center justify-between">
                 <Text type="supporting" color="secondary" className="text-[10px]">
-                  Duration
+                  {t("advanced.emphasis.duration")}
                 </Text>
                 <ValueText>
                   {currentAnimation.animationDuration
                     ? formatTime(currentAnimation.animationDuration)
-                    : "Full clip"}
+                    : t("advanced.emphasis.fullClip")}
                 </ValueText>
               </div>
               <Slider
@@ -455,7 +481,7 @@ export const EmphasisAnimationSection: React.FC<
                   0s
                 </Text>
                 <Button
-                  label="Reset to full clip"
+                  label={t("advanced.emphasis.resetFullClip")}
                   variant="ghost"
                   size="sm"
                   onClick={() =>
@@ -478,14 +504,14 @@ export const EmphasisAnimationSection: React.FC<
             <div className="flex items-center gap-2 text-primary">
               <Target size={12} />
               <Text type="supporting" className="text-[10px] font-medium text-primary">
-                Focus Zoom Settings
+                {t("advanced.emphasis.focusSettings")}
               </Text>
             </div>
 
             <div className="space-y-1">
               <div className="flex items-center justify-between">
                   <Text type="supporting" color="secondary" className="text-[10px]">
-                    Zoom Scale
+                    {t("advanced.emphasis.zoomScale")}
                   </Text>
                   <ValueText>
                     {(currentAnimation.zoomScale || 1.5).toFixed(1)}x
@@ -507,7 +533,7 @@ export const EmphasisAnimationSection: React.FC<
               <div className="space-y-1">
                 <div className="flex items-center justify-between">
                   <Text type="supporting" color="secondary" className="text-[10px]">
-                    Hold Duration
+                    {t("advanced.emphasis.holdDuration")}
                   </Text>
                   <ValueText>
                     {((currentAnimation.holdDuration || 0.3) * 100).toFixed(0)}%
@@ -528,12 +554,12 @@ export const EmphasisAnimationSection: React.FC<
 
               <div className="space-y-2">
                 <Text type="supporting" color="secondary" className="text-[10px]">
-                  Focus Point
+                  {t("advanced.emphasis.focusPoint")}
                 </Text>
                 <div className="grid grid-cols-2 gap-2">
                   <div className="space-y-1">
                     <Text type="supporting" color="secondary" className="text-[9px]">
-                      X Position
+                      {t("advanced.emphasis.xPosition")}
                     </Text>
                     <Slider
                       min={0}
@@ -552,7 +578,7 @@ export const EmphasisAnimationSection: React.FC<
                   </div>
                   <div className="space-y-1">
                     <Text type="supporting" color="secondary" className="text-[9px]">
-                      Y Position
+                      {t("advanced.emphasis.yPosition")}
                     </Text>
                     <Slider
                       min={0}
@@ -572,20 +598,12 @@ export const EmphasisAnimationSection: React.FC<
                 </div>
 
                 <div className="grid grid-cols-3 gap-1 mt-2">
-                  {[
-                    { x: 0, y: 0, label: "TL" },
-                    { x: 0.5, y: 0, label: "TC" },
-                    { x: 1, y: 0, label: "TR" },
-                    { x: 0, y: 0.5, label: "ML" },
-                    { x: 0.5, y: 0.5, label: "C" },
-                    { x: 1, y: 0.5, label: "MR" },
-                    { x: 0, y: 1, label: "BL" },
-                    { x: 0.5, y: 1, label: "BC" },
-                    { x: 1, y: 1, label: "BR" },
-                  ].map((preset) => (
+                  {FOCUS_PRESETS.map((preset) => (
                     <ClickableCard
-                      key={preset.label}
-                      label={`Focus ${preset.label}`}
+                      key={preset.id}
+                      label={t("advanced.emphasis.focusAt", {
+                        position: t(`advanced.emphasis.focus.${preset.id}`),
+                      })}
                       onClick={() =>
                         handleAnimationChange({
                           focusPoint: { x: preset.x, y: preset.y },
@@ -598,7 +616,7 @@ export const EmphasisAnimationSection: React.FC<
                         : "bg-bg-2 border border-border text-fg-3 hover:text-fg"
                       }`}
                     >
-                      {preset.label}
+                      {t(`advanced.emphasis.focusShort.${preset.id}`)}
                     </ClickableCard>
                   ))}
                 </div>
@@ -612,8 +630,7 @@ export const EmphasisAnimationSection: React.FC<
         <div className="flex items-center gap-2 text-fg-3">
           <Zap size={10} />
           <Text type="supporting" color="secondary" className="text-[9px]">
-            Emphasis animations play while the clip is visible (not during
-            entry/exit)
+            {t("advanced.emphasis.footer")}
           </Text>
         </div>
       </div>

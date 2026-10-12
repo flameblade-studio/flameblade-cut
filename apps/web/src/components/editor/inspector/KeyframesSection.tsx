@@ -24,6 +24,7 @@ import {
 } from "@openreel/core";
 import type { Keyframe, EasingType } from "@openreel/core";
 import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 
 const keyframeEngine = new KeyframeEngine();
 
@@ -144,14 +145,40 @@ const ANIMATABLE_PROPERTIES: AnimatableProperty[] = [
   },
 ];
 
-const formatEasingLabel = (easing: string): string => {
-  return (
-    easing
-      .replace(/([A-Z])/g, " $1")
-      .replace(/^ease/, "")
-      .trim() || easing
-  );
+const BASIC_EASINGS = new Set([
+  "linear",
+  "ease",
+  "ease-in",
+  "ease-out",
+  "ease-in-out",
+  "hold",
+  "bezier",
+  "smoothstep",
+  "smootherstep",
+  "snappy",
+  "smooth",
+]);
+const EASING_PATTERN =
+  /^ease(InOut|In|Out)(Quad|Cubic|Quart|Quint|Sine|Expo|Circ|Back|Elastic|Bounce)(Strong|Soft|Small)?$/;
+
+/** Maps an easing id such as "easeInOutBackStrong" to its localized display name. */
+const formatEasingLabel = (easing: string, t: TFunction): string => {
+  if (BASIC_EASINGS.has(easing)) return t(`advanced.easing.basic.${easing}`);
+  const match = EASING_PATTERN.exec(easing);
+  if (!match) return easing;
+  const [, direction, family, variant] = match;
+  const label = t("advanced.easing.curve", {
+    direction: t(`advanced.easing.direction.${direction}`),
+    family: t(`advanced.easing.family.${family}`),
+  });
+  return variant
+    ? t("advanced.easing.withVariant", { label, variant: t(`advanced.easing.variant.${variant}`) })
+    : label;
 };
+
+/** Localized heading for an easing category from the core EASING_CATEGORIES list. */
+const formatEasingCategory = (name: string, t: TFunction): string =>
+  name === "Basic" ? t("advanced.easing.basicCategory") : t(`advanced.easing.family.${name}`, { defaultValue: name });
 
 const PropertySelector: React.FC<{
   selectedProperty: string | null;
@@ -288,7 +315,7 @@ const EasingSelector: React.FC<{
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
-  const currentLabel = formatEasingLabel(value);
+  const currentLabel = formatEasingLabel(value, t);
 
   return (
     <Popover
@@ -304,13 +331,13 @@ const EasingSelector: React.FC<{
             <div key={category.name} className="space-y-1">
               <div className="sticky top-0 px-2 py-1 bg-bg-2">
                 <Text type="supporting" color="secondary" weight="bold">
-                  {category.name}
+                  {formatEasingCategory(category.name, t)}
                 </Text>
               </div>
               {category.easings.map((easing) => (
                 <ClickableCard
                   key={easing}
-                  label={`Use ${formatEasingLabel(easing)} easing`}
+                  label={t("advanced.easing.use", { name: formatEasingLabel(easing, t) })}
                   onClick={() => {
                     onChange(easing);
                     setIsOpen(false);
@@ -321,7 +348,7 @@ const EasingSelector: React.FC<{
                   <div className="flex items-center gap-2">
                     <EasingCurvePreview easing={easing} size={14} />
                     <Text type="supporting" color="primary">
-                      {formatEasingLabel(easing)}
+                      {formatEasingLabel(easing, t)}
                     </Text>
                   </div>
                 </ClickableCard>

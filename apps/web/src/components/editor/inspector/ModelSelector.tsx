@@ -4,6 +4,7 @@ import { ToolcraftClickableCard as ClickableCard } from "@openreel/ui";
 import { ToolcraftIconButton as IconButton } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
 import { Star, StarOff, ChevronDown } from "@/icons/lucide-compat";
+import { useTranslation } from "react-i18next";
 import { useSettingsStore } from "../../../stores/settings-store";
 import type { ElevenLabsModel } from "./tts-types";
 
@@ -16,6 +17,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
   allModels,
   isLoadingModels,
 }) => {
+  const { t } = useTranslation();
   const {
     elevenLabsModel,
     setElevenLabsModel,
@@ -56,7 +58,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
   return (
     <div className="space-y-2">
       <Text type="supporting" color="secondary" className="text-[10px] font-medium">
-        Model
+        {t("advanced.tts.model")}
       </Text>
 
       {favoriteModels.length > 0 && (
@@ -66,14 +68,13 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
             color="secondary"
             className="flex items-center gap-1 text-[9px]"
           >
-            <Star size={9} className="text-amber-400 fill-amber-400" /> Favorite
-            Models
+            <Star size={9} className="text-amber-400 fill-amber-400" /> {t("advanced.tts.favoriteModels")}
           </Text>
           <div className="flex flex-wrap gap-1.5">
             {favoriteModels.map((fav) => (
               <ClickableCard
                 key={fav.modelId}
-                label={`Select ${fav.name}`}
+                label={t("advanced.tts.select", { name: fav.name })}
                 onClick={() => setElevenLabsModel(fav.modelId)}
                 className={`flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] transition-colors ${
                   elevenLabsModel === fav.modelId
@@ -93,12 +94,12 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
 
       <div className="flex items-center gap-2">
         <ClickableCard
-          label="Toggle model list"
+          label={t("advanced.tts.toggleModels")}
           className="flex-1 h-8 px-2 rounded-lg border border-border bg-bg-2 text-[10px] text-fg flex items-center justify-between cursor-pointer hover:border-primary/50 transition-colors"
           onClick={() => setShowAllModels(!showAllModels)}
         >
           <Text type="supporting" color="primary" className="truncate text-[10px]">
-            {isLoadingModels ? "Loading models..." : getSelectedModelName()}
+            {isLoadingModels ? t("advanced.tts.loadingModels") : getSelectedModelName()}
           </Text>
           <ChevronDown
             size={12}
@@ -114,7 +115,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
           <div className="max-h-48 overflow-y-auto">
             {allModels.length === 0 ? (
               <Text type="supporting" color="secondary" className="block p-3 text-center text-[10px]">
-                {isLoadingModels ? "Loading models..." : "No models available"}
+                {isLoadingModels ? t("advanced.tts.loadingModels") : t("advanced.tts.noModels")}
               </Text>
             ) : (
               allModels.map((model) => {
@@ -125,7 +126,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
                 return (
                   <ClickableCard
                     key={model.model_id}
-                    label={`Select ${model.name}`}
+                    label={t("advanced.tts.select", { name: model.name })}
                     className={`flex items-center gap-2 px-2 py-1.5 cursor-pointer transition-colors ${
                       isSelected
                         ? "bg-primary/10 border-l-2 border-primary"
@@ -148,12 +149,12 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
                             ? model.description.slice(0, 80) + "..."
                             : model.description
                           : ""}
-                        {langCount > 0 && ` · ${langCount} languages`}
+                        {langCount > 0 && ` · ${t("advanced.tts.languageCount", { count: langCount })}`}
                       </Text>
                     </div>
 
                     <IconButton
-                      label={isFav ? "Remove from favorites" : "Add to favorites"}
+                      label={isFav ? t("advanced.tts.removeFavorite") : t("advanced.tts.addFavorite")}
                       icon={
                         isFav ? (
                           <Star size={10} className="fill-current" />
@@ -184,7 +185,7 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
             color="secondary"
             className="block border-t border-border bg-bg-1 px-2 py-1 text-center text-[8px]"
           >
-            {allModels.length} models available
+            {t("advanced.tts.modelsAvailable", { count: allModels.length })}
           </Text>
         </Card>
       )}

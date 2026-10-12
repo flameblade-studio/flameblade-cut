@@ -233,7 +233,7 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
                     {COMPRESSION_SIZE_PRESETS.map((preset) => (
                       <SelectableCard
                         key={preset.id}
-                        label={preset.label}
+                        label={t(`tools.export.sizePresets.${preset.id}`, { size: Math.round(preset.bytes / MB), defaultValue: preset.label })}
                         isSelected={sizePresetId === preset.id}
                         onChange={() => setSizePresetId(preset.id)}
                         padding={2}
@@ -241,7 +241,7 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
                         className="text-center"
                       >
                         <Text type="label" weight="bold">
-                          {preset.label}
+                          {t(`tools.export.sizePresets.${preset.id}`, { size: Math.round(preset.bytes / MB), defaultValue: preset.label })}
                         </Text>
                       </SelectableCard>
                     ))}

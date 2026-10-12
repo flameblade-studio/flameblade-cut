@@ -827,7 +827,7 @@ export const ClipComponent: React.FC<ClipComponentProps> = ({
           <div className="absolute -inset-px rounded-lg border border-amber-300/80 shadow-[0_0_18px_rgba(251,191,36,0.55)] pointer-events-none animate-pulse" />
           <div className="absolute inset-0 bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.08)_28%,rgba(251,191,36,0.28)_50%,rgba(255,255,255,0.08)_72%,transparent_100%)] pointer-events-none animate-pulse" />
           <div className="absolute top-1 right-1 rounded-full bg-black/70 px-2 py-0.5 text-[9px] font-medium uppercase tracking-[0.12em] text-amber-200 pointer-events-none">
-            {effectApplicationLabel ?? "Applying effect"}
+            {effectApplicationLabel ?? t("tools.timelineItems.applyingEffect")}
           </div>
         </>
       )}

@@ -17,6 +17,9 @@ import { ToolcraftSelectableCard as SelectableCard } from "@openreel/ui";
 import { ToolcraftSelectControl as Selector } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
 import { ToolcraftTextInputControl } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
+// Callbacks translate at call time; render paths use the hook.
+import { t as translateNow } from "@/i18n";
 import { useProjectStore } from "../../../stores/project-store";
 import { useUIStore } from "../../../stores/ui-store";
 import { useTimelineStore } from "../../../stores/timeline-store";
@@ -72,6 +75,7 @@ const AngleCard: React.FC<{
   onRemove: () => void;
   onOffsetChange: (offset: number) => void;
 }> = ({ angle, isActive, onSelect, onRename, onRemove, onOffsetChange }) => {
+  const { t } = useTranslation();
   const [isEditing, setIsEditing] = useState(false);
   const [editName, setEditName] = useState(angle.name);
 
@@ -95,7 +99,7 @@ const AngleCard: React.FC<{
         />
         {isEditing ? (
           <ToolcraftTextInputControl
-            label="Camera angle name"
+            label={t("visual.multicam.angleName")}
             isLabelHidden
             value={editName}
             onChange={setEditName}
@@ -116,10 +120,10 @@ const AngleCard: React.FC<{
             {angle.name}
           </span>
         )}
-        <IconButton label={`Cut to ${angle.name} at playhead`} icon={<Camera size={12} />}
+        <IconButton label={t("visual.multicam.cutTo", { name: angle.name })} icon={<Camera size={12} />}
           variant={isActive ? "primary" : "ghost"} size="sm" onClick={onSelect} />
         <IconButton
-          label="Remove angle"
+          label={t("visual.multicam.removeAngle")}
           icon={<Trash2 size={10} />}
           variant="ghost"
           size="sm"
@@ -131,9 +135,9 @@ const AngleCard: React.FC<{
         />
       </div>
       <div className="mt-1 flex items-center gap-1">
-        <span className="text-[8px] text-fg-3">Offset:</span>
+        <span className="text-[8px] text-fg-3">{t("visual.multicam.offset")}</span>
         <ToolcraftNumberInputControl
-          label="Angle offset"
+          label={t("visual.multicam.angleOffset")}
           isLabelHidden
           size="sm"
           value={Number(angle.offset.toFixed(2))}
@@ -142,7 +146,7 @@ const AngleCard: React.FC<{
           className="w-16 px-1 py-0.5 text-[8px] bg-bg-1 rounded border border-border focus:border-primary focus:outline-none"
           step={0.1}
         />
-        <span className="text-[8px] text-fg-3">sec</span>
+        <span className="text-[8px] text-fg-3">{t("visual.multicam.sec")}</span>
       </div>
     </div>
   );
@@ -190,7 +194,9 @@ const GroupSection: React.FC<{
   onDelete,
   isProcessing,
   status,
-}) => (
+}) => {
+  const { t } = useTranslation();
+  return (
   <div className="border border-border rounded-lg overflow-hidden">
     <Button
       label={group.name}
@@ -208,7 +214,7 @@ const GroupSection: React.FC<{
         {group.name}
       </span>
       <span className="text-[9px] text-fg-3">
-        {group.angles.length} angles
+        {t("visual.multicam.angles", { count: group.angles.length })}
       </span>
     </Button>
     {isExpanded && (
@@ -228,7 +234,7 @@ const GroupSection: React.FC<{
         </div>
         <div className="flex gap-1 pt-2 border-t border-border">
           <Button
-            label="Sync Audio"
+            label={t("visual.multicam.syncAudio")}
             variant="ghost"
             icon={<Link size={10} />}
             onClick={onSync}
@@ -236,7 +242,7 @@ const GroupSection: React.FC<{
             className="flex-1 flex items-center justify-center gap-1 py-1.5 text-[9px] text-fg-2 hover:text-fg bg-bg-2 rounded transition-colors"
           />
           <Button
-            label="Auto Edit"
+            label={t("visual.multicam.autoEdit")}
             variant="primary"
             icon={<Sparkles size={10} />}
             onClick={onAutoEdit}
@@ -245,7 +251,7 @@ const GroupSection: React.FC<{
             className="flex-1 flex items-center justify-center gap-1 py-1.5 text-[9px] rounded transition-colors"
           />
           <IconButton
-            label="Delete camera group"
+            label={t("visual.multicam.deleteGroup")}
             icon={<Trash2 size={10} />}
             variant="ghost"
             size="sm"
@@ -255,7 +261,7 @@ const GroupSection: React.FC<{
         </div>
         <div className="flex gap-1">
           <label className="flex-1 cursor-pointer rounded bg-bg-2 py-1 text-center text-[8px] text-fg-2 hover:text-fg">
-            Import manifest
+            {t("visual.multicam.importManifest")}
             <input
               type="file"
               accept=".json,.yaml,.yml,application/json,application/yaml,text/yaml"
@@ -269,7 +275,7 @@ const GroupSection: React.FC<{
           </label>
           {group.manifest && (
             <Button
-              label="Export manifest"
+              label={t("visual.multicam.exportManifest")}
               variant="ghost"
               onClick={onExportManifest}
               className="flex-1 py-1 text-[8px]"
@@ -284,9 +290,9 @@ const GroupSection: React.FC<{
         {(group.switches?.length ?? 0) > 0 && (
           <div className="space-y-1 rounded-md border border-border bg-bg-1 p-2">
             <div className="flex items-center justify-between text-[9px]">
-              <span className="font-medium text-fg-2">Cut review</span>
+              <span className="font-medium text-fg-2">{t("visual.multicam.cutReview")}</span>
               <span className="text-fg-3">
-                {Math.max(0, (group.switches?.length ?? 1) - 1)} cuts
+                {t("visual.multicam.cuts", { count: Math.max(0, (group.switches?.length ?? 1) - 1) })}
               </span>
             </div>
             <div className="max-h-28 space-y-1 overflow-y-auto">
@@ -297,10 +303,10 @@ const GroupSection: React.FC<{
                     key={switchItem.id}
                     className="grid grid-cols-[42px_1fr_auto] items-center gap-1 text-[8px] text-fg-3"
                   >
-                    <span>{switchItem.time.toFixed(2)}s</span>
+                    <span>{t("visual.shell.seconds", { value: switchItem.time.toFixed(2) })}</span>
                     <span className="truncate text-fg-2">{angle?.name ?? switchItem.angleId}</span>
                     <span className="text-right">
-                      {switchItem.reason?.replaceAll("-", " ") ?? "manual"}
+                      {switchItem.reason ? t(`visual.multicam.reasons.${switchItem.reason}`, { defaultValue: switchItem.reason.replaceAll("-", " ") }) : t("visual.multicam.manual")}
                       {switchItem.confidence !== undefined
                         ? ` · ${Math.round(switchItem.confidence * 100)}%`
                         : ""}
@@ -320,13 +326,13 @@ const GroupSection: React.FC<{
                           className="px-1 py-0.5 text-[8px]"
                         />
                         <Button
-                          label="Reject"
+                          label={t("visual.multicam.reject")}
                           variant="ghost"
                           onClick={() => onRejectCut(switchItem.id)}
                           className="px-1 py-0.5 text-[8px] text-red-400"
                         />
                         <Button
-                          label={switchItem.reviewStatus === "accepted" ? "Accepted" : "Accept"}
+                          label={switchItem.reviewStatus === "accepted" ? t("visual.multicam.accepted") : t("visual.multicam.accept")}
                           variant="ghost"
                           onClick={() => onAcceptCut(switchItem.id)}
                           isDisabled={switchItem.reviewStatus === "accepted"}
@@ -339,26 +345,26 @@ const GroupSection: React.FC<{
               })}
             </div>
             <Text type="supporting" color="secondary" className="block text-[8px] text-fg-3">
-              The generated output track remains fully editable on the timeline.
+              {t("visual.multicam.editableHint")}
             </Text>
           </div>
         )}
         {group.manifest && group.shotPlan && (
           <div className="flex gap-1 border-t border-border pt-2">
             <Button
-              label="Export OTIO"
+              label={t("visual.multicam.exportOtio")}
               variant="ghost"
               onClick={onExportOtio}
               className="flex-1 py-1 text-[8px]"
             />
             <Button
-              label="Export .orma"
+              label={t("visual.multicam.exportOrma")}
               variant="ghost"
               onClick={onExportOrma}
               className="flex-1 py-1 text-[8px]"
             />
             <Button
-              label="Find clips"
+              label={t("visual.multicam.findClips")}
               variant="ghost"
               onClick={onFindSocialClips}
               className="flex-1 py-1 text-[8px]"
@@ -368,9 +374,11 @@ const GroupSection: React.FC<{
       </div>
     )}
   </div>
-);
+  );
+};
 
 export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
+  const { t } = useTranslation();
   const project = useProjectStore((state) => state.project);
   const playhead = useTimelineStore((state) => state.playheadPosition);
   const getMultiCamEngine = useEngineStore((state) => state.getMultiCamEngine);
@@ -409,7 +417,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
         setMultiCamEngine(engine);
       }
     };
-    void loadEngine().catch((error) => toast.error("Camera tools could not load", String(error)));
+    void loadEngine().catch((error) => toast.error(translateNow("visual.multicam.loadFailed"), String(error)));
     return () => {
       cancelled = true;
     };
@@ -443,7 +451,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
           clips.push({
             id: clip.id,
             name: media.name,
-            trackName: track.name || `Track ${track.id.slice(-4)}`,
+            trackName: track.name || translateNow("visual.multicam.trackFallback", { id: track.id.slice(-4) }),
           });
         }
       }
@@ -466,7 +474,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
     });
     if (!result.success) {
       multiCamEngine.loadGroups(useProjectStore.getState().project.multicamGroups ?? []);
-      throw new Error(result.error?.message ?? "Could not save the camera group.");
+      throw new Error(result.error?.message ?? translateNow("visual.multicam.saveGroupFailed"));
     }
   }, [multiCamEngine]);
 
@@ -489,13 +497,13 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
           if (!source.media.blob) {
             throw new Error(`${source.angle.name} needs its source media relinked.`);
           }
-          setStatus(group.id, `Decoding ${source.angle.name}…`);
+          setStatus(group.id, translateNow("visual.multicam.decoding", { name: source.angle.name }));
           const buffer = await loadAudioBuffer(audioContext, source.media.blob, {
             audioTrackIndex: source.clip.audioTrackIndex,
             onProgress: ({ message }) => setStatus(group.id, `${source.angle.name}: ${message}`),
           });
           if (!buffer) {
-            throw new Error(`Could not decode audio for ${source.angle.name}.`);
+            throw new Error(translateNow("visual.multicam.decodeFailed", { name: source.angle.name }));
           }
           buffers.set(source.angle.id, buffer);
         }
@@ -513,7 +521,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       sources: ReturnType<typeof resolveMulticamSources>,
     ) => {
       const liveGroup = multiCamEngine?.getGroup(groupId);
-      if (!liveGroup) throw new Error("Camera group is no longer available.");
+      if (!liveGroup) throw new Error(translateNow("visual.multicam.groupGone"));
       for (const source of sources) {
         const angle = liveGroup.angles.find((item) => item.id === source.angle.id);
         if (angle) angle.trackId = source.track.id;
@@ -540,7 +548,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
     if (!multiCamEngine || busyRef.current || selectedClips.length < 2) return;
 
     const group = multiCamEngine.createGroup(
-      `Multi-Cam ${groups.length + 1}`,
+      translateNow("visual.multicam.defaultGroupName", { index: groups.length + 1 }),
       selectedClips,
     );
     try {
@@ -551,8 +559,8 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
     } catch (error) {
       multiCamEngine.deleteGroup(group.id);
       toast.error(
-        "Camera group failed",
-        error instanceof Error ? error.message : "Could not create the camera group.",
+        translateNow("visual.multicam.createFailedTitle"),
+        error instanceof Error ? error.message : translateNow("visual.multicam.createFailed"),
       );
       return;
     }
@@ -573,7 +581,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       if (!multiCamEngine) return;
       multiCamEngine.removeAngle(groupId, angleId);
       void persistGroups().catch((error) =>
-        toast.error("Could not remove angle", error instanceof Error ? error.message : undefined),
+        toast.error(translateNow("visual.multicam.removeAngleFailed"), error instanceof Error ? error.message : undefined),
       );
     },
     [multiCamEngine, persistGroups],
@@ -584,7 +592,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       if (!multiCamEngine) return;
       multiCamEngine.renameAngle(groupId, angleId, name);
       void persistGroups().catch((error) =>
-        toast.error("Could not rename angle", error instanceof Error ? error.message : undefined),
+        toast.error(translateNow("visual.multicam.renameAngleFailed"), error instanceof Error ? error.message : undefined),
       );
     },
     [multiCamEngine, persistGroups],
@@ -595,7 +603,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       if (!multiCamEngine) return;
       multiCamEngine.setAngleOffset(groupId, angleId, offset);
       void persistGroups().catch((error) =>
-        toast.error("Could not save offset", error instanceof Error ? error.message : undefined),
+        toast.error(translateNow("visual.multicam.saveOffsetFailed"), error instanceof Error ? error.message : undefined),
       );
     },
     [multiCamEngine, persistGroups],
@@ -613,19 +621,19 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       const ensureCurrent = () => {
         const latest = useProjectStore.getState().project;
         if (!mounted.current || snapshot !== JSON.stringify([latest.id, latest.timeline, latest.multicamGroups])) {
-          throw new Error("The project changed during analysis. Run the camera analysis again.");
+          throw new Error(translateNow("visual.multicam.projectChanged"));
         }
       };
       try {
         const { buffers, sources } = await decodeGroupAudio(group);
         updateGroupSourceLayout(groupId, sources);
-        setStatus(groupId, "Synchronizing camera audio…");
+        setStatus(groupId, translateNow("visual.multicam.synchronizing"));
         const { results } = await analyzeMulticamSyncInWorker(
           buffers,
           group.angles[0]?.id ?? "",
         );
         const liveGroup = multiCamEngine.getGroup(groupId);
-        if (!liveGroup) throw new Error("Camera group is no longer available.");
+        if (!liveGroup) throw new Error(translateNow("visual.multicam.groupGone"));
         updateAlignedSourceOffsets(liveGroup, sources, results);
         const alignedSources = sources.map((source) => ({
           ...source,
@@ -639,13 +647,13 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
         const confidence = confidences.length
           ? confidences.reduce((sum, value) => sum + value, 0) / confidences.length
           : 0;
-        setStatus(groupId, `Audio synchronized · ${Math.round(confidence * 100)}% confidence`);
-        toast.success("Camera audio synchronized", group.name);
+        setStatus(groupId, translateNow("visual.multicam.synced", { percent: Math.round(confidence * 100) }));
+        toast.success(translateNow("visual.multicam.syncedTitle"), group.name);
       } catch (error) {
         multiCamEngine.loadGroups(useProjectStore.getState().project.multicamGroups ?? []);
-        const message = error instanceof Error ? error.message : "Audio sync failed.";
+        const message = error instanceof Error ? error.message : translateNow("visual.multicam.syncFailedDetail");
         setStatus(groupId, message);
-        toast.error("Audio sync failed", message);
+        toast.error(translateNow("visual.multicam.syncFailed"), message);
       } finally {
         busyRef.current = false;
         setProcessingGroupId(null);
@@ -672,19 +680,19 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       const ensureCurrent = () => {
         const latest = useProjectStore.getState().project;
         if (!mounted.current || snapshot !== JSON.stringify([latest.id, latest.timeline, latest.multicamGroups])) {
-          throw new Error("The project changed during analysis. Run the camera analysis again.");
+          throw new Error(translateNow("visual.multicam.projectChanged"));
         }
       };
       try {
         const { buffers, sources } = await decodeGroupAudio(group);
         updateGroupSourceLayout(groupId, sources);
-        setStatus(groupId, "Synchronizing camera audio…");
+        setStatus(groupId, translateNow("visual.multicam.synchronizing"));
         const { results: syncResults, drift } = syncBeforeAutoEdit
           ? await analyzeMulticamSyncInWorker(buffers, group.angles[0]?.id ?? "")
           : { results: null, drift: {} as Record<string, import("@openreel/core").MulticamDriftModel> };
 
         const liveGroup = multiCamEngine.getGroup(groupId);
-        if (!liveGroup) throw new Error("Camera group is no longer available.");
+        if (!liveGroup) throw new Error(translateNow("visual.multicam.groupGone"));
         if (syncResults) updateAlignedSourceOffsets(liveGroup, sources, syncResults);
         for (const angle of liveGroup.angles) {
           angle.driftSecondsPerSecond = drift[angle.id]?.secondsPerSecond ?? 0;
@@ -696,10 +704,10 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
         }));
         const duration = getMulticamAnalysisDuration(alignedSources, buffers);
         if (!Number.isFinite(duration) || duration <= 0.1) {
-          throw new Error("The camera recordings do not have enough overlapping audio.");
+          throw new Error(translateNow("visual.multicam.noOverlap"));
         }
 
-        setStatus(groupId, "Running local Silero voice detection…");
+        setStatus(groupId, translateNow("visual.multicam.runningVad"));
         const vadTracks = new Map<string, import("@openreel/core").MulticamVadTrack>();
         for (const source of alignedSources) {
           const buffer = buffers.get(source.angle.id);
@@ -710,18 +718,18 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
               if (completed === total || completed % 100 === 0) {
                 setStatus(
                   groupId,
-                  `Voice detection · ${source.angle.name} · ${Math.round((completed / total) * 100)}%`,
+                  translateNow("visual.multicam.voiceDetection", { name: source.angle.name, percent: Math.round((completed / total) * 100) }),
                 );
               }
             },
           });
           vadTracks.set(source.angle.id, vad);
         }
-        setStatus(groupId, "Calibrating room noise and microphone bleed…");
+        setStatus(groupId, translateNow("visual.multicam.calibrating"));
         const calibrationWindows = findMulticamCalibrationRanges(vadTracks);
         const calibrationSources = alignedSources.map((source) => {
           const buffer = buffers.get(source.angle.id);
-          if (!buffer) throw new Error(`Missing decoded audio for ${source.angle.name}.`);
+          if (!buffer) throw new Error(translateNow("visual.multicam.missingAudio", { name: source.angle.name }));
           const analysisAudio = prepareMulticamAnalysisAudio(buffer);
           return { angleId: source.angle.id, ...analysisAudio };
         });
@@ -730,11 +738,11 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
           calibrationWindows.ranges,
           calibrationWindows.silenceRange,
         );
-        setStatus(groupId, "Analyzing speakers and microphone bleed…");
+        setStatus(groupId, translateNow("visual.multicam.analyzing"));
         const activity = analyzeMulticamActivity(
           alignedSources.map((source) => {
             const buffer = buffers.get(source.angle.id);
-            if (!buffer) throw new Error(`Missing decoded audio for ${source.angle.name}.`);
+            if (!buffer) throw new Error(translateNow("visual.multicam.missingAudio", { name: source.angle.name }));
             const analysisAudio = prepareMulticamAnalysisAudio(buffer);
             return {
               angleId: source.angle.id,
@@ -782,7 +790,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
           reactions,
         );
         if (shotPlan.shots.length === 0) {
-          throw new Error("No usable speaker activity was detected.");
+          throw new Error(translateNow("visual.multicam.noSpeakers"));
         }
         liveGroup.shotPlan = shotPlan;
         multiCamEngine.applyAutomaticEdit(
@@ -838,13 +846,13 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
           currentProject.settings,
         );
         if (outputTracks.length === 0 || outputTracks.every((track) => track.clips.length === 0)) {
-          throw new Error("The detected cuts could not be mapped to source clips.");
+          throw new Error(translateNow("visual.multicam.cutsUnmapped"));
         }
         multiCamEngine.setOutputTracks(groupId, outputTracks.map((track) => track.id));
 
-        setStatus(groupId, `Applying ${Math.max(0, shotPlan.shots.length - 1)} cuts…`);
+        setStatus(groupId, translateNow("visual.multicam.applying", { count: Math.max(0, shotPlan.shots.length - 1) }));
         const updatedGroup = multiCamEngine.getGroup(groupId);
-        if (!updatedGroup) throw new Error("Camera group is no longer available.");
+        if (!updatedGroup) throw new Error(translateNow("visual.multicam.groupGone"));
         const applyAction = createMulticamApplyTracksAction({
           project: currentProject,
           group: updatedGroup,
@@ -854,23 +862,23 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
         ensureCurrent();
         const result = await useProjectStore.getState().executeAction(applyAction);
         if (!result.success) {
-          throw new Error(result.error?.message ?? "Could not apply the automatic edit.");
+          throw new Error(result.error?.message ?? translateNow("visual.multicam.applyFailed"));
         }
         setStatus(
           groupId,
-          `${shotPlan.shots.length} shots created on “${group.name} Auto Edit”`,
+          translateNow("visual.multicam.shotsCreated", { count: shotPlan.shots.length, name: group.name }),
         );
         toast.success(
-          "Automatic multicam edit created",
-          `${Math.max(0, shotPlan.shots.length - 1)} cuts · one undo step`,
+          translateNow("visual.multicam.autoEditCreated"),
+          translateNow("visual.multicam.autoEditDetail", { count: Math.max(0, shotPlan.shots.length - 1) }),
         );
       } catch (error) {
         multiCamEngine.loadGroups(
           useProjectStore.getState().project.multicamGroups ?? [],
         );
-        const message = error instanceof Error ? error.message : "Automatic edit failed.";
+        const message = error instanceof Error ? error.message : translateNow("visual.multicam.autoEditFailedDetail");
         setStatus(groupId, message);
-        toast.error("Automatic edit failed", message);
+        toast.error(translateNow("visual.multicam.autoEditFailed"), message);
       } finally {
         busyRef.current = false;
         setProcessingGroupId(null);
@@ -917,7 +925,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       groupId,
     );
     if (!artifact) {
-      toast.error("Analysis unavailable", "Run Auto Edit before exporting the .orma artifact.");
+      toast.error(translateNow("visual.multicam.analysisUnavailable"), translateNow("visual.multicam.runAutoEditExport"));
       return;
     }
     downloadText(
@@ -932,7 +940,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
     try {
       const parsed = parseMulticamManifest(await file.text());
       const group = multiCamEngine.getGroup(groupId);
-      if (!group) throw new Error("Camera group is no longer available.");
+      if (!group) throw new Error(translateNow("visual.multicam.groupGone"));
       const currentProject = useProjectStore.getState().project;
       const sources = resolveMulticamSources(currentProject, group);
       const unusedAngles = [...group.angles];
@@ -947,15 +955,15 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
             camera.file === source?.media.name
           );
         }) ?? unusedAngles[0];
-        if (!matched) throw new Error(`Could not map camera ${camera.id} (${camera.file}) to a selected angle.`);
+        if (!matched) throw new Error(translateNow("visual.multicam.mapCameraFailed", { id: camera.id, file: camera.file }));
         unusedAngles.splice(unusedAngles.indexOf(matched), 1);
         return { ...camera, clipId: matched.clipId, angleId: matched.id };
       });
       group.manifest = { ...parsed, cameras };
       await persistGroups();
-      toast.success("Multicam manifest imported", `${parsed.participants.length} participants · ${parsed.cameras.length} cameras`);
+      toast.success(translateNow("visual.multicam.manifestImported"), translateNow("visual.multicam.manifestDetail", { participants: parsed.participants.length, count: parsed.cameras.length }));
     } catch (error) {
-      toast.error("Manifest import failed", error instanceof Error ? error.message : undefined);
+      toast.error(translateNow("visual.multicam.manifestFailed"), error instanceof Error ? error.message : undefined);
     }
   }, [multiCamEngine, persistGroups]);
 
@@ -975,7 +983,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       groupId,
     );
     if (!artifact) {
-      toast.error("Analysis unavailable", "Run Auto Edit before finding social clips.");
+      toast.error(translateNow("visual.multicam.analysisUnavailable"), translateNow("visual.multicam.runAutoEditSocial"));
       return;
     }
     const candidates = extractMulticamSocialClips(artifact);
@@ -989,7 +997,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
           timestamp: Date.now(),
           params: {
             time: candidate.startMs / 1_000,
-            label: `Social · ${candidate.title ?? candidate.reason}`,
+            label: translateNow("visual.multicam.socialMarker", { title: candidate.title ?? candidate.reason }),
             color: "#f59e0b",
           },
         });
@@ -997,7 +1005,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
     } finally {
       useProjectStore.getState().endHistoryGroup();
     }
-    toast.success("Social clip candidates added", `${candidates.length} timeline markers`);
+    toast.success(translateNow("visual.multicam.socialAdded"), translateNow("visual.multicam.markers", { count: candidates.length }));
   }, []);
 
   const applyReviewedEdit = useCallback(
@@ -1037,7 +1045,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
             ),
           });
       const result = await useProjectStore.getState().executeAction(action);
-      if (!result.success) throw new Error(result.error?.message ?? "Could not update cut review.");
+      if (!result.success) throw new Error(result.error?.message ?? translateNow("visual.multicam.reviewFailed"));
     },
     [multiCamEngine],
   );
@@ -1048,18 +1056,18 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
     if (!group) return;
     const time = useTimelineStore.getState().playheadPosition - group.syncPoint;
     if (time < 0 || time >= group.duration) {
-      toast.error("Move the playhead inside the camera group", `Group range: ${group.syncPoint.toFixed(2)}s – ${(group.syncPoint + group.duration).toFixed(2)}s`);
+      toast.error(translateNow("visual.multicam.playheadOutside"), translateNow("visual.multicam.groupRange", { start: group.syncPoint.toFixed(2), end: (group.syncPoint + group.duration).toFixed(2) }));
       return;
     }
     busyRef.current = true;
     setProcessingGroupId(groupId);
     try {
-      if (!multiCamEngine.cutToAngle(groupId, angleId, time)) throw new Error("This camera is unavailable at the playhead.");
+      if (!multiCamEngine.cutToAngle(groupId, angleId, time)) throw new Error(translateNow("visual.multicam.cameraUnavailable"));
       await applyReviewedEdit(groupId);
-      setStatus(groupId, `Camera cut added at ${(group.syncPoint + time).toFixed(2)}s · Undo restores the previous edit`);
+      setStatus(groupId, translateNow("visual.multicam.cutAdded", { time: (group.syncPoint + time).toFixed(2) }));
     } catch (error) {
       multiCamEngine.loadGroups(useProjectStore.getState().project.multicamGroups ?? []);
-      toast.error("Could not switch camera", error instanceof Error ? error.message : undefined);
+      toast.error(translateNow("visual.multicam.switchFailed"), error instanceof Error ? error.message : undefined);
     } finally {
       busyRef.current = false;
       setProcessingGroupId(null);
@@ -1072,7 +1080,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       await applyReviewedEdit(groupId);
     } catch (error) {
       multiCamEngine?.loadGroups(useProjectStore.getState().project.multicamGroups ?? []);
-      toast.error("Could not accept cut", error instanceof Error ? error.message : undefined);
+      toast.error(translateNow("visual.multicam.acceptFailed"), error instanceof Error ? error.message : undefined);
     }
   }, [applyReviewedEdit, multiCamEngine]);
 
@@ -1082,7 +1090,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       await applyReviewedEdit(groupId);
     } catch (error) {
       multiCamEngine?.loadGroups(useProjectStore.getState().project.multicamGroups ?? []);
-      toast.error("Could not reject cut", error instanceof Error ? error.message : undefined);
+      toast.error(translateNow("visual.multicam.rejectFailed"), error instanceof Error ? error.message : undefined);
     }
   }, [applyReviewedEdit, multiCamEngine]);
 
@@ -1096,7 +1104,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       await applyReviewedEdit(groupId);
     } catch (error) {
       multiCamEngine?.loadGroups(useProjectStore.getState().project.multicamGroups ?? []);
-      toast.error("Could not nudge cut", error instanceof Error ? error.message : undefined);
+      toast.error(translateNow("visual.multicam.nudgeFailed"), error instanceof Error ? error.message : undefined);
     }
   }, [applyReviewedEdit, multiCamEngine]);
 
@@ -1110,7 +1118,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
         return next;
       });
       void persistGroups().catch((error) =>
-        toast.error("Could not delete group", error instanceof Error ? error.message : undefined),
+        toast.error(translateNow("visual.multicam.deleteFailed"), error instanceof Error ? error.message : undefined),
       );
     },
     [multiCamEngine, persistGroups],
@@ -1130,10 +1138,10 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
         <Video size={16} className="text-primary" />
         <div className="flex-1 flex flex-col gap-0.5">
           <span className="text-[11px] font-medium text-fg">
-            Multi-Camera Editing
+            {t("visual.multicam.title")}
           </span>
           <Text type="supporting" color="secondary" className="text-[9px] text-fg-3">
-            Choose recordings of the same event, create a group, then sync audio or cut between cameras at the playhead.
+            {t("visual.multicam.subtitle")}
           </Text>
         </div>
       </div>
@@ -1142,7 +1150,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       {groups.length > 0 && (
         <div className="space-y-2">
           <span className="text-[10px] font-medium text-fg-2">
-            Camera Groups
+            {t("visual.multicam.groups")}
           </span>
           {groups.map((group) => (
             <GroupSection
@@ -1178,10 +1186,10 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
 
       <div className="space-y-2 pt-2 border-t border-border">
         <span className="block text-[10px] font-medium text-fg-2">
-          Create New Group
+          {t("visual.multicam.createNew")}
         </span>
         <Text type="supporting" color="secondary" className="block text-[9px] text-fg-3">
-          Choose 2 or more recordings of the same event. Use separate tracks for camera sources; source tracks are hidden and muted when the edit is created.
+          {t("visual.multicam.createHint", { min: 2 })}
         </Text>
 
         {availableClips.length === 0 ? (
@@ -1191,7 +1199,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
               className="mx-auto mb-2 text-fg-3 opacity-50"
             />
             <Text type="supporting" color="secondary" className="text-[10px] text-fg-3">
-              Add video clips to unlocked timeline tracks to use multi-camera editing
+              {t("visual.multicam.noClips")}
             </Text>
           </div>
         ) : (
@@ -1235,7 +1243,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
             </div>
 
             <Button
-              label={`Create Group (${selectedClips.length} selected)`}
+              label={t("visual.multicam.createGroup", { count: selectedClips.length })}
               variant="primary"
               icon={<Plus size={12} />}
               onClick={handleCreateGroup}
@@ -1251,14 +1259,14 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
       </div>
 
       <details className="space-y-2 rounded-lg border border-border bg-bg-2 p-2">
-        <summary className="cursor-pointer text-xs">Automatic edit settings</summary>
+        <summary className="cursor-pointer text-xs">{t("visual.multicam.settings")}</summary>
         <label className="flex items-center gap-2 text-[10px] text-fg-2">
           <input type="checkbox" checked={syncBeforeAutoEdit} onChange={(event) => setSyncBeforeAutoEdit(event.target.checked)} />
-          Sync cameras before Auto Edit (turn off to use manual offsets)
+          {t("visual.multicam.syncFirst")}
         </label>
-        <span className="text-[10px] font-medium text-fg-2">Automatic edit policy</span>
+        <span className="text-[10px] font-medium text-fg-2">{t("visual.multicam.policy")}</span>
         <Selector
-          label="Preset"
+          label={t("visual.multicam.preset")}
           size="sm"
           width="100%"
           value={policyPreset}
@@ -1271,14 +1279,14 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
             }
           }}
           options={[
-            { label: "Custom", value: "custom" },
-            { label: "Conversation", value: "conversation" },
-            { label: "Energetic", value: "energetic" },
-            { label: "Panel", value: "panel" },
+            { label: t("visual.multicam.presets.custom"), value: "custom" },
+            { label: t("visual.multicam.presets.conversation"), value: "conversation" },
+            { label: t("visual.multicam.presets.energetic"), value: "energetic" },
+            { label: t("visual.multicam.presets.panel"), value: "panel" },
           ]}
         />
         <Selector
-          label="Overlapping speakers"
+          label={t("visual.multicam.overlap")}
           size="sm"
           width="100%"
           value={overlapStrategy}
@@ -1287,16 +1295,16 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
             setOverlapStrategy(value);
           }}
           options={[
-            { label: "Hold current camera", value: "hold" },
-            { label: "Choose energy winner", value: "winner" },
-            { label: "Participant priority", value: "priority" },
-            { label: "Use wide shot", value: "wide" },
-            { label: "Split active speakers", value: "composite" },
-            { label: "Progressive PiP", value: "progressive" },
+            { label: t("visual.multicam.strategies.hold"), value: "hold" },
+            { label: t("visual.multicam.strategies.winner"), value: "winner" },
+            { label: t("visual.multicam.strategies.priority"), value: "priority" },
+            { label: t("visual.multicam.strategies.wide"), value: "wide" },
+            { label: t("visual.multicam.strategies.composite"), value: "composite" },
+            { label: t("visual.multicam.strategies.progressive"), value: "progressive" },
           ]}
         />
         <Selector
-          label="Sustained overlap"
+          label={t("visual.multicam.sustained")}
           size="sm"
           width="100%"
           value={overlapEscalation}
@@ -1305,37 +1313,37 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
             setOverlapEscalation(value);
           }}
           options={[
-            { label: "Wide shot", value: "wide" },
-            { label: "Energy winner", value: "winner" },
-            { label: "Participant priority", value: "priority" },
-            { label: "Split layout", value: "composite" },
-            { label: "Progressive PiP", value: "progressive" },
+            { label: t("visual.multicam.escalations.wideShot"), value: "wide" },
+            { label: t("visual.multicam.escalations.energyWinner"), value: "winner" },
+            { label: t("visual.multicam.strategies.priority"), value: "priority" },
+            { label: t("visual.multicam.escalations.splitLayout"), value: "composite" },
+            { label: t("visual.multicam.strategies.progressive"), value: "progressive" },
           ]}
         />
         <div className="grid grid-cols-2 gap-2">
           <ToolcraftNumberInputControl
-            label="Minimum shot"
+            label={t("visual.multicam.minShot")}
             size="sm"
             value={minShotSeconds}
             min={0}
             max={30}
             step={0.1}
-            unit="sec"
+            unit={t("visual.multicam.sec")}
             onChange={(value) => setMinShotSeconds(value ?? 0)}
           />
           <ToolcraftNumberInputControl
-            label="Maximum shot"
+            label={t("visual.multicam.maxShot")}
             size="sm"
             value={maxShotSeconds}
             min={0}
             max={120}
             step={1}
-            unit="sec"
+            unit={t("visual.multicam.sec")}
             onChange={(value) => setMaxShotSeconds(value ?? 0)}
           />
         </div>
         <Text type="supporting" color="secondary" className="block text-[9px] text-fg-3">
-          Maximum shot length triggers a listener reaction or wide reset.
+          {t("visual.multicam.maxShotHint")}
         </Text>
         <label className="flex items-center gap-2 text-[9px] text-fg-2">
           <input
@@ -1343,7 +1351,7 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
             checked={includeTranscripts}
             onChange={(event) => setIncludeTranscripts(event.target.checked)}
           />
-          Add per-channel local Whisper transcripts to the .orma artifact
+          {t("visual.multicam.transcripts")}
         </label>
         <label className="flex items-center gap-2 text-[9px] text-fg-2">
           <input
@@ -1351,11 +1359,11 @@ export const MultiCameraPanel: React.FC<MultiCameraPanelProps> = () => {
             checked={includeVisualReactions}
             onChange={(event) => setIncludeVisualReactions(event.target.checked)}
           />
-          Add local MediaPipe face/reaction cues (slower)
+          {t("visual.multicam.reactions")}
         </label>
       </details>
       <Text type="supporting" color="secondary" className="text-[9px] text-fg-3 text-center">
-        Automatic edits create an editable timeline track and undo in one step
+        {t("visual.multicam.footer")}
       </Text>
     </fieldset>
   );

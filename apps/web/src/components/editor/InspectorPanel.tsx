@@ -871,12 +871,10 @@ export const InspectorPanel: React.FC = () => {
             project.mediaLibrary.items.find(
               (m) => m.id === selectedClip.mediaId,
             )?.name ??
-            (clipType
-              ? clipType.charAt(0).toUpperCase() + clipType.slice(1)
-              : "Clip")
+            t(`tools.editorChrome.clipTypes.${clipType ?? "clip"}`)
           }
           durationSeconds={selectedClip.duration}
-          typeLabel={clipType ?? "clip"}
+          typeLabel={t(`tools.editorChrome.clipTypes.${clipType ?? "clip"}`)}
         />
       )}
 
@@ -1272,12 +1270,12 @@ export const InspectorPanel: React.FC = () => {
                       ...Object.entries(FONT_CATEGORIES).flatMap(([category, fonts]) =>
                         fonts.map((font) => ({
                           value: font,
-                          label: `${font} (${category})`,
+                          label: t("tools.editorChrome.fontOption", { font, category: t(`tools.editorChrome.fontCategories.${category.replace(/[^A-Za-z]/g, "")}`, { defaultValue: category }) }),
                         })),
                       ),
                       ...customFonts.map((font) => ({
                         value: font,
-                        label: `${font} (Custom)`,
+                        label: t("tools.editorChrome.fontOption", { font, category: t("tools.editorChrome.fontCategories.Custom") }),
                       })),
                     ]}
                     size="sm"

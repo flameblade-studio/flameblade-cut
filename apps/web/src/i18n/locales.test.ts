@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { RESOURCE_LANGUAGES, stringsFor } from "./resources";
+import { AREA_NAMES, RESOURCE_LANGUAGES, stringsFor } from "./resources";
+import baseZhTW from "./locales/zh-TW.json";
 import { matchLanguage } from "./index";
 
 function flatKeys(value: unknown, prefix = ""): string[] {
@@ -29,6 +30,24 @@ describe("locales", () => {
       expect(empty).toEqual([]);
     });
   }
+
+  it("uses no dots inside key names (i18next reads a dot as a path separator)", () => {
+    const dotted = (value: unknown, path: string): string[] =>
+      typeof value !== "object" || value === null
+        ? []
+        : Object.entries(value as Record<string, unknown>).flatMap(([key, child]) => [
+            ...(key.includes(".") ? [`${path}${key}`] : []),
+            ...dotted(child, `${path}${key}/`),
+          ]);
+    for (const locale of Object.values(LOCALES)) {
+      expect(dotted(locale, "")).toEqual([]);
+    }
+  });
+
+  it("mounts every feature area under a key the base strings do not use", () => {
+    const clashes = AREA_NAMES.filter((name) => Object.hasOwn(baseZhTW, name));
+    expect(clashes).toEqual([]);
+  });
 
   it("maps browser languages", () => {
     expect(matchLanguage("zh-TW")).toBe("zh-TW");

@@ -10,6 +10,8 @@
  *   generation store, and is unit-tested against a fake transport.
  */
 
+import type { LtxModelChoice } from "./model-choice";
+
 /** A ComfyUI file reference as reported by `/upload/image` and `/history`. */
 export interface ComfyFileRef {
   filename: string;
@@ -161,6 +163,8 @@ export interface LtxSettings {
   preLaunchScript: string | null;
   /** Where finished videos are saved; null = the default library folder (Videos\Flameblade Cut). */
   outputDir: string | null;
+  /** Which LTX-2.5 transformer file to load ("auto" = best installed file for the GPU). */
+  model: LtxModelChoice;
 }
 
 /**
@@ -176,4 +180,5 @@ export const DEFAULT_LTX_SETTINGS: LtxSettings = {
   launchArgs: ["main.py", "--listen", "127.0.0.1", "--port", "8188"],
   preLaunchScript: null,
   outputDir: null,
+  model: "auto",
 };

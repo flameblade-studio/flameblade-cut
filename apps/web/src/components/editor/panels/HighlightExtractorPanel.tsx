@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { ToolcraftButton as Button } from "@openreel/ui";
 import { ToolcraftIconButton as IconButton } from "@openreel/ui";
 import { ToolcraftNumberInputControl } from "@openreel/ui";
@@ -22,6 +23,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
 }) => {
   const [highlights, setHighlights] = useState<HighlightResult[]>([]);
   const [selected, setSelected] = useState<Set<number>>(new Set());
+  const { t } = useTranslation();
   const [phase, setPhase] = useState("");
   const [progress, setProgress] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -48,7 +50,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
 
     const mediaItem = getMediaItem(clip.mediaId);
     if (!mediaItem?.blob) {
-      setError("Media not found or not loaded");
+      setError(t("tools.highlightExtractor.mediaMissing"));
       return;
     }
 
@@ -57,7 +59,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
     setHighlights([]);
 
     try {
-      setPhase("Decoding audio...");
+      setPhase(t("tools.highlightExtractor.decoding"));
       setProgress(10);
 
       const arrayBuffer = await mediaItem.blob.arrayBuffer();
@@ -77,13 +79,13 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
       setHighlights(results);
       setSelected(new Set(results.map((_, i) => i)));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Analysis failed");
+      setError(err instanceof Error ? err.message : t("tools.highlightExtractor.failed"));
     } finally {
       setIsProcessing(false);
       setPhase("");
       setProgress(0);
     }
-  }, [clipId, project, getMediaItem, preferences]);
+  }, [clipId, project, getMediaItem, preferences, t]);
 
   const handlePreview = useCallback(
     (highlight: HighlightResult) => {
@@ -116,7 +118,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
         <div className="flex items-center gap-2">
           <Text type="label" color="secondary" className="text-[10px] text-text-secondary">Clips</Text>
           <ToolcraftNumberInputControl
-            label="Clips"
+            label={t("tools.highlightExtractor.clips")}
             isLabelHidden
             size="sm"
             width={48}
@@ -130,7 +132,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
           />
           <Text type="label" color="secondary" className="text-[10px] text-text-secondary">Max</Text>
           <ToolcraftNumberInputControl
-            label="Max duration"
+            label={t("tools.highlightExtractor.maxDuration")}
             isLabelHidden
             size="sm"
             width={48}
@@ -142,12 +144,12 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
             }
             className="w-12 px-1 py-0.5 text-[10px] bg-background-secondary border border-border rounded text-text-primary"
           />
-          <span className="text-[10px] text-text-muted">s</span>
+          <span className="text-[10px] text-text-muted">{t("tools.highlightExtractor.secondsUnit")}</span>
         </div>
 
         <Button
           label={
-            isProcessing ? `${phase} (${progress}%)` : "Find Highlights"
+            isProcessing ? t("tools.highlightExtractor.progress", { phase, percent: progress }) : t("tools.highlightExtractor.find")
           }
           icon={
             isProcessing ? (
@@ -199,7 +201,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
                 </div>
                 <div className="flex items-center gap-1">
                   <IconButton
-                    label="Preview highlight"
+                    label={t("tools.highlightExtractor.preview")}
                     icon={<Play size={10} className="text-text-muted" aria-hidden />}
                     variant="ghost"
                     size="sm"
@@ -226,7 +228,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
           ))}
 
           <Button
-            label={`Apply ${selected.size} Highlight${selected.size !== 1 ? "s" : ""}`}
+            label={t("tools.highlightExtractor.apply", { count: selected.size })}
             icon={<Check size={14} aria-hidden />}
             variant="primary"
             size="md"

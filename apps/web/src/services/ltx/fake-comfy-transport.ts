@@ -1,9 +1,11 @@
 /**
  * In-memory `ComfyTransport` for unit tests. It simulates the parts of
- * ComfyUI the runner uses: /system_stats, /prompt, /queue, /interrupt,
- * /history, uploads, downloads, the websocket and the library files.
+ * ComfyUI the runner uses: /system_stats, /object_info/UNETLoader, /prompt,
+ * /queue, /interrupt, /history, uploads, downloads, the websocket and the
+ * library files.
  * Test-only; never imported by production code.
  */
+import { LTX_TRANSFORMER_FILES } from "./model-choice";
 import type { ComfyFileRef, ComfyHttpResponse, ComfyLaunchConfig, ComfyTransport } from "./types";
 
 export interface RecordedRequest {
@@ -30,6 +32,10 @@ export class FakeComfyTransport implements ComfyTransport {
   /** Override the next `/prompt` response. */
   nextPromptResponse: ComfyHttpResponse | null = null;
   historyFailures = 0;
+  /** Diffusion model files ComfyUI reports as loadable. */
+  unetNames: string[] = [LTX_TRANSFORMER_FILES.nvfp4];
+  /** GPU name in `/system_stats`; null reports no devices. */
+  gpuName: string | null = "cuda:0 NVIDIA GeForce RTX 5060 Ti : cudaMallocAsync";
   subscribeCount = 0;
   private listener: ((text: string | null) => void) | null = null;
   private promptCounter = 0;
@@ -40,6 +46,9 @@ export class FakeComfyTransport implements ComfyTransport {
     if (path === "/system_stats") return this.systemStats();
     if (!this.online) throw new Error("connect ECONNREFUSED 127.0.0.1:8188");
     if (method === "POST" && path === "/prompt") return this.queuePrompt();
+    if (method === "GET" && path === "/object_info/UNETLoader") {
+      return json({ UNETLoader: { input: { required: { unet_name: [this.unetNames, {}] } } } });
+    }
     if (method === "GET" && path === "/queue") {
       return json({
         queue_running: this.running.map((id, i) => [i, id, {}, {}, []]),
@@ -142,7 +151,7 @@ export class FakeComfyTransport implements ComfyTransport {
       }
     }
     if (!this.online) throw new Error("connect ECONNREFUSED 127.0.0.1:8188");
-    return json({ system: { comfyui_version: "0.38.0" }, devices: [] });
+    return json({ system: { comfyui_version: "0.38.0" }, devices: this.gpuName === null ? [] : [{ name: this.gpuName }] });
   }
 
   private queuePrompt(): ComfyHttpResponse {

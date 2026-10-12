@@ -103,16 +103,20 @@ export const TransitionHandle: React.FC<TransitionHandleProps> = ({
     toast.success(t("timeline.transition.removed"), t("timeline.transition.hardCut"));
   }, [transition, removeClipTransition, t]);
 
+  const typeName = (type: string): string =>
+    t(`tools.transitionTypes.${type}.name`, { defaultValue: type });
   const label = transition
-    ? `${transition.type} · ${transition.duration.toFixed(1)}s`
+    ? t("tools.timelineItems.transition.badge", { name: typeName(transition.type), seconds: transition.duration.toFixed(1) })
     : edge === "in"
-      ? "Add intro transition"
+      ? t("tools.timelineItems.transition.addIntro")
       : edge === "out"
-        ? "Add outro transition"
-        : "Add transition";
-  const ariaLabel = edge
-    ? `Edit ${edge === "in" ? "intro" : "outro"} transition: ${label}`
-    : `Edit transition between clips: ${label}`;
+        ? t("tools.timelineItems.transition.addOutro")
+        : t("tools.timelineItems.transition.add");
+  const ariaLabel = edge === "in"
+    ? t("tools.timelineItems.transition.editIntro", { label })
+    : edge === "out"
+      ? t("tools.timelineItems.transition.editOutro", { label })
+      : t("tools.timelineItems.transition.editBetween", { label });
   const isActive = Boolean(transition) || isSelected || open;
 
   const menu =
@@ -140,7 +144,7 @@ export const TransitionHandle: React.FC<TransitionHandleProps> = ({
             >
               <div className="py-1 max-h-72 overflow-y-auto">
                 <div className="px-3 py-1.5 text-[11px] font-semibold text-fg-muted uppercase tracking-wide">
-                  Transition
+                  {t("tools.timelineItems.transition.menuTitle")}
                 </div>
                 {transition && (
                   <button
@@ -148,27 +152,27 @@ export const TransitionHandle: React.FC<TransitionHandleProps> = ({
                     onClick={handleRemove}
                     className="w-full flex items-center px-3 py-2 text-[12px] font-medium text-destructive hover:bg-hover transition-colors text-left"
                   >
-                    Remove transition
+                    {t("tools.timelineItems.transition.remove")}
                   </button>
                 )}
-                {types.map((t) => (
+                {types.map((info) => (
                   <button
-                    key={t.type}
+                    key={info.type}
                     type="button"
-                    onClick={() => applyType(t.type)}
+                    onClick={() => applyType(info.type)}
                     className={`w-full flex flex-col px-3 py-1.5 hover:bg-hover transition-colors text-left ${
-                      transition?.type === t.type ? "bg-selected" : ""
+                      transition?.type === info.type ? "bg-selected" : ""
                     }`}
                   >
                     <span
                       className={`text-[12px] font-medium ${
-                        transition?.type === t.type ? "text-accent" : "text-fg"
+                        transition?.type === info.type ? "text-accent" : "text-fg"
                       }`}
                     >
-                      {t.name}
+                      {t(`tools.transitionTypes.${info.type}.name`, { defaultValue: info.name })}
                     </span>
                     <span className="text-[11px] text-fg-muted leading-tight">
-                      {t.description}
+                      {t(`tools.transitionTypes.${info.type}.description`, { defaultValue: info.description })}
                     </span>
                   </button>
                 ))}

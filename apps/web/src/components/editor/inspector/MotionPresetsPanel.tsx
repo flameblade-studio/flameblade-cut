@@ -34,6 +34,8 @@ import type {
   GraphicClip,
 } from "@openreel/core";
 import { v4 as uuid } from "uuid";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 
 type MutableGraphicClip = {
   -readonly [K in keyof GraphicClip]: GraphicClip[K];
@@ -49,6 +51,10 @@ const CATEGORY_CONFIG: {
   { id: "emphasis", name: "Emphasis", icon: Zap },
   { id: "transition", name: "Transition", icon: RefreshCw },
 ];
+
+/** Localized preset name; presets without a translation keep their library name. */
+const presetDisplayName = (preset: MotionPreset, t: TFunction): string =>
+  t(`advanced.motionPresets.presets.${preset.id}`, { defaultValue: preset.name });
 
 function easingToType(easing: string): EasingType {
   const mappings: Record<string, EasingType> = {
@@ -233,6 +239,7 @@ const PresetCard: React.FC<PresetCardProps> = ({
   isApplied,
   onApply,
 }) => {
+  const { t } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<Animation | null>(null);
@@ -262,7 +269,7 @@ const PresetCard: React.FC<PresetCardProps> = ({
 
   return (
     <ClickableCard
-      label={`Apply ${preset.name}`}
+      label={t("advanced.motionPresets.apply", { name: presetDisplayName(preset, t) })}
       onClick={onApply}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -287,14 +294,14 @@ const PresetCard: React.FC<PresetCardProps> = ({
         {isHovered && !isApplied && (
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
             <Text type="supporting" className="text-[10px] text-white font-medium px-2 py-1 bg-primary rounded">
-              Apply
+              {t("advanced.motionPresets.applyShort")}
             </Text>
           </div>
         )}
       </div>
       <div className="p-2 text-left">
         <Text type="supporting" color="primary" className="block truncate text-[10px] font-medium">
-          {preset.name}
+          {presetDisplayName(preset, t)}
         </Text>
         <Text type="supporting" color="secondary" className="text-[8px]">
           {duration}s
@@ -318,6 +325,7 @@ interface MotionPresetsPanelProps {
 export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
   clipId,
 }) => {
+  const { t } = useTranslation();
   const selectedClipIds = useUIStore((state) => state.getSelectedClipIds());
   const project = useProjectStore((state) => state.project);
   const updateClipKeyframes = useProjectStore(
@@ -496,7 +504,10 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
         updateClipKeyframes(targetClipId, allKeyframes);
       }
 
-      toast.success("Motion Preset Applied", `${preset.name} added to clip`);
+      toast.success(
+        t("advanced.motionPresets.appliedTitle"),
+        t("advanced.motionPresets.appliedBody", { name: presetDisplayName(preset, t) }),
+      );
     },
     [
       clip,
@@ -506,6 +517,7 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
       updateTextClipKeyframes,
       getGraphicsEngine,
       project.settings,
+      t,
     ],
   );
 
@@ -593,7 +605,7 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
         updateClipKeyframes(targetClipId, filteredKeyframes);
       }
 
-      toast.info("Preset Removed");
+      toast.info(t("advanced.motionPresets.removed"));
     },
     [
       clip,
@@ -602,6 +614,7 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
       updateTextClipKeyframes,
       getGraphicsEngine,
       presetLibrary,
+      t,
     ],
   );
 
@@ -610,7 +623,7 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
       <div className="p-4 text-center">
         <Zap size={24} className="mx-auto mb-2 text-fg-3" />
         <Text type="supporting" color="secondary" className="text-[10px]">
-          Select a clip to apply motion presets
+          {t("advanced.motionPresets.selectClip")}
         </Text>
       </div>
     );
@@ -621,7 +634,7 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
       <div className="p-4 text-center">
         <Zap size={24} className="mx-auto mb-2 text-fg-3" />
         <Text type="supporting" color="secondary" className="text-[10px]">
-          Clip not found
+          {t("advanced.motionPresets.clipNotFound")}
         </Text>
       </div>
     );
@@ -644,12 +657,12 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
         appliedState.emphasis) && (
         <Card variant="muted" padding={2} className="space-y-1 border border-border">
           <Text type="supporting" color="secondary" className="text-[10px] font-medium">
-            Applied Animations
+            {t("advanced.motionPresets.applied")}
           </Text>
           <div className="flex flex-wrap gap-1 mt-1">
             {appliedState.entrance && (
               <Button
-                label="Entry x"
+                label={t("advanced.motionPresets.removeEntry")}
                 icon={<ArrowRight size={10} />}
                 variant="ghost"
                 size="sm"
@@ -659,7 +672,7 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
             )}
             {appliedState.exit && (
               <Button
-                label="Exit x"
+                label={t("advanced.motionPresets.removeExit")}
                 icon={<ArrowLeft size={10} />}
                 variant="ghost"
                 size="sm"
@@ -669,7 +682,7 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
             )}
             {appliedState.emphasis && (
               <Button
-                label="Emphasis x"
+                label={t("advanced.motionPresets.removeEmphasis")}
                 icon={<Zap size={10} />}
                 variant="ghost"
                 size="sm"
@@ -693,7 +706,7 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
           return (
             <Button
               key={category.id}
-              label={category.name}
+              label={t(`advanced.motionPresets.categories.${category.id}`)}
               icon={<Icon size={12} />}
               variant={selectedCategory === category.id ? "primary" : "secondary"}
               size="sm"
@@ -714,8 +727,8 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
 
       <Card variant="muted" padding={2} className="space-y-2 border border-border">
         <ToolcraftSliderControl
-          ariaLabel="Motion preset duration"
-          label="Duration"
+          ariaLabel={t("advanced.motionPresets.durationAria")}
+          label={t("advanced.motionPresets.duration")}
           value={selectedDuration}
           min={0.05}
           max={maxPresetDuration}
@@ -725,8 +738,9 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
           onChange={handleDurationChange}
         />
         <Text type="supporting" color="secondary" className="text-[9px]">
-          Sets how long {selectedCategory} presets run. The last applied preset
-          updates after you stop dragging.
+          {t("advanced.motionPresets.durationHint", {
+            category: t(`advanced.motionPresets.categories.${selectedCategory}`),
+          })}
         </Text>
       </Card>
 
@@ -754,7 +768,10 @@ export const MotionPresetsPanel: React.FC<MotionPresetsPanelProps> = ({
       </div>
 
       <Text type="supporting" color="secondary" className="text-center text-[9px]">
-        {presets.length} presets in {selectedCategory}
+        {t("advanced.motionPresets.presetCount", {
+          count: presets.length,
+          category: t(`advanced.motionPresets.categories.${selectedCategory}`),
+        })}
       </Text>
     </div>
   );
