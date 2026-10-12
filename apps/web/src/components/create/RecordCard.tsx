@@ -13,6 +13,7 @@ import {
   Trash2,
   X,
 } from "@/icons/lucide-compat";
+import { modelErrorKind } from "../../services/ltx/model-choice";
 import type { GenerationRecord } from "../../services/ltx/types";
 import { estimateSeconds } from "../../services/ltx/workflow-binder";
 import { toast } from "../../stores/notification-store";
@@ -110,11 +111,13 @@ function ResultStage({ record }: { record: GenerationRecord }): JSX.Element {
 function FailedStage({ record, onRedo }: { record: GenerationRecord; onRedo: () => void }): JSX.Element {
   const { t } = useTranslation();
   const canceled = record.status === "canceled";
+  const modelError = modelErrorKind(record.error);
+  const message = modelError === null ? record.error : t(`create.errors.model.${modelError}`);
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-10 text-center">
-      <AlertCircle size={26} className={canceled ? "text-fg-muted" : "text-[oklch(0.7_0.17_25)]"} aria-hidden />
+      <AlertCircle size={26} className={canceled ? "text-fg-muted" : "text-[var(--error)]"} aria-hidden />
       <div className="text-[14px] font-semibold text-fg">{canceled ? t("create.status.canceled") : t("create.status.failed")}</div>
-      {record.error && !canceled ? <p className="max-w-[460px] text-[12px] leading-relaxed text-fg-3">{record.error}</p> : null}
+      {message && !canceled ? <p className="max-w-[460px] text-[12px] leading-relaxed text-fg-3">{message}</p> : null}
       <button type="button" className="fc-action" onClick={onRedo}>
         <RotateCcw size={14} aria-hidden />
         {t("create.actions.retry")}

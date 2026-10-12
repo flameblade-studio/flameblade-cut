@@ -1,0 +1,688 @@
+{
+  "shell": {
+    "seconds": "{{value}} 秒",
+    "tabError": "此面板发生错误，请切换到其他标签页再切回来重试。"
+  },
+  "tabs": {
+    "enable": "启用"
+  },
+  "behindSubject": {
+    "title": "置于主体后方",
+    "hint": "文字会显示在视频中人物的后方",
+    "loading": "正在加载 AI 模型…",
+    "modelFailed": "AI 模型加载失败，请检查网络连接。"
+  },
+  "shader": {
+    "selectColor": "选择{{label}}"
+  },
+  "filterPresets": {
+    "applyPreset": "应用“{{name}}”滤镜预设",
+    "appliedTitle": "已应用滤镜",
+    "appliedBody": "已应用“{{name}}”预设",
+    "cleared": "已清除效果",
+    "noClip": "请选择视频片段以应用滤镜",
+    "title": "滤镜预设",
+    "subtitle": "一键完成调色",
+    "intensity": "强度",
+    "removeAll": "移除所有效果",
+    "summary_one": "共 {{count}} 个预设，分为 {{categories}} 类",
+    "summary_other": "共 {{count}} 个预设，分为 {{categories}} 类",
+    "categories": {
+      "cinematic": "电影感",
+      "vintage": "复古",
+      "mood": "氛围",
+      "color": "色彩",
+      "stylized": "风格化"
+    }
+  },
+  "presets": {
+    "filters": {
+      "cinematic-teal-orange": {
+        "name": "青橙色调",
+        "description": "经典好莱坞调色"
+      },
+      "cinematic-noir": {
+        "name": "黑色电影",
+        "description": "高对比黑白"
+      },
+      "cinematic-blockbuster": {
+        "name": "大片风",
+        "description": "强烈鲜明的好莱坞风格"
+      },
+      "vintage-70s": {
+        "name": "70 年代复古",
+        "description": "温暖褪色的 1970 年代风格"
+      },
+      "vintage-polaroid": {
+        "name": "拍立得",
+        "description": "经典拍立得照片风格"
+      },
+      "vintage-vhs": {
+        "name": "VHS 录像带",
+        "description": "怀旧 VHS 录像带效果"
+      },
+      "vintage-sepia": {
+        "name": "怀旧棕褐",
+        "description": "经典棕褐色调"
+      },
+      "mood-dreamy": {
+        "name": "梦幻",
+        "description": "柔和空灵的氛围"
+      },
+      "mood-moody": {
+        "name": "阴郁",
+        "description": "暗沉而富有氛围感"
+      },
+      "mood-golden-hour": {
+        "name": "黄金时刻",
+        "description": "温暖的夕阳光线"
+      },
+      "mood-cold": {
+        "name": "冷冽蓝调",
+        "description": "冰冷清冽的氛围"
+      },
+      "color-vibrant": {
+        "name": "鲜艳",
+        "description": "饱和鲜明的色彩"
+      },
+      "color-muted": {
+        "name": "低饱和",
+        "description": "柔和的低饱和配色"
+      },
+      "color-bw-classic": {
+        "name": "经典黑白",
+        "description": "永不过时的黑白"
+      },
+      "color-bw-high-contrast": {
+        "name": "高对比黑白",
+        "description": "戏剧性的黑白"
+      },
+      "stylized-cyberpunk": {
+        "name": "赛博朋克",
+        "description": "霓虹闪烁的未来感"
+      },
+      "stylized-comic": {
+        "name": "漫画风",
+        "description": "强烈的图像小说风格"
+      },
+      "stylized-soft-glow": {
+        "name": "柔光",
+        "description": "浪漫的柔焦效果"
+      },
+      "cinematic-bleach-bypass": {
+        "name": "漂白跳过",
+        "description": "粗犷低饱和的高对比"
+      },
+      "cinematic-day-for-night": {
+        "name": "日拍夜景",
+        "description": "清冷的月夜风格"
+      },
+      "vintage-faded-film": {
+        "name": "褪色胶片",
+        "description": "黑位提亮的褪色感"
+      },
+      "vintage-super8": {
+        "name": "Super 8 胶片",
+        "description": "温暖颗粒感的家庭录像"
+      },
+      "mood-sunset": {
+        "name": "夕阳",
+        "description": "温暖的金色光晕"
+      },
+      "mood-winter-chill": {
+        "name": "冬日寒意",
+        "description": "冷冽清透的蓝调"
+      },
+      "mood-dramatic": {
+        "name": "戏剧性",
+        "description": "带暗角的高对比氛围"
+      },
+      "color-pop": {
+        "name": "波普",
+        "description": "鲜明强烈的色彩"
+      },
+      "color-pastel": {
+        "name": "马卡龙色",
+        "description": "柔和轻盈的低对比色调"
+      },
+      "stylized-dreamscape": {
+        "name": "梦境",
+        "description": "朦胧发光的梦境感"
+      },
+      "stylized-hdr": {
+        "name": "清晰 HDR",
+        "description": "细节丰富、清晰有力"
+      },
+      "stylized-matrix": {
+        "name": "黑客帝国",
+        "description": "带绿色调的数字反乌托邦"
+      }
+    },
+    "emojiCategories": {
+      "smileys": "笑脸与情绪",
+      "gestures": "手势",
+      "objects": "物品",
+      "symbols": "符号",
+      "nature": "自然"
+    },
+    "shaderGroups": {
+      "builtIn": "内置",
+      "general": "常规"
+    },
+    "templates": {
+      "builtin-youtube-intro": "YouTube 片头",
+      "builtin-tiktok-promo": "TikTok 宣传",
+      "builtin-lower-third": "下方字幕条",
+      "builtin-slideshow": "照片幻灯片",
+      "builtin-instagram-reel": "Instagram Reels 短视频",
+      "builtin-youtube-shorts": "YouTube Shorts 短视频",
+      "builtin-quote-card": "名言卡片",
+      "builtin-product-promo": "产品宣传",
+      "builtin-countdown": "倒计时"
+    },
+    "particles": {
+      "dissolve-soft": "柔和溶解",
+      "explode-burst": "爆炸迸发",
+      "implode-gather": "向内聚合",
+      "confetti-celebration": "庆祝彩纸",
+      "dust-ambient": "环境尘埃",
+      "sparkle-magic": "魔法闪光",
+      "disintegrate-thanos": "灰飞烟灭",
+      "pixelate-retro": "像素碎裂",
+      "shatter-glass": "玻璃碎裂",
+      "morph-transform": "形状变形",
+      "fire-trail": "火焰尾迹",
+      "snow-fall": "飘雪"
+    },
+    "particleTypes": {
+      "dissolve": "溶解",
+      "explode": "爆炸",
+      "implode": "内聚",
+      "confetti": "彩纸",
+      "dust": "尘埃",
+      "sparkle": "闪光",
+      "disintegrate": "瓦解",
+      "pixelate": "像素化",
+      "shatter": "碎裂",
+      "morph": "变形"
+    },
+    "svgAnimations": {
+      "none": "无",
+      "fade": "淡化",
+      "slide-left": "从右侧滑入",
+      "slide-right": "从左侧滑入",
+      "slide-up": "从下方滑入",
+      "slide-down": "从上方滑入",
+      "scale": "缩放",
+      "rotate": "旋转",
+      "bounce": "弹跳",
+      "pop": "弹出",
+      "draw": "描绘",
+      "wipe-left": "向左擦除",
+      "wipe-right": "向右擦除",
+      "wipe-up": "向上擦除",
+      "wipe-down": "向下擦除",
+      "reveal-center": "从中央展开",
+      "reveal-edges": "向中央收拢",
+      "elastic": "弹性",
+      "flip-horizontal": "水平翻转",
+      "flip-vertical": "垂直翻转"
+    }
+  },
+  "mask": {
+    "pointX": "第 {{index}} 点 X 百分比",
+    "pointY": "第 {{index}} 点 Y 百分比",
+    "matteHint": "所选片段的{{channel}}会决定此片段的可见区域。为来源片段的变换制作动画，即可让遮罩随之运动。",
+    "textSource": "文字 •“{{text}}”",
+    "count_one": "遮罩（{{count}}）",
+    "count_other": "遮罩（{{count}}）",
+    "pointsHint": "X 和 Y 为画面尺寸的百分比，可微调各点以制作精确的自定义抠像形状。",
+    "channels": {
+      "bounds": "边界",
+      "alpha": "Alpha 通道",
+      "luminance": "亮度"
+    }
+  },
+  "bgRemoval": {
+    "useColor": "使用 {{color}} 背景色"
+  },
+  "stickers": {
+    "addItem": "添加 {{name}}",
+    "errorType": "请选择 PNG、JPEG、WebP、GIF 或 SVG 图片。",
+    "errorSize": "贴纸文件必须小于 {{size}} MB。",
+    "errorAdd": "贴纸已导入，但无法添加到时间线。",
+    "errorRead": "无法读取这张图片，请尝试导出为 PNG 或 WebP。",
+    "added": "已在 {{time}} 添加 {{name}}",
+    "title": "贴纸与表情符号",
+    "subtitle": "为视频添加有趣的元素",
+    "emojis": "表情符号",
+    "stickers": "贴纸",
+    "searchEmojis": "搜索表情符号",
+    "searchStickers": "搜索贴纸",
+    "searchEmojisPlaceholder": "搜索表情符号…",
+    "searchStickersPlaceholder": "搜索贴纸…",
+    "noEmojis": "未找到表情符号",
+    "noStickers": "还没有贴纸",
+    "importHint": "可在下方导入自定义贴纸",
+    "chooseImage": "选择自定义贴纸图片",
+    "importing": "正在导入贴纸…",
+    "import": "导入并添加贴纸",
+    "emojiCount_one": "共有 {{count}} 个表情符号",
+    "emojiCount_other": "共有 {{count}} 个表情符号",
+    "stickerCount_one": "共有 {{count}} 个贴纸",
+    "stickerCount_other": "共有 {{count}} 个贴纸"
+  },
+  "shape": {
+    "style": "样式",
+    "shapeClip": "形状片段",
+    "noClip": "未选择形状片段",
+    "fill": "填充",
+    "fillType": "填充类型",
+    "solid": "纯色",
+    "shader": "着色器",
+    "color": "颜色",
+    "opacity": "不透明度",
+    "stroke": "描边",
+    "width": "宽度",
+    "corners": "圆角",
+    "radius": "半径",
+    "shadow": "阴影",
+    "offsetX": "X 偏移",
+    "offsetY": "Y 偏移",
+    "blur": "模糊",
+    "shaderFill": "着色器填充",
+    "types": {
+      "rectangle": "矩形",
+      "circle": "圆形",
+      "ellipse": "椭圆",
+      "triangle": "三角形",
+      "star": "星形",
+      "polygon": "多边形",
+      "arrow": "箭头"
+    }
+  },
+  "adjustment": {
+    "defaultName": "调整图层 {{index}}",
+    "collapse": "收起“{{name}}”",
+    "expand": "展开“{{name}}”",
+    "hideLayer": "隐藏图层",
+    "showLayer": "显示图层",
+    "opacity": "不透明度",
+    "start": "开始",
+    "duration": "时长",
+    "blendMode": "混合模式",
+    "useBlendMode": "使用“{{name}}”混合模式",
+    "effectCount_one": "效果（{{count}}）",
+    "effectCount_other": "效果（{{count}}）",
+    "enableEffect": "启用“{{name}}”效果",
+    "disableEffect": "停用“{{name}}”效果",
+    "removeEffect": "移除“{{name}}”效果",
+    "addEffect": "+ {{name}}",
+    "before": "原始",
+    "after": "效果",
+    "duplicate": "复制",
+    "delete": "删除",
+    "title": "调整图层",
+    "subtitle": "以非破坏方式将效果应用到下方片段",
+    "add": "添加调整图层",
+    "trackLayers_one": "此轨道的图层（{{count}}）",
+    "trackLayers_other": "此轨道的图层（{{count}}）",
+    "otherLayers": "其他图层",
+    "footer": "将调色与效果应用到下方所有片段",
+    "effects": {
+      "brightness": "亮度",
+      "contrast": "对比度",
+      "saturation": "饱和度",
+      "grayscale": "灰度",
+      "sepia": "怀旧棕褐",
+      "invert": "反相",
+      "hue": "色相旋转",
+      "blur": "模糊",
+      "sharpen": "锐化",
+      "vignette": "暗角",
+      "temperature": "色温",
+      "tint": "色调",
+      "grain": "胶片颗粒"
+    },
+    "controls": {
+      "brightness": "亮度",
+      "contrast": "对比度",
+      "saturation": "饱和度",
+      "amount": "强度",
+      "rotation": "旋转",
+      "radius": "半径",
+      "midpoint": "中点",
+      "feather": "羽化",
+      "warmCool": "暖 / 冷",
+      "greenMagenta": "绿 / 品红",
+      "size": "大小"
+    },
+    "blendModes": {
+      "normal": "正常",
+      "multiply": "正片叠底",
+      "screen": "滤色",
+      "overlay": "叠加",
+      "darken": "变暗",
+      "lighten": "变亮",
+      "color-dodge": "颜色减淡",
+      "color-burn": "颜色加深",
+      "hard-light": "强光",
+      "soft-light": "柔光",
+      "difference": "差值",
+      "exclusion": "排除",
+      "hue": "色相",
+      "saturation": "饱和度",
+      "color": "颜色",
+      "luminosity": "明度"
+    },
+    "blendGroups": {
+      "basic": "基本",
+      "darken": "变暗",
+      "lighten": "变亮",
+      "contrast": "对比",
+      "inversion": "反相",
+      "component": "成分"
+    }
+  },
+  "nested": {
+    "title": "嵌套序列",
+    "subtitle": "将所选片段创建为复合片段",
+    "clipCount_one": "{{count}} 个片段",
+    "clipCount_other": "{{count}} 个片段",
+    "trackCount_one": "{{count}} 条轨道",
+    "trackCount_other": "{{count}} 条轨道",
+    "flatten": "展平",
+    "duplicate": "复制",
+    "create": "创建复合片段",
+    "selected_one": "已选择 {{count}} 个片段",
+    "selected_other": "已选择 {{count}} 个片段",
+    "selectHint": "请选择至少 {{min}} 个片段以创建复合片段",
+    "library": "复合片段库",
+    "nameLabel": "复合片段名称",
+    "instances_one": "{{count}} 个实例",
+    "instances_other": "{{count}} 个实例",
+    "confirmRename": "确认重命名",
+    "cancelRename": "取消重命名",
+    "rename": "重命名",
+    "cannotDelete": "无法删除：仍有实例在使用",
+    "delete": "删除",
+    "footer": "将片段组合成可重复使用的复合片段"
+  },
+  "templates": {
+    "builtIn": "内置",
+    "cloud": "云端",
+    "placeholders_one": "{{count}} 个占位符",
+    "placeholders_other": "{{count}} 个占位符",
+    "use": "使用此模板",
+    "notFound": "找不到模板",
+    "missing": "缺少必填项：{{names}}",
+    "applyFailed": "应用模板失败",
+    "back": "返回模板",
+    "configure": "设置模板变量",
+    "title": "模板",
+    "subtitle": "从现成的项目开始",
+    "all": "全部",
+    "empty": "此分类中没有模板",
+    "saveCurrent": "将当前项目保存为模板",
+    "count_one": "共有 {{count}} 个模板",
+    "count_other": "共有 {{count}} 个模板",
+    "categories": {
+      "social-media": "社交媒体",
+      "youtube": "YouTube",
+      "tiktok": "抖音 / TikTok",
+      "instagram": "Instagram",
+      "business": "商务",
+      "personal": "个人",
+      "slideshow": "幻灯片",
+      "intro-outro": "片头／片尾",
+      "lower-third": "下方字幕条",
+      "motion": "动态",
+      "custom": "自定义"
+    }
+  },
+  "templateVars": {
+    "resetDefault": "重置为默认值",
+    "reset": "重置",
+    "enterText": "输入文字…",
+    "characters_one": "{{count}} / {{max}} 字",
+    "characters_other": "{{count}} / {{max}} 字",
+    "noMedia": "没有可用的媒体",
+    "importMedia": "请先导入媒体才能在此使用",
+    "enterSubtitle": "输入字幕文字…",
+    "noTemplate": "请选择模板以编辑变量",
+    "title": "模板变量",
+    "resetAll": "全部重置",
+    "none": "此模板没有可编辑的变量",
+    "missing": "请填写必填字段：{{names}}",
+    "apply": "应用模板"
+  },
+  "multiClip": {
+    "selected_one": "已选择 {{count}} 个片段",
+    "selected_other": "已选择 {{count}} 个片段",
+    "syncHint": "批量更改会与时间线保持同步",
+    "batchTransform": "批量变换",
+    "nudge": "微调位置",
+    "nudgeLeft": "将片段向左微移",
+    "nudgeUp": "将片段向上微移",
+    "nudgeDown": "将片段向下微移",
+    "nudgeRight": "将片段向右微移",
+    "align": "对齐",
+    "alignLeft": "左对齐",
+    "alignCenter": "水平居中",
+    "alignRight": "右对齐",
+    "alignTop": "顶部对齐",
+    "alignMiddle": "垂直居中",
+    "alignBottom": "底部对齐",
+    "distributeH": "水平均匀分布",
+    "distributeV": "垂直均匀分布",
+    "scale": "缩放",
+    "rotation": "旋转",
+    "rotationLabel": "所选片段的旋转角度",
+    "opacity": "不透明度",
+    "batchText": "批量文字",
+    "batchEffects": "批量效果",
+    "effectsHint_one": "从第一个选中的视觉图层复制效果，再应用到全部 {{count}} 个选中的视觉图层。",
+    "effectsHint_other": "从第一个选中的视觉图层复制效果，再应用到全部 {{count}} 个选中的视觉图层。",
+    "copyEffects": "复制第一组效果",
+    "appendEffects": "将效果追加到所选片段",
+    "replaceEffects": "替换所选片段的效果",
+    "clearEffects": "清除所选片段的效果",
+    "actions": "选区操作",
+    "resetTransforms": "重置变换",
+    "copy_one": "复制 {{count}} 个所选片段",
+    "copy_other": "复制 {{count}} 个所选片段",
+    "paste": "将剪贴板内容粘贴到 {{time}} 秒处",
+    "duplicate_one": "复制并粘贴 {{count}} 个所选片段",
+    "duplicate_other": "复制并粘贴 {{count}} 个所选片段",
+    "delete": "删除所选片段",
+    "compound": "复合片段",
+    "mixed": "混合"
+  },
+  "clipTransition": {
+    "incoming": "入场转场",
+    "incomingHint": "从上一个片段转入此片段",
+    "outgoing": "出场转场",
+    "outgoingHint": "从此片段转入下一个片段",
+    "intro": "开场转场",
+    "introHint": "从项目背景转入此片段",
+    "outro": "结尾转场",
+    "outroHint": "从此片段转入项目背景",
+    "appliedTitle": "已应用片段动画",
+    "appliedBoth": "入场：{{entry}}，退场：{{exit}}",
+    "appliedEntry": "入场：{{entry}}",
+    "appliedExit": "退场：{{exit}}",
+    "cleared": "已清除动画",
+    "entry": "入场动画",
+    "exit": "退场动画",
+    "setEntry": "将入场动画设为“{{name}}”",
+    "setExit": "将退场动画设为“{{name}}”",
+    "duration": "时长",
+    "easing": "缓动",
+    "apply": "应用入场／退场动画",
+    "single": "单片段转场",
+    "singleUnavailable": "单片段转场仅适用于视频和图片片段。",
+    "clipToClip": "片段间转场",
+    "noAdjacent": "此轨道上没有相邻的片段。",
+    "clipToClipUnavailable": "片段间转场仅适用于时间线上的媒体片段。",
+    "presets": {
+      "none": "无",
+      "fade": "淡化",
+      "slide-left": "向左滑动",
+      "slide-right": "向右滑动",
+      "slide-up": "向上滑动",
+      "slide-down": "向下滑动",
+      "zoom-in": "放大",
+      "zoom-out": "缩小",
+      "rotate": "旋转",
+      "blur": "模糊",
+      "iris-circle": "圆形光圈",
+      "iris-rectangle": "矩形光圈",
+      "iris-diamond": "菱形光圈",
+      "iris-star": "星形光圈"
+    },
+    "easings": {
+      "linear": "线性",
+      "ease-in": "缓入",
+      "ease-out": "缓出",
+      "ease-in-out": "缓入缓出"
+    }
+  },
+  "multicam": {
+    "angleName": "机位名称",
+    "cutTo": "在播放头位置切换到 {{name}}",
+    "removeAngle": "移除机位",
+    "offset": "偏移：",
+    "angleOffset": "机位时间偏移",
+    "sec": "秒",
+    "angles_one": "{{count}} 个机位",
+    "angles_other": "{{count}} 个机位",
+    "syncAudio": "同步音频",
+    "autoEdit": "自动剪辑",
+    "deleteGroup": "删除摄像机组",
+    "importManifest": "导入清单",
+    "exportManifest": "导出清单",
+    "cutReview": "剪辑点检查",
+    "cuts_one": "{{count}} 个剪辑点",
+    "cuts_other": "{{count}} 个剪辑点",
+    "manual": "手动",
+    "reject": "拒绝",
+    "accept": "接受",
+    "accepted": "已接受",
+    "editableHint": "生成的输出轨道在时间线上仍可完整编辑。",
+    "exportOtio": "导出 OTIO",
+    "exportOrma": "导出 .orma",
+    "findClips": "查找精华片段",
+    "loadFailed": "无法加载多机位工具",
+    "trackFallback": "轨道 {{id}}",
+    "saveGroupFailed": "无法保存摄像机组。",
+    "decoding": "正在解码 {{name}}…",
+    "decodeFailed": "无法解码 {{name}} 的音频。",
+    "groupGone": "摄像机组已不存在。",
+    "defaultGroupName": "多机位 {{index}}",
+    "createFailedTitle": "创建摄像机组失败",
+    "createFailed": "无法创建摄像机组。",
+    "removeAngleFailed": "无法移除机位",
+    "renameAngleFailed": "无法重命名机位",
+    "saveOffsetFailed": "无法保存偏移",
+    "projectChanged": "分析期间项目已更改，请重新运行摄像机分析。",
+    "synchronizing": "正在同步各机位音频…",
+    "synced": "音频已同步 · 置信度 {{percent}}%",
+    "syncedTitle": "各机位音频已同步",
+    "syncFailedDetail": "音频同步失败。",
+    "syncFailed": "音频同步失败",
+    "noOverlap": "各机位录像的重叠音频不足。",
+    "runningVad": "正在运行本地 Silero 人声检测…",
+    "voiceDetection": "人声检测 · {{name}} · {{percent}}%",
+    "missingAudio": "缺少 {{name}} 的解码音频。",
+    "calibrating": "正在校准环境噪音与麦克风串音…",
+    "analyzing": "正在分析说话人与麦克风串音…",
+    "noSpeakers": "未检测到可用的说话活动。",
+    "cutsUnmapped": "检测到的剪辑点无法对应到源片段。",
+    "applying_one": "正在应用 {{count}} 个剪辑点…",
+    "applying_other": "正在应用 {{count}} 个剪辑点…",
+    "applyFailed": "无法应用自动剪辑。",
+    "shotsCreated_one": "已在“{{name}} Auto Edit”创建 {{count}} 个镜头",
+    "shotsCreated_other": "已在“{{name}} Auto Edit”创建 {{count}} 个镜头",
+    "autoEditCreated": "已创建多机位自动剪辑",
+    "autoEditDetail_one": "{{count}} 个剪辑点 · 可一步撤销",
+    "autoEditDetail_other": "{{count}} 个剪辑点 · 可一步撤销",
+    "autoEditFailedDetail": "自动剪辑失败。",
+    "autoEditFailed": "自动剪辑失败",
+    "analysisUnavailable": "暂无分析结果",
+    "runAutoEditExport": "请先运行自动剪辑，再导出 .orma 文件。",
+    "runAutoEditSocial": "请先运行自动剪辑，再查找社交精华片段。",
+    "mapCameraFailed": "无法将摄像机 {{id}}（{{file}}）对应到所选机位。",
+    "manifestImported": "已导入多机位清单",
+    "manifestDetail_one": "{{participants}} 位参与者 · {{count}} 台摄像机",
+    "manifestDetail_other": "{{participants}} 位参与者 · {{count}} 台摄像机",
+    "manifestFailed": "清单导入失败",
+    "socialMarker": "社交 · {{title}}",
+    "socialAdded": "已添加社交精华候选片段",
+    "markers_one": "{{count}} 个时间线标记",
+    "markers_other": "{{count}} 个时间线标记",
+    "reviewFailed": "无法更新剪辑点检查。",
+    "playheadOutside": "请将播放头移到摄像机组范围内",
+    "groupRange": "组范围：{{start}} 秒 – {{end}} 秒",
+    "cameraUnavailable": "播放头位置无法使用此摄像机。",
+    "cutAdded": "已在 {{time}} 秒添加机位切换 · 撤销即可恢复上一版剪辑",
+    "switchFailed": "无法切换摄像机",
+    "acceptFailed": "无法接受剪辑点",
+    "rejectFailed": "无法拒绝剪辑点",
+    "nudgeFailed": "无法微调剪辑点",
+    "deleteFailed": "无法删除组",
+    "title": "多机位剪辑",
+    "subtitle": "选择同一活动的多段录像并创建组，然后同步音频，或在播放头位置切换机位。",
+    "groups": "摄像机组",
+    "createNew": "创建新组",
+    "createHint": "请选择同一活动的 {{min}} 段以上录像，并将各机位放在不同轨道；创建剪辑后，源轨道会被隐藏并静音。",
+    "noClips": "请将视频片段添加到未锁定的时间线轨道，才能使用多机位剪辑",
+    "createGroup_one": "创建组（已选 {{count}} 个）",
+    "createGroup_other": "创建组（已选 {{count}} 个）",
+    "settings": "自动剪辑设置",
+    "syncFirst": "自动剪辑前先同步各机位（关闭则使用手动偏移）",
+    "policy": "自动剪辑策略",
+    "preset": "预设",
+    "overlap": "多人同时说话时",
+    "sustained": "持续重叠时",
+    "minShot": "最短镜头",
+    "maxShot": "最长镜头",
+    "maxShotHint": "达到最长镜头长度时，会切到聆听者反应或全景镜头。",
+    "transcripts": "在 .orma 文件中添加各声道的本地 Whisper 转录稿",
+    "reactions": "添加本地 MediaPipe 面部／反应提示（较慢）",
+    "footer": "自动剪辑会创建可编辑的时间线轨道，并可一步撤销",
+    "presets": {
+      "custom": "自定义",
+      "conversation": "对谈",
+      "energetic": "活泼",
+      "panel": "座谈"
+    },
+    "strategies": {
+      "hold": "保持当前机位",
+      "winner": "选择音量最大者",
+      "priority": "按参与者优先级",
+      "wide": "使用全景镜头",
+      "composite": "分屏显示说话人",
+      "progressive": "渐进式画中画"
+    },
+    "escalations": {
+      "wideShot": "全景镜头",
+      "energyWinner": "音量最大者",
+      "splitLayout": "分屏布局"
+    },
+    "reasons": {
+      "speaker": "说话人",
+      "overlap-hold": "重叠时保持",
+      "overlap-winner": "重叠时选音量最大者",
+      "silence-hold": "静音时保持",
+      "max-shot": "达最长镜头",
+      "backchannel-hold": "附和时保持",
+      "turn-collision-winner": "抢话时选胜出者",
+      "successful-interruption": "成功插话",
+      "sustained-overlap": "持续重叠",
+      "group-reaction": "群体反应",
+      "reaction-shot": "反应镜头",
+      "layout-budget": "布局配额",
+      "directive": "指令"
+    }
+  }
+}

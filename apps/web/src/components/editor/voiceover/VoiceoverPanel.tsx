@@ -7,6 +7,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useTranslation } from "react-i18next";
 import {
   Cloud,
+  KeyRound,
   Loader2,
   Mic,
   Monitor,
@@ -28,14 +29,13 @@ import {
 } from "@openreel/ui";
 import { toast } from "../../../stores/notification-store";
 import { useSettingsStore } from "../../../stores/settings-store";
+import { useCloudKeyStatus } from "../../../services/cloud-keys/cloud-key-store";
 import { useTimelineStore } from "../../../stores/timeline-store";
 import { TextToSpeechPanel } from "../inspector/TextToSpeechPanel";
 import {
-  VOICE_KEY_IDS,
   chooseVoice,
   getVoiceBridge,
   groupVoices,
-  keyStatus as fetchKeyStatus,
   listVoices,
   maxTextChars,
   synthesize,
@@ -47,7 +47,6 @@ import {
 import { placeVoiceover, voiceoverFileName } from "../../../services/voiceover/place-voiceover";
 import type { SubtitleLine } from "../../../services/voiceover/subtitle-voiceover";
 import { useVoiceoverSettings } from "../../../services/voiceover/voiceover-settings";
-import { VoiceKeySetup } from "./VoiceKeySetup";
 import { SubtitleVoiceoverSection } from "./SubtitleVoiceoverSection";
 import { formatSeconds, languageLabel, voiceErrorText } from "./voice-ui-helpers";
 
@@ -111,15 +110,14 @@ export const VoiceoverPanel: React.FC = () => {
   const azureRegion = useVoiceoverSettings((s) => s.azureRegion);
   const instructions = useVoiceoverSettings((s) => s.openaiInstructions);
   const setInstructions = useVoiceoverSettings((s) => s.setOpenaiInstructions);
-  const addConfiguredService = useSettingsStore((s) => s.addConfiguredService);
-  const removeConfiguredService = useSettingsStore((s) => s.removeConfiguredService);
+  const openSettings = useSettingsStore((s) => s.openSettings);
+  const keys = useCloudKeyStatus() ?? { azure: false, openai: false };
 
   // "elevenlabs" keeps the original OpenReel panel reachable; it is a view choice, not a main-process engine.
   const [showElevenLabs, setShowElevenLabs] = useState(false);
   const [voices, setVoices] = useState<VoiceInfo[]>([]);
   const [loadingVoices, setLoadingVoices] = useState(false);
   const [voiceError, setVoiceError] = useState<string | null>(null);
-  const [keys, setKeys] = useState<Record<CloudVoiceEngine, boolean>>({ azure: false, openai: false });
   const [text, setText] = useState("");
   const [rate, setRate] = useState(1);
   const [busy, setBusy] = useState<"preview" | "insert" | "subtitles" | null>(null);
@@ -132,20 +130,6 @@ export const VoiceoverPanel: React.FC = () => {
   const voice = voiceByEngine[engine] ?? null;
   const cloudReady = !isCloud(engine) || (keys[engine] && (engine !== "azure" || azureRegion.length > 0));
   const maxChars = maxTextChars(engine);
-
-  const refreshKeys = useCallback(async () => {
-    if (!bridgeAvailable) return;
-    const status = await fetchKeyStatus();
-    setKeys(status);
-    for (const cloud of ["azure", "openai"] as const) {
-      if (status[cloud]) addConfiguredService(VOICE_KEY_IDS[cloud]);
-      else removeConfiguredService(VOICE_KEY_IDS[cloud]);
-    }
-  }, [bridgeAvailable, addConfiguredService, removeConfiguredService]);
-
-  useEffect(() => {
-    void refreshKeys().catch(() => undefined);
-  }, [refreshKeys]);
 
   const loadVoices = useCallback(async () => {
     if (!bridgeAvailable) return;
@@ -328,7 +312,17 @@ export const VoiceoverPanel: React.FC = () => {
         </Card>
       ) : (
         <>
-          {isCloud(engine) && <VoiceKeySetup engine={engine} configured={keys[engine]} onChanged={() => void refreshKeys()} />}
+          {isCloud(engine) && !cloudReady && (
+            <div className="flex items-center justify-between gap-2 rounded-lg border border-border bg-bg-1 px-3 py-2">
+              <span className="flex min-w-0 items-center gap-2">
+                <KeyRound size={13} className="shrink-0 text-fg-3" aria-hidden />
+                <Text type="supporting" className="text-[11px]">
+                  {t(keys[engine] ? "voice.keys.needRegion" : "voice.keys.needKey")}
+                </Text>
+              </span>
+              <Button label={t("voice.keys.openSettings")} size="sm" variant="secondary" onClick={() => openSettings("api-keys")} />
+            </div>
+          )}
 
           <div className="space-y-1">
             <div className="flex items-end gap-1.5">

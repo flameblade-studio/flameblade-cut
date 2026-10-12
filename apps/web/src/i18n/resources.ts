@@ -25,6 +25,18 @@ import voiceEn from "./locales/voice/en.json";
 import voiceJa from "./locales/voice/ja.json";
 import voiceZhCN from "./locales/voice/zh-CN.json";
 import voiceZhTW from "./locales/voice/zh-TW.json";
+import advancedEn from "./locales/advanced/en.json";
+import advancedJa from "./locales/advanced/ja.json";
+import advancedZhCN from "./locales/advanced/zh-CN.json";
+import advancedZhTW from "./locales/advanced/zh-TW.json";
+import toolsEn from "./locales/tools/en.json";
+import toolsJa from "./locales/tools/ja.json";
+import toolsZhCN from "./locales/tools/zh-CN.json";
+import toolsZhTW from "./locales/tools/zh-TW.json";
+import visualEn from "./locales/visual/en.json";
+import visualJa from "./locales/visual/ja.json";
+import visualZhCN from "./locales/visual/zh-CN.json";
+import visualZhTW from "./locales/visual/zh-TW.json";
 
 export const RESOURCE_LANGUAGES = ["zh-TW", "zh-CN", "en", "ja"] as const;
 export type ResourceLanguage = (typeof RESOURCE_LANGUAGES)[number];
@@ -39,7 +51,13 @@ const AREAS: Record<string, Record<ResourceLanguage, Strings>> = {
   voice: { "zh-TW": voiceZhTW, "zh-CN": voiceZhCN, en: voiceEn, ja: voiceJa },
   captions: { "zh-TW": captionsZhTW, "zh-CN": captionsZhCN, en: captionsEn, ja: captionsJa },
   highlights: { "zh-TW": highlightsZhTW, "zh-CN": highlightsZhCN, en: highlightsEn, ja: highlightsJa },
+  advanced: { "zh-TW": advancedZhTW, "zh-CN": advancedZhCN, en: advancedEn, ja: advancedJa },
+  tools: { "zh-TW": toolsZhTW, "zh-CN": toolsZhCN, en: toolsEn, ja: toolsJa },
+  visual: { "zh-TW": visualZhTW, "zh-CN": visualZhCN, en: visualEn, ja: visualJa },
 };
+
+/** Area keys; each must differ from every top-level key of the base strings. */
+export const AREA_NAMES: readonly string[] = Object.keys(AREAS);
 
 /** All strings of one language, base editor strings plus every feature area. */
 export function stringsFor(language: ResourceLanguage): Strings {

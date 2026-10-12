@@ -2,6 +2,7 @@ import * as React from "react"
 
 import { cn } from "../lib/utils"
 import { Slider } from "./slider"
+import { useUiStrings } from "./ui-strings"
 
 export interface ToolcraftSliderControlProps {
   ariaLabel?: string
@@ -116,6 +117,7 @@ export const ToolcraftSliderControl = React.forwardRef<
     const resolvedShowValueLabel = valueDisplay === "none" ? false : showValueLabel
     const visibleLabel = isLabelHidden ? undefined : label
     const accessibleLabel = ariaLabel ?? label
+    const strings = useUiStrings()
     const fieldStyle = width
       ? { width: typeof width === "number" ? `${width}px` : width }
       : undefined
@@ -191,7 +193,7 @@ export const ToolcraftSliderControl = React.forwardRef<
                 {editing ? (
                   <input
                     ref={inputRef}
-                    aria-label={accessibleLabel ? `${accessibleLabel} value` : "Slider value"}
+                    aria-label={strings.sliderValue(accessibleLabel)}
                     value={draft}
                     onBlur={commitDraft}
                     onChange={(event) => setDraft(event.target.value)}
@@ -214,13 +216,9 @@ export const ToolcraftSliderControl = React.forwardRef<
                 ) : (
                   <button
                     type="button"
-                    aria-label={accessibleLabel ? `Edit ${accessibleLabel} value` : "Edit slider value"}
+                    aria-label={strings.editSliderValue(accessibleLabel)}
                     disabled={resolvedDisabled}
-                    title={
-                      canReset
-                        ? "Click to edit, double-click to reset"
-                        : "Click to edit"
-                    }
+                    title={canReset ? strings.clickToEditOrReset : strings.clickToEdit}
                     onClick={beginEditing}
                     onDoubleClick={resetToDefault}
                     className="h-5 min-w-[4ch] cursor-text rounded border border-transparent px-1 text-right font-mono text-[11px] leading-5 tabular-nums text-text-muted transition-colors hover:border-border hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-50"

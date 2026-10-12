@@ -12,9 +12,22 @@ export interface ExportEstimateSettings {
   trackCount?: number;
 }
 
+/**
+ * A rounded, unit-tagged breakdown of an estimated duration. Display layers
+ * format it in the user's language; `TimeEstimate.formatted` is the English
+ * rendering of the same value.
+ */
+export type EstimateDuration =
+  | { unit: "seconds"; seconds: number }
+  | { unit: "minutes"; minutes: number }
+  | { unit: "minutesSeconds"; minutes: number; seconds: number }
+  | { unit: "hoursMinutes"; hours: number; minutes: number };
+
 export interface TimeEstimate {
   seconds: number;
+  /** English text for logs and non-localized callers; UIs format `duration`. */
   formatted: string;
+  duration: EstimateDuration;
   confidence: "measured" | "estimated" | "rough";
   breakdown?: {
     rendering: number;
@@ -101,9 +114,10 @@ function getComplexityMultiplier(settings: ExportEstimateSettings): number {
   return multiplier;
 }
 
-function formatTime(seconds: number): string {
+/** Rounds an estimate to the unit pair shown to people. */
+export function describeEstimateDuration(seconds: number): EstimateDuration {
   if (seconds < 60) {
-    return `~${Math.round(seconds)} seconds`;
+    return { unit: "seconds", seconds: Math.round(seconds) };
   }
 
   const minutes = Math.floor(seconds / 60);
@@ -111,14 +125,40 @@ function formatTime(seconds: number): string {
 
   if (minutes < 60) {
     if (remainingSeconds === 0) {
-      return `~${minutes} minute${minutes > 1 ? "s" : ""}`;
+      return { unit: "minutes", minutes };
     }
-    return `~${minutes}m ${remainingSeconds}s`;
+    return { unit: "minutesSeconds", minutes, seconds: remainingSeconds };
   }
 
-  const hours = Math.floor(minutes / 60);
-  const remainingMinutes = minutes % 60;
-  return `~${hours}h ${remainingMinutes}m`;
+  return { unit: "hoursMinutes", hours: Math.floor(minutes / 60), minutes: minutes % 60 };
+}
+
+function formatDuration(duration: EstimateDuration): string {
+  switch (duration.unit) {
+    case "seconds":
+      return `~${duration.seconds} seconds`;
+    case "minutes":
+      return `~${duration.minutes} minute${duration.minutes > 1 ? "s" : ""}`;
+    case "minutesSeconds":
+      return `~${duration.minutes}m ${duration.seconds}s`;
+    case "hoursMinutes":
+      return `~${duration.hours}h ${duration.minutes}m`;
+  }
+}
+
+function timeEstimate(seconds: number, confidence: TimeEstimate["confidence"]): TimeEstimate {
+  const duration = describeEstimateDuration(seconds);
+  return {
+    seconds,
+    formatted: formatDuration(duration),
+    duration,
+    confidence,
+    breakdown: {
+      rendering: seconds * 0.4,
+      encoding: seconds * 0.55,
+      muxing: seconds * 0.05,
+    },
+  };
 }
 
 export function estimateExportTime(
@@ -154,16 +194,7 @@ export function estimateExportTime(
 
     const seconds = totalFrames / Math.max(1, adjustedFps);
 
-    return {
-      seconds,
-      formatted: formatTime(seconds),
-      confidence: "measured",
-      breakdown: {
-        rendering: seconds * 0.4,
-        encoding: seconds * 0.55,
-        muxing: seconds * 0.05,
-      },
-    };
+    return timeEstimate(seconds, "measured");
   }
 
   const codecSupport = profile.encoding[settings.codec];
@@ -183,16 +214,7 @@ export function estimateExportTime(
   const estimatedFps = baseFps * resolutionMultiplier * complexityMultiplier;
   const seconds = totalFrames / Math.max(1, estimatedFps);
 
-  return {
-    seconds,
-    formatted: formatTime(seconds),
-    confidence: "estimated",
-    breakdown: {
-      rendering: seconds * 0.4,
-      encoding: seconds * 0.55,
-      muxing: seconds * 0.05,
-    },
-  };
+  return timeEstimate(seconds, "estimated");
 }
 
 export function compareCodecEstimates(

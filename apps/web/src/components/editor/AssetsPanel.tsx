@@ -1303,7 +1303,7 @@ export const AssetsPanel: React.FC = () => {
 
                 <div className="mb-6">
                   <Text type="label" color="secondary" weight="bold" display="block" className="mb-3 text-xs">
-                    3D Objects
+                    {t("tools.editorChrome.objects3d")}
                   </Text>
                   <div className="grid grid-cols-3 gap-2">
                     {([

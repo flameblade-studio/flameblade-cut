@@ -172,7 +172,18 @@
     "start": "Start now",
     "libraryDefault": "Default: Videos\\Flameblade Cut",
     "libraryReset": "Reset",
-    "libraryHint": "New videos are saved here, one sub-folder per day. Use \"Save as\" to put any single video elsewhere."
+    "libraryHint": "New videos are saved here, one sub-folder per day. Use \"Save as\" to put any single video elsewhere.",
+    "model": {
+      "label": "Main model",
+      "options": {
+        "auto": "Automatic (best installed model for your GPU)",
+        "nvfp4": "NVFP4 · RTX 50 series only, fastest",
+        "int8": "INT8 · RTX 30/40 series and other NVIDIA GPUs",
+        "bf16": "BF16 · full precision, largest file (about 42 GB)"
+      },
+      "autoHint": "Uses NVFP4 on RTX 50 series, INT8 on other GPUs, and BF16 if neither is installed. Time estimates were measured on an RTX 5060 Ti with NVFP4; other setups differ.",
+      "fileHint": "Needs the model file {{file}} (in ComfyUI's models/diffusion_models)."
+    }
   },
   "time": {
     "justNow": "Just now",
@@ -188,7 +199,7 @@
     "engine": "Translation engine",
     "engineLocal": "Local · free",
     "engineOpenai": "OpenAI",
-    "openaiNoKey": "No OpenAI key yet; add one in Settings",
+    "openaiNoKey": "No OpenAI key yet; add one in Settings → API Keys",
     "localNote": "The first use downloads the translation model ({{size}}); after that it works offline",
     "preview": "English prompt",
     "previewButton": "Preview translation",
@@ -201,5 +212,11 @@
     "sentChip": "EN",
     "sentTitle": "English actually sent: {{prompt}} (click to copy)",
     "directorHint": "Each shot is translated with this setting"
+  },
+  "errors": {
+    "model": {
+      "missing": "The LTX-2.5 main model file was not found. Download the version for your GPU from Lightricks/LTX-2.5 on Hugging Face (NVFP4 for RTX 50 series, INT8 otherwise) into ComfyUI's models/diffusion_models, or choose an installed model in the AI engine settings.",
+      "nvfp4-unsupported": "Your GPU cannot run the NVFP4 model (RTX 50 series only). Download the INT8 main model, or choose INT8 in the AI engine settings."
+    }
   }
 }

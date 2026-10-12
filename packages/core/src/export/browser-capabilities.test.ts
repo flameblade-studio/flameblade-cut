@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { checkBrowserExportCapability, getMissingExportMedia, getVideoExportValidationError } from "./browser-capabilities";
+import { checkBrowserExportCapability, getMissingExportMedia, getVideoExportValidationError, getVideoExportValidationIssue } from "./browser-capabilities";
 import { DEFAULT_VIDEO_SETTINGS } from "./types";
 import type { Project } from "../types/project";
 
@@ -36,6 +36,19 @@ describe("browser export preflight", () => {
     expect(getVideoExportValidationError({ ...DEFAULT_VIDEO_SETTINGS, width: 0 }, 2)).toContain("width");
     expect(getVideoExportValidationError({ ...DEFAULT_VIDEO_SETTINGS, frameRate: NaN }, 2)).toContain("frame rate");
     expect(getVideoExportValidationError({ ...DEFAULT_VIDEO_SETTINGS, bitrate: Infinity }, 2)).toContain("bitrate");
+  });
+  it("exposes stable error codes alongside the English messages", async () => {
+    expect(getVideoExportValidationIssue(DEFAULT_VIDEO_SETTINGS, 0)?.code).toBe("emptyTimeline");
+    expect(getVideoExportValidationIssue({ ...DEFAULT_VIDEO_SETTINGS, height: 1.5 }, 2)?.code).toBe("invalidDimensions");
+    expect(getVideoExportValidationIssue({ ...DEFAULT_VIDEO_SETTINGS, frameRate: 0 }, 2)?.code).toBe("invalidFrameRate");
+    expect(getVideoExportValidationIssue({ ...DEFAULT_VIDEO_SETTINGS, bitrate: -1 }, 2)?.code).toBe("invalidBitrate");
+    expect(getVideoExportValidationIssue(DEFAULT_VIDEO_SETTINGS, 2)).toBeNull();
+    await expect(checkBrowserExportCapability({ ...DEFAULT_VIDEO_SETTINGS, codec: "prores" }, library())).resolves.toMatchObject({ reasonCode: "desktopEncoderRequired" });
+    await expect(checkBrowserExportCapability({ ...DEFAULT_VIDEO_SETTINGS, format: "webm" }, library())).resolves.toMatchObject({ reasonCode: "codecUnsupportedInContainer", reasonParams: { codec: "H264", format: "WEBM" } });
+    await expect(checkBrowserExportCapability(DEFAULT_VIDEO_SETTINGS, library(null))).resolves.toMatchObject({ reasonCode: "videoEncodeUnsupported", reasonParams: { codec: "H264", width: 1920, height: 1080 } });
+    await expect(checkBrowserExportCapability(DEFAULT_VIDEO_SETTINGS, library("avc", null))).resolves.toMatchObject({ reasonCode: "audioEncodeUnsupported", reasonParams: { format: "MP4" } });
+    const broken = { ...library(), getFirstEncodableVideoCodec: vi.fn(async () => { throw new Error("boom"); }) } as unknown as typeof import("mediabunny");
+    await expect(checkBrowserExportCapability(DEFAULT_VIDEO_SETTINGS, broken)).resolves.toMatchObject({ reasonCode: "checkFailed", reasonParams: { detail: "boom" } });
   });
   it("requires referenced original files even if a preview proxy exists", () => {
     const project = { timeline: { tracks: [{ clips: [{ mediaId: "video" }] }] }, mediaLibrary: { items: [{ id: "video", name: "Original.mp4", type: "video", blob: null, proxyUrl: "blob:proxy" }, { id: "unused", name: "Unused.mp4", type: "video", blob: null }] } } as unknown as Project;

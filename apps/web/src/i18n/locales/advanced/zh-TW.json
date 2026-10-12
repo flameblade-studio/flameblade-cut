@@ -1,0 +1,953 @@
+{
+  "particles": {
+    "presetLabel": "粒子特效預設",
+    "presetPlaceholder": "選擇特效預設…",
+    "add": "新增",
+    "previews": "粒子預設預覽",
+    "emptyTitle": "尚未新增粒子特效",
+    "emptyHint": "從上方選擇預設即可新增特效",
+    "collapse": "收合特效",
+    "expand": "展開特效",
+    "preview": "預覽特效",
+    "disable": "停用特效",
+    "enable": "啟用特效",
+    "remove": "移除特效",
+    "startTime": "開始時間",
+    "duration": "長度",
+    "settings": "粒子設定",
+    "count": "粒子數量",
+    "speed": "速度",
+    "gravity": "重力",
+    "emissionRate": "發射速率",
+    "minSize": "最小尺寸",
+    "maxSize": "最大尺寸",
+    "turbulence": "擾動",
+    "blendMode": "混合模式",
+    "blend": {
+      "normal": "一般",
+      "add": "相加",
+      "multiply": "色彩增值",
+      "screen": "濾色"
+    },
+    "colors": "顏色（{{count}}）",
+    "addColor": "新增顏色",
+    "previewPreset": "預覽 {{name}}",
+    "presetMeta": "{{type}} · {{count}} 個粒子",
+    "editColor": "編輯顏色 {{color}}",
+    "removeColor": "移除顏色"
+  },
+  "pip": {
+    "presets": {
+      "top-left": "左上",
+      "top-right": "右上",
+      "bottom-left": "左下",
+      "bottom-right": "右下",
+      "split-left": "分割左側",
+      "split-right": "分割右側",
+      "split-top": "分割上方",
+      "split-bottom": "分割下方",
+      "center-small": "置中（小）",
+      "center-medium": "置中（中）",
+      "fullscreen": "全螢幕"
+    },
+    "title": "子母畫面",
+    "subtitle": "調整疊加影片的位置與縮放",
+    "corners": "角落位置",
+    "split": "分割畫面",
+    "center": "置中與全螢幕",
+    "showAdvanced": "顯示進階控制",
+    "hideAdvanced": "隱藏進階控制",
+    "position": "位置",
+    "positionX": "X 位置",
+    "positionY": "Y 位置",
+    "scale": "縮放",
+    "uniformScale": "等比縮放",
+    "scaleX": "X 縮放",
+    "scaleY": "Y 縮放",
+    "appearance": "外觀",
+    "borderRadius": "圓角",
+    "opacity": "不透明度",
+    "reset": "重設為預設值",
+    "dragHint": "在預覽中拖曳片段即可微調位置"
+  },
+  "motionTracking": {
+    "title": "動態追蹤",
+    "subtitle": "追蹤物件以附加元素",
+    "region": "追蹤區域",
+    "positionX": "X 位置",
+    "positionY": "Y 位置",
+    "width": "寬度",
+    "height": "高度",
+    "regionHint": "在預覽中繪製區域，或輸入座標",
+    "advancedOptions": "進階選項",
+    "algorithm": "演算法",
+    "algorithmOption": "{{name}}：{{description}}",
+    "algorithms": {
+      "correlation": {
+        "name": "相關比對",
+        "description": "最適合高對比物件"
+      },
+      "optical-flow": {
+        "name": "光流",
+        "description": "適合平順的動作"
+      },
+      "feature": {
+        "name": "特徵比對",
+        "description": "可處理複雜紋理"
+      }
+    },
+    "confidence": "信心門檻",
+    "confidenceHint": "數值越高越精準，但較容易跟丟",
+    "smoothing": "路徑平滑",
+    "smoothingHint": "減少追蹤路徑的抖動",
+    "start": "開始追蹤",
+    "inProgress": "追蹤中",
+    "cancel": "取消追蹤",
+    "analyzing": "正在分析影格…",
+    "lostFrames_one": "有 {{count}} 個影格跟丟",
+    "lostFrames_other": "有 {{count}} 個影格跟丟",
+    "failed": "追蹤失敗",
+    "complete": "追蹤完成",
+    "keyframesCaptured_one": "已擷取 {{count}} 個關鍵影格",
+    "keyframesCaptured_other": "已擷取 {{count}} 個關鍵影格",
+    "framesLost_one": "{{count}} 個影格跟丟",
+    "framesLost_other": "{{count}} 個影格跟丟",
+    "positionOffset": "位置偏移",
+    "offsetX": "X 偏移",
+    "offsetY": "Y 偏移",
+    "transformOptions": "變形選項",
+    "scale": "縮放",
+    "rotation": "旋轉",
+    "apply": "將追蹤套用到片段",
+    "applied": "已套用追蹤",
+    "remove": "移除追蹤",
+    "retrack": "以不同設定重新追蹤",
+    "footer": "追蹤物件以固定圖形、文字或特效"
+  },
+  "markers": {
+    "defaultLabel": "標記 {{index}}",
+    "title": "標記",
+    "add": "新增",
+    "emptyTitle": "尚無標記",
+    "emptyHint": "在播放頭位置按 M 即可新增標記",
+    "labelField": "標記名稱",
+    "useColor": "使用標記顏色 {{color}}",
+    "save": "儲存",
+    "cancel": "取消",
+    "jumpTo": "跳至 {{label}}",
+    "edit": "編輯 {{label}}",
+    "remove": "移除 {{label}}"
+  },
+  "transform3d": {
+    "noClip": "未選取片段",
+    "rotationX": "X 軸旋轉",
+    "rotationY": "Y 軸旋轉",
+    "rotationZ": "Z 軸旋轉",
+    "perspective": "透視",
+    "style": "變形樣式",
+    "flat": "平面",
+    "preserve3d": "保留 3D",
+    "flatHint": "將子元素壓平到此元素的平面上",
+    "preserve3dHint": "子元素位於 3D 空間中",
+    "tip": "提示：3D 旋轉可讓圖層沿 X、Y、Z 軸旋轉，營造景深效果；調整透視即可控制 3D 縱深感。"
+  },
+  "svg": {
+    "selectColor": "選擇{{label}}",
+    "noClip": "未選取 SVG 片段",
+    "mode": "模式",
+    "setMode": "將 SVG 色彩模式設為{{mode}}",
+    "modes": {
+      "none": "無",
+      "tint": "染色",
+      "replace": "取代"
+    },
+    "color": "顏色",
+    "opacity": "不透明度",
+    "entryAnimation": "進場動畫",
+    "exitAnimation": "退場動畫",
+    "duration": "長度"
+  },
+  "sceneNavigator": {
+    "fullTimeline": "完整時間軸",
+    "intro": "開場",
+    "defaultLabel": "場景 {{index}}",
+    "previousScene": "上一個場景",
+    "nextScene": "下一個場景",
+    "scene": "場景",
+    "scenes": "場景",
+    "addScene": "新增場景",
+    "add": "新增",
+    "title": "場景導覽",
+    "subtitle": "在各段落之間切換",
+    "previous": "上一個",
+    "position": "第 {{current}} / {{total}} 個場景",
+    "next": "下一個"
+  },
+  "retouching": {
+    "setSourceHint": "按住 Alt 並點按以設定仿製來源",
+    "cloneSource": "仿製來源",
+    "clear": "清除",
+    "tools": {
+      "spotHeal": {
+        "label": "污點修復",
+        "description": "取樣周圍像素以去除瑕疵"
+      },
+      "cloneStamp": {
+        "label": "仿製印章",
+        "description": "將來源像素複製到目標處"
+      },
+      "redEyeRemoval": {
+        "label": "消除紅眼",
+        "description": "去除相片中的紅眼"
+      }
+    },
+    "title": "修飾工具",
+    "brushSettings": "筆刷設定",
+    "size": "大小",
+    "hardness": "硬度",
+    "opacity": "不透明度",
+    "flow": "流量",
+    "howTo": "使用方式",
+    "instructions": {
+      "spotHeal": "在瑕疵上點按並拖曳即可去除；工具會取樣周圍像素，自然融合。",
+      "cloneStamp": "按住 Alt 並點按設定來源點，再塗抹即可將來源像素複製到目標處。",
+      "redEyeRemoval": "點按紅眼處即可自動偵測並去除紅眼。"
+    }
+  },
+  "photoLayers": {
+    "blendMode": "混合模式",
+    "setBlendMode": "將混合模式設為{{mode}}",
+    "blendModes": {
+      "normal": "正常",
+      "multiply": "色彩增值",
+      "screen": "濾色",
+      "overlay": "覆蓋",
+      "softLight": "柔光",
+      "hardLight": "實光",
+      "colorDodge": "加亮顏色",
+      "colorBurn": "加深顏色",
+      "difference": "差異化",
+      "exclusion": "排除",
+      "hue": "色相",
+      "saturation": "飽和度",
+      "color": "顏色",
+      "luminosity": "明度"
+    },
+    "hideLayer": "隱藏圖層",
+    "showLayer": "顯示圖層",
+    "unlockLayer": "解除鎖定圖層",
+    "lockLayer": "鎖定圖層",
+    "empty": "沒有圖層",
+    "addLayer": "新增圖層",
+    "layersCount": "圖層（{{count}}）",
+    "addNewLayer": "新增圖層",
+    "properties": "圖層屬性",
+    "opacity": "不透明度",
+    "duplicate": "再製",
+    "delete": "刪除"
+  },
+  "musicLibrary": {
+    "stop": "停止 {{name}}",
+    "preview": "試聽 {{name}}",
+    "addToTimeline": "將 {{name}} 加入時間軸",
+    "title": "音樂與音效",
+    "subtitle": "免版稅音效",
+    "music": "音樂",
+    "sfx": "音效",
+    "search": "搜尋音效",
+    "searchPlaceholder": "搜尋音效…",
+    "all": "全部",
+    "genres": {
+      "electronic": "電子",
+      "cinematic": "電影感",
+      "pop": "流行",
+      "rock": "搖滾",
+      "hip-hop": "嘻哈",
+      "jazz": "爵士",
+      "classical": "古典",
+      "ambient": "氛圍",
+      "lofi": "Lo-Fi",
+      "corporate": "企業",
+      "upbeat": "輕快",
+      "dramatic": "戲劇性"
+    },
+    "sfxCategories": {
+      "transitions": "轉場",
+      "whoosh": "呼嘯聲",
+      "impacts": "撞擊",
+      "ui": "介面音效",
+      "nature": "自然",
+      "human": "人聲",
+      "mechanical": "機械",
+      "musical": "樂器",
+      "cartoon": "卡通",
+      "horror": "恐怖",
+      "sci-fi": "科幻"
+    },
+    "moods": {
+      "happy": "快樂",
+      "sad": "悲傷",
+      "energetic": "活力",
+      "calm": "平靜",
+      "tense": "緊張",
+      "romantic": "浪漫",
+      "inspiring": "激勵",
+      "mysterious": "神祕",
+      "playful": "俏皮",
+      "dark": "陰暗",
+      "bright": "明亮",
+      "nostalgic": "懷舊"
+    },
+    "emptyTitle": "找不到音效",
+    "emptyHint": "請試著調整篩選條件",
+    "tracksAvailable": "共 {{count}} 首音樂",
+    "effectsAvailable": "共 {{count}} 個音效"
+  },
+  "audioTextSync": {
+    "intro": "依序修剪並排列影片片段，讓每個剪接點都落在音樂節拍上。",
+    "progress": "節拍偵測進度",
+    "detect": "偵測節拍",
+    "bpmDetected": "偵測到的 BPM",
+    "beats": "節拍數",
+    "selectTracks": "選擇要對齊節拍的軌道：",
+    "noTracks": "找不到含有可用片段且未鎖定的軌道。請先將影片片段加入時間軸。",
+    "selectTrack": "選取 {{name}}",
+    "deselectTrack": "取消選取 {{name}}",
+    "clipCount_one": "{{count}} 個片段",
+    "clipCount_other": "{{count}} 個片段",
+    "cutEvery": "剪接間隔",
+    "beatCount_one": "{{count}} 拍",
+    "beatCount_other": "{{count}} 拍",
+    "cutHint": "每個影片片段只使用一次，從目前的入點開始，音樂位置不變。序列至少需要兩個影片片段；復原可還原原本的時間安排。",
+    "willSync": "將把 {{clips}} 個片段對齊到 {{beats}} 個節拍",
+    "settings": "同步設定",
+    "syncMode": "同步模式",
+    "useMode": "使用「{{mode}}」同步模式",
+    "modes": {
+      "cutToBeats": {
+        "label": "依節拍剪接影片",
+        "description": "每 1、2、4 或 8 拍剪接一次來排列影片片段"
+      },
+      "smart": {
+        "label": "智慧",
+        "description": "調整長度以符合最接近的節拍數"
+      },
+      "onePerBeat": {
+        "label": "每拍一個",
+        "description": "每個片段剛好佔一拍"
+      },
+      "preserveDuration": {
+        "label": "保留長度",
+        "description": "保留原本長度，只將起點貼齊節拍"
+      }
+    },
+    "subdivision": "節拍細分",
+    "offset": "偏移",
+    "downbeatsOnly": "僅限強拍",
+    "allBeats": "所有節拍",
+    "downbeats": "強拍",
+    "preview": "預覽：",
+    "clipIndex": "片段 {{index}}",
+    "more": "…還有 {{count}} 個",
+    "syncing": "同步中…",
+    "applyCuts": "將節拍剪接套用到 {{count}} 個片段",
+    "syncClips": "將 {{count}} 個片段對齊節拍",
+    "reanalyze": "重新分析節拍"
+  },
+  "tts": {
+    "title": "文字轉語音",
+    "subtitle": "使用你自己的 ElevenLabs 金鑰產生語音",
+    "keySettings": "API 金鑰設定",
+    "text": "文字",
+    "textPlaceholder": "輸入要轉成語音的文字……",
+    "enhanceForTts": "針對語音最佳化",
+    "openSettings": "開啟設定",
+    "enhancing": "最佳化中……",
+    "enhanceText": "最佳化文字",
+    "generating": "產生中……",
+    "generate": "產生語音",
+    "unsaved": "音訊尚未儲存：請存入媒體庫、加入時間軸或下載保存。",
+    "poweredBy": "由 ElevenLabs 提供 · {{model}}",
+    "model": "模型",
+    "favoriteModels": "收藏的模型",
+    "select": "選擇 {{name}}",
+    "toggleModels": "展開或收合模型清單",
+    "loadingModels": "正在載入模型……",
+    "noModels": "沒有可用的模型",
+    "languageCount_one": "{{count}} 種語言",
+    "languageCount_other": "{{count}} 種語言",
+    "removeFavorite": "從收藏移除",
+    "addFavorite": "加入收藏",
+    "modelsAvailable_one": "共 {{count}} 個模型",
+    "modelsAvailable_other": "共 {{count}} 個模型",
+    "voiceName": "{{name}} 語音",
+    "pausePreview": "暫停試聽",
+    "playPreview": "播放試聽",
+    "saveToMedia": "存入媒體庫",
+    "addToTimeline": "加入時間軸",
+    "download": "下載",
+    "enhancedHint": "已最佳化：可在下方修改後再產生",
+    "discard": "捨棄",
+    "enhancedPreview": "最佳化預覽",
+    "voice": "語音",
+    "favorites": "收藏",
+    "previewVoice": "試聽語音",
+    "hideVoices": "隱藏語音瀏覽",
+    "browseVoices": "瀏覽與搜尋語音",
+    "searchVoices": "搜尋語音",
+    "searchPlaceholder": "依名稱、口音、性別搜尋……",
+    "loadingVoices": "正在載入語音……",
+    "unlockVoices": "解鎖工作階段以瀏覽語音",
+    "noVoiceMatch": "沒有符合搜尋的語音",
+    "cloned": "複製語音",
+    "preview": "試聽"
+  },
+  "voiceOver": {
+    "title": "從播放頭開始錄音",
+    "startsAt": "將從 {{seconds}} 秒開始錄到新的旁白軌道。",
+    "stop": "停止並加入時間軸",
+    "adding": "正在加入旁白……",
+    "record": "錄製旁白",
+    "footer": "錄好的音訊會保存在此專案中，並與其他混音一起匯出。",
+    "emptyRecording": "麥克風錄音是空的。",
+    "importFailed": "無法匯入這段錄音。",
+    "notFound": "匯入後找不到錄好的音訊。",
+    "addFailed": "無法把旁白加入時間軸。",
+    "unsupported": "這個環境不支援旁白錄音。",
+    "noFormat": "這個環境沒有可用的麥克風錄音格式。",
+    "stoppedUnexpectedly": "麥克風錄音意外中斷。",
+    "saveFailed": "無法儲存旁白。",
+    "allowMic": "請允許使用麥克風，才能錄製旁白。",
+    "startFailed": "無法開始麥克風錄音。"
+  },
+  "ducking": {
+    "trackFallback": "軌道 {{id}}",
+    "noOverlap": "找不到與此片段重疊的觸發片段。",
+    "noDecodable": "所選來源軌道上沒有可解碼的觸發音訊。",
+    "persistFailed": "無法把自動降音設定儲存到此片段。"
+  },
+  "audioEffects": {
+    "wetDry": "效果／原音比例"
+  },
+  "easing": {
+    "use": "使用「{{name}}」緩動",
+    "basicCategory": "基本",
+    "curve": "{{family}}{{direction}}",
+    "withVariant": "{{label}}（{{variant}}）",
+    "direction": {
+      "In": "漸入",
+      "Out": "漸出",
+      "InOut": "漸入漸出"
+    },
+    "family": {
+      "Quad": "二次",
+      "Cubic": "三次",
+      "Quart": "四次",
+      "Quint": "五次",
+      "Sine": "正弦",
+      "Expo": "指數",
+      "Circ": "圓形",
+      "Back": "回拉",
+      "Elastic": "彈性",
+      "Bounce": "彈跳"
+    },
+    "variant": {
+      "Strong": "強",
+      "Soft": "柔和",
+      "Small": "小幅"
+    },
+    "basic": {
+      "linear": "線性",
+      "ease": "緩和",
+      "ease-in": "漸入",
+      "ease-out": "漸出",
+      "ease-in-out": "漸入漸出",
+      "hold": "保持",
+      "bezier": "貝茲曲線",
+      "smoothstep": "平滑步進",
+      "smootherstep": "更平滑步進",
+      "snappy": "俐落",
+      "smooth": "平滑"
+    }
+  },
+  "motionPath": {
+    "noClip": "尚未選取片段",
+    "title": "運動路徑",
+    "enable": "啟用運動路徑",
+    "showPathLabel": "顯示路徑",
+    "hidePath": "隱藏路徑",
+    "showPath": "顯示路徑",
+    "autoOrient": "自動轉向",
+    "pathType": "路徑類型",
+    "setPathType": "將路徑類型設為{{type}}",
+    "types": {
+      "linear": "直線",
+      "bezier": "貝茲曲線",
+      "catmull-rom": "平滑"
+    },
+    "pathPoints": "路徑點",
+    "pointCount_one": "{{count}} 個點",
+    "pointCount_other": "{{count}} 個點",
+    "addPoint": "新增點",
+    "clearPath": "清除路徑",
+    "exitEdit": "結束編輯模式",
+    "editOnCanvas": "在畫布上編輯路徑",
+    "editingLabel": "編輯中：",
+    "editingHint": "點一下路徑可新增點，拖曳點可移動，按右鍵可刪除，拖曳控制桿可調整曲線。",
+    "tipLabel": "提示：",
+    "tip": "運動路徑會讓片段的位置隨時間沿著曲線移動。使用貝茲控制桿可做出平滑曲線。"
+  },
+  "textAnimation": {
+    "preset": "動畫預設",
+    "previews": "文字動畫預覽",
+    "previewApply": "預覽並套用「{{name}}」",
+    "easing": "緩動",
+    "noClip": "尚未選取文字片段",
+    "timing": "時間",
+    "inDuration": "進場時長",
+    "outDuration": "退場時長",
+    "previewTitle": "預覽",
+    "previewHint": "動畫會在預覽與匯出時播放。動畫總長：{{seconds}} 秒",
+    "settings": {
+      "fade": "淡入設定",
+      "slide": "滑入設定",
+      "scale": "縮放設定",
+      "bounce": "彈跳設定",
+      "rotate": "旋轉設定",
+      "wave": "波浪設定",
+      "shake": "晃動設定",
+      "pop": "彈出設定",
+      "glitch": "故障效果設定"
+    },
+    "params": {
+      "startOpacity": "起始不透明度",
+      "endOpacity": "結束不透明度",
+      "distance": "距離",
+      "scaleFrom": "起始縮放",
+      "scaleTo": "結束縮放",
+      "height": "高度",
+      "bounces": "彈跳次數",
+      "angle": "角度",
+      "amplitude": "振幅",
+      "frequency": "頻率",
+      "intensity": "強度",
+      "speed": "速度",
+      "overshoot": "過衝幅度"
+    },
+    "presets": {
+      "none": {
+        "name": "無",
+        "description": "沒有動畫"
+      },
+      "typewriter": {
+        "name": "打字機",
+        "description": "文字逐字出現"
+      },
+      "fade": {
+        "name": "淡入",
+        "description": "平順的透明度變化"
+      },
+      "slide-up": {
+        "name": "向上滑入",
+        "description": "從下方滑入"
+      },
+      "slide-down": {
+        "name": "向下滑入",
+        "description": "從上方滑入"
+      },
+      "slide-left": {
+        "name": "向左滑入",
+        "description": "從右側滑入"
+      },
+      "slide-right": {
+        "name": "向右滑入",
+        "description": "從左側滑入"
+      },
+      "scale": {
+        "name": "放大進場",
+        "description": "從小放大到原尺寸"
+      },
+      "blur": {
+        "name": "模糊進場",
+        "description": "淡入同時由模糊變清晰"
+      },
+      "bounce": {
+        "name": "彈跳",
+        "description": "彈跳到定位"
+      },
+      "rotate": {
+        "name": "旋轉進場",
+        "description": "邊旋轉邊出現"
+      },
+      "pop": {
+        "name": "彈出",
+        "description": "略為放大後彈回出現"
+      },
+      "flip": {
+        "name": "翻轉",
+        "description": "翻轉進入畫面"
+      },
+      "split": {
+        "name": "分裂",
+        "description": "文字從中央向外分開"
+      },
+      "word-by-word": {
+        "name": "逐詞出現",
+        "description": "詞語一個接一個出現"
+      },
+      "rise": {
+        "name": "上升",
+        "description": "柔和模糊上升，並帶輕微縮放收尾"
+      },
+      "drop": {
+        "name": "落下",
+        "description": "文字落下並輕輕彈跳著地"
+      },
+      "elastic": {
+        "name": "彈性",
+        "description": "帶有適度過衝的彈簧式縮放進場"
+      },
+      "swing": {
+        "name": "擺盪",
+        "description": "文字以交錯的鉸鏈方式擺入定位"
+      },
+      "zoom-blur": {
+        "name": "縮放模糊",
+        "description": "從電影感的前推縮放中逐漸清晰"
+      },
+      "cascade": {
+        "name": "階梯瀑布",
+        "description": "文字沿對角線依序進場"
+      },
+      "wave": {
+        "name": "波浪",
+        "description": "持續的波浪動作"
+      },
+      "shake": {
+        "name": "晃動",
+        "description": "持續晃動"
+      },
+      "glitch": {
+        "name": "故障效果",
+        "description": "數位故障效果"
+      },
+      "rainbow": {
+        "name": "彩虹",
+        "description": "循環變換的彩虹色"
+      }
+    }
+  },
+  "emphasis": {
+    "none": "無",
+    "reset": "重設",
+    "speed": "速度",
+    "intensity": "強度",
+    "loop": "循環播放動畫",
+    "timing": "時間",
+    "clipLength": "片段長度：{{time}}",
+    "startTime": "開始時間",
+    "duration": "時長",
+    "fullClip": "整個片段",
+    "resetFullClip": "重設為整個片段",
+    "focusSettings": "焦點縮放設定",
+    "zoomScale": "縮放倍率",
+    "holdDuration": "停留時長",
+    "focusPoint": "焦點位置",
+    "xPosition": "X 位置",
+    "yPosition": "Y 位置",
+    "focusAt": "焦點設在{{position}}",
+    "focus": {
+      "tl": "左上",
+      "tc": "上方中央",
+      "tr": "右上",
+      "ml": "左側中央",
+      "c": "正中央",
+      "mr": "右側中央",
+      "bl": "左下",
+      "bc": "下方中央",
+      "br": "右下"
+    },
+    "focusShort": {
+      "tl": "左上",
+      "tc": "上",
+      "tr": "右上",
+      "ml": "左",
+      "c": "中",
+      "mr": "右",
+      "bl": "左下",
+      "bc": "下",
+      "br": "右下"
+    },
+    "footer": "強調動畫會在片段顯示期間播放（不含進場與退場）",
+    "categories": {
+      "attention": "吸引注意",
+      "movement": "移動",
+      "rotation": "旋轉",
+      "distortion": "變形",
+      "zoomPan": "縮放與平移"
+    },
+    "animations": {
+      "pulse": {
+        "name": "脈動",
+        "description": "輕柔的縮放呼吸效果"
+      },
+      "heartbeat": {
+        "name": "心跳",
+        "description": "像心跳一樣的雙拍脈動"
+      },
+      "flash": {
+        "name": "閃爍",
+        "description": "不透明度脈動效果"
+      },
+      "glow": {
+        "name": "光暈",
+        "description": "縮放與不透明度一起脈動"
+      },
+      "breathe": {
+        "name": "呼吸",
+        "description": "緩慢、平靜的縮放效果"
+      },
+      "shake": {
+        "name": "晃動",
+        "description": "快速左右晃動"
+      },
+      "bounce": {
+        "name": "彈跳",
+        "description": "上下彈跳"
+      },
+      "float": {
+        "name": "漂浮",
+        "description": "輕柔的漂浮動作"
+      },
+      "vibrate": {
+        "name": "震動",
+        "description": "隨機的細微移動"
+      },
+      "wave": {
+        "name": "波浪",
+        "description": "像波浪般的動作"
+      },
+      "spin": {
+        "name": "自轉",
+        "description": "持續旋轉"
+      },
+      "swing": {
+        "name": "擺盪",
+        "description": "像鐘擺般的旋轉"
+      },
+      "wobble": {
+        "name": "搖晃",
+        "description": "帶旋轉的搖晃"
+      },
+      "tilt": {
+        "name": "傾斜",
+        "description": "緩慢的傾斜動作"
+      },
+      "tada": {
+        "name": "登登",
+        "description": "吸引目光的扭動"
+      },
+      "jello": {
+        "name": "果凍",
+        "description": "像果凍般擠壓的效果"
+      },
+      "rubber-band": {
+        "name": "橡皮筋",
+        "description": "有彈性的伸縮效果"
+      },
+      "flicker": {
+        "name": "閃動",
+        "description": "隨機忽隱忽現"
+      },
+      "zoom-pulse": {
+        "name": "縮放脈動",
+        "description": "放大後再縮回"
+      },
+      "focus-zoom": {
+        "name": "焦點縮放",
+        "description": "放大到某一點再回來"
+      },
+      "ken-burns": {
+        "name": "肯·伯恩斯效果",
+        "description": "緩慢縮放並平移"
+      },
+      "pan-left": {
+        "name": "向左平移",
+        "description": "緩慢向左平移"
+      },
+      "pan-right": {
+        "name": "向右平移",
+        "description": "緩慢向右平移"
+      },
+      "pan-up": {
+        "name": "向上平移",
+        "description": "緩慢向上平移"
+      },
+      "pan-down": {
+        "name": "向下平移",
+        "description": "緩慢向下平移"
+      }
+    }
+  },
+  "motionPresets": {
+    "apply": "套用「{{name}}」",
+    "applyShort": "套用",
+    "appliedTitle": "已套用動態預設",
+    "appliedBody": "已將「{{name}}」加入片段",
+    "removed": "已移除預設",
+    "selectClip": "請選取片段以套用動態預設",
+    "clipNotFound": "找不到片段",
+    "applied": "已套用的動畫",
+    "removeEntry": "移除進場 ×",
+    "removeExit": "移除退場 ×",
+    "removeEmphasis": "移除強調 ×",
+    "categories": {
+      "entrance": "進場",
+      "exit": "退場",
+      "emphasis": "強調",
+      "transition": "轉場"
+    },
+    "durationAria": "動態預設時長",
+    "duration": "時長",
+    "durationHint": "設定「{{category}}」預設的播放時長。放開滑桿後，最後套用的預設會隨之更新。",
+    "presetCount_one": "「{{category}}」共 {{count}} 個預設",
+    "presetCount_other": "「{{category}}」共 {{count}} 個預設",
+    "presets": {
+      "fade-in": "淡入",
+      "slide-in-left": "從左滑入",
+      "slide-in-right": "從右滑入",
+      "slide-in-top": "從上滑入",
+      "slide-in-bottom": "從下滑入",
+      "scale-in": "放大進場",
+      "pop": "彈出",
+      "bounce-in": "彈跳進場",
+      "flip-in": "翻轉進場",
+      "blur-in": "模糊進場",
+      "fade-out": "淡出",
+      "slide-out-left": "向左滑出",
+      "slide-out-right": "向右滑出",
+      "scale-out": "縮小退場",
+      "shrink": "縮小",
+      "blur-out": "模糊退場",
+      "pulse": "脈動",
+      "shake": "晃動",
+      "bounce": "彈跳",
+      "wiggle": "扭動",
+      "rubber-band": "橡皮筋",
+      "glow-pulse": "光暈脈動",
+      "cross-dissolve": "交叉溶解",
+      "wipe-left": "向左擦除",
+      "zoom-transition": "縮放轉場"
+    }
+  },
+  "speedRamp": {
+    "canvasHint": "點一下新增 • 拖曳移動 • 點一下控制點刪除",
+    "effectiveDuration": "實際時長：{{duration}}",
+    "playbackSpeed": "播放速度",
+    "reverse": "倒轉播放",
+    "pitchCorrect": "音高校正",
+    "curvePresets": "速度曲線預設",
+    "ramping": "變速",
+    "rampingWithCount_one": "變速（{{count}} 個關鍵影格）",
+    "rampingWithCount_other": "變速（{{count}} 個關鍵影格）",
+    "removeKeyframe": "移除速度關鍵影格",
+    "freeze": "定格畫面",
+    "freezeWithCount_one": "定格畫面（{{count}} 個）",
+    "freezeWithCount_other": "定格畫面（{{count}} 個）",
+    "addFreeze": "在播放頭加入定格畫面",
+    "removeFreeze": "移除定格畫面",
+    "reset": "重設速度與效果",
+    "curves": {
+      "flash": "瞬間加速",
+      "smooth-slow-mo": "平滑慢動作",
+      "jump-cut": "跳接",
+      "montage": "蒙太奇",
+      "hero-moment": "英雄時刻",
+      "bullet-time": "子彈時間"
+    }
+  },
+  "noiseReduction": {
+    "emptyRange": "片段的音訊範圍是空的",
+    "analyzingAudio": "正在分析片段音訊",
+    "sampling": "正在取樣片段音訊（{{index}}/{{total}}）",
+    "analyzingSamples_one": "正在分析 {{count}} 段片段樣本",
+    "analyzingSamples_other": "正在分析 {{count}} 段片段樣本",
+    "analyzedSamples_one": "已分析 {{count}} 段片段樣本",
+    "analyzedSamples_other": "已分析 {{count}} 段片段樣本",
+    "analyzedAudio": "已分析片段音訊",
+    "updateFailed": "無法更新降噪設定",
+    "applyFailed": "無法套用降噪",
+    "clipNotFound": "找不到片段",
+    "noAudio": "此片段沒有可用的音訊資料",
+    "preparing": "正在準備分析片段",
+    "decodeFailed": "無法解碼音訊以進行分析",
+    "analyzingSignature": "正在分析雜訊特徵",
+    "learningProfile": "正在學習自訂降噪設定檔",
+    "recommendationReady": "建議已就緒",
+    "applied": "已將「{{name}}」套用到此片段。",
+    "learnedApplied": "已學習「{{name}}」並套用到此片段。",
+    "presetFailed": "無法套用降噪預設",
+    "analyzeFailed": "無法分析此片段",
+    "recommendFailed": "無法套用建議的降噪設定",
+    "analyzing": "分析中……",
+    "applyingCleanup": "正在套用降噪……",
+    "recommendationReadyButton": "建議已就緒",
+    "cleanupApplied": "已套用降噪",
+    "analysisFailed": "分析失敗",
+    "analyze": "分析並建議",
+    "collapse": "收合降噪",
+    "expand": "展開降噪",
+    "title": "降噪",
+    "enable": "啟用降噪",
+    "intro": "降低白噪音、風聲、嗡嗡聲、環境底噪與背景音樂，同時讓人聲或想保留的聲音維持清楚。",
+    "usePreset": "使用「{{name}}」降噪",
+    "currentMode": "目前模式：{{name}}",
+    "statusApplied": "已套用",
+    "statusOff": "關閉",
+    "recommendationLearned": "偵測到的雜訊最接近「{{name}}」。以 {{threshold}} dB 套用 {{percent}}% 降噪，即可把這組設定檔存到片段上。",
+    "recommendationPreset": "偵測到的雜訊最接近「{{name}}」。建議以 {{threshold}} dB 套用 {{percent}}% 降噪。由於無法單獨取出自訂設定檔，這項建議改用與片段最相符的預設。",
+    "applying": "套用中……",
+    "applyRecommended": "套用建議的降噪",
+    "abPreview": "A/B 比較試聽",
+    "hearOriginal": "聽原音",
+    "hearCleaned": "聽降噪後",
+    "previewOnly": "僅影響預覽；匯出時仍會使用降噪後的音訊效果鏈。",
+    "threshold": "臨界值",
+    "reduction": "降噪量",
+    "attack": "起音",
+    "release": "釋放",
+    "progress": "雜訊分析進度",
+    "profileActive": "此片段正在使用學習到的雜訊設定檔。",
+    "autoTuned": "已依「{{name}}」自動調整，匯出時也會沿用。",
+    "presets": {
+      "balanced": {
+        "name": "均衡",
+        "description": "適度清除一般室內雜訊，不會壓得太重。"
+      },
+      "speech": {
+        "name": "人聲優先",
+        "description": "保留對白的清晰度，同時降低嘶嘶聲與環境底噪。"
+      },
+      "whiteNoise": {
+        "name": "白噪音",
+        "description": "強力去除寬頻嘶嘶聲，適用風扇、空調、攝影機前級雜訊與環境底噪。"
+      },
+      "music": {
+        "name": "背景音樂",
+        "description": "壓低背景音樂，同時讓人聲維持在前方。"
+      },
+      "heavy": {
+        "name": "強烈雜訊",
+        "description": "更強力的寬頻降噪，適用大聲的空調、風扇與街道環境音。"
+      },
+      "wind": {
+        "name": "風聲與低頻隆隆聲",
+        "description": "針對低頻隆隆聲、手持操作雜音與戶外風切聲。"
+      },
+      "hum": {
+        "name": "嗡嗡聲與空調",
+        "description": "專門清除音調性嗡嗡聲、冷氣低鳴與電源線類雜訊。"
+      }
+    }
+  }
+}

@@ -90,14 +90,3 @@ export function disposeLocalTranslator(): void {
   defaultLocal?.dispose();
 }
 
-/** Whether the user saved an OpenAI key in the desktop app. */
-export async function openAiKeyConfigured(): Promise<boolean> {
-  const bridge = openAiBridge();
-  if (!bridge) return false;
-  try {
-    return (await bridge.keyStatus()).configured;
-  } catch (error) {
-    console.warn("[prompt-translation] could not read the OpenAI key status:", error);
-    return false;
-  }
-}

@@ -1,0 +1,881 @@
+{
+  "autoEdit": {
+    "audioMissing": "Audio file not loaded",
+    "analyzeFailed": "Failed to analyze audio",
+    "title": "Beat-Synced Auto-Edit",
+    "empty": "Add an audio track to use auto-edit",
+    "audioSource": "Audio Source",
+    "cutMode": "Cut Mode",
+    "modes": {
+      "beats": "beats",
+      "downbeats": "downbeats",
+      "segments": "segments"
+    },
+    "sensitivity": "Sensitivity",
+    "minClip": "Min Clip Duration",
+    "minClipAria": "Minimum clip duration",
+    "analyzing": "Analyzing beats...",
+    "generate": "Generate Auto-Edit",
+    "preview": "Preview",
+    "cuts": "Cuts:",
+    "duration": "Duration:",
+    "apply": "Apply Auto-Edit"
+  },
+  "crop": {
+    "title": "Crop Video",
+    "free": "Free",
+    "reset": "Reset crop",
+    "loading": "Loading video...",
+    "previewAlt": "Crop preview"
+  },
+  "highlightExtractor": {
+    "mediaMissing": "Media not found or not loaded",
+    "decoding": "Decoding audio...",
+    "failed": "Analysis failed",
+    "clips": "Clips",
+    "maxDuration": "Max duration",
+    "secondsUnit": "s",
+    "progress": "{{phase}} ({{percent}}%)",
+    "find": "Find Highlights",
+    "preview": "Preview highlight",
+    "apply_one": "Apply {{count}} Highlight",
+    "apply_other": "Apply {{count}} Highlights"
+  },
+  "aspectMatch": {
+    "title": "Match Video Dimensions?",
+    "subtitle": "The video you're adding has different dimensions than your current project settings.",
+    "video": "Video Dimensions",
+    "project": "Current Project",
+    "ratio": "Aspect Ratio: {{ratio}}",
+    "hint": "Match the project dimensions to this video for a clean fit, or keep the current canvas. Your video will be placed at its original size so you can resize it freely.",
+    "keep": "Keep Current",
+    "match": "Match Video"
+  },
+  "easing": {
+    "linear": "Linear",
+    "easeInQuad": "Ease In",
+    "easeOutQuad": "Ease Out",
+    "easeInOutQuad": "Ease In Out",
+    "easeInCubic": "Ease In Cubic",
+    "easeOutCubic": "Ease Out Cubic",
+    "easeInOutCubic": "Ease In Out Cubic",
+    "easeInQuart": "Ease In Quart",
+    "easeOutQuart": "Ease Out Quart",
+    "easeInOutQuart": "Ease In Out Quart",
+    "easeInBack": "Ease In Back",
+    "easeOutBack": "Ease Out Back",
+    "easeInOutBack": "Ease In Out Back",
+    "easeInElastic": "Ease In Elastic",
+    "easeOutElastic": "Ease Out Elastic",
+    "easeInOutElastic": "Ease In Out Elastic",
+    "easeInBounce": "Ease In Bounce",
+    "easeOutBounce": "Ease Out Bounce",
+    "easeInOutBounce": "Ease In Out Bounce"
+  },
+  "keyframeEditor": {
+    "empty": "Select a clip with keyframes to edit",
+    "title": "Keyframe Editor",
+    "close": "Close keyframe editor",
+    "property": "Property",
+    "copy": "Copy",
+    "paste": "Paste",
+    "delete": "Delete",
+    "easingPrefix": "Easing:",
+    "easing": "Easing",
+    "selected_one": "{{count}} keyframe selected",
+    "selected_other": "{{count}} keyframes selected",
+    "time": "Time",
+    "value": "Value",
+    "properties": {
+      "position_x": "Position X",
+      "position_y": "Position Y",
+      "scale_x": "Scale X",
+      "scale_y": "Scale Y",
+      "rotation": "Rotation",
+      "opacity": "Opacity",
+      "borderRadius": "Corner radius"
+    }
+  },
+  "saveTemplate": {
+    "title": "Save as Template",
+    "nameRequired": "Template name is required",
+    "descriptionRequired": "Description is required",
+    "uploadFailed": "Failed to upload to cloud",
+    "saveFailed": "Failed to save template",
+    "saved": "Template saved successfully!",
+    "name": "Template Name",
+    "namePlaceholder": "My Awesome Template",
+    "characterCount_one": "{{count}}/{{max}} character",
+    "characterCount_other": "{{count}}/{{max}} characters",
+    "description": "Description",
+    "descriptionPlaceholder": "Describe what this template is for and how to use it...",
+    "category": "Category",
+    "tags": "Tags (comma-separated)",
+    "tagsPlaceholder": "intro, animated, youtube",
+    "author": "Author Name",
+    "authorPlaceholder": "Your name or username",
+    "location": "Save Location",
+    "cloud": "Cloud",
+    "local": "Local",
+    "cloudHint": "Saved to cloud and accessible from any device",
+    "localHint": "Saved locally in your browser storage",
+    "saving": "Saving...",
+    "save": "Save Template"
+  },
+  "templateCategories": {
+    "social-media": "Social Media",
+    "business": "Business",
+    "personal": "Personal",
+    "slideshow": "Slideshow",
+    "intro-outro": "Intro/Outro",
+    "lower-third": "Lower Third",
+    "motion": "Motion",
+    "custom": "Custom"
+  },
+  "scriptView": {
+    "title": "Project JSON",
+    "subtitle": "Export or import project as JSON",
+    "mode": "Project JSON mode",
+    "exportTab": "Export JSON",
+    "importTab": "Import",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "download": "Download JSON",
+    "empty": "No project data to export.",
+    "file": "Project JSON file",
+    "jsonOnly": "Please upload a .json file",
+    "dropPlaceholder": "Drop a JSON file here or click to browse",
+    "dropHint": "Accepts .json project files",
+    "loaded_one": "{{formatted}} character loaded",
+    "loaded_other": "{{formatted}} characters loaded",
+    "clear": "Clear",
+    "validating": "Validating...",
+    "revalidate": "Re-validate",
+    "valid": "Valid project JSON — ready to import",
+    "errors": "Errors",
+    "warnings": "Warnings",
+    "missingAssets": "Missing Assets ({{count}})",
+    "missingAssetsHint": "These assets will be imported as placeholders and can be replaced later.",
+    "importProject": "Import Project",
+    "validationError": "Validation error: {{message}}",
+    "importError": "Import error: {{message}}",
+    "unknownError": "Unknown error",
+    "needsRelink_one": "{{count}} asset needs relinking",
+    "needsRelink_other": "{{count}} assets need relinking",
+    "needsRelinkHint": "Go to the {{panel}} panel → click \"{{action}}\" to restore missing media."
+  },
+  "estimate": {
+    "seconds_one": "~{{count}} second",
+    "seconds_other": "~{{count}} seconds",
+    "minutes_one": "~{{count}} minute",
+    "minutes_other": "~{{count}} minutes",
+    "minutesSeconds": "~{{minutes}}m {{seconds}}s",
+    "hoursMinutes": "~{{hours}}h {{minutes}}m"
+  },
+  "export": {
+    "deviceSummary_one": "{{gpu}} · {{count}} core",
+    "deviceSummary_other": "{{gpu}} · {{count}} cores",
+    "aspect": {
+      "vertical": "Vertical (TikTok, Reels, Shorts)",
+      "square": "Square (Instagram Feed)",
+      "horizontal": "Horizontal (YouTube, Twitter)"
+    },
+    "platforms": {
+      "Broadcast": "Broadcast",
+      "Web": "Web",
+      "Archive": "Archive",
+      "Audio": "Audio",
+      "Custom": "Custom"
+    },
+    "quality": "Quality",
+    "noAudio": "No audio",
+    "audioAutomatic": "Automatic",
+    "codecs": "Codecs",
+    "desktopEncoderRequired": "ProRes, transparency, and high bit depth require the desktop encoder. You can export an H.264 MP4 without transparency in this browser.",
+    "sizePresets": {
+      "email": "Email ({{size}} MB)",
+      "whatsapp": "WhatsApp ({{size}} MB)",
+      "discord": "Discord ({{size}} MB)"
+    },
+    "presets": {
+      "youtube-4k": {
+        "description": "Best quality for YouTube 4K - 50Mbps"
+      },
+      "youtube-4k-60": {
+        "description": "4K 60fps for gaming/motion - 65Mbps"
+      },
+      "youtube-1080p": {
+        "description": "Standard HD quality for YouTube"
+      },
+      "youtube-shorts": {
+        "description": "Vertical format for YouTube Shorts (60s max)"
+      },
+      "tiktok": {
+        "description": "Optimized for TikTok (3min max)"
+      },
+      "instagram-reels": {
+        "description": "Vertical format for Reels (90s max)"
+      },
+      "instagram-feed": {
+        "name": "Instagram Feed Video",
+        "description": "Square format for feed posts (60s max)"
+      },
+      "instagram-story": {
+        "name": "Instagram Story",
+        "description": "Vertical format for Stories (15s per clip)"
+      },
+      "twitter": {
+        "description": "Optimized for Twitter (2min 20s max)"
+      },
+      "facebook-feed": {
+        "name": "Facebook Feed",
+        "description": "Standard format for Facebook feed"
+      },
+      "linkedin": {
+        "description": "Professional format for LinkedIn (10min max)"
+      },
+      "broadcast-4k-master": {
+        "name": "4K Master Quality",
+        "description": "Maximum quality 4K - 80Mbps H.265"
+      },
+      "broadcast-4k-prores-hq": {
+        "description": "Professional ProRes for editing/mastering"
+      },
+      "broadcast-4k-prores-4444": {
+        "description": "Highest quality ProRes with alpha support"
+      },
+      "broadcast-4k-60": {
+        "name": "4K 60fps High Motion",
+        "description": "4K at 60fps for sports/gaming - 65Mbps"
+      },
+      "broadcast-4k": {
+        "name": "Broadcast 4K UHD",
+        "description": "4K broadcast quality - 50Mbps"
+      },
+      "broadcast-1080p-high": {
+        "name": "1080p High Quality",
+        "description": "High bitrate 1080p - 20Mbps"
+      },
+      "broadcast-1080p-prores": {
+        "description": "ProRes HQ for 1080p editing"
+      },
+      "broadcast-hd": {
+        "name": "Broadcast HD 1080p",
+        "description": "Standard broadcast quality"
+      },
+      "web-hd": {
+        "name": "Web HD",
+        "description": "Balanced quality for web embedding"
+      },
+      "web-small": {
+        "name": "Web Optimized",
+        "description": "Smaller file size for faster loading"
+      },
+      "webm-vp9": {
+        "description": "Modern web format with VP9 codec (720p recommended)"
+      },
+      "archive-4k-prores": {
+        "name": "Archive 4K ProRes",
+        "description": "Lossless 4K ProRes for long-term archival"
+      },
+      "archive-master": {
+        "name": "Archive Master H.265",
+        "description": "High quality 4K H.265 - 80Mbps"
+      },
+      "archive-1080p-prores": {
+        "name": "Archive 1080p ProRes",
+        "description": "ProRes HQ for 1080p archival"
+      },
+      "archive-proxy": {
+        "name": "Archive Proxy",
+        "description": "Lower quality proxy for editing"
+      }
+    }
+  },
+  "proxy": {
+    "presets": {
+      "low": "Up to 540p · Faster",
+      "medium": "Up to 720p · Balanced",
+      "high": "Up to 1080p · Clearer"
+    },
+    "badgeProxy": "Proxy preview",
+    "badgeOriginal": "Original preview",
+    "badgeEncoding": "Proxy {{percent}}%",
+    "badgeQueued": "Proxy queued",
+    "sectionAria": "Preview performance for {{name}}",
+    "title": "Smoother preview",
+    "recommended": "Recommended",
+    "intro": "Create a smaller copy for editing. Exports always use your original video. Cached in this tab, up to {{size}} MB.",
+    "quality": "Preview quality",
+    "qualityAria": "Proxy quality",
+    "ready": "Proxy ready · {{width}} × {{height}} · {{size}} MB",
+    "queued": "Queued — one video at a time",
+    "creating": "Creating proxy · {{percent}}%",
+    "progressAria": "Proxy progress for {{name}}",
+    "cancel": "Cancel proxy",
+    "sourceAria": "Preview source",
+    "original": "Original",
+    "proxy": "Proxy",
+    "recreate": "Recreate proxy",
+    "create": "Create preview proxy",
+    "remove": "Remove cached proxy"
+  },
+  "recording": {
+    "resume": "Resume recording",
+    "pause": "Pause recording",
+    "stop": "Stop recording",
+    "cancel": "Cancel recording",
+    "minimize": "Minimize controls"
+  },
+  "exportErrors": {
+    "emptyTimeline": "Add a clip, text, or graphics to the timeline before exporting.",
+    "invalidDimensions": "Choose a valid width and height for your video.",
+    "invalidFrameRate": "Choose a valid frame rate for your video.",
+    "invalidBitrate": "Choose a valid video bitrate.",
+    "desktopEncoderRequired": "ProRes, transparency, and high bit depth export require the desktop encoder. Choose H.264 for browser export.",
+    "codecUnsupportedInContainer": "{{codec}} cannot be exported in {{format}}. Choose VP9 for WebM or H.264 for MP4.",
+    "videoEncodeUnsupported": "This browser cannot encode {{codec}} at {{width}}×{{height}}. Try H.264 / MP4, VP9 / WebM, or a smaller resolution.",
+    "audioEncodeUnsupported": "This browser cannot encode audio for {{format}}. Try WebM with Opus audio or another browser.",
+    "checkFailed": "Could not check browser export support: {{detail}}"
+  },
+  "editorChrome": {
+    "objects3d": "3D Objects",
+    "loadingAiEditor": "Loading AI Editor…",
+    "timelineTool": "Timeline tool",
+    "trackLayers": "Track layers",
+    "recordingNow": "Recording...",
+    "resolutionHints": {
+      "720p": "1280×720 - Smaller files",
+      "1080p": "1920×1080 - Recommended",
+      "1440p": "2560×1440 - High quality",
+      "4k": "3840×2160 - Maximum quality"
+    },
+    "aspectCustom": "Custom",
+    "fontOption": "{{font}} ({{category}})",
+    "fontCategories": {
+      "Popular": "Popular",
+      "DisplayHeadlines": "Display & Headlines",
+      "ElegantSerif": "Elegant & Serif",
+      "ModernClean": "Modern & Clean",
+      "HandwrittenScript": "Handwritten & Script",
+      "FunCreative": "Fun & Creative",
+      "Monospace": "Monospace",
+      "System": "System",
+      "Custom": "Custom"
+    },
+    "clipTypes": {
+      "video": "Video",
+      "audio": "Audio",
+      "image": "Image",
+      "text": "Text",
+      "shape": "Shape",
+      "svg": "SVG",
+      "sticker": "Sticker",
+      "clip": "Clip"
+    }
+  },
+  "processing": {
+    "title": "Processing Effects",
+    "tasks_one": "{{count}} task in progress",
+    "tasks_other": "{{count}} tasks in progress",
+    "overall": "Overall Progress",
+    "overallAria": "Overall progress",
+    "taskProgress": "{{name}} progress",
+    "wait": "Please wait while effects are being applied...",
+    "types": {
+      "background-removal": "Background Removal",
+      "auto-reframe": "Auto Reframe",
+      "color-grading": "Color Grading",
+      "effects": "Video Effects"
+    },
+    "status": {
+      "queued": "queued",
+      "processing": "processing",
+      "completed": "completed",
+      "failed": "failed"
+    }
+  },
+  "timelineItems": {
+    "noKeyframes": "No keyframes",
+    "dropToAdd": "Drop to add clip",
+    "placeAbove": "Place above",
+    "applyingEffect": "Applying effect",
+    "emoji": "Emoji",
+    "sticker": "Sticker",
+    "svg": "SVG",
+    "textFallback": "Text",
+    "transition": {
+      "menuTitle": "Transition",
+      "remove": "Remove transition",
+      "addIntro": "Add intro transition",
+      "addOutro": "Add outro transition",
+      "add": "Add transition",
+      "badge": "{{name}} · {{seconds}}s",
+      "editIntro": "Edit intro transition: {{label}}",
+      "editOutro": "Edit outro transition: {{label}}",
+      "editBetween": "Edit transition between clips: {{label}}"
+    }
+  },
+  "recipesTab": {
+    "video": "VIDEO",
+    "image": "IMAGE",
+    "all": "ALL",
+    "selectedClip": "Selected Clip",
+    "summary_one": "{{duration}}s • {{count}} recipe applied",
+    "summary_other": "{{duration}}s • {{count}} recipes applied",
+    "applying": "Applying..."
+  },
+  "transitionDescriptions": {
+    "Crossfade": "Smooth opacity blend",
+    "DiptoBlack": "Fade through black",
+    "DiptoWhite": "Fade through white",
+    "Wipe": "Hard edge sweeps across",
+    "WipeLeft": "Directional left reveal",
+    "WipeRight": "Directional right reveal",
+    "WipeUp": "Directional up reveal",
+    "WipeDown": "Directional down reveal",
+    "Slide": "New clip slides in",
+    "SlideLeft": "Slide the next clip left",
+    "SlideRight": "Slide the next clip right",
+    "SlideUp": "Slide the next clip up",
+    "SlideDown": "Slide the next clip down",
+    "Push": "Outgoing clip is shoved off",
+    "Zoom": "Scale up and dissolve",
+    "CircleReveal": "Iris reveal from the center",
+    "BlurDissolve": "Blur out and into the next clip",
+    "WhipPan": "Fast motion-blurred pan",
+    "RadialWipe": "Clock-style angular sweep",
+    "Pixelate": "Break the cut into a chunky pixel mosaic",
+    "GlitchCut": "Digital slice displacement at the cut",
+    "VenetianBlinds": "Reveal the next shot through repeating slats",
+    "DiamondReveal": "Geometric iris expanding from the center",
+    "SpinClockwise": "Rotating scale transition with a smooth handoff",
+    "SpinCounterclockwise": "Rotating scale transition with a smooth handoff",
+    "FlipHorizontal": "Card-style horizontal flip between shots",
+    "FlipVertical": "Card-style vertical flip between shots",
+    "SplitHorizontal": "Reveal the next shot outward from the center line",
+    "SplitVertical": "Reveal the next shot outward from the middle",
+    "FlashCut": "High-energy white flash through the edit",
+    "FilmBurn": "Warm analog light leak through the edit",
+    "RedFilmBurn": "Dense red-orange flare for dramatic cuts",
+    "CoolLightLeak": "Blue-white optical flare through the edit",
+    "MosaicReveal": "Tiles assemble the next shot in a shuffled pattern",
+    "Ripple": "A fluid wave distorts both shots through the cut",
+    "PageTurnLeft": "Fold the outgoing shot toward the left",
+    "PageTurnRight": "Fold the outgoing shot toward the right",
+    "ColorSplit": "Prismatic channel ghosts collide at the edit",
+    "LinearDissolve": "Constant-speed opacity blend",
+    "SlowInDissolve": "Blend accelerates into the cut",
+    "SlowOutDissolve": "Blend settles gently after the cut",
+    "SoftWipeLeft": "Feathered directional reveal",
+    "SoftWipeRight": "Feathered directional reveal",
+    "DiagonalWipe": "Angular reveal from the corner",
+    "PushLeft": "Both clips travel left",
+    "PushRight": "Both clips travel right",
+    "PushUp": "Both clips travel up",
+    "PushDown": "Both clips travel down",
+    "ZoomTopLeft": "Focused scale-and-dissolve transition",
+    "ZoomBottomRight": "Focused scale-and-dissolve transition",
+    "PunchZoom": "Focused scale-and-dissolve transition",
+    "WhipLeft": "Motion-blurred whip left",
+    "WhipRight": "Motion-blurred whip right",
+    "WhipUp": "Motion-blurred whip up",
+    "WhipDown": "Motion-blurred whip down"
+  },
+  "transitionTypes": {
+    "crossfade": {
+      "name": "Crossfade",
+      "description": "Smooth blend between clips"
+    },
+    "dipToBlack": {
+      "name": "Dip to Black",
+      "description": "Fade through black"
+    },
+    "dipToWhite": {
+      "name": "Dip to White",
+      "description": "Fade through white"
+    },
+    "wipe": {
+      "name": "Wipe",
+      "description": "Wipe from one clip to another"
+    },
+    "slide": {
+      "name": "Slide",
+      "description": "Slide incoming clip over outgoing"
+    },
+    "zoom": {
+      "name": "Zoom",
+      "description": "Zoom transition between clips"
+    },
+    "push": {
+      "name": "Push",
+      "description": "Push outgoing clip with incoming"
+    },
+    "circleReveal": {
+      "name": "Circle Reveal",
+      "description": "Iris reveal from the center"
+    },
+    "blur": {
+      "name": "Blur Dissolve",
+      "description": "Blur out and back into the next clip"
+    },
+    "whipPan": {
+      "name": "Whip Pan",
+      "description": "Fast motion-blurred pan"
+    },
+    "radialWipe": {
+      "name": "Radial Wipe",
+      "description": "Clock-style angular sweep"
+    },
+    "pixelate": {
+      "name": "Pixelate",
+      "description": "Chunky pixel mosaic through the cut"
+    },
+    "glitch": {
+      "name": "Glitch Cut",
+      "description": "Digital slice displacement"
+    },
+    "blinds": {
+      "name": "Venetian Blinds",
+      "description": "Repeating slat reveal"
+    },
+    "diamondReveal": {
+      "name": "Diamond Reveal",
+      "description": "Geometric center reveal"
+    },
+    "spin": {
+      "name": "Spin",
+      "description": "Rotating scale handoff"
+    },
+    "flip": {
+      "name": "Flip",
+      "description": "Card-style horizontal or vertical flip"
+    },
+    "splitReveal": {
+      "name": "Split Reveal",
+      "description": "Reveal outward from the center"
+    },
+    "flash": {
+      "name": "Flash Cut",
+      "description": "High-energy white flash edit"
+    },
+    "filmBurn": {
+      "name": "Film Burn",
+      "description": "Warm analog light leak through the edit"
+    },
+    "mosaic": {
+      "name": "Mosaic Reveal",
+      "description": "Shuffled tile reveal between shots"
+    },
+    "ripple": {
+      "name": "Ripple",
+      "description": "Fluid horizontal wave distortion"
+    },
+    "pageTurn": {
+      "name": "Page Turn",
+      "description": "Fold the outgoing shot away like a page"
+    },
+    "colorSplit": {
+      "name": "Color Split",
+      "description": "Prismatic channel ghosts through the cut"
+    }
+  },
+  "recipes": {
+    "categories": {
+      "cinema": {
+        "name": "Cinema",
+        "description": "Letterbox, grain, and dramatic finishing touches."
+      },
+      "glitch": {
+        "name": "Glitch",
+        "description": "Digital breakup, scanlines, and signal drift."
+      },
+      "retro": {
+        "name": "Retro",
+        "description": "Tape, CRT, and old-film inspired looks."
+      },
+      "social": {
+        "name": "Social",
+        "description": "Recording overlays, countdowns, and creator framing."
+      },
+      "branding": {
+        "name": "Branding",
+        "description": "Watermarks, lower thirds, and copyright overlays."
+      },
+      "color": {
+        "name": "Color",
+        "description": "Fast mood changes through stacked correction presets."
+      },
+      "overlay": {
+        "name": "Overlay",
+        "description": "Frames, focus markers, and atmospheric graphic layers."
+      },
+      "text-effects": {
+        "name": "Text Effects",
+        "description": "Stylized motion captions and title accents."
+      },
+      "transitions": {
+        "name": "Transitions",
+        "description": "Reserved for clip-to-clip recipe transitions."
+      },
+      "ads": {
+        "name": "Ads",
+        "description": "Reusable ad cards, product promos, and launch scenes."
+      },
+      "app-ui-demos": {
+        "name": "App UI Demos",
+        "description": "Animated interface walkthroughs and product UI moments."
+      },
+      "lower-thirds": {
+        "name": "Lower Thirds",
+        "description": "Name straps, titles, and branded information bands."
+      },
+      "product-shots": {
+        "name": "Product Shots",
+        "description": "Media placeholders, feature callouts, and polished showcases."
+      },
+      "social-hooks": {
+        "name": "Social Hooks",
+        "description": "Fast opening beats for short-form social videos."
+      },
+      "kinetic-typography": {
+        "name": "Kinetic Typography",
+        "description": "Animated type systems for captions, quotes, and slogans."
+      },
+      "logo-reveals": {
+        "name": "Logo Reveals",
+        "description": "Logo animation starters for brand intros and outros."
+      },
+      "end-screens": {
+        "name": "End Screens",
+        "description": "Animated end cards, CTAs, and subscribe prompts."
+      }
+    },
+    "templates": {
+      "cinema-letterbox": {
+        "name": "Cinematic Letterbox",
+        "description": "Wide-screen bars with grain and vignette."
+      },
+      "cinema-light-frame": {
+        "name": "Light Frame",
+        "description": "A subtle warm edge frame for cinematic shots."
+      },
+      "cinema-warm-fade": {
+        "name": "Warm Fade",
+        "description": "Soft warm grade for lifestyle and travel cuts."
+      },
+      "glitch-digital": {
+        "name": "Digital Glitch",
+        "description": "RGB drift with moving scanline accents."
+      },
+      "glitch-rgb-scan": {
+        "name": "RGB Scan",
+        "description": "Thin scanlines and channel separation."
+      },
+      "glitch-static-frame": {
+        "name": "Static Frame",
+        "description": "Noisy border treatment with light distortion."
+      },
+      "retro-vhs": {
+        "name": "VHS Tape",
+        "description": "Classic tape softness with transport text."
+      },
+      "retro-crt-monitor": {
+        "name": "CRT Monitor",
+        "description": "Soft corner frame and green terminal vibe."
+      },
+      "retro-old-film": {
+        "name": "Old Film",
+        "description": "High grain monochrome with gate marker text."
+      },
+      "retro-sepia-drift": {
+        "name": "Sepia Drift",
+        "description": "Subtle vintage warmth with a soft border."
+      },
+      "social-recording": {
+        "name": "Recording Camera",
+        "description": "Classic REC indicator, timer, and frame border."
+      },
+      "social-facecam-frame": {
+        "name": "Facecam Frame",
+        "description": "Corner frame for reaction and gameplay clips."
+      },
+      "social-countdown-lead": {
+        "name": "Countdown Lead",
+        "description": "Short intro count-in for tutorials and hooks."
+      },
+      "social-comment-pop": {
+        "name": "Comment Pop",
+        "description": "Pinned comment bubble for social callouts."
+      },
+      "branding-watermark-drift": {
+        "name": "Watermark Drift",
+        "description": "Soft moving corner watermark for brand protection."
+      },
+      "branding-copyright": {
+        "name": "Moving Copyright",
+        "description": "Full-width copyright crawl for delivered cuts."
+      },
+      "branding-lower-third": {
+        "name": "Lower Third",
+        "description": "Simple branded name tag."
+      },
+      "branding-subscribe-tag": {
+        "name": "Subscribe Tag",
+        "description": "End-card subscribe banner."
+      },
+      "color-warm-pop": {
+        "name": "Warm Pop",
+        "description": "Golden warmth with gentle contrast."
+      },
+      "color-cool-bloom": {
+        "name": "Cool Bloom",
+        "description": "Softer cooler palette for night and tech footage."
+      },
+      "color-dramatic-noir": {
+        "name": "Dramatic Noir",
+        "description": "High-contrast moody look."
+      },
+      "color-vintage-wash": {
+        "name": "Vintage Wash",
+        "description": "Low-contrast faded stock feel."
+      },
+      "overlay-focus-frame": {
+        "name": "Focus Frame",
+        "description": "Center guide frame with crosshair accents."
+      },
+      "overlay-soft-border": {
+        "name": "Soft Border",
+        "description": "Thin elegant border for editorial framing."
+      },
+      "overlay-spotlight-title": {
+        "name": "Spotlight Title",
+        "description": "Headline treatment for hero moments."
+      },
+      "text-kinetic-punch": {
+        "name": "Kinetic Punch",
+        "description": "Bold text punch-in for transitions and hooks."
+      },
+      "text-stamp-upper": {
+        "name": "Stamp Upper",
+        "description": "Upper-third stamp for chapter labels."
+      },
+      "text-neon-tag": {
+        "name": "Neon Tag",
+        "description": "Bright tag for music and nightlife content."
+      },
+      "social-live-badge": {
+        "name": "Live Badge",
+        "description": "Pulsing LIVE indicator for stream-style overlays."
+      },
+      "social-hashtag-strip": {
+        "name": "Hashtag Strip",
+        "description": "Bottom hashtag bar for social video posts."
+      },
+      "cinema-anamorphic-flare": {
+        "name": "Anamorphic Flare",
+        "description": "Top and bottom bars with blue lens flare accents."
+      },
+      "cinema-noir-bars": {
+        "name": "Noir Bars",
+        "description": "Heavy letterbox with deep contrast for dramatic scenes."
+      },
+      "overlay-grid-guide": {
+        "name": "Grid Guide",
+        "description": "Rule of thirds grid for composition reference."
+      },
+      "overlay-corner-brackets": {
+        "name": "Corner Brackets",
+        "description": "Elegant corner frame markers for cinematic focus."
+      },
+      "text-subtitle-bar": {
+        "name": "Subtitle Bar",
+        "description": "Bottom subtitle with dark backing for readability."
+      },
+      "text-quote-block": {
+        "name": "Quote Block",
+        "description": "Centered quote with decorative marks."
+      },
+      "color-teal-orange": {
+        "name": "Teal & Orange",
+        "description": "Hollywood color grading — cool shadows, warm highlights."
+      },
+      "color-monochrome": {
+        "name": "Monochrome",
+        "description": "Clean black and white with lifted blacks."
+      },
+      "glitch-datamosh": {
+        "name": "Datamosh",
+        "description": "Heavy grain and color separation for chaotic energy."
+      },
+      "branding-end-card": {
+        "name": "End Card",
+        "description": "Full outro card with name and call to action."
+      },
+      "social-viewer-count": {
+        "name": "Viewer Count",
+        "description": "Animated viewer/like counter badge."
+      },
+      "retro-polaroid": {
+        "name": "Polaroid",
+        "description": "White border frame with warm vintage tones."
+      },
+      "motion-saas-ad-card": {
+        "name": "SaaS Ad Card",
+        "description": "Motion Creator starter for a product ad with editable copy, brand color, media placeholder, and animation intensity."
+      }
+    },
+    "controls": {
+      "name": "Name",
+      "grainAmount": "Grain",
+      "gridOpacity": "Grid Opacity",
+      "watermarkText": "Watermark",
+      "headline": "Headline",
+      "glitchAmount": "Glitch",
+      "quote": "Quote",
+      "label": "Label",
+      "warmth": "Warmth",
+      "media": "Product Media",
+      "role": "Role",
+      "accent": "Accent",
+      "brandColor": "Brand Color",
+      "cta": "Call to Action",
+      "frameOpacity": "Frame Opacity",
+      "count": "Count",
+      "tags": "Hashtags",
+      "barOpacity": "Bar Opacity",
+      "brandKit": "Use Brand Kit",
+      "watermarkOpacity": "Opacity",
+      "tag": "Tag",
+      "duration": "Duration",
+      "intensity": "Animation Intensity",
+      "caption": "Caption",
+      "subtitle": "Subtitle",
+      "channel": "Channel Name"
+    }
+  },
+  "previewLock": {
+    "locked": "🔒 Locked",
+    "free": "🔓 Free"
+  },
+  "uiControls": {
+    "sliderValue": "{{label}} value",
+    "sliderValueGeneric": "Slider value",
+    "editValue": "Edit {{label}} value",
+    "editValueGeneric": "Edit slider value",
+    "clickToEdit": "Click to edit",
+    "clickToEditOrReset": "Click to edit, double-click to reset",
+    "closeDialog": "Close dialog"
+  },
+  "serviceDescriptions": {
+    "elevenlabs": "AI voice generation and text-to-speech",
+    "openai-compatible": "Any OpenAI-compatible API host; API key optional",
+    "anthropic-compatible": "Any Anthropic Messages-compatible API host; API key optional",
+    "kie-ai": "AI aggregator for video/image generation, upscaling, and editing",
+    "freepik": "AI aggregator for image generation, vectors, and creative assets"
+  },
+  "otherServices": {
+    "title": "Other AI services",
+    "description": "Keys for ElevenLabs, custom API hosts and other services, encrypted with your master password."
+  }
+}

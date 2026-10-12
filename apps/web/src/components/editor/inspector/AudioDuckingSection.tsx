@@ -27,6 +27,9 @@ import { MockToggle } from "./shell/InspectorControls";
 import { useProjectStore } from "../../../stores/project-store";
 import type { AudioDuckingSettings } from "../../../stores/project";
 import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
+import { i18next } from "@/i18n";
+import { displayTrackName } from "../timeline/track-display-name";
 
 interface AudioDuckingSectionProps {
   clipId: string;
@@ -107,8 +110,10 @@ const findClipById = (project: Project, clipId: string): Clip | null => {
   return null;
 };
 
-const getTrackLabel = (track: Track): string => {
-  return track.name || `Track ${track.id.slice(-4)}`;
+const getTrackLabel = (track: Track, t: TFunction): string => {
+  return track.name
+    ? displayTrackName(track.name, t)
+    : t("advanced.ducking.trackFallback", { id: track.id.slice(-4) });
 };
 
 interface DuckingSliderProps {
@@ -164,7 +169,7 @@ const buildTriggerTrackBuffer = async (
   });
 
   if (overlappingClips.length === 0) {
-    throw new Error("No overlapping trigger clips were found for this clip.");
+    throw new Error(i18next.t("advanced.ducking.noOverlap"));
   }
 
   const decodeContext = new AudioContext();
@@ -227,7 +232,7 @@ const buildTriggerTrackBuffer = async (
     }
 
     if (scheduledSources === 0) {
-      throw new Error("No decodable trigger audio was found on the selected source track.");
+      throw new Error(i18next.t("advanced.ducking.noDecodable"));
     }
 
     return offlineContext.startRendering();
@@ -364,7 +369,7 @@ export const AudioDuckingSection: React.FC<AudioDuckingSectionProps> = ({
       const applied = setClipAudioDucking(audioTargetClip.id, persisted, keyframes);
 
       if (!applied) {
-        throw new Error("Failed to persist ducking on this clip.");
+        throw new Error(t("advanced.ducking.persistFailed"));
       }
 
       window.dispatchEvent(new CustomEvent("openreel:preview-invalidate"));
@@ -449,7 +454,7 @@ export const AudioDuckingSection: React.FC<AudioDuckingSectionProps> = ({
                   .map((track) => (
                   <ClickableCard
                     key={track.id}
-                    label={t("inspector.ducking.useTrack", { name: getTrackLabel(track) })}
+                    label={t("inspector.ducking.useTrack", { name: getTrackLabel(track, t) })}
                     onClick={() => updateSetting("sourceTrackId", track.id)}
                     padding={2}
                     variant={
@@ -464,7 +469,7 @@ export const AudioDuckingSection: React.FC<AudioDuckingSectionProps> = ({
                         color="primary"
                         className="flex-1 text-[10px]"
                       >
-                        {getTrackLabel(track)}
+                        {getTrackLabel(track, t)}
                       </Text>
                       {settings.sourceTrackId === track.id && (
                         <Check size={12} className="text-primary" aria-hidden />

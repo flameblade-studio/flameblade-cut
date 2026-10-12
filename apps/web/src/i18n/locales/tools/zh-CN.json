@@ -1,0 +1,881 @@
+{
+  "autoEdit": {
+    "audioMissing": "音频文件尚未加载",
+    "analyzeFailed": "无法分析音频",
+    "title": "节拍同步自动剪辑",
+    "empty": "添加音频轨道即可使用自动剪辑",
+    "audioSource": "音频来源",
+    "cutMode": "剪切模式",
+    "modes": {
+      "beats": "节拍",
+      "downbeats": "强拍",
+      "segments": "段落"
+    },
+    "sensitivity": "灵敏度",
+    "minClip": "最短片段时长",
+    "minClipAria": "最短片段时长",
+    "analyzing": "正在分析节拍…",
+    "generate": "生成自动剪辑",
+    "preview": "预览",
+    "cuts": "剪切点：",
+    "duration": "时长：",
+    "apply": "应用自动剪辑"
+  },
+  "crop": {
+    "title": "裁剪视频",
+    "free": "自由",
+    "reset": "重置裁剪",
+    "loading": "正在加载视频…",
+    "previewAlt": "裁剪预览"
+  },
+  "highlightExtractor": {
+    "mediaMissing": "找不到媒体或尚未加载",
+    "decoding": "正在解码音频…",
+    "failed": "分析失败",
+    "clips": "片段数",
+    "maxDuration": "最长时长",
+    "secondsUnit": "秒",
+    "progress": "{{phase}}（{{percent}}%）",
+    "find": "查找精彩片段",
+    "preview": "预览精彩片段",
+    "apply_one": "应用 {{count}} 个精彩片段",
+    "apply_other": "应用 {{count}} 个精彩片段"
+  },
+  "aspectMatch": {
+    "title": "要匹配视频尺寸吗？",
+    "subtitle": "要添加的视频尺寸与当前项目设置不同。",
+    "video": "视频尺寸",
+    "project": "当前项目",
+    "ratio": "宽高比：{{ratio}}",
+    "hint": "将项目尺寸匹配此视频以完整贴合，或保留当前画布。视频将以原始大小放置，你可以自由调整大小。",
+    "keep": "保留当前设置",
+    "match": "匹配视频"
+  },
+  "easing": {
+    "linear": "线性",
+    "easeInQuad": "缓入",
+    "easeOutQuad": "缓出",
+    "easeInOutQuad": "缓入缓出",
+    "easeInCubic": "三次缓入",
+    "easeOutCubic": "三次缓出",
+    "easeInOutCubic": "三次缓入缓出",
+    "easeInQuart": "四次缓入",
+    "easeOutQuart": "四次缓出",
+    "easeInOutQuart": "四次缓入缓出",
+    "easeInBack": "回弹缓入",
+    "easeOutBack": "回弹缓出",
+    "easeInOutBack": "回弹缓入缓出",
+    "easeInElastic": "弹性缓入",
+    "easeOutElastic": "弹性缓出",
+    "easeInOutElastic": "弹性缓入缓出",
+    "easeInBounce": "弹跳缓入",
+    "easeOutBounce": "弹跳缓出",
+    "easeInOutBounce": "弹跳缓入缓出"
+  },
+  "keyframeEditor": {
+    "empty": "选择含有关键帧的片段进行编辑",
+    "title": "关键帧编辑器",
+    "close": "关闭关键帧编辑器",
+    "property": "属性",
+    "copy": "复制",
+    "paste": "粘贴",
+    "delete": "删除",
+    "easingPrefix": "缓动：",
+    "easing": "缓动",
+    "selected_one": "已选择 {{count}} 个关键帧",
+    "selected_other": "已选择 {{count}} 个关键帧",
+    "time": "时间",
+    "value": "数值",
+    "properties": {
+      "position_x": "位置 X",
+      "position_y": "位置 Y",
+      "scale_x": "缩放 X",
+      "scale_y": "缩放 Y",
+      "rotation": "旋转",
+      "opacity": "不透明度",
+      "borderRadius": "圆角"
+    }
+  },
+  "saveTemplate": {
+    "title": "另存为模板",
+    "nameRequired": "请输入模板名称",
+    "descriptionRequired": "请输入说明",
+    "uploadFailed": "无法上传到云端",
+    "saveFailed": "无法保存模板",
+    "saved": "模板已保存！",
+    "name": "模板名称",
+    "namePlaceholder": "我的精彩模板",
+    "characterCount_one": "{{count}}/{{max}} 个字符",
+    "characterCount_other": "{{count}}/{{max}} 个字符",
+    "description": "说明",
+    "descriptionPlaceholder": "说明这个模板的用途和使用方法…",
+    "category": "类别",
+    "tags": "标签（用逗号分隔）",
+    "tagsPlaceholder": "片头, 动画, youtube",
+    "author": "作者名称",
+    "authorPlaceholder": "你的名字或用户名",
+    "location": "保存位置",
+    "cloud": "云端",
+    "local": "本地",
+    "cloudHint": "保存到云端，可在任何设备上使用",
+    "localHint": "保存在此设备的浏览器存储空间",
+    "saving": "保存中…",
+    "save": "保存模板"
+  },
+  "templateCategories": {
+    "social-media": "社交媒体",
+    "business": "商务",
+    "personal": "个人",
+    "slideshow": "幻灯片",
+    "intro-outro": "片头/片尾",
+    "lower-third": "下方字幕条",
+    "motion": "动态",
+    "custom": "自定义"
+  },
+  "scriptView": {
+    "title": "项目 JSON",
+    "subtitle": "以 JSON 导出或导入项目",
+    "mode": "项目 JSON 模式",
+    "exportTab": "导出 JSON",
+    "importTab": "导入",
+    "copy": "复制",
+    "copied": "已复制！",
+    "download": "下载 JSON",
+    "empty": "没有可导出的项目数据。",
+    "file": "项目 JSON 文件",
+    "jsonOnly": "请上传 .json 文件",
+    "dropPlaceholder": "将 JSON 文件拖放到这里，或点击浏览",
+    "dropHint": "接受 .json 项目文件",
+    "loaded_one": "已加载 {{formatted}} 个字符",
+    "loaded_other": "已加载 {{formatted}} 个字符",
+    "clear": "清除",
+    "validating": "验证中…",
+    "revalidate": "重新验证",
+    "valid": "项目 JSON 有效，可以导入",
+    "errors": "错误",
+    "warnings": "警告",
+    "missingAssets": "缺失的素材（{{count}}）",
+    "missingAssetsHint": "这些素材将以占位符导入，之后可以替换。",
+    "importProject": "导入项目",
+    "validationError": "验证错误：{{message}}",
+    "importError": "导入错误：{{message}}",
+    "unknownError": "未知错误",
+    "needsRelink_one": "{{count}} 个素材需要重新链接",
+    "needsRelink_other": "{{count}} 个素材需要重新链接",
+    "needsRelinkHint": "前往“{{panel}}”面板，点击“{{action}}”以恢复缺失的媒体。"
+  },
+  "estimate": {
+    "seconds_one": "约 {{count}} 秒",
+    "seconds_other": "约 {{count}} 秒",
+    "minutes_one": "约 {{count}} 分钟",
+    "minutes_other": "约 {{count}} 分钟",
+    "minutesSeconds": "约 {{minutes}} 分 {{seconds}} 秒",
+    "hoursMinutes": "约 {{hours}} 小时 {{minutes}} 分"
+  },
+  "export": {
+    "deviceSummary_one": "{{gpu}} · {{count}} 核",
+    "deviceSummary_other": "{{gpu}} · {{count}} 核",
+    "aspect": {
+      "vertical": "竖屏（TikTok、Reels、Shorts）",
+      "square": "方形（Instagram 动态）",
+      "horizontal": "横屏（YouTube、Twitter）"
+    },
+    "platforms": {
+      "Broadcast": "广播",
+      "Web": "网页",
+      "Archive": "归档",
+      "Audio": "音频",
+      "Custom": "自定义"
+    },
+    "quality": "质量",
+    "noAudio": "无音频",
+    "audioAutomatic": "自动",
+    "codecs": "编码器",
+    "desktopEncoderRequired": "ProRes、透明度和高位深需要桌面版编码器。在此浏览器中可导出不含透明度的 H.264 MP4。",
+    "sizePresets": {
+      "email": "电子邮件（{{size}} MB）",
+      "whatsapp": "WhatsApp（{{size}} MB）",
+      "discord": "Discord（{{size}} MB）"
+    },
+    "presets": {
+      "youtube-4k": {
+        "description": "YouTube 4K 最佳质量（50 Mbps）"
+      },
+      "youtube-4k-60": {
+        "description": "4K 60fps，适合游戏与动态画面（65 Mbps）"
+      },
+      "youtube-1080p": {
+        "description": "YouTube 标准高清质量"
+      },
+      "youtube-shorts": {
+        "description": "YouTube Shorts 竖屏格式（最长 60 秒）"
+      },
+      "tiktok": {
+        "description": "为 TikTok 优化（最长 3 分钟）"
+      },
+      "instagram-reels": {
+        "description": "Reels 竖屏格式（最长 90 秒）"
+      },
+      "instagram-feed": {
+        "name": "Instagram 动态视频",
+        "description": "动态帖子方形格式（最长 60 秒）"
+      },
+      "instagram-story": {
+        "name": "Instagram 快拍",
+        "description": "快拍竖屏格式（每段 15 秒）"
+      },
+      "twitter": {
+        "description": "为 Twitter 优化（最长 2 分 20 秒）"
+      },
+      "facebook-feed": {
+        "name": "Facebook 动态",
+        "description": "Facebook 动态的标准格式"
+      },
+      "linkedin": {
+        "description": "LinkedIn 专业格式（最长 10 分钟）"
+      },
+      "broadcast-4k-master": {
+        "name": "4K 母版质量",
+        "description": "最高质量 4K（80 Mbps H.265）"
+      },
+      "broadcast-4k-prores-hq": {
+        "description": "用于剪辑与母版制作的专业 ProRes"
+      },
+      "broadcast-4k-prores-4444": {
+        "description": "最高质量 ProRes，支持 Alpha 透明通道"
+      },
+      "broadcast-4k-60": {
+        "name": "4K 60fps 高动态",
+        "description": "4K 60fps，适合体育与游戏（65 Mbps）"
+      },
+      "broadcast-4k": {
+        "name": "广播级 4K UHD",
+        "description": "4K 广播质量（50 Mbps）"
+      },
+      "broadcast-1080p-high": {
+        "name": "1080p 高质量",
+        "description": "高码率 1080p（20 Mbps）"
+      },
+      "broadcast-1080p-prores": {
+        "description": "用于 1080p 剪辑的 ProRes HQ"
+      },
+      "broadcast-hd": {
+        "name": "广播级 HD 1080p",
+        "description": "标准广播质量"
+      },
+      "web-hd": {
+        "name": "网页 HD",
+        "description": "兼顾质量的网页嵌入格式"
+      },
+      "web-small": {
+        "name": "网页优化",
+        "description": "更小的文件，加载更快"
+      },
+      "webm-vp9": {
+        "description": "采用 VP9 编码器的新式网页格式（建议 720p）"
+      },
+      "archive-4k-prores": {
+        "name": "归档 4K ProRes",
+        "description": "用于长期归档的无损 4K ProRes"
+      },
+      "archive-master": {
+        "name": "归档母版 H.265",
+        "description": "高质量 4K H.265（80 Mbps）"
+      },
+      "archive-1080p-prores": {
+        "name": "归档 1080p ProRes",
+        "description": "用于 1080p 归档的 ProRes HQ"
+      },
+      "archive-proxy": {
+        "name": "归档代理文件",
+        "description": "用于剪辑的低质量代理文件"
+      }
+    }
+  },
+  "proxy": {
+    "presets": {
+      "low": "最高 540p · 较快",
+      "medium": "最高 720p · 均衡",
+      "high": "最高 1080p · 更清晰"
+    },
+    "badgeProxy": "代理预览",
+    "badgeOriginal": "原始预览",
+    "badgeEncoding": "代理文件 {{percent}}%",
+    "badgeQueued": "代理文件排队中",
+    "sectionAria": "{{name}} 的预览性能",
+    "title": "更流畅的预览",
+    "recommended": "推荐使用",
+    "intro": "创建较小的副本用于剪辑。导出始终使用原始视频。缓存在此标签页中，最多 {{size}} MB。",
+    "quality": "预览质量",
+    "qualityAria": "代理文件质量",
+    "ready": "代理文件已就绪 · {{width}} × {{height}} · {{size}} MB",
+    "queued": "排队中：一次处理一个视频",
+    "creating": "正在创建代理文件 · {{percent}}%",
+    "progressAria": "{{name}} 的代理文件进度",
+    "cancel": "取消代理文件",
+    "sourceAria": "预览来源",
+    "original": "原始",
+    "proxy": "代理",
+    "recreate": "重新创建代理文件",
+    "create": "创建预览代理文件",
+    "remove": "移除缓存的代理文件"
+  },
+  "recording": {
+    "resume": "继续录制",
+    "pause": "暂停录制",
+    "stop": "停止录制",
+    "cancel": "取消录制",
+    "minimize": "最小化控制栏"
+  },
+  "exportErrors": {
+    "emptyTimeline": "导出前请先在时间线添加片段、文字或图形。",
+    "invalidDimensions": "请为视频选择有效的宽度和高度。",
+    "invalidFrameRate": "请为视频选择有效的帧率。",
+    "invalidBitrate": "请选择有效的视频码率。",
+    "desktopEncoderRequired": "ProRes、透明背景和高位深导出需要桌面版编码器。浏览器导出请选择 H.264。",
+    "codecUnsupportedInContainer": "{{codec}} 无法导出为 {{format}}。WebM 请选择 VP9，MP4 请选择 H.264。",
+    "videoEncodeUnsupported": "此浏览器无法以 {{width}}×{{height}} 编码 {{codec}}。请改用 H.264 / MP4、VP9 / WebM，或降低分辨率。",
+    "audioEncodeUnsupported": "此浏览器无法为 {{format}} 编码音频。请改用 WebM 搭配 Opus 音频，或换一个浏览器。",
+    "checkFailed": "无法检查浏览器的导出支持：{{detail}}"
+  },
+  "editorChrome": {
+    "objects3d": "3D 对象",
+    "loadingAiEditor": "正在加载 AI 剪辑助手…",
+    "timelineTool": "时间线工具",
+    "trackLayers": "轨道图层",
+    "recordingNow": "录制中...",
+    "resolutionHints": {
+      "720p": "1280×720 - 文件较小",
+      "1080p": "1920×1080 - 推荐",
+      "1440p": "2560×1440 - 高画质",
+      "4k": "3840×2160 - 最高画质"
+    },
+    "aspectCustom": "自定义",
+    "fontOption": "{{font}}（{{category}}）",
+    "fontCategories": {
+      "Popular": "热门",
+      "DisplayHeadlines": "展示与标题",
+      "ElegantSerif": "典雅衬线",
+      "ModernClean": "现代简洁",
+      "HandwrittenScript": "手写与草书",
+      "FunCreative": "趣味创意",
+      "Monospace": "等宽",
+      "System": "系统",
+      "Custom": "自定义"
+    },
+    "clipTypes": {
+      "video": "视频",
+      "audio": "音频",
+      "image": "图片",
+      "text": "文本",
+      "shape": "形状",
+      "svg": "SVG",
+      "sticker": "贴纸",
+      "clip": "片段"
+    }
+  },
+  "processing": {
+    "title": "正在处理特效",
+    "tasks_one": "{{count}} 个任务进行中",
+    "tasks_other": "{{count}} 个任务进行中",
+    "overall": "总体进度",
+    "overallAria": "总体进度",
+    "taskProgress": "{{name}}进度",
+    "wait": "正在应用特效，请稍候...",
+    "types": {
+      "background-removal": "背景移除",
+      "auto-reframe": "自动重新构图",
+      "color-grading": "调色",
+      "effects": "视频特效"
+    },
+    "status": {
+      "queued": "排队中",
+      "processing": "处理中",
+      "completed": "已完成",
+      "failed": "失败"
+    }
+  },
+  "timelineItems": {
+    "noKeyframes": "没有关键帧",
+    "dropToAdd": "松开以添加片段",
+    "placeAbove": "放到上方",
+    "applyingEffect": "正在应用特效",
+    "emoji": "表情符号",
+    "sticker": "贴纸",
+    "svg": "SVG",
+    "textFallback": "文本",
+    "transition": {
+      "menuTitle": "转场",
+      "remove": "移除转场",
+      "addIntro": "添加开场转场",
+      "addOutro": "添加结尾转场",
+      "add": "添加转场",
+      "badge": "{{name}} · {{seconds}} 秒",
+      "editIntro": "编辑开场转场：{{label}}",
+      "editOutro": "编辑结尾转场：{{label}}",
+      "editBetween": "编辑片段之间的转场：{{label}}"
+    }
+  },
+  "recipesTab": {
+    "video": "视频",
+    "image": "图片",
+    "all": "全部",
+    "selectedClip": "已选中的片段",
+    "summary_one": "{{duration}} 秒 • 已应用 {{count}} 个配方",
+    "summary_other": "{{duration}} 秒 • 已应用 {{count}} 个配方",
+    "applying": "应用中..."
+  },
+  "transitionDescriptions": {
+    "Crossfade": "平滑的不透明度混合",
+    "DiptoBlack": "经由黑场淡出淡入",
+    "DiptoWhite": "经由白场淡出淡入",
+    "Wipe": "硬边扫过画面",
+    "WipeLeft": "向左揭示画面",
+    "WipeRight": "向右揭示画面",
+    "WipeUp": "向上揭示画面",
+    "WipeDown": "向下揭示画面",
+    "Slide": "新片段滑入",
+    "SlideLeft": "下一个片段向左滑入",
+    "SlideRight": "下一个片段向右滑入",
+    "SlideUp": "下一个片段向上滑入",
+    "SlideDown": "下一个片段向下滑入",
+    "Push": "上一个片段被推出画面",
+    "Zoom": "放大并溶解",
+    "CircleReveal": "从中心以圆形展开",
+    "BlurDissolve": "模糊过渡到下一个片段",
+    "WhipPan": "带动态模糊的快速平移",
+    "RadialWipe": "时钟式的扇形扫过",
+    "Pixelate": "以粗颗粒像素马赛克切换",
+    "GlitchCut": "在切点产生数字切片错位",
+    "VenetianBlinds": "通过重复的百叶条露出下一个镜头",
+    "DiamondReveal": "从中心展开的菱形",
+    "SpinClockwise": "旋转缩放并平滑衔接",
+    "SpinCounterclockwise": "旋转缩放并平滑衔接",
+    "FlipHorizontal": "镜头之间像卡片般水平翻转",
+    "FlipVertical": "镜头之间像卡片般垂直翻转",
+    "SplitHorizontal": "从中线向外露出下一个镜头",
+    "SplitVertical": "从中间向外露出下一个镜头",
+    "FlashCut": "以强烈白光闪过剪辑点",
+    "FilmBurn": "剪辑点的暖色模拟漏光",
+    "RedFilmBurn": "浓烈的红橙色光斑，适合戏剧性剪辑",
+    "CoolLightLeak": "剪辑点的蓝白色光学光斑",
+    "MosaicReveal": "以打散的方块拼出下一个镜头",
+    "Ripple": "流动的波纹扭曲前后两个镜头",
+    "PageTurnLeft": "将上一个镜头向左翻页",
+    "PageTurnRight": "将上一个镜头向右翻页",
+    "ColorSplit": "棱镜般的色彩通道残影在剪辑点交汇",
+    "LinearDissolve": "匀速的不透明度混合",
+    "SlowInDissolve": "混合逐渐加速进入切点",
+    "SlowOutDissolve": "切点后混合平缓收尾",
+    "SoftWipeLeft": "柔边的方向性揭示",
+    "SoftWipeRight": "柔边的方向性揭示",
+    "DiagonalWipe": "从角落斜向揭示",
+    "PushLeft": "两个片段一起向左移动",
+    "PushRight": "两个片段一起向右移动",
+    "PushUp": "两个片段一起向上移动",
+    "PushDown": "两个片段一起向下移动",
+    "ZoomTopLeft": "聚焦缩放并溶解的转场",
+    "ZoomBottomRight": "聚焦缩放并溶解的转场",
+    "PunchZoom": "聚焦缩放并溶解的转场",
+    "WhipLeft": "带动态模糊向左甩镜",
+    "WhipRight": "带动态模糊向右甩镜",
+    "WhipUp": "带动态模糊向上甩镜",
+    "WhipDown": "带动态模糊向下甩镜"
+  },
+  "transitionTypes": {
+    "crossfade": {
+      "name": "交叉淡化",
+      "description": "片段之间平滑混合"
+    },
+    "dipToBlack": {
+      "name": "黑场过渡",
+      "description": "经由黑场淡出淡入"
+    },
+    "dipToWhite": {
+      "name": "白场过渡",
+      "description": "经由白场淡出淡入"
+    },
+    "wipe": {
+      "name": "擦除",
+      "description": "从一个片段擦除到另一个片段"
+    },
+    "slide": {
+      "name": "滑入",
+      "description": "新片段滑入覆盖上一个片段"
+    },
+    "zoom": {
+      "name": "缩放",
+      "description": "片段之间的缩放转场"
+    },
+    "push": {
+      "name": "推移",
+      "description": "新片段推开上一个片段"
+    },
+    "circleReveal": {
+      "name": "圆形展开",
+      "description": "从中心以圆形展开"
+    },
+    "blur": {
+      "name": "模糊溶解",
+      "description": "模糊后再清晰进入下一个片段"
+    },
+    "whipPan": {
+      "name": "甩镜",
+      "description": "带动态模糊的快速平移"
+    },
+    "radialWipe": {
+      "name": "径向擦除",
+      "description": "时钟式的扇形扫过"
+    },
+    "pixelate": {
+      "name": "像素化",
+      "description": "以粗颗粒像素马赛克切换"
+    },
+    "glitch": {
+      "name": "故障剪辑",
+      "description": "数字切片错位"
+    },
+    "blinds": {
+      "name": "百叶窗",
+      "description": "以重复的百叶条揭示"
+    },
+    "diamondReveal": {
+      "name": "菱形展开",
+      "description": "从中心以几何形状揭示"
+    },
+    "spin": {
+      "name": "旋转",
+      "description": "旋转缩放衔接"
+    },
+    "flip": {
+      "name": "翻转",
+      "description": "像卡片般水平或垂直翻转"
+    },
+    "splitReveal": {
+      "name": "分割揭示",
+      "description": "从中心向外揭示"
+    },
+    "flash": {
+      "name": "闪白剪辑",
+      "description": "强烈白光闪切"
+    },
+    "filmBurn": {
+      "name": "胶片灼烧",
+      "description": "剪辑点的暖色模拟漏光"
+    },
+    "mosaic": {
+      "name": "马赛克展开",
+      "description": "镜头之间以打散方块揭示"
+    },
+    "ripple": {
+      "name": "涟漪",
+      "description": "流动的水平波纹扭曲"
+    },
+    "pageTurn": {
+      "name": "翻页",
+      "description": "像翻书一样翻走上一个镜头"
+    },
+    "colorSplit": {
+      "name": "色彩分离",
+      "description": "棱镜般的色彩通道残影穿过剪辑点"
+    }
+  },
+  "recipes": {
+    "categories": {
+      "cinema": {
+        "name": "电影感",
+        "description": "黑边、颗粒与戏剧化的收尾修饰。"
+      },
+      "glitch": {
+        "name": "故障",
+        "description": "数字破碎、扫描线与信号漂移。"
+      },
+      "retro": {
+        "name": "复古",
+        "description": "录像带、CRT 与老电影风格。"
+      },
+      "social": {
+        "name": "社交",
+        "description": "录制叠加、倒计时与创作者画框。"
+      },
+      "branding": {
+        "name": "品牌",
+        "description": "水印、下方字幕条与版权叠加。"
+      },
+      "color": {
+        "name": "色彩",
+        "description": "以叠加的校色预设快速改变氛围。"
+      },
+      "overlay": {
+        "name": "叠加",
+        "description": "画框、焦点标记与氛围图形图层。"
+      },
+      "text-effects": {
+        "name": "文字特效",
+        "description": "风格化的动态字幕与标题点缀。"
+      },
+      "transitions": {
+        "name": "转场",
+        "description": "保留给片段之间的配方转场。"
+      },
+      "ads": {
+        "name": "广告",
+        "description": "可复用的广告卡、产品推广与发布场景。"
+      },
+      "app-ui-demos": {
+        "name": "App 界面演示",
+        "description": "动态界面导览与产品界面亮点。"
+      },
+      "lower-thirds": {
+        "name": "下方字幕条",
+        "description": "姓名条、职称与品牌信息带。"
+      },
+      "product-shots": {
+        "name": "产品镜头",
+        "description": "素材占位、功能标注与精致展示。"
+      },
+      "social-hooks": {
+        "name": "社交开场钩子",
+        "description": "短视频的快速开场节奏。"
+      },
+      "kinetic-typography": {
+        "name": "动态文字排版",
+        "description": "用于字幕、引言与标语的动态文字系统。"
+      },
+      "logo-reveals": {
+        "name": "标志揭示",
+        "description": "品牌片头与片尾的标志动画起手式。"
+      },
+      "end-screens": {
+        "name": "片尾画面",
+        "description": "动态片尾卡、行动号召与订阅提示。"
+      }
+    },
+    "templates": {
+      "cinema-letterbox": {
+        "name": "电影黑边",
+        "description": "宽银幕黑边，搭配颗粒与暗角。"
+      },
+      "cinema-light-frame": {
+        "name": "光感边框",
+        "description": "适合电影感镜头的细致暖色边框。"
+      },
+      "cinema-warm-fade": {
+        "name": "暖色淡化",
+        "description": "适合生活与旅行视频的柔和暖色调色。"
+      },
+      "glitch-digital": {
+        "name": "数字故障",
+        "description": "RGB 偏移搭配移动的扫描线点缀。"
+      },
+      "glitch-rgb-scan": {
+        "name": "RGB 扫描",
+        "description": "细扫描线与色彩通道分离。"
+      },
+      "glitch-static-frame": {
+        "name": "噪点边框",
+        "description": "带轻微扭曲的噪点边框处理。"
+      },
+      "retro-vhs": {
+        "name": "VHS 录像带",
+        "description": "经典录像带的柔和感与播放状态文字。"
+      },
+      "retro-crt-monitor": {
+        "name": "CRT 显示器",
+        "description": "柔和圆角边框与绿色终端风格。"
+      },
+      "retro-old-film": {
+        "name": "老电影",
+        "description": "高颗粒黑白画面，搭配片门标记文字。"
+      },
+      "retro-sepia-drift": {
+        "name": "怀旧棕褐",
+        "description": "细致的复古暖色调与柔和边框。"
+      },
+      "social-recording": {
+        "name": "录像机画面",
+        "description": "经典 REC 指示灯、计时器与边框。"
+      },
+      "social-facecam-frame": {
+        "name": "人像镜头框",
+        "description": "适合反应与游戏片段的角落画框。"
+      },
+      "social-countdown-lead": {
+        "name": "倒计时开场",
+        "description": "适合教程与开场钩子的简短倒计时。"
+      },
+      "social-comment-pop": {
+        "name": "评论气泡",
+        "description": "用于社交标注的置顶评论气泡。"
+      },
+      "branding-watermark-drift": {
+        "name": "漂移水印",
+        "description": "柔和移动的角落水印，保护品牌。"
+      },
+      "branding-copyright": {
+        "name": "滚动版权声明",
+        "description": "交付视频用的全宽滚动版权声明。"
+      },
+      "branding-lower-third": {
+        "name": "下方字幕条",
+        "description": "简洁的品牌姓名条。"
+      },
+      "branding-subscribe-tag": {
+        "name": "订阅标签",
+        "description": "片尾卡的订阅横幅。"
+      },
+      "color-warm-pop": {
+        "name": "暖色亮丽",
+        "description": "金色暖调搭配柔和对比。"
+      },
+      "color-cool-bloom": {
+        "name": "冷调柔光",
+        "description": "适合夜景与科技画面的柔和冷色调。"
+      },
+      "color-dramatic-noir": {
+        "name": "戏剧黑色电影",
+        "description": "高对比的阴郁氛围。"
+      },
+      "color-vintage-wash": {
+        "name": "复古褪色",
+        "description": "低对比的褪色胶片感。"
+      },
+      "overlay-focus-frame": {
+        "name": "焦点框",
+        "description": "带十字准星点缀的中央参考框。"
+      },
+      "overlay-soft-border": {
+        "name": "柔和边框",
+        "description": "适合编辑风格构图的细致典雅边框。"
+      },
+      "overlay-spotlight-title": {
+        "name": "聚光灯标题",
+        "description": "为重点时刻设计的标题样式。"
+      },
+      "text-kinetic-punch": {
+        "name": "动态冲击字",
+        "description": "用于转场与开场的粗体文字冲击效果。"
+      },
+      "text-stamp-upper": {
+        "name": "上方印章字",
+        "description": "用于章节标签的上方印章字。"
+      },
+      "text-neon-tag": {
+        "name": "霓虹标签",
+        "description": "适合音乐与夜生活内容的亮眼标签。"
+      },
+      "social-live-badge": {
+        "name": "直播徽章",
+        "description": "直播风格叠加用的闪烁 LIVE 指示。"
+      },
+      "social-hashtag-strip": {
+        "name": "话题标签条",
+        "description": "社交视频帖子的底部话题标签条。"
+      },
+      "cinema-anamorphic-flare": {
+        "name": "变形宽银幕光斑",
+        "description": "上下黑边搭配蓝色镜头光斑点缀。"
+      },
+      "cinema-noir-bars": {
+        "name": "黑色电影黑边",
+        "description": "粗黑边搭配深沉对比，适合戏剧性场景。"
+      },
+      "overlay-grid-guide": {
+        "name": "网格参考",
+        "description": "三分法网格，供构图参考。"
+      },
+      "overlay-corner-brackets": {
+        "name": "角落括框",
+        "description": "营造电影感焦点的典雅角落框线。"
+      },
+      "text-subtitle-bar": {
+        "name": "字幕条",
+        "description": "带深色底的底部字幕，提升可读性。"
+      },
+      "text-quote-block": {
+        "name": "引言区块",
+        "description": "居中引言搭配装饰引号。"
+      },
+      "color-teal-orange": {
+        "name": "青橙色调",
+        "description": "好莱坞式调色：冷色阴影、暖色高光。"
+      },
+      "color-monochrome": {
+        "name": "黑白",
+        "description": "干净的黑白画面，黑位略为提亮。"
+      },
+      "glitch-datamosh": {
+        "name": "数据崩坏",
+        "description": "重颗粒与色彩分离，营造混乱能量。"
+      },
+      "branding-end-card": {
+        "name": "片尾卡",
+        "description": "含名称与行动号召的完整片尾卡。"
+      },
+      "social-viewer-count": {
+        "name": "观看人数",
+        "description": "动态观看／点赞计数徽章。"
+      },
+      "retro-polaroid": {
+        "name": "拍立得",
+        "description": "白色边框搭配暖色复古色调。"
+      },
+      "motion-saas-ad-card": {
+        "name": "SaaS 广告卡",
+        "description": "动态创作起手式：可编辑文案、品牌色、素材占位与动画强度的产品广告。"
+      }
+    },
+    "controls": {
+      "name": "名称",
+      "grainAmount": "颗粒",
+      "gridOpacity": "网格不透明度",
+      "watermarkText": "水印",
+      "headline": "标题",
+      "glitchAmount": "故障强度",
+      "quote": "引言",
+      "label": "标签",
+      "warmth": "暖度",
+      "media": "产品素材",
+      "role": "职称",
+      "accent": "强调色",
+      "brandColor": "品牌色",
+      "cta": "行动号召",
+      "frameOpacity": "边框不透明度",
+      "count": "数量",
+      "tags": "话题标签",
+      "barOpacity": "黑边不透明度",
+      "brandKit": "使用品牌套件",
+      "watermarkOpacity": "不透明度",
+      "tag": "标签",
+      "duration": "时长",
+      "intensity": "动画强度",
+      "caption": "字幕",
+      "subtitle": "副标题",
+      "channel": "频道名称"
+    }
+  },
+  "previewLock": {
+    "locked": "🔒 锁定比例",
+    "free": "🔓 自由比例"
+  },
+  "uiControls": {
+    "sliderValue": "{{label}}数值",
+    "sliderValueGeneric": "数值",
+    "editValue": "编辑{{label}}数值",
+    "editValueGeneric": "编辑数值",
+    "clickToEdit": "单击即可输入数值",
+    "clickToEditOrReset": "单击输入数值，双击恢复默认",
+    "closeDialog": "关闭对话框"
+  },
+  "serviceDescriptions": {
+    "elevenlabs": "AI 语音生成与文字转语音",
+    "openai-compatible": "任何兼容 OpenAI 的 API 服务；密钥可不填",
+    "anthropic-compatible": "任何兼容 Anthropic Messages 的 API 服务；密钥可不填",
+    "kie-ai": "视频／图片生成、放大与编辑的 AI 聚合服务",
+    "freepik": "图片生成、矢量图与创意素材的 AI 聚合服务"
+  },
+  "otherServices": {
+    "title": "其他 AI 服务",
+    "description": "ElevenLabs、自定义 API 等其他服务的密钥，以你设置的主密码加密保存。"
+  }
+}

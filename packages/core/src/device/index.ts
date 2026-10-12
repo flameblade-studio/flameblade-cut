@@ -8,6 +8,7 @@ export {
   type BenchmarkResult,
   type DeviceProfile,
   type CodecRecommendation,
+  type DeviceSummary,
   detectDeviceCapabilities,
   getDeviceProfile,
   getCodecRecommendations,
@@ -15,13 +16,16 @@ export {
   saveBenchmarkResult,
   clearBenchmarkCache,
   formatDeviceSummary,
+  describeDeviceSummary,
 } from "./device-capabilities";
 
 export {
   type ExportEstimateSettings,
   type TimeEstimate,
+  type EstimateDuration,
   type BenchmarkProgress,
   estimateExportTime,
+  describeEstimateDuration,
   compareCodecEstimates,
   runBenchmark,
   shouldRecommendBenchmark,

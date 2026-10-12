@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   estimateExportTime,
+  describeEstimateDuration,
   compareCodecEstimates,
   shouldRecommendBenchmark,
   type ExportEstimateSettings,
@@ -263,6 +264,30 @@ describe("ExportEstimator", () => {
       const profile = createMockProfile({ benchmark });
 
       expect(shouldRecommendBenchmark(profile)).toBe(true);
+    });
+  });
+
+  describe("describeEstimateDuration", () => {
+    it("rounds short estimates to whole seconds", () => {
+      expect(describeEstimateDuration(12.4)).toEqual({ unit: "seconds", seconds: 12 });
+    });
+
+    it("uses whole minutes when there are no leftover seconds", () => {
+      expect(describeEstimateDuration(120)).toEqual({ unit: "minutes", minutes: 2 });
+    });
+
+    it("pairs minutes with leftover seconds", () => {
+      expect(describeEstimateDuration(95)).toEqual({ unit: "minutesSeconds", minutes: 1, seconds: 35 });
+    });
+
+    it("pairs hours with leftover minutes", () => {
+      expect(describeEstimateDuration(3_900)).toEqual({ unit: "hoursMinutes", hours: 1, minutes: 5 });
+    });
+
+    it("is carried on every estimate and matches the English text", () => {
+      const estimate = estimateExportTime(createMockProfile(), createMockSettings({ duration: 5 }));
+      expect(estimate.duration).toEqual(describeEstimateDuration(estimate.seconds));
+      expect(estimate.formatted).toBe(`~${Math.round(estimate.seconds)} seconds`);
     });
   });
 });

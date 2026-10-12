@@ -172,7 +172,18 @@
     "start": "今すぐ起動",
     "libraryDefault": "既定：ビデオ\\Flameblade Cut",
     "libraryReset": "既定に戻す",
-    "libraryHint": "これから生成する動画はここに保存され、日ごとにサブフォルダーが作られます。個別の動画は「名前を付けて保存」で好きな場所に保存できます。"
+    "libraryHint": "これから生成する動画はここに保存され、日ごとにサブフォルダーが作られます。個別の動画は「名前を付けて保存」で好きな場所に保存できます。",
+    "model": {
+      "label": "メインモデル",
+      "options": {
+        "auto": "自動（GPU に合わせてインストール済みのモデルを選択）",
+        "nvfp4": "NVFP4・RTX 50 シリーズ専用、最速",
+        "int8": "INT8・RTX 30／40 シリーズなどその他の NVIDIA GPU",
+        "bf16": "BF16・元の精度、ファイル最大（約 42 GB）"
+      },
+      "autoHint": "RTX 50 シリーズでは NVFP4、その他の GPU では INT8、どちらもなければ BF16 を使います。所要時間の目安は RTX 5060 Ti＋NVFP4 の実測値で、構成によって変わります。",
+      "fileHint": "モデルファイル {{file}} が必要です（ComfyUI の models/diffusion_models に配置）。"
+    }
   },
   "time": {
     "justNow": "たった今",
@@ -188,7 +199,7 @@
     "engine": "翻訳エンジン",
     "engineLocal": "ローカル翻訳・無料",
     "engineOpenai": "OpenAI",
-    "openaiNoKey": "OpenAI キーが未設定です。設定画面で入力してください",
+    "openaiNoKey": "OpenAI キーが未設定です。「設定 → API キー」で入力してください",
     "localNote": "初回のみ翻訳モデル（{{size}}）をダウンロードし、以降はオフラインで使えます",
     "preview": "英語プロンプト",
     "previewButton": "翻訳をプレビュー",
@@ -201,5 +212,11 @@
     "sentChip": "英語",
     "sentTitle": "実際に送信した英語：{{prompt}}（クリックでコピー）",
     "directorHint": "各ショットはこの設定でそれぞれ翻訳されます"
+  },
+  "errors": {
+    "model": {
+      "missing": "LTX-2.5 のメインモデルファイルが見つかりません。Hugging Face の Lightricks/LTX-2.5 から GPU に合ったもの（RTX 50 シリーズは NVFP4、それ以外は INT8）をダウンロードして ComfyUI の models/diffusion_models に置くか、AI エンジン設定でインストール済みのモデルを選んでください。",
+      "nvfp4-unsupported": "お使いの GPU は NVFP4 モデルに対応していません（RTX 50 シリーズのみ）。INT8 版のメインモデルをダウンロードするか、AI エンジン設定で INT8 を選んでください。"
+    }
   }
 }

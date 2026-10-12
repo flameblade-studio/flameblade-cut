@@ -9,8 +9,13 @@ interface FakeClip {
   outPoint: number;
 }
 
+const calls: string[] = [];
+
 const state = {
   hasOpenProject: false,
+  initializeAutoSave: vi.fn(async () => {
+    calls.push("initializeAutoSave");
+  }),
   createdWith: null as null | { name: string; settings: Record<string, unknown> },
   project: {
     mediaLibrary: { items: [] as Array<{ id: string; metadata: { duration: number } }> },
@@ -21,6 +26,7 @@ const state = {
     return { success: true };
   }),
   createNewProject: vi.fn((name: string, settings: Record<string, unknown>) => {
+    calls.push("createNewProject");
     state.createdWith = { name, settings };
     state.hasOpenProject = true;
     state.project.timeline.tracks.push({ id: "v1", type: "video", locked: false, clips: [] });
@@ -44,6 +50,7 @@ vi.mock("../../stores/project-store", () => ({
 const { sendRangesToEditor, VERTICAL_FORMAT } = await import("./send-ranges-to-editor");
 
 beforeEach(() => {
+  calls.length = 0;
   state.hasOpenProject = false;
   state.createdWith = null;
   state.project.mediaLibrary.items = [];
@@ -64,6 +71,8 @@ describe("sendRangesToEditor", () => {
       readBytes,
     );
     expect(placed).toBe(2);
+    // Auto-save must observe the new project, or it is lost when the app quits.
+    expect(calls.slice(0, 2)).toEqual(["initializeAutoSave", "createNewProject"]);
     expect(readBytes).toHaveBeenCalledTimes(1);
     expect(state.importMedia).toHaveBeenCalledTimes(1);
     expect(state.createdWith?.settings).toMatchObject({ width: 1080, height: 1920 });

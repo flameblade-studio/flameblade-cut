@@ -2,6 +2,7 @@
  * The generation history file `<libraryDir>/flameblade-cut-history.json`:
  * records, LTX settings and the storyboard, versioned for future migrations.
  */
+import { LTX_MODEL_CHOICES } from "./model-choice";
 import {
   DEFAULT_LTX_SETTINGS,
   GENERATION_ASPECTS,
@@ -99,6 +100,8 @@ function parseSettings(value: unknown): LtxSettings {
         : defaults.preLaunchScript,
     // Absent in history files written before 0.1.0 previews had this setting.
     outputDir: typeof value.outputDir === "string" && value.outputDir.trim() !== "" ? value.outputDir : null,
+    // Absent in history files written before the model choice existed.
+    model: LTX_MODEL_CHOICES.find((choice) => choice === value.model) ?? defaults.model,
   };
 }
 

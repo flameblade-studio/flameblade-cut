@@ -59,6 +59,7 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
   const inputRef = useRef<HTMLInputElement>(null);
 
   const trackInfo = getTrackInfo(track, index);
+  const shownName = track.name ? displayTrackName(track.name, t) : trackInfo.label;
   const isVisual = trackHasVisualItems(project, track.id);
   const isAudio = trackHasAudioItems(project, track.id);
   const hasSoloedAudioTrack = project.timeline.tracks.some(
@@ -196,14 +197,14 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
                 className="block truncate text-[13px] font-semibold text-fg-2 cursor-grab active:cursor-grabbing"
                 onDoubleClick={startRename}
               >
-                {track.name ? displayTrackName(track.name, t) : trackInfo.label}
+                {shownName}
               </span>
             )}
           </div>
 
           {compact && <DropdownMenu
             menuWidth={220} placement="end" alignment="start" size="lg"
-            button={{ label: t("timeline.track.options", { name: track.name || trackInfo.label }), isIconOnly: true, variant: "ghost", icon: <MoreHorizontal size={18} aria-hidden /> }}
+            button={{ label: t("timeline.track.options", { name: shownName }), isIconOnly: true, variant: "ghost", icon: <MoreHorizontal size={18} aria-hidden /> }}
             items={[
               ...(isVisual ? [{ label: track.hidden ? t("timeline.track.show") : t("timeline.track.hide"), onClick: () => hideTrack(track.id, !track.hidden) }] : []),
               ...(isAudio ? [
@@ -243,7 +244,7 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
               <>
                 <button
                   type="button"
-                  aria-label={track.muted ? t("timeline.track.unmuteNamed", { name: track.name }) : t("timeline.layers.muteNamed", { name: track.name })}
+                  aria-label={track.muted ? t("timeline.track.unmuteNamed", { name: shownName }) : t("timeline.layers.muteNamed", { name: shownName })}
                   aria-pressed={track.muted}
                   title={track.muted ? t("timeline.track.unmute") : t("timeline.track.mute")}
                   className={`transition-colors ${
@@ -262,7 +263,7 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
                 </button>
                 <button
                   type="button"
-                  aria-label={track.solo ? t("timeline.track.clearSoloNamed", { name: track.name }) : t("timeline.layers.soloNamed", { name: track.name })}
+                  aria-label={track.solo ? t("timeline.track.clearSoloNamed", { name: shownName }) : t("timeline.layers.soloNamed", { name: shownName })}
                   aria-pressed={track.solo}
                   title={track.solo ? t("timeline.track.clearSolo") : t("timeline.track.solo")}
                   className={`flex h-[18px] min-w-[18px] items-center justify-center rounded px-1 text-[9px] font-black transition-colors ${

@@ -451,18 +451,28 @@ export async function getDeviceProfile(
   return cachedProfile;
 }
 
+/** The facts a device summary shows, left for the display layer to word. */
+export interface DeviceSummary {
+  /** Cleaned GPU renderer name, or null when the renderer is unknown. */
+  gpuName: string | null;
+  cores: number;
+}
+
+export function describeDeviceSummary(profile: DeviceProfile): DeviceSummary {
+  const gpuName =
+    profile.gpu.renderer === "Unknown"
+      ? null
+      : profile.gpu.renderer
+          .replace(/ANGLE \(|, .*\)/g, "")
+          .replace(/Direct3D11 vs_\d+_\d+ ps_\d+_\d+/g, "")
+          .trim();
+  return { gpuName, cores: profile.cpu.cores };
+}
+
+/** English summary for logs and non-localized callers; UIs format `describeDeviceSummary`. */
 export function formatDeviceSummary(profile: DeviceProfile): string {
-  const parts = [];
-
-  if (profile.gpu.renderer !== "Unknown") {
-    const gpuName = profile.gpu.renderer
-      .replace(/ANGLE \(|, .*\)/g, "")
-      .replace(/Direct3D11 vs_\d+_\d+ ps_\d+_\d+/g, "")
-      .trim();
-    parts.push(gpuName);
-  }
-
-  parts.push(`${profile.cpu.cores} cores`);
-
+  const { gpuName, cores } = describeDeviceSummary(profile);
+  const parts = gpuName === null ? [] : [gpuName];
+  parts.push(`${cores} cores`);
   return parts.join(" · ");
 }

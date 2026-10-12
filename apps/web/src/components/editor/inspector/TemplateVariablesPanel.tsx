@@ -10,6 +10,7 @@ import {
   Upload,
   Check,
 } from "@/icons/lucide-compat";
+import { useTranslation } from "react-i18next";
 import { ToolcraftButton as Button } from "@openreel/ui";
 import { ToolcraftIconButton as IconButton } from "@openreel/ui";
 import { ToolcraftSelectableCard as SelectableCard } from "@openreel/ui";
@@ -37,6 +38,7 @@ const TextPlaceholderInput: React.FC<PlaceholderInputProps> = ({
   onChange,
   onClear,
 }) => {
+  const { t } = useTranslation();
   const [text, setText] = useState(
     value?.value || placeholder.defaultValue || "",
   );
@@ -73,7 +75,7 @@ const TextPlaceholderInput: React.FC<PlaceholderInputProps> = ({
         </div>
         {isModified && (
           <IconButton
-            label="Reset to default"
+            label={t("visual.templateVars.resetDefault")}
             icon={<Undo2 size={10} />}
             variant="ghost"
             size="sm"
@@ -97,12 +99,12 @@ const TextPlaceholderInput: React.FC<PlaceholderInputProps> = ({
         maxLength={maxLength}
         rows={Math.min(4, Math.ceil((text.length || 20) / 40))}
         inputClassName="w-full px-2 py-1.5 text-[11px] text-fg bg-bg-2 border border-border rounded-lg focus:border-primary focus:outline-none resize-none"
-        placeholder={placeholder.defaultValue || "Enter text..."}
+        placeholder={placeholder.defaultValue || t("visual.templateVars.enterText")}
       />
 
       <div className="flex justify-between text-[9px] text-fg-3">
         <span>
-          {text.length} / {maxLength} characters
+          {t("visual.templateVars.characters", { count: text.length, max: maxLength })}
         </span>
       </div>
     </div>
@@ -115,6 +117,7 @@ const MediaPlaceholderInput: React.FC<PlaceholderInputProps> = ({
   onChange,
   onClear,
 }) => {
+  const { t } = useTranslation();
   const project = useProjectStore((state) => state.project);
   const [selectedMediaId, setSelectedMediaId] = useState(value?.value || "");
 
@@ -165,7 +168,7 @@ const MediaPlaceholderInput: React.FC<PlaceholderInputProps> = ({
         </div>
         {isModified && (
           <IconButton
-            label="Reset"
+            label={t("visual.templateVars.reset")}
             icon={<Undo2 size={10} />}
             variant="ghost"
             size="sm"
@@ -185,10 +188,10 @@ const MediaPlaceholderInput: React.FC<PlaceholderInputProps> = ({
         <div className="p-4 border border-dashed border-border rounded-lg text-center">
           <Upload size={16} className="mx-auto mb-2 text-fg-3" />
           <Text type="supporting" color="secondary" display="block" className="text-[10px]">
-            No media available
+            {t("visual.templateVars.noMedia")}
           </Text>
           <Text type="supporting" color="secondary" display="block" className="mt-1 text-[9px]">
-            Import media to use here
+            {t("visual.templateVars.importMedia")}
           </Text>
         </div>
       ) : (
@@ -242,6 +245,7 @@ const SubtitlePlaceholderInput: React.FC<PlaceholderInputProps> = ({
   onChange,
   onClear,
 }) => {
+  const { t } = useTranslation();
   const [text, setText] = useState(
     value?.value || placeholder.defaultValue || "",
   );
@@ -277,7 +281,7 @@ const SubtitlePlaceholderInput: React.FC<PlaceholderInputProps> = ({
         </div>
         {isModified && (
           <IconButton
-            label="Reset to default"
+            label={t("visual.templateVars.resetDefault")}
             icon={<Undo2 size={10} />}
             variant="ghost"
             size="sm"
@@ -299,7 +303,7 @@ const SubtitlePlaceholderInput: React.FC<PlaceholderInputProps> = ({
         value={text}
         onChange={handleChange}
         className="w-full px-2 py-1.5 text-[11px] text-fg bg-bg-2 border border-border rounded-lg focus:border-primary focus:outline-none"
-        placeholder={placeholder.defaultValue || "Enter subtitle text..."}
+        placeholder={placeholder.defaultValue || t("visual.templateVars.enterSubtitle")}
       />
     </div>
   );
@@ -318,6 +322,7 @@ export const TemplateVariablesPanel: React.FC<TemplateVariablesPanelProps> = ({
   onChange,
   onApply,
 }) => {
+  const { t } = useTranslation();
   const placeholders = useMemo(() => {
     return template?.placeholders ?? [];
   }, [template]);
@@ -387,7 +392,7 @@ export const TemplateVariablesPanel: React.FC<TemplateVariablesPanelProps> = ({
           className="mx-auto mb-2 text-fg-3 opacity-50"
         />
         <Text type="supporting" color="secondary" display="block" className="text-[10px]">
-          Select a template to edit variables
+          {t("visual.templateVars.noTemplate")}
         </Text>
       </div>
     );
@@ -399,7 +404,7 @@ export const TemplateVariablesPanel: React.FC<TemplateVariablesPanelProps> = ({
         <div className="flex items-center gap-2">
           <Settings2 size={14} className="text-primary" />
           <span className="text-[11px] font-medium text-fg">
-            Template Variables
+            {t("visual.templateVars.title")}
           </span>
           <span className="text-[9px] text-fg-3 bg-bg-2 px-1.5 py-0.5 rounded">
             {placeholders.length}
@@ -407,7 +412,7 @@ export const TemplateVariablesPanel: React.FC<TemplateVariablesPanelProps> = ({
         </div>
         {hasChanges && (
           <Button
-            label="Reset All"
+            label={t("visual.templateVars.resetAll")}
             variant="ghost"
             icon={<RotateCcw size={10} />}
             onClick={handleResetAll}
@@ -419,7 +424,7 @@ export const TemplateVariablesPanel: React.FC<TemplateVariablesPanelProps> = ({
       {placeholders.length === 0 ? (
         <div className="text-center py-6">
           <Text type="supporting" color="secondary" display="block" className="text-[10px]">
-            This template has no editable variables
+            {t("visual.templateVars.none")}
           </Text>
         </div>
       ) : (
@@ -438,15 +443,16 @@ export const TemplateVariablesPanel: React.FC<TemplateVariablesPanelProps> = ({
       {missingRequired.length > 0 && (
         <div className="p-2 bg-amber-500/10 border border-amber-500/30 rounded-lg">
           <Text type="supporting" display="block" className="text-[10px] text-amber-400">
-            Fill in required fields:{" "}
-            {missingRequired.map((p) => p.label).join(", ")}
+            {t("visual.templateVars.missing", {
+              names: missingRequired.map((p) => p.label).join(", "),
+            })}
           </Text>
         </div>
       )}
 
       {onApply && (
         <Button
-          label="Apply Template"
+          label={t("visual.templateVars.apply")}
           variant="primary"
           onClick={onApply}
           isDisabled={!canApply}

@@ -21,6 +21,7 @@ import { useUIStore } from "../../../stores/ui-store";
 import { toast } from "../../../stores/notification-store";
 import {
   EditingTemplateControls,
+  recipeText,
   getEditingTemplateDefaultControlValues,
 } from "./EditingTemplateControls";
 import { useTranslation } from "react-i18next";
@@ -128,10 +129,12 @@ export const RecipesTab: React.FC = () => {
       return (
         template.name.toLowerCase().includes(query) ||
         template.description.toLowerCase().includes(query) ||
+        recipeText(template, "name", t).toLowerCase().includes(query) ||
+        recipeText(template, "description", t).toLowerCase().includes(query) ||
         template.tags.some((tag) => tag.toLowerCase().includes(query))
       );
     });
-  }, [searchQuery, selectedCategory, selectedTargetType, templates]);
+  }, [searchQuery, selectedCategory, selectedTargetType, templates, t]);
 
   const handleExpand = (template: EditingTemplate): void => {
     setExpandedTemplateId((current) =>
@@ -188,7 +191,7 @@ export const RecipesTab: React.FC = () => {
 
       toast.success(
         t("assets.recipesPanel.applied"),
-        t("assets.recipesPanel.appliedHint", { name: template.name, target: selectedMedia?.name || t("assets.recipesPanel.selectedClip") }),
+        t("assets.recipesPanel.appliedHint", { name: recipeText(template, "name", t), target: selectedMedia?.name || t("assets.recipesPanel.selectedClip") }),
       );
     } finally {
       setApplyingTemplateId(null);
@@ -219,14 +222,14 @@ export const RecipesTab: React.FC = () => {
       <div className="p-4 border-b border-border bg-background-secondary/80 backdrop-blur sticky top-0 z-10 space-y-3">
         <div className="flex items-center gap-3 bg-background-tertiary rounded-xl p-2 pr-3 border border-border">
           <div className="w-10 h-10 rounded-lg bg-background-elevated flex items-center justify-center border border-border shrink-0">
-            {selectedTargetType === 'video' ? <span className="text-primary/70 text-[10px]">VIDEO</span> : <span className="text-primary/70 text-[10px]">IMAGE</span>}
+            {selectedTargetType === 'video' ? <span className="text-primary/70 text-[10px]">{t("tools.recipesTab.video")}</span> : <span className="text-primary/70 text-[10px]">{t("tools.recipesTab.image")}</span>}
           </div>
           <div className="flex-1 min-w-0">
             <Text type="body" weight="bold" display="block" className="truncate text-xs">
-              {selectedMedia?.name || 'Selected Clip'}
+              {selectedMedia?.name || t("tools.recipesTab.selectedClip")}
             </Text>
             <Text type="supporting" color="secondary" display="block" className="mt-0.5 text-[10px]">
-              {selectedClip.duration.toFixed(1)}s • {appliedTemplates.length} recipes applied
+              {t("tools.recipesTab.summary", { duration: selectedClip.duration.toFixed(1), count: appliedTemplates.length })}
             </Text>
           </div>
         </div>
@@ -260,12 +263,12 @@ export const RecipesTab: React.FC = () => {
                 : "bg-background-tertiary text-text-muted hover:text-text-primary hover:bg-background-elevated border border-border/50"
             }`}
           >
-            ALL
+            {t("tools.recipesTab.all")}
           </SelectableCard>
           {EDITING_TEMPLATE_CATEGORIES.map((category) => (
             <SelectableCard
               key={category.id}
-              label={category.name}
+              label={t(`tools.recipes.categories.${category.id}.name`, { defaultValue: category.name })}
               isSelected={selectedCategory === category.id}
               onChange={() => setSelectedCategory(category.id)}
               onClick={() => setSelectedCategory(category.id)}
@@ -277,7 +280,7 @@ export const RecipesTab: React.FC = () => {
                   : "bg-background-tertiary text-text-muted hover:text-text-primary hover:bg-background-elevated border border-border/50"
               }`}
             >
-              {category.name}
+              {t(`tools.recipes.categories.${category.id}.name`, { defaultValue: category.name })}
             </SelectableCard>
           ))}
         </div>
@@ -320,7 +323,7 @@ export const RecipesTab: React.FC = () => {
                         <div>
                           <div className="flex items-center justify-between gap-2">
                             <Text type="body" weight="bold" display="block" className="truncate text-xs leading-tight">
-                              {template.name}
+                              {recipeText(template, "name", t)}
                             </Text>
                             {appliedCount > 0 && (
                               <span className="shrink-0 flex items-center gap-1 rounded bg-primary/10 px-1.5 py-0.5 text-[9px] font-bold text-primary ring-1 ring-primary/20">
@@ -330,7 +333,7 @@ export const RecipesTab: React.FC = () => {
                             )}
                           </div>
                           <Text type="supporting" color="secondary" display="block" className="mt-0.5 line-clamp-2 text-[10px] leading-relaxed">
-                            {template.description}
+                            {recipeText(template, "description", t)}
                           </Text>
                         </div>
                         

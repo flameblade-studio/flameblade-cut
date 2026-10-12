@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   children: React.ReactNode;
@@ -6,6 +7,11 @@ interface Props {
 
 interface State {
   hasError: boolean;
+}
+
+function InspectorTabErrorFallback(): React.ReactElement {
+  const { t } = useTranslation();
+  return <div className="p-4 text-center text-xs text-fg-2">{t("visual.shell.tabError")}</div>;
 }
 
 export class InspectorTabErrorBoundary extends React.Component<Props, State> {
@@ -18,9 +24,7 @@ export class InspectorTabErrorBoundary extends React.Component<Props, State> {
   render(): React.ReactNode {
     if (this.state.hasError) {
       return (
-        <div className="p-4 text-center text-xs text-fg-2">
-          This panel hit an error. Switch tabs and back to retry.
-        </div>
+        <InspectorTabErrorFallback />
       );
     }
     return this.props.children;

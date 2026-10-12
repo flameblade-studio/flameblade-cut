@@ -5,6 +5,7 @@ import {
   ToolcraftText as Text,
 } from "@openreel/ui";
 import { AlertCircle, Mic, Square } from "@/icons/lucide-compat";
+import { useTranslation } from "react-i18next";
 import { useProjectStore } from "../../../stores/project-store";
 import { useTimelineStore } from "../../../stores/timeline-store";
 
@@ -28,6 +29,7 @@ function formatElapsed(milliseconds: number): string {
 }
 
 export const VoiceOverPanel: React.FC = () => {
+  const { t } = useTranslation();
   const importMedia = useProjectStore((state) => state.importMedia);
   const addClipToNewTrack = useProjectStore((state) => state.addClipToNewTrack);
   const renameTrack = useProjectStore((state) => state.renameTrack);
@@ -68,7 +70,7 @@ export const VoiceOverPanel: React.FC = () => {
 
   const saveVoiceOver = useCallback(
     async (blob: Blob, extension: string, startTime: number) => {
-      if (blob.size === 0) throw new Error("The microphone recording was empty.");
+      if (blob.size === 0) throw new Error(t("advanced.voiceOver.emptyRecording"));
       setIsSaving(true);
       const beforeMediaIds = new Set(
         useProjectStore.getState().project.mediaLibrary.items.map((item) => item.id),
@@ -80,15 +82,15 @@ export const VoiceOverPanel: React.FC = () => {
       );
       const importResult = await importMedia(file);
       if (!importResult.success) {
-        throw new Error(importResult.error?.message ?? "Could not import the recording.");
+        throw new Error(importResult.error?.message ?? t("advanced.voiceOver.importFailed"));
       }
       const mediaItem = useProjectStore
         .getState()
         .project.mediaLibrary.items.find((item) => !beforeMediaIds.has(item.id));
-      if (!mediaItem) throw new Error("The recorded audio could not be found after import.");
+      if (!mediaItem) throw new Error(t("advanced.voiceOver.notFound"));
       const addResult = await addClipToNewTrack(mediaItem.id, startTime);
       if (!addResult.success) {
-        throw new Error(addResult.error?.message ?? "Could not add the voice over to the timeline.");
+        throw new Error(addResult.error?.message ?? t("advanced.voiceOver.addFailed"));
       }
       const voiceTrack = useProjectStore
         .getState()
@@ -97,18 +99,18 @@ export const VoiceOverPanel: React.FC = () => {
         );
       if (voiceTrack) await renameTrack(voiceTrack.id, "Voice Over");
     },
-    [addClipToNewTrack, importMedia, renameTrack],
+    [addClipToNewTrack, importMedia, renameTrack, t],
   );
 
   const startRecording = useCallback(async () => {
     setError(null);
     if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === "undefined") {
-      setError("Voice-over recording is not supported by this browser.");
+      setError(t("advanced.voiceOver.unsupported"));
       return;
     }
     const format = selectVoiceOverMimeType();
     if (!format) {
-      setError("This browser does not provide a supported microphone recording format.");
+      setError(t("advanced.voiceOver.noFormat"));
       return;
     }
     try {
@@ -132,7 +134,7 @@ export const VoiceOverPanel: React.FC = () => {
         if (event.data.size > 0) chunksRef.current.push(event.data);
       };
       recorder.onerror = () => {
-        setError("The microphone recording stopped unexpectedly.");
+        setError(t("advanced.voiceOver.stoppedUnexpectedly"));
       };
       recorder.onstop = () => {
         const shouldSave = saveRecordingRef.current;
@@ -143,7 +145,7 @@ export const VoiceOverPanel: React.FC = () => {
         if (!shouldSave) return;
         void saveVoiceOver(blob, format.extension, timelineStart)
           .catch((reason) => {
-            setError(reason instanceof Error ? reason.message : "Could not save the voice over.");
+            setError(reason instanceof Error ? reason.message : t("advanced.voiceOver.saveFailed"));
           })
           .finally(() => setIsSaving(false));
       };
@@ -155,13 +157,13 @@ export const VoiceOverPanel: React.FC = () => {
       releaseStream();
       setError(
         reason instanceof DOMException && reason.name === "NotAllowedError"
-          ? "Allow microphone access to record a voice over."
+          ? t("advanced.voiceOver.allowMic")
           : reason instanceof Error
             ? reason.message
-            : "Could not start microphone recording.",
+            : t("advanced.voiceOver.startFailed"),
       );
     }
-  }, [playheadPosition, releaseStream, saveVoiceOver]);
+  }, [playheadPosition, releaseStream, saveVoiceOver, t]);
 
   const stopRecording = () => {
     saveRecordingRef.current = true;
@@ -173,10 +175,10 @@ export const VoiceOverPanel: React.FC = () => {
       <Card variant="muted" padding={3} className="flex items-center justify-between border border-border">
         <div>
           <Text type="supporting" weight="bold" className="block text-[11px] text-fg">
-            Record at playhead
+            {t("advanced.voiceOver.title")}
           </Text>
           <Text type="supporting" color="secondary" className="block text-[9px]">
-            Starts at {playheadPosition.toFixed(1)}s on a new Voice Over track.
+            {t("advanced.voiceOver.startsAt", { seconds: playheadPosition.toFixed(1) })}
           </Text>
         </div>
         <span className={`font-mono text-sm ${isRecording ? "text-red-400" : "text-fg-2"}`}>
@@ -191,7 +193,7 @@ export const VoiceOverPanel: React.FC = () => {
       )}
       {isRecording ? (
         <Button
-          label="Stop & Add to Timeline"
+          label={t("advanced.voiceOver.stop")}
           icon={<Square size={13} aria-hidden />}
           variant="primary"
           size="md"
@@ -200,7 +202,7 @@ export const VoiceOverPanel: React.FC = () => {
         />
       ) : (
         <Button
-          label={isSaving ? "Adding Voice Over…" : "Record Voice Over"}
+          label={isSaving ? t("advanced.voiceOver.adding") : t("advanced.voiceOver.record")}
           icon={<Mic size={14} aria-hidden />}
           variant="primary"
           size="md"
@@ -210,7 +212,7 @@ export const VoiceOverPanel: React.FC = () => {
         />
       )}
       <Text type="supporting" color="secondary" className="block text-center text-[9px]">
-        Recorded audio stays in this project and exports with the rest of the mix.
+        {t("advanced.voiceOver.footer")}
       </Text>
     </div>
   );

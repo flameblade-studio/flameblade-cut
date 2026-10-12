@@ -10,7 +10,6 @@ import { ChevronDown, Loader2 } from "@/icons/lucide-compat";
 import {
   LOCAL_TRANSLATION_MODEL,
   onLocalModelProgress,
-  openAiKeyConfigured,
   translatePrompt,
   type ModelDownloadProgress,
   type PromptTranslation,
@@ -19,20 +18,11 @@ import {
 import { containsChinese } from "../../services/prompt-translation/segments";
 import { toast } from "../../stores/notification-store";
 import { useCreateDraft } from "./draft-store";
+import { useCloudKeyStatus } from "../../services/cloud-keys/cloud-key-store";
 
-/** Whether the user saved an OpenAI key (checked once per mount). */
+/** Whether the user saved an OpenAI key (Settings → API keys); follows later changes. */
 export function useOpenAiKey(): boolean {
-  const [configured, setConfigured] = useState(false);
-  useEffect(() => {
-    let alive = true;
-    void openAiKeyConfigured().then((value) => {
-      if (alive) setConfigured(value);
-    });
-    return () => {
-      alive = false;
-    };
-  }, []);
-  return configured;
+  return useCloudKeyStatus()?.openai ?? false;
 }
 
 /** Summed download progress of the local model's files while `active`. */

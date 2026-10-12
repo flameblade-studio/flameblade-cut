@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Loader2, CheckCircle, XCircle, Clock } from "@/icons/lucide-compat";
 import { ToolcraftCard as Card } from "@openreel/ui";
 import { ToolcraftProgressBar as ProgressBar } from "@openreel/ui";
@@ -10,6 +11,8 @@ import {
 } from "../../services/processing-manager";
 
 const TaskItem: React.FC<{ task: ProcessingTask }> = ({ task }) => {
+  const { t } = useTranslation();
+  const typeLabel = t(`tools.processing.types.${task.type}`, { defaultValue: PROCESSING_TYPE_LABELS[task.type] });
   const getIcon = () => {
     switch (task.status) {
       case "queued":
@@ -42,16 +45,16 @@ const TaskItem: React.FC<{ task: ProcessingTask }> = ({ task }) => {
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between">
           <Text type="supporting" weight="bold" maxLines={1}>
-            {PROCESSING_TYPE_LABELS[task.type]}
+            {typeLabel}
           </Text>
           <Text type="supporting" className={`text-[10px] ${getStatusColor()}`}>
-            {task.status === "processing" ? `${task.progress}%` : task.status}
+            {task.status === "processing" ? `${task.progress}%` : t(`tools.processing.status.${task.status}`)}
           </Text>
         </div>
         {task.status === "processing" && (
           <div className="mt-1">
             <ProgressBar
-              label={`${PROCESSING_TYPE_LABELS[task.type]} progress`}
+              label={t("tools.processing.taskProgress", { name: typeLabel })}
               isLabelHidden
               value={task.progress}
               max={100}
@@ -79,10 +82,11 @@ const TaskItem: React.FC<{ task: ProcessingTask }> = ({ task }) => {
 };
 
 export const ProcessingOverlay: React.FC = () => {
+  const { t } = useTranslation();
   const { tasks, isProcessing, getOverallProgress } = useProcessingStore();
   const taskList = Array.from(tasks.values());
   const activeTasks = taskList.filter(
-    (t) => t.status === "queued" || t.status === "processing",
+    (task) => task.status === "queued" || task.status === "processing",
   );
 
   if (!isProcessing || activeTasks.length === 0) {
@@ -104,11 +108,10 @@ export const ProcessingOverlay: React.FC = () => {
           </div>
           <div>
             <Text as="h3" type="label" weight="bold" display="block">
-              Processing Effects
+              {t("tools.processing.title")}
             </Text>
             <Text type="supporting" color="secondary" display="block">
-              {activeTasks.length} task{activeTasks.length !== 1 ? "s" : ""} in
-              progress
+              {t("tools.processing.tasks", { count: activeTasks.length })}
             </Text>
           </div>
         </div>
@@ -116,14 +119,14 @@ export const ProcessingOverlay: React.FC = () => {
         <div className="mb-4">
           <div className="flex items-center justify-between mb-1">
             <Text type="supporting" color="secondary" className="text-[10px]">
-              Overall Progress
+              {t("tools.processing.overall")}
             </Text>
             <Text type="supporting" color="secondary" className="text-[10px] font-mono">
               {progress}%
             </Text>
           </div>
           <ProgressBar
-            label="Overall progress"
+            label={t("tools.processing.overallAria")}
             isLabelHidden
             value={progress}
             max={100}
@@ -140,7 +143,7 @@ export const ProcessingOverlay: React.FC = () => {
         </div>
 
         <Text type="supporting" color="secondary" display="block" justify="center" className="mt-4 text-[10px]">
-          Please wait while effects are being applied...
+          {t("tools.processing.wait")}
         </Text>
       </Card>
     </div>

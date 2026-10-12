@@ -32,13 +32,16 @@ import {
   ShaderParamFields,
 } from "./ShaderControls";
 import { ColorSelector } from "../../../motion/components/primitives";
+import { useTranslation } from "react-i18next";
 
 const ColorField: React.FC<{
   label: string;
   value: string;
   onChange: (color: string) => void;
   showAlpha?: boolean;
-}> = ({ label, value, onChange, showAlpha = false }) => (
+}> = ({ label, value, onChange, showAlpha = false }) => {
+  const { t } = useTranslation();
+  return (
   <div className="flex items-center justify-between gap-2">
     <Text type="supporting" color="secondary">
       {label}
@@ -47,12 +50,13 @@ const ColorField: React.FC<{
       <ColorSelector
         value={value}
         onChange={onChange}
-        label={`Select ${label.toLowerCase()}`}
+        label={t("visual.shader.selectColor", { label: label.toLowerCase() })}
         showAlpha={showAlpha}
       />
     </div>
   </div>
-);
+  );
+};
 
 const NumberInput: React.FC<{
   label: string;
@@ -100,6 +104,7 @@ const StrokeStyleSelector: React.FC<{
   value: number[] | undefined;
   onChange: (dashArray: number[] | undefined) => void;
 }> = ({ value, onChange }) => {
+  const { t } = useTranslation();
   const styles = [
     { value: undefined, label: "Solid", preview: "────" },
     { value: [5, 5], label: "Dashed", preview: "- - -" },
@@ -109,7 +114,7 @@ const StrokeStyleSelector: React.FC<{
   return (
     <div className="flex items-center justify-between">
       <Text type="supporting" color="secondary">
-        Style
+        {t("visual.shape.style")}
       </Text>
       <div className="flex gap-1">
         {styles.map((style, index) => (
@@ -134,6 +139,7 @@ const StrokeStyleSelector: React.FC<{
 const ShapeTypeDisplay: React.FC<{
   shapeType: string;
 }> = ({ shapeType }) => {
+  const { t } = useTranslation();
   const shapeIcons: Record<string, React.ReactNode> = {
     rectangle: <Square size={16} />,
     circle: <Circle size={16} />,
@@ -151,10 +157,10 @@ const ShapeTypeDisplay: React.FC<{
       </div>
       <div className="flex flex-col gap-0.5">
         <Text type="supporting" color="primary" weight="medium" className="capitalize">
-          {shapeType}
+          {t(`visual.shape.types.${shapeType}`, { defaultValue: shapeType })}
         </Text>
         <Text type="supporting" color="secondary" className="text-[9px]">
-          Shape clip
+          {t("visual.shape.shapeClip")}
         </Text>
       </div>
     </div>
@@ -170,6 +176,7 @@ interface ShapeSectionProps {
 }
 
 export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
+  const { t } = useTranslation();
   const { getShapeClip, updateShapeStyle, project } = useProjectStore();
 
   const shapeClip = useMemo(
@@ -209,7 +216,7 @@ export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
       <div className="p-4 text-center">
         <Square size={24} className="mx-auto mb-2 text-fg-3" />
         <Text type="supporting" color="secondary">
-          No shape clip selected
+          {t("visual.shape.noClip")}
         </Text>
       </div>
     );
@@ -222,10 +229,10 @@ export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
       <Card variant="muted" padding={3}>
         <div className="space-y-2">
           <Text type="supporting" color="primary" weight="medium">
-            Fill
+            {t("visual.shape.fill")}
           </Text>
           <ToolcraftSegmentedControl<"solid" | "shader">
-            ariaLabel="Fill Type"
+            ariaLabel={t("visual.shape.fillType")}
             value={style.fill?.type === "shader" ? "shader" : "solid"}
             onChange={(fillType) => {
               if (fillType === "shader") {
@@ -253,8 +260,8 @@ export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
               });
             }}
             options={[
-              { value: "solid", label: "Solid" },
-              { value: "shader", label: "Shader" },
+              { value: "solid", label: t("visual.shape.solid") },
+              { value: "shader", label: t("visual.shape.shader") },
             ]}
           />
           {style.fill?.type === "shader" && style.fill.shader ? (
@@ -273,7 +280,7 @@ export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
             />
           ) : (
             <ColorField
-              label="Color"
+              label={t("visual.shape.color")}
               value={style.fill?.color || "#3b82f6"}
               onChange={(color) =>
                 handleStyleChange({
@@ -288,7 +295,7 @@ export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
             />
           )}
           <SliderField
-            label="Opacity"
+            label={t("visual.shape.opacity")}
             value={(style.fill?.opacity || 1) * 100}
             onChange={(opacity) =>
               handleStyleChange({
@@ -309,10 +316,10 @@ export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
       <Card variant="muted" padding={3}>
         <div className="space-y-2">
           <Text type="supporting" color="primary" weight="medium">
-            Stroke
+            {t("visual.shape.stroke")}
           </Text>
           <ColorField
-            label="Color"
+            label={t("visual.shape.color")}
             value={style.stroke?.color || "#1d4ed8"}
             onChange={(color) =>
               handleStyleChange({
@@ -326,7 +333,7 @@ export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
             }
           />
           <NumberInput
-            label="Width"
+            label={t("visual.shape.width")}
             value={style.stroke?.width || 0}
             onChange={(width) =>
               handleStyleChange({
@@ -363,10 +370,10 @@ export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
         <Card variant="muted" padding={3}>
           <div className="space-y-2">
             <Text type="supporting" color="primary" weight="medium">
-              Corners
+              {t("visual.shape.corners")}
             </Text>
             <SliderField
-              label="Radius"
+              label={t("visual.shape.radius")}
               value={style.cornerRadius || 0}
               onChange={(cornerRadius) => handleStyleChange({ cornerRadius })}
               min={0}
@@ -380,10 +387,10 @@ export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
       <Card variant="muted" padding={3}>
         <div className="space-y-2">
           <Text type="supporting" color="primary" weight="medium">
-            Shadow
+            {t("visual.shape.shadow")}
           </Text>
           <ColorField
-            label="Color"
+            label={t("visual.shape.color")}
             value={style.shadow?.color || "#000000"}
             onChange={(color) =>
               handleStyleChange({
@@ -398,7 +405,7 @@ export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
             showAlpha
           />
           <NumberInput
-            label="Offset X"
+            label={t("visual.shape.offsetX")}
             value={style.shadow?.offsetX || 0}
             onChange={(offsetX) =>
               handleStyleChange({
@@ -415,7 +422,7 @@ export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
             unit="px"
           />
           <NumberInput
-            label="Offset Y"
+            label={t("visual.shape.offsetY")}
             value={style.shadow?.offsetY || 0}
             onChange={(offsetY) =>
               handleStyleChange({
@@ -432,7 +439,7 @@ export const ShapeSection: React.FC<ShapeSectionProps> = ({ clipId }) => {
             unit="px"
           />
           <SliderField
-            label="Blur"
+            label={t("visual.shape.blur")}
             value={style.shadow?.blur || 0}
             onChange={(blur) =>
               handleStyleChange({
@@ -458,10 +465,10 @@ const ShapeShaderFillControls: React.FC<{
   shader: MotionShaderFill;
   onChange: (shader: MotionShaderFill) => void;
 }> = ({ shader, onChange }) => {
-  const shaderOptions = useMemo(
-    () => groupShaderDefsByCollection(getMotionShaderFillDefs()),
-    [],
-  );
+  const { t } = useTranslation();
+  // Rebuilt every render: the group titles are translated, and grouping a
+  // handful of shader definitions is cheap.
+  const shaderOptions = groupShaderDefsByCollection(getMotionShaderFillDefs());
   const def = getMotionShaderDef(shader.shaderId);
 
   const handleShaderSelect = useCallback(
@@ -491,7 +498,7 @@ const ShapeShaderFillControls: React.FC<{
   return (
     <div className="space-y-2 rounded border border-border/70 bg-bg-2 p-2">
       <Selector
-        label="Shader Fill"
+        label={t("visual.shape.shaderFill")}
         isLabelHidden
         size="sm"
         width="100%"

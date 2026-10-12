@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Music, Zap, Loader2 } from "@/icons/lucide-compat";
 import { ToolcraftSegmentedControl } from "@openreel/ui";
 import { ToolcraftButton as Button } from "@openreel/ui";
@@ -24,6 +25,7 @@ interface AutoEditPanelProps {
 }
 
 export const AutoEditPanel: React.FC<AutoEditPanelProps> = ({ onClose }) => {
+  const { t } = useTranslation();
   const project = useProjectStore((s) => s.project);
   const [cutMode, setCutMode] = useState<CutMode>("beats");
   const [sensitivity, setSensitivity] = useState(0.5);
@@ -110,7 +112,7 @@ export const AutoEditPanel: React.FC<AutoEditPanelProps> = ({ onClose }) => {
             (m) => m.id === audioClip.mediaId,
           );
         if (!mediaItem?.blob) {
-          setError("Audio file not loaded");
+          setError(t("tools.autoEdit.audioMissing"));
           setAnalyzing(false);
           return;
         }
@@ -133,7 +135,7 @@ export const AutoEditPanel: React.FC<AutoEditPanelProps> = ({ onClose }) => {
       setPreview(result);
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Failed to analyze audio",
+        err instanceof Error ? err.message : t("tools.autoEdit.analyzeFailed"),
       );
     } finally {
       setAnalyzing(false);
@@ -146,6 +148,7 @@ export const AutoEditPanel: React.FC<AutoEditPanelProps> = ({ onClose }) => {
     sensitivity,
     minClipDuration,
     project.timeline,
+    t,
   ]);
 
   const handleApply = useCallback(() => {
@@ -199,21 +202,21 @@ export const AutoEditPanel: React.FC<AutoEditPanelProps> = ({ onClose }) => {
         <div className="flex items-center gap-2">
           <Zap size={14} className="text-primary" aria-hidden />
           <Text type="label" weight="bold" className="text-[11px]">
-            Beat-Synced Auto-Edit
+            {t("tools.autoEdit.title")}
           </Text>
         </div>
       </div>
 
       {audioClips.length === 0 ? (
         <EmptyState
-          title="Add an audio track to use auto-edit"
+          title={t("tools.autoEdit.empty")}
           icon={<Music size={24} className="text-text-muted opacity-50" aria-hidden />}
           isCompact
         />
       ) : (
         <>
           <Selector
-            label="Audio Source"
+            label={t("tools.autoEdit.audioSource")}
             value={selectedAudioClipId}
             onChange={setSelectedAudioClipId}
             options={audioClipOptions}
@@ -223,16 +226,16 @@ export const AutoEditPanel: React.FC<AutoEditPanelProps> = ({ onClose }) => {
 
           <div className="space-y-2">
             <Text type="supporting" color="secondary" weight="bold" display="block" className="text-[10px]">
-              Cut Mode
+              {t("tools.autoEdit.cutMode")}
             </Text>
             <ToolcraftSegmentedControl<CutMode>
-              ariaLabel="Cut mode"
+              ariaLabel={t("tools.autoEdit.cutMode")}
               value={cutMode}
               onChange={setCutMode}
               options={(["beats", "downbeats", "segments"] as CutMode[]).map(
                 (mode) => ({
                   value: mode,
-                  label: mode,
+                  label: t(`tools.autoEdit.modes.${mode}`),
                 }),
               )}
             />
@@ -241,14 +244,14 @@ export const AutoEditPanel: React.FC<AutoEditPanelProps> = ({ onClose }) => {
           <div className="space-y-1.5">
             <div className="flex justify-between">
               <Text type="supporting" color="secondary" weight="bold" className="text-[10px]">
-                Sensitivity
+                {t("tools.autoEdit.sensitivity")}
               </Text>
               <Text type="supporting" color="secondary" className="text-[9px]">
                 {Math.round(sensitivity * 100)}%
               </Text>
             </div>
             <ToolcraftSliderControl
-              label="Sensitivity"
+              label={t("tools.autoEdit.sensitivity")}
               isLabelHidden
               min={0}
               max={1}
@@ -262,14 +265,14 @@ export const AutoEditPanel: React.FC<AutoEditPanelProps> = ({ onClose }) => {
           <div className="space-y-1.5">
             <div className="flex justify-between">
               <Text type="supporting" color="secondary" weight="bold" className="text-[10px]">
-                Min Clip Duration
+                {t("tools.autoEdit.minClip")}
               </Text>
               <Text type="supporting" color="secondary" className="text-[9px]">
                 {minClipDuration.toFixed(1)}s
               </Text>
             </div>
             <ToolcraftSliderControl
-              label="Minimum clip duration"
+              label={t("tools.autoEdit.minClipAria")}
               isLabelHidden
               min={0.1}
               max={3}
@@ -281,7 +284,7 @@ export const AutoEditPanel: React.FC<AutoEditPanelProps> = ({ onClose }) => {
           </div>
 
           <Button
-            label={analyzing ? "Analyzing beats..." : "Generate Auto-Edit"}
+            label={analyzing ? t("tools.autoEdit.analyzing") : t("tools.autoEdit.generate")}
             onClick={handleAnalyze}
             isDisabled={analyzing || videoClips.length === 0}
             variant="primary"
@@ -306,12 +309,12 @@ export const AutoEditPanel: React.FC<AutoEditPanelProps> = ({ onClose }) => {
           {preview && (
             <Card variant="muted" padding={3} className="space-y-2 border border-border">
               <Text type="label" weight="bold" display="block" className="text-[10px]">
-                Preview
+                {t("tools.autoEdit.preview")}
               </Text>
               <div className="grid grid-cols-2 gap-2">
                 <div>
                   <Text type="supporting" color="secondary" className="text-[9px]">
-                    Cuts:{" "}
+                    {t("tools.autoEdit.cuts")}{" "}
                   </Text>
                   <Text type="supporting" className="text-[9px]">
                     {preview.cuts.length}
@@ -319,7 +322,7 @@ export const AutoEditPanel: React.FC<AutoEditPanelProps> = ({ onClose }) => {
                 </div>
                 <div>
                   <Text type="supporting" color="secondary" className="text-[9px]">
-                    Duration:{" "}
+                    {t("tools.autoEdit.duration")}{" "}
                   </Text>
                   <Text type="supporting" className="text-[9px]">
                     {preview.totalDuration.toFixed(1)}s
@@ -327,7 +330,7 @@ export const AutoEditPanel: React.FC<AutoEditPanelProps> = ({ onClose }) => {
                 </div>
               </div>
               <Button
-                label="Apply Auto-Edit"
+                label={t("tools.autoEdit.apply")}
                 onClick={handleApply}
                 variant="primary"
                 size="sm"

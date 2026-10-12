@@ -106,7 +106,7 @@ export const TrackLane: React.FC<TrackLaneProps> = React.memo(function TrackLane
   const viewportWidth = useTimelineStore((state) => state.viewportWidth);
   const snapSettings = useUIStore((state) => state.snapSettings);
   const [isDragOver, setIsDragOver] = useState(false);
-  const [dropHint, setDropHint] = useState("Drop to add clip");
+  const [dropHint, setDropHint] = useState<"dropToAdd" | "placeAbove">("dropToAdd");
   const [isResizing, setIsResizing] = useState(false);
   const laneRef = useRef<HTMLDivElement>(null);
   const resizeStartY = useRef<number>(0);
@@ -144,7 +144,7 @@ export const TrackLane: React.FC<TrackLaneProps> = React.memo(function TrackLane
         const mediaItem = mediaItems.find((item) => item.id === mediaId);
         const rect = laneRef.current?.getBoundingClientRect();
         if (!mediaItem || !rect) {
-          setDropHint("Drop to add clip");
+          setDropHint("dropToAdd");
           return;
         }
         const startTime = Math.max(
@@ -163,11 +163,11 @@ export const TrackLane: React.FC<TrackLaneProps> = React.memo(function TrackLane
         });
         setDropHint(
           placement.ok && placement.trackId !== track.id
-            ? "Place above"
-            : "Drop to add clip",
+            ? "placeAbove"
+            : "dropToAdd",
         );
       } catch {
-        setDropHint("Drop to add clip");
+        setDropHint("dropToAdd");
       }
     },
     [mediaItems, pixelsPerSecond, scrollX, track.id],
@@ -175,7 +175,7 @@ export const TrackLane: React.FC<TrackLaneProps> = React.memo(function TrackLane
 
   const handleDragLeave = useCallback(() => {
     setIsDragOver(false);
-    setDropHint("Drop to add clip");
+    setDropHint("dropToAdd");
   }, []);
 
   const handleDrop = useCallback(
@@ -183,7 +183,7 @@ export const TrackLane: React.FC<TrackLaneProps> = React.memo(function TrackLane
       e.preventDefault();
       e.stopPropagation();
       setIsDragOver(false);
-      setDropHint("Drop to add clip");
+      setDropHint("dropToAdd");
 
       // External OS file drop (e.g. from Windows Explorer)
       if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
@@ -404,7 +404,7 @@ export const TrackLane: React.FC<TrackLaneProps> = React.memo(function TrackLane
         {isDragOver && (
           <div className="absolute inset-0 border-2 border-dashed border-primary/50 rounded pointer-events-none flex items-center justify-center">
             <span className="text-xs text-primary bg-background/80 px-2 py-1 rounded">
-              {dropHint}
+              {t(`tools.timelineItems.${dropHint}`)}
             </span>
           </div>
         )}

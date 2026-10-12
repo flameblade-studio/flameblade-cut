@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import {
   Download,
@@ -58,7 +59,7 @@ import {
   estimateExportTime,
   runBenchmark,
   getCodecRecommendations,
-  formatDeviceSummary,
+  describeDeviceSummary,
   shouldRecommendBenchmark,
   computeCompressionPlan,
   estimateCompressedBytes,
@@ -67,17 +68,37 @@ import {
   exportSettingsRequireNativeEncoder,
   resolveWebCodecsExportLimits,
   checkBrowserExportCapability,
-  getVideoExportValidationError,
+  type BrowserExportCapability,
   type DeviceProfile,
   type BenchmarkProgress,
   type TimeEstimate,
   type CodecRecommendation,
+  type EstimateDuration,
 } from "@openreel/core";
+import { getVideoExportValidationIssue } from "@openreel/core/export/browser-capabilities";
 import { EDITING_FRAME_RATE_OPTIONS } from "./editing-frame-rate";
 import type { ExportDeliveryMode } from "../../services/export-runner";
 
-const WEB_EXPORT_GUARDRAIL_MESSAGE =
-  "ProRes, transparency, and high bit depth require the desktop encoder. You can export an H.264 MP4 without transparency in this browser.";
+/** Words an export-time estimate in the current language, e.g. "~2m 5s". */
+export function formatEstimateDuration(duration: EstimateDuration, t: TFunction): string {
+  switch (duration.unit) {
+    case "seconds":
+      return t("tools.estimate.seconds", { count: duration.seconds });
+    case "minutes":
+      return t("tools.estimate.minutes", { count: duration.minutes });
+    case "minutesSeconds":
+      return t("tools.estimate.minutesSeconds", { minutes: duration.minutes, seconds: duration.seconds });
+    case "hoursMinutes":
+      return t("tools.estimate.hoursMinutes", { hours: duration.hours, minutes: duration.minutes });
+  }
+}
+
+function formatDeviceSummaryLabel(profile: DeviceProfile, t: TFunction): string {
+  const { gpuName, cores } = describeDeviceSummary(profile);
+  return gpuName === null
+    ? t("export.device.cores", { count: cores })
+    : t("tools.export.deviceSummary", { gpu: gpuName, count: cores });
+}
 
 interface ExportDialogProps {
   isOpen: boolean;
@@ -118,18 +139,25 @@ function getRecommendedPresetsForAspectRatio(
   });
 }
 
-function getAspectRatioLabel(aspectType: AspectRatioType): string {
-  switch (aspectType) {
-    case "vertical":
-      return "Vertical (TikTok, Reels, Shorts)";
-    case "square":
-      return "Square (Instagram Feed)";
-    case "horizontal":
-      return "Horizontal (YouTube, Twitter)";
-  }
+function getAspectRatioLabel(aspectType: AspectRatioType, t: TFunction): string {
+  return t(`tools.export.aspect.${aspectType}`);
 }
 
-const getExportValidationError = getVideoExportValidationError;
+/** Display name of a preset platform; brand names have no key and show as-is. */
+function platformLabel(platform: string, t: TFunction): string {
+  return t(`tools.export.platforms.${platform}`, { defaultValue: platform });
+}
+
+/** Localized preset text by preset id; user-made presets keep their stored text. */
+function presetText(preset: PlatformExportPreset, field: "name" | "description", t: TFunction): string {
+  return t(`tools.export.presets.${preset.id}.${field}`, { defaultValue: preset[field] });
+}
+
+/** Localized browser-capability problem; uncoded reasons are shown as given. */
+function capabilityMessage(capability: BrowserExportCapability, t: TFunction): string | null {
+  if (capability.reasonCode) return t(`tools.exportErrors.${capability.reasonCode}`, { ...capability.reasonParams });
+  return capability.reason;
+}
 
 type PlatformIcon = typeof Video;
 
@@ -162,7 +190,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
   const isDesktop =
     typeof window !== "undefined" && window.openreel?.platform === "desktop";
   const [delivery, setDelivery] = useState<ExportDeliveryMode>(isDesktop ? "file" : "download");
-  const [capabilityError, setCapabilityError] = useState<string | null>(null);
+  const [capability, setCapability] = useState<BrowserExportCapability | null>(null);
   const [checkingCapability, setCheckingCapability] = useState(false);
   const [browserAudioCodec, setBrowserAudioCodec] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"presets" | "custom" | "reduce">(
@@ -297,7 +325,9 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
     return customSettings;
   }, [activeTab, selectedPreset, reducePlan, customSettings]);
 
-  const validationError = getExportValidationError(effectiveSettings, duration);
+  const validationIssue = getVideoExportValidationIssue(effectiveSettings, duration);
+  const validationError = validationIssue ? t(`tools.exportErrors.${validationIssue.code}`) : null;
+  const capabilityError = capability && !capability.supported ? capabilityMessage(capability, t) : null;
 
   const webExportAdjustment = useMemo(
     () =>
@@ -345,13 +375,13 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
   useEffect(() => {
     if (!isOpen || isDesktop || validationError) return;
     let active = true;
-    setCapabilityError(null);
+    setCapability(null);
     setCheckingCapability(true);
     const settings = resolveWebCodecsExportLimits(resolveBrowserSettings(effectiveSettings), duration).settings;
-    checkBrowserExportCapability(settings, undefined, hasAudio).then((capability) => {
+    checkBrowserExportCapability(settings, undefined, hasAudio).then((result) => {
       if (!active) return;
-      setCapabilityError(capability.reason);
-      setBrowserAudioCodec(capability.audioCodec ?? null);
+      setCapability(result);
+      setBrowserAudioCodec(result.audioCodec ?? null);
       setCheckingCapability(false);
     });
     return () => { active = false; };
@@ -497,7 +527,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
       bitrate: sourceMatch.bitrate,
       encodeMode: customSettings.encodeMode ?? "balanced",
     };
-    if (getExportValidationError(settings, duration)) return;
+    if (getVideoExportValidationIssue(settings, duration)) return;
     onExport(settings, delivery);
     onClose();
   }, [sourceMatch, customSettings, duration, onExport, onClose, delivery]);
@@ -523,6 +553,12 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
     }
     return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
   };
+
+  const sizePresetLabel = (preset: (typeof COMPRESSION_SIZE_PRESETS)[number]): string =>
+    t(`tools.export.sizePresets.${preset.id}`, {
+      size: Math.round(preset.bytes / (1024 * 1024)),
+      defaultValue: preset.label,
+    });
 
   const formatDuration = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
@@ -640,7 +676,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                       <span className="font-semibold">{t("export.recommended")}</span>
                     </div>
                     <span className="ml-5 mt-1 text-[10px] leading-4 text-fg-muted">
-                      {getAspectRatioLabel(aspectType)}
+                      {getAspectRatioLabel(aspectType, t)}
                     </span>
                   </SelectableCard>
                   <div className="mb-2 h-px bg-border" />
@@ -649,7 +685,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                     return (
                       <SelectableCard
                         key={platform}
-                        label={platform}
+                        label={platformLabel(platform, t)}
                         isSelected={selectedPlatform === platform}
                         onClick={() => setSelectedPlatform(platform)}
                         onChange={() => setSelectedPlatform(platform)}
@@ -669,7 +705,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                               : "text-fg-muted"
                           }
                         />
-                        {platform}
+                        {platformLabel(platform, t)}
                       </SelectableCard>
                     );
                   })}
@@ -681,7 +717,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                       <h3 className="text-[14px] font-semibold text-fg">
                         {selectedPlatform === "recommended"
                           ? t("export.recommendedForVideo")
-                          : selectedPlatform}
+                          : selectedPlatform && platformLabel(selectedPlatform, t)}
                       </h3>
                       <p className="mt-1 text-[11px] text-fg-muted">
                         {t("export.selectPresetHint")}
@@ -699,7 +735,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                       return (
                         <SelectableCard
                           key={preset.id}
-                          label={preset.name}
+                          label={presetText(preset, "name", t)}
                           isSelected={selectedPreset?.id === preset.id}
                           onClick={() => setSelectedPreset(preset)}
                           onChange={() => setSelectedPreset(preset)}
@@ -717,7 +753,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                                 <PlatformIcon size={14} />
                               </span>
                               <span className="truncate text-[12px] font-semibold text-fg">
-                                {preset.name}
+                                {presetText(preset, "name", t)}
                               </span>
                             </div>
                             {isSelected ? (
@@ -739,7 +775,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                             display="block"
                             className="mb-3 line-clamp-2 min-h-8 text-[11px] leading-4"
                           >
-                            {preset.description}
+                            {presetText(preset, "description", t)}
                           </Text>
                           {"width" in preset.settings && (
                             <div className="flex flex-wrap items-center gap-1.5 text-[10px] text-fg-muted">
@@ -898,7 +934,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                         {COMPRESSION_SIZE_PRESETS.map((preset) => (
                           <SelectableCard
                             key={preset.id}
-                            label={preset.label}
+                            label={sizePresetLabel(preset)}
                             isSelected={reduceSizePresetId === preset.id}
                             onClick={() => setReduceSizePresetId(preset.id)}
                             onChange={() => setReduceSizePresetId(preset.id)}
@@ -914,7 +950,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                                 : "border-border text-text-secondary hover:border-primary/50"
                             }`}
                           >
-                            {preset.label}
+                            {sizePresetLabel(preset)}
                           </SelectableCard>
                         ))}
                       </div>
@@ -1112,7 +1148,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
 
                       <div>
                         <ToolcraftSliderControl
-                          label="Quality"
+                          label={t("tools.export.quality")}
                           value={customSettings.quality}
                           onChange={(quality: number) =>
                             setCustomSettings({
@@ -1207,7 +1243,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                       {!isDesktop ? (
                         <div className="space-y-1 text-[11px]">
                           <p className="text-fg-muted">{t("export.custom.audioFormat")}</p>
-                          <p className="min-h-[32px] rounded-md border border-border bg-bg-2 px-2 py-2 text-fg">{!hasAudio ? "No audio" : browserAudioCodec?.toUpperCase() ?? (customSettings.format === "webm" ? "Opus" : "Automatic")}</p>
+                          <p className="min-h-[32px] rounded-md border border-border bg-bg-2 px-2 py-2 text-fg">{!hasAudio ? t("tools.export.noAudio") : browserAudioCodec?.toUpperCase() ?? (customSettings.format === "webm" ? "Opus" : t("tools.export.audioAutomatic"))}</p>
                           <p className="text-[10px] text-fg-muted">{t("export.custom.audioCompatible")}</p>
                         </div>
                       ) : (
@@ -1410,7 +1446,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                     className="-ml-2 text-[11px] text-fg-muted"
                   >
                     <Cpu size={12} />
-                    <span>{formatDeviceSummary(deviceProfile)}</span>
+                    <span>{formatDeviceSummaryLabel(deviceProfile, t)}</span>
                     <Info size={10} className="text-fg-muted" />
                   </Button>
 
@@ -1427,7 +1463,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                         )}
                         <span className="text-fg-muted">{t("export.device.estimate")}</span>
                         <span className="font-semibold text-fg">
-                          {timeEstimate.formatted}
+                          {formatEstimateDuration(timeEstimate.duration, t)}
                         </span>
                       </div>
 
@@ -1502,7 +1538,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                       </Text>
                     </div>
                     <div>
-                      <span className="text-fg-muted">Codecs</span>
+                      <span className="text-fg-muted">{t("tools.export.codecs")}</span>
                       <div className="flex flex-wrap gap-1">
                         {codecRecommendations.slice(0, 3).map((rec) => (
                           <span
@@ -1577,7 +1613,7 @@ export const ExportDialog: React.FC<ExportDialogProps> = ({
                     className="mt-0.5 shrink-0"
                     aria-hidden
                   />
-                  {WEB_EXPORT_GUARDRAIL_MESSAGE}
+                  {t("tools.export.desktopEncoderRequired")}
                 </span>
                 {h264FallbackAcknowledged ? (
                   <span className="text-[11px] text-fg-muted">

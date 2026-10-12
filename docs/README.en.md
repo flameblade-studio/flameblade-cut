@@ -18,7 +18,7 @@
 
 ---
 
-> **In development (0.1.0 preview).** Features and UI are still being polished; bug reports are welcome.
+> **In development (0.2.0 preview).** Features and UI are still being polished; bug reports are welcome.
 
 ## What it does
 
@@ -38,16 +38,16 @@ The interface is available in **Traditional Chinese, Simplified Chinese, English
 
 - Windows 10/11 (64-bit)
 - **Editing only:** any ordinary PC.
-- **AI video generation:** an NVIDIA **RTX 50-series** GPU (the default workflow uses the NVFP4 main model; 16 GB of VRAM or more recommended), 64 GB of system RAM, and the following installed by you:
+- **AI video generation:** an NVIDIA GPU (16 GB of VRAM or more recommended), 64 GB of system RAM, and the following installed by you:
   - [ComfyUI](https://github.com/comfyanonymous/ComfyUI) (git install or portable build)
   - LTX-2.5 model files (download them from [Hugging Face](https://huggingface.co/Lightricks) after accepting Lightricks' license, and place them in the `models` subfolders described by the official ComfyUI LTX-2.5 templates):
-    - `ltx-2.5-22b-distilled-transformer-nvfp4.safetensors`
+    - One main model for your GPU: `ltx-2.5-22b-distilled-transformer-nvfp4.safetensors` for RTX 50 series (18.7 GB, fastest); `ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors` for RTX 30/40 series and other GPUs (21.5 GB); or full-precision `ltx-2.5-22b-distilled-transformer-bf16.safetensors` (42 GB)
     - `gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors`, `gemma4_e2b_it_int8_convrot.safetensors`
     - `ltx-2.5-video-vae-conv-bf16.safetensors`, `ltx-2.5-audio-vae-bf16.safetensors`
     - `ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors`
     - Reference-to-video additionally needs `ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors` and the [ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo) custom nodes
 
-  Once installed, set the ComfyUI folder with the gear button at the top right of the "AI Generate" page. **You never need to open ComfyUI yourself**: Flameblade Cut starts it in the background when needed and closes it when you quit. Model choices for other GPUs (RTX 40-series and so on) will come in a later release.
+  Once installed, set the ComfyUI folder with the gear button at the top right of the "AI Generate" page. **You never need to open ComfyUI yourself**: Flameblade Cut starts it in the background when needed and closes it when you quit. The main model defaults to "Automatic": NVFP4 on RTX 50 series, INT8 on other GPUs; you can also pick one in the same settings window. The INT8 and BF16 versions have only been checked for a correct workflow so far, not timed on RTX 30/40 hardware.
 
 ## Installation
 

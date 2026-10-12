@@ -96,7 +96,7 @@ export const BlendingSection: React.FC<BlendingSectionProps> = ({ clipId }) => {
           >
             {availableBlendModes.map((mode) => (
               <option key={mode} value={mode}>
-                {getBlendModeName(mode)}
+                {t(`visual.adjustment.blendModes.${mode}`, { defaultValue: getBlendModeName(mode) })}
               </option>
             ))}
           </select>

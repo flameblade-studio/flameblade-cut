@@ -334,7 +334,7 @@ export const ApiKeysPanel: React.FC = () => {
 
               {service && (
                 <Text as="p" type="supporting" color="secondary" display="block" className="mb-2">
-                  {service.description}
+                  {t(`tools.serviceDescriptions.${service.id}`, { defaultValue: service.description })}
                 </Text>
               )}
 
@@ -423,7 +423,7 @@ export const ApiKeysPanel: React.FC = () => {
                       {service.label}{service.keyOptional ? t("settings.apiKeys.optionalSuffix") : ""}
                     </Text>
                     <Text type="supporting" color="secondary" display="block">
-                      {service.description}
+                      {t(`tools.serviceDescriptions.${service.id}`, { defaultValue: service.description })}
                     </Text>
                   </div>
                 </div>

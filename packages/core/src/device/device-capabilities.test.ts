@@ -3,6 +3,7 @@ import {
   getCodecRecommendations,
   getResolutionRecommendations,
   formatDeviceSummary,
+  describeDeviceSummary,
   type DeviceProfile,
 } from "./device-capabilities";
 
@@ -230,4 +231,27 @@ describe("DeviceCapabilities", () => {
     });
   });
 
+
+  describe("describeDeviceSummary", () => {
+    it("returns the cleaned GPU name and core count", () => {
+      const profile = createMockProfile({
+        gpu: {
+          vendor: "Apple",
+          renderer: "Apple M2 Pro",
+          tier: "high",
+          hasHardwareEncoding: true,
+        },
+      });
+
+      expect(describeDeviceSummary(profile)).toEqual({ gpuName: "Apple M2 Pro", cores: 8 });
+    });
+
+    it("leaves the GPU name out when the renderer is unknown", () => {
+      const profile = createMockProfile({
+        gpu: { vendor: "Unknown", renderer: "Unknown", tier: "low", hasHardwareEncoding: false },
+      });
+
+      expect(describeDeviceSummary(profile)).toEqual({ gpuName: null, cores: 8 });
+    });
+  });
 });

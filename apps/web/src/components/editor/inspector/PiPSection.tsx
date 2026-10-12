@@ -3,6 +3,7 @@ import { ToolcraftButton as Button } from "@openreel/ui";
 import { ToolcraftCard as Card } from "@openreel/ui";
 import { ToolcraftClickableCard as ClickableCard } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
 import { PropertySlider } from "./shell/PropertySlider";
 import {
   PictureInPicture2,
@@ -176,9 +177,12 @@ const PresetButton: React.FC<{
   preset: PiPPreset;
   isActive: boolean;
   onClick: () => void;
-}> = ({ preset, isActive, onClick }) => (
+}> = ({ preset, isActive, onClick }) => {
+  const { t } = useTranslation();
+  const name = t(`advanced.pip.presets.${preset.id}`);
+  return (
   <ClickableCard
-    label={preset.name}
+    label={name}
     onClick={onClick}
     className={`flex flex-col items-center gap-1 p-2 rounded-lg border transition-colors ${
       isActive
@@ -188,10 +192,11 @@ const PresetButton: React.FC<{
   >
     <PresetIcon type={preset.icon} />
     <Text type="supporting" className="truncate max-w-full text-[8px]">
-      {preset.name}
+      {name}
     </Text>
   </ClickableCard>
-);
+  );
+};
 
 export const PiPSection: React.FC<PiPSectionProps> = ({ clipId }) => {
   const project = useProjectStore((state) => state.project);
@@ -199,6 +204,7 @@ export const PiPSection: React.FC<PiPSectionProps> = ({ clipId }) => {
     (state) => state.updateClipTransform,
   );
 
+  const { t } = useTranslation();
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   const clip = useMemo(() => {
@@ -334,17 +340,17 @@ export const PiPSection: React.FC<PiPSectionProps> = ({ clipId }) => {
         <PictureInPicture2 size={16} className="text-primary" />
         <div className="flex-1 flex flex-col gap-0.5">
           <Text type="supporting" color="primary" className="text-[11px] font-medium">
-            Picture-in-Picture
+            {t("advanced.pip.title")}
           </Text>
           <Text type="supporting" color="secondary" className="text-[9px]">
-            Position and scale video overlay
+            {t("advanced.pip.subtitle")}
           </Text>
         </div>
       </Card>
 
       <div className="space-y-2">
         <Text type="supporting" color="secondary" className="text-[10px] font-medium">
-          Corner Positions
+          {t("advanced.pip.corners")}
         </Text>
         <div className="grid grid-cols-4 gap-1">
           {cornerPresets.map((preset) => (
@@ -360,7 +366,7 @@ export const PiPSection: React.FC<PiPSectionProps> = ({ clipId }) => {
 
       <div className="space-y-2">
         <Text type="supporting" color="secondary" className="text-[10px] font-medium">
-          Split Screen
+          {t("advanced.pip.split")}
         </Text>
         <div className="grid grid-cols-4 gap-1">
           {splitPresets.map((preset) => (
@@ -376,7 +382,7 @@ export const PiPSection: React.FC<PiPSectionProps> = ({ clipId }) => {
 
       <div className="space-y-2">
         <Text type="supporting" color="secondary" className="text-[10px] font-medium">
-          Center & Full
+          {t("advanced.pip.center")}
         </Text>
         <div className="grid grid-cols-3 gap-1">
           {centerPresets.map((preset) => (
@@ -391,7 +397,7 @@ export const PiPSection: React.FC<PiPSectionProps> = ({ clipId }) => {
       </div>
 
       <Button
-        label={`${showAdvanced ? "Hide" : "Show"} Advanced Controls`}
+        label={showAdvanced ? t("advanced.pip.hideAdvanced") : t("advanced.pip.showAdvanced")}
         variant="secondary"
         size="sm"
         onClick={() => setShowAdvanced(!showAdvanced)}
@@ -402,17 +408,17 @@ export const PiPSection: React.FC<PiPSectionProps> = ({ clipId }) => {
         <div className="space-y-3 pt-2 border-t border-border">
           <div className="space-y-2">
             <Text type="supporting" color="secondary" className="text-[10px] font-medium">
-              Position
+              {t("advanced.pip.position")}
             </Text>
             <ControlSlider
-              label="X Position"
+              label={t("advanced.pip.positionX")}
               value={currentTransform.position.x}
               onChange={(v) => handlePositionChange("x", v)}
               min={-1}
               max={1}
             />
             <ControlSlider
-              label="Y Position"
+              label={t("advanced.pip.positionY")}
               value={currentTransform.position.y}
               onChange={(v) => handlePositionChange("y", v)}
               min={-1}
@@ -422,24 +428,24 @@ export const PiPSection: React.FC<PiPSectionProps> = ({ clipId }) => {
 
           <div className="space-y-2">
             <Text type="supporting" color="secondary" className="text-[10px] font-medium">
-              Scale
+              {t("advanced.pip.scale")}
             </Text>
             <ControlSlider
-              label="Uniform Scale"
+              label={t("advanced.pip.uniformScale")}
               value={currentTransform.scale.x}
               onChange={(v) => handleScaleChange("both", v)}
               min={0.1}
               max={2}
             />
             <ControlSlider
-              label="X Scale"
+              label={t("advanced.pip.scaleX")}
               value={currentTransform.scale.x}
               onChange={(v) => handleScaleChange("x", v)}
               min={0.1}
               max={2}
             />
             <ControlSlider
-              label="Y Scale"
+              label={t("advanced.pip.scaleY")}
               value={currentTransform.scale.y}
               onChange={(v) => handleScaleChange("y", v)}
               min={0.1}
@@ -449,10 +455,10 @@ export const PiPSection: React.FC<PiPSectionProps> = ({ clipId }) => {
 
           <div className="space-y-2">
             <Text type="supporting" color="secondary" className="text-[10px] font-medium">
-              Appearance
+              {t("advanced.pip.appearance")}
             </Text>
             <ControlSlider
-              label="Border Radius"
+              label={t("advanced.pip.borderRadius")}
               value={currentTransform.borderRadius || 0}
               onChange={handleBorderRadiusChange}
               min={0}
@@ -460,7 +466,7 @@ export const PiPSection: React.FC<PiPSectionProps> = ({ clipId }) => {
               unit="px"
             />
             <ControlSlider
-              label="Opacity"
+              label={t("advanced.pip.opacity")}
               value={currentTransform.opacity}
               onChange={handleOpacityChange}
               min={0}
@@ -471,7 +477,7 @@ export const PiPSection: React.FC<PiPSectionProps> = ({ clipId }) => {
       )}
 
       <Button
-        label="Reset to Default"
+        label={t("advanced.pip.reset")}
         icon={<RotateCcw size={12} />}
         variant="secondary"
         size="sm"
@@ -480,7 +486,7 @@ export const PiPSection: React.FC<PiPSectionProps> = ({ clipId }) => {
       />
 
       <Text type="supporting" color="secondary" className="text-center text-[9px]">
-        Drag clip in preview to fine-tune position
+        {t("advanced.pip.dragHint")}
       </Text>
     </div>
   );

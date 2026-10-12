@@ -499,7 +499,7 @@ export const AudioEffectsSection: React.FC<AudioEffectsSectionProps> = ({
             unit="%"
           />
           <EffectSlider
-            label="Wet/Dry"
+            label={t("advanced.audioEffects.wetDry")}
             value={reverb.wetLevel * 100}
             onChange={(v) => handleReverbChange("wetLevel", v / 100)}
             min={0}

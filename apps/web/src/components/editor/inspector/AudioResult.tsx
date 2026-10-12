@@ -3,6 +3,7 @@ import { ToolcraftButton as Button } from "@openreel/ui";
 import { ToolcraftCard as Card } from "@openreel/ui";
 import { ToolcraftIconButton as IconButton } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
 import { Play, Pause, Plus, Download, FolderPlus, Volume2 } from "@/icons/lucide-compat";
 
 interface AudioResultProps {
@@ -26,6 +27,7 @@ export const AudioResult: React.FC<AudioResultProps> = ({
   onAddToTimeline,
   onDownload,
 }) => {
+  const { t } = useTranslation();
   return (
     <Card padding={3} variant="muted" className="space-y-3">
       <div className="flex items-center justify-between">
@@ -35,7 +37,7 @@ export const AudioResult: React.FC<AudioResultProps> = ({
           </div>
           <div>
             <Text type="label" weight="bold" display="block">
-              {voiceName} Voice
+              {t("advanced.tts.voiceName", { name: voiceName })}
             </Text>
             <Text type="supporting" color="secondary" display="block">
               {(generatedAudio.size / 1024).toFixed(1)} KB
@@ -43,7 +45,7 @@ export const AudioResult: React.FC<AudioResultProps> = ({
           </div>
         </div>
         <IconButton
-          label={isPlaying ? "Pause preview" : "Play preview"}
+          label={isPlaying ? t("advanced.tts.pausePreview") : t("advanced.tts.playPreview")}
           icon={
             isPlaying ? (
               <Pause size={14} aria-hidden />
@@ -59,7 +61,7 @@ export const AudioResult: React.FC<AudioResultProps> = ({
 
       <div className="flex gap-2">
         <Button
-          label="Save to Media"
+          label={t("advanced.tts.saveToMedia")}
           icon={<FolderPlus size={12} aria-hidden />}
           variant="primary"
           size="sm"
@@ -68,7 +70,7 @@ export const AudioResult: React.FC<AudioResultProps> = ({
           className="flex-1"
         />
         <IconButton
-          label="Add to Timeline"
+          label={t("advanced.tts.addToTimeline")}
           icon={<Plus size={12} aria-hidden />}
           variant="secondary"
           size="sm"
@@ -76,7 +78,7 @@ export const AudioResult: React.FC<AudioResultProps> = ({
           isDisabled={isGenerating}
         />
         <IconButton
-          label="Download"
+          label={t("advanced.tts.download")}
           icon={<Download size={12} aria-hidden />}
           variant="secondary"
           size="sm"

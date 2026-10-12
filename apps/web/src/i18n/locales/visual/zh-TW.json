@@ -1,0 +1,688 @@
+{
+  "shell": {
+    "seconds": "{{value}} 秒",
+    "tabError": "此面板發生錯誤，請切換到其他分頁再切回來重試。"
+  },
+  "tabs": {
+    "enable": "啟用"
+  },
+  "behindSubject": {
+    "title": "置於主體後方",
+    "hint": "文字會顯示在影片中人物的後方",
+    "loading": "正在載入 AI 模型…",
+    "modelFailed": "AI 模型載入失敗，請檢查網路連線。"
+  },
+  "shader": {
+    "selectColor": "選擇{{label}}"
+  },
+  "filterPresets": {
+    "applyPreset": "套用「{{name}}」濾鏡預設",
+    "appliedTitle": "已套用濾鏡",
+    "appliedBody": "已套用「{{name}}」預設",
+    "cleared": "已清除效果",
+    "noClip": "請選取影片片段以套用濾鏡",
+    "title": "濾鏡預設",
+    "subtitle": "一鍵完成調色",
+    "intensity": "強度",
+    "removeAll": "移除所有效果",
+    "summary_one": "共 {{count}} 個預設，分為 {{categories}} 類",
+    "summary_other": "共 {{count}} 個預設，分為 {{categories}} 類",
+    "categories": {
+      "cinematic": "電影感",
+      "vintage": "復古",
+      "mood": "氛圍",
+      "color": "色彩",
+      "stylized": "風格化"
+    }
+  },
+  "presets": {
+    "filters": {
+      "cinematic-teal-orange": {
+        "name": "青橙色調",
+        "description": "經典好萊塢調色"
+      },
+      "cinematic-noir": {
+        "name": "黑色電影",
+        "description": "高對比黑白"
+      },
+      "cinematic-blockbuster": {
+        "name": "大片風",
+        "description": "強烈鮮明的好萊塢風格"
+      },
+      "vintage-70s": {
+        "name": "70 年代復古",
+        "description": "溫暖褪色的 1970 年代風格"
+      },
+      "vintage-polaroid": {
+        "name": "拍立得",
+        "description": "經典即可拍相片風格"
+      },
+      "vintage-vhs": {
+        "name": "VHS 錄影帶",
+        "description": "懷舊 VHS 錄影帶效果"
+      },
+      "vintage-sepia": {
+        "name": "懷舊棕褐",
+        "description": "經典棕褐色調"
+      },
+      "mood-dreamy": {
+        "name": "夢幻",
+        "description": "柔和空靈的氛圍"
+      },
+      "mood-moody": {
+        "name": "陰鬱",
+        "description": "暗沉而富氛圍感"
+      },
+      "mood-golden-hour": {
+        "name": "黃金時刻",
+        "description": "溫暖的夕陽光線"
+      },
+      "mood-cold": {
+        "name": "冷冽藍調",
+        "description": "冰冷清冽的氛圍"
+      },
+      "color-vibrant": {
+        "name": "鮮豔",
+        "description": "飽和鮮明的色彩"
+      },
+      "color-muted": {
+        "name": "低彩度",
+        "description": "柔和的低飽和配色"
+      },
+      "color-bw-classic": {
+        "name": "經典黑白",
+        "description": "永不過時的黑白"
+      },
+      "color-bw-high-contrast": {
+        "name": "高對比黑白",
+        "description": "戲劇性的黑白"
+      },
+      "stylized-cyberpunk": {
+        "name": "賽博龐克",
+        "description": "霓虹閃爍的未來感"
+      },
+      "stylized-comic": {
+        "name": "漫畫風",
+        "description": "強烈的圖像小說風格"
+      },
+      "stylized-soft-glow": {
+        "name": "柔光",
+        "description": "浪漫的柔焦效果"
+      },
+      "cinematic-bleach-bypass": {
+        "name": "漂白略過",
+        "description": "粗獷低飽和的高對比"
+      },
+      "cinematic-day-for-night": {
+        "name": "日拍夜景",
+        "description": "清冷的月夜風格"
+      },
+      "vintage-faded-film": {
+        "name": "褪色底片",
+        "description": "黑位提亮的褪色感"
+      },
+      "vintage-super8": {
+        "name": "Super 8 底片",
+        "description": "溫暖顆粒感的家庭錄影"
+      },
+      "mood-sunset": {
+        "name": "夕陽",
+        "description": "溫暖的金色光暈"
+      },
+      "mood-winter-chill": {
+        "name": "冬日寒意",
+        "description": "冷冽清透的藍調"
+      },
+      "mood-dramatic": {
+        "name": "戲劇性",
+        "description": "帶暗角的高對比氛圍"
+      },
+      "color-pop": {
+        "name": "普普",
+        "description": "鮮明強烈的色彩"
+      },
+      "color-pastel": {
+        "name": "粉彩",
+        "description": "柔和輕盈的低對比色調"
+      },
+      "stylized-dreamscape": {
+        "name": "夢境",
+        "description": "朦朧發光的夢境感"
+      },
+      "stylized-hdr": {
+        "name": "清晰 HDR",
+        "description": "細節豐富、清晰有力"
+      },
+      "stylized-matrix": {
+        "name": "駭客任務",
+        "description": "帶綠色調的數位反烏托邦"
+      }
+    },
+    "emojiCategories": {
+      "smileys": "笑臉與情緒",
+      "gestures": "手勢",
+      "objects": "物品",
+      "symbols": "符號",
+      "nature": "自然"
+    },
+    "shaderGroups": {
+      "builtIn": "內建",
+      "general": "一般"
+    },
+    "templates": {
+      "builtin-youtube-intro": "YouTube 片頭",
+      "builtin-tiktok-promo": "TikTok 宣傳",
+      "builtin-lower-third": "下方字幕條",
+      "builtin-slideshow": "相片幻燈片",
+      "builtin-instagram-reel": "Instagram Reels 短片",
+      "builtin-youtube-shorts": "YouTube Shorts 短片",
+      "builtin-quote-card": "名言卡片",
+      "builtin-product-promo": "產品宣傳",
+      "builtin-countdown": "倒數計時"
+    },
+    "particles": {
+      "dissolve-soft": "柔和溶解",
+      "explode-burst": "爆炸迸發",
+      "implode-gather": "向內聚合",
+      "confetti-celebration": "慶祝彩紙",
+      "dust-ambient": "環境塵埃",
+      "sparkle-magic": "魔法閃光",
+      "disintegrate-thanos": "灰飛煙滅",
+      "pixelate-retro": "像素碎裂",
+      "shatter-glass": "玻璃碎裂",
+      "morph-transform": "形狀變形",
+      "fire-trail": "火焰尾跡",
+      "snow-fall": "飄雪"
+    },
+    "particleTypes": {
+      "dissolve": "溶解",
+      "explode": "爆炸",
+      "implode": "內聚",
+      "confetti": "彩紙",
+      "dust": "塵埃",
+      "sparkle": "閃光",
+      "disintegrate": "瓦解",
+      "pixelate": "像素化",
+      "shatter": "碎裂",
+      "morph": "變形"
+    },
+    "svgAnimations": {
+      "none": "無",
+      "fade": "淡化",
+      "slide-left": "從右側滑入",
+      "slide-right": "從左側滑入",
+      "slide-up": "從下方滑入",
+      "slide-down": "從上方滑入",
+      "scale": "縮放",
+      "rotate": "旋轉",
+      "bounce": "彈跳",
+      "pop": "彈出",
+      "draw": "描繪",
+      "wipe-left": "向左擦除",
+      "wipe-right": "向右擦除",
+      "wipe-up": "向上擦除",
+      "wipe-down": "向下擦除",
+      "reveal-center": "從中央展開",
+      "reveal-edges": "向中央收合",
+      "elastic": "彈性",
+      "flip-horizontal": "水平翻轉",
+      "flip-vertical": "垂直翻轉"
+    }
+  },
+  "mask": {
+    "pointX": "第 {{index}} 點 X 百分比",
+    "pointY": "第 {{index}} 點 Y 百分比",
+    "matteHint": "所選片段的{{channel}}會決定此片段的可見區域。為來源片段的變形製作動畫，即可讓遮罩跟著動。",
+    "textSource": "文字 •「{{text}}」",
+    "count_one": "遮罩（{{count}}）",
+    "count_other": "遮罩（{{count}}）",
+    "pointsHint": "X 與 Y 為畫面尺寸的百分比，可微調各點做出精確的自訂去背形狀。",
+    "channels": {
+      "bounds": "邊界",
+      "alpha": "Alpha 通道",
+      "luminance": "亮度"
+    }
+  },
+  "bgRemoval": {
+    "useColor": "使用 {{color}} 背景色"
+  },
+  "stickers": {
+    "addItem": "加入 {{name}}",
+    "errorType": "請選擇 PNG、JPEG、WebP、GIF 或 SVG 圖片。",
+    "errorSize": "貼圖檔案必須小於 {{size}} MB。",
+    "errorAdd": "貼圖已匯入，但無法加入時間軸。",
+    "errorRead": "無法讀取這張圖片，請試著匯出成 PNG 或 WebP。",
+    "added": "已在 {{time}} 加入 {{name}}",
+    "title": "貼圖與表情符號",
+    "subtitle": "為影片加入有趣的元素",
+    "emojis": "表情符號",
+    "stickers": "貼圖",
+    "searchEmojis": "搜尋表情符號",
+    "searchStickers": "搜尋貼圖",
+    "searchEmojisPlaceholder": "搜尋表情符號…",
+    "searchStickersPlaceholder": "搜尋貼圖…",
+    "noEmojis": "找不到表情符號",
+    "noStickers": "還沒有貼圖",
+    "importHint": "可在下方匯入自訂貼圖",
+    "chooseImage": "選擇自訂貼圖圖片",
+    "importing": "正在匯入貼圖…",
+    "import": "匯入並加入貼圖",
+    "emojiCount_one": "共有 {{count}} 個表情符號",
+    "emojiCount_other": "共有 {{count}} 個表情符號",
+    "stickerCount_one": "共有 {{count}} 張貼圖",
+    "stickerCount_other": "共有 {{count}} 張貼圖"
+  },
+  "shape": {
+    "style": "樣式",
+    "shapeClip": "形狀片段",
+    "noClip": "尚未選取形狀片段",
+    "fill": "填色",
+    "fillType": "填色類型",
+    "solid": "純色",
+    "shader": "著色器",
+    "color": "顏色",
+    "opacity": "不透明度",
+    "stroke": "外框",
+    "width": "寬度",
+    "corners": "圓角",
+    "radius": "半徑",
+    "shadow": "陰影",
+    "offsetX": "X 位移",
+    "offsetY": "Y 位移",
+    "blur": "模糊",
+    "shaderFill": "著色器填色",
+    "types": {
+      "rectangle": "矩形",
+      "circle": "圓形",
+      "ellipse": "橢圓",
+      "triangle": "三角形",
+      "star": "星形",
+      "polygon": "多邊形",
+      "arrow": "箭頭"
+    }
+  },
+  "adjustment": {
+    "defaultName": "調整圖層 {{index}}",
+    "collapse": "收合「{{name}}」",
+    "expand": "展開「{{name}}」",
+    "hideLayer": "隱藏圖層",
+    "showLayer": "顯示圖層",
+    "opacity": "不透明度",
+    "start": "開始",
+    "duration": "長度",
+    "blendMode": "混合模式",
+    "useBlendMode": "使用「{{name}}」混合模式",
+    "effectCount_one": "效果（{{count}}）",
+    "effectCount_other": "效果（{{count}}）",
+    "enableEffect": "啟用「{{name}}」效果",
+    "disableEffect": "停用「{{name}}」效果",
+    "removeEffect": "移除「{{name}}」效果",
+    "addEffect": "+ {{name}}",
+    "before": "原始",
+    "after": "效果",
+    "duplicate": "複製",
+    "delete": "刪除",
+    "title": "調整圖層",
+    "subtitle": "以非破壞方式套用效果到下方片段",
+    "add": "新增調整圖層",
+    "trackLayers_one": "此軌道的圖層（{{count}}）",
+    "trackLayers_other": "此軌道的圖層（{{count}}）",
+    "otherLayers": "其他圖層",
+    "footer": "將調色與效果套用到下方所有片段",
+    "effects": {
+      "brightness": "亮度",
+      "contrast": "對比",
+      "saturation": "飽和度",
+      "grayscale": "灰階",
+      "sepia": "懷舊棕褐",
+      "invert": "負片",
+      "hue": "色相旋轉",
+      "blur": "模糊",
+      "sharpen": "銳利化",
+      "vignette": "暗角",
+      "temperature": "色溫",
+      "tint": "色調",
+      "grain": "底片顆粒"
+    },
+    "controls": {
+      "brightness": "亮度",
+      "contrast": "對比",
+      "saturation": "飽和度",
+      "amount": "強度",
+      "rotation": "旋轉",
+      "radius": "半徑",
+      "midpoint": "中點",
+      "feather": "羽化",
+      "warmCool": "暖 / 冷",
+      "greenMagenta": "綠 / 洋紅",
+      "size": "大小"
+    },
+    "blendModes": {
+      "normal": "正常",
+      "multiply": "色彩增值",
+      "screen": "濾色",
+      "overlay": "覆蓋",
+      "darken": "變暗",
+      "lighten": "變亮",
+      "color-dodge": "加亮顏色",
+      "color-burn": "加深顏色",
+      "hard-light": "實光",
+      "soft-light": "柔光",
+      "difference": "差異化",
+      "exclusion": "排除",
+      "hue": "色相",
+      "saturation": "飽和度",
+      "color": "顏色",
+      "luminosity": "明度"
+    },
+    "blendGroups": {
+      "basic": "基本",
+      "darken": "變暗",
+      "lighten": "變亮",
+      "contrast": "對比",
+      "inversion": "反轉",
+      "component": "成分"
+    }
+  },
+  "nested": {
+    "title": "巢狀序列",
+    "subtitle": "將選取的片段建立為複合片段",
+    "clipCount_one": "{{count}} 個片段",
+    "clipCount_other": "{{count}} 個片段",
+    "trackCount_one": "{{count}} 條軌道",
+    "trackCount_other": "{{count}} 條軌道",
+    "flatten": "展開為一般片段",
+    "duplicate": "複製",
+    "create": "建立複合片段",
+    "selected_one": "已選取 {{count}} 個片段",
+    "selected_other": "已選取 {{count}} 個片段",
+    "selectHint": "請選取至少 {{min}} 個片段以建立複合片段",
+    "library": "複合片段庫",
+    "nameLabel": "複合片段名稱",
+    "instances_one": "{{count}} 個實例",
+    "instances_other": "{{count}} 個實例",
+    "confirmRename": "確認重新命名",
+    "cancelRename": "取消重新命名",
+    "rename": "重新命名",
+    "cannotDelete": "無法刪除：仍有實例在使用",
+    "delete": "刪除",
+    "footer": "將片段組成可重複使用的複合片段"
+  },
+  "templates": {
+    "builtIn": "內建",
+    "cloud": "雲端",
+    "placeholders_one": "{{count}} 個預留位置",
+    "placeholders_other": "{{count}} 個預留位置",
+    "use": "使用此範本",
+    "notFound": "找不到範本",
+    "missing": "缺少必填項目：{{names}}",
+    "applyFailed": "套用範本失敗",
+    "back": "返回範本",
+    "configure": "設定範本變數",
+    "title": "範本",
+    "subtitle": "從現成的專案開始",
+    "all": "全部",
+    "empty": "此分類中沒有範本",
+    "saveCurrent": "將目前專案儲存為範本",
+    "count_one": "共有 {{count}} 個範本",
+    "count_other": "共有 {{count}} 個範本",
+    "categories": {
+      "social-media": "社群媒體",
+      "youtube": "YouTube",
+      "tiktok": "TikTok",
+      "instagram": "Instagram",
+      "business": "商務",
+      "personal": "個人",
+      "slideshow": "幻燈片",
+      "intro-outro": "片頭／片尾",
+      "lower-third": "下方字幕條",
+      "motion": "動態",
+      "custom": "自訂"
+    }
+  },
+  "templateVars": {
+    "resetDefault": "重設為預設值",
+    "reset": "重設",
+    "enterText": "輸入文字…",
+    "characters_one": "{{count}} / {{max}} 字",
+    "characters_other": "{{count}} / {{max}} 字",
+    "noMedia": "沒有可用的媒體",
+    "importMedia": "請先匯入媒體才能在此使用",
+    "enterSubtitle": "輸入字幕文字…",
+    "noTemplate": "請選擇範本以編輯變數",
+    "title": "範本變數",
+    "resetAll": "全部重設",
+    "none": "此範本沒有可編輯的變數",
+    "missing": "請填寫必填欄位：{{names}}",
+    "apply": "套用範本"
+  },
+  "multiClip": {
+    "selected_one": "已選取 {{count}} 個片段",
+    "selected_other": "已選取 {{count}} 個片段",
+    "syncHint": "批次變更會與時間軸保持同步",
+    "batchTransform": "批次變形",
+    "nudge": "微調位置",
+    "nudgeLeft": "將片段向左微移",
+    "nudgeUp": "將片段向上微移",
+    "nudgeDown": "將片段向下微移",
+    "nudgeRight": "將片段向右微移",
+    "align": "對齊",
+    "alignLeft": "靠左對齊",
+    "alignCenter": "水平置中",
+    "alignRight": "靠右對齊",
+    "alignTop": "靠上對齊",
+    "alignMiddle": "垂直置中",
+    "alignBottom": "靠下對齊",
+    "distributeH": "水平均分",
+    "distributeV": "垂直均分",
+    "scale": "縮放",
+    "rotation": "旋轉",
+    "rotationLabel": "所選片段的旋轉角度",
+    "opacity": "不透明度",
+    "batchText": "批次文字",
+    "batchEffects": "批次效果",
+    "effectsHint_one": "從第一個選取的視覺圖層複製效果，再套用到全部 {{count}} 個選取的視覺圖層。",
+    "effectsHint_other": "從第一個選取的視覺圖層複製效果，再套用到全部 {{count}} 個選取的視覺圖層。",
+    "copyEffects": "複製第一組效果",
+    "appendEffects": "將效果附加到所選片段",
+    "replaceEffects": "取代所選片段的效果",
+    "clearEffects": "清除所選片段的效果",
+    "actions": "選取範圍操作",
+    "resetTransforms": "重設變形",
+    "copy_one": "複製 {{count}} 個選取的片段",
+    "copy_other": "複製 {{count}} 個選取的片段",
+    "paste": "貼上剪貼簿內容到 {{time}} 秒處",
+    "duplicate_one": "再製 {{count}} 個選取的片段",
+    "duplicate_other": "再製 {{count}} 個選取的片段",
+    "delete": "刪除選取的片段",
+    "compound": "複合片段",
+    "mixed": "不一致"
+  },
+  "clipTransition": {
+    "incoming": "進場轉場",
+    "incomingHint": "從上一個片段轉入此片段",
+    "outgoing": "出場轉場",
+    "outgoingHint": "從此片段轉入下一個片段",
+    "intro": "開場轉場",
+    "introHint": "從專案背景轉入此片段",
+    "outro": "結尾轉場",
+    "outroHint": "從此片段轉入專案背景",
+    "appliedTitle": "已套用片段動畫",
+    "appliedBoth": "進場：{{entry}}，退場：{{exit}}",
+    "appliedEntry": "進場：{{entry}}",
+    "appliedExit": "退場：{{exit}}",
+    "cleared": "已清除動畫",
+    "entry": "進場動畫",
+    "exit": "退場動畫",
+    "setEntry": "將進場動畫設為「{{name}}」",
+    "setExit": "將退場動畫設為「{{name}}」",
+    "duration": "長度",
+    "easing": "緩動",
+    "apply": "套用進場／退場動畫",
+    "single": "單一片段轉場",
+    "singleUnavailable": "單一片段轉場僅適用於影片與圖片片段。",
+    "clipToClip": "片段間轉場",
+    "noAdjacent": "此軌道上沒有相鄰的片段。",
+    "clipToClipUnavailable": "片段間轉場僅適用於時間軸上的媒體片段。",
+    "presets": {
+      "none": "無",
+      "fade": "淡化",
+      "slide-left": "向左滑動",
+      "slide-right": "向右滑動",
+      "slide-up": "向上滑動",
+      "slide-down": "向下滑動",
+      "zoom-in": "放大",
+      "zoom-out": "縮小",
+      "rotate": "旋轉",
+      "blur": "模糊",
+      "iris-circle": "圓形光圈",
+      "iris-rectangle": "矩形光圈",
+      "iris-diamond": "菱形光圈",
+      "iris-star": "星形光圈"
+    },
+    "easings": {
+      "linear": "線性",
+      "ease-in": "漸入",
+      "ease-out": "漸出",
+      "ease-in-out": "漸入漸出"
+    }
+  },
+  "multicam": {
+    "angleName": "機位名稱",
+    "cutTo": "在播放頭位置切換到 {{name}}",
+    "removeAngle": "移除機位",
+    "offset": "位移：",
+    "angleOffset": "機位時間位移",
+    "sec": "秒",
+    "angles_one": "{{count}} 個機位",
+    "angles_other": "{{count}} 個機位",
+    "syncAudio": "同步音訊",
+    "autoEdit": "自動剪輯",
+    "deleteGroup": "刪除攝影機群組",
+    "importManifest": "匯入清單",
+    "exportManifest": "匯出清單",
+    "cutReview": "剪接點檢查",
+    "cuts_one": "{{count}} 個剪接點",
+    "cuts_other": "{{count}} 個剪接點",
+    "manual": "手動",
+    "reject": "捨棄",
+    "accept": "採用",
+    "accepted": "已採用",
+    "editableHint": "產生的輸出軌道在時間軸上仍可完整編輯。",
+    "exportOtio": "匯出 OTIO",
+    "exportOrma": "匯出 .orma",
+    "findClips": "尋找精華片段",
+    "loadFailed": "無法載入多機位工具",
+    "trackFallback": "軌道 {{id}}",
+    "saveGroupFailed": "無法儲存攝影機群組。",
+    "decoding": "正在解碼 {{name}}…",
+    "decodeFailed": "無法解碼 {{name}} 的音訊。",
+    "groupGone": "攝影機群組已不存在。",
+    "defaultGroupName": "多機位 {{index}}",
+    "createFailedTitle": "建立攝影機群組失敗",
+    "createFailed": "無法建立攝影機群組。",
+    "removeAngleFailed": "無法移除機位",
+    "renameAngleFailed": "無法重新命名機位",
+    "saveOffsetFailed": "無法儲存位移",
+    "projectChanged": "分析期間專案已變更，請重新執行攝影機分析。",
+    "synchronizing": "正在同步各機位音訊…",
+    "synced": "音訊已同步 · 可信度 {{percent}}%",
+    "syncedTitle": "各機位音訊已同步",
+    "syncFailedDetail": "音訊同步失敗。",
+    "syncFailed": "音訊同步失敗",
+    "noOverlap": "各機位錄影的重疊音訊不足。",
+    "runningVad": "正在執行本機 Silero 人聲偵測…",
+    "voiceDetection": "人聲偵測 · {{name}} · {{percent}}%",
+    "missingAudio": "缺少 {{name}} 的解碼音訊。",
+    "calibrating": "正在校正環境雜音與麥克風串音…",
+    "analyzing": "正在分析說話者與麥克風串音…",
+    "noSpeakers": "未偵測到可用的說話活動。",
+    "cutsUnmapped": "偵測到的剪接點無法對應到來源片段。",
+    "applying_one": "正在套用 {{count}} 個剪接點…",
+    "applying_other": "正在套用 {{count}} 個剪接點…",
+    "applyFailed": "無法套用自動剪輯。",
+    "shotsCreated_one": "已在「{{name}} Auto Edit」建立 {{count}} 個鏡頭",
+    "shotsCreated_other": "已在「{{name}} Auto Edit」建立 {{count}} 個鏡頭",
+    "autoEditCreated": "已建立多機位自動剪輯",
+    "autoEditDetail_one": "{{count}} 個剪接點 · 可一步復原",
+    "autoEditDetail_other": "{{count}} 個剪接點 · 可一步復原",
+    "autoEditFailedDetail": "自動剪輯失敗。",
+    "autoEditFailed": "自動剪輯失敗",
+    "analysisUnavailable": "尚無分析結果",
+    "runAutoEditExport": "請先執行自動剪輯，再匯出 .orma 檔。",
+    "runAutoEditSocial": "請先執行自動剪輯，再尋找社群精華片段。",
+    "mapCameraFailed": "無法將攝影機 {{id}}（{{file}}）對應到所選機位。",
+    "manifestImported": "已匯入多機位清單",
+    "manifestDetail_one": "{{participants}} 位參與者 · {{count}} 台攝影機",
+    "manifestDetail_other": "{{participants}} 位參與者 · {{count}} 台攝影機",
+    "manifestFailed": "清單匯入失敗",
+    "socialMarker": "社群 · {{title}}",
+    "socialAdded": "已加入社群精華候選片段",
+    "markers_one": "{{count}} 個時間軸標記",
+    "markers_other": "{{count}} 個時間軸標記",
+    "reviewFailed": "無法更新剪接點檢查。",
+    "playheadOutside": "請將播放頭移到攝影機群組範圍內",
+    "groupRange": "群組範圍：{{start}} 秒 – {{end}} 秒",
+    "cameraUnavailable": "播放頭位置無法使用此攝影機。",
+    "cutAdded": "已在 {{time}} 秒加入機位切換 · 復原即可回到上一版剪輯",
+    "switchFailed": "無法切換攝影機",
+    "acceptFailed": "無法採用剪接點",
+    "rejectFailed": "無法捨棄剪接點",
+    "nudgeFailed": "無法微調剪接點",
+    "deleteFailed": "無法刪除群組",
+    "title": "多機位剪輯",
+    "subtitle": "選擇同一場活動的多段錄影並建立群組，再同步音訊，或在播放頭位置切換機位。",
+    "groups": "攝影機群組",
+    "createNew": "建立新群組",
+    "createHint": "請選擇同一場活動的 {{min}} 段以上錄影，並將各機位放在不同軌道；建立剪輯後，來源軌道會被隱藏並靜音。",
+    "noClips": "請將影片片段加入未鎖定的時間軸軌道，才能使用多機位剪輯",
+    "createGroup_one": "建立群組（已選 {{count}} 個）",
+    "createGroup_other": "建立群組（已選 {{count}} 個）",
+    "settings": "自動剪輯設定",
+    "syncFirst": "自動剪輯前先同步各機位（關閉則使用手動位移）",
+    "policy": "自動剪輯策略",
+    "preset": "預設",
+    "overlap": "多人同時說話時",
+    "sustained": "持續重疊時",
+    "minShot": "最短鏡頭",
+    "maxShot": "最長鏡頭",
+    "maxShotHint": "達到最長鏡頭長度時，會切到聆聽者反應或全景鏡頭。",
+    "transcripts": "在 .orma 檔中加入各聲道的本機 Whisper 逐字稿",
+    "reactions": "加入本機 MediaPipe 臉部／反應提示（較慢）",
+    "footer": "自動剪輯會建立可編輯的時間軸軌道，並可一步復原",
+    "presets": {
+      "custom": "自訂",
+      "conversation": "對談",
+      "energetic": "活潑",
+      "panel": "座談"
+    },
+    "strategies": {
+      "hold": "維持目前機位",
+      "winner": "選擇音量最大者",
+      "priority": "依參與者優先順序",
+      "wide": "使用全景鏡頭",
+      "composite": "分割畫面顯示說話者",
+      "progressive": "漸進式子母畫面"
+    },
+    "escalations": {
+      "wideShot": "全景鏡頭",
+      "energyWinner": "音量最大者",
+      "splitLayout": "分割畫面"
+    },
+    "reasons": {
+      "speaker": "說話者",
+      "overlap-hold": "重疊時維持",
+      "overlap-winner": "重疊時選音量最大者",
+      "silence-hold": "靜音時維持",
+      "max-shot": "達最長鏡頭",
+      "backchannel-hold": "附和時維持",
+      "turn-collision-winner": "搶話時選勝出者",
+      "successful-interruption": "成功插話",
+      "sustained-overlap": "持續重疊",
+      "group-reaction": "群體反應",
+      "reaction-shot": "反應鏡頭",
+      "layout-budget": "版面配額",
+      "directive": "指示"
+    }
+  }
+}

@@ -5,6 +5,7 @@ import React, {
   useRef,
   useEffect,
 } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Play,
   Rewind,
@@ -73,6 +74,7 @@ const SpeedCurveCanvas: React.FC<{
   onRemoveKeyframe,
   onMoveKeyframe,
 }) => {
+  const { t } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [hoveredKeyframe, setHoveredKeyframe] = useState<string | null>(null);
   const [draggingKeyframe, setDraggingKeyframe] = useState<string | null>(null);
@@ -371,13 +373,14 @@ const SpeedCurveCanvas: React.FC<{
         }`}
       />
       <div className="absolute bottom-1 right-1 text-[8px] text-fg-3 pointer-events-none">
-        Click to add • Drag to move • Click a point to remove
+        {t("advanced.speedRamp.canvasHint")}
       </div>
     </div>
   );
 };
 
 export const SpeedRampSection: React.FC<SpeedRampSectionProps> = ({ clip }) => {
+  const { t } = useTranslation();
   const playheadPosition = useTimelineStore((state) => state.playheadPosition);
   const speedEngine = useMemo(() => getSpeedEngine(), []);
 
@@ -596,13 +599,13 @@ export const SpeedRampSection: React.FC<SpeedRampSectionProps> = ({ clip }) => {
     <div className="space-y-3">
       <Card variant="muted" padding={2} className="border border-border">
         <Text type="supporting" color="secondary" className="text-[10px]">
-          Effective duration: {formatDuration(effectiveDuration)}
+          {t("advanced.speedRamp.effectiveDuration", { duration: formatDuration(effectiveDuration) })}
         </Text>
       </Card>
 
       <div className="space-y-2">
         <PropertySlider
-          label="Playback Speed"
+          label={t("advanced.speedRamp.playbackSpeed")}
           min={Math.log(SPEED_MIN)}
           max={Math.log(SPEED_MAX)}
           step={0.01}
@@ -632,7 +635,7 @@ export const SpeedRampSection: React.FC<SpeedRampSectionProps> = ({ clip }) => {
 
       <div className="flex gap-2">
         <Button
-          label="Reverse"
+          label={t("advanced.speedRamp.reverse")}
           icon={<RotateCcw size={12} aria-hidden />}
           variant={isReverse ? "primary" : "secondary"}
           size="sm"
@@ -640,7 +643,7 @@ export const SpeedRampSection: React.FC<SpeedRampSectionProps> = ({ clip }) => {
           className="flex-1"
         />
         <Button
-          label="Pitch Correct"
+          label={t("advanced.speedRamp.pitchCorrect")}
           variant={pitchCorrection ? "primary" : "secondary"}
           size="sm"
           onClick={handlePitchCorrectionToggle}
@@ -650,13 +653,13 @@ export const SpeedRampSection: React.FC<SpeedRampSectionProps> = ({ clip }) => {
 
       <div className="space-y-1.5">
         <Text type="supporting" color="secondary" weight="bold" className="text-[10px]">
-          Speed Curve Presets
+          {t("advanced.speedRamp.curvePresets")}
         </Text>
         <div className="grid grid-cols-2 gap-1">
           {SPEED_CURVE_PRESETS.map((preset) => (
             <Button
               key={preset.id}
-              label={preset.name}
+              label={t(`advanced.speedRamp.curves.${preset.id}`, { defaultValue: preset.name })}
               variant="secondary"
               size="sm"
               onClick={() => handleApplyCurvePreset(preset.id)}
@@ -667,7 +670,11 @@ export const SpeedRampSection: React.FC<SpeedRampSectionProps> = ({ clip }) => {
       </div>
 
       <Button
-        label={`Speed Ramping${keyframes.length > 0 ? ` (${keyframes.length} keyframes)` : ""}`}
+        label={
+          keyframes.length > 0
+            ? t("advanced.speedRamp.rampingWithCount", { count: keyframes.length })
+            : t("advanced.speedRamp.ramping")
+        }
         icon={
           showCurve ? (
             <ChevronDown size={12} aria-hidden />
@@ -711,7 +718,7 @@ export const SpeedRampSection: React.FC<SpeedRampSectionProps> = ({ clip }) => {
                     {kf.speed.toFixed(2)}x
                   </Text>
                   <IconButton
-                    label="Remove speed keyframe"
+                    label={t("advanced.speedRamp.removeKeyframe")}
                     icon={<Trash2 size={10} aria-hidden />}
                     variant="ghost"
                     size="sm"
@@ -726,7 +733,11 @@ export const SpeedRampSection: React.FC<SpeedRampSectionProps> = ({ clip }) => {
       )}
 
       <Button
-        label={`Freeze Frames${freezeFrames.length > 0 ? ` (${freezeFrames.length} freeze)` : ""}`}
+        label={
+          freezeFrames.length > 0
+            ? t("advanced.speedRamp.freezeWithCount", { count: freezeFrames.length })
+            : t("advanced.speedRamp.freeze")
+        }
         icon={
           isExpanded ? (
             <ChevronDown size={12} aria-hidden />
@@ -743,7 +754,7 @@ export const SpeedRampSection: React.FC<SpeedRampSectionProps> = ({ clip }) => {
       {isExpanded && (
         <div className="space-y-2">
           <Button
-            label="Add Freeze Frame at Playhead"
+            label={t("advanced.speedRamp.addFreeze")}
             icon={<Pause size={12} aria-hidden />}
             variant="primary"
             size="sm"
@@ -769,7 +780,7 @@ export const SpeedRampSection: React.FC<SpeedRampSectionProps> = ({ clip }) => {
                     {ff.duration.toFixed(1)}s
                   </Text>
                   <IconButton
-                    label="Remove freeze frame"
+                    label={t("advanced.speedRamp.removeFreeze")}
                     icon={<Trash2 size={10} aria-hidden />}
                     variant="ghost"
                     size="sm"
@@ -784,7 +795,7 @@ export const SpeedRampSection: React.FC<SpeedRampSectionProps> = ({ clip }) => {
       )}
 
       <Button
-        label="Reset Speed & Effects"
+        label={t("advanced.speedRamp.reset")}
         icon={<RotateCcw size={12} aria-hidden />}
         variant="secondary"
         size="sm"

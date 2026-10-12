@@ -1,0 +1,953 @@
+{
+  "particles": {
+    "presetLabel": "パーティクルエフェクトのプリセット",
+    "presetPlaceholder": "エフェクトのプリセットを選択…",
+    "add": "追加",
+    "previews": "パーティクルプリセットのプレビュー",
+    "emptyTitle": "パーティクルエフェクトはまだありません",
+    "emptyHint": "上のプリセットを選んでエフェクトを追加",
+    "collapse": "エフェクトを折りたたむ",
+    "expand": "エフェクトを展開",
+    "preview": "エフェクトをプレビュー",
+    "disable": "エフェクトを無効にする",
+    "enable": "エフェクトを有効にする",
+    "remove": "エフェクトを削除",
+    "startTime": "開始時間",
+    "duration": "長さ",
+    "settings": "パーティクル設定",
+    "count": "パーティクル数",
+    "speed": "速度",
+    "gravity": "重力",
+    "emissionRate": "放出レート",
+    "minSize": "最小サイズ",
+    "maxSize": "最大サイズ",
+    "turbulence": "乱流",
+    "blendMode": "描画モード",
+    "blend": {
+      "normal": "通常",
+      "add": "加算",
+      "multiply": "乗算",
+      "screen": "スクリーン"
+    },
+    "colors": "カラー（{{count}}）",
+    "addColor": "カラーを追加",
+    "previewPreset": "{{name}} をプレビュー",
+    "presetMeta": "{{type}} · パーティクル {{count}} 個",
+    "editColor": "カラー {{color}} を編集",
+    "removeColor": "カラーを削除"
+  },
+  "pip": {
+    "presets": {
+      "top-left": "左上",
+      "top-right": "右上",
+      "bottom-left": "左下",
+      "bottom-right": "右下",
+      "split-left": "分割・左",
+      "split-right": "分割・右",
+      "split-top": "分割・上",
+      "split-bottom": "分割・下",
+      "center-small": "中央・小",
+      "center-medium": "中央・中",
+      "fullscreen": "フルスクリーン"
+    },
+    "title": "ピクチャーインピクチャー",
+    "subtitle": "オーバーレイ映像の位置とサイズを調整",
+    "corners": "コーナー配置",
+    "split": "画面分割",
+    "center": "中央・全画面",
+    "showAdvanced": "詳細設定を表示",
+    "hideAdvanced": "詳細設定を隠す",
+    "position": "位置",
+    "positionX": "X 位置",
+    "positionY": "Y 位置",
+    "scale": "スケール",
+    "uniformScale": "均等スケール",
+    "scaleX": "X スケール",
+    "scaleY": "Y スケール",
+    "appearance": "外観",
+    "borderRadius": "角丸",
+    "opacity": "不透明度",
+    "reset": "デフォルトに戻す",
+    "dragHint": "プレビューでクリップをドラッグして位置を微調整"
+  },
+  "motionTracking": {
+    "title": "モーショントラッキング",
+    "subtitle": "オブジェクトを追跡して要素を追従させる",
+    "region": "トラッキング範囲",
+    "positionX": "X 位置",
+    "positionY": "Y 位置",
+    "width": "幅",
+    "height": "高さ",
+    "regionHint": "プレビューで範囲を描くか座標を入力",
+    "advancedOptions": "詳細オプション",
+    "algorithm": "アルゴリズム",
+    "algorithmOption": "{{name}}：{{description}}",
+    "algorithms": {
+      "correlation": {
+        "name": "相関",
+        "description": "コントラストの高い対象に最適"
+      },
+      "optical-flow": {
+        "name": "オプティカルフロー",
+        "description": "滑らかな動きに適しています"
+      },
+      "feature": {
+        "name": "特徴点マッチング",
+        "description": "複雑なテクスチャにも対応"
+      }
+    },
+    "confidence": "信頼度のしきい値",
+    "confidenceHint": "高いほど正確ですが、追跡を失いやすくなります",
+    "smoothing": "パスのスムージング",
+    "smoothingHint": "トラッキングパスのブレを軽減",
+    "start": "トラッキング開始",
+    "inProgress": "トラッキング中",
+    "cancel": "トラッキングをキャンセル",
+    "analyzing": "フレームを解析中…",
+    "lostFrames_one": "{{count}} フレームで追跡を失いました",
+    "lostFrames_other": "{{count}} フレームで追跡を失いました",
+    "failed": "トラッキングに失敗しました",
+    "complete": "トラッキング完了",
+    "keyframesCaptured_one": "キーフレーム {{count}} 個を取得",
+    "keyframesCaptured_other": "キーフレーム {{count}} 個を取得",
+    "framesLost_one": "{{count}} フレーム欠落",
+    "framesLost_other": "{{count}} フレーム欠落",
+    "positionOffset": "位置オフセット",
+    "offsetX": "X オフセット",
+    "offsetY": "Y オフセット",
+    "transformOptions": "トランスフォームのオプション",
+    "scale": "スケール",
+    "rotation": "回転",
+    "apply": "トラッキングをクリップに適用",
+    "applied": "トラッキングを適用済み",
+    "remove": "トラッキングを削除",
+    "retrack": "設定を変えて再トラッキング",
+    "footer": "オブジェクトを追跡してグラフィック・テキスト・エフェクトを固定"
+  },
+  "markers": {
+    "defaultLabel": "マーカー {{index}}",
+    "title": "マーカー",
+    "add": "追加",
+    "emptyTitle": "マーカーはまだありません",
+    "emptyHint": "再生ヘッドの位置で M キーを押すとマーカーを追加",
+    "labelField": "マーカー名",
+    "useColor": "マーカーの色を {{color}} にする",
+    "save": "保存",
+    "cancel": "キャンセル",
+    "jumpTo": "{{label}} へ移動",
+    "edit": "{{label}} を編集",
+    "remove": "{{label}} を削除"
+  },
+  "transform3d": {
+    "noClip": "クリップが選択されていません",
+    "rotationX": "X 回転",
+    "rotationY": "Y 回転",
+    "rotationZ": "Z 回転",
+    "perspective": "遠近感",
+    "style": "トランスフォームスタイル",
+    "flat": "フラット",
+    "preserve3d": "3D を保持",
+    "flatHint": "子要素をこの要素の平面に平坦化します",
+    "preserve3dHint": "子要素を 3D 空間に配置します",
+    "tip": "ヒント：3D 回転でレイヤーを X・Y・Z 軸に沿って回転させ、奥行きを演出できます。遠近感を調整すると 3D の奥行きの見え方を制御できます。"
+  },
+  "svg": {
+    "selectColor": "{{label}}を選択",
+    "noClip": "SVG クリップが選択されていません",
+    "mode": "モード",
+    "setMode": "SVG のカラーモードを{{mode}}に設定",
+    "modes": {
+      "none": "なし",
+      "tint": "色合い",
+      "replace": "置き換え"
+    },
+    "color": "カラー",
+    "opacity": "不透明度",
+    "entryAnimation": "イン アニメーション",
+    "exitAnimation": "アウト アニメーション",
+    "duration": "長さ"
+  },
+  "sceneNavigator": {
+    "fullTimeline": "タイムライン全体",
+    "intro": "イントロ",
+    "defaultLabel": "シーン {{index}}",
+    "previousScene": "前のシーン",
+    "nextScene": "次のシーン",
+    "scene": "シーン",
+    "scenes": "シーン",
+    "addScene": "シーンを追加",
+    "add": "追加",
+    "title": "シーンナビゲーター",
+    "subtitle": "セクション間を移動",
+    "previous": "前へ",
+    "position": "シーン {{current}} / {{total}}",
+    "next": "次へ"
+  },
+  "retouching": {
+    "setSourceHint": "Alt＋クリックでコピー元を設定",
+    "cloneSource": "コピー元",
+    "clear": "クリア",
+    "tools": {
+      "spotHeal": {
+        "label": "スポット修復",
+        "description": "周囲のピクセルをサンプリングしてシミや傷を除去"
+      },
+      "cloneStamp": {
+        "label": "コピースタンプ",
+        "description": "コピー元のピクセルを対象にコピー"
+      },
+      "redEyeRemoval": {
+        "label": "赤目除去",
+        "description": "写真の赤目を除去"
+      }
+    },
+    "title": "レタッチツール",
+    "brushSettings": "ブラシ設定",
+    "size": "サイズ",
+    "hardness": "硬さ",
+    "opacity": "不透明度",
+    "flow": "流量",
+    "howTo": "使い方",
+    "instructions": {
+      "spotHeal": "シミや傷の上をクリック＆ドラッグすると除去できます。周囲のピクセルをサンプリングして自然になじませます。",
+      "cloneStamp": "Alt＋クリックでコピー元を設定し、ペイントするとコピー元のピクセルを対象にコピーします。",
+      "redEyeRemoval": "赤目をクリックすると自動で検出して除去します。"
+    }
+  },
+  "photoLayers": {
+    "blendMode": "描画モード",
+    "setBlendMode": "描画モードを{{mode}}に設定",
+    "blendModes": {
+      "normal": "通常",
+      "multiply": "乗算",
+      "screen": "スクリーン",
+      "overlay": "オーバーレイ",
+      "softLight": "ソフトライト",
+      "hardLight": "ハードライト",
+      "colorDodge": "覆い焼きカラー",
+      "colorBurn": "焼き込みカラー",
+      "difference": "差の絶対値",
+      "exclusion": "除外",
+      "hue": "色相",
+      "saturation": "彩度",
+      "color": "カラー",
+      "luminosity": "輝度"
+    },
+    "hideLayer": "レイヤーを非表示",
+    "showLayer": "レイヤーを表示",
+    "unlockLayer": "レイヤーのロックを解除",
+    "lockLayer": "レイヤーをロック",
+    "empty": "レイヤーがありません",
+    "addLayer": "レイヤーを追加",
+    "layersCount": "レイヤー（{{count}}）",
+    "addNewLayer": "新しいレイヤーを追加",
+    "properties": "レイヤーのプロパティ",
+    "opacity": "不透明度",
+    "duplicate": "複製",
+    "delete": "削除"
+  },
+  "musicLibrary": {
+    "stop": "{{name}} を停止",
+    "preview": "{{name}} を試聴",
+    "addToTimeline": "{{name}} をタイムラインに追加",
+    "title": "音楽と効果音",
+    "subtitle": "ロイヤリティフリーのサウンド",
+    "music": "音楽",
+    "sfx": "効果音",
+    "search": "サウンドを検索",
+    "searchPlaceholder": "サウンドを検索…",
+    "all": "すべて",
+    "genres": {
+      "electronic": "エレクトロニック",
+      "cinematic": "シネマティック",
+      "pop": "ポップ",
+      "rock": "ロック",
+      "hip-hop": "ヒップホップ",
+      "jazz": "ジャズ",
+      "classical": "クラシック",
+      "ambient": "アンビエント",
+      "lofi": "Lo-Fi",
+      "corporate": "コーポレート",
+      "upbeat": "アップビート",
+      "dramatic": "ドラマチック"
+    },
+    "sfxCategories": {
+      "transitions": "トランジション",
+      "whoosh": "ヒュー音",
+      "impacts": "衝撃音",
+      "ui": "UI サウンド",
+      "nature": "自然",
+      "human": "人の声",
+      "mechanical": "機械音",
+      "musical": "楽器",
+      "cartoon": "カートゥーン",
+      "horror": "ホラー",
+      "sci-fi": "SF"
+    },
+    "moods": {
+      "happy": "ハッピー",
+      "sad": "悲しい",
+      "energetic": "エネルギッシュ",
+      "calm": "穏やか",
+      "tense": "緊迫",
+      "romantic": "ロマンチック",
+      "inspiring": "感動的",
+      "mysterious": "ミステリアス",
+      "playful": "遊び心",
+      "dark": "ダーク",
+      "bright": "明るい",
+      "nostalgic": "ノスタルジック"
+    },
+    "emptyTitle": "サウンドが見つかりません",
+    "emptyHint": "フィルターを調整してください",
+    "tracksAvailable": "{{count}} 曲が利用可能",
+    "effectsAvailable": "{{count}} 個の効果音が利用可能"
+  },
+  "audioTextSync": {
+    "intro": "動画クリップを順番にトリミング・配置し、各カットが音楽のビートに合うようにします。",
+    "progress": "ビート検出の進行状況",
+    "detect": "ビートを検出",
+    "bpmDetected": "検出された BPM",
+    "beats": "ビート数",
+    "selectTracks": "ビートに合わせるトラックを選択：",
+    "noTracks": "対象クリップを含むロック解除済みのトラックがありません。先に動画クリップをタイムラインに追加してください。",
+    "selectTrack": "{{name}} を選択",
+    "deselectTrack": "{{name}} の選択を解除",
+    "clipCount_one": "{{count}} クリップ",
+    "clipCount_other": "{{count}} クリップ",
+    "cutEvery": "カット間隔",
+    "beatCount_one": "{{count}} 拍",
+    "beatCount_other": "{{count}} 拍",
+    "cutHint": "各動画クリップを現在のイン点から一度ずつ使用し、音楽の位置は変わりません。シーケンスには動画クリップが 2 つ以上必要です。元に戻すと元のタイミングに戻ります。",
+    "willSync": "{{clips}} クリップを {{beats}} ビートに同期します",
+    "settings": "同期設定",
+    "syncMode": "同期モード",
+    "useMode": "同期モード「{{mode}}」を使用",
+    "modes": {
+      "cutToBeats": {
+        "label": "ビートに合わせてカット",
+        "description": "1・2・4・8 拍ごとにカットして動画クリップを配置"
+      },
+      "smart": {
+        "label": "スマート",
+        "description": "最も近いビート数に合わせて長さを調整"
+      },
+      "onePerBeat": {
+        "label": "1 拍に 1 クリップ",
+        "description": "各クリップにちょうど 1 拍を割り当て"
+      },
+      "preserveDuration": {
+        "label": "長さを維持",
+        "description": "元の長さを維持し、開始位置をビートにスナップ"
+      }
+    },
+    "subdivision": "ビートの分割",
+    "offset": "オフセット",
+    "downbeatsOnly": "ダウンビートのみ",
+    "allBeats": "すべてのビート",
+    "downbeats": "ダウンビート",
+    "preview": "プレビュー：",
+    "clipIndex": "クリップ {{index}}",
+    "more": "…ほか {{count}} 件",
+    "syncing": "同期中…",
+    "applyCuts": "{{count}} クリップにビートカットを適用",
+    "syncClips": "{{count}} クリップをビートに同期",
+    "reanalyze": "ビートを再解析"
+  },
+  "tts": {
+    "title": "テキスト読み上げ",
+    "subtitle": "ご自身の ElevenLabs キーで音声を生成",
+    "keySettings": "API キー設定",
+    "text": "テキスト",
+    "textPlaceholder": "音声に変換するテキストを入力…",
+    "enhanceForTts": "読み上げ向けに最適化",
+    "openSettings": "設定を開く",
+    "enhancing": "最適化中…",
+    "enhanceText": "テキストを最適化",
+    "generating": "生成中…",
+    "generate": "音声を生成",
+    "unsaved": "音声は未保存です。メディアに保存、タイムラインに追加、またはダウンロードしてください。",
+    "poweredBy": "Powered by ElevenLabs · {{model}}",
+    "model": "モデル",
+    "favoriteModels": "お気に入りのモデル",
+    "select": "{{name}} を選択",
+    "toggleModels": "モデル一覧の表示を切り替え",
+    "loadingModels": "モデルを読み込み中…",
+    "noModels": "利用できるモデルがありません",
+    "languageCount_one": "{{count}} 言語",
+    "languageCount_other": "{{count}} 言語",
+    "removeFavorite": "お気に入りから削除",
+    "addFavorite": "お気に入りに追加",
+    "modelsAvailable_one": "{{count}} 個のモデルが利用可能",
+    "modelsAvailable_other": "{{count}} 個のモデルが利用可能",
+    "voiceName": "{{name}} の音声",
+    "pausePreview": "試聴を一時停止",
+    "playPreview": "試聴を再生",
+    "saveToMedia": "メディアに保存",
+    "addToTimeline": "タイムラインに追加",
+    "download": "ダウンロード",
+    "enhancedHint": "最適化済み：下で編集してから生成",
+    "discard": "破棄",
+    "enhancedPreview": "最適化プレビュー",
+    "voice": "音声",
+    "favorites": "お気に入り",
+    "previewVoice": "音声を試聴",
+    "hideVoices": "音声ブラウザーを隠す",
+    "browseVoices": "音声を閲覧・検索",
+    "searchVoices": "音声を検索",
+    "searchPlaceholder": "名前・アクセント・性別で検索…",
+    "loadingVoices": "音声を読み込み中…",
+    "unlockVoices": "セッションのロックを解除して音声を閲覧",
+    "noVoiceMatch": "検索に一致する音声がありません",
+    "cloned": "クローン",
+    "preview": "試聴"
+  },
+  "voiceOver": {
+    "title": "再生ヘッドから録音",
+    "startsAt": "{{seconds}} 秒から新しいナレーショントラックに録音します。",
+    "stop": "停止してタイムラインに追加",
+    "adding": "ナレーションを追加中…",
+    "record": "ナレーションを録音",
+    "footer": "録音した音声はこのプロジェクト内に保存され、ほかのミックスと一緒に書き出されます。",
+    "emptyRecording": "マイクの録音が空でした。",
+    "importFailed": "録音を読み込めませんでした。",
+    "notFound": "読み込み後に録音した音声が見つかりませんでした。",
+    "addFailed": "ナレーションをタイムラインに追加できませんでした。",
+    "unsupported": "この環境ではナレーション録音に対応していません。",
+    "noFormat": "この環境には対応するマイク録音形式がありません。",
+    "stoppedUnexpectedly": "マイクの録音が予期せず停止しました。",
+    "saveFailed": "ナレーションを保存できませんでした。",
+    "allowMic": "ナレーションを録音するにはマイクへのアクセスを許可してください。",
+    "startFailed": "マイク録音を開始できませんでした。"
+  },
+  "ducking": {
+    "trackFallback": "トラック {{id}}",
+    "noOverlap": "このクリップと重なるトリガークリップが見つかりませんでした。",
+    "noDecodable": "選択したソーストラックにデコード可能なトリガー音声がありません。",
+    "persistFailed": "このクリップにダッキングを保存できませんでした。"
+  },
+  "audioEffects": {
+    "wetDry": "ウェット／ドライ"
+  },
+  "easing": {
+    "use": "{{name}} イージングを使用",
+    "basicCategory": "基本",
+    "curve": "{{family}}・{{direction}}",
+    "withVariant": "{{label}}（{{variant}}）",
+    "direction": {
+      "In": "イーズイン",
+      "Out": "イーズアウト",
+      "InOut": "イーズインアウト"
+    },
+    "family": {
+      "Quad": "2次",
+      "Cubic": "3次",
+      "Quart": "4次",
+      "Quint": "5次",
+      "Sine": "サイン",
+      "Expo": "指数",
+      "Circ": "円形",
+      "Back": "バック",
+      "Elastic": "弾性",
+      "Bounce": "バウンス"
+    },
+    "variant": {
+      "Strong": "強め",
+      "Soft": "ソフト",
+      "Small": "小さめ"
+    },
+    "basic": {
+      "linear": "リニア",
+      "ease": "イーズ",
+      "ease-in": "イーズイン",
+      "ease-out": "イーズアウト",
+      "ease-in-out": "イーズインアウト",
+      "hold": "ホールド",
+      "bezier": "ベジェ",
+      "smoothstep": "スムーズステップ",
+      "smootherstep": "スムーザーステップ",
+      "snappy": "キビキビ",
+      "smooth": "なめらか"
+    }
+  },
+  "motionPath": {
+    "noClip": "クリップが選択されていません",
+    "title": "モーションパス",
+    "enable": "モーションパスを有効化",
+    "showPathLabel": "パスを表示",
+    "hidePath": "パスを隠す",
+    "showPath": "パスを表示",
+    "autoOrient": "自動回転",
+    "pathType": "パスの種類",
+    "setPathType": "パスの種類を{{type}}に設定",
+    "types": {
+      "linear": "直線",
+      "bezier": "ベジェ",
+      "catmull-rom": "なめらか"
+    },
+    "pathPoints": "パスポイント",
+    "pointCount_one": "{{count}} ポイント",
+    "pointCount_other": "{{count}} ポイント",
+    "addPoint": "ポイントを追加",
+    "clearPath": "パスをクリア",
+    "exitEdit": "編集モードを終了",
+    "editOnCanvas": "キャンバス上でパスを編集",
+    "editingLabel": "編集中：",
+    "editingHint": "パスをクリックするとポイントを追加、ドラッグで移動、右クリックで削除できます。ハンドルをドラッグするとカーブを調整できます。",
+    "tipLabel": "ヒント：",
+    "tip": "モーションパスはクリップの位置を時間とともにカーブに沿って動かします。ベジェハンドルでなめらかなカーブを作れます。"
+  },
+  "textAnimation": {
+    "preset": "アニメーションプリセット",
+    "previews": "テキストアニメーションのプレビュー",
+    "previewApply": "「{{name}}」をプレビューして適用",
+    "easing": "イージング",
+    "noClip": "テキストクリップが選択されていません",
+    "timing": "タイミング",
+    "inDuration": "イン時間",
+    "outDuration": "アウト時間",
+    "previewTitle": "プレビュー",
+    "previewHint": "アニメーションはプレビューと書き出しで再生されます。合計時間：{{seconds}} 秒",
+    "settings": {
+      "fade": "フェード設定",
+      "slide": "スライド設定",
+      "scale": "スケール設定",
+      "bounce": "バウンス設定",
+      "rotate": "回転設定",
+      "wave": "ウェーブ設定",
+      "shake": "シェイク設定",
+      "pop": "ポップ設定",
+      "glitch": "グリッチ設定"
+    },
+    "params": {
+      "startOpacity": "開始時の不透明度",
+      "endOpacity": "終了時の不透明度",
+      "distance": "距離",
+      "scaleFrom": "開始スケール",
+      "scaleTo": "終了スケール",
+      "height": "高さ",
+      "bounces": "バウンス回数",
+      "angle": "角度",
+      "amplitude": "振幅",
+      "frequency": "周波数",
+      "intensity": "強さ",
+      "speed": "速度",
+      "overshoot": "オーバーシュート"
+    },
+    "presets": {
+      "none": {
+        "name": "なし",
+        "description": "アニメーションなし"
+      },
+      "typewriter": {
+        "name": "タイプライター",
+        "description": "文字が1つずつ現れる"
+      },
+      "fade": {
+        "name": "フェードイン",
+        "description": "なめらかな不透明度の変化"
+      },
+      "slide-up": {
+        "name": "上へスライド",
+        "description": "下からスライドイン"
+      },
+      "slide-down": {
+        "name": "下へスライド",
+        "description": "上からスライドイン"
+      },
+      "slide-left": {
+        "name": "左へスライド",
+        "description": "右からスライドイン"
+      },
+      "slide-right": {
+        "name": "右へスライド",
+        "description": "左からスライドイン"
+      },
+      "scale": {
+        "name": "スケールイン",
+        "description": "小さい状態から元のサイズへ拡大"
+      },
+      "blur": {
+        "name": "ブラーイン",
+        "description": "ぼかしを解きながらフェードイン"
+      },
+      "bounce": {
+        "name": "バウンス",
+        "description": "弾みながら定位置へ"
+      },
+      "rotate": {
+        "name": "回転イン",
+        "description": "回転しながら現れる"
+      },
+      "pop": {
+        "name": "ポップ",
+        "description": "少し行き過ぎてから弾むように現れる"
+      },
+      "flip": {
+        "name": "フリップ",
+        "description": "回転して画面に入る"
+      },
+      "split": {
+        "name": "スプリット",
+        "description": "文字が中央から分かれて現れる"
+      },
+      "word-by-word": {
+        "name": "単語ごと",
+        "description": "単語が1つずつ現れる"
+      },
+      "rise": {
+        "name": "ライズ",
+        "description": "ぼかしながら柔らかく浮かび、わずかに拡大して落ち着く"
+      },
+      "drop": {
+        "name": "ドロップ",
+        "description": "文字が落ちてきて軽く弾んで着地"
+      },
+      "elastic": {
+        "name": "エラスティック",
+        "description": "ほどよく行き過ぎるバネのようなスケール登場"
+      },
+      "swing": {
+        "name": "スイング",
+        "description": "文字が交互に蝶番のように振れて定位置へ"
+      },
+      "zoom-blur": {
+        "name": "ズームブラー",
+        "description": "映画的な前方ズームからくっきり現れる"
+      },
+      "cascade": {
+        "name": "カスケード",
+        "description": "文字が斜めに時間差で登場"
+      },
+      "wave": {
+        "name": "ウェーブ",
+        "description": "連続する波の動き"
+      },
+      "shake": {
+        "name": "シェイク",
+        "description": "連続して揺れる"
+      },
+      "glitch": {
+        "name": "グリッチ",
+        "description": "デジタルグリッチ効果"
+      },
+      "rainbow": {
+        "name": "レインボー",
+        "description": "虹色が循環する"
+      }
+    }
+  },
+  "emphasis": {
+    "none": "なし",
+    "reset": "リセット",
+    "speed": "速度",
+    "intensity": "強さ",
+    "loop": "アニメーションをループ",
+    "timing": "タイミング",
+    "clipLength": "クリップ：{{time}}",
+    "startTime": "開始時間",
+    "duration": "長さ",
+    "fullClip": "クリップ全体",
+    "resetFullClip": "クリップ全体にリセット",
+    "focusSettings": "フォーカスズーム設定",
+    "zoomScale": "ズーム倍率",
+    "holdDuration": "保持時間",
+    "focusPoint": "フォーカス位置",
+    "xPosition": "X 位置",
+    "yPosition": "Y 位置",
+    "focusAt": "フォーカスを{{position}}に",
+    "focus": {
+      "tl": "左上",
+      "tc": "上中央",
+      "tr": "右上",
+      "ml": "左中央",
+      "c": "中央",
+      "mr": "右中央",
+      "bl": "左下",
+      "bc": "下中央",
+      "br": "右下"
+    },
+    "focusShort": {
+      "tl": "左上",
+      "tc": "上",
+      "tr": "右上",
+      "ml": "左",
+      "c": "中",
+      "mr": "右",
+      "bl": "左下",
+      "bc": "下",
+      "br": "右下"
+    },
+    "footer": "強調アニメーションはクリップの表示中に再生されます（登場・退場中を除く）",
+    "categories": {
+      "attention": "注目",
+      "movement": "動き",
+      "rotation": "回転",
+      "distortion": "変形",
+      "zoomPan": "ズーム＆パン"
+    },
+    "animations": {
+      "pulse": {
+        "name": "パルス",
+        "description": "やさしく拡大縮小する呼吸のような効果"
+      },
+      "heartbeat": {
+        "name": "ハートビート",
+        "description": "心臓のような2拍のパルス"
+      },
+      "flash": {
+        "name": "フラッシュ",
+        "description": "不透明度が脈打つ効果"
+      },
+      "glow": {
+        "name": "グロー",
+        "description": "スケールと不透明度のパルス"
+      },
+      "breathe": {
+        "name": "ブリーズ",
+        "description": "ゆっくり落ち着いたスケール効果"
+      },
+      "shake": {
+        "name": "シェイク",
+        "description": "すばやく左右に揺れる"
+      },
+      "bounce": {
+        "name": "バウンス",
+        "description": "上下に弾む"
+      },
+      "float": {
+        "name": "フロート",
+        "description": "ふわふわ漂う動き"
+      },
+      "vibrate": {
+        "name": "バイブレーション",
+        "description": "ランダムな小さな動き"
+      },
+      "wave": {
+        "name": "ウェーブ",
+        "description": "波のような動き"
+      },
+      "spin": {
+        "name": "スピン",
+        "description": "連続回転"
+      },
+      "swing": {
+        "name": "スイング",
+        "description": "振り子のような回転"
+      },
+      "wobble": {
+        "name": "ウォブル",
+        "description": "回転しながらぐらつく"
+      },
+      "tilt": {
+        "name": "チルト",
+        "description": "ゆっくり傾く動き"
+      },
+      "tada": {
+        "name": "ジャジャーン",
+        "description": "目を引く小刻みな動き"
+      },
+      "jello": {
+        "name": "ゼリー",
+        "description": "ゼリーのようにぷるぷるする効果"
+      },
+      "rubber-band": {
+        "name": "ラバーバンド",
+        "description": "ゴムのように伸び縮みする効果"
+      },
+      "flicker": {
+        "name": "フリッカー",
+        "description": "ランダムに点滅する"
+      },
+      "zoom-pulse": {
+        "name": "ズームパルス",
+        "description": "拡大と縮小を繰り返す"
+      },
+      "focus-zoom": {
+        "name": "フォーカスズーム",
+        "description": "指定位置へズームして戻る"
+      },
+      "ken-burns": {
+        "name": "ケン・バーンズ",
+        "description": "ゆっくりズームしながらパン"
+      },
+      "pan-left": {
+        "name": "左へパン",
+        "description": "ゆっくり左へパン"
+      },
+      "pan-right": {
+        "name": "右へパン",
+        "description": "ゆっくり右へパン"
+      },
+      "pan-up": {
+        "name": "上へパン",
+        "description": "ゆっくり上へパン"
+      },
+      "pan-down": {
+        "name": "下へパン",
+        "description": "ゆっくり下へパン"
+      }
+    }
+  },
+  "motionPresets": {
+    "apply": "「{{name}}」を適用",
+    "applyShort": "適用",
+    "appliedTitle": "モーションプリセットを適用しました",
+    "appliedBody": "「{{name}}」をクリップに追加しました",
+    "removed": "プリセットを削除しました",
+    "selectClip": "モーションプリセットを適用するクリップを選択してください",
+    "clipNotFound": "クリップが見つかりません",
+    "applied": "適用中のアニメーション",
+    "removeEntry": "登場を削除 ×",
+    "removeExit": "退場を削除 ×",
+    "removeEmphasis": "強調を削除 ×",
+    "categories": {
+      "entrance": "登場",
+      "exit": "退場",
+      "emphasis": "強調",
+      "transition": "トランジション"
+    },
+    "durationAria": "モーションプリセットの長さ",
+    "duration": "長さ",
+    "durationHint": "「{{category}}」プリセットの再生時間を設定します。ドラッグを終えると、最後に適用したプリセットが更新されます。",
+    "presetCount_one": "「{{category}}」のプリセット {{count}} 個",
+    "presetCount_other": "「{{category}}」のプリセット {{count}} 個",
+    "presets": {
+      "fade-in": "フェードイン",
+      "slide-in-left": "左からスライドイン",
+      "slide-in-right": "右からスライドイン",
+      "slide-in-top": "上からスライドイン",
+      "slide-in-bottom": "下からスライドイン",
+      "scale-in": "スケールイン",
+      "pop": "ポップ",
+      "bounce-in": "バウンスイン",
+      "flip-in": "フリップイン",
+      "blur-in": "ブラーイン",
+      "fade-out": "フェードアウト",
+      "slide-out-left": "左へスライドアウト",
+      "slide-out-right": "右へスライドアウト",
+      "scale-out": "スケールアウト",
+      "shrink": "シュリンク",
+      "blur-out": "ブラーアウト",
+      "pulse": "パルス",
+      "shake": "シェイク",
+      "bounce": "バウンス",
+      "wiggle": "ウィグル",
+      "rubber-band": "ラバーバンド",
+      "glow-pulse": "グローパルス",
+      "cross-dissolve": "クロスディゾルブ",
+      "wipe-left": "左へワイプ",
+      "zoom-transition": "ズームトランジション"
+    }
+  },
+  "speedRamp": {
+    "canvasHint": "クリックで追加 • ドラッグで移動 • ポイントをクリックで削除",
+    "effectiveDuration": "実際の長さ：{{duration}}",
+    "playbackSpeed": "再生速度",
+    "reverse": "逆再生",
+    "pitchCorrect": "ピッチ補正",
+    "curvePresets": "速度カーブのプリセット",
+    "ramping": "スピードランプ",
+    "rampingWithCount_one": "スピードランプ（キーフレーム {{count}} 個）",
+    "rampingWithCount_other": "スピードランプ（キーフレーム {{count}} 個）",
+    "removeKeyframe": "速度キーフレームを削除",
+    "freeze": "フリーズフレーム",
+    "freezeWithCount_one": "フリーズフレーム（{{count}} 個）",
+    "freezeWithCount_other": "フリーズフレーム（{{count}} 個）",
+    "addFreeze": "再生ヘッド位置にフリーズフレームを追加",
+    "removeFreeze": "フリーズフレームを削除",
+    "reset": "速度と効果をリセット",
+    "curves": {
+      "flash": "フラッシュ",
+      "smooth-slow-mo": "なめらかスローモー",
+      "jump-cut": "ジャンプカット",
+      "montage": "モンタージュ",
+      "hero-moment": "ヒーローモーメント",
+      "bullet-time": "バレットタイム"
+    }
+  },
+  "noiseReduction": {
+    "emptyRange": "クリップの音声範囲が空です",
+    "analyzingAudio": "クリップの音声を解析中",
+    "sampling": "クリップの音声をサンプリング中（{{index}}/{{total}}）",
+    "analyzingSamples_one": "クリップのサンプル {{count}} 個を解析中",
+    "analyzingSamples_other": "クリップのサンプル {{count}} 個を解析中",
+    "analyzedSamples_one": "クリップのサンプル {{count}} 個を解析しました",
+    "analyzedSamples_other": "クリップのサンプル {{count}} 個を解析しました",
+    "analyzedAudio": "クリップの音声を解析しました",
+    "updateFailed": "ノイズ除去を更新できませんでした",
+    "applyFailed": "ノイズ除去を適用できませんでした",
+    "clipNotFound": "クリップが見つかりません",
+    "noAudio": "このクリップには音声データがありません",
+    "preparing": "クリップの解析を準備中",
+    "decodeFailed": "解析用の音声をデコードできませんでした",
+    "analyzingSignature": "ノイズの特徴を解析中",
+    "learningProfile": "カスタムのノイズ除去プロファイルを学習中",
+    "recommendationReady": "おすすめ設定の準備ができました",
+    "applied": "「{{name}}」をこのクリップに適用しました。",
+    "learnedApplied": "「{{name}}」を学習してこのクリップに適用しました。",
+    "presetFailed": "ノイズ除去プリセットを適用できませんでした",
+    "analyzeFailed": "このクリップを解析できませんでした",
+    "recommendFailed": "おすすめのノイズ除去を適用できませんでした",
+    "analyzing": "解析中…",
+    "applyingCleanup": "ノイズ除去を適用中…",
+    "recommendationReadyButton": "おすすめ準備完了",
+    "cleanupApplied": "ノイズ除去を適用済み",
+    "analysisFailed": "解析に失敗しました",
+    "analyze": "解析しておすすめを表示",
+    "collapse": "ノイズ除去を折りたたむ",
+    "expand": "ノイズ除去を展開",
+    "title": "ノイズ除去",
+    "enable": "ノイズ除去を有効化",
+    "intro": "ホワイトノイズ、風、ハム、ルームトーン、BGM を抑えつつ、声や残したい音をはっきり保ちます。",
+    "usePreset": "「{{name}}」のノイズ除去を使用",
+    "currentMode": "現在のモード：{{name}}",
+    "statusApplied": "適用中",
+    "statusOff": "オフ",
+    "recommendationLearned": "検出したノイズは「{{name}}」に最も近いです。{{threshold}} dB で {{percent}}% のノイズ除去を適用すると、このプロファイルがクリップに保存されます。",
+    "recommendationPreset": "検出したノイズは「{{name}}」に最も近いです。{{threshold}} dB で {{percent}}% のノイズ除去を適用してください。カスタムプロファイルを分離できなかったため、クリップに最も合うプリセットを使っています。",
+    "applying": "適用中…",
+    "applyRecommended": "おすすめのノイズ除去を適用",
+    "abPreview": "A/B 比較試聴",
+    "hearOriginal": "元の音を聴く",
+    "hearCleaned": "ノイズ除去後を聴く",
+    "previewOnly": "プレビューのみです。書き出しでは引き続きノイズ除去後のエフェクトチェーンを使います。",
+    "threshold": "しきい値",
+    "reduction": "低減量",
+    "attack": "アタック",
+    "release": "リリース",
+    "progress": "ノイズ解析の進行状況",
+    "profileActive": "このクリップでは学習したノイズプロファイルが有効です。",
+    "autoTuned": "「{{name}}」で自動調整され、書き出し時にも使われます。",
+    "presets": {
+      "balanced": {
+        "name": "バランス",
+        "description": "適度な室内ノイズを、やりすぎずに整える汎用設定。"
+      },
+      "speech": {
+        "name": "音声重視",
+        "description": "会話の存在感を保ちながら、ヒスノイズや環境音を抑えます。"
+      },
+      "whiteNoise": {
+        "name": "ホワイトノイズ",
+        "description": "ファン、空調、カメラのプリアンプノイズ、ルームトーンなどの広帯域ヒスを強力に除去します。"
+      },
+      "music": {
+        "name": "BGM",
+        "description": "BGM を下げ、声の存在感を前に保ちます。"
+      },
+      "heavy": {
+        "name": "強いノイズ",
+        "description": "大きな空調音、ファン、街の騒音向けの、より強力な広帯域ノイズ除去。"
+      },
+      "wind": {
+        "name": "風・ランブル",
+        "description": "低域のランブル、ハンドリングノイズ、屋外の風圧音を対象にします。"
+      },
+      "hum": {
+        "name": "ハム・空調",
+        "description": "ハム音、エアコンのうなり、電源由来のノイズを重点的に除去します。"
+      }
+    }
+  }
+}

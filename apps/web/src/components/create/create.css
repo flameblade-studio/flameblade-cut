@@ -4,8 +4,8 @@
   --fc-radius: 14px;
   --fc-radius-sm: 10px;
   background:
-    radial-gradient(1200px 500px at 70% -10%, oklch(0.6 0.2 30 / 0.07), transparent 60%),
-    radial-gradient(900px 400px at -10% 110%, oklch(0.74 0.11 75 / 0.05), transparent 60%),
+    radial-gradient(1200px 500px at 70% -10%, var(--ambient-flame), transparent 60%),
+    radial-gradient(900px 400px at -10% 110%, var(--ambient-gold), transparent 60%),
     var(--bg);
 }
 
@@ -36,8 +36,8 @@
 }
 .fc-tab[aria-selected="true"] {
   color: var(--fg);
-  background: var(--bg-3);
-  box-shadow: inset 0 0 0 1px var(--border-strong);
+  background: var(--pressed-bg);
+  box-shadow: inset 0 0 0 1px var(--border-strong), var(--control-shadow);
 }
 
 .fc-segment {
@@ -47,7 +47,7 @@
   gap: 4px;
   padding: 4px;
   border-radius: 12px;
-  background: var(--bg);
+  background: var(--segment-track);
   border: 1px solid var(--border);
 }
 .fc-segment > button {
@@ -68,8 +68,8 @@
 }
 .fc-segment > button[aria-pressed="true"] {
   color: var(--fg);
-  background: var(--bg-3);
-  box-shadow: inset 0 0 0 1px var(--border-strong), 0 1px 2px oklch(0 0 0 / 0.3);
+  background: var(--pressed-bg);
+  box-shadow: inset 0 0 0 1px var(--border-strong), var(--control-shadow);
 }
 
 .fc-label {
@@ -135,14 +135,14 @@
   font-size: 15px;
   font-weight: 750;
   letter-spacing: 0.08em;
-  color: oklch(0.99 0.005 80);
+  color: var(--accent-fg);
   background: var(--flame-gradient);
-  box-shadow: 0 8px 24px oklch(0.6 0.2 30 / 0.35), inset 0 1px 0 oklch(1 0 0 / 0.25);
+  box-shadow: 0 8px 24px var(--flame-shadow), inset 0 1px 0 oklch(1 0 0 / 0.25);
   transition: transform 0.12s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 .fc-generate:hover:not(:disabled) {
   background: var(--flame-gradient-hover);
-  box-shadow: 0 10px 30px oklch(0.6 0.2 30 / 0.45), inset 0 1px 0 oklch(1 0 0 / 0.3);
+  box-shadow: 0 10px 30px var(--flame-shadow), inset 0 1px 0 oklch(1 0 0 / 0.3);
 }
 .fc-generate:active:not(:disabled) {
   transform: translateY(1px) scale(0.995);
@@ -186,7 +186,7 @@
   border-color: color-mix(in oklch, var(--gold) 35%, transparent);
 }
 .fc-chip--flame {
-  color: oklch(0.85 0.1 50);
+  color: var(--chip-flame-fg);
   background: var(--accent-soft);
   border-color: color-mix(in oklch, var(--accent) 40%, transparent);
 }
@@ -215,18 +215,18 @@
   cursor: not-allowed;
 }
 .fc-action--primary {
-  color: oklch(0.99 0.005 80);
+  color: var(--accent-fg);
   border-color: transparent;
   background: var(--flame-gradient);
 }
 .fc-action--primary:hover:not(:disabled) {
-  color: oklch(0.99 0.005 80);
+  color: var(--accent-fg);
   border-color: transparent;
   background: var(--flame-gradient-hover);
 }
 .fc-action--danger:hover:not(:disabled) {
-  color: oklch(0.75 0.17 25);
-  border-color: oklch(0.55 0.17 25 / 0.6);
+  color: var(--danger-fg);
+  border-color: var(--danger-border);
 }
 
 .fc-stage {
@@ -253,7 +253,7 @@
   background:
     linear-gradient(110deg, transparent 30%, oklch(0.7 0.18 36 / 0.12) 45%, oklch(0.8 0.15 70 / 0.16) 50%, transparent 65%)
       0 0 / 250% 100%,
-    radial-gradient(60% 80% at 50% 50%, oklch(0.3 0.06 33 / 0.6), var(--stage-bg));
+    radial-gradient(60% 80% at 50% 50%, var(--shimmer-core), var(--stage-bg));
   animation: fc-shimmer 2.2s linear infinite;
 }
 @keyframes fc-shimmer {
@@ -269,8 +269,8 @@
   flex: none;
 }
 .fc-dot--ready {
-  background: oklch(0.75 0.17 150);
-  box-shadow: 0 0 0 3px oklch(0.75 0.17 150 / 0.2);
+  background: var(--ok);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--ok) 20%, transparent);
 }
 .fc-dot--starting {
   background: var(--gold);
@@ -280,7 +280,7 @@
   background: var(--fg-muted);
 }
 .fc-dot--error {
-  background: oklch(0.65 0.2 25);
+  background: var(--error);
 }
 @keyframes fc-pulse {
   50% {
@@ -312,7 +312,7 @@
   gap: 2px;
   padding: 3px;
   border-radius: 10px;
-  background: var(--bg);
+  background: var(--segment-track);
   border: 1px solid var(--border);
 }
 .fc-workspace-switch > button {
@@ -332,8 +332,8 @@
 }
 .fc-workspace-switch > button[aria-pressed="true"] {
   color: var(--fg);
-  background: var(--bg-3);
-  box-shadow: inset 0 0 0 1px var(--border-strong);
+  background: var(--pressed-bg);
+  box-shadow: inset 0 0 0 1px var(--border-strong), var(--control-shadow);
 }
 
 @media (prefers-reduced-motion: reduce) {

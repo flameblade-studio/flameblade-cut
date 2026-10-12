@@ -299,7 +299,7 @@ export const TextClipComponent: React.FC<TextClipComponentProps> = ({
           <div className="w-full h-full flex items-center gap-1 px-3">
             <Type size={12} className="text-fg-2 flex-shrink-0" />
             <span className="text-[10px] font-semibold text-fg truncate">
-              {textClip.text || "Text"}
+              {textClip.text || t("tools.timelineItems.textFallback")}
             </span>
           </div>
           {isSelected && (

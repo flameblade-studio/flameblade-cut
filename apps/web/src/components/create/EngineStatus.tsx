@@ -2,6 +2,7 @@ import type { JSX } from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FolderOpen, Settings2, X } from "@/icons/lucide-compat";
+import { LTX_MODEL_CHOICES, LTX_TRANSFORMER_FILES, type LtxModelChoice } from "../../services/ltx/model-choice";
 import type { ComfyConnection, LtxSettings } from "../../services/ltx/types";
 import { useGenerationStore } from "../../stores/generation-store";
 
@@ -50,6 +51,25 @@ function SettingsDialog({ onClose }: { onClose: () => void }): JSX.Element {
                 {t("create.settings.browse")}
               </button>
             </div>
+          </label>
+          <label className="flex flex-col gap-1.5">
+            <span className="fc-label">{t("create.settings.model.label")}</span>
+            <select
+              className="fc-input"
+              value={draft.model}
+              onChange={(event) => setDraft({ ...draft, model: event.target.value as LtxModelChoice })}
+            >
+              {LTX_MODEL_CHOICES.map((choice) => (
+                <option key={choice} value={choice}>
+                  {t(`create.settings.model.options.${choice}`)}
+                </option>
+              ))}
+            </select>
+            <span className="text-[11.5px] leading-relaxed text-fg-muted">
+              {draft.model === "auto"
+                ? t("create.settings.model.autoHint")
+                : t("create.settings.model.fileHint", { file: LTX_TRANSFORMER_FILES[draft.model] })}
+            </span>
           </label>
           <div className="flex flex-col gap-1.5">
             <span className="fc-label">{t("create.settings.library")}</span>

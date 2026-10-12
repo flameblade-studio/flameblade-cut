@@ -1343,7 +1343,9 @@ const TransitionCard: React.FC<{
   onApply: () => void;
 }> = ({ def, thumbUrl, onApply }) => {
   const { t } = useTranslation();
-  const label = t(`transitions.labels.${def.label.replace(/[^A-Za-z]/g, "")}`, { defaultValue: def.label });
+  const labelKey = def.label.replace(/[^A-Za-z]/g, "");
+  const label = t(`transitions.labels.${labelKey}`, { defaultValue: def.label });
+  const description = t(`tools.transitionDescriptions.${labelKey}`, { defaultValue: def.description });
   const [progress, setProgress] = useState(0);
   const [isHover, setIsHover] = useState(false);
   const rafRef = React.useRef<number | null>(null);
@@ -1400,7 +1402,7 @@ const TransitionCard: React.FC<{
           {label}
         </Text>
         <Text type="supporting" color="secondary" display="block" maxLines={1} className="text-[9.5px] text-fg-muted leading-tight mt-0.5">
-          {def.description}
+          {description}
         </Text>
       </div>
     </ClickableCard>

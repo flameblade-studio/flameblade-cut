@@ -23,7 +23,7 @@
     "engine": "Analysis",
     "engineLocal": "On-device · Free",
     "engineOpenai": "OpenAI · Smarter",
-    "openaiNoKey": "Add an OpenAI key under “Keys and region” in the voiceover panel to use this.",
+    "openaiNoKey": "Add an OpenAI key in Settings → API Keys to use this.",
     "openaiUnavailable": "OpenAI analysis is not available in this build."
   },
   "run": "Find highlights",

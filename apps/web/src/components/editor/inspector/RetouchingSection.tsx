@@ -3,6 +3,7 @@ import { ToolcraftButton as Button } from "@openreel/ui";
 import { ToolcraftCard as Card } from "@openreel/ui";
 import { ToolcraftClickableCard as ClickableCard } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
 import { PropertySlider } from "./shell/PropertySlider";
 import { Eraser, Copy, Eye, Target, MousePointer2 } from "@/icons/lucide-compat";
 
@@ -131,12 +132,13 @@ const CloneSourceIndicator: React.FC<{
   source: CloneSource | null;
   onClear: () => void;
 }> = ({ source, onClear }) => {
+  const { t } = useTranslation();
   if (!source) {
     return (
       <div className="p-3 bg-bg-2 rounded-lg text-center">
         <Target size={20} className="mx-auto mb-1 text-fg-3" />
         <Text type="supporting" color="secondary">
-          Alt+Click to set clone source
+          {t("advanced.retouching.setSourceHint")}
         </Text>
       </div>
     );
@@ -148,11 +150,11 @@ const CloneSourceIndicator: React.FC<{
         <div className="flex items-center gap-2">
           <Target size={14} className="text-primary" />
           <Text type="supporting" color="primary">
-            Clone Source
+            {t("advanced.retouching.cloneSource")}
           </Text>
         </div>
         <Button
-          label="Clear"
+          label={t("advanced.retouching.clear")}
           size="sm"
           variant="ghost"
           onClick={onClear}
@@ -216,29 +218,30 @@ export const RetouchingSection: React.FC<RetouchingSectionProps> = ({
   onBrushFlowChange,
   onClearCloneSource,
 }) => {
+  const { t } = useTranslation();
   // Tool definitions
   const tools = useMemo(
     () => [
       {
         id: "spotHeal" as RetouchingTool,
         icon: <Eraser size={16} />,
-        label: "Spot Healing",
-        description: "Remove blemishes by sampling surrounding pixels",
+        label: t("advanced.retouching.tools.spotHeal.label"),
+        description: t("advanced.retouching.tools.spotHeal.description"),
       },
       {
         id: "cloneStamp" as RetouchingTool,
         icon: <Copy size={16} />,
-        label: "Clone Stamp",
-        description: "Copy pixels from source to target",
+        label: t("advanced.retouching.tools.cloneStamp.label"),
+        description: t("advanced.retouching.tools.cloneStamp.description"),
       },
       {
         id: "redEyeRemoval" as RetouchingTool,
         icon: <Eye size={16} />,
-        label: "Red-Eye Removal",
-        description: "Remove red-eye from photos",
+        label: t("advanced.retouching.tools.redEyeRemoval.label"),
+        description: t("advanced.retouching.tools.redEyeRemoval.description"),
       },
     ],
-    [],
+    [t],
   );
 
   return (
@@ -246,7 +249,7 @@ export const RetouchingSection: React.FC<RetouchingSectionProps> = ({
       {/* Tool Selection */}
       <div className="space-y-2">
         <Text type="supporting" color="secondary" weight="medium">
-          Retouching Tools
+          {t("advanced.retouching.title")}
         </Text>
         <div className="space-y-2">
           {tools.map((tool) => (
@@ -267,7 +270,7 @@ export const RetouchingSection: React.FC<RetouchingSectionProps> = ({
       {activeTool === "cloneStamp" && (
         <div className="space-y-2">
           <Text type="supporting" color="secondary" weight="medium">
-            Clone Source
+            {t("advanced.retouching.cloneSource")}
           </Text>
           <CloneSourceIndicator
             source={cloneSource}
@@ -280,7 +283,7 @@ export const RetouchingSection: React.FC<RetouchingSectionProps> = ({
       <Card variant="muted" padding={3}>
         <div className="space-y-3">
           <Text type="supporting" color="secondary" weight="medium">
-            Brush Settings
+            {t("advanced.retouching.brushSettings")}
           </Text>
 
           {/* Brush Preview */}
@@ -288,7 +291,7 @@ export const RetouchingSection: React.FC<RetouchingSectionProps> = ({
 
           {/* Size Slider */}
           <BrushSlider
-            label="Size"
+            label={t("advanced.retouching.size")}
             value={brushConfig.size}
             onChange={onBrushSizeChange}
             min={1}
@@ -299,7 +302,7 @@ export const RetouchingSection: React.FC<RetouchingSectionProps> = ({
 
           {/* Hardness Slider */}
           <BrushSlider
-            label="Hardness"
+            label={t("advanced.retouching.hardness")}
             value={brushConfig.hardness * 100}
             onChange={(value) => onBrushHardnessChange(value / 100)}
             min={0}
@@ -310,7 +313,7 @@ export const RetouchingSection: React.FC<RetouchingSectionProps> = ({
 
           {/* Opacity Slider */}
           <BrushSlider
-            label="Opacity"
+            label={t("advanced.retouching.opacity")}
             value={brushConfig.opacity * 100}
             onChange={(value) => onBrushOpacityChange(value / 100)}
             min={0}
@@ -322,7 +325,7 @@ export const RetouchingSection: React.FC<RetouchingSectionProps> = ({
           {/* Flow Slider (for spot healing and clone stamp) */}
           {(activeTool === "spotHeal" || activeTool === "cloneStamp") && (
             <BrushSlider
-              label="Flow"
+              label={t("advanced.retouching.flow")}
               value={brushConfig.flow * 100}
               onChange={(value) => onBrushFlowChange(value / 100)}
               min={0}
@@ -340,15 +343,15 @@ export const RetouchingSection: React.FC<RetouchingSectionProps> = ({
           <MousePointer2 size={14} className="text-fg-3 mt-0.5" />
           <div className="flex flex-col gap-1">
             <Text type="supporting" color="primary" weight="medium">
-              How to use
+              {t("advanced.retouching.howTo")}
             </Text>
             <Text type="supporting" color="secondary" className="mt-1 text-[9px]">
               {activeTool === "spotHeal" &&
-                "Click and drag over blemishes to remove them. The tool samples surrounding pixels to blend seamlessly."}
+                t("advanced.retouching.instructions.spotHeal")}
               {activeTool === "cloneStamp" &&
-                "Alt+Click to set source point, then paint to copy pixels from source to target."}
+                t("advanced.retouching.instructions.cloneStamp")}
               {activeTool === "redEyeRemoval" &&
-                "Click on red eyes to automatically detect and remove the red-eye effect."}
+                t("advanced.retouching.instructions.redEyeRemoval")}
             </Text>
           </div>
         </div>

@@ -10,12 +10,30 @@
       "tools": "工具"
     },
     "cards": {
-      "voiceover": { "title": "配音", "description": "文字转语音，直接放到时间线" },
-      "captions": { "title": "自动字幕", "description": "从音频自动生成字幕" },
-      "templates": { "title": "项目模板", "description": "从预先建好的项目结构开始" },
-      "filters": { "title": "滤镜预设", "description": "一键应用电影感调色" },
-      "music": { "title": "音乐与音效", "description": "浏览免版税音频素材" },
-      "multicam": { "title": "多机位剪辑", "description": "同步并切换多个机位" }
+      "voiceover": {
+        "title": "配音",
+        "description": "文字转语音，直接放到时间线"
+      },
+      "captions": {
+        "title": "自动字幕",
+        "description": "从音频自动生成字幕"
+      },
+      "templates": {
+        "title": "项目模板",
+        "description": "从预先建好的项目结构开始"
+      },
+      "filters": {
+        "title": "滤镜预设",
+        "description": "一键应用电影感调色"
+      },
+      "music": {
+        "title": "音乐与音效",
+        "description": "浏览免版税音频素材"
+      },
+      "multicam": {
+        "title": "多机位剪辑",
+        "description": "同步并切换多个机位"
+      }
     },
     "footer": "更多 AI 功能即将推出",
     "unsavedTitle": "未保存的音频已丢弃",
@@ -71,7 +89,6 @@
       "failed": "第 {{index}} 句失败（已完成 {{placed}} / {{total}} 句）：{{message}}"
     },
     "setup": {
-      "title": "密钥与区域设置",
       "configured": "已设置",
       "notConfigured": "未设置",
       "azureKey": "Azure Speech 密钥",
@@ -87,7 +104,7 @@
       "keyHint": "密钥由 Windows 加密保存在这台电脑，界面上不会再显示。"
     },
     "errors": {
-      "missing-key": "尚未设置密钥，请在下方“密钥与区域设置”输入。",
+      "missing-key": "尚未设置密钥，请到“设置 → API 密钥”输入。",
       "invalid-region": "Azure 区域格式不正确，例如 eastasia。",
       "unsupported-platform": "Windows 内置声音只能在 Windows 上使用。",
       "voice-missing": "这台电脑找不到所选的声音，请重新选择。",
@@ -101,5 +118,16 @@
       "noProject": "请先打开项目。",
       "placement": "无法把配音放到时间线。"
     }
+  },
+  "keys": {
+    "title": "云服务密钥",
+    "description": "配音、提示词翻译和 AI 精华会用到。只在你使用这些云功能时才会联网。",
+    "use": {
+      "openai": "用于 OpenAI 配音、提示词翻译与 AI 精华",
+      "azure": "用于 Azure 云端配音（还需要填写区域）"
+    },
+    "needKey": "这个配音引擎需要密钥",
+    "needRegion": "还需要填写 Azure 区域",
+    "openSettings": "前往设置"
   }
 }

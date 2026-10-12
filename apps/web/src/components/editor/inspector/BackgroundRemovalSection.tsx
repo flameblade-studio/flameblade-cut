@@ -224,7 +224,7 @@ export const BackgroundRemovalSection: React.FC<
                 {PRESET_COLORS.map((color) => (
                   <ClickableCard
                     key={color}
-                    label={`Use ${color} background color`}
+                    label={t("visual.bgRemoval.useColor", { color })}
                     onClick={() => updateSettings({ backgroundColor: color })}
                     className={`w-6 h-6 rounded border-2 transition-all ${
                       settings.backgroundColor === color

@@ -2,6 +2,7 @@ import React, { useCallback, useMemo } from "react";
 import { ToolcraftClickableCard as ClickableCard } from "@openreel/ui";
 import { ToolcraftSelectControl as Selector } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
 import { PropertySlider } from "./shell/PropertySlider";
 import { useProjectStore } from "../../../stores/project-store";
 import type { GraphicAnimation, GraphicAnimationType } from "@openreel/core";
@@ -12,20 +13,23 @@ const ColorField: React.FC<{
   label: string;
   value: string;
   onChange: (color: string) => void;
-}> = ({ label, value, onChange }) => (
-  <div className="flex items-center justify-between gap-2">
-    <Text type="supporting" color="secondary" className="text-[10px]">
-      {label}
-    </Text>
-    <div className="max-w-[170px]">
-      <ColorSelector
-        label={`Select ${label.toLowerCase()}`}
-        value={value}
-        onChange={onChange}
-      />
+}> = ({ label, value, onChange }) => {
+  const { t } = useTranslation();
+  return (
+    <div className="flex items-center justify-between gap-2">
+      <Text type="supporting" color="secondary" className="text-[10px]">
+        {label}
+      </Text>
+      <div className="max-w-[170px]">
+        <ColorSelector
+          label={t("advanced.svg.selectColor", { label })}
+          value={value}
+          onChange={onChange}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const ANIMATION_PRESETS = SVG_ANIMATION_PRESETS.map((preset) => ({
   value: preset.id,
@@ -38,6 +42,7 @@ interface SVGSectionProps {
 }
 
 export const SVGSection: React.FC<SVGSectionProps> = ({ clipId }) => {
+  const { t } = useTranslation();
   const { getSVGClipById, updateSVGClip, project } = useProjectStore();
 
   const svgClip = useMemo(
@@ -149,7 +154,7 @@ export const SVGSection: React.FC<SVGSectionProps> = ({ clipId }) => {
   if (!svgClip) {
     return (
       <Text type="supporting" color="secondary" className="py-8 text-center text-xs">
-        No SVG clip selected
+        {t("advanced.svg.noClip")}
       </Text>
     );
   }
@@ -159,13 +164,13 @@ export const SVGSection: React.FC<SVGSectionProps> = ({ clipId }) => {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <Text type="supporting" color="secondary" className="text-[10px]">
-            Mode
+            {t("advanced.svg.mode")}
           </Text>
           <div className="flex gap-1">
             {(["none", "tint", "replace"] as const).map((mode) => (
               <ClickableCard
                 key={mode}
-                label={`Set SVG color mode to ${mode}`}
+                label={t("advanced.svg.setMode", { mode: t(`advanced.svg.modes.${mode}`) })}
                 onClick={() => handleColorModeChange(mode)}
                 className={`px-2 py-1 text-[9px] rounded capitalize transition-colors ${
                   colorStyle.colorMode === mode
@@ -173,7 +178,7 @@ export const SVGSection: React.FC<SVGSectionProps> = ({ clipId }) => {
                     : "bg-bg-2 border border-border text-fg-2 hover:text-fg"
                 }`}
               >
-                {mode}
+                {t(`advanced.svg.modes.${mode}`)}
               </ClickableCard>
             ))}
           </div>
@@ -182,12 +187,12 @@ export const SVGSection: React.FC<SVGSectionProps> = ({ clipId }) => {
         {colorStyle.colorMode !== "none" && (
           <>
             <ColorField
-              label="Color"
+              label={t("advanced.svg.color")}
               value={colorStyle.tintColor || "#ffffff"}
               onChange={handleTintColorChange}
             />
             <PropertySlider
-              label="Opacity"
+              label={t("advanced.svg.opacity")}
               value={colorStyle.tintOpacity || 1}
               onChange={handleTintOpacityChange}
               min={0}
@@ -201,12 +206,12 @@ export const SVGSection: React.FC<SVGSectionProps> = ({ clipId }) => {
 
       <div className="space-y-3">
         <Selector
-          label="Entry Animation"
+          label={t("advanced.svg.entryAnimation")}
           size="sm"
           width="100%"
           value={entryAnimation?.type || "none"}
           options={ANIMATION_PRESETS.map((preset) => ({
-            label: preset.label,
+            label: t(`visual.presets.svgAnimations.${preset.value}`, { defaultValue: preset.label }),
             value: preset.value,
           }))}
           onChange={(value) =>
@@ -216,7 +221,7 @@ export const SVGSection: React.FC<SVGSectionProps> = ({ clipId }) => {
 
         {entryAnimation && entryAnimation.type !== "none" && (
           <PropertySlider
-            label="Duration"
+            label={t("advanced.svg.duration")}
             value={entryAnimation.duration}
             onChange={handleEntryDurationChange}
             min={0.1}
@@ -229,12 +234,12 @@ export const SVGSection: React.FC<SVGSectionProps> = ({ clipId }) => {
 
       <div className="space-y-4">
         <Selector
-          label="Exit Animation"
+          label={t("advanced.svg.exitAnimation")}
           size="sm"
           width="100%"
           value={exitAnimation?.type || "none"}
           options={ANIMATION_PRESETS.map((preset) => ({
-            label: preset.label,
+            label: t(`visual.presets.svgAnimations.${preset.value}`, { defaultValue: preset.label }),
             value: preset.value,
           }))}
           onChange={(value) =>
@@ -244,7 +249,7 @@ export const SVGSection: React.FC<SVGSectionProps> = ({ clipId }) => {
 
         {exitAnimation && exitAnimation.type !== "none" && (
           <PropertySlider
-            label="Duration"
+            label={t("advanced.svg.duration")}
             value={exitAnimation.duration}
             onChange={handleExitDurationChange}
             min={0.1}

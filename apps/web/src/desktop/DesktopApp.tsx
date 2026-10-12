@@ -96,11 +96,11 @@ export function DesktopApp(): JSX.Element {
   // collector so editor-side faults are captured alongside main-process crashes.
   useEffect(() => installRendererCrashHandlers(), []);
 
-  // The desktop app is designed dark. Dialogs, menus and toasts render in
-  // portals outside this component's root, so the dark mode and the desktop
+  // The desktop app is designed light. Dialogs, menus and toasts render in
+  // portals outside this component's root, so the light mode and the desktop
   // design tokens must be applied to the whole document, not just our div.
   useEffect(() => {
-    useThemeStore.getState().setMode("dark");
+    useThemeStore.getState().setMode("light");
     document.body.classList.add("openreel-desktop");
     return () => document.body.classList.remove("openreel-desktop");
   }, []);

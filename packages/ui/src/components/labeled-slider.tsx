@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Slider } from "./slider"
+import { useUiStrings } from "./ui-strings"
 import { cn } from "@openreel/ui/lib/utils"
 
 export interface LabeledSliderProps {
@@ -16,6 +17,7 @@ export interface LabeledSliderProps {
 
 const LabeledSlider = React.forwardRef<HTMLDivElement, LabeledSliderProps>(
   ({ label, value, onChange, min = 0, max = 100, step = 1, unit = "", defaultValue, className }, ref) => {
+    const strings = useUiStrings()
     const displayValue = step < 1 ? value.toFixed(1) : Math.round(value)
     const [editing, setEditing] = React.useState(false)
     const [draft, setDraft] = React.useState("")
@@ -53,7 +55,7 @@ const LabeledSlider = React.forwardRef<HTMLDivElement, LabeledSliderProps>(
             <span
               role="button"
               tabIndex={0}
-              title={defaultValue !== undefined ? "Click to edit, double-click to reset" : "Click to edit"}
+              title={defaultValue !== undefined ? strings.clickToEditOrReset : strings.clickToEdit}
               onClick={() => {
                 if (defaultValue === undefined) {
                   enterEdit()

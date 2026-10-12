@@ -236,13 +236,14 @@ export const ShapeClipComponent: React.FC<ShapeClipComponentProps> = ({
   const isSticker = shapeClip.type === "sticker" || shapeClip.type === "emoji";
   const shapeLabel =
     isShape && "shapeType" in shapeClip
-      ? shapeClip.shapeType.charAt(0).toUpperCase() +
-        shapeClip.shapeType.slice(1)
+      ? t(`assets.shapes.${shapeClip.shapeType.replace(/^mesh-/, "")}`, {
+          defaultValue: shapeClip.shapeType.charAt(0).toUpperCase() + shapeClip.shapeType.slice(1),
+        })
       : isSticker
         ? shapeClip.type === "emoji"
-          ? "Emoji"
-          : "Sticker"
-        : "SVG";
+          ? t("tools.timelineItems.emoji")
+          : t("tools.timelineItems.sticker")
+        : t("tools.timelineItems.svg");
   const IconComponent = isShape ? Shapes : isSticker ? Smile : FileCode;
   const colorClass = isShape ? "green" : isSticker ? "pink" : "green";
 

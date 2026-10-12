@@ -4,6 +4,7 @@ import { ToolcraftCard as Card } from "@openreel/ui";
 import { ToolcraftClickableCard as ClickableCard } from "@openreel/ui";
 import { ToolcraftIconButton as IconButton } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
 import { MockToggle } from "./shell/InspectorControls";
 import { Route, Trash2, Plus, Eye, EyeOff } from "@/icons/lucide-compat";
 import { useProjectStore } from "../../../stores/project-store";
@@ -22,6 +23,7 @@ interface MotionPathSectionProps {
 export const MotionPathSection: React.FC<MotionPathSectionProps> = ({
   clipId,
 }) => {
+  const { t } = useTranslation();
   const { getClip, project } = useProjectStore();
   const { motionPathMode, motionPathClipId, setMotionPathMode } = useUIStore();
   const getGraphicsEngine = useEngineStore((state) => state.getGraphicsEngine);
@@ -153,7 +155,7 @@ export const MotionPathSection: React.FC<MotionPathSectionProps> = ({
   if (!clip) {
     return (
       <Text type="supporting" color="secondary" className="py-8 text-center text-xs">
-        No clip selected
+        {t("advanced.motionPath.noClip")}
       </Text>
     );
   }
@@ -170,11 +172,11 @@ export const MotionPathSection: React.FC<MotionPathSectionProps> = ({
         <div className="flex items-center gap-2">
           <Route size={14} className="text-primary" />
           <Text type="supporting" color="primary" className="text-xs font-medium">
-            Motion Path
+            {t("advanced.motionPath.title")}
           </Text>
         </div>
         <MockToggle
-          ariaLabel="Enable motion path"
+          ariaLabel={t("advanced.motionPath.enable")}
           checked={isEnabled}
           onChange={handleEnableToggle}
         />
@@ -185,11 +187,11 @@ export const MotionPathSection: React.FC<MotionPathSectionProps> = ({
           <Card variant="muted" padding={3} className="space-y-3">
             <div className="flex items-center justify-between">
               <Text type="supporting" color="secondary" className="text-[10px]">
-                Show Path
+                {t("advanced.motionPath.showPathLabel")}
               </Text>
               <div className="flex items-center gap-2">
                 <IconButton
-                  label={showPath ? "Hide path" : "Show path"}
+                  label={showPath ? t("advanced.motionPath.hidePath") : t("advanced.motionPath.showPath")}
                   icon={showPath ? <Eye size={12} /> : <EyeOff size={12} />}
                   variant={showPath ? "primary" : "secondary"}
                   size="sm"
@@ -205,10 +207,10 @@ export const MotionPathSection: React.FC<MotionPathSectionProps> = ({
 
             <div className="flex items-center justify-between">
               <Text type="supporting" color="secondary" className="text-[10px]">
-                Auto Orient
+                {t("advanced.motionPath.autoOrient")}
               </Text>
               <MockToggle
-                ariaLabel="Auto Orient"
+                ariaLabel={t("advanced.motionPath.autoOrient")}
                 checked={autoOrient}
                 onChange={handleAutoOrientToggle}
               />
@@ -216,13 +218,13 @@ export const MotionPathSection: React.FC<MotionPathSectionProps> = ({
 
             <div className="space-y-1">
               <Text type="supporting" color="secondary" className="text-[10px]">
-                Path Type
+                {t("advanced.motionPath.pathType")}
               </Text>
               <div className="grid grid-cols-3 gap-1">
                 {(["linear", "bezier", "catmull-rom"] as const).map((type) => (
                   <ClickableCard
                     key={type}
-                    label={`Set path type to ${type}`}
+                    label={t("advanced.motionPath.setPathType", { type: t(`advanced.motionPath.types.${type}`) })}
                     onClick={() => handlePathTypeChange(type)}
                     className={`py-1.5 rounded text-[9px] capitalize transition-colors ${
                       pathType === type
@@ -230,7 +232,7 @@ export const MotionPathSection: React.FC<MotionPathSectionProps> = ({
                         : "bg-bg-elev border border-border text-fg-2 hover:text-fg"
                     }`}
                   >
-                    {type === "catmull-rom" ? "Smooth" : type}
+                    {t(`advanced.motionPath.types.${type}`)}
                   </ClickableCard>
                 ))}
               </div>
@@ -240,15 +242,15 @@ export const MotionPathSection: React.FC<MotionPathSectionProps> = ({
           <Card variant="muted" padding={3} className="flex items-center justify-between">
             <div className="flex flex-col gap-0.5">
               <Text type="supporting" color="secondary" className="text-[10px]">
-                Path Points
+                {t("advanced.motionPath.pathPoints")}
               </Text>
               <Text type="body" color="primary" className="text-sm font-medium">
-                {pointCount} points
+                {t("advanced.motionPath.pointCount", { count: pointCount })}
               </Text>
             </div>
             <div className="flex items-center gap-1">
               <IconButton
-                label="Add point"
+                label={t("advanced.motionPath.addPoint")}
                 icon={<Plus size={12} />}
                 variant="primary"
                 size="sm"
@@ -256,7 +258,7 @@ export const MotionPathSection: React.FC<MotionPathSectionProps> = ({
                 className="p-1.5 rounded bg-primary/20 text-primary hover:bg-primary/30 transition-colors"
               />
               <IconButton
-                label="Clear path"
+                label={t("advanced.motionPath.clearPath")}
                 icon={<Trash2 size={12} />}
                 variant="secondary"
                 size="sm"
@@ -267,7 +269,7 @@ export const MotionPathSection: React.FC<MotionPathSectionProps> = ({
           </Card>
 
           <Button
-            label={isEditing ? "Exit Edit Mode" : "Edit Path on Canvas"}
+            label={isEditing ? t("advanced.motionPath.exitEdit") : t("advanced.motionPath.editOnCanvas")}
             icon={<Route size={14} />}
             variant={isEditing ? "primary" : "secondary"}
             size="sm"
@@ -283,11 +285,9 @@ export const MotionPathSection: React.FC<MotionPathSectionProps> = ({
             <Card variant="muted" padding={2} className="border border-primary/30 bg-primary/10">
               <Text type="supporting" className="text-[9px] text-primary">
                 <Text as="span" type="supporting" className="font-medium text-primary">
-                  Editing:
+                  {t("advanced.motionPath.editingLabel")}
                 </Text>{" "}
-                Click on the path
-                to add points. Drag points to move them. Right-click to remove.
-                Drag handles to adjust curves.
+                {t("advanced.motionPath.editingHint")}
               </Text>
             </Card>
           )}
@@ -295,10 +295,9 @@ export const MotionPathSection: React.FC<MotionPathSectionProps> = ({
           <Card variant="muted" padding={2} className="border border-border bg-bg-2/50">
             <Text type="supporting" color="secondary" className="text-[9px]">
               <Text as="span" type="supporting" className="font-medium text-fg-2">
-                Tip:
+                {t("advanced.motionPath.tipLabel")}
               </Text>{" "}
-              Motion paths animate the clip's position along a curved path over
-              time. Use bezier handles for smooth curves.
+              {t("advanced.motionPath.tip")}
             </Text>
           </Card>
         </>

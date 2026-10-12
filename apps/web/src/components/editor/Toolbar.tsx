@@ -16,7 +16,7 @@ import {
   type DeviceProfile,
   type TimeEstimate,
 } from "@openreel/core";
-import { ExportDialog } from "./ExportDialog";
+import { ExportDialog, formatEstimateDuration } from "./ExportDialog";
 import { CompressDialog } from "./CompressDialog";
 import { deriveSourceExportMatch } from "../../services/export-source-match";
 import { useExportRunner, extForFormat, exportFilename, type ExportDeliveryMode } from "../../services/export-runner";
@@ -158,6 +158,11 @@ export const Toolbar: React.FC = () => {
 
     setExportEstimates(estimates);
   }, [deviceProfile, project.timeline?.duration, project.settings.width, project.settings.height]);
+
+  const exportEstimateLabel = (type: string): string | null => {
+    const estimate = exportEstimates.get(type);
+    return estimate ? formatEstimateDuration(estimate.duration, t) : null;
+  };
 
   const handleExport = useCallback(
     async (type: ExportType) => {
@@ -506,9 +511,9 @@ export const Toolbar: React.FC = () => {
                           <Text type="supporting" color="secondary" display="block">
                             {option.desc}
                           </Text>
-                          {exportEstimates.get(option.type) && (
+                          {exportEstimateLabel(option.type) && (
                             <Text type="supporting" color="secondary" display="block" className="text-[10px]">
-                              {t("editor.toolbar.estimate", { time: exportEstimates.get(option.type)?.formatted })}
+                              {t("editor.toolbar.estimate", { time: exportEstimateLabel(option.type) })}
                             </Text>
                           )}
                         </div>

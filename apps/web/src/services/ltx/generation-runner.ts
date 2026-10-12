@@ -12,6 +12,7 @@
  * → downloading → done. Any error → failed; cancel → canceled.
  */
 import { buildComfyPrompt, samplerNodeIds, type BinderInputs } from "./workflow-binder";
+import { gpuNameFromSystemStats, modelErrorMessage, resolveTransformer, unetNamesFromObjectInfo } from "./model-choice";
 import { parseHistory, parseWsMessage, type ComfyWsEvent } from "./history-parser";
 import { parseQueuePromptResponse, parseQueueState } from "./queue-parser";
 import { fileExtension, joinPath, localDateFolder } from "./library-paths";
@@ -83,6 +84,11 @@ interface ActiveJob {
   /** The websocket reported that our prompt finished (success, error or interrupt). */
   terminalSeen: boolean;
   wake: (() => void) | null;
+}
+
+function parseJsonBody(status: number, body: string, path: string): unknown {
+  if (status !== 200) throw new Error(`ComfyUI ${path} answered HTTP ${status}`);
+  return JSON.parse(body) as unknown;
 }
 
 function errorMessage(error: unknown): string {
@@ -371,8 +377,9 @@ export class GenerationRunner {
       await raceAbort(signal, this.ensureReady());
       const record = this.deps.getRecord(recordId);
       if (record === undefined) throw new Error(`Generation record ${recordId} no longer exists`);
+      const transformerFile = await raceAbort(signal, this.resolveModelFile());
       const images = await raceAbort(signal, this.prepareImages(record));
-      const prompt = buildComfyPrompt(record.request, { recordId, ...images });
+      const prompt = buildComfyPrompt(record.request, { recordId, transformerFile, ...images });
       job.samplerIds = samplerNodeIds(prompt);
       if (signal.aborted) throw new JobCanceledError();
 
@@ -403,7 +410,7 @@ export class GenerationRunner {
     }
   }
 
-  private async prepareImages(record: GenerationRecord): Promise<Omit<BinderInputs, "recordId">> {
+  private async prepareImages(record: GenerationRecord): Promise<Omit<BinderInputs, "recordId" | "transformerFile">> {
     const { request, id } = record;
     switch (request.mode) {
       case "t2v":
@@ -461,6 +468,22 @@ export class GenerationRunner {
     const bytes = await this.deps.transport.readFileBytes(image.path);
     const filename = `${recordId}-${role}${fileExtension(image.name || image.path, ".png")}`;
     return this.deps.transport.uploadImage(this.deps.getSettings().baseUrl, bytes, filename);
+  }
+
+  /** The transformer file for this job, checked against what ComfyUI can load before anything is queued. */
+  private async resolveModelFile(): Promise<string> {
+    const { baseUrl, model } = this.deps.getSettings();
+    const [objectInfo, stats] = await Promise.all([
+      this.deps.transport.request(baseUrl, "GET", "/object_info/UNETLoader"),
+      this.deps.transport.request(baseUrl, "GET", "/system_stats"),
+    ]);
+    const resolution = resolveTransformer(
+      model,
+      unetNamesFromObjectInfo(parseJsonBody(objectInfo.status, objectInfo.body, "/object_info/UNETLoader")),
+      gpuNameFromSystemStats(parseJsonBody(stats.status, stats.body, "/system_stats")),
+    );
+    if (!resolution.ok) throw new Error(modelErrorMessage(resolution));
+    return resolution.file;
   }
 
   private async queuePrompt(prompt: unknown): Promise<string> {

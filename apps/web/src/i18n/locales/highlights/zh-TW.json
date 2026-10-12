@@ -23,7 +23,7 @@
     "engine": "分析方式",
     "engineLocal": "本機分析・免費",
     "engineOpenai": "OpenAI・更聰明",
-    "openaiNoKey": "在配音面板的「金鑰與區域設定」填入 OpenAI 金鑰後即可使用。",
+    "openaiNoKey": "到「設定 → API 金鑰」填入 OpenAI 金鑰後即可使用。",
     "openaiUnavailable": "這個版本尚未開放 OpenAI 分析。"
   },
   "run": "找出精華",

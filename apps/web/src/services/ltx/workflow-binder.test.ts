@@ -49,7 +49,8 @@ function ofClass(prompt: ComfyApiPrompt, classType: string): ComfyApiNode[] {
 }
 
 const SHEET: ComfyFileRef = { filename: "rec-1-sheet.png", subfolder: "flameblade-cut", type: "input" };
-const inputs = { recordId: "rec-1", firstImage: FIRST, lastImage: LAST };
+const TRANSFORMER = "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors";
+const inputs = { recordId: "rec-1", firstImage: FIRST, lastImage: LAST, transformerFile: TRANSFORMER };
 const REFS = Array.from({ length: 8 }, (_, i) => ({ path: `D:/refs/${i}.png`, name: `${i}.png` }));
 
 function ref2vRequest(overrides: Partial<GenerationRequest> = {}): GenerationRequest {
@@ -163,11 +164,11 @@ describe("buildComfyPrompt", () => {
   });
 
   it("fails closed when an image the mode needs was not uploaded", () => {
-    expect(() => buildComfyPrompt(request({ mode: "flf2v" }), { recordId: "r", firstImage: FIRST, lastImage: null })).toThrow(
+    expect(() => buildComfyPrompt(request({ mode: "flf2v" }), { recordId: "r", firstImage: FIRST, lastImage: null, transformerFile: TRANSFORMER })).toThrow(
       WorkflowBindingError,
     );
     try {
-      buildComfyPrompt(request({ mode: "i2v" }), { recordId: "r", firstImage: null, lastImage: null });
+      buildComfyPrompt(request({ mode: "i2v" }), { recordId: "r", firstImage: null, lastImage: null, transformerFile: TRANSFORMER });
       expect.unreachable();
     } catch (error) {
       expect(error).toBeInstanceOf(WorkflowBindingError);
@@ -239,5 +240,14 @@ describe("buildComfyPrompt", () => {
 
   it("reports the two LTX sampler passes for progress", () => {
     expect(samplerNodeIds(buildComfyPrompt(request(), inputs)).sort()).toEqual(["405:344", "405:368"]);
+  });
+});
+
+describe("model file", () => {
+  it.each(["t2v", "i2v", "extend", "flf2v", "ref2v"] as const)("%s loads the chosen transformer file", (mode) => {
+    const req = mode === "ref2v" ? ref2vRequest() : request({ mode });
+    const prompt = buildComfyPrompt(req, { ...inputs, referenceSheet: SHEET });
+    const loaders = Object.values(prompt).filter((node) => node.class_type === "UNETLoader");
+    expect(loaders.map((node) => node.inputs.unet_name)).toEqual([TRANSFORMER]);
   });
 });

@@ -3,6 +3,7 @@ import { ToolcraftButton as Button } from "@openreel/ui";
 import { ToolcraftCard as Card } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
 import { ToolcraftTextAreaControl } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
 import { Sparkles } from "@/icons/lucide-compat";
 
 interface EnhancedTextPreviewProps {
@@ -16,6 +17,7 @@ export const EnhancedTextPreview: React.FC<EnhancedTextPreviewProps> = ({
   onUpdate,
   onDiscard,
 }) => {
+  const { t } = useTranslation();
   return (
     <Card
       variant="muted"
@@ -26,11 +28,11 @@ export const EnhancedTextPreview: React.FC<EnhancedTextPreviewProps> = ({
         <div className="flex items-center gap-1">
           <Sparkles size={9} className="text-amber-400" />
           <Text type="supporting" className="text-[9px] font-medium text-amber-400">
-            Enhanced - edit below then Generate
+            {t("advanced.tts.enhancedHint")}
           </Text>
         </div>
         <Button
-          label="Discard"
+          label={t("advanced.tts.discard")}
           variant="ghost"
           size="sm"
           onClick={onDiscard}
@@ -38,7 +40,7 @@ export const EnhancedTextPreview: React.FC<EnhancedTextPreviewProps> = ({
         />
       </div>
       <ToolcraftTextAreaControl
-        label="Enhanced preview"
+        label={t("advanced.tts.enhancedPreview")}
         isLabelHidden
         value={enhancedPreview}
         onChange={onUpdate}

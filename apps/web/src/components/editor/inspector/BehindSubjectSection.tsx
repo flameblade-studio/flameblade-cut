@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { ToolcraftText as Text } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
 import { Loader2 } from "@/icons/lucide-compat";
 import { MockToggle } from "./shell/InspectorControls";
 import { useEngineStore } from "../../../stores/engine-store";
@@ -13,6 +14,7 @@ interface BehindSubjectSectionProps {
 export const BehindSubjectSection: React.FC<BehindSubjectSectionProps> = ({
   clipId,
 }) => {
+  const { t } = useTranslation();
   const getTitleEngine = useEngineStore((state) => state.getTitleEngine);
   const updateTextBehindSubject = useProjectStore(
     (state) => state.updateTextBehindSubject,
@@ -51,7 +53,7 @@ export const BehindSubjectSection: React.FC<BehindSubjectSectionProps> = ({
             "[BehindSubject] Person model initialization failed:",
             modelError,
           );
-          setError("Failed to load AI model. Check your connection.");
+          setError("modelFailed");
           updateTextBehindSubject(clipId, false);
           setEnabled(false);
           setIsLoading(false);
@@ -70,17 +72,17 @@ export const BehindSubjectSection: React.FC<BehindSubjectSectionProps> = ({
       <div className="flex items-center justify-between">
         <div className="flex flex-1 flex-col gap-0.5">
           <Text type="supporting" color="primary" className="block">
-            Place Behind Subject
+            {t("visual.behindSubject.title")}
           </Text>
           <Text type="supporting" color="secondary" className="block text-[9px]">
-            Text appears behind people in the video
+            {t("visual.behindSubject.hint")}
           </Text>
         </div>
         {isLoading ? (
           <Loader2 size={14} className="animate-spin text-primary" />
         ) : (
           <MockToggle
-            ariaLabel="Place Behind Subject"
+            ariaLabel={t("visual.behindSubject.title")}
             checked={enabled}
             onChange={handleToggle}
           />
@@ -88,12 +90,12 @@ export const BehindSubjectSection: React.FC<BehindSubjectSectionProps> = ({
       </div>
       {isLoading && (
         <Text type="supporting" color="secondary" className="text-[9px]">
-          Loading AI model...
+          {t("visual.behindSubject.loading")}
         </Text>
       )}
       {error && (
         <Text type="supporting" className="text-[9px] text-red-400">
-          {error}
+          {t(`visual.behindSubject.${error}`)}
         </Text>
       )}
     </div>

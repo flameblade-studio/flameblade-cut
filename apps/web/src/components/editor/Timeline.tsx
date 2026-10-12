@@ -954,7 +954,7 @@ export const Timeline: React.FC = () => {
   }) => (
     <button
       type="button"
-      aria-label={title ?? "Timeline tool"}
+      aria-label={title ?? t("tools.editorChrome.timelineTool")}
       onClick={onClick}
       disabled={disabled}
       data-tip-bottom={title}
@@ -1312,7 +1312,7 @@ export const Timeline: React.FC = () => {
             icon={<Layers size={16} aria-hidden />}
             size="sm"
             variant={showLayersPanel ? "secondary" : "ghost"}
-            data-tip-bottom="Track layers"
+            data-tip-bottom={t("tools.editorChrome.trackLayers")}
           />
         </Popover>
 

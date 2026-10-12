@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "./dialog"
 import { cn } from "../lib/utils"
+import { useUiStrings } from "./ui-strings"
 
 export interface ToolcraftDialogProps {
   children: React.ReactNode
@@ -61,6 +62,7 @@ export function ToolcraftDialogHeader({
   subtitle,
   title,
 }: ToolcraftDialogHeaderProps) {
+  const strings = useUiStrings()
   return (
     <div
       className={cn(
@@ -91,7 +93,7 @@ export function ToolcraftDialogHeader({
       {onOpenChange ? (
         <button
           type="button"
-          aria-label="Close dialog"
+          aria-label={strings.closeDialog}
           className="flex h-7 w-7 shrink-0 items-center justify-center rounded-[7px] text-fg-muted transition-colors hover:bg-bg-2 hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           onClick={() => onOpenChange(false)}
         >
