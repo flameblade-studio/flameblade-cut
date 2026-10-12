@@ -9,10 +9,15 @@ import { ClipComponent } from "./ClipComponent";
 import { TextClipComponent } from "./TextClipComponent";
 import { TimeRuler } from "./TimeRuler";
 
+type TestPointerEventInit = NonNullable<ConstructorParameters<typeof MouseEvent>[1]> & {
+  pointerId?: number;
+  pointerType?: string;
+};
+
 class TestPointerEvent extends MouseEvent {
   readonly pointerId: number;
   readonly pointerType: string;
-  constructor(type: string, options: PointerEventInit = {}) {
+  constructor(type: string, options: TestPointerEventInit = {}) {
     super(type, options);
     this.pointerId = options.pointerId ?? 1;
     this.pointerType = options.pointerType ?? "touch";
@@ -35,7 +40,7 @@ const props = { clip, track, allTracks: [track], pixelsPerSecond: 50, scrollX: 0
   onSelect: vi.fn(), onMoveClip: vi.fn(), onSnapIndicator: noop };
 
 describe("touch timeline editing", () => {
-  const frames = new Map<number, FrameRequestCallback>();
+  const frames = new Map<number, (time: number) => void>();
   let nextFrame = 0;
   function flushFrame() {
     act(() => {
