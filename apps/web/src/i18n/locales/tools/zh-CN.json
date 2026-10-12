@@ -39,7 +39,9 @@
     "find": "查找精彩片段",
     "preview": "预览精彩片段",
     "apply_one": "应用 {{count}} 个精彩片段",
-    "apply_other": "应用 {{count}} 个精彩片段"
+    "apply_other": "应用 {{count}} 个精彩片段",
+    "clipsLabel": "片段数",
+    "maxLabel": "最长"
   },
   "aspectMatch": {
     "title": "要匹配视频尺寸吗？",
@@ -877,5 +879,122 @@
   "otherServices": {
     "title": "其他 AI 服务",
     "description": "ElevenLabs、自定义 API 等其他服务的密钥，以你设置的主密码加密保存。"
+  },
+  "history": {
+    "actions": {
+      "clip_add": "添加片段",
+      "clip_remove": "删除片段",
+      "clip_move": "移动片段",
+      "clip_trim": "修剪片段",
+      "clip_split": "分割片段",
+      "clip_rippleDelete": "波纹删除",
+      "clip_duplicate": "复制片段",
+      "clip_setBlendMode": "更改混合模式",
+      "clip_setBlendOpacity": "调整混合不透明度",
+      "clip_setEmphasisAnimation": "设置强调动画",
+      "clip_setColorGrading": "调色",
+      "track_add": "添加{{trackType}}轨道",
+      "track_duplicate": "复制轨道",
+      "track_remove": "移除轨道",
+      "track_rename": "重命名轨道",
+      "effect_add": "添加效果",
+      "effect_remove": "移除效果",
+      "effect_update": "更新效果",
+      "effect_toggle": "切换效果",
+      "effect_setStack": "替换效果组合",
+      "transform_update": "变换片段",
+      "keyframe_add": "添加关键帧",
+      "keyframe_remove": "移除关键帧",
+      "keyframe_setAll": "替换片段关键帧",
+      "transition_add": "添加转场",
+      "transition_set": "添加转场",
+      "transition_update": "更新转场",
+      "transition_remove": "移除转场",
+      "audio_setVolume": "调整音量",
+      "audio_setFade": "调整淡入淡出",
+      "audio_addEffect": "添加音频效果",
+      "audio_removeEffect": "移除音频效果",
+      "audio_updateEffect": "更新音频效果",
+      "audio_toggleEffect": "切换音频效果",
+      "subtitle_add": "添加字幕",
+      "subtitle_remove": "移除字幕",
+      "marker_add": "添加标记",
+      "marker_remove": "移除标记",
+      "marker_update": "更新标记",
+      "project_rename": "重命名项目",
+      "project_updateSettings": "更新设置",
+      "project_setCanvasBackground": "更改画布背景",
+      "project_registerGeneratedShader": "添加生成的着色器",
+      "project_removeGeneratedShader": "移除生成的着色器",
+      "media_import": "导入素材",
+      "media_delete": "删除素材",
+      "clip_closeGapBefore": "填补空隙",
+      "track_consolidate": "移除空隙",
+      "track_restorePositions": "还原位置"
+    },
+    "trackTypes": {
+      "video": "视频",
+      "audio": "音频",
+      "image": "图片",
+      "text": "文字",
+      "graphics": "图形"
+    },
+    "undo": "撤销（{{count}}）",
+    "redo": "重做（{{count}}）"
+  },
+  "serviceMessages": {
+    "processing": {
+      "waiting": "等待开始…",
+      "complete": "完成",
+      "failed": "失败"
+    },
+    "autoReframe": {
+      "engineUnavailable": "自动构图引擎无法使用",
+      "stages": {
+        "initializing": "正在初始化自动构图引擎…",
+        "ready": "自动构图引擎已就绪",
+        "analyzing": "正在分析视频画面…",
+        "analyzingFrame": "正在分析第 {{frame}}/{{frameCount}} 帧画面",
+        "analysisComplete": "分析完成"
+      }
+    },
+    "highlights": {
+      "title": "精彩片段 {{number}}",
+      "stages": {
+        "analyze": "正在分析音频能量…",
+        "rank": "正在本地排序高能量片段…",
+        "done": "本地精彩片段已就绪"
+      },
+      "reasons": {
+        "energySpeech": "本地检测到强烈的音频能量与说话活动",
+        "energy": "本地检测到强烈的音频能量"
+      }
+    },
+    "tts": {
+      "errors": {
+        "emptyText": "请输入文字",
+        "sessionLocked": "会话已锁定。请先到“设置 > API 密钥”解锁。",
+        "missingKey": "找不到 ElevenLabs API 密钥。请到“设置 > API 密钥”添加。",
+        "invalidKey": "ElevenLabs 不接受此 API 密钥，或尚未保存密钥。请到“设置 > API 密钥”检查。",
+        "quota": "ElevenLabs 的字符额度已用完，请检查你的 ElevenLabs 套餐。",
+        "rateLimited": "ElevenLabs 当前请求过多，请稍后再试。",
+        "network": "无法连接到 ElevenLabs，请检查网络连接。",
+        "service": "ElevenLabs 出错（{{status}}）",
+        "serviceDetail": "ElevenLabs 出错（{{status}}）：{{detail}}",
+        "llmNotConfigured": "使用文字润色前，请先配置 AI 端点和模型。",
+        "llmSessionLocked": "会话已锁定。请到“设置 > API 密钥”解锁后再使用文字润色。",
+        "llmNetwork": "无法连接到 AI 端点，请检查地址和网络连接。",
+        "llmService": "{{provider}} 出错（{{status}}）",
+        "llmServiceDetail": "{{provider}} 出错（{{status}}）：{{detail}}",
+        "enhanceFailed": "文字润色失败",
+        "generateFailed": "语音生成失败",
+        "saveFailed": "无法保存到媒体库",
+        "timelineFailed": "无法添加到时间线",
+        "importFailed": "音频导入失败"
+      },
+      "success": {
+        "savedToMedia": "已保存到媒体素材"
+      }
+    }
   }
 }

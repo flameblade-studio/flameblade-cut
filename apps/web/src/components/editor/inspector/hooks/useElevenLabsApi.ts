@@ -2,9 +2,38 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import type { LlmProvider } from "../../../../stores/settings-store";
 import { useSettingsStore } from "../../../../stores/settings-store";
 import { isSessionUnlocked, getSecret } from "../../../../services/secure-storage";
-import { apiFetch } from "../../../../services/api-proxy";
+import { apiFetch, type ApiFetchOptions, type ApiService } from "../../../../services/api-proxy";
 import type { ElevenLabsVoice, ElevenLabsModel } from "../tts-types";
 import { FALLBACK_MODELS, ENHANCE_SYSTEM_PROMPT } from "../tts-constants";
+import {
+  elevenLabsHttpError,
+  llmHttpError,
+  TtsRequestError,
+} from "./tts-errors";
+
+function isAbortError(err: unknown): boolean {
+  return err instanceof DOMException && err.name === "AbortError";
+}
+
+/**
+ * `apiFetch` with transport failures (offline, DNS, refused connection)
+ * reported as a coded network error; aborts propagate unchanged.
+ */
+async function fetchOrNetworkError(
+  networkCode: "network" | "llm-network",
+  service: ApiService,
+  path: string,
+  apiKey: string,
+  options: ApiFetchOptions,
+): Promise<Response> {
+  try {
+    return await apiFetch(service, path, apiKey, options);
+  } catch (err) {
+    if (isAbortError(err)) throw err;
+    console.warn(`[tts] ${service} request failed`, err);
+    throw new TtsRequestError(networkCode);
+  }
+}
 
 interface UseElevenLabsApiOptions {
   hasElevenLabsKey: boolean;
@@ -153,15 +182,16 @@ export function useElevenLabsApi(options: UseElevenLabsApiOptions): UseElevenLab
 
   const generateWithElevenLabs = useCallback(async (inputText: string, voiceId: string, signal?: AbortSignal): Promise<Blob> => {
     if (!isSessionUnlocked()) {
-      throw new Error("Session locked. Unlock in Settings > API Keys first.");
+      throw new TtsRequestError("session-locked");
     }
 
     const apiKey = isDesktop ? "" : (await getSecret("elevenlabs")) ?? "";
     if (!isDesktop && !apiKey) {
-      throw new Error("ElevenLabs API key not found. Add it in Settings > API Keys.");
+      throw new TtsRequestError("missing-key");
     }
 
-    const response = await apiFetch(
+    const response = await fetchOrNetworkError(
+      "network",
       "elevenlabs",
       `/text-to-speech/${voiceId}`,
       apiKey,
@@ -178,11 +208,8 @@ export function useElevenLabsApi(options: UseElevenLabsApiOptions): UseElevenLab
     );
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      const msg = (errorData as Record<string, unknown>).detail
-        ?? (errorData as Record<string, unknown>).message
-        ?? `ElevenLabs error (${response.status})`;
-      throw new Error(String(msg));
+      const errorData: unknown = await response.json().catch(() => ({}));
+      throw elevenLabsHttpError(response.status, errorData);
     }
 
     return response.blob();
@@ -192,12 +219,12 @@ export function useElevenLabsApi(options: UseElevenLabsApiOptions): UseElevenLab
     const llmProvider = defaultLlmProvider;
     const selectedModel = llmModel.trim();
     if (!llmProvider || !llmBaseUrl.trim() || !selectedModel) {
-      throw new Error("Configure an AI endpoint and model before using text enhancement.");
+      throw new TtsRequestError("llm-not-configured");
     }
     const compatibleKeyConfigured = configuredServices.includes(llmProvider);
 
     if (compatibleKeyConfigured && !isSessionUnlocked()) {
-      throw new Error("Session locked. Unlock in Settings > API Keys to use text enhancement.");
+      throw new TtsRequestError("llm-session-locked");
     }
 
     const apiKey =
@@ -206,7 +233,7 @@ export function useElevenLabsApi(options: UseElevenLabsApiOptions): UseElevenLab
         : (await getSecret(llmProvider)) ?? "";
 
     if (llmProvider === "anthropic-compatible") {
-      const response = await apiFetch(llmProvider, "/messages", apiKey, {
+      const response = await fetchOrNetworkError("llm-network", llmProvider, "/messages", apiKey, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -220,10 +247,8 @@ export function useElevenLabsApi(options: UseElevenLabsApiOptions): UseElevenLab
       });
 
       if (!response.ok) {
-        const err = await response.json().catch(() => ({}));
-        throw new Error((err as Record<string, unknown>).error
-          ? String((err as Record<string, unknown>).error)
-          : `Anthropic error (${response.status})`);
+        const err: unknown = await response.json().catch(() => ({}));
+        throw llmHttpError("Anthropic", response.status, err);
       }
 
       const data = await response.json();
@@ -231,7 +256,8 @@ export function useElevenLabsApi(options: UseElevenLabsApiOptions): UseElevenLab
       return content?.[0]?.text ?? inputText;
     }
 
-    const response = await apiFetch(
+    const response = await fetchOrNetworkError(
+      "llm-network",
       llmProvider,
       "/chat/completions",
       apiKey,
@@ -251,9 +277,8 @@ export function useElevenLabsApi(options: UseElevenLabsApiOptions): UseElevenLab
     );
 
     if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      const msg = (err as Record<string, unknown>).error;
-      throw new Error(msg ? String((msg as Record<string, unknown>).message ?? msg) : `OpenAI error (${response.status})`);
+      const err: unknown = await response.json().catch(() => ({}));
+      throw llmHttpError("OpenAI", response.status, err);
     }
 
     const data = await response.json();

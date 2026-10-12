@@ -7,11 +7,17 @@
  * every change through `onRecordUpdate`, so the store stays the single
  * source of truth.
  *
- * Job lifecycle: queued → preparing (connect, upload images) → running
+ * Job lifecycle: queued → preparing (connect, plan the shot when the
+ * request asks for it, upload images) → running
  * (queued in ComfyUI, progress from /ws, /history polled as a fallback)
  * → downloading → done. Any error → failed; cancel → canceled.
  */
 import { buildComfyPrompt, samplerNodeIds, type BinderInputs } from "./workflow-binder";
+import { buildIngredientsPrompt } from "./ingredients-prompt";
+import { containsChinese } from "../prompt-translation/segments";
+import { createGemmaShotPlanner, type ComfyTextJobs } from "./shot-plan/gemma-planner";
+import type { ShotPlan, ShotPlanner, ShotPlanReference } from "./shot-plan/types";
+import type { ComfyApiPrompt } from "./workflow-binder";
 import { gpuNameFromSystemStats, modelErrorMessage, resolveTransformer, unetNamesFromObjectInfo } from "./model-choice";
 import { parseHistory, parseWsMessage, type ComfyWsEvent } from "./history-parser";
 import { parseQueuePromptResponse, parseQueueState } from "./queue-parser";
@@ -40,6 +46,10 @@ export interface GenerationRunnerDeps {
   getRecord: (id: string) => GenerationRecord | undefined;
   onRecordUpdate: (id: string, patch: Partial<GenerationRecord>) => void;
   onConnection: (state: ComfyConnection, detail: string | null) => void;
+  /** Shot planner on the user's OpenAI key; null outside the desktop app. */
+  openAiPlanner: () => ShotPlanner | null;
+  /** Last resort when no planner works: the local zh→en translator. */
+  translateFallback: (text: string) => Promise<string>;
 }
 
 /** Interval between /system_stats probes while ComfyUI starts. */
@@ -53,6 +63,9 @@ export const HISTORY_FINISH_POLL_MS = 500;
 export const RESUBSCRIBE_MS = 3_000;
 /** Consecutive failed /history requests before the job is failed. */
 export const MAX_HISTORY_FAILURES = 3;
+
+/** Uploaded images for the binder, plus each reference image's sheet position (ref2v only). */
+type PreparedImages = Omit<BinderInputs, "recordId" | "transformerFile"> & { sheetPositions?: string[] };
 
 export class JobCanceledError extends Error {
   constructor() {
@@ -84,6 +97,29 @@ interface ActiveJob {
   /** The websocket reported that our prompt finished (success, error or interrupt). */
   terminalSeen: boolean;
   wake: (() => void) | null;
+}
+
+/** Poll interval while a short text job (shot planning) runs. */
+export const TEXT_JOB_POLL_MS = 1_000;
+
+interface TextJobHistory {
+  status?: { completed?: boolean; status_str?: string };
+  outputs?: Record<string, { text?: unknown[] }>;
+}
+
+/** The request as planned: the shot as the prompt, each reference with its description and crop. */
+export function withPlan(request: GenerationRecord["request"], plan: ShotPlan): GenerationRecord["request"] {
+  const referenceImages = request.referenceImages.map((image, index) => {
+    const panel = plan.panels[index];
+    if (panel === undefined) return image;
+    const { crop: _previous, ...rest } = image;
+    return {
+      ...rest,
+      description: panel.description || image.description,
+      ...(panel.crop === null ? {} : { crop: panel.crop }),
+    };
+  });
+  return { ...request, prompt: plan.shot, referenceImages };
 }
 
 function parseJsonBody(status: number, body: string, path: string): unknown {
@@ -378,8 +414,18 @@ export class GenerationRunner {
       const record = this.deps.getRecord(recordId);
       if (record === undefined) throw new Error(`Generation record ${recordId} no longer exists`);
       const transformerFile = await raceAbort(signal, this.resolveModelFile());
-      const images = await raceAbort(signal, this.prepareImages(record));
-      const prompt = buildComfyPrompt(record.request, { recordId, transformerFile, ...images });
+      const planned = { ...record, request: await this.planShot(record, signal) };
+      const { sheetPositions, ...images } = await raceAbort(signal, this.prepareImages(planned));
+      // ref2v: the Ingredients LoRA expects each sheet panel described by its position.
+      const request =
+        sheetPositions === undefined
+          ? planned.request
+          : {
+              ...planned.request,
+              prompt: buildIngredientsPrompt(planned.request.prompt, planned.request.referenceImages, sheetPositions),
+            };
+      if (record.request.autoPlan !== null) update({ sentPrompt: request.prompt });
+      const prompt = buildComfyPrompt(request, { recordId, transformerFile, ...images });
       job.samplerIds = samplerNodeIds(prompt);
       if (signal.aborted) throw new JobCanceledError();
 
@@ -410,7 +456,7 @@ export class GenerationRunner {
     }
   }
 
-  private async prepareImages(record: GenerationRecord): Promise<Omit<BinderInputs, "recordId" | "transformerFile">> {
+  private async prepareImages(record: GenerationRecord): Promise<PreparedImages> {
     const { request, id } = record;
     switch (request.mode) {
       case "t2v":
@@ -436,13 +482,15 @@ export class GenerationRunner {
         );
         return { firstImage, lastImage: null };
       }
-      case "ref2v":
-        return { firstImage: null, lastImage: null, referenceSheet: await this.uploadReferenceSheet(record) };
+      case "ref2v": {
+        const sheet = await this.uploadReferenceSheet(record);
+        return { firstImage: null, lastImage: null, referenceSheet: sheet.file, sheetPositions: sheet.positions };
+      }
     }
   }
 
   /** Reads every reference image, composes the sheet and uploads it as `<recordId>-sheet.png`. */
-  private async uploadReferenceSheet(record: GenerationRecord): Promise<ComfyFileRef> {
+  private async uploadReferenceSheet(record: GenerationRecord): Promise<{ file: ComfyFileRef; positions: string[] }> {
     const { referenceImages, aspect } = record.request;
     if (referenceImages.length < MIN_REFERENCE_IMAGES || referenceImages.length > MAX_REFERENCE_IMAGES) {
       throw new Error(
@@ -453,8 +501,9 @@ export class GenerationRunner {
     for (const image of referenceImages) {
       sources.push({ image, bytes: await this.deps.transport.readFileBytes(image.path) });
     }
-    const png = await this.deps.composeReferenceSheet(sources, aspect);
-    return this.deps.transport.uploadImage(this.deps.getSettings().baseUrl, png, `${record.id}-sheet.png`);
+    const { png, positions } = await this.deps.composeReferenceSheet(sources, aspect);
+    const file = await this.deps.transport.uploadImage(this.deps.getSettings().baseUrl, png, `${record.id}-sheet.png`);
+    return { file, positions };
   }
 
   private async uploadLocalImage(
@@ -484,6 +533,71 @@ export class GenerationRunner {
     );
     if (!resolution.ok) throw new Error(modelErrorMessage(resolution));
     return resolution.file;
+  }
+
+  /**
+   * Shot planning (request.autoPlan): the planner turns the user's own words
+   * and references into the English shot, per-reference descriptions and
+   * crops. OpenAI falls back to the local planner, and the local planner to
+   * plain translation, so a planning problem never blocks the video.
+   */
+  private async planShot(record: GenerationRecord, signal: AbortSignal): Promise<GenerationRecord["request"]> {
+    const { request } = record;
+    if (request.autoPlan === null) return request;
+    const references: ShotPlanReference[] = [];
+    if (request.mode === "ref2v") {
+      for (const image of request.referenceImages) {
+        references.push({ image, bytes: await this.deps.transport.readFileBytes(image.path) });
+      }
+    }
+    const input = { mode: request.mode, request: request.prompt, durationSec: request.durationSec, references };
+    const local = createGemmaShotPlanner(this.textJobs, record.id);
+    const openAi = request.autoPlan === "openai" ? this.deps.openAiPlanner() : null;
+    const planners = openAi === null ? [local] : [openAi, local];
+    for (const planner of planners) {
+      try {
+        return withPlan(request, await raceAbort(signal, planner.plan(input, signal)));
+      } catch (error) {
+        if (error instanceof JobCanceledError || signal.aborted) throw new JobCanceledError();
+        console.warn("[ltx] shot planning failed; trying the next way:", errorMessage(error));
+      }
+    }
+    const translate = async (text: string) => (containsChinese(text) ? this.deps.translateFallback(text) : text);
+    const referenceImages = [];
+    for (const image of request.referenceImages) {
+      const description = image.description?.trim();
+      referenceImages.push(description ? { ...image, description: await translate(description) } : image);
+    }
+    return { ...request, prompt: await translate(request.prompt), referenceImages };
+  }
+
+  /** ComfyUI access for the local planner: uploads and text-only jobs. */
+  private readonly textJobs: ComfyTextJobs = {
+    uploadImage: (bytes, filename) => this.deps.transport.uploadImage(this.deps.getSettings().baseUrl, bytes, filename),
+    runTextJob: (prompt, signal) => this.runTextJob(prompt, signal),
+  };
+
+  /** Queues a prompt whose outputs are `PreviewAny` texts and returns them by node id. */
+  private async runTextJob(prompt: ComfyApiPrompt, signal: AbortSignal): Promise<Record<string, string>> {
+    const promptId = await this.queuePrompt(prompt);
+    const { baseUrl } = this.deps.getSettings();
+    for (;;) {
+      if (signal.aborted) {
+        await this.cancelRemote(promptId);
+        throw new JobCanceledError();
+      }
+      await new Promise((resolve) => setTimeout(resolve, TEXT_JOB_POLL_MS));
+      const res = await this.deps.transport.request(baseUrl, "GET", `/history/${promptId}`);
+      const entry = (parseJsonBody(res.status, res.body, "/history") as Record<string, TextJobHistory>)[promptId];
+      if (entry?.status?.completed === undefined) continue;
+      if (entry.status.status_str !== "success") throw new Error(`ComfyUI text job ${promptId} failed`);
+      const texts: Record<string, string> = {};
+      for (const [nodeId, output] of Object.entries(entry.outputs ?? {})) {
+        const text = output.text?.[0];
+        if (typeof text === "string") texts[nodeId] = text;
+      }
+      return texts;
+    }
   }
 
   private async queuePrompt(prompt: unknown): Promise<string> {

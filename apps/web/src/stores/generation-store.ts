@@ -16,6 +16,11 @@ import {
   serializeHistory,
 } from "../services/ltx/history-file";
 import { composeReferenceSheetPng, type ReferenceSheetComposer } from "../services/ltx/reference-sheet";
+import { createOpenAiShotPlanner } from "../services/ltx/shot-plan/openai-planner";
+import type { ShotPlanner } from "../services/ltx/shot-plan/types";
+import { encodeForVision } from "../services/ltx/shot-plan/vision-image";
+import { getOpenAiTextBridge } from "../services/highlights/openai-highlights";
+import { translatePrompt } from "../services/prompt-translation";
 import { HISTORY_FILE_NAME, joinPath, newRecordId, randomSeed48, SEED_LIMIT } from "../services/ltx/library-paths";
 import {
   MAX_GENERATION_SECONDS,
@@ -28,6 +33,7 @@ import {
   type GenerationRecord,
   type GenerationRequest,
   type LtxSettings,
+  type ShotPlannerEngine,
   type Storyboard,
   type StoryboardShot,
 } from "../services/ltx/types";
@@ -43,18 +49,16 @@ export interface GenerationStoreDeps {
   extractLastFrame: (videoPath: string) => Promise<Uint8Array>;
   /** Packs `ref2v` reference images into one PNG sheet; defaults to the browser canvas renderer. */
   composeReferenceSheet: ReferenceSheetComposer;
+  /** Shot planner on the user's OpenAI key, or null when there is no desktop bridge. */
+  openAiPlanner: () => ShotPlanner | null;
+  /** Local zh→en translation, used only when no shot planner works. */
+  translateFallback: (text: string) => Promise<string>;
 }
 
 /** A request from the UI; the store picks a random seed when none is given. */
 export type GenerationSubmission = Omit<GenerationRequest, "seed"> & { seed?: number };
 
 export type ShotDraft = Partial<Omit<StoryboardShot, "id" | "recordId">>;
-
-/** A shot prompt already translated by the UI (`prompt` is sent, `promptOriginal` is shown). */
-export interface PreparedPrompt {
-  prompt: string;
-  promptOriginal: string | null;
-}
 
 /** Shots `generateStoryboard` would submit: written, and without a finished or in-flight record. */
 export function pendingStoryboardShots(storyboard: Storyboard, records: readonly GenerationRecord[]): StoryboardShot[] {
@@ -104,7 +108,8 @@ export interface GenerationStoreState {
    * (`pendingStoryboardShots`). `prepared` holds translated prompts by shot
    * id; shots missing from it are sent as written. Returns the new record ids.
    */
-  generateStoryboard(prepared?: Readonly<Record<string, PreparedPrompt>>): string[];
+  /** Submits every pending shot as written; `autoPlan` lets a shot planner write each shot's English. */
+  generateStoryboard(autoPlan?: ShotPlannerEngine | null): string[];
 
   /** Writes pending changes now (e.g. before the window closes). */
   flushPersistence(): Promise<void>;
@@ -121,6 +126,11 @@ const DEFAULT_DEPS: GenerationStoreDeps = {
   randomSeed: randomSeed48,
   extractLastFrame: missingExtractLastFrame,
   composeReferenceSheet: composeReferenceSheetPng,
+  openAiPlanner: () => {
+    const bridge = getOpenAiTextBridge();
+    return bridge === null ? null : createOpenAiShotPlanner(bridge, encodeForVision);
+  },
+  translateFallback: async (text) => (await translatePrompt(text, { engine: "local" })).english,
 };
 
 function validateRequest(request: GenerationRequest): void {
@@ -208,6 +218,7 @@ export function createGenerationStore() {
         startedAt: null,
         finishedAt: null,
         comfyPromptId: null,
+        sentPrompt: null,
       };
       set((state) => ({ records: [record, ...state.records], activeRecordId: record.id }));
       schedulePersist();
@@ -259,6 +270,8 @@ export function createGenerationStore() {
           newId: deps.newId,
           extractLastFrame: (path) => deps.extractLastFrame(path),
           composeReferenceSheet: (sources, aspect) => deps.composeReferenceSheet(sources, aspect),
+          openAiPlanner: () => deps.openAiPlanner(),
+          translateFallback: (text) => deps.translateFallback(text),
           getRecord: (id) => get().records.find((r) => r.id === id),
           onRecordUpdate: patchRecord,
           onConnection: (connection, detail) => set({ connection, connectionDetail: detail }),
@@ -364,15 +377,14 @@ export function createGenerationStore() {
         setStoryboard((sb) => ({ ...sb, ...format }));
       },
 
-      generateStoryboard(prepared = {}) {
+      generateStoryboard(autoPlan = null) {
         const { storyboard, records } = get();
         const submitted: string[] = [];
         for (const shot of pendingStoryboardShots(storyboard, records)) {
-          const text = prepared[shot.id] ?? { prompt: shot.prompt, promptOriginal: null };
           const recordId = get().submit({
             mode: shot.image === null ? "t2v" : "i2v",
-            prompt: text.prompt,
-            promptOriginal: text.promptOriginal,
+            prompt: shot.prompt,
+            promptOriginal: null,
             aspect: storyboard.aspect,
             quality: storyboard.quality,
             durationSec: shot.durationSec,
@@ -381,6 +393,7 @@ export function createGenerationStore() {
             referenceImages: [],
             extendFromRecordId: null,
             enhancePrompt: false,
+            autoPlan,
           });
           setStoryboard((sb) => ({
             ...sb,

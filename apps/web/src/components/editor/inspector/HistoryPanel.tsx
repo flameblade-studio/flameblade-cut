@@ -22,6 +22,7 @@ import { ToolcraftTextInputControl } from "@openreel/ui";
 import { useProjectStore } from "../../../stores/project-store";
 import type { HistorySnapshot } from "@openreel/core";
 import { useTranslation } from "react-i18next";
+import { historyActionLabel } from "./history-labels";
 
 interface DisplayEntry {
   id: string;
@@ -59,7 +60,7 @@ export const HistoryPanel: React.FC = () => {
 
       const displayEntries: DisplayEntry[] = actionEntries.map((item, idx) => ({
         id: `action-${item.entry.action.id}-${idx}`,
-        description: item.entry.description,
+        description: historyActionLabel(t, item.entry.action, item.entry.description),
         timestamp: item.entry.timestamp,
         isCurrent: item.isCurrent,
         isClipEntry: false,
@@ -84,7 +85,7 @@ export const HistoryPanel: React.FC = () => {
     updateHistory();
     const unsubscribe = actionHistory.subscribe(updateHistory);
     return () => unsubscribe();
-  }, [actionHistory, clipUndoStack, clipRedoStack]);
+  }, [actionHistory, clipUndoStack, clipRedoStack, t]);
 
   const handleUndo = useCallback(async () => {
     if (canUndo()) {
@@ -142,7 +143,7 @@ export const HistoryPanel: React.FC = () => {
         </div>
         <div className="flex items-center gap-1">
           <IconButton
-            label={`Undo (${undoCount})`}
+            label={t("tools.history.undo", { count: undoCount })}
             icon={<Undo2 size={14} aria-hidden />}
             variant="ghost"
             size="sm"
@@ -150,7 +151,7 @@ export const HistoryPanel: React.FC = () => {
             isDisabled={!canUndo()}
           />
           <IconButton
-            label={`Redo (${redoCount})`}
+            label={t("tools.history.redo", { count: redoCount })}
             icon={<Redo2 size={14} aria-hidden />}
             variant="ghost"
             size="sm"

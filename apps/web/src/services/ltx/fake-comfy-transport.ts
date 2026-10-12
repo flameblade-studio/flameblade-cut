@@ -34,6 +34,12 @@ export class FakeComfyTransport implements ComfyTransport {
   historyFailures = 0;
   /** Diffusion model files ComfyUI reports as loadable. */
   unetNames: string[] = [LTX_TRANSFORMER_FILES.nvfp4];
+  /**
+   * Answers text-only jobs (shot planning): when a queued prompt has
+   * `PreviewAny` nodes and no `SaveVideo`, its history completes at once with these texts by
+   * node id. Null leaves such prompts pending like any other.
+   */
+  textJobReply: ((prompt: Record<string, { class_type: string; inputs: Record<string, unknown> }>) => Record<string, string>) | null = null;
   /** GPU name in `/system_stats`; null reports no devices. */
   gpuName: string | null = "cuda:0 NVIDIA GeForce RTX 5060 Ti : cudaMallocAsync";
   subscribeCount = 0;
@@ -45,7 +51,7 @@ export class FakeComfyTransport implements ComfyTransport {
     this.requests.push({ method, path, body: jsonBody });
     if (path === "/system_stats") return this.systemStats();
     if (!this.online) throw new Error("connect ECONNREFUSED 127.0.0.1:8188");
-    if (method === "POST" && path === "/prompt") return this.queuePrompt();
+    if (method === "POST" && path === "/prompt") return this.queuePrompt(jsonBody);
     if (method === "GET" && path === "/object_info/UNETLoader") {
       return json({ UNETLoader: { input: { required: { unet_name: [this.unetNames, {}] } } } });
     }
@@ -154,7 +160,7 @@ export class FakeComfyTransport implements ComfyTransport {
     return json({ system: { comfyui_version: "0.38.0" }, devices: this.gpuName === null ? [] : [{ name: this.gpuName }] });
   }
 
-  private queuePrompt(): ComfyHttpResponse {
+  private queuePrompt(body: unknown): ComfyHttpResponse {
     if (this.nextPromptResponse !== null) {
       const response = this.nextPromptResponse;
       this.nextPromptResponse = null;
@@ -162,6 +168,17 @@ export class FakeComfyTransport implements ComfyTransport {
     }
     this.promptCounter += 1;
     const promptId = `prompt-${this.promptCounter}`;
+    const prompt = (body as { prompt?: Record<string, { class_type: string; inputs: Record<string, unknown> }> } | undefined)?.prompt ?? {};
+    const nodes = Object.values(prompt);
+    const isTextJob = nodes.some((node) => node.class_type === "PreviewAny") && !nodes.some((node) => node.class_type === "SaveVideo");
+    if (isTextJob && this.textJobReply !== null) {
+      const texts = this.textJobReply(prompt);
+      this.history.set(promptId, {
+        status: { status_str: "success", completed: true, messages: [] },
+        outputs: Object.fromEntries(Object.entries(texts).map(([nodeId, text]) => [nodeId, { text: [text] }])),
+      });
+      return json({ prompt_id: promptId, number: this.promptCounter - 1, node_errors: {} });
+    }
     this.pending.push(promptId);
     return json({ prompt_id: promptId, number: this.promptCounter - 1, node_errors: {} });
   }

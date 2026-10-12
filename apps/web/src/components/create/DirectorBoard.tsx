@@ -1,5 +1,4 @@
 import type { JSX } from "react";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ArrowDown,
@@ -22,9 +21,9 @@ import {
   type StoryboardShot,
 } from "../../services/ltx/types";
 import { estimateSeconds } from "../../services/ltx/workflow-binder";
-import { pendingStoryboardShots, useGenerationStore, type PreparedPrompt } from "../../stores/generation-store";
+import { useGenerationStore } from "../../stores/generation-store";
 import { useCreateDraft } from "./draft-store";
-import { DownloadProgress, TranslationSettings, translateOrToast, useEffectiveEngine } from "./PromptTranslation";
+import { TranslationSettings, useEffectiveEngine } from "./PromptTranslation";
 import { pickImage, readLocalBytes } from "./desktop-files";
 import { formatEstimate } from "./format";
 import { ImageSlot } from "./ImageSlot";
@@ -177,30 +176,10 @@ export function DirectorSidebar({ onSendAll }: { onSendAll: (records: Generation
   const allDone = shots.length > 0 && finished.length === shots.length;
   const autoTranslate = useCreateDraft((state) => state.autoTranslate);
   const engine = useEffectiveEngine();
-  const [translating, setTranslating] = useState(false);
 
-  /** Translates every pending shot first; one failure sends nothing. */
-  const generateAll = async (): Promise<void> => {
-    if (!autoTranslate) {
-      generateStoryboard();
-      return;
-    }
-    setTranslating(true);
-    try {
-      const { storyboard: current, records: latest } = useGenerationStore.getState();
-      const prepared: Record<string, PreparedPrompt> = {};
-      for (const shot of pendingStoryboardShots(current, latest)) {
-        const translation = await translateOrToast(shot.prompt, engine, t);
-        if (!translation) return;
-        prepared[shot.id] = {
-          prompt: translation.english,
-          promptOriginal: translation.engine === null ? null : translation.original,
-        };
-      }
-      generateStoryboard(prepared);
-    } finally {
-      setTranslating(false);
-    }
+  /** Each shot goes as written; the shot planner (in its generation job) writes the English. */
+  const generateAll = (): void => {
+    generateStoryboard(autoTranslate ? engine : null);
   };
 
   return (
@@ -233,7 +212,7 @@ export function DirectorSidebar({ onSendAll }: { onSendAll: (records: Generation
         </section>
         <section className="flex flex-col gap-2">
           <h3 className="fc-label">{t("create.form.prompt")}</h3>
-          <TranslationSettings hasChinese={null} />
+          <TranslationSettings director />
         </section>
         <section className="rounded-[12px] border border-border bg-bg/60 px-4 py-3 text-[12.5px] text-fg-2">
           {t("create.director.total", { count: shots.length, seconds: totalSeconds })}
@@ -247,11 +226,8 @@ export function DirectorSidebar({ onSendAll }: { onSendAll: (records: Generation
       </div>
       <footer className="flex flex-col gap-2.5 border-t border-border px-5 pb-5 pt-3">
         {writable.length > 0 ? <div className="text-[11.5px] font-semibold text-fg-2">{formatEstimate(estimate, t)}</div> : null}
-        <DownloadProgress active={translating && engine === "local"} />
-        <button type="button" className="fc-generate" disabled={writable.length === 0 || translating} onClick={() => void generateAll()}>
-          {translating
-            ? t("create.translate.translating")
-            : finished.length > 0 && writable.length > 0
+        <button type="button" className="fc-generate" disabled={writable.length === 0} onClick={generateAll}>
+          {finished.length > 0 && writable.length > 0
             ? t("create.director.generateRemaining", { count: writable.length })
             : t("create.director.generateAll")}
         </button>

@@ -13,7 +13,6 @@ import {
   type GenerationRequest,
   type ImageInput,
 } from "../../services/ltx/types";
-import { containsChinese } from "../../services/prompt-translation/segments";
 import type { TranslationEngine } from "../../services/prompt-translation/types";
 
 export type CreateTab = GenerationMode | "director";
@@ -35,12 +34,6 @@ export interface CreateDraft {
   /** Translate prompts that contain Chinese to English before sending (form and director). */
   autoTranslate: boolean;
   translationEngine: TranslationEngine;
-  /** English shown under the prompt box (from "preview" or typed by the user). */
-  englishPreview: string | null;
-  /** The trimmed prompt `englishPreview` belongs to; a different prompt makes it stale. */
-  englishPreviewSource: string | null;
-  /** The user edited `englishPreview` by hand. */
-  englishEdited: boolean;
 }
 
 interface DraftState extends CreateDraft {
@@ -62,9 +55,6 @@ export const useCreateDraft = create<DraftState>()((set) => ({
   fixedSeed: null,
   autoTranslate: true,
   translationEngine: "local",
-  englishPreview: null,
-  englishPreviewSource: null,
-  englishEdited: false,
   patch: (patch) => {
     set(patch);
   },
@@ -108,30 +98,13 @@ export function draftToRequest(draft: CreateDraft, mode: GenerationMode): Genera
     extendFromRecordId: mode === "extend" ? draft.extendFromRecordId : null,
     // The Ingredients (ref2v) workflow has no prompt enhancer.
     enhancePrompt: mode === "ref2v" ? false : draft.enhancePrompt,
+    autoPlan: draft.autoTranslate ? draft.translationEngine : null,
   };
 }
 
-/**
- * What to do with the prompt on Generate:
- * - `none`: send as written (translation off, or no Chinese);
- * - `use`: send the preview English (edited or not) made for this exact prompt;
- * - `translate`: translate first (no preview, or the prompt changed since).
- */
-export type TranslationPlan = { kind: "none" } | { kind: "use"; english: string } | { kind: "translate" };
-
-export function translationPlan(
-  draft: Pick<CreateDraft, "prompt" | "autoTranslate" | "englishPreview" | "englishPreviewSource">,
-): TranslationPlan {
-  const prompt = draft.prompt.trim();
-  if (!draft.autoTranslate || !containsChinese(prompt)) return { kind: "none" };
-  const english = draft.englishPreview?.trim() ?? "";
-  if (english !== "" && draft.englishPreviewSource === prompt) return { kind: "use", english };
-  return { kind: "translate" };
-}
-
-/** Puts a prompt back into the form (e.g. "use this prompt"), dropping any stale English preview. */
+/** Puts a prompt back into the form (e.g. "use this prompt"). */
 export function promptPatch(prompt: string): Partial<CreateDraft> {
-  return { prompt, englishPreview: null, englishPreviewSource: null, englishEdited: false };
+  return { prompt };
 }
 
 /** Picks the generation aspect closest to an image's width/height ratio. */

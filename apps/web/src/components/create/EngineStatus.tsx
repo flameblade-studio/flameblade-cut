@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FolderOpen, Settings2, X } from "@/icons/lucide-compat";
 import { LTX_MODEL_CHOICES, LTX_TRANSFORMER_FILES, type LtxModelChoice } from "../../services/ltx/model-choice";
@@ -23,6 +23,14 @@ function SettingsDialog({ onClose }: { onClose: () => void }): JSX.Element {
   const settings = useGenerationStore((state) => state.settings);
   const updateSettings = useGenerationStore((state) => state.updateSettings);
   const [draft, setDraft] = useState<LtxSettings>(settings);
+  // Esc closes without saving, like every other dialog in the app.
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-black/55 backdrop-blur-sm" role="dialog" aria-modal="true" aria-label={t("create.settings.title")}>
       <div className="fc-panel w-[520px] max-w-[92vw] p-6">

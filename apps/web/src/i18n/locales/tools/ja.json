@@ -39,7 +39,9 @@
     "find": "ハイライトを探す",
     "preview": "ハイライトをプレビュー",
     "apply_one": "{{count}} 件のハイライトを適用",
-    "apply_other": "{{count}} 件のハイライトを適用"
+    "apply_other": "{{count}} 件のハイライトを適用",
+    "clipsLabel": "クリップ数",
+    "maxLabel": "最大"
   },
   "aspectMatch": {
     "title": "動画のサイズに合わせますか？",
@@ -877,5 +879,122 @@
   "otherServices": {
     "title": "その他の AI サービス",
     "description": "ElevenLabs やカスタム API など、その他のサービスのキーはマスターパスワードで暗号化して保存します。"
+  },
+  "history": {
+    "actions": {
+      "clip_add": "クリップを追加",
+      "clip_remove": "クリップを削除",
+      "clip_move": "クリップを移動",
+      "clip_trim": "クリップをトリム",
+      "clip_split": "クリップを分割",
+      "clip_rippleDelete": "リップル削除",
+      "clip_duplicate": "クリップを複製",
+      "clip_setBlendMode": "描画モードを変更",
+      "clip_setBlendOpacity": "描画の不透明度を調整",
+      "clip_setEmphasisAnimation": "強調アニメーションを設定",
+      "clip_setColorGrading": "カラーグレーディング",
+      "track_add": "{{trackType}}トラックを追加",
+      "track_duplicate": "トラックを複製",
+      "track_remove": "トラックを削除",
+      "track_rename": "トラック名を変更",
+      "effect_add": "エフェクトを追加",
+      "effect_remove": "エフェクトを削除",
+      "effect_update": "エフェクトを更新",
+      "effect_toggle": "エフェクトを切り替え",
+      "effect_setStack": "エフェクト構成を置き換え",
+      "transform_update": "クリップを変形",
+      "keyframe_add": "キーフレームを追加",
+      "keyframe_remove": "キーフレームを削除",
+      "keyframe_setAll": "クリップのキーフレームを置き換え",
+      "transition_add": "トランジションを追加",
+      "transition_set": "トランジションを追加",
+      "transition_update": "トランジションを更新",
+      "transition_remove": "トランジションを削除",
+      "audio_setVolume": "音量を調整",
+      "audio_setFade": "フェードを調整",
+      "audio_addEffect": "オーディオエフェクトを追加",
+      "audio_removeEffect": "オーディオエフェクトを削除",
+      "audio_updateEffect": "オーディオエフェクトを更新",
+      "audio_toggleEffect": "オーディオエフェクトを切り替え",
+      "subtitle_add": "字幕を追加",
+      "subtitle_remove": "字幕を削除",
+      "marker_add": "マーカーを追加",
+      "marker_remove": "マーカーを削除",
+      "marker_update": "マーカーを更新",
+      "project_rename": "プロジェクト名を変更",
+      "project_updateSettings": "設定を更新",
+      "project_setCanvasBackground": "キャンバスの背景を変更",
+      "project_registerGeneratedShader": "生成シェーダーを追加",
+      "project_removeGeneratedShader": "生成シェーダーを削除",
+      "media_import": "メディアを読み込み",
+      "media_delete": "メディアを削除",
+      "clip_closeGapBefore": "隙間を詰める",
+      "track_consolidate": "隙間を削除",
+      "track_restorePositions": "位置を戻す"
+    },
+    "trackTypes": {
+      "video": "動画",
+      "audio": "オーディオ",
+      "image": "画像",
+      "text": "テキスト",
+      "graphics": "グラフィック"
+    },
+    "undo": "元に戻す（{{count}}）",
+    "redo": "やり直し（{{count}}）"
+  },
+  "serviceMessages": {
+    "processing": {
+      "waiting": "開始待ち…",
+      "complete": "完了",
+      "failed": "失敗"
+    },
+    "autoReframe": {
+      "engineUnavailable": "自動リフレームエンジンを利用できません",
+      "stages": {
+        "initializing": "自動リフレームエンジンを初期化中…",
+        "ready": "自動リフレームエンジンの準備ができました",
+        "analyzing": "動画フレームを解析中…",
+        "analyzingFrame": "フレーム {{frame}}/{{frameCount}} を解析中",
+        "analysisComplete": "解析が完了しました"
+      }
+    },
+    "highlights": {
+      "title": "ハイライト {{number}}",
+      "stages": {
+        "analyze": "音声のエネルギーを解析中…",
+        "rank": "盛り上がる場面をローカルで順位付け中…",
+        "done": "ローカルのハイライトの準備ができました"
+      },
+      "reasons": {
+        "energySpeech": "音声のエネルギーと発話が活発（ローカル判定）",
+        "energy": "音声のエネルギーが強い（ローカル判定）"
+      }
+    },
+    "tts": {
+      "errors": {
+        "emptyText": "テキストを入力してください",
+        "sessionLocked": "セッションがロックされています。先に「設定 > API キー」でロックを解除してください。",
+        "missingKey": "ElevenLabs の API キーが見つかりません。「設定 > API キー」で追加してください。",
+        "invalidKey": "ElevenLabs が API キーを受け付けなかったか、キーが保存されていません。「設定 > API キー」で確認してください。",
+        "quota": "ElevenLabs の文字数クォータを使い切りました。ElevenLabs のプランを確認してください。",
+        "rateLimited": "ElevenLabs へのリクエストが多すぎます。しばらく待ってから再試行してください。",
+        "network": "ElevenLabs に接続できません。インターネット接続を確認してください。",
+        "service": "ElevenLabs でエラーが発生しました（{{status}}）",
+        "serviceDetail": "ElevenLabs でエラーが発生しました（{{status}}）：{{detail}}",
+        "llmNotConfigured": "テキスト補正を使う前に、AI エンドポイントとモデルを設定してください。",
+        "llmSessionLocked": "セッションがロックされています。テキスト補正を使うには「設定 > API キー」でロックを解除してください。",
+        "llmNetwork": "AI エンドポイントに接続できません。アドレスと接続を確認してください。",
+        "llmService": "{{provider}} でエラーが発生しました（{{status}}）",
+        "llmServiceDetail": "{{provider}} でエラーが発生しました（{{status}}）：{{detail}}",
+        "enhanceFailed": "テキストの補正に失敗しました",
+        "generateFailed": "音声の生成に失敗しました",
+        "saveFailed": "メディアへの保存に失敗しました",
+        "timelineFailed": "タイムラインへの追加に失敗しました",
+        "importFailed": "音声の読み込みに失敗しました"
+      },
+      "success": {
+        "savedToMedia": "メディア素材に保存しました"
+      }
+    }
   }
 }

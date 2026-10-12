@@ -38,7 +38,7 @@
       "i2v": "Describe how the image comes alive: who does what, how the camera moves, what you hear…",
       "flf2v": "Describe what happens between the first and the last image…",
       "extend": "Describe how the story continues…",
-      "ref2v": "First describe who or what each reference shows, then what happens: Reference sheet: … Generated video: …"
+      "ref2v": "Describe one continuous shot, e.g. Lin Keyun stands by Kaohsiung harbour at dusk, the sea breeze lifting her long hair; she turns to the camera and smiles: \"Leaving on time today!\""
     },
     "promptTip": "English prompts work best; Chinese also works",
     "firstFrame": "First frame",
@@ -78,13 +78,16 @@
       "ref2v": "References"
     },
     "references": "Reference images (characters, props, scenes)",
-    "referencesTip": "Use 1–12 images; they are arranged into one black reference sheet for the AI. Fewer, tightly cropped images (e.g. just the character) reconstruct best — crop empty space around full-body shots.",
+    "referencesTip": "Design sheets, posters and screenshots are all fine; with AI tidy-up on, AI works out who and what each image shows. A one-line note (who it is) makes it even more precise.",
     "add": "Add",
     "addReferences": "Add reference images",
     "removeReference": "Remove reference image {{index}}",
     "needReferences": "Add at least one reference image",
     "tooManyReferences": "Up to 12 reference images",
-    "referenceCount": "{{count}} references"
+    "referenceCount": "{{count}} references",
+    "referenceDescribe": "Who or what is this? (optional) e.g. Lin Keyun's design sheet",
+    "referenceDescribeLabel": "Description of reference image {{index}}",
+    "ref2vPromptTip": "Write the way you like, even a whole screenplay; AI condenses it into one continuous shot. 5–10 seconds works best."
   },
   "feed": {
     "title": "History",
@@ -193,25 +196,17 @@
     "minutesSeconds": "{{minutes}} min {{seconds}} s"
   },
   "translate": {
-    "toggle": "Translate to English before sending (recommended)",
-    "toggleHint": "LTX draws objects, colours and counts more accurately from English; your original text stays in the history",
-    "noChinese": "No Chinese in the prompt; it is sent as written",
-    "engine": "Translation engine",
-    "engineLocal": "Local · free",
-    "engineOpenai": "OpenAI",
+    "toggle": "Let AI tidy it into English the model understands (recommended)",
+    "toggleHint": "Write the way you like: any language, a whole screenplay, posters and design sheets as references. AI translates, condenses it into one shot and describes each reference; your own text stays in the history.",
+    "directorHint": "AI tidies each shot into English on its own",
+    "engine": "Tidy with",
+    "engineLocal": "Local Gemma · free",
+    "engineOpenai": "OpenAI · smarter",
+    "localNote": "LTX's bundled Gemma helper works on this computer, nothing is uploaded; adds about 30 seconds.",
+    "openaiNote": "Your prompt and reference images are sent to OpenAI; it also crops text and clutter off the references. Best results.",
     "openaiNoKey": "No OpenAI key yet; add one in Settings → API Keys",
-    "localNote": "The first use downloads the translation model ({{size}}); after that it works offline",
-    "preview": "English prompt",
-    "previewButton": "Preview translation",
-    "previewEmpty": "Press “Preview translation” to see the English that will be sent; you can edit it and your version is sent as is",
-    "edited": "Edited by you; this English is sent as is",
-    "stale": "The Chinese changed; it will be translated again when you generate",
-    "translating": "Translating…",
-    "downloading": "Downloading translation model {{loaded}} / {{total}} MB",
-    "failed": "Translation failed, nothing was sent: {{message}}",
-    "sentChip": "EN",
-    "sentTitle": "English actually sent: {{prompt}} (click to copy)",
-    "directorHint": "Each shot is translated with this setting"
+    "sentChip": "English",
+    "sentTitle": "English actually sent: {{prompt}} (click to copy)"
   },
   "errors": {
     "model": {

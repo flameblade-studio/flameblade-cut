@@ -78,7 +78,25 @@ export const GENERATION_QUALITIES: readonly GenerationQuality[] = ["480p", "720p
 export interface ImageInput {
   path: string;
   name: string;
+  /**
+   * ref2v only: what this reference shows ("Character: ..."), as sent to the
+   * model (English when translated). Written into the Ingredients prompt.
+   */
+  description?: string;
+  /** ref2v only: the useful part of the image (set by the shot planner); the sheet uses just that. */
+  crop?: NormalizedRect;
 }
+
+/** A box in 0..1 image coordinates (x, y = top-left corner). */
+export interface NormalizedRect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+/** Who turns the user's words and references into what the video model understands. */
+export type ShotPlannerEngine = "openai" | "local";
 
 /** Reference images per `ref2v` request (one reference sheet holds at most 12 panels). */
 export const MIN_REFERENCE_IMAGES = 1;
@@ -109,6 +127,12 @@ export interface GenerationRequest {
   extendFromRecordId: string | null;
   /** LTX prompt enhancer (slower, needs the small Gemma helper model). */
   enhancePrompt: boolean;
+  /**
+   * Shot planning before generation (see `shot-plan/`): `prompt` is then the
+   * user's own words and the planner writes the English the model receives.
+   * Null: `prompt` is sent as it is.
+   */
+  autoPlan: ShotPlannerEngine | null;
 }
 
 export type GenerationStatus =
@@ -135,6 +159,8 @@ export interface GenerationRecord {
   startedAt: string | null;
   finishedAt: string | null;
   comfyPromptId: string | null;
+  /** The English prompt the video model actually received, when shot planning wrote it. */
+  sentPrompt: string | null;
 }
 
 export interface StoryboardShot {

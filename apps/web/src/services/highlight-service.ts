@@ -3,13 +3,29 @@ import {
   type TranscriptWord,
 } from "@openreel/core";
 
+/** Why a local highlight was picked; UIs translate this code. */
+export type HighlightReasonCode = "energy-speech" | "energy";
+
 export interface HighlightResult {
   start: number;
   end: number;
   score: number;
+  /** English title ("Highlight 2"); `number` is its translatable form. */
   title: string;
+  /** 1-based pick order used in `title`. */
+  number: number;
+  /** English reason; `reasonCode` is its translatable form. */
   reason: string;
+  reasonCode: HighlightReasonCode;
 }
+
+/** Stable progress stage ids reported through `onProgress`. */
+export type HighlightStage = "analyze" | "rank" | "done";
+
+const REASON_TEXT: Record<HighlightReasonCode, string> = {
+  "energy-speech": "Strong local audio energy and speech activity",
+  energy: "Strong local audio energy",
+};
 
 export interface HighlightPreferences {
   targetClipCount: number;
@@ -25,7 +41,7 @@ const DEFAULT_PREFERENCES: HighlightPreferences = {
   contentType: "video",
 };
 
-type ProgressCallback = (phase: string, progress: number, message: string) => void;
+type ProgressCallback = (phase: HighlightStage, progress: number, message: string) => void;
 
 export async function extractHighlights(
   audioBuffer: AudioBuffer,
@@ -77,12 +93,14 @@ export async function extractHighlights(
       (item) => candidate.start < item.end && candidate.end > item.start,
     );
     if (overlaps) continue;
+    const number = selected.length + 1;
+    const reasonCode: HighlightReasonCode = transcript.length > 0 ? "energy-speech" : "energy";
     selected.push({
       ...candidate,
-      title: `Highlight ${selected.length + 1}`,
-      reason: transcript.length > 0
-        ? "Strong local audio energy and speech activity"
-        : "Strong local audio energy",
+      title: `Highlight ${number}`,
+      number,
+      reason: REASON_TEXT[reasonCode],
+      reasonCode,
     });
     if (selected.length >= prefs.targetClipCount) break;
   }

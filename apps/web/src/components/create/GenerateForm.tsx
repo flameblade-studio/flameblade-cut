@@ -20,11 +20,10 @@ import { estimateSeconds } from "../../services/ltx/workflow-binder";
 import { useGenerationStore } from "../../stores/generation-store";
 import { toast } from "../../stores/notification-store";
 import { imageSize, pickImage } from "./desktop-files";
-import { containsChinese } from "../../services/prompt-translation/segments";
-import { draftProblem, draftToRequest, nearestAspect, translationPlan, useCreateDraft } from "./draft-store";
+import { draftProblem, draftToRequest, nearestAspect, useCreateDraft } from "./draft-store";
 import { formatEstimate } from "./format";
 import { ImageSlot } from "./ImageSlot";
-import { DownloadProgress, EnglishPreview, TranslationSettings, translateOrToast, useEffectiveEngine } from "./PromptTranslation";
+import { TranslationSettings, useEffectiveEngine } from "./PromptTranslation";
 import { ReferenceImages } from "./ReferenceImages";
 
 const ASPECT_ICON: Record<GenerationAspect, typeof Square> = {
@@ -250,32 +249,15 @@ export function GenerateForm({ mode }: { mode: GenerationMode }): JSX.Element {
   const request = draftToRequest(draft, mode);
   const estimate = estimateSeconds(request, { warm: connection === "ready" });
   const engine = useEffectiveEngine();
-  const [translating, setTranslating] = useState(false);
 
-  const onGenerate = async (): Promise<void> => {
+  const onGenerate = (): void => {
     if (problem) {
       toast.warning(t(`create.form.${problem}`));
       return;
     }
-    const plan = translationPlan(draft);
-    if (plan.kind === "none") {
-      submit(request);
-      return;
-    }
-    if (plan.kind === "use") {
-      submit({ ...request, prompt: plan.english, promptOriginal: request.prompt });
-      return;
-    }
-    setTranslating(true);
-    try {
-      // Failure shows a toast and sends nothing: never submit silently untranslated.
-      const translation = await translateOrToast(request.prompt, engine, t);
-      if (!translation) return;
-      draft.patch({ englishPreview: translation.english, englishPreviewSource: translation.original, englishEdited: false });
-      submit({ ...request, prompt: translation.english, promptOriginal: translation.engine === null ? null : translation.original });
-    } finally {
-      setTranslating(false);
-    }
+    // The prompt and reference notes go as written; the shot planner (in the
+    // generation job) turns them into what the model understands.
+    submit({ ...request, autoPlan: draft.autoTranslate ? engine : null });
   };
 
   return (
@@ -296,11 +278,10 @@ export function GenerateForm({ mode }: { mode: GenerationMode }): JSX.Element {
             onChange={(event) => draft.patch({ prompt: event.target.value })}
           />
           <div className="flex items-center justify-between text-[11px] text-fg-muted">
-            <span>{t("create.form.promptTip")}</span>
+            <span>{t(mode === "ref2v" ? "create.form.ref2vPromptTip" : "create.form.promptTip")}</span>
             <span>{draft.prompt.length}/4000</span>
           </div>
-          <TranslationSettings hasChinese={containsChinese(draft.prompt)} />
-          <EnglishPreview translating={translating} onTranslating={setTranslating} />
+          <TranslationSettings director={false} />
         </Field>
         {/* ref2v output size follows the reference sheet (960x544 class), so quality does not apply. */}
         <FormatFields showAspect={mode === "t2v" || mode === "ref2v"} showQuality={mode !== "ref2v"} />
@@ -314,15 +295,14 @@ export function GenerateForm({ mode }: { mode: GenerationMode }): JSX.Element {
           </span>
           <span className="text-fg-muted">{t("create.form.free")}</span>
         </div>
-        <DownloadProgress active={translating && engine === "local"} />
         <button
           type="button"
           className="fc-generate"
-          onClick={() => void onGenerate()}
-          disabled={problem !== null || translating}
+          onClick={onGenerate}
+          disabled={problem !== null}
           title={problem ? t(`create.form.${problem}`) : undefined}
         >
-          {translating ? t("create.translate.translating") : busy ? t("create.form.queueMore") : t("create.form.generate")}
+          {busy ? t("create.form.queueMore") : t("create.form.generate")}
         </button>
       </footer>
     </div>

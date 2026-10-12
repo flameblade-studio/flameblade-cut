@@ -9,6 +9,7 @@ import {
   PROCESSING_TYPE_LABELS,
   type ProcessingTask,
 } from "../../services/processing-manager";
+import { translateServiceMessage } from "../../services/service-message";
 
 const TaskItem: React.FC<{ task: ProcessingTask }> = ({ task }) => {
   const { t } = useTranslation();
@@ -67,13 +68,13 @@ const TaskItem: React.FC<{ task: ProcessingTask }> = ({ task }) => {
               maxLines={1}
               className="mt-0.5 text-[9px]"
             >
-              {task.message}
+              {translateServiceMessage(t, task.localizedMessage ?? task.message)}
             </Text>
           </div>
         )}
         {task.status === "failed" && task.error && (
           <Text type="supporting" display="block" maxLines={1} className="mt-0.5 text-[9px] text-red-400">
-            {task.error}
+            {translateServiceMessage(t, task.localizedError ?? task.error)}
           </Text>
         )}
       </div>

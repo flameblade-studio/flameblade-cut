@@ -2,7 +2,7 @@
   "name": "@openreel/desktop",
   "private": true,
   "productName": "Flameblade Cut",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "commonjs",
   "main": "dist/main/index.js",
   "bin": {

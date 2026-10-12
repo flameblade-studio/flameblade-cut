@@ -2,6 +2,13 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { useProjectStore } from "../../../../stores/project-store";
 import { useTtsAudioStore } from "../../../../stores/tts-store";
 import type { ElevenLabsVoice } from "../tts-types";
+import {
+  toTtsError,
+  ttsError,
+  TtsRequestError,
+  type TtsError,
+  type TtsSuccessCode,
+} from "./tts-errors";
 
 interface UseTtsActionsOptions {
   selectedVoice: string;
@@ -13,7 +20,7 @@ interface UseTtsActionsOptions {
   generateWithElevenLabs: (text: string, voiceId: string, signal?: AbortSignal) => Promise<Blob>;
   enhanceViaLlm: (text: string, signal?: AbortSignal) => Promise<string>;
   setText: (text: string) => void;
-  setError: (error: string | null) => void;
+  setError: (error: TtsError | null) => void;
   setEnhancedPreview: (preview: string | null) => void;
 }
 
@@ -23,7 +30,7 @@ interface UseTtsActionsReturn {
   isEnhancing: boolean;
   generatedAudio: Blob | null;
   hasUnsavedAudio: boolean;
-  successMsg: string | null;
+  successMsg: TtsSuccessCode | null;
   audioRef: React.RefObject<HTMLAudioElement | null>;
   getSelectedVoiceName: () => string;
   handleEnhance: () => Promise<void>;
@@ -65,7 +72,7 @@ export function useTtsActions(options: UseTtsActionsOptions): UseTtsActionsRetur
   const [isGenerating, setIsGenerating] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isEnhancing, setIsEnhancing] = useState(false);
-  const [successMsg, setSuccessMsg] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState<TtsSuccessCode | null>(null);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const generateAbortRef = useRef<AbortController | null>(null);
@@ -121,7 +128,7 @@ export function useTtsActions(options: UseTtsActionsOptions): UseTtsActionsRetur
 
   const handleEnhance = useCallback(async () => {
     if (!text.trim()) {
-      setError("Please enter some text");
+      setError(ttsError("empty-text"));
       return;
     }
 
@@ -137,7 +144,7 @@ export function useTtsActions(options: UseTtsActionsOptions): UseTtsActionsRetur
       setEnhancedPreview(result);
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") return;
-      setError(err instanceof Error ? err.message : "Failed to enhance text");
+      setError(toTtsError(err, "enhance-failed"));
     } finally {
       setIsEnhancing(false);
     }
@@ -145,7 +152,7 @@ export function useTtsActions(options: UseTtsActionsOptions): UseTtsActionsRetur
 
   const generateSpeech = useCallback(async () => {
     if (!text.trim() && !enhancedPreview) {
-      setError("Please enter some text");
+      setError(ttsError("empty-text"));
       return;
     }
 
@@ -169,7 +176,7 @@ export function useTtsActions(options: UseTtsActionsOptions): UseTtsActionsRetur
       }
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") return;
-      setError(err instanceof Error ? err.message : "Failed to generate speech");
+      setError(toTtsError(err, "generate-failed"));
     } finally {
       setIsGenerating(false);
     }
@@ -202,11 +209,11 @@ export function useTtsActions(options: UseTtsActionsOptions): UseTtsActionsRetur
     const importResult = await importMedia(file);
 
     if (!importResult.success || !importResult.actionId) {
-      const errorMsg =
-        typeof importResult.error === "string"
-          ? importResult.error
-          : "Failed to import audio";
-      throw new Error(errorMsg);
+      // The project store's own error text is shown as-is (uncoded).
+      if (typeof importResult.error === "string" && importResult.error !== "") {
+        throw new Error(importResult.error);
+      }
+      throw new TtsRequestError("import-failed");
     }
 
     return importResult.actionId;
@@ -223,10 +230,10 @@ export function useTtsActions(options: UseTtsActionsOptions): UseTtsActionsRetur
       await importToMediaAssets();
       storeClearAudio();
       setText("");
-      setSuccessMsg("Saved to Media Assets");
+      setSuccessMsg("saved-to-media");
       setTimeout(() => setSuccessMsg(null), 3000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to save to media");
+      setError(toTtsError(err, "save-failed"));
     } finally {
       setIsGenerating(false);
     }
@@ -247,7 +254,7 @@ export function useTtsActions(options: UseTtsActionsOptions): UseTtsActionsRetur
       storeClearAudio();
       setText("");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to add to timeline");
+      setError(toTtsError(err, "timeline-failed"));
     } finally {
       setIsGenerating(false);
     }

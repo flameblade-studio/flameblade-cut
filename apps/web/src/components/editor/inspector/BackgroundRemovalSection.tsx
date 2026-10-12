@@ -21,6 +21,7 @@ import {
 } from "@openreel/core";
 import { toast } from "../../../stores/notification-store";
 import { useProcessingStore } from "../../../services/processing-manager";
+import { serviceMessage } from "../../../services/service-message";
 import { ColorSelector } from "../../../motion/components/primitives";
 import { useTranslation } from "react-i18next";
 
@@ -106,19 +107,19 @@ export const BackgroundRemovalSection: React.FC<
     setIsProcessing(true);
 
     try {
-      updateTaskProgress(taskId, 10, t("inspector.bgRemoval.initModel"));
+      updateTaskProgress(taskId, 10, serviceMessage("inspector.bgRemoval.initModel", "Initializing AI model..."));
 
       if (!isInitialized) {
         await handleInitialize();
       }
 
-      updateTaskProgress(taskId, 30, t("inspector.bgRemoval.preparing"));
+      updateTaskProgress(taskId, 30, serviceMessage("inspector.bgRemoval.preparing", "Preparing background detection..."));
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      updateTaskProgress(taskId, 60, t("inspector.bgRemoval.configuring"));
+      updateTaskProgress(taskId, 60, serviceMessage("inspector.bgRemoval.configuring", "Configuring effect pipeline..."));
       await new Promise((resolve) => setTimeout(resolve, 400));
 
-      updateTaskProgress(taskId, 90, t("inspector.bgRemoval.finalizing"));
+      updateTaskProgress(taskId, 90, serviceMessage("inspector.bgRemoval.finalizing", "Finalizing setup..."));
       await new Promise((resolve) => setTimeout(resolve, 300));
 
       updateSettings({ enabled: true });
@@ -130,7 +131,9 @@ export const BackgroundRemovalSection: React.FC<
     } catch (error) {
       failTask(
         taskId,
-        error instanceof Error ? error.message : t("inspector.bgRemoval.unknownError"),
+        error instanceof Error
+          ? error.message
+          : serviceMessage("inspector.bgRemoval.unknownError", "Unknown error"),
       );
       toast.error(t("inspector.bgRemoval.failed"), t("inspector.bgRemoval.failedHint"));
     } finally {

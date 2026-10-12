@@ -16,6 +16,8 @@ import { MockToggle } from "./shell/InspectorControls";
 import { useSettingsStore } from "../../../stores/settings-store";
 import { useElevenLabsApi } from "./hooks/useElevenLabsApi";
 import { useTtsActions } from "./hooks/useTtsActions";
+import { offersSettings, ttsSuccessMessage, type TtsError } from "./hooks/tts-errors";
+import { translateServiceMessage } from "../../../services/service-message";
 import { VoiceBrowser } from "./VoiceBrowser";
 import { ModelSelector } from "./ModelSelector";
 import { EnhancedTextPreview } from "./EnhancedTextPreview";
@@ -41,7 +43,7 @@ export const TextToSpeechPanel: React.FC = () => {
   const [selectedVoice, setSelectedVoice] = useState<string>(
     favoriteVoices.length > 0 ? favoriteVoices[0].voiceId : "",
   );
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<TtsError | null>(null);
   const [enhanceText, setEnhanceText] = useState(false);
   const [enhancedPreview, setEnhancedPreview] = useState<string | null>(null);
 
@@ -203,9 +205,9 @@ export const TextToSpeechPanel: React.FC = () => {
           className="flex items-center justify-between gap-2 border border-red-500/30"
         >
           <Text type="supporting" className="text-[10px] text-red-400">
-            {error}
+            {translateServiceMessage(t, error.message)}
           </Text>
-          {(error.includes("API key") || error.includes("Session locked") || error.includes("Unlock")) && (
+          {offersSettings(error) && (
             <Button
               label={t("advanced.tts.openSettings")}
               variant="secondary"
@@ -220,7 +222,7 @@ export const TextToSpeechPanel: React.FC = () => {
       {successMsg && (
         <Card variant="green" padding={2} className="border border-green-500/30">
           <Text type="supporting" className="text-[10px] text-green-400">
-            {successMsg}
+            {translateServiceMessage(t, ttsSuccessMessage(successMsg))}
           </Text>
         </Card>
       )}

@@ -25,6 +25,7 @@ function submission(overrides: Partial<GenerationSubmission> = {}): GenerationSu
     referenceImages: [],
     extendFromRecordId: null,
     enhancePrompt: false,
+    autoPlan: null,
     ...overrides,
   };
 }
@@ -38,7 +39,7 @@ async function setup(transport = new FakeComfyTransport()) {
     newId: () => `id-${++id}`,
     randomSeed: () => ++seed,
     extractLastFrame: async () => new Uint8Array([1]),
-    composeReferenceSheet: async () => new Uint8Array([2]),
+    composeReferenceSheet: async (sources) => ({ png: new Uint8Array([2]), positions: sources.map(() => "Full Sheet") }),
   });
   await flush();
   return { store, transport };
@@ -275,16 +276,16 @@ describe("prompt translation", () => {
     expect(record?.request.promptOriginal).toBe("一輛紅色機車");
   });
 
-  it("uses prepared (translated) prompts per storyboard shot and leaves others as written", async () => {
+  it("sends every storyboard shot as written with the chosen shot planner", async () => {
     const { store } = await setup();
     const zh = store.getState().addShot({ prompt: "三隻橘色的貓" });
     const en = store.getState().addShot({ prompt: "a lantern" });
     expect(pendingStoryboardShots(store.getState().storyboard, store.getState().records).map((s) => s.id)).toEqual([zh, en]);
-    const ids = store.getState().generateStoryboard({ [zh]: { prompt: "Three orange cats", promptOriginal: "三隻橘色的貓" } });
+    const ids = store.getState().generateStoryboard("local");
     const requests = ids.map((id) => store.getState().records.find((r) => r.id === id)?.request);
-    expect(requests.map((r) => [r?.prompt, r?.promptOriginal])).toEqual([
-      ["Three orange cats", "三隻橘色的貓"],
-      ["a lantern", null],
+    expect(requests.map((r) => [r?.prompt, r?.promptOriginal, r?.autoPlan])).toEqual([
+      ["三隻橘色的貓", null, "local"],
+      ["a lantern", null, "local"],
     ]);
     expect(pendingStoryboardShots(store.getState().storyboard, store.getState().records)).toEqual([]);
   });

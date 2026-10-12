@@ -23,6 +23,23 @@
  *   cost", supports Structured Outputs and the Responses API, 1,050,000-token
  *   context; `reasoning.effort` accepts low | medium | high | xhigh | max).
  *
+ * Vision input, verified 2026-10-13:
+ * - https://developers.openai.com/api/docs/guides/images-vision
+ *   (Responses API: `input` is an array holding one `{ role: "user", content }`
+ *   message; content items are `{ type: "input_text", text }` and
+ *   `{ type: "input_image", image_url: "data:image/<type>;base64,...",
+ *   detail }`; `detail` is optional, defaults to "auto" and accepts low |
+ *   high | auto, plus "original" on some models only, so it is not exposed
+ *   here; PNG, JPEG, WEBP and non-animated GIF are accepted, up to 1,500
+ *   images and 512 MB per request — our 12-image / 24 MB caps are far
+ *   stricter on purpose).
+ * - https://developers.openai.com/api/docs/models/gpt-6.1-sol
+ *   ("Input modalities: text, image").
+ *
+ * Image data is user content: it is never logged, never echoed in a zod
+ * validation message (all image issues use fixed custom messages) and
+ * stripped from HTTP error excerpts together with the key.
+ *
  * Composition: `createOpenAiTextService(deps)` is pure and testable (fetch,
  * key lookup and base URL are injected); `registerOpenAiTextIpc(channels)`
  * wires it to Electron.
@@ -41,6 +58,58 @@ const USER_AGENT = "FlamebladeCut-Highlights/1.0";
 
 export const OPENAI_TEXT_MAX_INPUT_CHARS = 600_000;
 
+export const OPENAI_TEXT_MAX_IMAGES = 12;
+/** Per-image cap, counted in base64 characters after the data-URL comma. */
+export const OPENAI_TEXT_MAX_IMAGE_BASE64_CHARS = 8 * 1024 * 1024;
+/** Cap for all images of one request together, in base64 characters. */
+export const OPENAI_TEXT_MAX_TOTAL_IMAGE_BASE64_CHARS = 24 * 1024 * 1024;
+const IMAGE_DATA_URL_PATTERN = /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/;
+export const OPENAI_TEXT_IMAGE_DETAILS = ["low", "high", "auto"] as const;
+export type OpenAiTextImageDetail = (typeof OPENAI_TEXT_IMAGE_DETAILS)[number];
+
+/** Base64 characters of a data URL (everything after the first comma). */
+function base64Length(dataUrl: string): number {
+  const comma = dataUrl.indexOf(",");
+  return comma < 0 ? dataUrl.length : dataUrl.length - comma - 1;
+}
+
+function isImageDetail(value: unknown): value is OpenAiTextImageDetail {
+  return typeof value === "string" && (OPENAI_TEXT_IMAGE_DETAILS as readonly string[]).includes(value);
+}
+
+// Custom issues only: built-in string/enum issues can carry the received
+// value, which would copy image data into the IPC error message.
+const imageInputSchema = z
+  .object({
+    dataUrl: z.string().superRefine((value, ctx) => {
+      if (base64Length(value) > OPENAI_TEXT_MAX_IMAGE_BASE64_CHARS) {
+        ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Image exceeds 8 MB of base64 data." });
+        return;
+      }
+      if (!IMAGE_DATA_URL_PATTERN.test(value)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Image must be a base64 data URL of type image/png, image/jpeg or image/webp.",
+        });
+      }
+    }),
+    detail: z
+      .custom<OpenAiTextImageDetail>(isImageDetail, { message: 'Image detail must be "low", "high" or "auto".' })
+      .optional(),
+  })
+  .strict();
+export type OpenAiTextImageInput = z.infer<typeof imageInputSchema>;
+
+const imagesSchema = z
+  .array(imageInputSchema)
+  .max(OPENAI_TEXT_MAX_IMAGES, { message: `At most ${OPENAI_TEXT_MAX_IMAGES} images per request.` })
+  .superRefine((images, ctx) => {
+    const total = images.reduce((sum, image) => sum + base64Length(image.dataUrl), 0);
+    if (total > OPENAI_TEXT_MAX_TOTAL_IMAGE_BASE64_CHARS) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: "Images exceed 24 MB of base64 data in total." });
+    }
+  });
+
 export const openAiTextChatArgsSchema = z
   .object({
     instructions: z.string().trim().min(1).max(20_000),
@@ -53,6 +122,8 @@ export const openAiTextChatArgsSchema = z
       .strict(),
     maxOutputTokens: z.number().int().min(256).max(32_000).optional(),
     reasoningEffort: z.enum(["low", "medium", "high"]).optional(),
+    /** Optional vision input; an empty array behaves like no images. */
+    images: imagesSchema.optional(),
   })
   .strict();
 export type OpenAiTextChatArgs = z.infer<typeof openAiTextChatArgsSchema>;
@@ -96,6 +167,22 @@ export interface OpenAiTextService {
 
 function redact(text: string, secret: string): string {
   return secret ? text.split(secret).join("***") : text;
+}
+
+/** Image data URLs echoed by the API (any image type, JSON-escaped slashes included). */
+const ECHOED_IMAGE_DATA_PATTERN = /data:image\\?\/[^;,\s"]*;base64,[A-Za-z0-9+/=\\]*/g;
+/** Bare base64 runs, e.g. an image fragment the API quoted without its prefix. */
+const LONG_BASE64_RUN_PATTERN = /[A-Za-z0-9+/=\\]{100,}/g;
+
+/**
+ * Error excerpt safe for messages: the key and image data are removed from the
+ * whole body before truncation, so a cut can never leave a partial secret.
+ */
+export function redactErrorExcerpt(raw: string, secret: string): string {
+  return redact(raw, secret)
+    .replace(ECHOED_IMAGE_DATA_PATTERN, "data:image/[redacted]")
+    .replace(LONG_BASE64_RUN_PATTERN, "[redacted]")
+    .slice(0, ERROR_EXCERPT_CHARS);
 }
 
 interface ResponsesContentItem {
@@ -144,11 +231,29 @@ export function readResponsesOutput(body: unknown): OpenAiTextChatResult {
   return { text, model: typeof data.model === "string" ? data.model : OPENAI_TEXT_MODEL };
 }
 
+/**
+ * Responses API `input`: the plain string without images (unchanged legacy
+ * shape), otherwise one user message with the text followed by the images.
+ */
+function buildResponsesInput(args: OpenAiTextChatArgs): string | Record<string, unknown>[] {
+  const images = args.images ?? [];
+  if (images.length === 0) return args.input;
+  return [
+    {
+      role: "user",
+      content: [
+        { type: "input_text", text: args.input },
+        ...images.map((image) => ({ type: "input_image", image_url: image.dataUrl, detail: image.detail ?? "auto" })),
+      ],
+    },
+  ];
+}
+
 export function buildResponsesPayload(args: OpenAiTextChatArgs): Record<string, unknown> {
   return {
     model: OPENAI_TEXT_MODEL,
     instructions: args.instructions,
-    input: args.input,
+    input: buildResponsesInput(args),
     reasoning: { effort: args.reasoningEffort ?? "low" },
     max_output_tokens: args.maxOutputTokens ?? 8_000,
     store: false,
@@ -196,7 +301,7 @@ export function createOpenAiTextService(deps: OpenAiTextServiceDeps): OpenAiText
     }
     const raw = await response.text();
     if (!response.ok) {
-      const excerpt = redact(raw.slice(0, ERROR_EXCERPT_CHARS), key);
+      const excerpt = redactErrorExcerpt(raw, key);
       throw new OpenAiTextError("http", `HTTP ${response.status}${excerpt ? `: ${excerpt}` : ""}`);
     }
     let body: unknown;

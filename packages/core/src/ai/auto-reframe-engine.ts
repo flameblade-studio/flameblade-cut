@@ -157,9 +157,37 @@ export interface ReframeResult {
   outputHeight: number;
   success: boolean;
   message?: string;
+  errorCode?: AutoReframeErrorCode;
 }
 
-type ProgressCallback = (progress: number, message: string) => void;
+/**
+ * Stable identifier of an auto-reframe progress step. UIs translate this
+ * code (with `frame` / `frameCount` for "analyzing-frame"); the English
+ * `message` passed alongside it stays for existing callers and logs.
+ */
+export type AutoReframeProgressStage =
+  | "initializing"
+  | "ready"
+  | "analyzing"
+  | "analyzing-frame"
+  | "analysis-complete";
+
+export interface AutoReframeProgressDetail {
+  readonly stage: AutoReframeProgressStage;
+  /** 1-based frame number, present for "analyzing-frame". */
+  readonly frame?: number;
+  /** Total frames, present for "analyzing-frame". */
+  readonly frameCount?: number;
+}
+
+/** Stable code for a failed ReframeResult; `message` keeps the English text. */
+export type AutoReframeErrorCode = "engine-not-initialized";
+
+type ProgressCallback = (
+  progress: number,
+  message: string,
+  detail: AutoReframeProgressDetail,
+) => void;
 
 export class AutoReframeEngine {
   private canvas: OffscreenCanvas | null = null;
@@ -170,12 +198,12 @@ export class AutoReframeEngine {
   async initialize(onProgress?: ProgressCallback): Promise<void> {
     if (this.initialized) return;
 
-    onProgress?.(10, "Initializing auto-reframe engine...");
+    onProgress?.(10, "Initializing auto-reframe engine...", { stage: "initializing" });
 
     this.canvas = new OffscreenCanvas(1920, 1080);
     this.ctx = this.canvas.getContext("2d");
 
-    onProgress?.(100, "Auto-reframe engine ready");
+    onProgress?.(100, "Auto-reframe engine ready", { stage: "ready" });
     this.initialized = true;
   }
 
@@ -196,6 +224,7 @@ export class AutoReframeEngine {
         outputHeight: 1080,
         success: false,
         message: "Engine not initialized",
+        errorCode: "engine-not-initialized",
       };
     }
 
@@ -204,7 +233,7 @@ export class AutoReframeEngine {
     const sourceWidth = frames[0]?.width || 1920;
     const sourceHeight = frames[0]?.height || 1080;
 
-    onProgress?.(0, "Analyzing video frames...");
+    onProgress?.(0, "Analyzing video frames...", { stage: "analyzing" });
 
     let lastCropX = 0;
     let lastCropY = 0;
@@ -214,7 +243,11 @@ export class AutoReframeEngine {
       const time = i / frameRate;
       const progress = Math.round((i / frames.length) * 100);
 
-      onProgress?.(progress, `Analyzing frame ${i + 1}/${frames.length}`);
+      onProgress?.(progress, `Analyzing frame ${i + 1}/${frames.length}`, {
+        stage: "analyzing-frame",
+        frame: i + 1,
+        frameCount: frames.length,
+      });
 
       const faces = await this.detectFaces(frame, i);
 
@@ -246,7 +279,7 @@ export class AutoReframeEngine {
       settings.smoothing,
     );
 
-    onProgress?.(100, "Analysis complete");
+    onProgress?.(100, "Analysis complete", { stage: "analysis-complete" });
 
     return {
       keyframes: smoothedKeyframes,

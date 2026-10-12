@@ -38,7 +38,7 @@
       "i2v": "描述图片接下来怎么动：谁做了什么、镜头怎么移动、有什么声音…",
       "flf2v": "描述从第一张图到最后一张图之间发生了什么…",
       "extend": "描述接下来的剧情如何延续…",
-      "ref2v": "先描述每张参考图是谁或什么，再描述视频中发生的事：Reference sheet: … Generated video: …"
+      "ref2v": "描述一个连续镜头。例：Lin Keyun 站在傍晚的高雄港边，海风吹动她的长发，她转头对镜头微笑说：“今天准时下班！”"
     },
     "promptTip": "英文提示词效果最好；中文也可以",
     "firstFrame": "首帧",
@@ -78,13 +78,16 @@
       "ref2v": "参考生视频"
     },
     "references": "参考图（角色、道具、场景）",
-    "referencesTip": "可放 1–12 张，会自动排成一张黑底设定表交给 AI。图越少、裁得越紧（例如只裁人物），角色还原越准；全身图请尽量裁掉多余留白。",
+    "referencesTip": "设定集、海报、截图都可以直接放；开启“AI 整理”时，AI 会自己认出每张图的人物与重点。想更准的话，在旁边写一句“这是谁”。",
     "add": "添加",
     "addReferences": "添加参考图",
     "removeReference": "移除第 {{index}} 张参考图",
     "needReferences": "请至少添加 1 张参考图",
     "tooManyReferences": "参考图最多 12 张",
-    "referenceCount": "参考图 ×{{count}}"
+    "referenceCount": "参考图 ×{{count}}",
+    "referenceDescribe": "这是谁／什么？（选填）例：林可芸的设定图",
+    "referenceDescribeLabel": "第 {{index}} 张参考图的说明",
+    "ref2vPromptTip": "按你的习惯写就好，整段剧本也可以；AI 会浓缩成一个连续镜头。建议 5–10 秒。"
   },
   "feed": {
     "title": "生成记录",
@@ -193,25 +196,17 @@
     "minutesSeconds": "{{minutes}} 分 {{seconds}} 秒"
   },
   "translate": {
-    "toggle": "发送前自动翻译成英文（推荐）",
-    "toggleHint": "LTX 读英文时更能准确画出物体、颜色和数量；你的中文原文会保留在记录里",
-    "noChinese": "当前没有中文，将按原文发送",
-    "engine": "翻译引擎",
-    "engineLocal": "本地翻译・免费",
-    "engineOpenai": "OpenAI",
+    "toggle": "发送前让 AI 整理成模型看得懂的英文（建议）",
+    "toggleHint": "按你的习惯写就好：中文、整段剧本都可以，海报和设定集也能直接当参考图。AI 会翻成英文、浓缩成一个镜头、整理每张参考图；你的原文会保留在记录里。",
+    "directorHint": "每个镜头都会由 AI 各自整理成英文",
+    "engine": "整理方式",
+    "engineLocal": "本机 Gemma・免费",
+    "engineOpenai": "OpenAI・更聪明",
+    "localNote": "用 LTX 内置的 Gemma 小模型在你的电脑上整理，不会上传；每次约多花 30 秒。",
+    "openaiNote": "提示词和参考图会发送给 OpenAI；它会自动裁掉参考图上的文字与多余部分，效果最好。",
     "openaiNoKey": "尚未设置 OpenAI 密钥，请到“设置 → API 密钥”输入",
-    "localNote": "首次使用会下载翻译模型（{{size}}），之后可离线使用",
-    "preview": "英文提示词",
-    "previewButton": "预览翻译",
-    "previewEmpty": "点击“预览翻译”查看实际发送的英文；可以直接修改，修改后的版本会照样发送",
-    "edited": "已手动修改，将按这段英文发送",
-    "stale": "中文已修改，发送时会重新翻译",
-    "translating": "翻译中…",
-    "downloading": "下载翻译模型 {{loaded}} / {{total}} MB",
-    "failed": "翻译失败，未发送：{{message}}",
     "sentChip": "英文",
-    "sentTitle": "实际发送的英文：{{prompt}}（点击复制）",
-    "directorHint": "每个镜头都会按此设置分别翻译"
+    "sentTitle": "实际发送的英文：{{prompt}}（点击复制）"
   },
   "errors": {
     "model": {
