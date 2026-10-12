@@ -63,7 +63,12 @@ function isGenerationRecord(value: unknown): value is GenerationRecord {
 }
 
 function isImageInput(value: unknown): value is ImageInput {
-  return isRecord(value) && typeof value.path === "string" && typeof value.name === "string";
+  return (
+    isRecord(value) &&
+    typeof value.path === "string" &&
+    typeof value.name === "string" &&
+    (value.description === undefined || typeof value.description === "string")
+  );
 }
 
 /**

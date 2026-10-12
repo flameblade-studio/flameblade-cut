@@ -39,7 +39,9 @@
     "find": "Find Highlights",
     "preview": "Preview highlight",
     "apply_one": "Apply {{count}} Highlight",
-    "apply_other": "Apply {{count}} Highlights"
+    "apply_other": "Apply {{count}} Highlights",
+    "clipsLabel": "Clips",
+    "maxLabel": "Max"
   },
   "aspectMatch": {
     "title": "Match Video Dimensions?",
@@ -877,5 +879,122 @@
   "otherServices": {
     "title": "Other AI services",
     "description": "Keys for ElevenLabs, custom API hosts and other services, encrypted with your master password."
+  },
+  "history": {
+    "actions": {
+      "clip_add": "Add clip",
+      "clip_remove": "Delete clip",
+      "clip_move": "Move clip",
+      "clip_trim": "Trim clip",
+      "clip_split": "Split clip",
+      "clip_rippleDelete": "Ripple delete",
+      "clip_duplicate": "Duplicate clip",
+      "clip_setBlendMode": "Change blend mode",
+      "clip_setBlendOpacity": "Adjust blend opacity",
+      "clip_setEmphasisAnimation": "Set emphasis animation",
+      "clip_setColorGrading": "Color grading",
+      "track_add": "Add {{trackType}} track",
+      "track_duplicate": "Duplicate track",
+      "track_remove": "Remove track",
+      "track_rename": "Rename track",
+      "effect_add": "Add effect",
+      "effect_remove": "Remove effect",
+      "effect_update": "Update effect",
+      "effect_toggle": "Toggle effect",
+      "effect_setStack": "Replace effect stack",
+      "transform_update": "Transform clip",
+      "keyframe_add": "Add keyframe",
+      "keyframe_remove": "Remove keyframe",
+      "keyframe_setAll": "Replace clip keyframes",
+      "transition_add": "Add transition",
+      "transition_set": "Add transition",
+      "transition_update": "Update transition",
+      "transition_remove": "Remove transition",
+      "audio_setVolume": "Adjust volume",
+      "audio_setFade": "Adjust fade",
+      "audio_addEffect": "Add audio effect",
+      "audio_removeEffect": "Remove audio effect",
+      "audio_updateEffect": "Update audio effect",
+      "audio_toggleEffect": "Toggle audio effect",
+      "subtitle_add": "Add subtitle",
+      "subtitle_remove": "Remove subtitle",
+      "marker_add": "Add marker",
+      "marker_remove": "Remove marker",
+      "marker_update": "Update marker",
+      "project_rename": "Rename project",
+      "project_updateSettings": "Update settings",
+      "project_setCanvasBackground": "Change canvas background",
+      "project_registerGeneratedShader": "Add generated shader",
+      "project_removeGeneratedShader": "Remove generated shader",
+      "media_import": "Import media",
+      "media_delete": "Delete media",
+      "clip_closeGapBefore": "Close gap",
+      "track_consolidate": "Remove gaps",
+      "track_restorePositions": "Restore positions"
+    },
+    "trackTypes": {
+      "video": "video",
+      "audio": "audio",
+      "image": "image",
+      "text": "text",
+      "graphics": "graphics"
+    },
+    "undo": "Undo ({{count}})",
+    "redo": "Redo ({{count}})"
+  },
+  "serviceMessages": {
+    "processing": {
+      "waiting": "Waiting to start...",
+      "complete": "Complete",
+      "failed": "Failed"
+    },
+    "autoReframe": {
+      "engineUnavailable": "Engine not available",
+      "stages": {
+        "initializing": "Initializing auto-reframe engine...",
+        "ready": "Auto-reframe engine ready",
+        "analyzing": "Analyzing video frames...",
+        "analyzingFrame": "Analyzing frame {{frame}}/{{frameCount}}",
+        "analysisComplete": "Analysis complete"
+      }
+    },
+    "highlights": {
+      "title": "Highlight {{number}}",
+      "stages": {
+        "analyze": "Analyzing audio energy...",
+        "rank": "Ranking energetic moments locally...",
+        "done": "Local highlights ready"
+      },
+      "reasons": {
+        "energySpeech": "Strong local audio energy and speech activity",
+        "energy": "Strong local audio energy"
+      }
+    },
+    "tts": {
+      "errors": {
+        "emptyText": "Please enter some text",
+        "sessionLocked": "Session locked. Unlock in Settings > API Keys first.",
+        "missingKey": "ElevenLabs API key not found. Add it in Settings > API Keys.",
+        "invalidKey": "ElevenLabs did not accept the API key, or no key is saved. Check it in Settings > API Keys.",
+        "quota": "Your ElevenLabs character quota is used up. Check your ElevenLabs plan.",
+        "rateLimited": "ElevenLabs is receiving too many requests. Wait a moment and try again.",
+        "network": "Could not reach ElevenLabs. Check your internet connection.",
+        "service": "ElevenLabs error ({{status}})",
+        "serviceDetail": "ElevenLabs error ({{status}}): {{detail}}",
+        "llmNotConfigured": "Configure an AI endpoint and model before using text enhancement.",
+        "llmSessionLocked": "Session locked. Unlock in Settings > API Keys to use text enhancement.",
+        "llmNetwork": "Could not reach the AI endpoint. Check the address and your connection.",
+        "llmService": "{{provider}} error ({{status}})",
+        "llmServiceDetail": "{{provider}} error ({{status}}): {{detail}}",
+        "enhanceFailed": "Failed to enhance text",
+        "generateFailed": "Failed to generate speech",
+        "saveFailed": "Failed to save to media",
+        "timelineFailed": "Failed to add to timeline",
+        "importFailed": "Failed to import audio"
+      },
+      "success": {
+        "savedToMedia": "Saved to Media Assets"
+      }
+    }
   }
 }

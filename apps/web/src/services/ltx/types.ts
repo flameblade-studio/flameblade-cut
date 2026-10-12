@@ -78,6 +78,11 @@ export const GENERATION_QUALITIES: readonly GenerationQuality[] = ["480p", "720p
 export interface ImageInput {
   path: string;
   name: string;
+  /**
+   * ref2v only: what this reference shows ("Character: ..."), as sent to the
+   * model (English when translated). Written into the Ingredients prompt.
+   */
+  description?: string;
 }
 
 /** Reference images per `ref2v` request (one reference sheet holds at most 12 panels). */

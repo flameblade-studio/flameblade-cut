@@ -12,6 +12,7 @@
  * → downloading → done. Any error → failed; cancel → canceled.
  */
 import { buildComfyPrompt, samplerNodeIds, type BinderInputs } from "./workflow-binder";
+import { buildIngredientsPrompt } from "./ingredients-prompt";
 import { gpuNameFromSystemStats, modelErrorMessage, resolveTransformer, unetNamesFromObjectInfo } from "./model-choice";
 import { parseHistory, parseWsMessage, type ComfyWsEvent } from "./history-parser";
 import { parseQueuePromptResponse, parseQueueState } from "./queue-parser";
@@ -53,6 +54,9 @@ export const HISTORY_FINISH_POLL_MS = 500;
 export const RESUBSCRIBE_MS = 3_000;
 /** Consecutive failed /history requests before the job is failed. */
 export const MAX_HISTORY_FAILURES = 3;
+
+/** Uploaded images for the binder, plus each reference image's sheet position (ref2v only). */
+type PreparedImages = Omit<BinderInputs, "recordId" | "transformerFile"> & { sheetPositions?: string[] };
 
 export class JobCanceledError extends Error {
   constructor() {
@@ -378,8 +382,16 @@ export class GenerationRunner {
       const record = this.deps.getRecord(recordId);
       if (record === undefined) throw new Error(`Generation record ${recordId} no longer exists`);
       const transformerFile = await raceAbort(signal, this.resolveModelFile());
-      const images = await raceAbort(signal, this.prepareImages(record));
-      const prompt = buildComfyPrompt(record.request, { recordId, transformerFile, ...images });
+      const { sheetPositions, ...images } = await raceAbort(signal, this.prepareImages(record));
+      // ref2v: the Ingredients LoRA expects each sheet panel described by its position.
+      const request =
+        sheetPositions === undefined
+          ? record.request
+          : {
+              ...record.request,
+              prompt: buildIngredientsPrompt(record.request.prompt, record.request.referenceImages, sheetPositions),
+            };
+      const prompt = buildComfyPrompt(request, { recordId, transformerFile, ...images });
       job.samplerIds = samplerNodeIds(prompt);
       if (signal.aborted) throw new JobCanceledError();
 
@@ -410,7 +422,7 @@ export class GenerationRunner {
     }
   }
 
-  private async prepareImages(record: GenerationRecord): Promise<Omit<BinderInputs, "recordId" | "transformerFile">> {
+  private async prepareImages(record: GenerationRecord): Promise<PreparedImages> {
     const { request, id } = record;
     switch (request.mode) {
       case "t2v":
@@ -436,13 +448,15 @@ export class GenerationRunner {
         );
         return { firstImage, lastImage: null };
       }
-      case "ref2v":
-        return { firstImage: null, lastImage: null, referenceSheet: await this.uploadReferenceSheet(record) };
+      case "ref2v": {
+        const sheet = await this.uploadReferenceSheet(record);
+        return { firstImage: null, lastImage: null, referenceSheet: sheet.file, sheetPositions: sheet.positions };
+      }
     }
   }
 
   /** Reads every reference image, composes the sheet and uploads it as `<recordId>-sheet.png`. */
-  private async uploadReferenceSheet(record: GenerationRecord): Promise<ComfyFileRef> {
+  private async uploadReferenceSheet(record: GenerationRecord): Promise<{ file: ComfyFileRef; positions: string[] }> {
     const { referenceImages, aspect } = record.request;
     if (referenceImages.length < MIN_REFERENCE_IMAGES || referenceImages.length > MAX_REFERENCE_IMAGES) {
       throw new Error(
@@ -453,8 +467,9 @@ export class GenerationRunner {
     for (const image of referenceImages) {
       sources.push({ image, bytes: await this.deps.transport.readFileBytes(image.path) });
     }
-    const png = await this.deps.composeReferenceSheet(sources, aspect);
-    return this.deps.transport.uploadImage(this.deps.getSettings().baseUrl, png, `${record.id}-sheet.png`);
+    const { png, positions } = await this.deps.composeReferenceSheet(sources, aspect);
+    const file = await this.deps.transport.uploadImage(this.deps.getSettings().baseUrl, png, `${record.id}-sheet.png`);
+    return { file, positions };
   }
 
   private async uploadLocalImage(

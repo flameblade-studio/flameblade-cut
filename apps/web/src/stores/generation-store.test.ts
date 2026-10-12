@@ -38,7 +38,7 @@ async function setup(transport = new FakeComfyTransport()) {
     newId: () => `id-${++id}`,
     randomSeed: () => ++seed,
     extractLastFrame: async () => new Uint8Array([1]),
-    composeReferenceSheet: async () => new Uint8Array([2]),
+    composeReferenceSheet: async (sources) => ({ png: new Uint8Array([2]), positions: sources.map(() => "Full Sheet") }),
   });
   await flush();
   return { store, transport };

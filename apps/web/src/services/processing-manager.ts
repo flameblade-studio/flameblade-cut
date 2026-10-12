@@ -1,4 +1,9 @@
 import { create } from "zustand";
+import {
+  serviceMessage,
+  serviceMessageText,
+  type ServiceMessage,
+} from "./service-message";
 
 export type ProcessingType =
   | "background-removal"
@@ -12,10 +17,26 @@ export interface ProcessingTask {
   type: ProcessingType;
   progress: number;
   status: "queued" | "processing" | "completed" | "failed";
+  /** Plain-text progress message (English fallback for keyed messages). */
   message: string;
+  /** Keyed form of `message`; the overlay translates it at display time. */
+  localizedMessage?: ServiceMessage;
   startedAt?: number;
   completedAt?: number;
+  /** Plain-text error (English fallback for keyed errors). */
   error?: string;
+  /** Keyed form of `error`, when the producer supplied one. */
+  localizedError?: ServiceMessage;
+}
+
+const MESSAGE_PREFIX = "tools.serviceMessages.processing";
+
+const WAITING_MESSAGE = serviceMessage(`${MESSAGE_PREFIX}.waiting`, "Waiting to start...");
+const COMPLETE_MESSAGE = serviceMessage(`${MESSAGE_PREFIX}.complete`, "Complete");
+const FAILED_MESSAGE = serviceMessage(`${MESSAGE_PREFIX}.failed`, "Failed");
+
+function keyedOrUndefined(message: ServiceMessage | string): ServiceMessage | undefined {
+  return typeof message === "string" ? undefined : message;
 }
 
 interface ProcessingState {
@@ -27,10 +48,10 @@ interface ProcessingState {
   updateTaskProgress: (
     taskId: string,
     progress: number,
-    message?: string,
+    message?: ServiceMessage | string,
   ) => void;
   completeTask: (taskId: string) => void;
-  failTask: (taskId: string, error: string) => void;
+  failTask: (taskId: string, error: ServiceMessage | string) => void;
   removeTask: (taskId: string) => void;
   getTasksForClip: (clipId: string) => ProcessingTask[];
   hasActiveProcessing: () => boolean;
@@ -57,7 +78,8 @@ export const useProcessingStore = create<ProcessingState>((set, get) => ({
       type,
       progress: 0,
       status: "queued",
-      message: "Waiting to start...",
+      message: WAITING_MESSAGE.fallback,
+      localizedMessage: WAITING_MESSAGE,
     };
 
     set((state) => {
@@ -83,7 +105,9 @@ export const useProcessingStore = create<ProcessingState>((set, get) => ({
         ...task,
         progress: Math.min(100, Math.max(0, progress)),
         status: "processing",
-        message: message || task.message,
+        ...(message
+          ? { message: serviceMessageText(message), localizedMessage: keyedOrUndefined(message) }
+          : {}),
         startedAt: task.startedAt || Date.now(),
       });
 
@@ -101,7 +125,8 @@ export const useProcessingStore = create<ProcessingState>((set, get) => ({
         ...task,
         progress: 100,
         status: "completed",
-        message: "Complete",
+        message: COMPLETE_MESSAGE.fallback,
+        localizedMessage: COMPLETE_MESSAGE,
         completedAt: Date.now(),
       });
 
@@ -131,8 +156,10 @@ export const useProcessingStore = create<ProcessingState>((set, get) => ({
       newTasks.set(taskId, {
         ...task,
         status: "failed",
-        message: "Failed",
-        error,
+        message: FAILED_MESSAGE.fallback,
+        localizedMessage: FAILED_MESSAGE,
+        error: serviceMessageText(error),
+        localizedError: keyedOrUndefined(error),
         completedAt: Date.now(),
       });
 

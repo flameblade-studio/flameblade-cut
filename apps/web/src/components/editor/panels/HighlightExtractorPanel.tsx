@@ -13,6 +13,12 @@ import {
   type HighlightResult,
   type HighlightPreferences,
 } from "../../../services/highlight-service";
+import {
+  highlightPhaseLabel,
+  highlightReasonLabel,
+  highlightTitleLabel,
+  type HighlightPhase,
+} from "./highlight-labels";
 
 interface HighlightExtractorPanelProps {
   clipId: string;
@@ -24,7 +30,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
   const [highlights, setHighlights] = useState<HighlightResult[]>([]);
   const [selected, setSelected] = useState<Set<number>>(new Set());
   const { t } = useTranslation();
-  const [phase, setPhase] = useState("");
+  const [phase, setPhase] = useState<HighlightPhase | null>(null);
   const [progress, setProgress] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -59,7 +65,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
     setHighlights([]);
 
     try {
-      setPhase(t("tools.highlightExtractor.decoding"));
+      setPhase("decode");
       setProgress(10);
 
       const arrayBuffer = await mediaItem.blob.arrayBuffer();
@@ -82,7 +88,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
       setError(err instanceof Error ? err.message : t("tools.highlightExtractor.failed"));
     } finally {
       setIsProcessing(false);
-      setPhase("");
+      setPhase(null);
       setProgress(0);
     }
   }, [clipId, project, getMediaItem, preferences, t]);
@@ -116,7 +122,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
     <div className="space-y-3">
       <div className="space-y-2">
         <div className="flex items-center gap-2">
-          <Text type="label" color="secondary" className="text-[10px] text-text-secondary">Clips</Text>
+          <Text type="label" color="secondary" className="text-[10px] text-text-secondary">{t("tools.highlightExtractor.clipsLabel")}</Text>
           <ToolcraftNumberInputControl
             label={t("tools.highlightExtractor.clips")}
             isLabelHidden
@@ -130,7 +136,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
             }
             className="w-12 px-1 py-0.5 text-[10px] bg-background-secondary border border-border rounded text-text-primary"
           />
-          <Text type="label" color="secondary" className="text-[10px] text-text-secondary">Max</Text>
+          <Text type="label" color="secondary" className="text-[10px] text-text-secondary">{t("tools.highlightExtractor.maxLabel")}</Text>
           <ToolcraftNumberInputControl
             label={t("tools.highlightExtractor.maxDuration")}
             isLabelHidden
@@ -149,7 +155,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
 
         <Button
           label={
-            isProcessing ? t("tools.highlightExtractor.progress", { phase, percent: progress }) : t("tools.highlightExtractor.find")
+            isProcessing ? t("tools.highlightExtractor.progress", { phase: highlightPhaseLabel(t, phase), percent: progress }) : t("tools.highlightExtractor.find")
           }
           icon={
             isProcessing ? (
@@ -196,7 +202,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
                     {highlight.score}
                   </div>
                   <span className="text-[10px] text-text-primary font-medium truncate max-w-[140px]">
-                    {highlight.title}
+                    {highlightTitleLabel(t, highlight)}
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
@@ -221,7 +227,7 @@ export const HighlightExtractorPanel: React.FC<HighlightExtractorPanelProps> = (
                   {formatTime(highlight.start)} - {formatTime(highlight.end)}
                 </span>
                 <span className="text-[9px] text-text-muted italic truncate max-w-[120px]">
-                  {highlight.reason}
+                  {highlightReasonLabel(t, highlight)}
                 </span>
               </div>
             </div>

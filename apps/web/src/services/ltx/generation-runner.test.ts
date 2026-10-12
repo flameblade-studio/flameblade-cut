@@ -81,7 +81,10 @@ function harness(settingsOverride: Partial<LtxSettings> = {}): Harness {
   const settings = { ...DEFAULT_LTX_SETTINGS, ...settingsOverride };
   const extractLastFrame = vi.fn<[string], Promise<Uint8Array>>(async () => new Uint8Array([137, 80, 78, 71]));
   const composeReferenceSheet = vi.fn<Parameters<ReferenceSheetComposer>, ReturnType<ReferenceSheetComposer>>(
-    async () => new Uint8Array([137, 80, 78, 71, 9]),
+    async (sources) => ({
+      png: new Uint8Array([137, 80, 78, 71, 9]),
+      positions: sources.map((_, i) => `Panel ${i + 1}`),
+    }),
   );
   const runner = new GenerationRunner({
     transport,
@@ -245,7 +248,12 @@ describe("GenerationRunner", () => {
     const prompt = h.postedPrompt();
     const loaders = Object.values(prompt).filter((n) => n.class_type === "LoadImage");
     expect(loaders.map((n) => n.inputs.image)).toEqual(["flameblade-cut/rec-1-sheet.png"]);
-    expect(nodeByTitle(prompt, "PrimitiveStringMultiline", "Prompt")?.inputs.value).toBe("A red paper lantern");
+    // The Ingredients prompt names each panel by its sheet position, then the shot.
+    const sent = String(nodeByTitle(prompt, "PrimitiveStringMultiline", "Prompt")?.inputs.value);
+    expect(sent.startsWith("### Reference Sheet Description\n**Panel 1:** ")).toBe(true);
+    expect(sent).toContain("**Panel 8:** ");
+    expect(sent.endsWith("### Target Description\nA red paper lantern")).toBe(true);
+    expect(h.records.get("rec-1")?.request.prompt).toBe("A red paper lantern");
     expect(nodeByTitle(prompt, "PrimitiveFloat", "Duration")?.inputs.value).toBe(5);
     expect(h.records.get("rec-1")?.status).toBe("running");
   });

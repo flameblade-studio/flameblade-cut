@@ -38,7 +38,7 @@
       "i2v": "Describe how the image comes alive: who does what, how the camera moves, what you hear…",
       "flf2v": "Describe what happens between the first and the last image…",
       "extend": "Describe how the story continues…",
-      "ref2v": "First describe who or what each reference shows, then what happens: Reference sheet: … Generated video: …"
+      "ref2v": "Describe one continuous shot, e.g. Lin Keyun stands by Kaohsiung harbour at dusk, the sea breeze lifting her long hair; she turns to the camera and smiles: \"Leaving on time today!\""
     },
     "promptTip": "English prompts work best; Chinese also works",
     "firstFrame": "First frame",
@@ -78,13 +78,16 @@
       "ref2v": "References"
     },
     "references": "Reference images (characters, props, scenes)",
-    "referencesTip": "Use 1–12 images; they are arranged into one black reference sheet for the AI. Fewer, tightly cropped images (e.g. just the character) reconstruct best — crop empty space around full-body shots.",
+    "referencesTip": "One subject per image: a character (front/side/back views work best), a prop or a setting, on a clean background with no text. Posters or whole design-sheet pages get shrunk so much the AI can barely see them. A one-line description next to each image (who or what it is, how it looks) helps a lot.",
     "add": "Add",
     "addReferences": "Add reference images",
     "removeReference": "Remove reference image {{index}}",
     "needReferences": "Add at least one reference image",
     "tooManyReferences": "Up to 12 reference images",
-    "referenceCount": "{{count}} references"
+    "referenceCount": "{{count}} references",
+    "referenceDescribe": "What is this? e.g. Character Lin Keyun, long brown hair, white shirt, black trousers",
+    "referenceDescribeLabel": "Description of reference image {{index}}",
+    "ref2vPromptTip": "Write one continuous shot: who is where, what they wear, do and say. Use the same name as in the reference descriptions. No shot lists or multi-part plots; 5–10 seconds works best."
   },
   "feed": {
     "title": "History",

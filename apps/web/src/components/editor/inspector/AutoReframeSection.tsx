@@ -25,6 +25,14 @@ import {
   DEFAULT_REFRAME_SETTINGS,
 } from "@openreel/core";
 import { toast } from "../../../stores/notification-store";
+import {
+  errorServiceMessage,
+  serviceMessage,
+  ServiceMessageError,
+  translateServiceMessage,
+  type ServiceMessage,
+} from "../../../services/service-message";
+import { autoReframeProgressMessage } from "./auto-reframe-progress";
 import { useProjectStore } from "../../../stores/project-store";
 import { useTranslation } from "react-i18next";
 
@@ -61,7 +69,7 @@ export const AutoReframeSection: React.FC<AutoReframeSectionProps> = ({
   const [isInitialized, setIsInitialized] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [progressMessage, setProgressMessage] = useState("");
+  const [progressMessage, setProgressMessage] = useState<ServiceMessage | string>("");
   const [selectedPlatform, setSelectedPlatform] =
     useState<PlatformPreset | null>("tiktok");
 
@@ -76,9 +84,9 @@ export const AutoReframeSection: React.FC<AutoReframeSectionProps> = ({
     setIsInitializing(true);
     try {
       const engine = initializeAutoReframeEngine();
-      await engine.initialize((prog, msg) => {
+      await engine.initialize((prog, msg, detail) => {
         setProgress(prog);
-        setProgressMessage(msg);
+        setProgressMessage(autoReframeProgressMessage(msg, detail));
       });
       setIsInitialized(true);
     } catch (error) {
@@ -122,26 +130,28 @@ export const AutoReframeSection: React.FC<AutoReframeSectionProps> = ({
   const handleAnalyze = useCallback(async () => {
     setIsProcessing(true);
     setProgress(0);
-    setProgressMessage(t("inspector.autoReframe.initializing"));
+    setProgressMessage(serviceMessage("inspector.autoReframe.initializing", "Initializing..."));
 
     try {
       if (!isInitialized) {
-        setProgressMessage(t("inspector.autoReframe.loadingEngine"));
+        setProgressMessage(serviceMessage("inspector.autoReframe.loadingEngine", "Loading AI engine..."));
         setProgress(10);
         await handleInitialize();
       }
 
       const engine = getAutoReframeEngine();
       if (!engine) {
-        throw new Error("Engine not available");
+        throw new ServiceMessageError(
+          serviceMessage("tools.serviceMessages.autoReframe.engineUnavailable", "Engine not available"),
+        );
       }
 
-      setProgressMessage(t("inspector.autoReframe.configuring"));
+      setProgressMessage(serviceMessage("inspector.autoReframe.configuring", "Configuring reframe settings..."));
       setProgress(30);
 
       await new Promise((resolve) => setTimeout(resolve, 300));
 
-      setProgressMessage(t("inspector.autoReframe.applyingCrop"));
+      setProgressMessage(serviceMessage("inspector.autoReframe.applyingCrop", "Applying smart crop configuration..."));
       setProgress(60);
 
       const targetConfig =
@@ -149,7 +159,7 @@ export const AutoReframeSection: React.FC<AutoReframeSectionProps> = ({
 
       await new Promise((resolve) => setTimeout(resolve, 300));
 
-      setProgressMessage(t("inspector.autoReframe.updatingProject"));
+      setProgressMessage(serviceMessage("inspector.autoReframe.updatingProject", "Updating project settings..."));
       setProgress(80);
 
       await updateProjectDimensions({
@@ -157,13 +167,13 @@ export const AutoReframeSection: React.FC<AutoReframeSectionProps> = ({
         height: targetConfig.height,
       });
 
-      setProgressMessage(t("inspector.autoReframe.finalizing"));
+      setProgressMessage(serviceMessage("inspector.autoReframe.finalizing", "Finalizing..."));
       setProgress(90);
 
       await new Promise((resolve) => setTimeout(resolve, 200));
 
       setProgress(100);
-      setProgressMessage(t("inspector.autoReframe.complete"));
+      setProgressMessage(serviceMessage("inspector.autoReframe.complete", "Complete!"));
       setIsApplied(true);
 
       const result: ReframeResult = {
@@ -187,7 +197,10 @@ export const AutoReframeSection: React.FC<AutoReframeSectionProps> = ({
       console.error("Auto-reframe failed:", error);
       toast.error(
         t("inspector.autoReframe.failed"),
-        error instanceof Error ? error.message : t("inspector.common.unknownError"),
+        translateServiceMessage(
+          t,
+          errorServiceMessage(error, serviceMessage("inspector.common.unknownError", "Unknown error")),
+        ),
       );
       setIsApplied(false);
     } finally {
@@ -317,7 +330,7 @@ export const AutoReframeSection: React.FC<AutoReframeSectionProps> = ({
           <Card variant="muted" padding={2} className="space-y-1">
             <div className="flex items-center justify-between">
               <Text type="supporting" color="secondary" className="text-[9px]">
-                {progressMessage}
+                {translateServiceMessage(t, progressMessage)}
               </Text>
               <Text type="supporting" color="secondary" className="text-[9px]">
                 {progress}%

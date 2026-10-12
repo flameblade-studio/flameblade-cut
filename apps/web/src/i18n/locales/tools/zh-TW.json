@@ -39,7 +39,9 @@
     "find": "尋找精華",
     "preview": "預覽精華",
     "apply_one": "套用 {{count}} 個精華",
-    "apply_other": "套用 {{count}} 個精華"
+    "apply_other": "套用 {{count}} 個精華",
+    "clipsLabel": "片段數",
+    "maxLabel": "最長"
   },
   "aspectMatch": {
     "title": "要配合影片尺寸嗎？",
@@ -877,5 +879,122 @@
   "otherServices": {
     "title": "其他 AI 服務",
     "description": "ElevenLabs、自訂 API 等其他服務的金鑰，以你設定的主密碼加密保存。"
+  },
+  "history": {
+    "actions": {
+      "clip_add": "新增片段",
+      "clip_remove": "刪除片段",
+      "clip_move": "移動片段",
+      "clip_trim": "修剪片段",
+      "clip_split": "分割片段",
+      "clip_rippleDelete": "波紋刪除",
+      "clip_duplicate": "複製片段",
+      "clip_setBlendMode": "變更混合模式",
+      "clip_setBlendOpacity": "調整混合不透明度",
+      "clip_setEmphasisAnimation": "設定強調動畫",
+      "clip_setColorGrading": "調色",
+      "track_add": "新增{{trackType}}軌道",
+      "track_duplicate": "複製軌道",
+      "track_remove": "移除軌道",
+      "track_rename": "重新命名軌道",
+      "effect_add": "新增效果",
+      "effect_remove": "移除效果",
+      "effect_update": "更新效果",
+      "effect_toggle": "切換效果",
+      "effect_setStack": "取代效果組合",
+      "transform_update": "變形片段",
+      "keyframe_add": "新增關鍵影格",
+      "keyframe_remove": "移除關鍵影格",
+      "keyframe_setAll": "取代片段關鍵影格",
+      "transition_add": "新增轉場",
+      "transition_set": "新增轉場",
+      "transition_update": "更新轉場",
+      "transition_remove": "移除轉場",
+      "audio_setVolume": "調整音量",
+      "audio_setFade": "調整淡入淡出",
+      "audio_addEffect": "新增音訊效果",
+      "audio_removeEffect": "移除音訊效果",
+      "audio_updateEffect": "更新音訊效果",
+      "audio_toggleEffect": "切換音訊效果",
+      "subtitle_add": "新增字幕",
+      "subtitle_remove": "移除字幕",
+      "marker_add": "新增標記",
+      "marker_remove": "移除標記",
+      "marker_update": "更新標記",
+      "project_rename": "重新命名專案",
+      "project_updateSettings": "更新設定",
+      "project_setCanvasBackground": "變更畫布背景",
+      "project_registerGeneratedShader": "新增生成的著色器",
+      "project_removeGeneratedShader": "移除生成的著色器",
+      "media_import": "匯入素材",
+      "media_delete": "刪除素材",
+      "clip_closeGapBefore": "填補空隙",
+      "track_consolidate": "移除空隙",
+      "track_restorePositions": "還原位置"
+    },
+    "trackTypes": {
+      "video": "影片",
+      "audio": "音訊",
+      "image": "圖片",
+      "text": "文字",
+      "graphics": "圖形"
+    },
+    "undo": "復原（{{count}}）",
+    "redo": "重做（{{count}}）"
+  },
+  "serviceMessages": {
+    "processing": {
+      "waiting": "等待開始…",
+      "complete": "完成",
+      "failed": "失敗"
+    },
+    "autoReframe": {
+      "engineUnavailable": "自動構圖引擎無法使用",
+      "stages": {
+        "initializing": "正在初始化自動構圖引擎…",
+        "ready": "自動構圖引擎已就緒",
+        "analyzing": "正在分析影片畫面…",
+        "analyzingFrame": "正在分析第 {{frame}}/{{frameCount}} 格畫面",
+        "analysisComplete": "分析完成"
+      }
+    },
+    "highlights": {
+      "title": "精華 {{number}}",
+      "stages": {
+        "analyze": "正在分析音訊能量…",
+        "rank": "正在本機排序高能量片段…",
+        "done": "本機精華片段已就緒"
+      },
+      "reasons": {
+        "energySpeech": "本機偵測到強烈的音訊能量與說話活動",
+        "energy": "本機偵測到強烈的音訊能量"
+      }
+    },
+    "tts": {
+      "errors": {
+        "emptyText": "請輸入文字",
+        "sessionLocked": "工作階段已鎖定。請先到「設定 > API 金鑰」解鎖。",
+        "missingKey": "找不到 ElevenLabs API 金鑰。請到「設定 > API 金鑰」新增。",
+        "invalidKey": "ElevenLabs 不接受這組 API 金鑰，或尚未儲存金鑰。請到「設定 > API 金鑰」檢查。",
+        "quota": "ElevenLabs 的字元額度已用完，請檢查你的 ElevenLabs 方案。",
+        "rateLimited": "ElevenLabs 目前請求過多，請稍候再試。",
+        "network": "無法連線到 ElevenLabs，請檢查網路連線。",
+        "service": "ElevenLabs 發生錯誤（{{status}}）",
+        "serviceDetail": "ElevenLabs 發生錯誤（{{status}}）：{{detail}}",
+        "llmNotConfigured": "使用文字潤飾前，請先設定 AI 端點與模型。",
+        "llmSessionLocked": "工作階段已鎖定。請到「設定 > API 金鑰」解鎖後再使用文字潤飾。",
+        "llmNetwork": "無法連線到 AI 端點，請檢查位址與網路連線。",
+        "llmService": "{{provider}} 發生錯誤（{{status}}）",
+        "llmServiceDetail": "{{provider}} 發生錯誤（{{status}}）：{{detail}}",
+        "enhanceFailed": "文字潤飾失敗",
+        "generateFailed": "語音產生失敗",
+        "saveFailed": "無法儲存到媒體庫",
+        "timelineFailed": "無法加入時間軸",
+        "importFailed": "音訊匯入失敗"
+      },
+      "success": {
+        "savedToMedia": "已儲存到媒體素材"
+      }
+    }
   }
 }

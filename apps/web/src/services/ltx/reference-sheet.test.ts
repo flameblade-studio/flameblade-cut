@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   layoutReferenceSheet,
+  positionName,
   REFERENCE_SHEET_CANVAS,
   REFERENCE_SHEET_SHORT_SIDE,
   ReferenceSheetError,
@@ -15,39 +16,43 @@ const PORTRAIT: ImageSize = { width: 768, height: 1344 };
 const LANDSCAPE: ImageSize = { width: 1344, height: 768 };
 const TALL: ImageSize = { width: 250, height: 700 };
 
+/** The owner's 2026-10-12 ref2v set: 2 wide design boards, 2 portrait posters, 3 character sheets. */
+const OWNER_SET: ImageSize[] = [
+  { width: 1536, height: 1024 },
+  { width: 1536, height: 1024 },
+  { width: 1024, height: 1536 },
+  { width: 1024, height: 1536 },
+  { width: 1536, height: 1024 },
+  { width: 1536, height: 1024 },
+  { width: 1536, height: 1024 },
+];
+
 function overlaps(a: SheetCell, b: SheetCell): boolean {
   return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 }
 
+function coverage(layout: ReferenceSheetLayout): number {
+  const used = layout.cells.reduce((sum, cell) => sum + cell.drawW * cell.drawH, 0);
+  return used / (layout.canvasWidth * layout.canvasHeight);
+}
+
 function expectWellFormed(layout: ReferenceSheetLayout, images: readonly ImageSize[]): void {
   expect(layout.cells).toHaveLength(images.length);
-  expect(layout.rows * layout.cols).toBeGreaterThanOrEqual(images.length);
+  expect(layout.positions).toHaveLength(images.length);
+  expect(layout.rowSizes.reduce((sum, size) => sum + size, 0)).toBe(images.length);
   layout.cells.forEach((cell, i) => {
-    // Cell inside the canvas, at least one gutter from every edge.
+    // Inside the canvas, at least one gutter from every edge.
     expect(cell.x).toBeGreaterThanOrEqual(layout.gutter);
     expect(cell.y).toBeGreaterThanOrEqual(layout.gutter);
     expect(cell.x + cell.w).toBeLessThanOrEqual(layout.canvasWidth - layout.gutter);
     expect(cell.y + cell.h).toBeLessThanOrEqual(layout.canvasHeight - layout.gutter);
-    // Image inside its cell, integer pixels, aspect ratio kept within rounding.
-    expect(cell.drawX).toBeGreaterThanOrEqual(cell.x);
-    expect(cell.drawY).toBeGreaterThanOrEqual(cell.y);
-    expect(cell.drawX + cell.drawW).toBeLessThanOrEqual(cell.x + cell.w);
-    expect(cell.drawY + cell.drawH).toBeLessThanOrEqual(cell.y + cell.h);
-    for (const n of [cell.x, cell.y, cell.w, cell.h, cell.drawX, cell.drawY, cell.drawW, cell.drawH]) {
-      expect(Number.isInteger(n)).toBe(true);
-    }
-    // "contain": one side fills the cell.
-    expect(cell.drawW === cell.w || cell.drawH === cell.h).toBe(true);
+    expect([cell.drawX, cell.drawY, cell.drawW, cell.drawH]).toEqual([cell.x, cell.y, cell.w, cell.h]);
+    for (const n of [cell.x, cell.y, cell.w, cell.h]) expect(Number.isInteger(n)).toBe(true);
+    // Aspect ratio kept within one pixel of rounding.
     const image = images[i] as ImageSize;
-    expect(Math.abs(cell.drawW / cell.drawH - image.width / image.height)).toBeLessThan(
-      (image.width / image.height) * (2 / Math.min(cell.drawW, cell.drawH)) + 1e-9,
-    );
+    expect(Math.abs(cell.w - (image.width / image.height) * cell.h)).toBeLessThanOrEqual(1);
     layout.cells.slice(i + 1).forEach((other) => expect(overlaps(cell, other)).toBe(false));
   });
-}
-
-function minArea(layout: ReferenceSheetLayout): number {
-  return Math.min(...layout.cells.map((c) => c.drawW * c.drawH));
 }
 
 describe("REFERENCE_SHEET_CANVAS", () => {
@@ -78,69 +83,37 @@ describe("layoutReferenceSheet", () => {
     }
   });
 
+  it("keeps the input order in reading order (rows top to bottom, left to right)", () => {
+    const layout = layoutReferenceSheet(OWNER_SET, "16:9");
+    for (let i = 1; i < layout.cells.length; i += 1) {
+      const previous = layout.cells[i - 1] as SheetCell;
+      const cell = layout.cells[i] as SheetCell;
+      expect(cell.y > previous.y || (cell.y === previous.y && cell.x > previous.x)).toBe(true);
+    }
+  });
+
+  it("fills most of the sheet with the owner's 7 mixed references", () => {
+    const layout = layoutReferenceSheet(OWNER_SET, "16:9");
+    expectWellFormed(layout, OWNER_SET);
+    expect(coverage(layout)).toBeGreaterThan(0.75);
+  });
+
   it("is deterministic", () => {
     const images = [PORTRAIT, LANDSCAPE, SQUARE, TALL, SQUARE];
     expect(layoutReferenceSheet(images, "16:9")).toEqual(layoutReferenceSheet(images, "16:9"));
   });
 
-  it("uses a ~2% gutter and fills a single image edge to edge within it", () => {
-    const layout = layoutReferenceSheet([LANDSCAPE], "16:9");
-    expect(layout.gutter).toBe(22);
-    expect(layout).toMatchObject({ rows: 1, cols: 1 });
-    expect(layout.cells[0]).toMatchObject({ x: 22, y: 22, w: 1876, h: 1044 });
+  it("fills the sheet with a single image of the same shape", () => {
+    const layout = layoutReferenceSheet([{ width: 1920, height: 1088 }], "16:9");
+    expect(layout.rowSizes).toEqual([1]);
+    expect(coverage(layout)).toBeGreaterThan(0.95);
+    expect(layout.positions).toEqual(["Full Sheet"]);
   });
 
-  it.each([
-    ["16:9", 2, 4],
-    ["9:16", 4, 2],
-    ["1:1", 3, 3],
-  ] as const)("lays 8 square images on %s as %i×%i", (aspect, rows, cols) => {
-    const images = Array.from({ length: 8 }, () => SQUARE);
-    const layout = layoutReferenceSheet(images, aspect);
-    expect(layout).toMatchObject({ rows, cols });
-    // Every panel stays usable after the workflow's 544 resize (≥ 150 px on its short side).
-    const scale = REFERENCE_SHEET_SHORT_SIDE / Math.min(layout.canvasWidth, layout.canvasHeight);
-    for (const cell of layout.cells) expect(Math.min(cell.drawW, cell.drawH) * scale).toBeGreaterThanOrEqual(150);
-  });
-
-  it("puts 8 tall character views in one row on 16:9", () => {
-    const images = Array.from({ length: 8 }, () => TALL);
-    expect(layoutReferenceSheet(images, "16:9")).toMatchObject({ rows: 1, cols: 8 });
-  });
-
-  it("chooses the grid with the largest smallest image", () => {
-    const images = [SQUARE, SQUARE, SQUARE, LANDSCAPE, PORTRAIT, TALL, SQUARE, SQUARE];
-    for (const aspect of GENERATION_ASPECTS) {
-      const chosen = layoutReferenceSheet(images, aspect);
-      // Brute force over every rows×cols that fits, uniform cells, same gutter.
-      const { width, height } = REFERENCE_SHEET_CANVAS[aspect];
-      const g = chosen.gutter;
-      let best = 0;
-      for (let rows = 1; rows <= 8; rows += 1) {
-        for (let cols = 1; cols <= 8; cols += 1) {
-          if (rows * cols < images.length) continue;
-          const cw = Math.floor((width - (cols + 1) * g) / cols);
-          const ch = Math.floor((height - (rows + 1) * g) / rows);
-          const smallest = Math.min(
-            ...images.map((im) => {
-              const s = Math.min(cw / im.width, ch / im.height);
-              return Math.min(cw, Math.round(im.width * s)) * Math.min(ch, Math.round(im.height * s));
-            }),
-          );
-          best = Math.max(best, smallest);
-        }
-      }
-      expect(minArea(chosen)).toBe(best);
-    }
-  });
-
-  it("centres an incomplete last row", () => {
-    const layout = layoutReferenceSheet(Array.from({ length: 5 }, () => SQUARE), "16:9");
-    expect(layout).toMatchObject({ rows: 2, cols: 3 });
-    const lastRow = layout.cells.slice(3);
-    const left = (lastRow[0] as SheetCell).x;
-    const right = layout.canvasWidth - ((lastRow[1] as SheetCell).x + (lastRow[1] as SheetCell).w);
-    expect(Math.abs(left - right)).toBeLessThanOrEqual(1);
+  it("names four squares on 1:1 by row and side", () => {
+    const layout = layoutReferenceSheet([SQUARE, SQUARE, SQUARE, SQUARE], "1:1");
+    expect(layout.rowSizes).toEqual([2, 2]);
+    expect(layout.positions).toEqual(["Top Row Left", "Top Row Right", "Bottom Row Left", "Bottom Row Right"]);
   });
 
   it.each([0, 13])("refuses %i images", (count) => {
@@ -153,5 +126,19 @@ describe("layoutReferenceSheet", () => {
     expect(() => layoutReferenceSheet([SQUARE, { width: 0, height: 10 }], "1:1")).toThrow(
       "Reference image 2 has an invalid size 0×10",
     );
+  });
+});
+
+describe("positionName", () => {
+  it.each([
+    [0, 1, 0, 1, "Full Sheet"],
+    [0, 1, 1, 3, "Middle"],
+    [0, 2, 0, 1, "Top Row"],
+    [1, 3, 2, 3, "Middle Row Right"],
+    [2, 3, 0, 2, "Bottom Row Left"],
+    [0, 2, 1, 4, "Top Row, 2nd from Left"],
+    [3, 4, 0, 1, "Row 4"],
+  ])("row %i of %i, column %i of %i → %s", (row, rowCount, column, rowSize, name) => {
+    expect(positionName(row, rowCount, column, rowSize)).toBe(name);
   });
 });

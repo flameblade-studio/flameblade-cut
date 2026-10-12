@@ -88,13 +88,16 @@ export function Icon({
   const Glyph = ICONS[name];
   if (!Glyph) return null;
   const dimension = Number.isFinite(size) && size > 0 ? size : 16;
+  // An icon without a label is decorative: its glyph name ("play.fill") is an
+  // internal id, not something a screen reader should announce.
+  const decorative = ariaHidden || ariaLabel === undefined;
   return (
     <span
       ref={ref}
       className={className}
-      role={ariaHidden ? undefined : "img"}
-      aria-hidden={ariaHidden || undefined}
-      aria-label={ariaHidden ? undefined : (ariaLabel ?? name)}
+      role={decorative ? undefined : "img"}
+      aria-hidden={decorative || undefined}
+      aria-label={decorative ? undefined : ariaLabel}
       style={{
         display: "inline-flex",
         width: dimension,

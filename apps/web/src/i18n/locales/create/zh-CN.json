@@ -38,7 +38,7 @@
       "i2v": "描述图片接下来怎么动：谁做了什么、镜头怎么移动、有什么声音…",
       "flf2v": "描述从第一张图到最后一张图之间发生了什么…",
       "extend": "描述接下来的剧情如何延续…",
-      "ref2v": "先描述每张参考图是谁或什么，再描述视频中发生的事：Reference sheet: … Generated video: …"
+      "ref2v": "描述一个连续镜头。例：Lin Keyun 站在傍晚的高雄港边，海风吹动她的长发，她转头对镜头微笑说：“今天准时下班！”"
     },
     "promptTip": "英文提示词效果最好；中文也可以",
     "firstFrame": "首帧",
@@ -78,13 +78,16 @@
       "ref2v": "参考生视频"
     },
     "references": "参考图（角色、道具、场景）",
-    "referencesTip": "可放 1–12 张，会自动排成一张黑底设定表交给 AI。图越少、裁得越紧（例如只裁人物），角色还原越准；全身图请尽量裁掉多余留白。",
+    "referencesTip": "每张只放一个主体：人物（正面／侧面／背面最好）、道具或场景，背景干净、不要有文字。宣传海报、设定集整页放进来会被缩得很小，AI 几乎看不清。在每张旁边写一句“这是谁／什么、长什么样”，效果会好很多。",
     "add": "添加",
     "addReferences": "添加参考图",
     "removeReference": "移除第 {{index}} 张参考图",
     "needReferences": "请至少添加 1 张参考图",
     "tooManyReferences": "参考图最多 12 张",
-    "referenceCount": "参考图 ×{{count}}"
+    "referenceCount": "参考图 ×{{count}}",
+    "referenceDescribe": "这张是什么？例：角色 Lin Keyun，长棕发、白衬衫、黑长裤",
+    "referenceDescribeLabel": "第 {{index}} 张参考图的说明",
+    "ref2vPromptTip": "写成一个连续镜头：谁在哪里、穿什么、做什么、说什么。人名请写英文或拼音（例：Lin Keyun），并和参考图说明用同一个名字。不要写分镜表或多段剧情；建议 5–10 秒。"
   },
   "feed": {
     "title": "生成记录",

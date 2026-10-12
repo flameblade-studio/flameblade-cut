@@ -15,6 +15,7 @@ import {
   type GenerationAspect,
   type GenerationMode,
   type GenerationRecord,
+  type ImageInput,
 } from "../../services/ltx/types";
 import { estimateSeconds } from "../../services/ltx/workflow-binder";
 import { useGenerationStore } from "../../stores/generation-store";
@@ -252,27 +253,46 @@ export function GenerateForm({ mode }: { mode: GenerationMode }): JSX.Element {
   const engine = useEffectiveEngine();
   const [translating, setTranslating] = useState(false);
 
+  /** ref2v: each reference's Chinese description goes to the model in English too; null when one failed. */
+  const translatedReferences = async (images: readonly ImageInput[]): Promise<ImageInput[] | null> => {
+    const result: ImageInput[] = [];
+    for (const image of images) {
+      const description = image.description?.trim() ?? "";
+      if (!draft.autoTranslate || !containsChinese(description)) {
+        result.push(description === "" ? { path: image.path, name: image.name } : { ...image, description });
+        continue;
+      }
+      const translation = await translateOrToast(description, engine, t);
+      if (!translation) return null;
+      result.push({ ...image, description: translation.english });
+    }
+    return result;
+  };
+
   const onGenerate = async (): Promise<void> => {
     if (problem) {
       toast.warning(t(`create.form.${problem}`));
       return;
     }
-    const plan = translationPlan(draft);
-    if (plan.kind === "none") {
-      submit(request);
-      return;
-    }
-    if (plan.kind === "use") {
-      submit({ ...request, prompt: plan.english, promptOriginal: request.prompt });
-      return;
-    }
     setTranslating(true);
     try {
       // Failure shows a toast and sends nothing: never submit silently untranslated.
+      const referenceImages = await translatedReferences(request.referenceImages);
+      if (referenceImages === null) return;
+      const base = { ...request, referenceImages };
+      const plan = translationPlan(draft);
+      if (plan.kind === "none") {
+        submit(base);
+        return;
+      }
+      if (plan.kind === "use") {
+        submit({ ...base, prompt: plan.english, promptOriginal: request.prompt });
+        return;
+      }
       const translation = await translateOrToast(request.prompt, engine, t);
       if (!translation) return;
       draft.patch({ englishPreview: translation.english, englishPreviewSource: translation.original, englishEdited: false });
-      submit({ ...request, prompt: translation.english, promptOriginal: translation.engine === null ? null : translation.original });
+      submit({ ...base, prompt: translation.english, promptOriginal: translation.engine === null ? null : translation.original });
     } finally {
       setTranslating(false);
     }
@@ -296,7 +316,7 @@ export function GenerateForm({ mode }: { mode: GenerationMode }): JSX.Element {
             onChange={(event) => draft.patch({ prompt: event.target.value })}
           />
           <div className="flex items-center justify-between text-[11px] text-fg-muted">
-            <span>{t("create.form.promptTip")}</span>
+            <span>{t(mode === "ref2v" ? "create.form.ref2vPromptTip" : "create.form.promptTip")}</span>
             <span>{draft.prompt.length}/4000</span>
           </div>
           <TranslationSettings hasChinese={containsChinese(draft.prompt)} />
