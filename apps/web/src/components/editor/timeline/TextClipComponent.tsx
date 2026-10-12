@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useTimelineTouchGesture, listenTimelineGesture } from "./touch-gestures";
 import { TimelineTouchMoveHandle } from "./TimelineTouchMoveHandle";
 import React, { useRef, useState, useEffect, useCallback } from "react";
@@ -37,6 +38,7 @@ export const TextClipComponent: React.FC<TextClipComponentProps> = ({
   trackHeights,
   timelineRef,
 }) => {
+  const { t } = useTranslation();
   const clipRef = useRef<HTMLDivElement>(null);
   const touchGesture = useTimelineTouchGesture();
   const locked = allTracks.find((track) => track.id === textClip.trackId)?.locked ?? false;
@@ -242,7 +244,7 @@ export const TextClipComponent: React.FC<TextClipComponentProps> = ({
           ref={clipRef}
           role="button"
           tabIndex={0}
-          aria-label={`Select text clip ${textClip.text || "Text"}`}
+          aria-label={t("timeline.clip.selectText", { name: textClip.text || t("timeline.filters.text") })}
           aria-pressed={isSelected}
           data-locked={locked}
           onClick={handleClick}
@@ -269,10 +271,10 @@ export const TextClipComponent: React.FC<TextClipComponentProps> = ({
             transition: isInteracting ? 'none' : 'opacity 150ms, box-shadow 150ms',
           }}
         >
-          {isSelected && !locked && <TimelineTouchMoveHandle label={`Move ${textClip.text || "Text"}`} onPointerDown={(event) => touchGesture.start(event, handleMouseDown)} />}
+          {isSelected && !locked && <TimelineTouchMoveHandle label={t("timeline.clip.move", { name: textClip.text || t("timeline.filters.text") })} onPointerDown={(event) => touchGesture.start(event, handleMouseDown)} />}
           <div
             data-timeline-trim="left"
-            aria-label="Trim start"
+            aria-label={t("timeline.clip.trimStart")}
             onPointerDown={(event) => touchGesture.start(event, (e) => handleTrimStart(e, "left"))}
             className={`absolute left-0 top-0 bottom-0 w-2 cursor-ew-resize z-20 flex items-center justify-center transition-opacity ${
               isSelected ? "opacity-100 bg-amber-400" : "opacity-0 group-hover:opacity-100 hover:bg-amber-400/50"
@@ -284,7 +286,7 @@ export const TextClipComponent: React.FC<TextClipComponentProps> = ({
           </div>
           <div
             data-timeline-trim="right"
-            aria-label="Trim end"
+            aria-label={t("timeline.clip.trimEnd")}
             onPointerDown={(event) => touchGesture.start(event, (e) => handleTrimStart(e, "right"))}
             className={`absolute right-0 top-0 bottom-0 w-2 cursor-ew-resize z-20 flex items-center justify-center transition-opacity ${
               isSelected ? "opacity-100 bg-amber-400" : "opacity-0 group-hover:opacity-100 hover:bg-amber-400/50"

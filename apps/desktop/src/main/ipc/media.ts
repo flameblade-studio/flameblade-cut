@@ -44,9 +44,10 @@ export async function transcode(args: {
 export async function extractAudioWav(args: {
   srcPath: string;
   streamIndex?: number;
+  format?: "editor" | "speech";
 }): Promise<{ outPath: string }> {
   const outPath = tmpPath("wav");
-  await new MediaJob(buildExtractAudioArgs(args.srcPath, outPath, args.streamIndex)).run();
+  await new MediaJob(buildExtractAudioArgs(args.srcPath, outPath, args.streamIndex, args.format)).run();
   return { outPath };
 }
 

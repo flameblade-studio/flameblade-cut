@@ -7,6 +7,7 @@ import { ToolcraftIconButton as IconButton } from "@openreel/ui";
 import { ToolcraftLayout as Layout, ToolcraftLayoutContent as LayoutContent, ToolcraftLayoutFooter as LayoutFooter } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
 import { ToolcraftTextInputControl } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
 
 interface MasterPasswordDialogProps {
   isOpen: boolean;
@@ -21,6 +22,7 @@ export const MasterPasswordDialog: React.FC<MasterPasswordDialogProps> = ({
   mode,
   onSubmit,
 }) => {
+  const { t } = useTranslation();
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -50,22 +52,22 @@ export const MasterPasswordDialog: React.FC<MasterPasswordDialogProps> = ({
 
     if (mode === "setup") {
       if (password.length < 8) {
-        setError("Password must be at least 8 characters");
+        setError(t("settings.password.min8"));
         return;
       }
       if (password !== confirmPassword) {
-        setError("Passwords do not match");
+        setError(t("settings.password.mismatch"));
         return;
       }
     }
 
     if (mode === "change") {
       if (newPassword.length < 8) {
-        setError("New password must be at least 8 characters");
+        setError(t("settings.password.newMin8"));
         return;
       }
       if (newPassword !== confirmPassword) {
-        setError("New passwords do not match");
+        setError(t("settings.password.newMismatch"));
         return;
       }
     }
@@ -81,27 +83,27 @@ export const MasterPasswordDialog: React.FC<MasterPasswordDialogProps> = ({
       } else {
         setError(
           mode === "unlock"
-            ? "Incorrect password"
-            : "Operation failed. Check your current password.",
+            ? t("settings.password.incorrect")
+            : t("settings.password.opFailed"),
         );
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      setError(err instanceof Error ? err.message : t("settings.password.errorOccurred"));
     } finally {
       setLoading(false);
     }
-  }, [mode, password, newPassword, confirmPassword, onSubmit, resetForm]);
+  }, [t, mode, password, newPassword, confirmPassword, onSubmit, resetForm]);
 
   const titles = {
-    setup: "Set Master Password",
-    unlock: "Unlock Settings",
-    change: "Change Master Password",
+    setup: t("settings.password.titleSetup"),
+    unlock: t("settings.password.titleUnlock"),
+    change: t("settings.password.titleChange"),
   };
 
   const descriptions = {
-    setup: "Create a master password to encrypt your API keys. This password is never stored — only a verification hash is kept.",
-    unlock: "Enter your master password to access encrypted API keys.",
-    change: "Change your master password. All stored keys will be re-encrypted.",
+    setup: t("settings.password.descSetup"),
+    unlock: t("settings.password.descUnlock"),
+    change: t("settings.password.descChange"),
   };
 
   return (
@@ -127,17 +129,17 @@ export const MasterPasswordDialog: React.FC<MasterPasswordDialogProps> = ({
             <div className="space-y-2">
               <div className="relative">
                 <ToolcraftTextInputControl
-                  label="Current Password"
+                  label={t("settings.password.current")}
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={setPassword}
-                  placeholder="Enter current password"
+                  placeholder={t("settings.password.enterCurrent")}
                   hasAutoFocus
                   width="100%"
                   className="pr-10"
                 />
                 <IconButton
-                  label={showPassword ? "Hide password" : "Show password"}
+                  label={showPassword ? t("settings.password.hide") : t("settings.password.show")}
                   onClick={() => setShowPassword(!showPassword)}
                   variant="ghost"
                   size="sm"
@@ -152,21 +154,21 @@ export const MasterPasswordDialog: React.FC<MasterPasswordDialogProps> = ({
             <div className="space-y-2">
               <div className="relative">
                 <ToolcraftTextInputControl
-                  label={mode === "setup" ? "Password" : "Master Password"}
+                  label={mode === "setup" ? t("settings.password.password") : t("settings.password.master")}
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={setPassword}
                   placeholder={
                     mode === "setup"
-                      ? "Min. 8 characters"
-                      : "Enter master password"
+                      ? t("settings.password.min8Placeholder")
+                      : t("settings.password.enterMaster")
                   }
                   hasAutoFocus
                   width="100%"
                   className="pr-10"
                 />
                 <IconButton
-                  label={showPassword ? "Hide password" : "Show password"}
+                  label={showPassword ? t("settings.password.hide") : t("settings.password.show")}
                   onClick={() => setShowPassword(!showPassword)}
                   variant="ghost"
                   size="sm"
@@ -182,7 +184,7 @@ export const MasterPasswordDialog: React.FC<MasterPasswordDialogProps> = ({
               <div className="space-y-2">
                 <div className="relative">
                   <ToolcraftTextInputControl
-                    label={mode === "change" ? "New Password" : "Confirm Password"}
+                    label={mode === "change" ? t("settings.password.new") : t("settings.password.confirm")}
                     type={showNewPassword ? "text" : "password"}
                     value={mode === "change" ? newPassword : confirmPassword}
                     onChange={(value) =>
@@ -192,14 +194,14 @@ export const MasterPasswordDialog: React.FC<MasterPasswordDialogProps> = ({
                     }
                     placeholder={
                       mode === "change"
-                        ? "Min. 8 characters"
-                        : "Repeat password"
+                        ? t("settings.password.min8Placeholder")
+                        : t("settings.password.repeat")
                     }
                     width="100%"
                     className="pr-10"
                   />
                   <IconButton
-                    label={showNewPassword ? "Hide password" : "Show password"}
+                    label={showNewPassword ? t("settings.password.hide") : t("settings.password.show")}
                     onClick={() => setShowNewPassword(!showNewPassword)}
                     variant="ghost"
                     size="sm"
@@ -212,11 +214,11 @@ export const MasterPasswordDialog: React.FC<MasterPasswordDialogProps> = ({
               {mode === "change" && (
                 <div className="space-y-2">
                   <ToolcraftTextInputControl
-                    label="Confirm New Password"
+                    label={t("settings.password.confirmNew")}
                     type={showNewPassword ? "text" : "password"}
                     value={confirmPassword}
                     onChange={setConfirmPassword}
-                    placeholder="Repeat new password"
+                    placeholder={t("settings.password.repeatNew")}
                     width="100%"
                   />
                 </div>
@@ -235,9 +237,7 @@ export const MasterPasswordDialog: React.FC<MasterPasswordDialogProps> = ({
             <Card variant="muted" padding={2} className="flex items-start gap-2 bg-background-secondary">
               <ShieldCheck size={14} className="mt-0.5 shrink-0 text-primary" />
               <Text type="supporting" color="secondary" className="text-xs">
-                Your password is used to derive an encryption key via PBKDF2
-                (100k iterations). API keys are encrypted with AES-256-GCM.
-                If you forget this password, stored keys cannot be recovered.
+                {t("settings.password.pbkdf2")}
               </Text>
             </Card>
           )}
@@ -248,7 +248,7 @@ export const MasterPasswordDialog: React.FC<MasterPasswordDialogProps> = ({
           <LayoutFooter hasDivider>
             <div className="flex justify-end gap-2">
               <Button
-                label="Cancel"
+                label={t("settings.password.cancel")}
                 variant="secondary"
                 onClick={handleClose}
                 isDisabled={loading}
@@ -256,12 +256,12 @@ export const MasterPasswordDialog: React.FC<MasterPasswordDialogProps> = ({
               <Button
                 label={
                   loading
-                    ? "Processing..."
+                    ? t("settings.password.processing")
                     : mode === "setup"
-                      ? "Set Password"
+                      ? t("settings.password.setPassword")
                       : mode === "unlock"
-                        ? "Unlock"
-                        : "Change Password"
+                        ? t("settings.password.unlock")
+                        : t("settings.password.changePassword")
                 }
                 type="submit"
                 form="master-password-form"

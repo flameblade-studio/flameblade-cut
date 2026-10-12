@@ -1,145 +1,96 @@
-<div align="center">
+<p align="center">
+  <img src="apps/desktop/build/icon.png" width="120" alt="炎劍剪輯 Flameblade Cut" />
+</p>
 
-# OpenReel Video
+<h1 align="center">炎劍剪輯 Flameblade Cut</h1>
 
-### Your footage. Your timeline. Your final cut.
+<p align="center">
+  在自己的電腦上，一條龍完成 <b>AI 生成影片 → 剪輯 → 字幕 → 配音 → 匯出</b>。<br />
+  不用上傳、不用積分、不用月費。
+</p>
 
-An open source video editor for the browser and desktop.<br>
-Cut clips, add captions, mix audio, and finish your video without a watermark.
-
-**[Open the editor](https://openreel.video)** &nbsp;·&nbsp; **[Download desktop](https://github.com/Augani/openreel-video/releases/latest)** &nbsp;·&nbsp; **[Get help](https://github.com/Augani/openreel-video/issues)**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-6366F1?style=flat-square)](LICENSE)
-[![Desktop releases](https://img.shields.io/github/v/release/Augani/openreel-video?include_prereleases&label=Desktop&style=flat-square&color=6366F1)](https://github.com/Augani/openreel-video/releases/latest)
-
-<a href="https://github.com/sponsors/Augani">
-  <img src="https://img.shields.io/badge/Sponsor_me-EA4AAA?style=for-the-badge&amp;logo=githubsponsors&amp;logoColor=white" alt="Sponsor me on GitHub" height="40">
-</a>
-
-</div>
+<p align="center">
+  <b>繁體中文</b> ·
+  <a href="docs/README.zh-CN.md">简体中文</a> ·
+  <a href="docs/README.en.md">English</a> ·
+  <a href="docs/README.ja.md">日本語</a>
+</p>
 
 ---
 
-## Make something worth watching
+> **開發中（0.1.0 預覽版）。** 功能與介面仍在打磨，歡迎回報問題。
 
-From a quick social clip to a longer edit, OpenReel gives you a timeline, a live preview, and control over the details.
+## 能做什麼
 
-| What you want to do | What you can use |
-| :--- | :--- |
-| **Get to the good part** | Trim, split, crop, ripple delete, rearrange clips, and change playback speed. |
-| **Build your story** | Stack video, audio, text, and graphics on multiple tracks. Add transitions and animate with keyframes. |
-| **Make every word readable** | Create and style captions, import SRT subtitles, and add animated titles. |
-| **Make it sound right** | Mix music and dialogue with waveforms, volume controls, fades, EQ, compression, and audio ducking. |
-| **Find your look** | Adjust color with wheels, curves, HSL controls, and LUTs. Add effects, masks, and chroma key. |
-| **Fit the platform** | Work in landscape, portrait, or square, then choose export resolution, frame rate, and bitrate. |
+| 功能 | 說明 |
+|---|---|
+| **AI 生成** | 文字轉影片、圖片轉影片、首尾影格、影片延長、多張參考圖生影片。使用你電腦上的 [LTX-2.5](https://huggingface.co/Lightricks)（透過 ComfyUI），影片附帶聲音。 |
+| **導演台** | 一鏡一句寫分鏡，一鍵全部生成，完成後依序排上剪輯時間軸。 |
+| **剪輯** | 多軌時間軸、修剪分割、轉場、濾鏡與調色、關鍵影格、變速、綠幕去背、自動直式構圖、自動剪掉無聲段落。 |
+| **字幕** | 本機語音辨識（Whisper）自動上字幕、繁體化、斷句、雙語字幕、逐字高亮、社群安全框、匯出 SRT／逐字稿。 |
+| **配音** | Windows 內建語音（免費、離線，含台灣「雅婷」）、Azure Speech、OpenAI 語音；可把字幕一鍵轉成配音。 |
+| **AI 精華** | 丟進一支長片，自動找出最值得剪成短影音的片段；可用文字搜尋影片中的任一段話。 |
+| **匯出** | MP4（H.264）等格式，橫式、直式、方形，最高 4K。 |
 
-## Start editing in minutes
+介面支援 **繁體中文、简体中文、English、日本語**。
 
-1. **[Open OpenReel](https://openreel.video)** and create a project.
-2. **Import your media** and drag clips onto the timeline.
-3. **Shape your edit** with cuts, captions, music, color, and transitions.
-4. **Export your video** using a preset or your own settings.
+## 系統需求
 
-The browser editor needs no installation. For a native app, download a **macOS, Windows, or Linux** build from [Releases](https://github.com/Augani/openreel-video/releases/latest). Desktop builds are currently in **alpha**.
+- Windows 10／11（64 位元）
+- **只剪輯**：一般電腦即可。
+- **AI 生成影片**：NVIDIA **RTX 50 系列**顯示卡（預設流程使用 NVFP4 主模型；建議 16 GB 顯示記憶體以上）、64 GB 系統記憶體，並自行安裝：
+  - [ComfyUI](https://github.com/comfyanonymous/ComfyUI)（git 版或免安裝版皆可）
+  - LTX-2.5 模型檔（需在 [Hugging Face](https://huggingface.co/Lightricks) 同意 Lightricks 的授權條款後下載，依 ComfyUI 官方 LTX-2.5 範本的說明放進對應的 `models` 子資料夾）：
+    - `ltx-2.5-22b-distilled-transformer-nvfp4.safetensors`
+    - `gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors`、`gemma4_e2b_it_int8_convrot.safetensors`
+    - `ltx-2.5-video-vae-conv-bf16.safetensors`、`ltx-2.5-audio-vae-bf16.safetensors`
+    - `ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors`
+    - 參考生影片另需：`ltx-2.5-22b-ic-lora-ingredients-0.9.safetensors` 與 [ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo) 擴充節點
 
-## Keep control of your footage
+  安裝好之後，在「AI 生成」頁右上角的齒輪設定 ComfyUI 資料夾即可。**你不需要自己開 ComfyUI**，炎劍剪輯會在需要時自動在背景啟動、離開時自動關閉。其他顯示卡（RTX 40 系列等）的模型選擇將在之後的版本提供。
 
-**Core editing and rendering happen on your device.** You can import, cut, preview, and export local media without uploading it to a server.
+## 安裝
 
-- **No export watermark.** Your finished video stays yours.
-- **Open source, MIT licensed.** Use it for personal or commercial work, inspect the code, or host your own copy.
-- **Save as you work.** Local autosave and undo/redo help you recover edits. Export project files for backups and moving between sessions.
-- **Choose when to connect.** Optional AI and connected services use network requests; their data handling depends on the provider and feature you choose.
+到 [Releases](https://github.com/flameblade-studio/flameblade-cut/releases) 下載 `FlamebladeCut-<版本>-x64.exe`，執行安裝即可。
 
-Browser storage can be cleared by your browser. Keep backups of your project files and original media for work you want to keep.
+預覽版安裝檔尚未數位簽章，Windows 可能顯示「Windows 已保護您的電腦」：按「其他資訊」→「仍要執行」。每個版本都附 SHA256 校驗碼，可用 `certutil -hashfile FlamebladeCut-<版本>-x64.exe SHA256` 核對。
 
-## Export for the next step
+## 隱私
 
-| Destination | Export options |
-| :--- | :--- |
-| **Social posts, tutorials, and everyday sharing** | MP4 with H.264; landscape, portrait, and square presets. |
-| **Web playback** | WebM, with codec availability determined by your browser and device. |
-| **High-resolution delivery** | Resolution presets up to 4K, plus custom frame rate and bitrate controls. |
-| **Further editing and compositing** | Use desktop for ProRes and exports that need transparency. |
+- 影片、圖片、字幕與專案全部留在你的電腦。
+- 不回傳使用紀錄、不送當機報告。
+- 只有在**你自己設定金鑰並使用**時，才會連線到 Azure Speech 或 OpenAI；金鑰以 Windows 的加密機制（DPAPI）保存在本機，不會出現在畫面、記錄檔或專案檔裡。
+- 第一次使用自動字幕時，會從 Hugging Face 下載語音辨識模型（約 760 MB），之後離線可用。
 
-Browser codec support, available memory, and hardware affect which settings you can use and how fast exports finish. OpenReel adjusts unsupported browser settings where needed; use desktop when you need native export capabilities.
+## 從原始碼建置
 
-## A little help from AI, if you want it
-
-Describe an edit in the **AI Editor** panel: trim a clip, add a title, adjust a transform, or build a sequence through chat. Connect your own OpenAI, Anthropic, or compatible endpoint.
-
-AI is optional and provider usage may cost money. See the [AI Editor setup guide](docs/AGENT-GUIDE.md#bring-your-own-key-web--desktop-chat) for configuration, data handling, and approval controls. Desktop also supports [MCP clients](docs/AGENT-GUIDE.md), so external assistants can work with your project.
-
-## Choose your setup
-
-| | Browser | Desktop |
-| :--- | :--- | :--- |
-| **Get started** | [Open the web editor](https://openreel.video) | [Download a release](https://github.com/Augani/openreel-video/releases/latest) |
-| **Install** | No installation | macOS, Windows, or Linux |
-| **Editing** | Timeline, captions, audio, color, effects, and keyframes | The editor with native desktop integrations |
-| **Export** | Browser-supported codecs and settings | Native FFmpeg export, including ProRes/alpha workflows |
-| **AI connection** | Bring your own provider or compatible endpoint | Provider connections plus external MCP clients |
-
-Use an up-to-date browser. Chrome or Edge is a good starting point; codec and GPU support vary across browsers and operating systems. Larger projects and 4K footage benefit from more memory and a capable GPU.
-
----
-
-## Run it locally
-
-Install [Node.js](https://nodejs.org/) and the pnpm version declared in [`package.json`](package.json), then:
+需要 Node.js 24 以上與 pnpm 11。
 
 ```bash
-git clone https://github.com/Augani/openreel-video.git
-cd openreel-video
 pnpm install
-pnpm dev
+pnpm --filter @openreel/desktop build      # 建置介面與桌面主程式
+pnpm --filter @openreel/desktop dist       # 產生 Windows 安裝檔（apps/desktop/release/）
 ```
 
-Open the local URL printed by Vite, usually `http://localhost:5173`.
+打包時若出現「Cannot create symbolic link」，是打包工具需要建立符號連結：開啟 Windows「開發人員模式」，或以系統管理員身分執行一次即可。
+
+開發時常用：
 
 ```bash
-# Build and preview the browser app
-pnpm build
-pnpm preview
-
-# Check your changes
-pnpm typecheck
-pnpm test
-pnpm lint
+pnpm --filter @openreel/web typecheck
+pnpm --filter @openreel/web test:run
+pnpm --filter @openreel/desktop test:run
 ```
 
-<details>
-<summary><strong>Inside the project</strong></summary>
+## 授權與致謝
 
-<br>
-
-| Path | Purpose |
-| :--- | :--- |
-| [`apps/web`](apps/web) | Browser editor and shared desktop interface |
-| [`apps/desktop`](apps/desktop) | Desktop app, native integrations, and packaging |
-| [`packages/core`](packages/core) | Timeline, media, audio, rendering, and export engines |
-| [`packages/ui`](packages/ui) | Shared interface components |
-| [`packages/agent`](packages/agent) | AI editing tools and routing |
-
-Built with React, TypeScript, Zustand, MediaBunny, WebCodecs, WebGPU, Web Audio, and Three.js.
-
-For desktop packaging, see the [distribution guide](apps/desktop/DISTRIBUTION.md).
-
-</details>
-
-## Help shape OpenReel
-
-**Found a bug?** [Open an issue](https://github.com/Augani/openreel-video/issues/new) with what you tried, what happened, your browser or desktop version, and steps to reproduce it.
-
-**Want to contribute?** Start with the [contributing guide](CONTRIBUTING.md). Fixes, documentation, accessibility improvements, and reproducible test cases all help.
-
-**Want to support development?** [Sponsor Augustus on GitHub](https://github.com/sponsors/Augani) to support continued work on OpenReel.
+- 本專案原始碼以 **MIT 授權**釋出，改作自 [OpenReel Video](https://github.com/Augani/openreel-video)（MIT，© 2024-2026 Augustus Otu and Contributors），原專案說明保留於 [docs/UPSTREAM-README.md](docs/UPSTREAM-README.md)。所有第三方元件與授權列於 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+- ComfyUI、ComfyUI-LTXVideo 與所有 AI 模型**都不包含在本軟體內**，由使用者自行安裝；炎劍剪輯只以獨立程式的方式呼叫本機的 ComfyUI。
+- 「炎劍剪輯」「Flameblade Cut」名稱與炎劍徽章為炎劍文化工作室的識別標誌，不隨 MIT 授權提供；改作時請換成自己的名稱與圖示。
+- 桌面版附帶的 FFmpeg 為獨立執行檔，依其 GPL 授權提供，詳見 `apps/desktop/LICENSES/`。
+- AI 模型不隨本軟體散布。使用 LTX-2.5 等模型時，請遵守各模型的授權條款（例如 LTX-2 Community License 要求公開發表時標示為 AI 生成內容）。
+- 提示詞本機翻譯使用 [Helsinki-NLP/opus-mt-zh-en](https://huggingface.co/Helsinki-NLP/opus-mt-zh-en)（© Language Technology Research Group, University of Helsinki，CC BY 4.0；ONNX 轉檔 [Xenova/opus-mt-zh-en](https://huggingface.co/Xenova/opus-mt-zh-en)），首次使用時自 Hugging Face 下載，不隨本軟體散布。
 
 ---
 
-<div align="center">
-
-Made by [Augustus Otu](https://github.com/Augani) and [contributors](https://github.com/Augani/openreel-video/graphs/contributors).<br>
-[MIT License](LICENSE) &nbsp;·&nbsp; [Updates on X](https://x.com/python_xi) &nbsp;·&nbsp; [Sponsor](https://github.com/sponsors/Augani)
-
-</div>
+由 [炎劍文化工作室 Flameblade Studio](https://www.flamebladestudio.com.tw) 開發維護。

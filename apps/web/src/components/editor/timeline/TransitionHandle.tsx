@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React, { useCallback, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import type { TransitionType } from "@openreel/core";
@@ -22,6 +23,7 @@ export const TransitionHandle: React.FC<TransitionHandleProps> = ({
   isSelected,
   onSelect,
 }) => {
+  const { t } = useTranslation();
   const { centerX, transition, clipA, clipB, edge } = handle;
   const [open, setOpen] = useState(false);
   const [anchor, setAnchor] = useState<{
@@ -58,11 +60,11 @@ export const TransitionHandle: React.FC<TransitionHandleProps> = ({
       setOpen(false);
       if (transition) {
         await updateClipTransition(transition.id, { type });
-        toast.success("Transition updated", type);
+        toast.success(t("timeline.transition.updated"), type);
         return;
       }
       if (!bridge.isInitialized()) {
-        toast.error("Transition engine not ready", "Try again in a moment.");
+        toast.error(t("timeline.transition.notReady"), t("timeline.transition.tryAgainSoon"));
         return;
       }
       const params = bridge.getDefaultParams(type);
@@ -73,13 +75,13 @@ export const TransitionHandle: React.FC<TransitionHandleProps> = ({
         const created = bridge.getTransition(result.transitionId);
         if (created) {
           await addClipTransition(created);
-          toast.success("Transition added", `${type} · 1.0s`);
+          toast.success(t("timeline.transition.added"), `${type} · 1.0s`);
           return;
         }
       }
       toast.error(
-        "Transition failed",
-        result.error || "Could not create transition",
+        t("timeline.transition.failed"),
+        result.error || t("timeline.transition.couldNotCreate"),
       );
     },
     [
@@ -90,6 +92,7 @@ export const TransitionHandle: React.FC<TransitionHandleProps> = ({
       addClipTransition,
       updateClipTransition,
       bridge,
+      t,
     ],
   );
 
@@ -97,8 +100,8 @@ export const TransitionHandle: React.FC<TransitionHandleProps> = ({
     setOpen(false);
     if (!transition) return;
     await removeClipTransition(transition.id);
-    toast.success("Transition removed", "Hard cut restored");
-  }, [transition, removeClipTransition]);
+    toast.success(t("timeline.transition.removed"), t("timeline.transition.hardCut"));
+  }, [transition, removeClipTransition, t]);
 
   const label = transition
     ? `${transition.type} · ${transition.duration.toFixed(1)}s`

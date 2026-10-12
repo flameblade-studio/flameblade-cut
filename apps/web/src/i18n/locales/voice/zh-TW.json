@@ -1,0 +1,105 @@
+{
+  "aiTab": {
+    "title": "AI 工具",
+    "subtitle": "用智慧功能加速剪輯",
+    "back": "返回 AI 工具",
+    "sections": {
+      "generation": "內容生成",
+      "templates": "範本與預設",
+      "media": "媒體庫",
+      "tools": "工具"
+    },
+    "cards": {
+      "voiceover": { "title": "配音", "description": "文字轉語音，直接放上時間軸" },
+      "captions": { "title": "自動字幕", "description": "從音訊自動產生字幕" },
+      "templates": { "title": "專案範本", "description": "從預先建好的專案結構開始" },
+      "filters": { "title": "濾鏡預設", "description": "一鍵套用電影感調色" },
+      "music": { "title": "音樂與音效", "description": "瀏覽免版稅音訊素材" },
+      "multicam": { "title": "多機剪輯", "description": "同步並切換多個機位" }
+    },
+    "footer": "更多 AI 功能即將推出",
+    "unsavedTitle": "未儲存的音訊已捨棄",
+    "unsavedBody": "下次請先存入媒體庫或下載。"
+  },
+  "panel": {
+    "title": "配音",
+    "subtitle": "選好聲音、輸入文字，試聽後放上時間軸",
+    "engine": "配音引擎",
+    "engines": {
+      "windows": "Windows 內建・免費",
+      "azure": "Azure",
+      "openai": "OpenAI",
+      "elevenlabs": "ElevenLabs"
+    },
+    "engineHints": {
+      "windows": "使用 Windows 內建聲音，免費、離線，不需要金鑰。",
+      "azure": "微軟 Azure 雲端神經語音，需要金鑰與區域，依用量計費。",
+      "openai": "OpenAI 雲端語音，需要金鑰，依用量計費。",
+      "elevenlabs": "ElevenLabs 雲端語音，使用設定中的 ElevenLabs 金鑰。"
+    },
+    "voice": "聲音",
+    "voicePlaceholder": "選擇聲音",
+    "searchVoices": "搜尋聲音",
+    "loadingVoices": "正在載入聲音…",
+    "noVoices": "找不到可用的聲音",
+    "refreshVoices": "重新整理聲音清單",
+    "multilingual": "多語言",
+    "text": "配音文字",
+    "textPlaceholder": "輸入要唸出來的文字…",
+    "rate": "語速",
+    "rateNatural": "自然語速",
+    "instructions": "語氣指示（選填）",
+    "instructionsPlaceholder": "例如：溫柔、放慢、像說故事",
+    "preview": "試聽",
+    "stopPreview": "停止試聽",
+    "generating": "產生中…",
+    "insert": "加到時間軸（播放頭位置）",
+    "inserted": "已在 {{time}} 加入配音",
+    "duration": "長度 {{seconds}} 秒",
+    "desktopOnly": "配音功能需要炎劍剪輯桌面版。",
+    "trackName": "配音",
+    "clipPrefix": "配音",
+    "subtitles": {
+      "title": "字幕一鍵配音",
+      "description": "依序為每一句字幕產生配音，放在該句字幕的開始時間。",
+      "start": "為 {{count}} 句字幕配音",
+      "none": "目前專案沒有字幕。",
+      "progress": "正在配音 {{done}} / {{total}}",
+      "cancel": "取消",
+      "cancelled": "已取消，完成 {{placed}} / {{total}} 句。",
+      "done": "完成！已放上 {{placed}} 句配音。",
+      "failed": "第 {{index}} 句失敗（已完成 {{placed}} / {{total}} 句）：{{message}}"
+    },
+    "setup": {
+      "title": "金鑰與區域設定",
+      "configured": "已設定",
+      "notConfigured": "未設定",
+      "azureKey": "Azure Speech 金鑰",
+      "openaiKey": "OpenAI 金鑰",
+      "keyPlaceholder": "貼上金鑰",
+      "save": "儲存",
+      "remove": "移除",
+      "saved": "金鑰已加密儲存",
+      "removed": "金鑰已移除",
+      "saveFailed": "金鑰儲存失敗",
+      "region": "Azure 區域",
+      "regionPlaceholder": "例如 eastasia",
+      "keyHint": "金鑰由 Windows 加密保存在這台電腦，畫面上不會再顯示。"
+    },
+    "errors": {
+      "missing-key": "尚未設定金鑰，請在下方「金鑰與區域設定」輸入。",
+      "invalid-region": "Azure 區域格式不正確，例如 eastasia。",
+      "unsupported-platform": "Windows 內建聲音只能在 Windows 上使用。",
+      "voice-missing": "這台電腦找不到所選的聲音，請重新選擇。",
+      "engine-failed": "語音引擎產生失敗。",
+      "timeout": "等待太久，已逾時。",
+      "http": "雲端服務回應錯誤。",
+      "bad-audio": "服務沒有回傳可用的音訊。",
+      "too-long": "文字太長，請縮短後再試。",
+      "unavailable": "配音功能需要炎劍剪輯桌面版。",
+      "unknown": "發生未預期的錯誤。",
+      "noProject": "請先開啟專案。",
+      "placement": "無法把配音放上時間軸。"
+    }
+  }
+}

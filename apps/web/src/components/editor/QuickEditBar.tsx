@@ -7,6 +7,7 @@ import { useUIStore } from "../../stores/ui-store";
 import { useTimelineStore } from "../../stores/timeline-store";
 import { useInspectorNavigationStore } from "../../stores/inspector-navigation-store";
 import { toast } from "../../stores/notification-store";
+import { useTranslation } from "react-i18next";
 import { splitTimelineItem, trimTimelineItemToPlayhead } from "../../utils/timeline-item-actions";
 import { canQuickEditAtPlayhead } from "./quick-edit";
 
@@ -19,6 +20,7 @@ interface QuickEditBarProps {
 export const QuickEditBar: React.FC<QuickEditBarProps> = ({
   clipId, onCleanAudio, isCleaningAudio,
 }) => {
+  const { t } = useTranslation();
   const project = useProjectStore((state) => state.project);
   const track = project.timeline.tracks.find((candidate) => candidate.clips.some((clip) => clip.id === clipId));
   const clip = track?.clips.find((candidate) => candidate.id === clipId);
@@ -52,7 +54,11 @@ export const QuickEditBar: React.FC<QuickEditBarProps> = ({
       !canQuickEditAtPlayhead(currentClip, timeline.playheadPosition, store.project.settings.frameRate)) return;
     const projectId = store.project.id;
     const time = timeline.playheadPosition;
-    const label = operation === "split" ? "Split clip" : operation === "trimStart" ? "Trim clip start" : "Trim clip end";
+    const label = operation === "split"
+      ? t("editor.quickEdit.splitClip")
+      : operation === "trimStart"
+        ? t("editor.quickEdit.trimClipStart")
+        : t("editor.quickEdit.trimClipEnd");
     editingRef.current = true;
     setBusy(true);
     timeline.pause();
@@ -61,9 +67,9 @@ export const QuickEditBar: React.FC<QuickEditBarProps> = ({
       const success = operation === "split"
         ? await splitTimelineItem(store, clipId, time)
         : await trimTimelineItemToPlayhead(store, clipId, time, operation === "trimStart");
-      if (!success) throw new Error("The edit could not be applied. Try moving the playhead inside the clip.");
+      if (!success) throw new Error(t("editor.quickEdit.editNotApplied"));
     } catch (error) {
-      toast.error(`${label} failed`, error instanceof Error ? error.message : "Please try again.");
+      toast.error(t("editor.quickEdit.failed", { action: label }), error instanceof Error ? error.message : t("common.tryAgainLater"));
     } finally {
       if (useProjectStore.getState().project.id === projectId) store.endHistoryGroup();
       editingRef.current = false;
@@ -72,39 +78,39 @@ export const QuickEditBar: React.FC<QuickEditBarProps> = ({
   };
 
   return (
-    <section aria-label="Quick edit" className="mb-5 rounded-lg border border-accent/25 bg-accent/5 p-3">
-      <h3 className="text-sm font-semibold text-fg">Quick edit</h3>
+    <section aria-label={t("editor.quickEdit.title")} className="mb-5 rounded-lg border border-accent/25 bg-accent/5 p-3">
+      <h3 className="text-sm font-semibold text-fg">{t("editor.quickEdit.title")}</h3>
       <p className="mt-1 mb-3 text-xs leading-relaxed text-fg-3">
-        {track.locked ? "Unlock this track to edit the clip." : canEditHere
-          ? "Trim at the playhead, then finish your video."
-          : "Move the playhead inside this clip to split or trim."}
+        {track.locked ? t("editor.quickEdit.unlockTrack") : canEditHere
+          ? t("editor.quickEdit.trimHint")
+          : t("editor.quickEdit.movePlayhead")}
       </p>
       <div className="grid gap-2" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 145px), 1fr))" }}>
-        <Button label="Split here" icon={<Scissors size={14} aria-hidden />} variant="secondary"
+        <Button label={t("editor.quickEdit.splitHere")} icon={<Scissors size={14} aria-hidden />} variant="secondary"
           onClick={() => void runEdit("split")} isDisabled={disabled || !canEditHere}
           className="min-h-11 w-full justify-center text-xs" />
-        <Button label="Trim start" title="Remove the part before the playhead" variant="secondary"
+        <Button label={t("editor.quickEdit.trimStart")} title={t("editor.quickEdit.trimStartHint")} variant="secondary"
           onClick={() => void runEdit("trimStart")} isDisabled={disabled || !canEditHere}
           className="min-h-11 w-full justify-center text-xs" />
-        <Button label="Trim end" title="Remove the part after the playhead" variant="secondary"
+        <Button label={t("editor.quickEdit.trimEnd")} title={t("editor.quickEdit.trimEndHint")} variant="secondary"
           onClick={() => void runEdit("trimEnd")} isDisabled={disabled || !canEditHere}
           className="min-h-11 w-full justify-center text-xs" />
-        {capabilities.audio && <Button label="Add captions" icon={<Captions size={14} aria-hidden />} variant="secondary"
+        {capabilities.audio && <Button label={t("editor.quickEdit.addCaptions")} icon={<Captions size={14} aria-hidden />} variant="secondary"
           onClick={() => openSection("auto-captions")} isDisabled={disabled || unavailableSource}
           className="min-h-11 w-full justify-center text-xs" />}
-        {capabilities.audio && <Button label={isCleaningAudio ? "Cleaning…" : "Clean audio"}
+        {capabilities.audio && <Button label={isCleaningAudio ? t("editor.quickEdit.cleaning") : t("editor.quickEdit.cleanAudio")}
           icon={isCleaningAudio ? <Loader2 size={14} className="animate-spin" aria-hidden /> : <Volume2 size={14} aria-hidden />}
           variant="secondary" onClick={() => { if (!disabled) void onCleanAudio(); }}
           isDisabled={disabled || isCleaningAudio || unavailableSource}
           className="min-h-11 w-full justify-center text-xs" />}
-        {media?.type === "video" && <Button label="Reframe" icon={<Proportions size={14} aria-hidden />} variant="secondary"
+        {media?.type === "video" && <Button label={t("editor.quickEdit.reframe")} icon={<Proportions size={14} aria-hidden />} variant="secondary"
           onClick={() => openSection("auto-reframe")} isDisabled={disabled || unavailableSource}
           className="min-h-11 w-full justify-center text-xs" />}
-        <Button label="Export video" icon={<Download size={14} aria-hidden />} variant="primary"
+        <Button label={t("editor.quickEdit.exportVideo")} icon={<Download size={14} aria-hidden />} variant="primary"
           onClick={() => useUIStore.getState().openModal("export")} isDisabled={exporting || playbackLocked}
           className="min-h-11 w-full justify-center text-xs" />
       </div>
-      {busy && <p role="status" className="mt-2 text-xs text-fg-3">Applying edit…</p>}
+      {busy && <p role="status" className="mt-2 text-xs text-fg-3">{t("editor.quickEdit.applying")}</p>}
     </section>
   );
 };

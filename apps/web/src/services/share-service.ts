@@ -1,4 +1,4 @@
-import { OPENREEL_CLOUD_URL } from "../config/api-endpoints";
+import { CLOUD_SERVICES_ENABLED, CloudServicesDisabledError, OPENREEL_CLOUD_URL } from "../config/api-endpoints";
 import { shareBaseOrigin } from "./share-origin";
 
 export interface ShareResult {
@@ -26,6 +26,7 @@ export async function uploadForSharing(
   filename: string,
   onProgress?: UploadProgressCallback,
 ): Promise<ShareResult> {
+  if (!CLOUD_SERVICES_ENABLED) throw new CloudServicesDisabledError();
   const formData = new FormData();
   formData.append("file", blob, filename);
 
@@ -75,6 +76,7 @@ export async function uploadForSharing(
 }
 
 export async function getShareInfo(shareId: string): Promise<ShareInfo | null> {
+  if (!CLOUD_SERVICES_ENABLED) return null;
   try {
     const response = await fetch(`${OPENREEL_CLOUD_URL}/shares/${shareId}`);
 
@@ -130,6 +132,7 @@ export function isShareExpired(expiresAt: number): boolean {
 }
 
 export async function checkShareHealth(): Promise<boolean> {
+  if (!CLOUD_SERVICES_ENABLED) return false;
   try {
     const response = await fetch(`${OPENREEL_CLOUD_URL}/health`);
     return response.ok;

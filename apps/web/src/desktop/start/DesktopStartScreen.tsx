@@ -6,6 +6,8 @@ import { ToolcraftClickableCard as ClickableCard } from "@openreel/ui";
 import { ToolcraftHeading as Heading } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
 import { Smartphone, Monitor, Square, Film } from "@/icons/lucide-compat";
+import { useTranslation } from "react-i18next";
+import type { TFunction } from "i18next";
 
 import { OpenReelMark } from "../brand/OpenReelMark";
 import { Icon } from "@/icons/Icon";
@@ -29,16 +31,17 @@ function formatDimensions(format: NewProjectFormat): string {
   return `${format.width} × ${format.height} · ${format.frameRate}fps`;
 }
 
-function formatSavedAt(savedAt: number): string {
+function formatSavedAt(savedAt: number, t: TFunction): string {
   const date = new Date(savedAt);
   const diffDays = Math.floor((Date.now() - savedAt) / (1000 * 60 * 60 * 24));
-  if (diffDays <= 0) return "Today";
-  if (diffDays === 1) return "Yesterday";
-  if (diffDays < 7) return `${diffDays} days ago`;
+  if (diffDays <= 0) return t("desktop.start.today");
+  if (diffDays === 1) return t("desktop.start.yesterday");
+  if (diffDays < 7) return t("desktop.start.daysAgo", { count: diffDays });
   return date.toLocaleDateString();
 }
 
 export function DesktopStartScreen(): JSX.Element {
+  const { t } = useTranslation();
   const [recents, setRecents] = useState<RecentEntry[]>([]);
   const [loadingRecents, setLoadingRecents] = useState<boolean>(true);
   const [openingId, setOpeningId] = useState<string | null>(null);
@@ -76,7 +79,7 @@ export function DesktopStartScreen(): JSX.Element {
     startNewProject(format);
   }, [setDesktopPage]);
 
-  const formatModeLabel = "Video Editor";
+  const formatModeLabel = t("desktop.start.videoEditor");
 
   return (
     <div className="h-full overflow-y-auto bg-bg text-fg">
@@ -84,10 +87,10 @@ export function DesktopStartScreen(): JSX.Element {
         <section>
           <div className="flex items-center gap-3">
             <OpenReelMark size={28} className="text-accent" />
-            <Heading level={1}>New Project</Heading>
+            <Heading level={1}>{t("desktop.start.newProject")}</Heading>
           </div>
           <Text type="supporting" display="block" className="mt-1">
-            Choose a format. You can change this later.
+            {t("desktop.start.chooseFormat")}
           </Text>
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
             {DESKTOP_FORMATS.map((format) => {
@@ -95,7 +98,7 @@ export function DesktopStartScreen(): JSX.Element {
               return (
                 <ClickableCard
                   key={format.id}
-                  label={`${format.label} ${formatModeLabel}`}
+                  label={t("desktop.start.formatCardLabel", { format: t(`desktop.formats.${format.id}`), mode: formatModeLabel })}
                   onClick={() => handleStartProject(format)}
                   padding={5}
                 >
@@ -110,7 +113,7 @@ export function DesktopStartScreen(): JSX.Element {
                       <FormatIcon size={22} aria-hidden />
                     </span>
                     <Text type="large" weight="bold" display="block">
-                      {format.label}
+                      {t(`desktop.formats.${format.id}`)}
                     </Text>
                     <Text type="code" color="secondary" display="block">
                       {formatDimensions(format)}
@@ -124,22 +127,22 @@ export function DesktopStartScreen(): JSX.Element {
         </section>
 
         <section>
-          <Heading level={2} color="secondary">Recent</Heading>
+          <Heading level={2} color="secondary">{t("desktop.start.recent")}</Heading>
           <Card className="mt-3" padding={0}>
             {loadingRecents ? (
               <Text type="supporting" display="block" className="px-4 py-6">
-                Loading recent projects...
+                {t("desktop.start.loadingRecents")}
               </Text>
             ) : recents.length === 0 ? (
               <Text type="supporting" display="block" className="px-4 py-6">
-                No recent projects yet. Start a new project above.
+                {t("desktop.start.noRecents")}
               </Text>
             ) : (
               <ul className="divide-y divide-border">
                 {recents.map((entry) => (
                   <li key={entry.id} className="p-1.5">
                     <ClickableCard
-                      label={`Open ${entry.name}`}
+                      label={t("desktop.start.openProject", { name: entry.name })}
                       isDisabled={openingId === entry.id}
                       onClick={() => handleOpenRecent(entry.id)}
                       padding={2}
@@ -155,7 +158,7 @@ export function DesktopStartScreen(): JSX.Element {
                             {entry.name}
                           </Text>
                           <Text type="supporting" display="block" className="mt-0.5">
-                            {formatSavedAt(entry.savedAt)}
+                            {formatSavedAt(entry.savedAt, t)}
                           </Text>
                         </span>
                       </div>

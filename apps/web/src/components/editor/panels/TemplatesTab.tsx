@@ -10,8 +10,10 @@ import type {
   TemplateCategory,
 } from "@openreel/core";
 import { TEMPLATE_CATEGORIES } from "@openreel/core";
+import { useTranslation } from "react-i18next";
 
 export const TemplatesTab: React.FC = () => {
+  const { t } = useTranslation();
   const getTemplateEngine = useEngineStore((s) => s.getTemplateEngine);
   const [templates, setTemplates] = useState<TemplateSummary[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -87,7 +89,7 @@ export const TemplatesTab: React.FC = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12 text-text-muted text-xs">
-        Loading templates...
+        {t("assets.templatesPanel.loading")}
       </div>
     );
   }
@@ -100,9 +102,9 @@ export const TemplatesTab: React.FC = () => {
           className="absolute left-2.5 top-1/2 -translate-y-1/2 text-text-muted"
         />
         <ToolcraftTextInputControl
-          label="Search templates"
+          label={t("assets.templatesPanel.search")}
           isLabelHidden
-          placeholder="Search templates..."
+          placeholder={t("assets.templatesPanel.searchPlaceholder")}
           value={searchQuery}
           onChange={setSearchQuery}
           className="w-full pl-8 pr-3 py-2 text-xs bg-background-secondary border border-border rounded-lg text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary/50"
@@ -111,7 +113,7 @@ export const TemplatesTab: React.FC = () => {
 
       <div className="flex gap-1.5 flex-wrap">
         <SelectableCard
-          label="All"
+          label={t("assets.templatesPanel.all")}
           isSelected={selectedCategory === "all"}
           onChange={() => setSelectedCategory("all")}
           onClick={() => setSelectedCategory("all")}
@@ -123,7 +125,7 @@ export const TemplatesTab: React.FC = () => {
               : "bg-background-tertiary border-border text-text-muted hover:border-primary/50"
           }`}
         >
-          All
+          {t("assets.templatesPanel.all")}
         </SelectableCard>
         {TEMPLATE_CATEGORIES.slice(0, 6).map((cat) => (
           <SelectableCard
@@ -147,7 +149,7 @@ export const TemplatesTab: React.FC = () => {
 
       {filteredTemplates.length === 0 ? (
         <div className="text-center py-8 text-text-muted text-xs">
-          No templates found
+          {t("assets.templatesPanel.none")}
         </div>
       ) : (
         <div className="grid grid-cols-2 gap-2">

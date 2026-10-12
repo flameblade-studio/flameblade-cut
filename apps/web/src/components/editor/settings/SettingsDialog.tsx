@@ -7,20 +7,23 @@ import { useSettingsStore, type SettingsTab } from "../../../stores/settings-sto
 import { GeneralPanel } from "./GeneralPanel";
 import { ApiKeysPanel } from "./ApiKeysPanel";
 import { McpPanel } from "./McpPanel";
+import { useTranslation } from "react-i18next";
 
 const isDesktop =
   typeof window !== "undefined" && window.openreel?.platform === "desktop";
 
-const TABS: readonly { id: SettingsTab; label: string; icon: typeof Settings }[] = [
-  { id: "general", label: "General", icon: Settings },
-  { id: "api-keys", label: "API Keys", icon: Key },
+/** `labelKey` is resolved with `t()` at render time so the tabs follow the language. */
+const TABS: readonly { id: SettingsTab; labelKey: string; icon: typeof Settings }[] = [
+  { id: "general", labelKey: "settings.tabs.general", icon: Settings },
+  { id: "api-keys", labelKey: "settings.tabs.apiKeys", icon: Key },
   ...(isDesktop
-    ? [{ id: "mcp" as const, label: "MCP", icon: Plug }]
+    ? [{ id: "mcp" as const, labelKey: "settings.tabs.mcp", icon: Plug }]
     : []),
 ];
 
 export const SettingsDialog: React.FC = () => {
   const { settingsOpen, settingsTab, closeSettings, openSettings } = useSettingsStore();
+  const { t } = useTranslation();
 
   const setTab = useCallback((tab: SettingsTab) => {
     openSettings(tab);
@@ -36,8 +39,8 @@ export const SettingsDialog: React.FC = () => {
       <Layout
         header={
           <DialogHeader
-            title="Settings"
-            subtitle="Configure preferences and manage API keys for external services."
+            title={t("settings.title")}
+            subtitle={t("settings.subtitle")}
             onOpenChange={(open) => !open && closeSettings()}
             startContent={<Settings size={18} className="text-primary" aria-hidden />}
           />
@@ -50,7 +53,7 @@ export const SettingsDialog: React.FC = () => {
               className="w-full"
             >
               <TabsList
-                aria-label="Settings"
+                aria-label={t("settings.title")}
                 className="grid h-auto w-full gap-0.5 rounded-[7px] border border-border bg-bg-1 p-0.5"
                 layoutId="settings-tabs"
                 style={{
@@ -70,7 +73,7 @@ export const SettingsDialog: React.FC = () => {
                       id={`settings-tab-${tab.id}`}
                     >
                       <Icon size={14} aria-hidden />
-                      <span className="truncate">{tab.label}</span>
+                      <span className="truncate">{t(tab.labelKey)}</span>
                     </TabsTrigger>
                   );
                 })}

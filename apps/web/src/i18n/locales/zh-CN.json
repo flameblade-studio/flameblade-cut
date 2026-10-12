@@ -1,0 +1,2436 @@
+{
+  "common": {
+    "loading": "加载中…",
+    "width": "宽度",
+    "height": "高度",
+    "apply": "应用",
+    "none": "无",
+    "undo": "撤销",
+    "redo": "重做",
+    "tryAgain": "重试",
+    "tryAgainLater": "请重试。",
+    "time": {
+      "justNow": "刚刚",
+      "minutesAgo": "{{count}} 分钟前",
+      "hoursAgo": "{{count}} 小时前",
+      "daysAgo": "{{count}} 天前"
+    },
+    "cancel": "取消"
+  },
+  "desktop": {
+    "update": {
+      "available": "有新版本 {{version}} 可更新",
+      "availableBody": "炎剑剪辑新版本已可下载。",
+      "download": "下载",
+      "later": "稍后再说",
+      "downloading": "正在下载更新…",
+      "ready": "更新 {{version}} 已就绪",
+      "readyBody": "重启即可安装；如有未保存的更改，会先询问是否保存。",
+      "restartInstall": "重启并安装"
+    },
+    "window": {
+      "minimize": "最小化",
+      "maximize": "最大化",
+      "close": "关闭",
+      "restore": "还原"
+    },
+    "bootstrap": {
+      "failed": "编辑器启动失败：{{message}}",
+      "loading": "正在加载编辑器…"
+    },
+    "start": {
+      "today": "今天",
+      "yesterday": "昨天",
+      "daysAgo": "{{count}} 天前",
+      "videoEditor": "视频剪辑",
+      "newProject": "新建项目",
+      "chooseFormat": "请选择画面比例，之后仍可更改。",
+      "formatCardLabel": "{{format}}{{mode}}",
+      "recent": "最近使用",
+      "loadingRecents": "正在加载最近的项目…",
+      "noRecents": "暂无最近项目，请在上方新建项目。",
+      "openProject": "打开“{{name}}”"
+    },
+    "formats": {
+      "vertical": "竖屏",
+      "horizontal": "横屏",
+      "square": "方形"
+    },
+    "export": {
+      "cancel": "取消导出",
+      "dismissError": "关闭导出错误提示",
+      "saved": "已保存！",
+      "export": "导出"
+    },
+    "dock": {
+      "media": "素材",
+      "viewer": "预览",
+      "inspector": "属性",
+      "timeline": "时间轴"
+    }
+  },
+  "settings": {
+    "title": "设置",
+    "subtitle": "配置偏好设置，并管理外部服务的 API 密钥。",
+    "tabs": {
+      "general": "常规",
+      "apiKeys": "API 密钥",
+      "mcp": "MCP"
+    },
+    "general": {
+      "language": "界面语言",
+      "languageHint": "选择整个编辑器使用的语言。",
+      "composition": "项目画面",
+      "compositionHint": "设置项目的画布尺寸。可选择 TikTok、Reels、YouTube 等预设，或自定义数值。",
+      "presets": {
+        "landscape1080": "16:9 横屏（1080p）",
+        "vertical": "9:16 竖屏（抖音/Reels）",
+        "square": "1:1 方形",
+        "portrait": "4:5 竖版",
+        "standard": "4:3 标准",
+        "cinematic": "21:9 电影宽屏",
+        "landscape4k": "4K 横屏"
+      },
+      "editingFrameRate": "剪辑帧率",
+      "editingFrameRateHint": "影响预览播放、逐帧移动和默认导出帧率；现有片段的时间不会改变。",
+      "backgroundFill": "背景填充",
+      "backgroundFillHint": "当片段与画面比例不一致时，填充周围的画布。",
+      "noBackgroundFill": "不填充背景",
+      "blurBackgroundFill": "用模糊画面填充背景",
+      "blur": "模糊",
+      "backgroundColor": "背景颜色 {{color}}",
+      "autoSave": "自动保存",
+      "enableAutoSave": "启用自动保存",
+      "enableAutoSaveHint": "定时自动保存项目",
+      "saveEvery": "保存间隔",
+      "autoSaveInterval": "自动保存间隔",
+      "minutes_one": "{{count}} 分钟",
+      "minutes_other": "{{count}} 分钟",
+      "aiConnections": "AI 连接",
+      "aiConnectionsHint": "连接由你自行管理的兼容端点。炎剑剪辑不会替你选择服务商或模型。",
+      "ttsLabel": "文字转语音/语音转换/音效",
+      "ttsProvider": "文字转语音服务",
+      "llmFormat": "AI 助手 API 格式",
+      "chooseFormat": "选择 API 格式…",
+      "anthropicEndpoint": "Anthropic 兼容端点",
+      "openaiEndpoint": "OpenAI 兼容端点",
+      "endpointHint": "请输入 API 主机地址，以及该主机提供、支持工具调用的完整模型 ID。",
+      "baseUrl": "基础 URL",
+      "modelId": "模型 ID",
+      "modelIdPlaceholder": "输入端点提供的任一模型 ID",
+      "modelHint": "可在 AI 对话设置中加载可用模型；无法自动检测时，请手动输入 ID。API 密钥为选填。",
+      "chooseFormatHint": "请先选择 API 格式，再配置主机和模型。",
+      "aggregator": "AI 聚合服务",
+      "aggregatorHint": "视频/图片生成、超分辨率放大与创作 AI 工具",
+      "aggregatorProvider": "AI 聚合服务提供商"
+    },
+    "unknownError": "未知错误",
+    "apiKeys": {
+      "masterSet": "已设置主密码",
+      "masterSetHint": "你的 API 密钥将以 AES-256-GCM 加密。",
+      "unlocked": "会话已解锁",
+      "unlockedHint": "现在可以管理 API 密钥。",
+      "passwordChanged": "密码已更改",
+      "passwordChangedHint": "所有密钥都已重新加密。",
+      "keySaved": "已保存 {{name}} 密钥",
+      "keySavedHint": "API 密钥已加密并保存。",
+      "saveFailed": "保存失败",
+      "deleteFailed": "删除失败",
+      "decryptFailed": "解密失败",
+      "secureTitle": "安全的 API 密钥存储",
+      "secureHint": "设置主密码，即可在本地加密并保存你的 API 密钥。密钥以 AES-256-GCM 加密，只会在向所选服务发出请求时发送。",
+      "setUp": "设置主密码",
+      "locked": "会话已锁定",
+      "lockedHint": "请输入主密码以查看和管理 API 密钥。",
+      "unlock": "解锁",
+      "storedCount_one": "已保存 {{count}} 个密钥",
+      "storedCount_other": "已保存 {{count}} 个密钥",
+      "changePassword": "更改密码",
+      "lock": "锁定",
+      "docs": "{{name}} 文档",
+      "hideKey": "隐藏密钥",
+      "showKey": "显示密钥",
+      "deleteKey": "删除密钥",
+      "addedUpdated": "添加于 {{added}} · 更新于 {{updated}}",
+      "keychain": "已安全保存在系统钥匙串",
+      "addTitleOptional": "添加可选的 {{name}} 密钥",
+      "addTitle": "添加 {{name}} 密钥",
+      "apiKey": "API 密钥",
+      "pasteOptional": "如果你的端点需要，请粘贴 API 密钥",
+      "paste": "在此粘贴你的 API 密钥",
+      "cancel": "取消",
+      "saveKey": "保存密钥",
+      "addApiKey": "添加 API 密钥",
+      "addServiceOptional": "添加可选的 {{name}} API 密钥",
+      "addService": "添加 {{name}} API 密钥",
+      "optionalSuffix": "（可选密钥）"
+    },
+    "mcp": {
+      "copied": "已复制{{label}}",
+      "copyFailed": "复制失败",
+      "clipboardUnavailable": "无法使用剪贴板。",
+      "tokenRotated": "已轮换令牌",
+      "tokenRotatedHint": "请用新的令牌更新你的 MCP 客户端。",
+      "rotateFailed": "轮换失败",
+      "connectionOk": "连接正常",
+      "toolsResponded": "服务器响应了 {{count}} 个工具。",
+      "connectionFailed": "连接失败",
+      "noResponse": "没有响应",
+      "desktopOnly": "仅限桌面版",
+      "desktopOnlyHint": "MCP 服务器在炎剑剪辑桌面版内运行，让外部 AI 客户端（Claude Desktop、Cursor、Cline）编辑你的项目。请在桌面版打开炎剑剪辑进行设置。",
+      "server": "MCP 服务器",
+      "serverHint": "本地 Model Context Protocol 服务器让 AI 客户端能通过与内置聊天相同的工具操作此编辑器。它只监听本地回环，并需要下方的 Bearer 令牌。",
+      "status": "状态",
+      "running": "运行中",
+      "stopped": "已停止",
+      "tools": "工具",
+      "checking": "正在检查目录…",
+      "available": "{{count}} 个可用",
+      "copyUrl": "复制网址",
+      "url": "网址",
+      "token": "令牌",
+      "hideToken": "隐藏令牌",
+      "showToken": "显示令牌",
+      "copyToken": "复制令牌",
+      "rotateToken": "轮换令牌",
+      "testing": "测试中…",
+      "test": "测试连接",
+      "workflows": "可用工作流程",
+      "workflowsHint": "实时目录包含针对每个桌面工作区的专用工具。",
+      "wfEditor": "视频编辑器",
+      "wfEditorHint": "轨道、片段、效果、转场、音频与字幕",
+      "wfMotion": "动态创作",
+      "wfMotionHint": "图层、动画、着色器、遮罩、效果与渲染队列",
+      "wfCreation": "创作与 3D",
+      "wfCreationHint": "场景、产品、材质、摄像机、骨骼与预览",
+      "wfProject": "项目操作",
+      "wfProjectHint": "检查、导入、保存、撤销、导出与诊断",
+      "clientSetup": "客户端设置",
+      "clientSetupHint": "将以下内容添加到你的 MCP 客户端配置（Claude Desktop、Cursor、Cline）。转接程序会自动连接到运行中的应用。",
+      "copyConfig": "复制配置",
+      "config": "配置",
+      "trusted": "受信任的本地客户端",
+      "autoAllow": "自动允许破坏性操作",
+      "autoAllowHint": "关闭时，通过 MCP 发出的破坏性或高成本工具调用会被拒绝，并显示需要确认的通知。只有在你信任所有已连接的本地客户端时才开启。"
+    },
+    "password": {
+      "min8": "密码至少需要 8 个字符",
+      "mismatch": "两次输入的密码不一致",
+      "newMin8": "新密码至少需要 8 个字符",
+      "newMismatch": "两次输入的新密码不一致",
+      "incorrect": "密码错误",
+      "opFailed": "操作失败，请检查当前密码。",
+      "errorOccurred": "发生错误",
+      "titleSetup": "设置主密码",
+      "titleUnlock": "解锁设置",
+      "titleChange": "更改主密码",
+      "descSetup": "创建主密码来加密你的 API 密钥。密码本身不会被保存，只会保留验证用的哈希值。",
+      "descUnlock": "请输入主密码以访问加密的 API 密钥。",
+      "descChange": "更改你的主密码，所有已保存的密钥都会重新加密。",
+      "current": "当前密码",
+      "enterCurrent": "输入当前密码",
+      "hide": "隐藏密码",
+      "show": "显示密码",
+      "password": "密码",
+      "master": "主密码",
+      "min8Placeholder": "至少 8 个字符",
+      "enterMaster": "输入主密码",
+      "new": "新密码",
+      "confirm": "确认密码",
+      "repeat": "再次输入密码",
+      "confirmNew": "确认新密码",
+      "repeatNew": "再次输入新密码",
+      "pbkdf2": "你的密码会通过 PBKDF2（10 万次迭代）派生出加密密钥，API 密钥则以 AES-256-GCM 加密。如果忘记此密码，已保存的密钥将无法恢复。",
+      "cancel": "取消",
+      "processing": "处理中…",
+      "setPassword": "设置密码",
+      "unlock": "解锁",
+      "changePassword": "更改密码"
+    }
+  },
+  "editor": {
+    "theme": {
+      "system": "跟随系统",
+      "light": "浅色",
+      "dark": "深色",
+      "auto": "跟随系统",
+      "action": "主题：{{current}}，切换为{{next}}"
+    },
+    "rail": {
+      "tools": "编辑器工具",
+      "backHome": "返回首页",
+      "search": "搜索工具、效果，或询问 AI",
+      "history": "操作历史",
+      "keyframeEditor": "关键帧编辑器",
+      "audioMixer": "混音器",
+      "aiChat": "AI 剪辑对话",
+      "projectJsonComments": "项目 JSON / 注释",
+      "more": "更多编辑操作",
+      "settings": "设置与 API 密钥",
+      "screenRecorder": "屏幕录制",
+      "editorTour": "编辑器导览",
+      "animationTour": "动画与效果导览",
+      "helpShortcuts": "帮助与快捷键（按 ?）",
+      "projectJson": "项目 JSON",
+      "cmdK": "按 Cmd+K 搜索"
+    },
+    "toolbar": {
+      "recordingFailed": "录制失败",
+      "recordingEmpty": "未录制到任何视频数据，请重试。",
+      "screenImportFailed": "导入屏幕录制失败",
+      "webcamImportFailed": "导入摄像头录制失败",
+      "recordingsImported_one": "已导入 {{count}} 段录制！",
+      "recordingsImported_other": "已导入 {{count}} 段录制！",
+      "screenAndWebcamAdded": "屏幕与摄像头画面已添加到素材，可在时间轴上合成。",
+      "screenAdded": "屏幕录制已添加到素材。",
+      "importFailed": "导入失败",
+      "export": {
+        "mp4": "MP4 标准",
+        "mp4Desc": "{{resolution}} H.264 - 网页与社交平台",
+        "4k": "4K 标准",
+        "4kDesc": "3840×2160 - YouTube 4K",
+        "1080pHigh": "1080p 高画质",
+        "1080pHighDesc": "1920×1080 30fps - 高码率",
+        "1080p60": "1080p 60fps",
+        "1080p60Desc": "1920×1080 - 流畅播放",
+        "wav": "仅音频（WAV）",
+        "wavDesc": "无压缩音频"
+      },
+      "projectName": "项目名称",
+      "chooseExportSettings": "选择导出设置",
+      "exportNeedsContent": "请先在时间轴添加素材或文字，才能导出",
+      "exportOptions": "导出选项",
+      "bestMatch": "最佳匹配",
+      "estimate": "预计 {{time}}",
+      "customExport": "自定义导出…",
+      "customExportDesc": "完整设置，含 AI 超分放大",
+      "compressVideo": "压缩视频…",
+      "compressVideoDesc": "将视频压缩到指定文件大小",
+      "closeHistory": "关闭操作历史"
+    },
+    "init": {
+      "failed": "编辑器无法启动",
+      "initializing": "正在初始化编辑器…"
+    },
+    "workspace": {
+      "label": "编辑工作区",
+      "edit": "编辑",
+      "ai": "AI"
+    },
+    "quickEdit": {
+      "title": "快速剪辑",
+      "splitClip": "分割片段",
+      "trimClipStart": "修剪片段开头",
+      "trimClipEnd": "修剪片段结尾",
+      "editNotApplied": "无法应用此编辑，请将播放头移到片段范围内再试。",
+      "failed": "{{action}}失败",
+      "unlockTrack": "请先解锁此轨道，才能编辑片段。",
+      "trimHint": "在播放头位置修剪，然后完成你的视频。",
+      "movePlayhead": "将播放头移到此片段内，即可分割或修剪。",
+      "splitHere": "在此分割",
+      "trimStart": "修剪开头",
+      "trimStartHint": "删除播放头之前的部分",
+      "trimEnd": "修剪结尾",
+      "trimEndHint": "删除播放头之后的部分",
+      "addCaptions": "添加字幕",
+      "cleaning": "处理中…",
+      "cleanAudio": "清理音频",
+      "reframe": "重新构图",
+      "exportVideo": "导出视频",
+      "applying": "正在应用编辑…"
+    },
+    "projectSwitcher": {
+      "current": "当前项目",
+      "saveName": "保存项目名称",
+      "rename": "重命名项目",
+      "newProjectHint": "从全新的画布开始",
+      "recent": "最近的项目"
+    }
+  },
+  "shortcuts": {
+    "title": "键盘快捷键",
+    "subtitle": "查找快捷键、选择预设方案，或自定义按键。",
+    "search": "搜索快捷键",
+    "searchPlaceholder": "搜索快捷键…",
+    "preset": "预设方案",
+    "applyPreset": "应用“{{name}}”预设方案",
+    "resetAll": "全部重置",
+    "category": "快捷键类别",
+    "all": "全部",
+    "setFor": "设置“{{name}}”的快捷键",
+    "pressKeys": "请按下按键…",
+    "resetToDefault": "恢复默认",
+    "noResults": "未找到快捷键",
+    "footerBefore": "点击快捷键即可自定义 • 按",
+    "footerAfter": "关闭",
+    "conflict": "该快捷键已被“{{name}}”占用，请选择其他按键。",
+    "defaultConflict": "默认按键已被“{{name}}”占用。请先修改该快捷键，或全部重置。",
+    "categories": {
+      "playback": "播放",
+      "editing": "编辑",
+      "selection": "选择",
+      "timeline": "时间轴",
+      "view": "视图",
+      "file": "文件",
+      "tools": "工具"
+    },
+    "items": {
+      "playback": {
+        "playPause": {
+          "name": "播放/暂停",
+          "description": "切换播放"
+        },
+        "frameBack": {
+          "name": "上一帧",
+          "description": "后退一帧"
+        },
+        "frameForward": {
+          "name": "下一帧",
+          "description": "前进一帧"
+        },
+        "secondBack": {
+          "name": "后退 1 秒",
+          "description": "后退 1 秒"
+        },
+        "secondForward": {
+          "name": "前进 1 秒",
+          "description": "前进 1 秒"
+        },
+        "jump5Back": {
+          "name": "后退 5 秒",
+          "description": "后退 5 秒"
+        },
+        "jump5Forward": {
+          "name": "前进 5 秒",
+          "description": "前进 5 秒"
+        },
+        "goToStart": {
+          "name": "跳到开头",
+          "description": "跳到时间轴开头"
+        },
+        "goToEnd": {
+          "name": "跳到结尾",
+          "description": "跳到时间轴结尾"
+        },
+        "prevClip": {
+          "name": "上一个片段",
+          "description": "跳到上一个片段边缘"
+        },
+        "nextClip": {
+          "name": "下一个片段",
+          "description": "跳到下一个片段边缘"
+        },
+        "markLoopStart": {
+          "name": "标记循环起点",
+          "description": "在播放头位置设置预览循环起点"
+        },
+        "markLoopEnd": {
+          "name": "标记循环终点",
+          "description": "在播放头位置设置预览循环终点"
+        },
+        "toggleLoop": {
+          "name": "切换预览循环",
+          "description": "重复播放标记范围或整条时间轴"
+        }
+      },
+      "editing": {
+        "undo": {
+          "name": "撤销",
+          "description": "撤销上一步操作"
+        },
+        "redo": {
+          "name": "重做",
+          "description": "重做上一步撤销的操作"
+        },
+        "cut": {
+          "name": "剪切",
+          "description": "剪切所选片段"
+        },
+        "copy": {
+          "name": "复制",
+          "description": "复制所选片段"
+        },
+        "paste": {
+          "name": "粘贴",
+          "description": "在播放头位置粘贴片段"
+        },
+        "duplicate": {
+          "name": "创建副本",
+          "description": "为所选片段创建副本"
+        },
+        "delete": {
+          "name": "删除",
+          "description": "删除所选片段"
+        },
+        "rippleDelete": {
+          "name": "波纹删除",
+          "description": "删除并自动填补空隙"
+        },
+        "split": {
+          "name": "分割",
+          "description": "在播放头位置分割片段"
+        },
+        "trimStart": {
+          "name": "修剪开头",
+          "description": "将片段开头修剪到播放头"
+        },
+        "trimEnd": {
+          "name": "修剪结尾",
+          "description": "将片段结尾修剪到播放头"
+        }
+      },
+      "selection": {
+        "selectAll": {
+          "name": "全选",
+          "description": "选择所有片段"
+        },
+        "deselect": {
+          "name": "取消选择",
+          "description": "清除当前选择"
+        }
+      },
+      "timeline": {
+        "toggleSnap": {
+          "name": "切换吸附",
+          "description": "开启或关闭吸附"
+        },
+        "zoomIn": {
+          "name": "放大",
+          "description": "放大时间轴"
+        },
+        "zoomOut": {
+          "name": "缩小",
+          "description": "缩小时间轴"
+        },
+        "fitTimeline": {
+          "name": "适应时间轴",
+          "description": "使时间轴适应窗口"
+        }
+      },
+      "view": {
+        "showShortcuts": {
+          "name": "显示快捷键",
+          "description": "显示键盘快捷键"
+        }
+      },
+      "file": {
+        "save": {
+          "name": "保存",
+          "description": "保存项目"
+        },
+        "export": {
+          "name": "导出",
+          "description": "导出视频"
+        }
+      },
+      "tools": {
+        "addText": {
+          "name": "添加文字",
+          "description": "添加文字片段"
+        },
+        "addMarker": {
+          "name": "添加标记",
+          "description": "在播放头位置添加标记"
+        }
+      }
+    },
+    "presets": {
+      "openreel": {
+        "name": "炎剑剪辑默认",
+        "description": "炎剑剪辑默认快捷键"
+      },
+      "capcut": {
+        "name": "剪映 (CapCut)",
+        "description": "剪映风格快捷键"
+      },
+      "premiere": {
+        "name": "Adobe Premiere",
+        "description": "Premiere Pro 风格快捷键"
+      },
+      "finalcut": {
+        "name": "Final Cut Pro",
+        "description": "Final Cut Pro 风格快捷键"
+      },
+      "davinci": {
+        "name": "DaVinci Resolve",
+        "description": "DaVinci Resolve 风格快捷键"
+      }
+    }
+  },
+  "timeline": {
+    "filters": {
+      "all": "全部",
+      "video": "视频",
+      "image": "图片",
+      "audio": "音频",
+      "text": "文字",
+      "graphics": "图形"
+    },
+    "addTrack": {
+      "track": "轨道",
+      "dialogue": "对白",
+      "music": "音乐",
+      "captions": "字幕"
+    },
+    "addTrackLabel": "添加轨道",
+    "tools": {
+      "undo": "撤销（⌘Z）",
+      "redo": "重做（⇧⌘Z）",
+      "split": "分割（S）",
+      "trimStart": "将开头修剪到播放头（Q）",
+      "trimEnd": "将结尾修剪到播放头（W）",
+      "delete": "删除（Del）",
+      "duplicate": "创建副本（⌘D）",
+      "rippleDelete": "波纹删除（⇧Del）",
+      "zoomOut": "缩小",
+      "zoomIn": "放大",
+      "zoom": "时间轴缩放",
+      "snapOn": "吸附：开（N）",
+      "snapOff": "吸附：关（N）",
+      "largeTracks": "大轨道",
+      "compactTracks": "紧凑轨道",
+      "restoreLayout": "还原布局",
+      "maximize": "最大化时间轴（更多空间）"
+    },
+    "layers": {
+      "label": "轨道图层",
+      "title": "轨道图层",
+      "manage": "管理轨道图层",
+      "deleteNamed": "删除“{{name}}”",
+      "confirmDelete": "要删除“{{name}}”吗？",
+      "confirmDeleteBody": "轨道上的片段会一并移除，之后仍可撤销。",
+      "deleteTrack": "删除轨道",
+      "searchPlaceholder": "搜索轨道",
+      "search": "搜索轨道图层",
+      "types": "轨道图层类型",
+      "empty": "暂无轨道",
+      "noMatch": "没有符合筛选条件的轨道",
+      "renameNamed": "重命名“{{name}}”",
+      "duplicateNamed": "复制“{{name}}”",
+      "hideNamed": "隐藏“{{name}}”",
+      "muteNamed": "将“{{name}}”静音",
+      "soloNamed": "独奏“{{name}}”",
+      "lockNamed": "锁定“{{name}}”",
+      "moveUpNamed": "将“{{name}}”上移",
+      "moveDownNamed": "将“{{name}}”下移"
+    },
+    "addedTo": "已添加到“{{name}}”",
+    "clipMenu": {
+      "videoClip": "视频片段",
+      "audioClip": "音频片段",
+      "imageClip": "图片片段",
+      "clip": "片段",
+      "copyClip": "复制片段",
+      "duplicate": "创建副本",
+      "selectAllOnTrack": "选择此轨道上的所有片段",
+      "selectAllCaptions": "选择所有字幕",
+      "splitAtPlayhead": "在播放头位置分割",
+      "closeGap": "填补与前一片段的空隙",
+      "effects": "效果",
+      "copyEffects": "复制效果",
+      "pasteEffects": "粘贴效果",
+      "separateAudio": "分离音频",
+      "copyAudioEffects": "复制音频效果",
+      "pasteAudioEffects": "粘贴音频效果",
+      "rippleDelete": "波纹删除",
+      "delete": "删除",
+      "typedClip": "{{type}}片段",
+      "types": {
+        "shape": "形状",
+        "svg": "SVG",
+        "sticker": "贴纸",
+        "emoji": "表情符号",
+        "text": "文字",
+        "graphics": "图形"
+      }
+    },
+    "track": {
+      "rename": "重命名轨道",
+      "removeGaps": "移除空隙",
+      "ungroup": "取消轨道编组",
+      "groupSection": "一起移动和修剪",
+      "groupWith": "与“{{name}}”编组",
+      "name": "轨道名称",
+      "options": "“{{name}}”选项",
+      "show": "显示轨道",
+      "hide": "隐藏轨道",
+      "mute": "静音轨道",
+      "unmute": "取消轨道静音",
+      "solo": "独奏轨道",
+      "clearSolo": "取消独奏",
+      "lock": "锁定轨道",
+      "unlock": "解锁轨道",
+      "lockShort": "锁定",
+      "unlockShort": "解锁",
+      "grouped": "轨道已编组",
+      "unmuteNamed": "取消“{{name}}”静音",
+      "clearSoloNamed": "取消“{{name}}”独奏"
+    },
+    "transition": {
+      "updated": "转场已更新",
+      "notReady": "转场引擎尚未就绪",
+      "tryAgainSoon": "请稍后再试。",
+      "added": "已添加转场",
+      "failed": "转场应用失败",
+      "couldNotCreate": "无法创建转场",
+      "removed": "已移除转场",
+      "hardCut": "已恢复为硬切",
+      "introApplied": "已应用入场转场",
+      "outroApplied": "已应用出场转场",
+      "applied": "已应用转场"
+    },
+    "effect": {
+      "applied": "已应用效果",
+      "added": "已添加 {{effect}}",
+      "failed": "效果应用失败",
+      "couldNotApply": "无法应用效果"
+    },
+    "clip": {
+      "select": "选择片段“{{name}}”",
+      "selectText": "选择文字片段“{{name}}”",
+      "selectTyped": "选择{{type}}片段",
+      "move": "移动“{{name}}”",
+      "moveGraphic": "移动图形",
+      "trimStartOf": "修剪“{{name}}”的开头",
+      "trimEndOf": "修剪“{{name}}”的结尾",
+      "trimStart": "修剪开头",
+      "trimEnd": "修剪结尾",
+      "adjustmentLayer": "{{name}}（调整图层）"
+    },
+    "marker": {
+      "label": "标记名称",
+      "remove": "移除标记"
+    },
+    "selectAllCaptions": "选择所有字幕（{{count}}）",
+    "trackNames": {
+      "Track": "轨道",
+      "Video": "视频",
+      "Audio": "音频",
+      "Image": "图片",
+      "Text": "文字",
+      "Graphics": "图形",
+      "Dialogue": "对白",
+      "Music": "音乐",
+      "Captions": "字幕",
+      "Effects": "音效"
+    }
+  },
+  "export": {
+    "projectPreset": {
+      "name": "项目设置",
+      "description": "沿用项目的画布尺寸和帧率"
+    },
+    "title": "导出视频",
+    "subtitle": "选择现成的预设，或自行微调每一项设置。",
+    "mode": "导出模式",
+    "tabs": {
+      "presets": "预设",
+      "reduce": "缩小文件",
+      "custom": "自定义设置"
+    },
+    "matchSource": "与源文件一致",
+    "browserLimitPrefix": "浏览器限制：将以下列规格导出",
+    "quickExport": "快速导出",
+    "browsePresets": "浏览预设",
+    "forYourVideo": "适合你的视频",
+    "recommended": "推荐",
+    "recommendedForVideo": "为此视频推荐",
+    "selectPresetHint": "选择预设即可查看预计文件大小和导出时间。",
+    "optionsCount_one": "{{count}} 个选项",
+    "optionsCount_other": "{{count}} 个选项",
+    "maxDuration": "最长 {{seconds}} 秒",
+    "reduce": {
+      "intro": "将项目重新编码为更小的文件。可选择画质档位，或指定目标大小，方便通过邮件、WhatsApp 或 Discord 分享。",
+      "by": "缩小方式",
+      "quality": "画质",
+      "targetSize": "目标大小",
+      "light": "轻度",
+      "lightHint": "稍微缩小",
+      "balanced": "平衡",
+      "balancedHint": "兼顾画质与大小",
+      "strong": "强力",
+      "strongHint": "文件最小",
+      "estimatedOutput": "预计输出",
+      "videoKbps": "视频 {{kbps}} kbps",
+      "audioKbps": "音频 {{kbps}} kbps",
+      "savings": "比源文件小 {{percent}}%",
+      "empty": "请先在时间轴添加片段，才能预估压缩后的大小。"
+    },
+    "custom": {
+      "title": "自定义导出",
+      "subtitle": "设置此文件的视频、编码和音频。",
+      "videoHint": "封装格式、编码器、分辨率和帧率",
+      "format": "格式",
+      "codec": "编码器",
+      "resolution": "分辨率",
+      "original": "原始尺寸（{{width}}x{{height}}）",
+      "vertical1080": "竖屏 1080p",
+      "square1080": "方形 1080",
+      "frameRate": "帧率",
+      "qualityEncoding": "画质与编码",
+      "qualityEncodingHint": "在画质、速度和文件大小之间取得平衡",
+      "bitrate": "码率（kbps）",
+      "smaller": "较小",
+      "better": "更好",
+      "exportMode": "导出模式",
+      "fast": "快速",
+      "fastHint": "硬件编码，速度最快",
+      "balanced": "平衡",
+      "balancedHint": "硬件编码，画质好且文件小",
+      "smallest": "最小",
+      "smallestHint": "软件编码，文件最小",
+      "audioHint": "格式、采样率和码率",
+      "audioFormat": "音频格式",
+      "audioCompatible": "与此封装格式兼容",
+      "sampleRate": "采样率",
+      "audioBitrate": "音频码率"
+    },
+    "upscale": {
+      "title": "提升画质",
+      "hint": "以高于源文件的分辨率导出时进行锐化",
+      "aria": "通过超分放大提升画质",
+      "qualityMode": "画质模式",
+      "modes": {
+        "fast": "快速",
+        "balanced": "平衡",
+        "quality": "高画质"
+      },
+      "sharpening": "锐化",
+      "max": "最大",
+      "note": "最适合在高于项目分辨率导出时使用，会增加处理时间。"
+    },
+    "device": {
+      "showDetails": "显示设备导出预估详情",
+      "estimate": "预估",
+      "benchmark": "获取精确预估",
+      "testing": "测试中…",
+      "cores_one": "{{count}} 核",
+      "cores_other": "{{count}} 核",
+      "unknown": "未知",
+      "hwEncode": "硬件编码",
+      "softwareOnly": "仅软件编码",
+      "hardwareAccelerated": "硬件加速"
+    },
+    "delivery": {
+      "label": "保存视频",
+      "download": "下载到本设备",
+      "file": "选择保存位置",
+      "hint": "导出时会以所选画质使用原始素材。大型导出建议选择保存位置，直接写入磁盘。"
+    },
+    "capability": {
+      "checking": "正在检查此浏览器支持的编码器…",
+      "chooseAnother": "请选择其他格式，才能在此浏览器导出。",
+      "hint": "可用的编码器取决于浏览器。建议使用 H.264 / MP4，或搭配 Opus 音频的 VP9 / WebM。"
+    },
+    "browserSafetyLimit": "受浏览器安全限制，此视频将以 {{width}}×{{height}} • {{fps}}fps 导出。",
+    "h264": {
+      "willEncode": "将以不含透明通道的 H.264 编码。",
+      "anyway": "仍以 H.264 导出"
+    },
+    "compressAndExport": "压缩并导出"
+  },
+  "assets": {
+    "tabs": {
+      "media": {
+        "label": "素材",
+        "description": "导入视频、音频和静态图片。"
+      },
+      "text": {
+        "label": "文字",
+        "description": "添加标题预设和字幕元素。"
+      },
+      "graphics": {
+        "label": "图形",
+        "description": "创建形状、箭头和 SVG 叠加层。"
+      },
+      "effects": {
+        "label": "效果",
+        "description": "将效果拖到片段上即可应用。"
+      },
+      "transitions": {
+        "label": "转场",
+        "description": "将转场拖到片段边缘。"
+      },
+      "ai": {
+        "label": "AI 生成",
+        "description": "生成片段、字幕和辅助剪辑。"
+      },
+      "recipes": {
+        "label": "风格配方",
+        "description": "为片段应用风格、叠加效果和文字组合。"
+      },
+      "templates": {
+        "label": "项目模板",
+        "description": "加载完整项目的起始布局和预设。"
+      }
+    },
+    "media": {
+      "retryGeneration": "重新生成",
+      "generating": "KieAI 生成中…",
+      "generatingShort": "生成中…",
+      "replaceAsset": "替换素材",
+      "createWithKieAI": "用 KieAI 创作",
+      "addToTimeline": "添加到时间轴",
+      "failed": "失败",
+      "missing": "缺失",
+      "emptyTitle": "尚未导入任何素材",
+      "emptyHint": "将文件拖到这里，或点击导入",
+      "importMedia": "导入素材",
+      "importMediaAria": "导入素材",
+      "import": "导入",
+      "record": "录制",
+      "sort": "排序素材",
+      "showMissing": "仅显示缺失的素材",
+      "relinkFolder": "从文件夹重新链接",
+      "relinkFolderEllipsis": "从文件夹重新链接…",
+      "projectMedia": "项目素材",
+      "addMedia": "添加素材",
+      "dropToImport": "松开即可导入文件"
+    },
+    "toast": {
+      "unsavedAudio": "已丢弃未保存的音频",
+      "unsavedAudioHint": "下次请先保存到素材或下载，才能保留。",
+      "folderPickerUnsupported": "不支持文件夹选择",
+      "folderPickerUnsupportedHint": "请使用每个缺失素材上的刷新按钮，逐个重新链接。",
+      "relinked_one": "已重新链接 {{linked}}/{{count}} 个素材",
+      "relinked_other": "已重新链接 {{linked}}/{{count}} 个素材",
+      "noMatches": "未找到匹配的文件",
+      "noMatchesHint": "所选文件夹中没有文件名与缺失素材匹配的文件。",
+      "assetNotFound": "找不到素材",
+      "assetNotFoundHint": "无法加载此素材的图片数据。",
+      "kieaiFailed": "无法打开 KieAI",
+      "unknownError": "未知错误"
+    },
+    "progress": {
+      "importing": "正在导入 {{name}}（{{current}}/{{total}}）…",
+      "extractingAudio": "正在从 {{name}} 提取音频…",
+      "replacing": "正在替换素材…",
+      "relinking": "正在重新链接 {{name}}…",
+      "importingMedia": "正在导入素材…"
+    },
+    "graphics": {
+      "backgrounds": "背景",
+      "svgImport": "导入 SVG",
+      "importSvg": "导入 SVG 文件",
+      "shapes": "形状"
+    },
+    "shapes": {
+      "rectangle": "矩形",
+      "circle": "圆形",
+      "triangle": "三角形",
+      "star": "星形",
+      "arrow": "箭头",
+      "polygon": "多边形",
+      "cube": "立方体",
+      "sphere": "球体",
+      "torus": "圆环",
+      "cone": "圆锥",
+      "cylinder": "圆柱",
+      "icosahedron": "二十面体"
+    },
+    "text": {
+      "addTitle": "添加标题",
+      "newTitle": "新标题",
+      "addTitleHint": "点击即可在时间轴添加文字"
+    },
+    "textPresets": {
+      "Heading": "大标题",
+      "Subtitle": "副标题",
+      "Lower Third": "下方字幕条",
+      "Caption": "字幕",
+      "Hero": "主视觉标题",
+      "Quote": "引言",
+      "Outline": "描边字",
+      "Badge": "标签"
+    },
+    "textPresetText": {
+      "Heading": "标题",
+      "Subtitle": "副标题文字",
+      "LowerThird": "在此输入名称",
+      "Caption": "在此输入说明文字",
+      "Hero": "让画面动起来",
+      "Quote": "“讲一个更好的故事。”",
+      "Outline": "描边文字",
+      "Badge": "全新发布"
+    },
+    "backgroundPresets": {
+      "solid-black": "黑色",
+      "solid-white": "白色",
+      "solid-slate": "石板灰",
+      "solid-zinc": "锌灰",
+      "solid-red": "红色",
+      "solid-blue": "蓝色",
+      "solid-green": "绿色",
+      "solid-purple": "紫色",
+      "gradient-sunset": "夕阳",
+      "gradient-ocean": "海洋",
+      "gradient-forest": "森林",
+      "gradient-lavender": "薰衣草",
+      "gradient-midnight": "午夜",
+      "gradient-rose": "玫瑰",
+      "gradient-gold": "金色",
+      "gradient-noir": "黑色电影",
+      "radial-spotlight": "聚光灯",
+      "radial-glow": "光晕",
+      "mesh-aurora": "极光",
+      "mesh-nebula": "星云",
+      "mesh-candy": "糖果",
+      "mesh-sunset-beach": "海滩",
+      "pattern-grid-dark": "深色网格",
+      "pattern-grid-light": "浅色网格",
+      "pattern-dots-dark": "深色圆点",
+      "pattern-dots-light": "浅色圆点",
+      "pattern-noise-dark": "胶片颗粒",
+      "waves-ocean": "海浪",
+      "waves-sunset": "夕阳波浪",
+      "aurora-borealis": "北极光"
+    },
+    "backgroundCategories": {
+      "all": "全部",
+      "solid": "纯色",
+      "gradient": "渐变",
+      "mesh": "网格渐变",
+      "pattern": "图案"
+    },
+    "effectsPanel": {
+      "cardHint": "{{name}}。拖到片段上即可应用，或双击应用到所选片段。",
+      "noClip": "未选择片段",
+      "noClipHint": "将效果拖到时间轴上的片段，或选择片段后双击。",
+      "notApplied": "无法应用效果",
+      "notAppliedHint": "所选图层不接受此效果。",
+      "applied": "已应用效果",
+      "appliedCount_one": "已将{{name}}添加到 {{count}} 个片段",
+      "appliedCount_other": "已将{{name}}添加到 {{count}} 个片段",
+      "skipped": "部分图层已跳过",
+      "skippedCount_one": "有 {{count}} 个所选图层无法应用此效果。",
+      "skippedCount_other": "有 {{count}} 个所选图层无法应用此效果。",
+      "search": "搜索效果",
+      "categories": "效果类别",
+      "noMatch": "没有符合“{{query}}”的效果。"
+    },
+    "transitionsPanel": {
+      "cardHint": "{{name}}。拖到片段边缘，或双击应用到所选剪辑点。",
+      "noClipHint": "请选择一个片段或两个相邻片段，然后双击转场。",
+      "noCut": "没有可用的剪辑点",
+      "noCutHint": "所选片段必须在同一条时间轴轨道上相邻。",
+      "failed": "转场失败",
+      "failedHint": "无法在所选剪辑点创建此转场。",
+      "saveFailed": "无法保存转场。",
+      "applied": "已应用转场",
+      "appliedHint": "已将{{name}}添加到所选剪辑点。",
+      "search": "搜索转场",
+      "categories": "转场类别",
+      "noMatch": "没有符合“{{query}}”的转场。"
+    },
+    "recipesPanel": {
+      "selectClip": "请选择片段",
+      "selectClipHint": "配方会应用到一个所选的视频或图片片段。",
+      "applyFailed": "无法应用配方",
+      "applyFailedHint": "此配方无法应用到当前片段。",
+      "applied": "已应用配方",
+      "appliedHint": "已将{{name}}添加到{{target}}。",
+      "selectedClip": "所选片段",
+      "selectFirst": "请先选择片段",
+      "selectFirstHint": "在时间轴上选择视频或图片，即可应用片段配方、风格与字幕样式。",
+      "search": "搜索配方",
+      "searchPlaceholder": "搜索配方…",
+      "all": "全部",
+      "noMatch": "没有符合的配方",
+      "noMatchHint": "请尝试其他搜索词或类别。",
+      "editControls": "编辑配方控件",
+      "applying": "应用中",
+      "apply": "应用"
+    },
+    "templatesPanel": {
+      "loading": "正在加载模板…",
+      "search": "搜索模板",
+      "searchPlaceholder": "搜索模板…",
+      "all": "全部",
+      "none": "未找到模板"
+    }
+  },
+  "inspector": {
+    "empty": {
+      "title": "未选择",
+      "hint": "选择片段即可查看其属性"
+    },
+    "progress": {
+      "backgroundRemoval": "正在应用背景移除",
+      "audioCleanup": "正在应用音频清理",
+      "autoColor": "正在应用自动调色"
+    },
+    "toast": {
+      "noiseCleanupFailed": "无法应用降噪",
+      "noiseCleanupApplied": "已应用降噪",
+      "noiseCleanupAppliedHint": "可在“背景噪音消除”中微调或切换预设。",
+      "couldNotCleanAudio": "无法清理音频",
+      "noiseCleanupNotApplied": "无法对此片段应用降噪。",
+      "captionsImportedWithWarnings": "字幕已导入，但有警告",
+      "segmentsSkipped": "已跳过 {{count}} 段字幕。",
+      "captionsImported": "字幕已导入",
+      "captionsImportedHint": "每段字幕都已成为“字幕”轨道上可编辑的文字片段。",
+      "captionImportFailed": "字幕导入失败",
+      "noValidCaptions": "未找到有效字幕。",
+      "couldNotReadSubtitle": "无法读取所选的字幕文件。",
+      "fontUploadFailed": "字体上传失败",
+      "fontUploaded": "已上传自定义字体",
+      "fontReady": "“{{font}}”已可使用。",
+      "recipeUnavailable": "无法使用此风格配方",
+      "recipeUnavailableHint": "此风格配方的定义已不存在。",
+      "recipeUpdateFailed": "无法更新风格配方",
+      "recipeUpdateFailedHint": "无法为此片段保存风格配方的设置。",
+      "recipeUpdated": "已更新风格配方",
+      "recipeUpdatedHint": "已更新此片段的“{{name}}”。"
+    },
+    "sections": {
+      "noiseRemoval": "背景噪音消除",
+      "noiseRemovalActive": "背景噪音消除（已启用）",
+      "noiseRemovalConfigured": "背景噪音消除（已配置）",
+      "multicam": "多机位剪辑",
+      "localAutoCaptions": "本地自动字幕",
+      "importSrtFile": "导入 SRT 或 VTT 文件",
+      "importSrtAsText": "将 SRT/VTT 导入为文字",
+      "editableCaptions": "可编辑字幕",
+      "autoReframe": "自动重新构图",
+      "beatSyncedAutoEdit": "节拍同步自动剪辑",
+      "localHighlights": "本地精彩片段",
+      "quickActions": "快捷操作",
+      "removeBackground": "移除背景",
+      "cleaningUp": "清理中…",
+      "noiseReduced": "已降噪",
+      "quickDialogueCleanup": "快速对白清理",
+      "applying": "应用中…",
+      "autoColor": "自动调色",
+      "keyframes": "关键帧",
+      "transitions": "转场",
+      "motionPresets": "动态预设",
+      "motionPath": "运动路径",
+      "emphasisAnimation": "强调动画",
+      "textAnimation": "文字动画",
+      "voiceOver": "旁白",
+      "clipAudio": "片段音频",
+      "volume": "音量",
+      "fadeIn": "淡入",
+      "fadeOut": "淡出",
+      "autoCutSilence": "自动剪除静音",
+      "beatSync": "节拍同步",
+      "audioEffects": "音频效果",
+      "audioDucking": "音频闪避",
+      "colorGrading": "调色",
+      "applied": "已应用（{{count}}）",
+      "edit": "编辑",
+      "removeRecipe": "移除配方",
+      "recipeRemoveFailed": "无法移除配方",
+      "recipeRemoveFailedHint": "无法从该片段移除配方。",
+      "reset": "重置",
+      "update": "更新",
+      "on": "开",
+      "off": "关",
+      "backgroundRemoval": "背景移除",
+      "particleEffects": "粒子效果",
+      "chromaKey": "色度抠像（绿幕）",
+      "enableChromaKey": "启用色度抠像",
+      "keyColor": "抠像颜色",
+      "tolerance": "容差",
+      "motionTracking": "运动跟踪",
+      "videoEffects": "视频效果",
+      "greenScreen": "绿幕",
+      "pip": "画中画",
+      "masking": "遮罩",
+      "nestedSequences": "嵌套序列",
+      "adjustmentLayers": "调整图层",
+      "textBehindSubject": "主体后方文字",
+      "speedDirection": "速度与方向",
+      "stabilization": "稳定",
+      "speedCurves": "速度曲线",
+      "textProperties": "文字属性",
+      "shapeProperties": "形状属性",
+      "svgProperties": "SVG 属性",
+      "transform": "变换",
+      "crop": "裁剪",
+      "alignment": "对齐",
+      "transform3d": "3D 变换"
+    },
+    "loadingCameraTools": "正在加载多机位工具…",
+    "transition": {
+      "intro": "入场转场",
+      "outro": "出场转场",
+      "between": "转场",
+      "introHint": "从项目背景过渡到此片段",
+      "outroHint": "从此片段过渡到项目背景",
+      "betweenHint": "两个片段之间，以剪辑点为中心",
+      "direction": "方向",
+      "directions": {
+        "left": "左",
+        "right": "右",
+        "up": "上",
+        "down": "下",
+        "vertical": "垂直",
+        "horizontal": "水平"
+      },
+      "needSecondClipLong": "片段到片段转场需要第二个片段",
+      "needSecondClip": "需要第二个片段",
+      "applied": "已应用转场",
+      "failed": "转场失败",
+      "couldNotApply": "无法应用转场",
+      "removed": "已移除转场",
+      "params": {
+        "centerX": "中心 X",
+        "centerY": "中心 Y",
+        "softness": "柔和度",
+        "pushOut": "推出",
+        "blurStrength": "模糊强度",
+        "motionBlur": "动态模糊",
+        "startAngle": "起始角度",
+        "clockwise": "顺时针",
+        "scale": "缩放",
+        "holdDuration": "停留时长",
+        "maxPixel": "最大像素大小",
+        "intensity": "强度",
+        "slices": "切片数",
+        "slats": "叶片数",
+        "rotations": "旋转圈数",
+        "flashIntensity": "闪光强度",
+        "burnIntensity": "灼烧强度",
+        "warmth": "暖度",
+        "tileColumns": "瓷砖列数",
+        "randomness": "随机度",
+        "amplitude": "振幅",
+        "waves": "波数",
+        "foldShadow": "折痕阴影",
+        "maxOffset": "最大偏移",
+        "angle": "角度",
+        "duration": "时长"
+      },
+      "background": "背景",
+      "from": "从",
+      "to": "到",
+      "type": "转场类型",
+      "fadeClipAudio": "淡化片段音频",
+      "smoothAudio": "平滑转场音频",
+      "parameters": "参数",
+      "remove": "移除转场",
+      "apply": "应用转场"
+    },
+    "subtitle": {
+      "title": "字幕",
+      "textContent": "文字内容",
+      "text": "字幕文字",
+      "textPlaceholder": "输入字幕文字…",
+      "timing": "时间",
+      "startTime": "开始时间",
+      "endTime": "结束时间",
+      "position": "位置",
+      "animation": "动画",
+      "style": "样式",
+      "animationStyle": "动画样式",
+      "animStyles": {
+        "none": "无",
+        "karaoke": "卡拉 OK",
+        "word-highlight": "逐字高亮",
+        "word-by-word": "逐字显示",
+        "bounce": "弹跳",
+        "typewriter": "打字机"
+      },
+      "animHints": {
+        "karaoke": "随着说话进度为文字填色",
+        "wordHighlight": "当前词语会高亮并放大",
+        "wordByWord": "一次显示一个词",
+        "bounce": "词语出现时弹跳进场",
+        "typewriter": "词语像打字一样逐个出现",
+        "none": "静态文字，无动画"
+      },
+      "noWordTiming": "没有逐词时间数据，请重新生成字幕以启用动画。",
+      "highlightColor": "高亮颜色",
+      "selectHighlightColor": "选择高亮颜色",
+      "font": "字体",
+      "fontFamily": "字体",
+      "uploadFont": "上传自定义字体",
+      "fontSize": "字号",
+      "colors": "颜色",
+      "textColor": "文字颜色",
+      "selectTextColor": "选择字幕文字颜色",
+      "background": "背景",
+      "selectBackgroundColor": "选择字幕背景颜色",
+      "backgroundOpacity": "背景不透明度",
+      "delete": "删除字幕"
+    },
+    "transform": {
+      "position": "位置",
+      "canvasPixels": "画布像素",
+      "offsetPixels": "偏移像素",
+      "nudgeGroup": "按一像素微调位置",
+      "nudgeLeft": "向左微移 1 像素",
+      "nudgeUp": "向上微移 1 像素",
+      "nudgeDown": "向下微移 1 像素",
+      "nudgeRight": "向右微移 1 像素",
+      "scale": "缩放",
+      "rotation": "旋转",
+      "increaseRotation": "增加旋转角度",
+      "decreaseRotation": "减少旋转角度",
+      "anchorPoint": "锚点",
+      "opacity": "不透明度",
+      "radius": "圆角",
+      "fitMode": "适配模式",
+      "setFitMode": "将适配模式设为{{label}}",
+      "fitModes": {
+        "contain": "适应",
+        "cover": "填充",
+        "stretch": "拉伸"
+      }
+    },
+    "common": {
+      "unknownError": "未知错误",
+      "hide": "隐藏",
+      "show": "显示",
+      "save": "保存"
+    },
+    "speed": {
+      "setSpeed": "将速度设为 {{speed}}",
+      "customSpeed": "自定义速度",
+      "range": "范围：0.1×（最慢）至 100×（最快）",
+      "applyToAudio": "同时调整音频速度",
+      "reversed": "已倒放",
+      "reverseClip": "倒放片段",
+      "smoothSlowMo": "平滑慢动作",
+      "quality": "质量",
+      "qualityLow": "低（较快）",
+      "qualityMedium": "中",
+      "qualityHigh": "高（较慢）",
+      "opticalFlowHint": "使用光流生成平滑的中间帧",
+      "currentSettings": "当前设置",
+      "speedValue": "速度：{{speed}}×",
+      "reversedSuffix": " • 已倒放",
+      "smoothSuffix": " • 平滑"
+    },
+    "stabilization": {
+      "failed": "稳定处理失败",
+      "downloading": "正在下载稳定引擎…",
+      "analyzing": "正在分析运动…",
+      "stabilizing": "正在稳定视频…",
+      "stabilize": "稳定",
+      "enable": "启用稳定",
+      "strength": "强度",
+      "firstUse": "首次使用需下载一次（约 65 MB）",
+      "restabilize": "重新稳定"
+    },
+    "crop": {
+      "adjust": "调整裁剪",
+      "cropVideo": "裁剪视频",
+      "region": "裁剪区域：",
+      "position": "位置：",
+      "reset": "重置裁剪"
+    },
+    "history": {
+      "createText": "创建文字片段",
+      "createShape": "创建形状",
+      "importSvg": "导入 SVG",
+      "addSticker": "添加贴纸",
+      "createClip": "创建片段",
+      "title": "历史记录",
+      "toggleSnapshots": "{{action}}快照",
+      "noSnapshots": "尚未保存快照",
+      "deleteSnapshot": "删除快照 {{name}}",
+      "snapshotName": "快照名称",
+      "snapshotPlaceholder": "快照名称…",
+      "createSnapshot": "创建快照",
+      "noActions": "暂无操作记录"
+    },
+    "autoCut": {
+      "initializing": "初始化中…",
+      "noSilence": "未检测到静音",
+      "noSilenceHint": "当前设置下未找到静音段落，请尝试降低阈值。",
+      "analysisFailed": "分析失败",
+      "preparing": "准备中…",
+      "removed": "已移除静音",
+      "removedCount_one": "已移除 {{count}} 段静音",
+      "removedCount_other": "已移除 {{count}} 段静音",
+      "cutFailed": "剪除失败",
+      "threshold": "静音阈值",
+      "thresholdHint": "数值越低，检测到的静音越多",
+      "minDuration": "最短时长",
+      "minDurationHint": "要检测的最短静音时长",
+      "padBefore": "前方保留",
+      "padAfter": "后方保留",
+      "found": "找到的静音段落",
+      "total": "静音总时长",
+      "totalValue": "{{silence}} 秒／共 {{duration}} 秒（{{percent}}%）",
+      "analyzing": "分析中…",
+      "reanalyze": "重新分析",
+      "analyze": "分析",
+      "cutting": "剪除中…",
+      "cutCount": "剪除 {{count}} 段",
+      "tip": "提示：按 Ctrl+Z 可一次撤销所有剪除"
+    },
+    "beatSync": {
+      "noClip": "未选择片段",
+      "title": "节拍同步",
+      "analyzing": "正在分析节拍…",
+      "detect": "从音频检测节拍",
+      "detectedBpm": "检测到的 BPM",
+      "confidence": "置信度",
+      "markers": "节拍标记",
+      "clearMarkers": "清除节拍标记",
+      "hideManual": "隐藏手动 BPM 设置",
+      "showManual": "显示手动 BPM 设置",
+      "manualBpm": "手动 BPM",
+      "generateGrid": "以 {{bpm}} BPM 生成节拍网格",
+      "selectClip": "请选择视频或音频片段来分析节拍",
+      "help": "节拍检测会分析音频，找出速度与节拍位置。可用于让剪辑点、转场或效果对齐音乐。"
+    },
+    "color": {
+      "wb": {
+        "Tungsten": "钨丝灯",
+        "Fluorescent": "荧光灯",
+        "Daylight": "日光",
+        "Cloudy": "阴天",
+        "Shade": "阴影"
+      },
+      "applyWb": "应用{{name}}白平衡",
+      "resetAll": "全部重置",
+      "whiteBalance": "白平衡",
+      "wbHint": "让偏冷的画面变暖，或让偏暖的画面变冷。色调可校正偏绿或偏品红的色偏。",
+      "resetWb": "重置白平衡",
+      "temperature": "色温",
+      "tint": "色调",
+      "presets": "预设",
+      "colorWheels": "色轮",
+      "curves": "曲线",
+      "wheelHint": "拖动以调整颜色，双击可重置。",
+      "reset": "重置",
+      "shadows": "阴影",
+      "midtones": "中间调",
+      "highlights": "高光",
+      "lift": "Lift（阴影）",
+      "gamma": "Gamma（中间调）",
+      "gain": "Gain（高光）",
+      "selectChannel": "选择 {{label}} 曲线通道",
+      "curvesHint": "单击添加控制点 • 双击移除",
+      "hsl": {
+        "reds": "红色",
+        "oranges": "橙色",
+        "yellows": "黄色",
+        "greens": "绿色",
+        "cyans": "青色",
+        "blues": "蓝色",
+        "purples": "紫色",
+        "magentas": "品红"
+      },
+      "adjustedSuffix": "（已调整）",
+      "hue": "色相",
+      "saturation": "饱和度",
+      "luminance": "明度",
+      "lut": {
+        "intensity": "强度",
+        "unsupported": "不支持的文件格式，请使用 .cube 或 .3dl 文件。",
+        "parseFailed": "无法解析 LUT 文件",
+        "loadFile": "加载 LUT 文件",
+        "loading": "加载中…",
+        "load": "加载 LUT（.cube、.3dl）",
+        "loaded": "已加载 LUT",
+        "remove": "移除 LUT",
+        "loadDifferent": "加载其他 LUT"
+      }
+    },
+    "videoEffects": {
+      "params": {
+        "value": "数值",
+        "amount": "数量",
+        "radius": "半径",
+        "midpoint": "中点",
+        "feather": "羽化",
+        "size": "大小",
+        "offsetX": "X 偏移",
+        "offsetY": "Y 偏移",
+        "blur": "模糊",
+        "opacity": "不透明度",
+        "intensity": "强度",
+        "angle": "角度",
+        "distance": "距离",
+        "centerX": "中心 X",
+        "centerY": "中心 Y"
+      },
+      "unknownShader": "未知的着色器",
+      "reorder": "重新排序{{name}}",
+      "dragToReorder": "拖动以重新排序效果",
+      "moveUp": "将{{name}}上移",
+      "moveDown": "将{{name}}下移",
+      "disable": "停用效果",
+      "enable": "启用效果",
+      "duplicate": "复制效果",
+      "remove": "移除效果",
+      "previewAndAdd": "预览并添加{{name}}",
+      "before": "原始",
+      "effect": "效果",
+      "addVideoEffect": "添加视频效果",
+      "effectsTab": "效果 · {{count}}",
+      "shadersTab": "着色器 · {{count}}",
+      "search": "搜索视觉效果",
+      "categoryEffects": "{{category}}效果",
+      "noMatch": "没有符合“{{query}}”的效果。",
+      "shaderPreviews": "着色器效果预览",
+      "addEffect": "添加效果",
+      "copyStack": "复制效果堆栈",
+      "pasteStack": "粘贴效果堆栈",
+      "pasteReplace": "粘贴并替换效果",
+      "clearStack": "清除效果堆栈",
+      "none": "尚未应用效果"
+    },
+    "keyframes": {
+      "props": {
+        "position_x": "X 位置",
+        "position_y": "Y 位置",
+        "scale_x": "X 缩放",
+        "scale_y": "Y 缩放",
+        "rotation": "旋转",
+        "opacity": "不透明度",
+        "effect_brightness": "亮度",
+        "effect_contrast": "对比度",
+        "effect_saturation": "饱和度",
+        "effect_blur": "模糊",
+        "volume": "音量",
+        "pan": "声道平衡"
+      },
+      "categories": {
+        "Transform": "变换",
+        "Effects": "效果",
+        "Audio": "音频"
+      },
+      "selectProperty": "选择属性",
+      "animateProperty": "动画属性",
+      "selectProp": "选择{{name}}",
+      "easing": "缓动：{{name}}",
+      "keyframeValue": "关键帧数值",
+      "deleteKeyframe": "删除关键帧",
+      "noClip": "未选择片段",
+      "animatePropertyTitle": "制作属性动画",
+      "valueAt": "{{time}} 秒处的数值",
+      "exists": "{{time}} 秒处已有关键帧",
+      "add": "在 {{time}} 秒处添加关键帧",
+      "count": "关键帧（{{count}}）",
+      "selectToAnimate": "请选择要制作动画的属性",
+      "none": "该属性还没有关键帧，添加一个即可开始制作动画。"
+    },
+    "autoReframe": {
+      "initializing": "初始化中…",
+      "loadingEngine": "正在加载 AI 引擎…",
+      "configuring": "正在配置重新构图…",
+      "applyingCrop": "正在应用智能裁剪配置…",
+      "updatingProject": "正在更新项目设置…",
+      "finalizing": "即将完成…",
+      "complete": "完成！",
+      "configuredFor": "已配置为 {{name}}（{{width}}x{{height}}）",
+      "applied": "已应用自动重新构图",
+      "resized": "项目已调整为 {{name}}（{{width}}x{{height}}）",
+      "failed": "自动重新构图失败",
+      "platformPresets": "平台预设",
+      "platformPreset": "{{name}} 平台预设",
+      "aspectRatio": "宽高比",
+      "ratioLabel": "{{ratio}} 宽高比",
+      "trackingSpeed": "跟踪速度",
+      "smoothing": "平滑度",
+      "centerBias": "居中偏好",
+      "followSubject": "跟随主体",
+      "analyzing": "分析中…",
+      "reanalyze": "已应用 - 点击重新分析",
+      "analyze": "分析并重新构图"
+    },
+    "greenScreen": {
+      "pickColor": "从视频中选取颜色",
+      "presets": {
+        "Green": "绿色",
+        "Blue": "蓝色",
+        "Magenta": "品红",
+        "Cyan": "青色"
+      },
+      "title": "绿幕",
+      "subtitle": "移除视频中的背景颜色",
+      "disable": "停用色度抠像",
+      "enable": "启用色度抠像",
+      "keyColor": "抠像颜色",
+      "clickPreview": "在视频预览上点击以选取颜色",
+      "tolerance": "容差",
+      "edgeSoftness": "边缘柔化",
+      "spill": "溢色抑制",
+      "reset": "重置为默认值",
+      "placeBelow": "将视频片段放在该片段下方作为背景",
+      "enableHint": "启用后即可移除背景颜色",
+      "enableGreen": "启用绿幕"
+    },
+    "mask": {
+      "shapes": {
+        "rectangle": "矩形",
+        "ellipse": "椭圆",
+        "polygon": "多边形"
+      },
+      "shapeMask": "形状遮罩",
+      "trackMatte": "轨道遮罩",
+      "drawnMask": "手绘遮罩",
+      "collapse": "收起遮罩",
+      "expand": "展开遮罩",
+      "inverted": "遮罩已反转",
+      "normal": "遮罩正常",
+      "duplicate": "复制遮罩",
+      "delete": "删除遮罩",
+      "pathPoints": "路径点",
+      "addPoint": "添加路径点",
+      "removePoint": "移除路径点 {{index}}",
+      "matteSource": "遮罩来源",
+      "pickClip": "选择片段…",
+      "channel": "通道",
+      "feathering": "羽化",
+      "expansion": "扩展",
+      "opacity": "不透明度",
+      "invertedShort": "已反转",
+      "invert": "反转",
+      "keyframes": "{{count}} 个关键帧",
+      "noKeyframes": "没有关键帧",
+      "title": "遮罩",
+      "subtitle": "控制片段的可见区域",
+      "addShape": "添加遮罩形状",
+      "addCustom": "添加自定义路径遮罩",
+      "custom": "自定义",
+      "useTrackMatte": "使用其他片段作为轨道遮罩",
+      "clearAll": "全部清除",
+      "none": "该片段没有遮罩",
+      "clickShape": "点击上方的形状来添加遮罩",
+      "help": "遮罩用于控制片段的哪些部分可见"
+    },
+    "text": {
+      "font": "字体",
+      "customUploads": "自定义上传",
+      "searchFonts": "搜索字体",
+      "noTextClip": "未选择文字片段",
+      "textContent": "文字内容",
+      "enterText": "输入文字…",
+      "customFont": "自定义字体",
+      "uploadCustomFont": "上传自定义字体",
+      "size": "大小",
+      "style": "样式",
+      "bold": "粗体",
+      "italic": "斜体",
+      "underline": "下划线",
+      "textAlign": "文字对齐",
+      "left": "左对齐",
+      "center": "居中",
+      "right": "右对齐",
+      "positionOnCanvas": "画布上的位置",
+      "alignToCanvas": "对齐画布",
+      "centerH": "水平居中",
+      "centerV": "垂直居中",
+      "centerBoth": "完全居中",
+      "textColor": "文字颜色",
+      "background": "背景",
+      "stroke": "描边",
+      "color": "颜色",
+      "width": "宽度",
+      "shadow": "阴影",
+      "offsetX": "X 偏移",
+      "offsetY": "Y 偏移",
+      "blur": "模糊",
+      "lineHeight": "行高",
+      "letterSpacing": "字距",
+      "none": "无",
+      "textMaterial": "文字材质",
+      "materialPreviews": "文字材质预览",
+      "progress": "进度",
+      "depth": "深度",
+      "bevelThickness": "倒角厚度",
+      "bevelSize": "倒角大小",
+      "bevelSegments": "倒角分段",
+      "material": "材质",
+      "basic": "基础",
+      "physical": "物理",
+      "metalness": "金属度",
+      "roughness": "粗糙度",
+      "histUpdate": "更新所选文字属性",
+      "histCenterH": "将所选文字水平居中",
+      "histCenterV": "将所选文字垂直居中",
+      "histCenter": "将所选文字居中",
+      "hist3d": "更新所选文字的 3D 属性",
+      "fontUploadFailed": "字体上传失败",
+      "unknownError": "未知错误。",
+      "fontUploaded": "已上传自定义字体",
+      "fontReady": "{{font}} 已可使用。",
+      "selectColor": "选择{{label}}"
+    },
+    "audioEffects": {
+      "toggle": "{{action}}{{title}}",
+      "collapse": "收起",
+      "expand": "展开",
+      "equalizer": "均衡器",
+      "compressor": "压缩器",
+      "threshold": "阈值",
+      "ratio": "比率",
+      "attack": "启动时间",
+      "release": "释放时间",
+      "reverb": "混响",
+      "roomSize": "房间大小",
+      "damping": "阻尼",
+      "delay": "延迟",
+      "time": "时间",
+      "feedback": "反馈",
+      "wetLevel": "湿声电平"
+    },
+    "tts": {
+      "needKey": "添加你的 ElevenLabs API 密钥即可启用语音生成。炎剑剪辑已不再提供语音服务器。"
+    },
+    "alignment": {
+      "horizontal": "水平",
+      "vertical": "垂直",
+      "alignLeft": "左对齐",
+      "centerH": "水平居中",
+      "alignRight": "右对齐",
+      "alignTop": "顶部对齐",
+      "centerV": "垂直居中",
+      "alignBottom": "底部对齐",
+      "centerCanvas": "置于画布中央",
+      "overlayHint": "在画布空间中对齐叠加层的锚点",
+      "mediaHint": "以相对中心的像素偏移对齐素材锚点"
+    },
+    "blending": {
+      "noClip": "未选择片段",
+      "title": "混合",
+      "mode": "混合模式",
+      "opacity": "混合不透明度"
+    },
+    "bgRemoval": {
+      "modes": {
+        "blur": "模糊",
+        "color": "颜色",
+        "image": "图片",
+        "transparent": "透明"
+      },
+      "modeLabel": "{{mode}}背景模式",
+      "initModel": "正在初始化 AI 模型…",
+      "preparing": "正在准备背景检测…",
+      "configuring": "正在配置效果管线…",
+      "finalizing": "正在完成设置…",
+      "ready": "背景移除已就绪",
+      "readyHint": "效果会在播放时应用",
+      "unknownError": "未知错误",
+      "failed": "处理失败",
+      "failedHint": "无法启用背景移除",
+      "disabled": "已停用背景移除",
+      "on": "开",
+      "off": "关",
+      "mode": "背景模式",
+      "blurAmount": "模糊程度",
+      "color": "背景颜色",
+      "selectColor": "选择替换的背景颜色",
+      "image": "背景图片",
+      "chooseImage": "选择图片",
+      "imageLoaded": "已加载图片",
+      "edgeSmoothing": "边缘平滑",
+      "threshold": "检测阈值",
+      "realtimeHint": "背景移除会实时处理。为获得最佳效果，请在预览后再导出视频。"
+    },
+    "ducking": {
+      "presets": {
+        "Subtle": "轻微",
+        "Moderate": "适中",
+        "Aggressive": "强烈",
+        "Podcast": "播客"
+      },
+      "invalidSource": "请选择有效的触发来源轨道。",
+      "noSpeech": "没有语音超过触发阈值。请降低阈值或选择音量更大的来源轨道。",
+      "applyFailed": "应用音频闪避失败。",
+      "removeFailed": "无法从该片段移除音频闪避。",
+      "title": "音频闪避",
+      "subtitle": "说话时自动降低音乐音量",
+      "enabled": "已启用音频闪避",
+      "disabled": "已停用音频闪避",
+      "enable": "启用音频闪避",
+      "triggerSource": "触发来源（人声轨道）",
+      "useTrack": "使用{{name}}作为闪避触发",
+      "addTrackHint": "请添加另一条含有人声的音频或视频轨道作为触发来源",
+      "presetsTitle": "闪避预设",
+      "threshold": "检测阈值",
+      "thresholdHint": "触发闪避的人声音量",
+      "reduction": "音量降低幅度",
+      "reductionHint": "背景音乐要降低多少",
+      "timing": "时间控制",
+      "attack": "启动时间",
+      "attackHint": "人声开始时音量下降的速度",
+      "release": "释放时间",
+      "releaseHint": "人声停止后音量恢复的速度",
+      "hold": "保持时间",
+      "holdHint": "词语之间保持闪避的最短时间",
+      "analyzing": "分析中…",
+      "apply": "应用音频闪避",
+      "applied": "已应用音频闪避",
+      "updating": "更新中…",
+      "update": "更新",
+      "remove": "移除",
+      "footer": "检测到人声时自动降低音乐音量"
+    }
+  },
+  "preview": {
+    "canvas": "预览画布",
+    "live": "实时预览",
+    "player": "播放器",
+    "compositionGrid": "构图网格",
+    "safeMargins": "标题与动作安全框",
+    "titleSafe": "标题安全框",
+    "exporting": "正在导出视频",
+    "preparing": "准备中…",
+    "exportProgress": "导出进度",
+    "keepEditing": "导出完成后即可继续编辑。",
+    "dragToMove": "拖动即可移动",
+    "dragToMoveText": "拖动即可移动文字",
+    "dragToMoveShape": "拖动即可移动形状",
+    "unlockAspect": "解锁宽高比",
+    "lockAspect": "锁定宽高比",
+    "subtitleSelected": "已选择字幕 - 请在属性面板中编辑",
+    "clickToSelect": "点击即可选择",
+    "skipBack": "后退 5 秒",
+    "skipForward": "前进 5 秒",
+    "play": "播放",
+    "pause": "暂停",
+    "enableLoop": "启用预览循环",
+    "disableLoop": "停用预览循环",
+    "loopHint": "循环 {{start}} 至 {{end}} • I：标记起点 • O：标记终点 • Shift+L：切换",
+    "mute": "静音",
+    "unmute": "取消静音",
+    "aspectRatio": "宽高比",
+    "aspectOption": "{{label}}（{{width}} × {{height}}）",
+    "playbackQuality": "播放画质",
+    "zoom": "预览缩放",
+    "canvasSnapping": "画布吸附",
+    "fullscreen": "全屏",
+    "exitFullscreen": "退出全屏",
+    "maximize": "最大化预览",
+    "restoreSize": "还原大小",
+    "canvasText": {
+      "dropMedia": "将素材拖放到这里",
+      "replacePlaceholder": "用你的内容替换此占位符",
+      "importToStart": "导入素材即可开始"
+    },
+    "history": {
+      "nudgeSelection": "微调画布选区"
+    },
+    "quality": {
+      "auto": "自动",
+      "full": "完整",
+      "half": "½",
+      "quarter": "¼"
+    }
+  },
+  "effects": {
+    "catalog": {
+      "brightness": {
+        "label": "亮度",
+        "description": "提亮中间调与高光"
+      },
+      "contrast": {
+        "label": "对比度",
+        "description": "让阴影与高光更有力"
+      },
+      "saturation": {
+        "label": "饱和度",
+        "description": "增强或减弱色彩强度"
+      },
+      "grayscale": {
+        "label": "灰度",
+        "description": "将色彩转为单色"
+      },
+      "sepia": {
+        "label": "复古褐色",
+        "description": "温暖的复古色调"
+      },
+      "invert": {
+        "label": "反相",
+        "description": "反转图像色彩数值"
+      },
+      "tonal": {
+        "label": "色调平衡",
+        "description": "调整阴影、中间调与高光"
+      },
+      "temperature": {
+        "label": "色温",
+        "description": "冷暖色偏移"
+      },
+      "tint": {
+        "label": "色调",
+        "description": "品红／绿色偏移"
+      },
+      "hue": {
+        "label": "色相",
+        "description": "旋转色轮"
+      },
+      "blur": {
+        "label": "模糊",
+        "description": "柔和的高斯失焦"
+      },
+      "motion-blur": {
+        "label": "动态模糊",
+        "description": "方向性拖影"
+      },
+      "radial-blur": {
+        "label": "径向模糊",
+        "description": "缩放式径向运动"
+      },
+      "sharpen": {
+        "label": "锐化",
+        "description": "USM 锐化增强边缘"
+      },
+      "vignette": {
+        "label": "暗角",
+        "description": "压暗边缘以聚焦"
+      },
+      "grain": {
+        "label": "胶片颗粒",
+        "description": "模拟胶片质感"
+      },
+      "shadow": {
+        "label": "投影",
+        "description": "投射柔和阴影"
+      },
+      "glow": {
+        "label": "发光",
+        "description": "明亮的外发光"
+      },
+      "chromatic-aberration": {
+        "label": "色差",
+        "description": "RGB 通道分离偏移"
+      },
+      "chromaKey": {
+        "label": "色度抠像",
+        "description": "移除绿幕或蓝幕背景"
+      },
+      "cinematic-punch": {
+        "label": "电影感强对比",
+        "description": "适合高冲击剪辑的强烈对比"
+      },
+      "golden-hour": {
+        "label": "黄金时刻",
+        "description": "温暖的阳光色调"
+      },
+      "soft-focus": {
+        "label": "柔焦",
+        "description": "适合人像与标题的柔和扩散"
+      },
+      "dream-bloom": {
+        "label": "梦幻光晕",
+        "description": "柔和薰衣草光晕与高光溢出"
+      },
+      "retro-grain": {
+        "label": "复古颗粒",
+        "description": "适合复古剪辑的细腻单色颗粒"
+      },
+      "rgb-split": {
+        "label": "RGB 分离",
+        "description": "适合数字风剪辑的强烈通道分离"
+      },
+      "shader-vhs": {
+        "label": "VHS",
+        "description": "动态录像带抖动、颗粒与扫描线"
+      },
+      "shader-posterize": {
+        "label": "色调分离",
+        "description": "将画面简化为大胆的色块"
+      },
+      "shader-duotone": {
+        "label": "双色调",
+        "description": "将阴影与高光映射到两种自定义颜色"
+      },
+      "shader-prism": {
+        "label": "棱镜分离",
+        "description": "可调偏移的方向性 RGB 折射"
+      },
+      "shader-fisheye": {
+        "label": "鱼眼",
+        "description": "以画面中心为焦点的曲面镜头变形"
+      },
+      "shader-wave-warp": {
+        "label": "波浪扭曲",
+        "description": "动态水平液态扭曲"
+      },
+      "shader-scanlines": {
+        "label": "扫描线",
+        "description": "动态 CRT 扫描线质感"
+      },
+      "shader-edge-glow": {
+        "label": "边缘发光",
+        "description": "沿图像细节描绘的霓虹色彩"
+      }
+    },
+    "categories": {
+      "Basic": "基础",
+      "Color": "色彩",
+      "Blur": "模糊",
+      "Creative": "创意",
+      "Stylize": "风格化",
+      "All": "全部"
+    },
+    "types": {
+      "brightness": "亮度",
+      "contrast": "对比度",
+      "saturation": "饱和度",
+      "grayscale": "灰度",
+      "sepia": "复古褐色",
+      "invert": "反相",
+      "hue": "色相",
+      "blur": "模糊",
+      "sharpen": "锐化",
+      "vignette": "暗角",
+      "grain": "颗粒",
+      "temperature": "色温",
+      "tint": "色调",
+      "tonal": "色调",
+      "chromaKey": "色度抠像",
+      "shadow": "投影",
+      "glow": "发光",
+      "motion-blur": "动态模糊",
+      "radial-blur": "径向模糊",
+      "chromatic-aberration": "色差",
+      "shader": "着色器"
+    }
+  },
+  "transitions": {
+    "types": {
+      "crossfade": {
+        "name": "交叉淡化",
+        "description": "片段之间平滑混合"
+      },
+      "dipToBlack": {
+        "name": "黑场过渡",
+        "description": "经过黑场淡出淡入"
+      },
+      "dipToWhite": {
+        "name": "白场过渡",
+        "description": "经过白场淡出淡入"
+      },
+      "wipe": {
+        "name": "擦除",
+        "description": "从一个片段擦除到另一个片段"
+      },
+      "slide": {
+        "name": "滑入",
+        "description": "新片段滑入覆盖旧片段"
+      },
+      "zoom": {
+        "name": "缩放",
+        "description": "片段之间的缩放转场"
+      },
+      "push": {
+        "name": "推移",
+        "description": "新片段推开旧片段"
+      },
+      "circleReveal": {
+        "name": "圆形展开",
+        "description": "从中心以光圈方式展开"
+      },
+      "blur": {
+        "name": "模糊溶解",
+        "description": "先模糊再清晰进入下一个片段"
+      },
+      "whipPan": {
+        "name": "甩镜",
+        "description": "快速动态模糊平移"
+      },
+      "radialWipe": {
+        "name": "径向擦除",
+        "description": "时钟式角度扫描"
+      },
+      "pixelate": {
+        "name": "像素化",
+        "description": "以粗像素马赛克穿越剪辑点"
+      },
+      "glitch": {
+        "name": "故障剪辑",
+        "description": "数字切片错位"
+      },
+      "blinds": {
+        "name": "百叶窗",
+        "description": "重复的叶片展开"
+      },
+      "diamondReveal": {
+        "name": "菱形展开",
+        "description": "几何形状从中心展开"
+      },
+      "spin": {
+        "name": "旋转",
+        "description": "旋转缩放交接"
+      },
+      "flip": {
+        "name": "翻转",
+        "description": "卡片式水平或垂直翻转"
+      },
+      "splitReveal": {
+        "name": "分割展开",
+        "description": "从中心向外展开"
+      },
+      "flash": {
+        "name": "闪白剪辑",
+        "description": "高能量的白光闪切"
+      },
+      "filmBurn": {
+        "name": "胶片灼烧",
+        "description": "穿越剪辑点的温暖模拟漏光"
+      },
+      "mosaic": {
+        "name": "马赛克展开",
+        "description": "镜头之间的打散瓷砖展开"
+      },
+      "ripple": {
+        "name": "涟漪",
+        "description": "流动的水平波浪扭曲"
+      },
+      "pageTurn": {
+        "name": "翻页",
+        "description": "像翻页一样折走旧画面"
+      },
+      "colorSplit": {
+        "name": "色彩分离",
+        "description": "穿越剪辑点的棱镜通道残影"
+      }
+    },
+    "labels": {
+      "Crossfade": "交叉淡化",
+      "DiptoBlack": "黑场过渡",
+      "DiptoWhite": "白场过渡",
+      "Wipe": "擦除",
+      "WipeLeft": "向左擦除",
+      "WipeRight": "向右擦除",
+      "WipeUp": "向上擦除",
+      "WipeDown": "向下擦除",
+      "Slide": "滑入",
+      "SlideLeft": "向左滑入",
+      "SlideRight": "向右滑入",
+      "SlideUp": "向上滑入",
+      "SlideDown": "向下滑入",
+      "Push": "推移",
+      "Zoom": "缩放",
+      "CircleReveal": "圆形展开",
+      "BlurDissolve": "模糊溶解",
+      "WhipPan": "甩镜",
+      "RadialWipe": "径向擦除",
+      "Pixelate": "像素化",
+      "GlitchCut": "故障剪辑",
+      "VenetianBlinds": "百叶窗",
+      "DiamondReveal": "菱形展开",
+      "SpinClockwise": "顺时针旋转",
+      "SpinCounterclockwise": "逆时针旋转",
+      "FlipHorizontal": "水平翻转",
+      "FlipVertical": "垂直翻转",
+      "SplitHorizontal": "水平分割",
+      "SplitVertical": "垂直分割",
+      "FlashCut": "闪白剪辑",
+      "FilmBurn": "胶片灼烧",
+      "RedFilmBurn": "红色胶片灼烧",
+      "CoolLightLeak": "冷色漏光",
+      "MosaicReveal": "马赛克展开",
+      "Ripple": "涟漪",
+      "PageTurnLeft": "向左翻页",
+      "PageTurnRight": "向右翻页",
+      "ColorSplit": "色彩分离",
+      "LinearDissolve": "线性溶解",
+      "SlowInDissolve": "缓入溶解",
+      "SlowOutDissolve": "缓出溶解",
+      "SoftWipeLeft": "柔和向左擦除",
+      "SoftWipeRight": "柔和向右擦除",
+      "DiagonalWipe": "对角擦除",
+      "PushLeft": "向左推移",
+      "PushRight": "向右推移",
+      "PushUp": "向上推移",
+      "PushDown": "向下推移",
+      "ZoomTopLeft": "左上缩放",
+      "ZoomBottomRight": "右下缩放",
+      "PunchZoom": "冲击缩放",
+      "WhipLeft": "向左甩镜",
+      "WhipRight": "向右甩镜",
+      "WhipUp": "向上甩镜",
+      "WhipDown": "向下甩镜"
+    },
+    "categories": {
+      "Dissolves": "溶解",
+      "Wipes": "擦除",
+      "Movement": "移动",
+      "Stylized": "风格化",
+      "All": "全部"
+    }
+  },
+  "search": {
+    "items": {
+      "transform": {
+        "name": "变换",
+        "description": "位置、缩放与旋转片段"
+      },
+      "crop": {
+        "name": "裁剪",
+        "description": "裁剪并取景片段"
+      },
+      "speed": {
+        "name": "速度控制",
+        "description": "控制播放速度与时间重映射"
+      },
+      "video-effects": {
+        "name": "视觉效果",
+        "description": "色彩、模糊、创意、着色器与风格化效果"
+      },
+      "color-grading": {
+        "name": "调色",
+        "description": "色轮、曲线、LUT 与 HSL 调整"
+      },
+      "green-screen": {
+        "name": "绿幕",
+        "description": "绿幕／蓝幕色度抠像"
+      },
+      "background-removal": {
+        "name": "背景移除",
+        "description": "AI 自动移除背景"
+      },
+      "masking": {
+        "name": "遮罩",
+        "description": "用形状遮罩显示或隐藏区域"
+      },
+      "motion-tracking": {
+        "name": "运动跟踪",
+        "description": "跟踪运动并附加元素"
+      },
+      "pip": {
+        "name": "画中画",
+        "description": "将片段放置为画中画叠加"
+      },
+      "blending": {
+        "name": "混合模式",
+        "description": "混合模式与不透明度控制"
+      },
+      "transform-3d": {
+        "name": "3D 变换",
+        "description": "3D 旋转与透视效果"
+      },
+      "keyframes": {
+        "name": "关键帧",
+        "description": "让属性随时间产生动画"
+      },
+      "transitions": {
+        "name": "转场",
+        "description": "片段到片段转场"
+      },
+      "motion-presets": {
+        "name": "动态预设",
+        "description": "预先构建的动态动画"
+      },
+      "audio-effects": {
+        "name": "音频效果",
+        "description": "均衡器、压缩器、混响等"
+      },
+      "audio-ducking": {
+        "name": "音频闪避",
+        "description": "人声出现时自动压低音乐"
+      },
+      "text-properties": {
+        "name": "文字属性",
+        "description": "字体、大小、颜色与文字样式"
+      },
+      "text-material": {
+        "name": "文字材质与着色器",
+        "description": "浏览文字的实时着色器与 Paper 材质预览"
+      },
+      "text-animation": {
+        "name": "文字动画",
+        "description": "用预设为文字制作动画"
+      },
+      "shape-properties": {
+        "name": "形状属性",
+        "description": "形状填充、描边与效果"
+      },
+      "shape-shader-fill": {
+        "name": "形状着色器填充",
+        "description": "为所选形状应用实时着色器材质"
+      }
+    },
+    "categories": {
+      "PositionSize": "位置与大小",
+      "Time": "时间",
+      "Video": "视频",
+      "Animation": "动画",
+      "Audio": "音频",
+      "Text": "文字",
+      "Shapes": "形状",
+      "All": "全部"
+    },
+    "clipTypes": {
+      "video": "视频",
+      "audio": "音频",
+      "text": "文字",
+      "shape": "形状",
+      "image": "图片"
+    },
+    "open": "打开{{name}}",
+    "title": "搜索效果",
+    "subtitleClip": "查找适用于所选{{type}}片段的工具。",
+    "subtitle": "在属性面板中查找效果与工具。",
+    "searchLabel": "搜索效果",
+    "placeholderClip": "搜索适用于{{type}}片段的效果…",
+    "placeholder": "搜索所有效果与工具…",
+    "clear": "清除搜索",
+    "categoryLabel": "效果类别",
+    "emptyTitle": "未找到效果",
+    "emptyHint": "请尝试其他搜索词或类别。",
+    "navigate": "浏览",
+    "select": "选择"
+  },
+  "compress": {
+    "tiers": {
+      "light": "轻度",
+      "balanced": "平衡",
+      "strong": "强力"
+    },
+    "hints": {
+      "light": "最佳质量",
+      "balanced": "≈720p",
+      "strong": "最小文件"
+    },
+    "readFailed": "无法读取该视频，请换一个文件试试。",
+    "failed": "压缩失败，请改用较轻的设置。",
+    "title": "压缩视频",
+    "videoFile": "视频文件",
+    "choose": "选择要压缩的视频…",
+    "reading": "读取中…",
+    "mode": "压缩模式",
+    "quality": "质量",
+    "targetSize": "目标大小",
+    "customTarget": "自定义目标大小",
+    "custom": "自定义",
+    "estimated": "预估输出",
+    "from": "原始 {{size}}",
+    "smaller": "缩小 {{percent}}%",
+    "compressing": "压缩中… {{percent}}%",
+    "progress": "压缩进度",
+    "cancel": "取消",
+    "close": "关闭",
+    "compress": "压缩"
+  },
+  "screenRecorder": {
+    "title": "屏幕录制",
+    "unsupported": "不支持屏幕录制",
+    "unsupportedHint": "你的浏览器不支持屏幕录制，请使用 Chrome、Edge 或 Firefox。",
+    "error": "录制错误",
+    "videoSettings": "视频设置",
+    "resolution": "分辨率",
+    "frameRate": "帧率",
+    "audioSettings": "音频设置",
+    "systemAudio": "系统音频",
+    "microphone": "麦克风",
+    "systemAudioHint": "系统音频捕获仅支持 Chrome 与 Edge 浏览器。",
+    "webcam": "摄像头录制",
+    "webcamAria": "摄像头录制",
+    "webcamResolution": "摄像头分辨率",
+    "webcamHint": "摄像头会录制为独立文件，让你在编辑器中完全控制。",
+    "countdown": "倒数 3 秒后开始录制",
+    "cancel": "取消",
+    "requesting": "正在请求访问权限…",
+    "start": "开始录制"
+  },
+  "tour": {
+    "skip": "跳过导览",
+    "skipTitle": "跳过导览",
+    "goToStep": "前往第 {{step}} 步",
+    "back": "上一步",
+    "getStarted": "开始使用",
+    "next": "下一步",
+    "mographProgress": "动态图形导览 • 第 {{step}} 步，共 {{total}} 步",
+    "steps": {
+      "welcome": {
+        "title": "欢迎使用炎剑剪辑",
+        "description": "快速认识当前的编辑器布局：左侧是工具、中央是播放、下方是时间轴、右侧是属性。"
+      },
+      "assets": {
+        "title": "素材与创作工具",
+        "description": "左侧面板会随工具栏切换：可以在这里导入素材、添加文字、图形、效果与转场。",
+        "tips": {
+          "0": "素材区存放导入的视频、音频与图片",
+          "1": "使用左侧工具栏切换到文字、图形、效果或转场",
+          "2": "把素材从这个面板拖到时间轴",
+          "3": "导入与录制控制位于这个面板顶部"
+        }
+      },
+      "timeline": {
+        "title": "时间轴",
+        "description": "在轨道上排列片段、修剪边缘、分割选区，并使用时间轴栏右侧的缩放控制。",
+        "tips": {
+          "0": "按 S 分割所选片段",
+          "1": "拖动片段边缘即可修剪",
+          "2": "需要更多视频或音频轨道时，使用“添加轨道”"
+        }
+      },
+      "preview": {
+        "title": "播放器",
+        "description": "中央播放器显示当前帧与播放控制。导出前可在这里裁剪、调整适配并检查更改。",
+        "tips": {
+          "0": "使用画布下方的播放控制",
+          "1": "绿点表示实时预览已启用",
+          "2": "全屏与适配工具位于播放器控制栏"
+        }
+      },
+      "inspector": {
+        "title": "属性面板",
+        "description": "选择片段即可编辑其属性。变换、色彩、效果、速度与动画控制都会显示在这里。",
+        "tips": {
+          "0": "使用上方标签页切换属性组",
+          "1": "调色与效果针对单个片段",
+          "2": "选择片段时，支持关键帧的控制会显示动画选项"
+        }
+      },
+      "complete": {
+        "title": "准备就绪",
+        "description": "你已经知道主要工具的位置。使用最左侧的操作栏，可重新打开导览、设置与项目工具。"
+      }
+    }
+  },
+  "chat": {
+    "suggestions": {
+      "welcomeTitle": "在前 3 秒添加写着“Welcome”的标题",
+      "trimEnd": "把第一个片段的结尾剪掉 2 秒",
+      "fadeIn": "为开场片段添加淡入",
+      "listTimeline": "列出当前时间轴上的所有内容"
+    },
+    "setupEndpoint": "请选择 API 格式，然后输入端点网址与模型 ID。",
+    "setupPassword": "请设置主密码，然后添加提供商的 API 密钥。",
+    "setupLocked": "解锁加密的 API 密钥即可启用 AI 编辑器。",
+    "setupOptional": "添加可选的端点 API 密钥即可开始编辑。",
+    "intro": "用日常语言描述想做的编辑，AI 会在你的时间轴上完成。",
+    "introNoProject": "请打开或创建项目，再用日常语言描述编辑。",
+    "unlockKeys": "解锁 API 密钥",
+    "configureEndpoint": "配置端点",
+    "setUpChat": "设置 AI 聊天",
+    "dryRunOn": "试运行开启：只规划不实际应用编辑",
+    "dryRunOff": "试运行关闭",
+    "autoOn": "自动批准开启：破坏性操作无需确认即执行",
+    "autoOff": "自动批准关闭：破坏性操作会先询问",
+    "undoTurn": "撤销上一轮 AI 操作",
+    "history": "对话记录",
+    "newChat": "新对话",
+    "close": "关闭",
+    "connectAny": "连接任何兼容的模型",
+    "connectAnyHint": "请选择 API 格式，再使用你自己的主机与模型。炎剑剪辑不会替你选择服务商或模型。"
+  },
+  "whisper": {
+    "models": {
+      "accurate": {
+        "label": "精准 · Large V3 Turbo",
+        "downloadSize": "约 760 MB",
+        "description": "本地准确度最佳；建议使用 WebGPU"
+      },
+      "fast": {
+        "label": "快速 · Whisper Tiny",
+        "downloadSize": "约 100 MB",
+        "description": "最快的选项，适合草稿与内存较小的设备"
+      }
+    }
+  },
+  "notifications": {
+    "mediaNotSaved": "无法将素材保存到浏览器存储空间",
+    "replacementNotSaved": "无法将替换的素材保存到浏览器存储空间",
+    "keepOriginal": "请保留原始文件 {{name}}，重新加载后才能重新链接。",
+    "autoSaveUnavailable": "无法自动保存",
+    "autoSaveUnavailableHint": "你的编辑仍保留在此标签页中。关闭前请保存一份项目副本，并保留原始素材文件。"
+  },
+  "mobile": {
+    "title": "你的浏览器需要更新",
+    "body": "炎剑剪辑需要本地文件访问与画布渲染功能。请用新版浏览器打开此页面，即可在手机、平板或电脑上编辑。"
+  }
+}

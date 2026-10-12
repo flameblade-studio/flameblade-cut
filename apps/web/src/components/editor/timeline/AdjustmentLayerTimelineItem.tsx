@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTimelineTouchGesture, listenTimelineGesture } from "./touch-gestures";
 import { TimelineTouchMoveHandle } from "./TimelineTouchMoveHandle";
@@ -22,6 +23,7 @@ export const AdjustmentLayerTimelineItem: React.FC<AdjustmentLayerTimelineItemPr
   onSelectOwner,
   isSelected = false,
 }) => {
+  const { t } = useTranslation();
   const touchGesture = useTimelineTouchGesture();
   const [gesture, setGesture] = useState<"move" | "left" | "right" | null>(null);
   const startRef = useRef({ x: 0, startTime: 0, duration: 0 });
@@ -95,7 +97,7 @@ export const AdjustmentLayerTimelineItem: React.FC<AdjustmentLayerTimelineItemPr
       data-timeline-clip
       aria-pressed={isSelected}
       onPointerDown={touchGesture.bodyPointerDown}
-      aria-label={`${layer.name}, adjustment layer`}
+      aria-label={t("timeline.clip.adjustmentLayer", { name: layer.name })}
       className={`absolute top-1 z-20 flex h-5 min-w-[12px] items-center overflow-hidden rounded border text-[9px] font-semibold shadow-sm ${
         layer.enabled
           ? "border-violet-300/70 bg-violet-500/85 text-white"
@@ -108,12 +110,12 @@ export const AdjustmentLayerTimelineItem: React.FC<AdjustmentLayerTimelineItemPr
       onMouseDown={(event) => startGesture(event, "move")}
       onClick={(event) => { if (touchGesture.consumeTap()) onSelectOwner(); event.stopPropagation(); }}
     >
-      {isSelected && <TimelineTouchMoveHandle label={`Move ${layer.name}`} onPointerDown={(event) => touchGesture.start(event, (e) => startGesture(e, "move"))} />}
+      {isSelected && <TimelineTouchMoveHandle label={t("timeline.clip.move", { name: layer.name })} onPointerDown={(event) => touchGesture.start(event, (e) => startGesture(e, "move"))} />}
       <button
         data-timeline-trim="left"
         onPointerDown={(event) => touchGesture.start(event, (e) => startGesture(e, "left"))}
         type="button"
-        aria-label={`Trim start of ${layer.name}`}
+        aria-label={t("timeline.clip.trimStartOf", { name: layer.name })}
         className="h-full w-1.5 shrink-0 cursor-ew-resize bg-white/20 hover:bg-white/50"
         onMouseDown={(event) => startGesture(event, "left")}
       />
@@ -123,7 +125,7 @@ export const AdjustmentLayerTimelineItem: React.FC<AdjustmentLayerTimelineItemPr
         data-timeline-trim="right"
         onPointerDown={(event) => touchGesture.start(event, (e) => startGesture(e, "right"))}
         type="button"
-        aria-label={`Trim end of ${layer.name}`}
+        aria-label={t("timeline.clip.trimEndOf", { name: layer.name })}
         className="ml-auto h-full w-1.5 shrink-0 cursor-ew-resize bg-white/20 hover:bg-white/50"
         onMouseDown={(event) => startGesture(event, "right")}
       />

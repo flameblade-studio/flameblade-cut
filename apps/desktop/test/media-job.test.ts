@@ -54,6 +54,13 @@ describe("media-job arg builders", () => {
   it("extract-audio: defaults to first audio stream when index omitted", () => {
     const a = buildExtractAudioArgs("/in.mp4", "/out.wav");
     expect(a.join(" ")).toContain("-map 0:a:0");
+    expect(a.join(" ")).toContain("-ar 48000 -ac 2");
+  });
+
+  it("extract-audio: speech format is 16 kHz mono 16-bit", () => {
+    const a = buildExtractAudioArgs("/in.mp4", "/out.wav", undefined, "speech");
+    expect(a.join(" ")).toContain("-c:a pcm_s16le -ar 16000 -ac 1");
+    expect(a).not.toContain("pcm_f32le");
   });
 
   it("exposes PROXY_SCALE heights matching the web presets", () => {

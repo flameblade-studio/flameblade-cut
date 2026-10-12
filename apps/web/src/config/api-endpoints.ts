@@ -7,10 +7,22 @@
 
 const isDev = import.meta.env.DEV;
 
-/** OpenReel cloud services */
-export const OPENREEL_CLOUD_URL = isDev
-  ? "http://localhost:8787"
-  : "https://api.openreel.video";
+/**
+ * Cloud services (template sharing, video share links). Flameblade Cut is a
+ * local-first app: nothing is uploaded unless a server of your own is set via
+ * VITE_FLAMEBLADE_CLOUD_URL at build time. The upstream OpenReel build sent
+ * these requests to api.openreel.video.
+ */
+const configuredCloudUrl = (import.meta.env.VITE_FLAMEBLADE_CLOUD_URL as string | undefined)?.trim() ?? "";
+export const CLOUD_SERVICES_ENABLED = configuredCloudUrl !== "" || isDev;
+export const OPENREEL_CLOUD_URL = configuredCloudUrl !== "" ? configuredCloudUrl : "http://localhost:8787";
+
+export class CloudServicesDisabledError extends Error {
+  constructor() {
+    super("Cloud services are disabled in this build (no VITE_FLAMEBLADE_CLOUD_URL configured).");
+    this.name = "CloudServicesDisabledError";
+  }
+}
 
 /**
  * Third-party API base URLs.

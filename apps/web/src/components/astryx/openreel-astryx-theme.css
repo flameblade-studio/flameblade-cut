@@ -1,12 +1,17 @@
-/* OpenReel brand overrides layered after the prebuilt Astryx Neutral theme. */
+/*
+ * Flameblade Cut brand overrides layered after the prebuilt Astryx Neutral
+ * theme (upstream OpenReel used emerald). Accent = the crest's flame
+ * vermilion; CJK falls back to the Windows UI fonts so Traditional Chinese and
+ * Japanese render with consistent, legible glyphs.
+ */
 [data-astryx-theme="neutral"] {
-  --color-accent: light-dark(#10b981, #34d399);
-  --color-accent-muted: light-dark(#e6f9f1, #064e3b);
-  --color-text-accent: light-dark(#059669, #6ee7b7);
-  --color-icon-accent: light-dark(#059669, #6ee7b7);
+  --color-accent: light-dark(#d9482b, #f0643c);
+  --color-accent-muted: light-dark(#fdebe5, #3a1a12);
+  --color-text-accent: light-dark(#b8371f, #ff9a70);
+  --color-icon-accent: light-dark(#b8371f, #ff9a70);
   --color-on-accent: #ffffff;
-  --font-family-body: "Inter", -apple-system, BlinkMacSystemFont, system-ui,
-    sans-serif;
-  --font-family-heading: "Inter", -apple-system, BlinkMacSystemFont, system-ui,
-    sans-serif;
+  --font-family-body: "Inter", "Microsoft JhengHei UI", "Microsoft JhengHei", "Yu Gothic UI", "Microsoft YaHei UI",
+    -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-family-heading: "Inter", "Microsoft JhengHei UI", "Microsoft JhengHei", "Yu Gothic UI", "Microsoft YaHei UI",
+    -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }

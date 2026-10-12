@@ -5,6 +5,7 @@ import { ToolcraftText as Text } from "@openreel/ui";
 import { PropertySlider } from "./shell/PropertySlider";
 import { RotateCcw } from "@/icons/lucide-compat";
 import type { HSLValues } from "@openreel/core";
+import { useTranslation } from "react-i18next";
 
 export const DEFAULT_HSL_VALUES: HSLValues = {
   hue: [0, 0, 0, 0, 0, 0, 0, 0],
@@ -69,9 +70,11 @@ const ColorTab: React.FC<{
   color: (typeof COLOR_RANGES)[number];
   isActive: boolean;
   onClick: () => void;
-}> = ({ color, isActive, onClick }) => (
+}> = ({ color, isActive, onClick }) => {
+  const { t } = useTranslation();
+  return (
   <ClickableCard
-    label={color.fullLabel}
+    label={t(`inspector.color.hsl.${color.key}`)}
     onClick={onClick}
     className={`flex-1 py-1.5 text-[9px] font-medium rounded transition-all ${
       isActive
@@ -86,7 +89,8 @@ const ColorTab: React.FC<{
   >
     {color.label}
   </ClickableCard>
-);
+  );
+};
 
 /**
  * HSL Slider component
@@ -126,6 +130,7 @@ export const HSLControls: React.FC<HSLControlsProps> = ({
   onChange,
   onReset,
 }) => {
+  const { t } = useTranslation();
   const [activeColorIndex, setActiveColorIndex] = useState(0);
 
   // Get current color info
@@ -196,7 +201,7 @@ export const HSLControls: React.FC<HSLControlsProps> = ({
       {onReset && (
         <div className="flex justify-end">
           <Button
-            label="Reset All"
+            label={t("inspector.color.resetAll")}
             icon={<RotateCcw size={10} />}
             variant="ghost"
             size="sm"
@@ -226,12 +231,12 @@ export const HSLControls: React.FC<HSLControlsProps> = ({
             style={{ backgroundColor: activeColor.color }}
           />
           <Text type="supporting" color="primary" className="text-[11px] font-medium">
-            {activeColor.fullLabel}
+            {t(`inspector.color.hsl.${activeColor.key}`)}
           </Text>
         </div>
         {hasAdjustments && (
           <Button
-            label="Reset"
+            label={t("inspector.color.reset")}
             variant="ghost"
             size="sm"
             onClick={handleResetColor}
@@ -243,7 +248,7 @@ export const HSLControls: React.FC<HSLControlsProps> = ({
       {/* HSL Sliders */}
       <div className="space-y-3">
         <HSLSlider
-          label="Hue"
+          label={t("inspector.color.hue")}
           value={currentHue}
           onChange={handleHueChange}
           min={-180}
@@ -252,7 +257,7 @@ export const HSLControls: React.FC<HSLControlsProps> = ({
           color={activeColor.color}
         />
         <HSLSlider
-          label="Saturation"
+          label={t("inspector.color.saturation")}
           value={currentSaturation}
           onChange={handleSaturationChange}
           min={-100}
@@ -261,7 +266,7 @@ export const HSLControls: React.FC<HSLControlsProps> = ({
           color={activeColor.color}
         />
         <HSLSlider
-          label="Luminance"
+          label={t("inspector.color.luminance")}
           value={currentLuminance}
           onChange={handleLuminanceChange}
           min={-100}
@@ -286,7 +291,7 @@ export const HSLControls: React.FC<HSLControlsProps> = ({
                   hasAdj ? "opacity-100" : "opacity-20"
                 }`}
                 style={{ backgroundColor: color.color }}
-                title={`${color.fullLabel}${hasAdj ? " (adjusted)" : ""}`}
+                title={`${t(`inspector.color.hsl.${color.key}`)}${hasAdj ? t("inspector.color.adjustedSuffix") : ""}`}
               />
             );
           })}

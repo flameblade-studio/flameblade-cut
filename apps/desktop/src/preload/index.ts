@@ -14,6 +14,8 @@ contextBridge.exposeInMainWorld("openreel", {
   fs: {
     showSaveDialog: (opts: unknown) => ipcRenderer.invoke(CHANNELS.fsShowSaveDialog, opts),
     showOpenDialog: (opts: unknown) => ipcRenderer.invoke(CHANNELS.fsShowOpenDialog, opts),
+    showOpenFilesDialog: (opts: unknown) => ipcRenderer.invoke(CHANNELS.fsShowOpenFilesDialog, opts),
+    showOpenFolderDialog: () => ipcRenderer.invoke(CHANNELS.fsShowOpenFolderDialog, undefined),
     readFile: (p: string) => ipcRenderer.invoke(CHANNELS.fsReadFile, { path: p }),
     readFileBytes: (p: string) => ipcRenderer.invoke(CHANNELS.fsReadFileBytes, { path: p }),
     tempFilePath: (ext: string) => ipcRenderer.invoke(CHANNELS.fsTempFilePath, { ext }),
@@ -89,6 +91,11 @@ contextBridge.exposeInMainWorld("openreel", {
     toggleMaximize: () => ipcRenderer.invoke(CHANNELS.windowControl, { action: "toggleMaximize" }),
     close: () => ipcRenderer.invoke(CHANNELS.windowControl, { action: "close" }),
     isMaximized: () => ipcRenderer.invoke(CHANNELS.windowIsMaximized),
+    onMaximizedChange: (cb: (maximized: boolean) => void) => {
+      const handler = (_event: unknown, maximized: boolean) => cb(maximized);
+      ipcRenderer.on(CHANNELS.windowMaximizedChanged, handler);
+      return () => ipcRenderer.removeListener(CHANNELS.windowMaximizedChanged, handler);
+    },
   },
   media: {
     generateProxy: (args: unknown) => ipcRenderer.invoke(CHANNELS.mediaGenerateProxy, args),
@@ -149,6 +156,42 @@ contextBridge.exposeInMainWorld("openreel", {
     getStatus: () => ipcRenderer.invoke(CHANNELS.mcpGetStatus, undefined),
     rotateToken: () => ipcRenderer.invoke(CHANNELS.mcpRotateToken, undefined),
     testConnection: () => ipcRenderer.invoke(CHANNELS.mcpTestConnection, undefined),
+  },
+  comfy: {
+    // Local ComfyUI bridge. Every HTTP/WebSocket call runs in the main process
+    // because ComfyUI rejects browser-origin requests. The renderer chooses the
+    // subscription id so it can listen before any websocket frame arrives.
+    request: (args: unknown) => ipcRenderer.invoke(CHANNELS.comfyRequest, args),
+    uploadImage: (args: unknown) => ipcRenderer.invoke(CHANNELS.comfyUploadImage, args),
+    download: (args: unknown) => ipcRenderer.invoke(CHANNELS.comfyDownload, args),
+    subscribe: (args: unknown) => ipcRenderer.invoke(CHANNELS.comfySubscribe, args),
+    unsubscribe: (subscriptionId: string) =>
+      ipcRenderer.invoke(CHANNELS.comfyUnsubscribe, { subscriptionId }),
+    onWsEvent: (cb: (event: unknown) => void) => {
+      const handler = (_event: unknown, payload: unknown) => cb(payload);
+      ipcRenderer.on(CHANNELS.comfyWsEvent, handler);
+      return () => ipcRenderer.removeListener(CHANNELS.comfyWsEvent, handler);
+    },
+    launch: (config: unknown) => ipcRenderer.invoke(CHANNELS.comfyLaunch, config),
+    stopLaunched: () => ipcRenderer.invoke(CHANNELS.comfyStopLaunched, undefined),
+    libraryDir: () => ipcRenderer.invoke(CHANNELS.comfyLibraryDir, undefined),
+    readFileBytes: (p: string) => ipcRenderer.invoke(CHANNELS.comfyReadFileBytes, { path: p }),
+    writeTextFile: (p: string, contents: string) =>
+      ipcRenderer.invoke(CHANNELS.comfyWriteTextFile, { path: p, contents }),
+    readTextFile: (p: string) => ipcRenderer.invoke(CHANNELS.comfyReadTextFile, { path: p }),
+  },
+  voice: {
+    // Voiceover (TTS). Cloud keys are read by main from the encrypted KeyStore;
+    // the renderer only stores/deletes them via `keychain` and sees booleans here.
+    listVoices: (args: unknown) => ipcRenderer.invoke(CHANNELS.voiceListVoices, args),
+    synthesize: (args: unknown) => ipcRenderer.invoke(CHANNELS.voiceSynthesize, args),
+    keyStatus: () => ipcRenderer.invoke(CHANNELS.voiceKeyStatus, undefined),
+  },
+  openaiText: {
+    // Highlights ranking / caption translation. The OpenAI key stays in main
+    // (KeyStore "flameblade.openai-key").
+    chat: (args: unknown) => ipcRenderer.invoke(CHANNELS.openaiTextChat, args),
+    keyStatus: () => ipcRenderer.invoke(CHANNELS.openaiTextKeyStatus, undefined),
   },
   lifecycle: {
     // The main process asks (on window close / quit) whether there are unsaved

@@ -7,12 +7,14 @@ import {
   getBlendModeName,
   type BlendMode,
 } from "@openreel/core";
+import { useTranslation } from "react-i18next";
 
 interface BlendingSectionProps {
   clipId: string;
 }
 
 export const BlendingSection: React.FC<BlendingSectionProps> = ({ clipId }) => {
+  const { t } = useTranslation();
   const {
     getClip,
     getTextClip,
@@ -72,7 +74,7 @@ export const BlendingSection: React.FC<BlendingSectionProps> = ({ clipId }) => {
         color="secondary"
         className="py-8 text-center text-xs"
       >
-        No clip selected
+        {t("inspector.blending.noClip")}
       </Text>
     );
   }
@@ -81,11 +83,11 @@ export const BlendingSection: React.FC<BlendingSectionProps> = ({ clipId }) => {
     <div className="space-y-3">
       <div className="flex items-center">
         <span className="w-[90px] flex-none text-[14px] font-semibold text-fg">
-          Blending
+          {t("inspector.blending.title")}
         </span>
         <div className="relative flex-1">
           <select
-            aria-label="Blend mode"
+            aria-label={t("inspector.blending.mode")}
             value={blendMode}
             onChange={(event) =>
               handleBlendModeChange(event.target.value as BlendMode)
@@ -116,7 +118,7 @@ export const BlendingSection: React.FC<BlendingSectionProps> = ({ clipId }) => {
       {blendMode !== "normal" && (
         <div className="flex items-center">
           <span className="w-[90px] flex-none text-[13px] font-medium text-fg-3">
-            Blend Opacity
+            {t("inspector.blending.opacity")}
           </span>
           <MockSlider
             className="flex-1"

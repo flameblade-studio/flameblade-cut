@@ -1,0 +1,344 @@
+/* AI generation page. Uses the desktop theme tokens (desktop-theme.css). */
+
+.fc-create {
+  --fc-radius: 14px;
+  --fc-radius-sm: 10px;
+  background:
+    radial-gradient(1200px 500px at 70% -10%, oklch(0.6 0.2 30 / 0.07), transparent 60%),
+    radial-gradient(900px 400px at -10% 110%, oklch(0.74 0.11 75 / 0.05), transparent 60%),
+    var(--bg);
+}
+
+.fc-panel {
+  background: color-mix(in oklch, var(--bg-1) 92%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--fc-radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.fc-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+.fc-tab {
+  position: relative;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-2);
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+.fc-tab:hover {
+  color: var(--fg);
+  background: var(--hover);
+}
+.fc-tab[aria-selected="true"] {
+  color: var(--fg);
+  background: var(--bg-3);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+
+.fc-segment {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+.fc-segment > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 8px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--fg-2);
+  transition: all 0.15s ease;
+}
+.fc-segment > button:hover {
+  color: var(--fg);
+}
+.fc-segment > button[aria-pressed="true"] {
+  color: var(--fg);
+  background: var(--bg-3);
+  box-shadow: inset 0 0 0 1px var(--border-strong), 0 1px 2px oklch(0 0 0 / 0.3);
+}
+
+.fc-label {
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  color: var(--fg-2);
+}
+
+.fc-input {
+  width: 100%;
+  border-radius: var(--fc-radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 13.5px;
+  line-height: 1.6;
+  padding: 10px 12px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.fc-input::placeholder {
+  color: var(--fg-muted);
+}
+.fc-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.fc-drop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--fc-radius-sm);
+  border: 1px dashed var(--border-strong);
+  background: var(--bg);
+  color: var(--fg-3);
+  overflow: hidden;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+.fc-drop:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+  background: color-mix(in oklch, var(--accent-soft) 35%, var(--bg));
+}
+.fc-drop img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fc-generate {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  border-radius: 13px;
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  color: oklch(0.99 0.005 80);
+  background: var(--flame-gradient);
+  box-shadow: 0 8px 24px oklch(0.6 0.2 30 / 0.35), inset 0 1px 0 oklch(1 0 0 / 0.25);
+  transition: transform 0.12s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+.fc-generate:hover:not(:disabled) {
+  background: var(--flame-gradient-hover);
+  box-shadow: 0 10px 30px oklch(0.6 0.2 30 / 0.45), inset 0 1px 0 oklch(1 0 0 / 0.3);
+}
+.fc-generate:active:not(:disabled) {
+  transform: translateY(1px) scale(0.995);
+}
+.fc-generate:disabled {
+  color: var(--fg-muted);
+  background: var(--bg-3);
+  box-shadow: inset 0 0 0 1px var(--border);
+  cursor: not-allowed;
+}
+
+.fc-card {
+  border-radius: var(--fc-radius);
+  border: 1px solid var(--border);
+  background: var(--bg-1);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+.fc-card[data-active="true"] {
+  border-color: color-mix(in oklch, var(--accent) 65%, var(--border));
+}
+
+.fc-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--fg-2);
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+.fc-chip--gold {
+  color: var(--gold);
+  background: var(--gold-soft);
+  border-color: color-mix(in oklch, var(--gold) 35%, transparent);
+}
+.fc-chip--flame {
+  color: oklch(0.85 0.1 50);
+  background: var(--accent-soft);
+  border-color: color-mix(in oklch, var(--accent) 40%, transparent);
+}
+
+.fc-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--fg-2);
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  transition: all 0.15s ease;
+}
+.fc-action:hover:not(:disabled) {
+  color: var(--fg);
+  border-color: var(--border-strong);
+  background: var(--bg-3);
+}
+.fc-action:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.fc-action--primary {
+  color: oklch(0.99 0.005 80);
+  border-color: transparent;
+  background: var(--flame-gradient);
+}
+.fc-action--primary:hover:not(:disabled) {
+  color: oklch(0.99 0.005 80);
+  border-color: transparent;
+  background: var(--flame-gradient-hover);
+}
+.fc-action--danger:hover:not(:disabled) {
+  color: oklch(0.75 0.17 25);
+  border-color: oklch(0.55 0.17 25 / 0.6);
+}
+
+.fc-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  background: var(--stage-bg);
+}
+
+.fc-progress-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bg-3);
+  overflow: hidden;
+}
+.fc-progress-bar {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--flame-gradient);
+  transition: width 0.4s ease;
+}
+
+.fc-shimmer {
+  background:
+    linear-gradient(110deg, transparent 30%, oklch(0.7 0.18 36 / 0.12) 45%, oklch(0.8 0.15 70 / 0.16) 50%, transparent 65%)
+      0 0 / 250% 100%,
+    radial-gradient(60% 80% at 50% 50%, oklch(0.3 0.06 33 / 0.6), var(--stage-bg));
+  animation: fc-shimmer 2.2s linear infinite;
+}
+@keyframes fc-shimmer {
+  to {
+    background-position: -250% 0, 0 0;
+  }
+}
+
+.fc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  flex: none;
+}
+.fc-dot--ready {
+  background: oklch(0.75 0.17 150);
+  box-shadow: 0 0 0 3px oklch(0.75 0.17 150 / 0.2);
+}
+.fc-dot--starting {
+  background: var(--gold);
+  animation: fc-pulse 1.2s ease-in-out infinite;
+}
+.fc-dot--offline {
+  background: var(--fg-muted);
+}
+.fc-dot--error {
+  background: oklch(0.65 0.2 25);
+}
+@keyframes fc-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.fc-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--stage-bg);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.fc-thumb:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+.fc-thumb[data-active="true"] {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.fc-workspace-switch {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+.fc-workspace-switch > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--fg-2);
+  transition: all 0.15s ease;
+}
+.fc-workspace-switch > button:hover {
+  color: var(--fg);
+}
+.fc-workspace-switch > button[aria-pressed="true"] {
+  color: var(--fg);
+  background: var(--bg-3);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fc-shimmer,
+  .fc-dot--starting {
+    animation: none;
+  }
+}

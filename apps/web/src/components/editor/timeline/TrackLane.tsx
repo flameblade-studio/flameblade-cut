@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React, { useRef, useCallback, useEffect, useState, useMemo } from "react";
 import type {
   Track,
@@ -100,6 +101,7 @@ export const TrackLane: React.FC<TrackLaneProps> = React.memo(function TrackLane
   onSelectTransition,
   selectedTransitionId = null,
 }) {
+  const { t } = useTranslation();
   const isExpanded = useTimelineStore((state) => state.expandedTracks.has(track.id));
   const viewportWidth = useTimelineStore((state) => state.viewportWidth);
   const snapSettings = useUIStore((state) => state.snapSettings);
@@ -210,7 +212,7 @@ export const TrackLane: React.FC<TrackLaneProps> = React.memo(function TrackLane
                 .project.mediaLibrary.items.find(i => !beforeIds.has(i.id));
               if (newItem) {
                 await placeMediaClip(newItem.id, track.id, snapResult.time);
-                toast.success(`Added to ${track.name}`, file.name);
+                toast.success(t("timeline.addedTo", { name: track.name }), file.name);
               }
             }
           } catch (err) {
@@ -261,6 +263,7 @@ export const TrackLane: React.FC<TrackLaneProps> = React.memo(function TrackLane
       snapSettings,
       track.id,
       track.name,
+      t,
     ],
   );
 

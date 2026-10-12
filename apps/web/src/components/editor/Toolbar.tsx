@@ -25,6 +25,7 @@ import { HistoryPanel } from "./inspector/HistoryPanel";
 import { ProjectSwitcher } from "./ProjectSwitcher";
 import { SettingsDialog } from "./settings/SettingsDialog";
 import { Icon } from "@/icons/Icon";
+import { useTranslation } from "react-i18next";
 import { toast } from "../../stores/notification-store";
 import { useAnalytics, AnalyticsEvents } from "../../hooks/useAnalytics";
 import {
@@ -49,6 +50,7 @@ type ExportType =
   | "project";
 
 export const Toolbar: React.FC = () => {
+  const { t } = useTranslation();
   const project = useProjectStore((state) => state.project);
   const renameProject = useProjectStore((state) => state.renameProject);
   const setGlobalExportState = useUIStore((state) => state.setExportState);
@@ -266,8 +268,8 @@ export const Toolbar: React.FC = () => {
     async (screenBlob: Blob, webcamBlob?: Blob) => {
       if (!screenBlob || screenBlob.size === 0) {
         toast.error(
-          "Recording failed",
-          "No video data was captured. Please try again.",
+          t("editor.toolbar.recordingFailed"),
+          t("editor.toolbar.recordingEmpty"),
         );
         return;
       }
@@ -287,7 +289,7 @@ export const Toolbar: React.FC = () => {
         importCount++;
       } else {
         errors.push(
-          screenResult.error?.message || "Failed to import screen recording",
+          screenResult.error?.message || t("editor.toolbar.screenImportFailed"),
         );
       }
 
@@ -300,23 +302,23 @@ export const Toolbar: React.FC = () => {
           importCount++;
         } else {
           errors.push(
-            webcamResult.error?.message || "Failed to import webcam recording",
+            webcamResult.error?.message || t("editor.toolbar.webcamImportFailed"),
           );
         }
       }
 
       if (importCount > 0) {
         toast.success(
-          `${importCount} recording${importCount > 1 ? "s" : ""} imported!`,
+          t("editor.toolbar.recordingsImported", { count: importCount }),
           webcamBlob && webcamBlob.size > 0
-            ? "Screen and webcam added to assets. Use the timeline to composite them."
-            : "Screen recording added to assets.",
+            ? t("editor.toolbar.screenAndWebcamAdded")
+            : t("editor.toolbar.screenAdded"),
         );
       } else if (errors.length > 0) {
-        toast.error("Import failed", errors.join(". "));
+        toast.error(t("editor.toolbar.importFailed"), errors.join(". "));
       }
     },
-    [importMedia],
+    [importMedia, t],
   );
 
   const projectRes = `${project.settings.width}×${project.settings.height}`;
@@ -332,9 +334,9 @@ export const Toolbar: React.FC = () => {
     separator?: boolean;
   }> = [
     {
-      label: "MP4 Standard",
+      label: t("editor.toolbar.export.mp4"),
       iconName: "bolt",
-      desc: `${projectRes} H.264 - Web & social`,
+      desc: t("editor.toolbar.export.mp4Desc", { resolution: projectRes }),
       type: "mp4",
       recommended: true,
     },
@@ -349,28 +351,28 @@ export const Toolbar: React.FC = () => {
       ? []
       : [
           {
-            label: "4K Standard",
+            label: t("editor.toolbar.export.4k"),
             iconName: "film",
-            desc: "3840×2160 - YouTube 4K",
+            desc: t("editor.toolbar.export.4kDesc"),
             type: "4k" as ExportType,
           },
         ]),
     {
-      label: "1080p High Quality",
+      label: t("editor.toolbar.export.1080pHigh"),
       iconName: "film",
-      desc: "1920×1080 30fps - High bitrate",
+      desc: t("editor.toolbar.export.1080pHighDesc"),
       type: "1080p-high",
     },
     {
-      label: "1080p 60fps",
+      label: t("editor.toolbar.export.1080p60"),
       iconName: "film",
-      desc: "1920×1080 - Smooth playback",
+      desc: t("editor.toolbar.export.1080p60Desc"),
       type: "1080p-60",
     },
     {
-      label: "Audio Only (WAV)",
+      label: t("editor.toolbar.export.wav"),
       iconName: "music.note",
-      desc: "Uncompressed audio",
+      desc: t("editor.toolbar.export.wavDesc"),
       type: "wav",
     },
   ];
@@ -380,7 +382,7 @@ export const Toolbar: React.FC = () => {
       {/* ─── Center: project name ─────────────────────────────── */}
       <div className="flex flex-1 min-w-0 items-center justify-center gap-1.5">
         <ToolcraftTextInputControl
-          label="Project name"
+          label={t("editor.toolbar.projectName")}
           isLabelHidden
           value={projectNameDraft}
           onChange={setProjectNameDraft}
@@ -428,7 +430,7 @@ export const Toolbar: React.FC = () => {
             className="flex items-center gap-1.5 rounded-[8px] bg-bg-3 px-[18px] py-[9px] text-[13px] font-semibold text-fg-2"
           >
             <Icon name="checkmark" size={13} ariaHidden />
-            Saved!
+            {t("desktop.export.saved")}
           </button>
         ) : (
           <div className="flex items-stretch">
@@ -436,17 +438,17 @@ export const Toolbar: React.FC = () => {
               type="button"
               onClick={openExportDialog}
               disabled={!hasTimelineContent}
-              title={hasTimelineContent ? "Choose export settings" : "Add media or text to the timeline to export"}
+              title={hasTimelineContent ? t("editor.toolbar.chooseExportSettings") : t("editor.toolbar.exportNeedsContent")}
               className="rounded-l-[8px] rounded-r-none bg-accent px-[18px] py-[9px] text-[13px] font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Export
+              {t("desktop.export.export")}
             </button>
             <DropdownMenu
               isMenuOpen={isExportOpen}
               onOpenChange={setIsExportOpen}
               hasChevron={false}
               button={{
-                label: "Export options",
+                label: t("editor.toolbar.exportOptions"),
                 variant: "primary",
                 size: "sm",
                 isIconOnly: true,
@@ -494,7 +496,7 @@ export const Toolbar: React.FC = () => {
                           </Text>
                           {option.recommended && (
                             <Text type="supporting" className="rounded bg-accent-soft px-1.5 py-0.5 text-[10px] text-accent">
-                              Best match
+                              {t("editor.toolbar.bestMatch")}
                             </Text>
                           )}
                         </div>
@@ -506,7 +508,7 @@ export const Toolbar: React.FC = () => {
                           </Text>
                           {exportEstimates.get(option.type) && (
                             <Text type="supporting" color="secondary" display="block" className="text-[10px]">
-                              Est. {exportEstimates.get(option.type)?.formatted}
+                              {t("editor.toolbar.estimate", { time: exportEstimates.get(option.type)?.formatted })}
                             </Text>
                           )}
                         </div>
@@ -520,15 +522,15 @@ export const Toolbar: React.FC = () => {
                 <div className="my-1 border-t border-border" />
                 <DropdownMenuItem
                   icon={<Settings size={18} aria-hidden />}
-                  label="Custom export..."
-                  description="Full settings with AI upscaling"
+                  label={t("editor.toolbar.customExport")}
+                  description={t("editor.toolbar.customExportDesc")}
                   endContent={<MoreHorizontal size={14} className="text-fg-muted" aria-hidden />}
                   onClick={openExportDialog}
                 />
                 <DropdownMenuItem
                   icon={<Video size={18} aria-hidden />}
-                  label="Compress video..."
-                  description="Shrink any video to a target size"
+                  label={t("editor.toolbar.compressVideo")}
+                  description={t("editor.toolbar.compressVideoDesc")}
                   onClick={() => setIsCompressOpen(true)}
                 />
               </div>
@@ -575,10 +577,10 @@ export const Toolbar: React.FC = () => {
           <div className="fixed top-topbar right-0 bottom-0 w-80 bg-bg-1 border-l border-border z-50 shadow-lg animate-in slide-in-from-right duration-200">
             <div className="flex items-center justify-between p-3 border-b border-border">
               <Text type="body" weight="bold" className="text-sm text-fg">
-                Action history
+                {t("editor.rail.history")}
               </Text>
               <ToolcraftIconButton
-                label="Close action history"
+                label={t("editor.toolbar.closeHistory")}
                 icon={<X size={14} aria-hidden />}
                 size="sm"
                 variant="ghost"

@@ -1,0 +1,105 @@
+{
+  "aiTab": {
+    "title": "AI ツール",
+    "subtitle": "インテリジェントな機能で編集を効率化",
+    "back": "AI ツールに戻る",
+    "sections": {
+      "generation": "コンテンツ生成",
+      "templates": "テンプレートとプリセット",
+      "media": "メディアライブラリ",
+      "tools": "ツール"
+    },
+    "cards": {
+      "voiceover": { "title": "ナレーション", "description": "テキストを音声にしてタイムラインへ" },
+      "captions": { "title": "自動字幕", "description": "音声から字幕を自動生成" },
+      "templates": { "title": "プロジェクトテンプレート", "description": "用意された構成から始める" },
+      "filters": { "title": "フィルタープリセット", "description": "映画風のカラーグレードをすぐに適用" },
+      "music": { "title": "音楽と効果音", "description": "ロイヤリティフリーの音源を探す" },
+      "multicam": { "title": "マルチカメラ編集", "description": "複数アングルを同期して切り替え" }
+    },
+    "footer": "AI 機能は今後も追加予定です",
+    "unsavedTitle": "未保存の音声を破棄しました",
+    "unsavedBody": "次回はメディアに保存するかダウンロードしてください。"
+  },
+  "panel": {
+    "title": "ナレーション",
+    "subtitle": "声を選んでテキストを入力し、試聴してからタイムラインへ",
+    "engine": "音声エンジン",
+    "engines": {
+      "windows": "Windows 標準・無料",
+      "azure": "Azure",
+      "openai": "OpenAI",
+      "elevenlabs": "ElevenLabs"
+    },
+    "engineHints": {
+      "windows": "Windows 標準の音声。無料・オフラインで、キーは不要です。",
+      "azure": "Microsoft Azure のクラウドニューラル音声。キーとリージョンが必要で、従量課金です。",
+      "openai": "OpenAI のクラウド音声。キーが必要で、従量課金です。",
+      "elevenlabs": "ElevenLabs のクラウド音声。設定の ElevenLabs キーを使います。"
+    },
+    "voice": "声",
+    "voicePlaceholder": "声を選択",
+    "searchVoices": "声を検索",
+    "loadingVoices": "声を読み込み中…",
+    "noVoices": "利用できる声がありません",
+    "refreshVoices": "声の一覧を更新",
+    "multilingual": "多言語",
+    "text": "読み上げテキスト",
+    "textPlaceholder": "読み上げる文章を入力…",
+    "rate": "話す速さ",
+    "rateNatural": "自然な速さ",
+    "instructions": "話し方の指示（任意）",
+    "instructionsPlaceholder": "例：やさしく、ゆっくり、物語を語るように",
+    "preview": "試聴",
+    "stopPreview": "試聴を停止",
+    "generating": "生成中…",
+    "insert": "タイムラインに追加（再生ヘッド位置）",
+    "inserted": "{{time}} にナレーションを追加しました",
+    "duration": "{{seconds}} 秒",
+    "desktopOnly": "ナレーションには Flameblade Cut デスクトップ版が必要です。",
+    "trackName": "ナレーション",
+    "clipPrefix": "ナレーション",
+    "subtitles": {
+      "title": "字幕を一括ナレーション",
+      "description": "字幕の各行に音声を順番に生成し、その行の開始時刻に配置します。",
+      "start": "{{count}} 行の字幕を読み上げ",
+      "none": "このプロジェクトには字幕がありません。",
+      "progress": "読み上げ中 {{done}} / {{total}}",
+      "cancel": "キャンセル",
+      "cancelled": "キャンセルしました（{{placed}} / {{total}} 行完了）。",
+      "done": "完了！{{placed}} 件のナレーションを配置しました。",
+      "failed": "{{index}} 行目で失敗しました（{{placed}} / {{total}} 行完了）：{{message}}"
+    },
+    "setup": {
+      "title": "キーとリージョンの設定",
+      "configured": "設定済み",
+      "notConfigured": "未設定",
+      "azureKey": "Azure Speech キー",
+      "openaiKey": "OpenAI キー",
+      "keyPlaceholder": "キーを貼り付け",
+      "save": "保存",
+      "remove": "削除",
+      "saved": "キーを暗号化して保存しました",
+      "removed": "キーを削除しました",
+      "saveFailed": "キーを保存できませんでした",
+      "region": "Azure リージョン",
+      "regionPlaceholder": "例：eastasia",
+      "keyHint": "キーはこのパソコンに Windows で暗号化して保存され、再表示されません。"
+    },
+    "errors": {
+      "missing-key": "キーが未設定です。下の「キーとリージョンの設定」で入力してください。",
+      "invalid-region": "Azure リージョンの形式が正しくありません（例：eastasia）。",
+      "unsupported-platform": "Windows 標準の音声は Windows でのみ使えます。",
+      "voice-missing": "選択した声がこのパソコンにありません。別の声を選んでください。",
+      "engine-failed": "音声エンジンでの生成に失敗しました。",
+      "timeout": "時間内に応答がありませんでした。",
+      "http": "クラウドサービスがエラーを返しました。",
+      "bad-audio": "サービスから有効な音声が返されませんでした。",
+      "too-long": "テキストが長すぎます。短くしてもう一度お試しください。",
+      "unavailable": "ナレーションには Flameblade Cut デスクトップ版が必要です。",
+      "unknown": "予期しないエラーが発生しました。",
+      "noProject": "先にプロジェクトを開いてください。",
+      "placement": "ナレーションをタイムラインに配置できませんでした。"
+    }
+  }
+}

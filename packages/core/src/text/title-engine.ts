@@ -12,6 +12,11 @@ import { DEFAULT_TEXT_STYLE, DEFAULT_TEXT_TRANSFORM } from "./types";
 import { textAnimationEngine } from "./text-animation";
 import { MotionShaderRenderer } from "../motion/motion-shader-renderer";
 import { getMotionShaderDef } from "../motion/shaders";
+import {
+  activeCaptionWordRange,
+  readCaptionWordHighlight,
+  splitCaptionLineRuns,
+} from "./caption-word-highlight";
 
 export interface CreateTextClipOptions {
   id?: string;
@@ -346,9 +351,17 @@ export class TitleEngine {
         charIdx++;
       }
     } else {
+      const wordHighlight = readCaptionWordHighlight(clip.metadata);
+      const highlightRuns = wordHighlight
+        ? splitCaptionLineRuns(
+            visibleText,
+            activeCaptionWordRange(visibleText, wordHighlight.words, time),
+          )
+        : null;
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         const y = startY + i * lineHeight;
+        const runs = highlightRuns?.[i];
 
         if (style.backgroundColor) {
           const lineMetrics = ctx.measureText(line);
@@ -362,6 +375,11 @@ export class TitleEngine {
           ctx.strokeStyle = style.strokeColor;
           ctx.lineWidth = style.strokeWidth;
           ctx.strokeText(line, 0, y);
+        }
+
+        if (wordHighlight && runs && runs.some((run) => run.highlighted)) {
+          this.drawHighlightedRuns(ctx, runs, y, style, wordHighlight.color);
+          continue;
         }
 
         ctx.fillStyle = style.color;
@@ -379,6 +397,36 @@ export class TitleEngine {
       height,
       textMetrics: metrics,
     };
+  }
+
+  /** Draws one line as coloured runs (caption word highlight), honouring alignment. */
+  private drawHighlightedRuns(
+    ctx: CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D,
+    runs: readonly { text: string; highlighted: boolean }[],
+    y: number,
+    style: TextStyle,
+    highlightColor: string,
+  ): void {
+    const lineWidth = runs.reduce((sum, run) => sum + ctx.measureText(run.text).width, 0);
+    let x =
+      style.textAlign === "center"
+        ? -lineWidth / 2
+        : style.textAlign === "right"
+          ? -lineWidth
+          : 0;
+    const previousAlign = ctx.textAlign;
+    ctx.textAlign = "left";
+    for (const run of runs) {
+      if (style.strokeColor && style.strokeWidth) {
+        ctx.strokeStyle = style.strokeColor;
+        ctx.lineWidth = style.strokeWidth;
+        ctx.strokeText(run.text, x, y);
+      }
+      ctx.fillStyle = run.highlighted ? highlightColor : style.color;
+      ctx.fillText(run.text, x, y);
+      x += ctx.measureText(run.text).width;
+    }
+    ctx.textAlign = previousAlign;
   }
 
   measureText(text: string, style: TextStyle, maxWidth?: number): TextMetrics {

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useTimelineTouchGesture, listenTimelineGesture } from "./touch-gestures";
 import { TimelineTouchMoveHandle } from "./TimelineTouchMoveHandle";
 import React, { useRef, useState, useEffect, useCallback } from "react";
@@ -39,6 +40,7 @@ export const ShapeClipComponent: React.FC<ShapeClipComponentProps> = ({
   trackHeights,
   timelineRef,
 }) => {
+  const { t } = useTranslation();
   const clipRef = useRef<HTMLDivElement>(null);
   const touchGesture = useTimelineTouchGesture();
   const locked = allTracks.find((track) => track.id === shapeClip.trackId)?.locked ?? false;
@@ -257,7 +259,7 @@ export const ShapeClipComponent: React.FC<ShapeClipComponentProps> = ({
           ref={clipRef}
           role="button"
           tabIndex={0}
-          aria-label={`Select ${shapeLabel} clip`}
+          aria-label={t("timeline.clip.selectTyped", { type: shapeLabel })}
           aria-pressed={isSelected}
           data-locked={locked}
           onClick={handleClick}
@@ -284,10 +286,10 @@ export const ShapeClipComponent: React.FC<ShapeClipComponentProps> = ({
             transition: isInteracting ? 'none' : 'opacity 150ms, box-shadow 150ms',
           }}
         >
-          {isSelected && !locked && <TimelineTouchMoveHandle label="Move graphic" onPointerDown={(event) => touchGesture.start(event, handleMouseDown)} />}
+          {isSelected && !locked && <TimelineTouchMoveHandle label={t("timeline.clip.moveGraphic")} onPointerDown={(event) => touchGesture.start(event, handleMouseDown)} />}
           <div
             data-timeline-trim="left"
-            aria-label="Trim start"
+            aria-label={t("timeline.clip.trimStart")}
             onPointerDown={(event) => touchGesture.start(event, (e) => handleTrimStart(e, "left"))}
             className={`absolute left-0 top-0 bottom-0 w-2 cursor-ew-resize z-20 flex items-center justify-center transition-opacity ${
               isSelected ? "opacity-100 bg-green-400" : `opacity-0 group-hover:opacity-100 hover:bg-${colorClass}-400/50`
@@ -299,7 +301,7 @@ export const ShapeClipComponent: React.FC<ShapeClipComponentProps> = ({
           </div>
           <div
             data-timeline-trim="right"
-            aria-label="Trim end"
+            aria-label={t("timeline.clip.trimEnd")}
             onPointerDown={(event) => touchGesture.start(event, (e) => handleTrimStart(e, "right"))}
             className={`absolute right-0 top-0 bottom-0 w-2 cursor-ew-resize z-20 flex items-center justify-center transition-opacity ${
               isSelected ? "opacity-100 bg-green-400" : `opacity-0 group-hover:opacity-100 hover:bg-${colorClass}-400/50`

@@ -45,15 +45,30 @@ export function buildTranscodeArgs(
   ];
 }
 
-export function buildExtractAudioArgs(srcPath: string, outPath: string, streamIndex?: number): string[] {
+/**
+ * `editor`: lossless 48 kHz stereo float for mixing and waveforms.
+ * `speech`: 16 kHz mono 16-bit for speech recognition and loudness analysis
+ * (about 115 MB per hour instead of about 1.4 GB).
+ */
+export type ExtractAudioFormat = "editor" | "speech";
+
+const EXTRACT_AUDIO_CODEC: Record<ExtractAudioFormat, string[]> = {
+  editor: ["-c:a", "pcm_f32le", "-ar", "48000", "-ac", "2"],
+  speech: ["-c:a", "pcm_s16le", "-ar", "16000", "-ac", "1"],
+};
+
+export function buildExtractAudioArgs(
+  srcPath: string,
+  outPath: string,
+  streamIndex?: number,
+  format: ExtractAudioFormat = "editor",
+): string[] {
   return [
     "-y",
     "-i", srcPath,
     "-map", `0:a:${streamIndex ?? 0}`,
     "-vn",
-    "-c:a", "pcm_f32le",
-    "-ar", "48000",
-    "-ac", "2",
+    ...EXTRACT_AUDIO_CODEC[format],
     "-progress", "pipe:2",
     outPath,
   ];

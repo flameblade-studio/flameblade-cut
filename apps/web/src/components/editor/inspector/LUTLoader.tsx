@@ -7,6 +7,7 @@ import { ToolcraftText as Text } from "@openreel/ui";
 import { PropertySlider } from "./shell/PropertySlider";
 import { Upload, X, AlertCircle } from "@/icons/lucide-compat";
 import type { LUTData } from "@openreel/core";
+import { useTranslation } from "react-i18next";
 
 interface LUTLoaderProps {
   lutData: LUTData | null;
@@ -18,11 +19,12 @@ const IntensitySlider: React.FC<{
   value: number;
   onChange: (value: number) => void;
 }> = ({ value, onChange }) => {
+  const { t } = useTranslation();
   const percentage = Math.round(value * 100);
 
   return (
     <PropertySlider
-      label="Intensity"
+      label={t("inspector.color.lut.intensity")}
       min={0}
       max={100}
       step={1}
@@ -172,6 +174,7 @@ export const LUTLoader: React.FC<LUTLoaderProps> = ({
   onChange,
   onError,
 }) => {
+  const { t } = useTranslation();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
@@ -202,7 +205,7 @@ export const LUTLoader: React.FC<LUTLoaderProps> = ({
           parsedLUT = parse3dlLUT(content);
         } else {
           throw new Error(
-            "Unsupported file format. Please use .cube or .3dl files.",
+            t("inspector.color.lut.unsupported"),
           );
         }
 
@@ -210,7 +213,7 @@ export const LUTLoader: React.FC<LUTLoaderProps> = ({
         onChange(parsedLUT);
       } catch (err) {
         const errorMessage =
-          err instanceof Error ? err.message : "Failed to parse LUT file";
+          err instanceof Error ? err.message : t("inspector.color.lut.parseFailed");
         setError(errorMessage);
         onError?.(errorMessage);
       } finally {
@@ -221,7 +224,7 @@ export const LUTLoader: React.FC<LUTLoaderProps> = ({
         }
       }
     },
-    [onChange, onError],
+    [t, onChange, onError],
   );
 
   /**
@@ -262,7 +265,7 @@ export const LUTLoader: React.FC<LUTLoaderProps> = ({
       {/* Hidden file input */}
       <FileInput
         ref={fileInputRef}
-        label="Load LUT file"
+        label={t("inspector.color.lut.loadFile")}
         isLabelHidden
         value={null}
         accept=".cube,.3dl"
@@ -282,7 +285,7 @@ export const LUTLoader: React.FC<LUTLoaderProps> = ({
       {/* Load button or loaded LUT info */}
       {!lutData ? (
         <Button
-          label={isLoading ? "Loading..." : "Load LUT (.cube, .3dl)"}
+          label={isLoading ? t("inspector.color.lut.loading") : t("inspector.color.lut.load")}
           icon={
             isLoading ? (
               <div className="w-3 h-3 border border-text-muted border-t-transparent rounded-full animate-spin" />
@@ -302,14 +305,14 @@ export const LUTLoader: React.FC<LUTLoaderProps> = ({
           <Card variant="muted" padding={2} className="flex items-center justify-between">
             <div className="flex min-w-0 flex-1 flex-col gap-0.5">
               <Text type="supporting" color="primary" className="block truncate text-[10px]">
-                {fileName || "LUT Loaded"}
+                {fileName || t("inspector.color.lut.loaded")}
               </Text>
               <Text type="supporting" color="secondary" className="text-[9px]">
                 {lutData.size}x{lutData.size}x{lutData.size} LUT
               </Text>
             </div>
             <IconButton
-              label="Remove LUT"
+              label={t("inspector.color.lut.remove")}
               icon={<X size={14} />}
               variant="ghost"
               size="sm"
@@ -326,7 +329,7 @@ export const LUTLoader: React.FC<LUTLoaderProps> = ({
 
           {/* Load different LUT button */}
           <Button
-            label="Load Different LUT"
+            label={t("inspector.color.lut.loadDifferent")}
             variant="ghost"
             size="sm"
             onClick={handleLoadClick}

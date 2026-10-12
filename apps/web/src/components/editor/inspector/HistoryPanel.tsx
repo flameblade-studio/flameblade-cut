@@ -21,6 +21,7 @@ import { ToolcraftText as Text } from "@openreel/ui";
 import { ToolcraftTextInputControl } from "@openreel/ui";
 import { useProjectStore } from "../../../stores/project-store";
 import type { HistorySnapshot } from "@openreel/core";
+import { useTranslation } from "react-i18next";
 
 interface DisplayEntry {
   id: string;
@@ -33,6 +34,7 @@ interface DisplayEntry {
 }
 
 export const HistoryPanel: React.FC = () => {
+  const { t } = useTranslation();
   const { actionHistory, undo, redo, canUndo, canRedo, clipUndoStack, clipRedoStack } = useProjectStore();
   const [combinedHistory, setCombinedHistory] = useState<DisplayEntry[]>([]);
   const [snapshots, setSnapshots] = useState<HistorySnapshot[]>([]);
@@ -42,11 +44,11 @@ export const HistoryPanel: React.FC = () => {
 
   const getClipDescription = (type: "shape" | "text" | "svg" | "sticker"): string => {
     switch (type) {
-      case "text": return "Create text clip";
-      case "shape": return "Create shape";
-      case "svg": return "Import SVG";
-      case "sticker": return "Add sticker";
-      default: return "Create clip";
+      case "text": return t("inspector.history.createText");
+      case "shape": return t("inspector.history.createShape");
+      case "svg": return t("inspector.history.importSvg");
+      case "sticker": return t("inspector.history.addSticker");
+      default: return t("inspector.history.createClip");
     }
   };
 
@@ -135,7 +137,7 @@ export const HistoryPanel: React.FC = () => {
         <div className="flex items-center gap-2">
           <History size={14} className="text-primary" aria-hidden />
           <Text type="body" color="primary" weight="bold" className="text-sm">
-            History
+            {t("inspector.history.title")}
           </Text>
         </div>
         <div className="flex items-center gap-1">
@@ -160,7 +162,7 @@ export const HistoryPanel: React.FC = () => {
 
       <div className="border-b border-border">
         <ClickableCard
-          label={`${showSnapshots ? "Hide" : "Show"} snapshots`}
+          label={t("inspector.history.toggleSnapshots", { action: showSnapshots ? t("inspector.common.hide") : t("inspector.common.show") })}
           onClick={() => setShowSnapshots(!showSnapshots)}
           padding={2}
           variant="transparent"
@@ -183,7 +185,7 @@ export const HistoryPanel: React.FC = () => {
           <div className="px-2 pb-2">
             {snapshots.length === 0 && !isCreatingSnapshot && (
               <Text type="supporting" color="secondary" className="block text-[10px] py-2 text-center">
-                No snapshots saved
+                {t("inspector.history.noSnapshots")}
               </Text>
             )}
 
@@ -206,7 +208,7 @@ export const HistoryPanel: React.FC = () => {
                   </div>
                 </div>
                 <IconButton
-                  label={`Delete snapshot ${snapshot.name}`}
+                  label={t("inspector.history.deleteSnapshot", { name: snapshot.name })}
                   icon={<Trash2 size={10} aria-hidden />}
                   variant="ghost"
                   size="sm"
@@ -219,7 +221,7 @@ export const HistoryPanel: React.FC = () => {
             {isCreatingSnapshot ? (
               <div className="flex items-center gap-2 p-2">
                 <ToolcraftTextInputControl
-                  label="Snapshot name"
+                  label={t("inspector.history.snapshotName")}
                   isLabelHidden
                   size="sm"
                   width="100%"
@@ -229,11 +231,11 @@ export const HistoryPanel: React.FC = () => {
                     if (e.key === "Enter") handleCreateSnapshot();
                     if (e.key === "Escape") setIsCreatingSnapshot(false);
                   }}
-                  placeholder="Snapshot name..."
+                  placeholder={t("inspector.history.snapshotPlaceholder")}
                   hasAutoFocus
                 />
                 <Button
-                  label="Save"
+                  label={t("inspector.common.save")}
                   variant="primary"
                   size="sm"
                   onClick={handleCreateSnapshot}
@@ -241,7 +243,7 @@ export const HistoryPanel: React.FC = () => {
               </div>
             ) : (
               <Button
-                label="Create Snapshot"
+                label={t("inspector.history.createSnapshot")}
                 icon={<BookmarkPlus size={12} aria-hidden />}
                 variant="secondary"
                 size="sm"
@@ -258,7 +260,7 @@ export const HistoryPanel: React.FC = () => {
           <div className="flex flex-col items-center justify-center h-full text-fg-3">
             <History size={24} className="mb-2 opacity-30" aria-hidden />
             <Text type="supporting" color="secondary" className="text-xs">
-              No actions yet
+              {t("inspector.history.noActions")}
             </Text>
           </div>
         ) : (

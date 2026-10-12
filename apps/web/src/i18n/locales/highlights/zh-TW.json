@@ -1,0 +1,98 @@
+{
+  "title": "AI 精華",
+  "subtitle": "丟進一支長影片，自動找出最值得剪成短片的精華片段。",
+  "source": {
+    "label": "來源影片",
+    "pick": "選擇影片",
+    "change": "更換影片",
+    "hint": "支援 MP4、MOV、WebM，長影片也沒問題",
+    "noDesktop": "請在桌面版使用 AI 精華"
+  },
+  "options": {
+    "length": "目標長度",
+    "lengthShort": "15–30 秒",
+    "lengthMedium": "30–60 秒",
+    "lengthLong": "1–3 分鐘",
+    "count": "片段數量",
+    "countValue": "{{count}} 段",
+    "language": "說話語言",
+    "languageAuto": "自動偵測",
+    "languageZh": "中文",
+    "languageEn": "English",
+    "languageJa": "日本語",
+    "engine": "分析方式",
+    "engineLocal": "本機分析・免費",
+    "engineOpenai": "OpenAI・更聰明",
+    "openaiNoKey": "在配音面板的「金鑰與區域設定」填入 OpenAI 金鑰後即可使用。",
+    "openaiUnavailable": "這個版本尚未開放 OpenAI 分析。"
+  },
+  "run": "找出精華",
+  "rerun": "重新找精華",
+  "cancel": "取消",
+  "progress": {
+    "audio": "讀取音訊…",
+    "model": "下載語音辨識模型 {{percent}}%（只需下載一次）",
+    "transcribe": "語音辨識 {{percent}}%",
+    "analyze": "分析精華…"
+  },
+  "privacy": {
+    "local": "影片和語音全程在這台電腦處理，不會上傳。",
+    "openai": "只會把文字稿傳給 OpenAI，影片本身不會上傳。"
+  },
+  "empty": {
+    "title": "把長影片變成精華短片",
+    "body": "AI 會先聽懂影片內容，再依照語氣、重點詞和節奏挑出最精彩的片段，你可以微調後一鍵加入剪輯。",
+    "step1": "選擇一支有人說話的影片",
+    "step2": "選好長度和數量，按「找出精華」",
+    "step3": "勾選喜歡的片段，加入剪輯"
+  },
+  "search": {
+    "placeholder": "用文字搜尋片段",
+    "none": "字幕中找不到「{{query}}」",
+    "count": "找到 {{count}} 處"
+  },
+  "results": {
+    "title": "精華片段",
+    "count": "共 {{count}} 段",
+    "selectAll": "全選",
+    "selectNone": "全不選",
+    "noResults": "找不到符合這個長度的片段，試試其他長度。",
+    "cached": "沿用這支影片上次的語音辨識結果"
+  },
+  "card": {
+    "score": "{{score}} 分",
+    "seconds": "{{seconds}} 秒",
+    "start": "開始",
+    "end": "結束",
+    "earlier": "提早 1 秒",
+    "later": "延後 1 秒",
+    "select": "選取這個片段",
+    "play": "播放片段",
+    "pause": "暫停",
+    "reasons": {
+      "cue": "有重點提示詞",
+      "hook": "開頭就抓住注意力",
+      "question": "有提問",
+      "exclaim": "情緒起伏",
+      "dense": "資訊密集",
+      "loud": "聲音有張力",
+      "dynamic": "節奏起伏大"
+    }
+  },
+  "actions": {
+    "selected": "已選 {{count}} 段",
+    "addVertical": "加入剪輯（直式 9:16）",
+    "addOriginal": "加入剪輯（原比例）",
+    "adding": "加入中…",
+    "reframeTip": "加入後，可在剪輯畫面右側「AI」分頁使用「自動直式構圖」，讓畫面自動跟著主角。",
+    "projectOpenTip": "目前已開啟專案，片段會接在第一條影片軌的最後面，專案比例不會改變。"
+  },
+  "toast": {
+    "added": "已將 {{count}} 個片段加入時間軸",
+    "addFailed": "加入剪輯失敗：{{message}}",
+    "failed": "分析失敗：{{message}}",
+    "noSpeech": "這支影片沒有偵測到語音，無法分析精華。",
+    "cancelled": "已取消分析"
+  },
+  "projectName": "AI 精華"
+}

@@ -23,11 +23,13 @@ import {
   EditingTemplateControls,
   getEditingTemplateDefaultControlValues,
 } from "./EditingTemplateControls";
+import { useTranslation } from "react-i18next";
 
 const formatCategoryLabel = (category: string): string =>
   category.replace(/-/g, " ");
 
 export const RecipesTab: React.FC = () => {
+  const { t } = useTranslation();
   const project = useProjectStore((state) => state.project);
   const getClip = useProjectStore((state) => state.getClip);
   const getMediaItem = useProjectStore((state) => state.getMediaItem);
@@ -161,8 +163,8 @@ export const RecipesTab: React.FC = () => {
   const handleApply = async (template: EditingTemplate): Promise<void> => {
     if (!selectedClip || !selectedTargetType) {
       toast.warning(
-        "Select a clip",
-        "Recipes apply to one selected video or image clip.",
+        t("assets.recipesPanel.selectClip"),
+        t("assets.recipesPanel.selectClipHint"),
       );
       return;
     }
@@ -178,15 +180,15 @@ export const RecipesTab: React.FC = () => {
 
       if (!applicationId) {
         toast.error(
-          "Could not apply recipe",
-          "This recipe could not be applied to the current clip.",
+          t("assets.recipesPanel.applyFailed"),
+          t("assets.recipesPanel.applyFailedHint"),
         );
         return;
       }
 
       toast.success(
-        "Recipe applied",
-        `${template.name} was added to ${selectedMedia?.name || "the selected clip"}.`,
+        t("assets.recipesPanel.applied"),
+        t("assets.recipesPanel.appliedHint", { name: template.name, target: selectedMedia?.name || t("assets.recipesPanel.selectedClip") }),
       );
     } finally {
       setApplyingTemplateId(null);
@@ -201,10 +203,10 @@ export const RecipesTab: React.FC = () => {
         </div>
         <div>
           <Text type="body" weight="bold" display="block" className="text-sm">
-            Select a clip first
+            {t("assets.recipesPanel.selectFirst")}
           </Text>
           <Text type="supporting" color="secondary" display="block" className="mt-1.5 max-w-[240px] text-xs leading-relaxed mx-auto">
-            Choose a video or image in the timeline to apply clip-scoped recipes, looks, and caption treatments.
+            {t("assets.recipesPanel.selectFirstHint")}
           </Text>
         </div>
       </div>
@@ -233,11 +235,11 @@ export const RecipesTab: React.FC = () => {
         <div className="relative">
           <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" />
           <ToolcraftTextInputControl
-            label="Search recipes"
+            label={t("assets.recipesPanel.search")}
             isLabelHidden
             value={searchQuery}
             onChange={setSearchQuery}
-            placeholder="Search recipes..."
+            placeholder={t("assets.recipesPanel.searchPlaceholder")}
             className="w-full h-9 pl-9 pr-3 rounded-lg border border-border bg-background-tertiary text-xs text-text-primary placeholder:text-text-muted outline-none focus:border-primary/50 transition-colors"
           />
         </div>
@@ -246,7 +248,7 @@ export const RecipesTab: React.FC = () => {
       <div className="px-4 py-3 border-b border-border/50 bg-background-secondary">
         <div className="flex flex-wrap gap-1.5">
           <SelectableCard
-            label="ALL"
+            label={t("assets.recipesPanel.all")}
             isSelected={selectedCategory === "all"}
             onChange={() => setSelectedCategory("all")}
             onClick={() => setSelectedCategory("all")}
@@ -285,10 +287,10 @@ export const RecipesTab: React.FC = () => {
         {filteredTemplates.length === 0 ? (
           <div className="py-12 text-center">
             <Text type="body" color="secondary" weight="bold" display="block" className="text-sm">
-              No recipes match
+              {t("assets.recipesPanel.noMatch")}
             </Text>
             <Text type="supporting" color="secondary" display="block" className="mt-2 text-xs">
-              Try a different search or category.
+              {t("assets.recipesPanel.noMatchHint")}
             </Text>
           </div>
         ) : (
@@ -339,7 +341,7 @@ export const RecipesTab: React.FC = () => {
                           <div className="flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                             {template.controls && template.controls.length > 0 && (
                               <Button
-                                label="Edit recipe controls"
+                                label={t("assets.recipesPanel.editControls")}
                                 variant="ghost"
                                 icon={<SlidersHorizontal size={10} />}
                                 onClick={() => handleExpand(template)}
@@ -351,7 +353,7 @@ export const RecipesTab: React.FC = () => {
                               />
                             )}
                             <Button
-                              label={applyingTemplateId === template.id ? "Applying" : "Apply"}
+                              label={applyingTemplateId === template.id ? t("assets.recipesPanel.applying") : t("assets.recipesPanel.apply")}
                               variant="primary"
                               onClick={() => void handleApply(template)}
                               isDisabled={applyingTemplateId !== null}

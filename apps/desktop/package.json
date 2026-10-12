@@ -1,18 +1,18 @@
 {
   "name": "@openreel/desktop",
   "private": true,
-  "version": "1.0.0-alpha.17",
+  "productName": "Flameblade Cut",
+  "version": "0.1.0",
   "type": "commonjs",
   "main": "dist/main/index.js",
   "bin": {
     "openreel-mcp": "dist/mcp-shim/index.js"
   },
-  "homepage": "https://openreel.video",
+  "homepage": "https://www.flamebladestudio.com.tw",
   "author": {
-    "name": "OpenReel",
-    "email": "support@openreel.video"
+    "name": "Flameblade Studio (CHOU MING HUA)"
   },
-  "description": "OpenReel — open-source professional video editor",
+  "description": "Flameblade Cut — local AI video generation, editing, captions and voiceover in one app",
   "scripts": {
     "build:main": "node scripts/prepare-aurora-native.mjs && tsup",
     "build:renderer": "OPENREEL_DESKTOP=1 pnpm --filter @openreel/web build",
@@ -34,10 +34,12 @@
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
+    "@types/ws": "8.18.1",
     "electron": "^33.0.0",
     "electron-builder": "^24.13.3",
     "tsup": "^8.0.0",
     "typescript": "^5.4.5",
-    "vitest": "^1.6.0"
+    "vitest": "^1.6.0",
+    "ws": "8.18.3"
   }
 }

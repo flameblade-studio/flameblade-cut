@@ -1,0 +1,98 @@
+{
+  "title": "AI 精华",
+  "subtitle": "放入一段长视频，自动找出最适合剪成短视频的精华片段。",
+  "source": {
+    "label": "来源视频",
+    "pick": "选择视频",
+    "change": "更换视频",
+    "hint": "支持 MP4、MOV、WebM，长视频也没问题",
+    "noDesktop": "请在桌面版使用 AI 精华"
+  },
+  "options": {
+    "length": "目标时长",
+    "lengthShort": "15–30 秒",
+    "lengthMedium": "30–60 秒",
+    "lengthLong": "1–3 分钟",
+    "count": "片段数量",
+    "countValue": "{{count}} 段",
+    "language": "说话语言",
+    "languageAuto": "自动检测",
+    "languageZh": "中文",
+    "languageEn": "English",
+    "languageJa": "日本語",
+    "engine": "分析方式",
+    "engineLocal": "本地分析・免费",
+    "engineOpenai": "OpenAI・更聪明",
+    "openaiNoKey": "在配音面板的“密钥与区域设置”中填入 OpenAI 密钥后即可使用。",
+    "openaiUnavailable": "此版本尚未开放 OpenAI 分析。"
+  },
+  "run": "找出精华",
+  "rerun": "重新找精华",
+  "cancel": "取消",
+  "progress": {
+    "audio": "读取音频…",
+    "model": "下载语音识别模型 {{percent}}%（只需下载一次）",
+    "transcribe": "语音识别 {{percent}}%",
+    "analyze": "分析精华…"
+  },
+  "privacy": {
+    "local": "视频和语音全程在本机处理，不会上传。",
+    "openai": "只会把文字稿发送给 OpenAI，视频本身不会上传。"
+  },
+  "empty": {
+    "title": "把长视频变成精华短视频",
+    "body": "AI 会先听懂视频内容，再根据语气、重点词和节奏挑出最精彩的片段，你可以微调后一键加入剪辑。",
+    "step1": "选择一段有人说话的视频",
+    "step2": "选好时长和数量，点击“找出精华”",
+    "step3": "勾选喜欢的片段，加入剪辑"
+  },
+  "search": {
+    "placeholder": "用文字搜索片段",
+    "none": "字幕中找不到“{{query}}”",
+    "count": "找到 {{count}} 处"
+  },
+  "results": {
+    "title": "精华片段",
+    "count": "共 {{count}} 段",
+    "selectAll": "全选",
+    "selectNone": "全不选",
+    "noResults": "找不到符合该时长的片段，试试其他时长。",
+    "cached": "沿用该视频上次的语音识别结果"
+  },
+  "card": {
+    "score": "{{score}} 分",
+    "seconds": "{{seconds}} 秒",
+    "start": "开始",
+    "end": "结束",
+    "earlier": "提前 1 秒",
+    "later": "延后 1 秒",
+    "select": "选择该片段",
+    "play": "播放片段",
+    "pause": "暂停",
+    "reasons": {
+      "cue": "有重点提示词",
+      "hook": "开头就抓住注意力",
+      "question": "有提问",
+      "exclaim": "情绪起伏",
+      "dense": "信息密集",
+      "loud": "声音有张力",
+      "dynamic": "节奏起伏大"
+    }
+  },
+  "actions": {
+    "selected": "已选 {{count}} 段",
+    "addVertical": "加入剪辑（竖屏 9:16）",
+    "addOriginal": "加入剪辑（原比例）",
+    "adding": "加入中…",
+    "reframeTip": "加入后，可在剪辑界面右侧“AI”标签页使用“自动竖屏构图”，让画面自动跟随主角。",
+    "projectOpenTip": "当前已打开项目，片段会接在第一条视频轨道的末尾，项目比例不会改变。"
+  },
+  "toast": {
+    "added": "已将 {{count}} 个片段加入时间线",
+    "addFailed": "加入剪辑失败：{{message}}",
+    "failed": "分析失败：{{message}}",
+    "noSpeech": "该视频没有检测到语音，无法分析精华。",
+    "cancelled": "已取消分析"
+  },
+  "projectName": "AI 精华"
+}

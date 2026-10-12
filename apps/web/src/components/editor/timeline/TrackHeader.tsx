@@ -1,3 +1,5 @@
+import { displayTrackName } from "./track-display-name";
+import { useTranslation } from "react-i18next";
 import React, { useState, useRef, useEffect } from "react";
 import { Eye, EyeOff, Volume2, VolumeX, Lock, MoreHorizontal, Trash2, Pencil, AlignLeft, Link2, Unlink } from "@/icons/lucide-compat";
 import {
@@ -35,6 +37,7 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
   onDrop,
   onDragEnd,
 }) {
+  const { t } = useTranslation();
   const compact = useCompactEditor();
   const {
     lockTrack,
@@ -114,12 +117,12 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
 
   const menuItems: ContextMenuOption[] = [
     {
-      label: "Rename Track",
+      label: t("timeline.track.rename"),
       icon: <Pencil size={14} aria-hidden />,
       onClick: startRename,
     },
     {
-      label: "Remove Gaps",
+      label: t("timeline.track.removeGaps"),
       icon: <AlignLeft size={14} aria-hidden />,
       isDisabled: !hasGaps,
       onClick: handleRemoveGaps,
@@ -127,7 +130,7 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
     ...(track.groupId
       ? [
           {
-            label: "Ungroup Track",
+            label: t("timeline.track.ungroup"),
             icon: <Unlink size={14} aria-hidden />,
             onClick: () => groupTracks(track.id),
           } satisfies ContextMenuOption,
@@ -137,9 +140,9 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
       ? [
           {
             type: "section" as const,
-            title: "Move & trim together",
+            title: t("timeline.track.groupSection"),
             items: groupCandidates.map((candidate) => ({
-              label: `Group with ${candidate.name}`,
+              label: t("timeline.track.groupWith", { name: candidate.name }),
               icon: <Link2 size={14} aria-hidden />,
               onClick: () => groupTracks(track.id, candidate.id),
             })),
@@ -148,7 +151,7 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
       : []),
     { type: "divider" },
     {
-      label: "Delete Track",
+      label: t("timeline.layers.deleteTrack"),
       icon: <Trash2 size={14} aria-hidden />,
       onClick: handleRemoveTrack,
     },
@@ -174,7 +177,7 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
             {isRenaming ? (
               <ToolcraftTextInputControl
                 ref={inputRef}
-                label="Track name"
+                label={t("timeline.track.name")}
                 isLabelHidden
                 size="sm"
                 width="100%"
@@ -193,21 +196,21 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
                 className="block truncate text-[13px] font-semibold text-fg-2 cursor-grab active:cursor-grabbing"
                 onDoubleClick={startRename}
               >
-                {track.name || trackInfo.label}
+                {track.name ? displayTrackName(track.name, t) : trackInfo.label}
               </span>
             )}
           </div>
 
           {compact && <DropdownMenu
             menuWidth={220} placement="end" alignment="start" size="lg"
-            button={{ label: `Options for ${track.name || trackInfo.label}`, isIconOnly: true, variant: "ghost", icon: <MoreHorizontal size={18} aria-hidden /> }}
+            button={{ label: t("timeline.track.options", { name: track.name || trackInfo.label }), isIconOnly: true, variant: "ghost", icon: <MoreHorizontal size={18} aria-hidden /> }}
             items={[
-              ...(isVisual ? [{ label: track.hidden ? "Show track" : "Hide track", onClick: () => hideTrack(track.id, !track.hidden) }] : []),
+              ...(isVisual ? [{ label: track.hidden ? t("timeline.track.show") : t("timeline.track.hide"), onClick: () => hideTrack(track.id, !track.hidden) }] : []),
               ...(isAudio ? [
-                { label: track.muted ? "Unmute track" : "Mute track", onClick: () => muteTrack(track.id, !track.muted) },
-                { label: track.solo ? "Clear solo" : "Solo track", onClick: () => soloTrack(track.id, !track.solo) },
+                { label: track.muted ? t("timeline.track.unmute") : t("timeline.track.mute"), onClick: () => muteTrack(track.id, !track.muted) },
+                { label: track.solo ? t("timeline.track.clearSolo") : t("timeline.track.solo"), onClick: () => soloTrack(track.id, !track.solo) },
               ] : []),
-              { label: track.locked ? "Unlock track" : "Lock track", onClick: () => lockTrack(track.id, !track.locked) },
+              { label: track.locked ? t("timeline.track.unlock") : t("timeline.track.lock"), onClick: () => lockTrack(track.id, !track.locked) },
               { type: "divider" }, ...menuItems,
             ]}
           />}
@@ -216,13 +219,13 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
               <Link2
                 size={13}
                 className="text-accent"
-                aria-label="Track is grouped"
+                aria-label={t("timeline.track.grouped")}
               />
             )}
             {isVisual && (
               <button
                 type="button"
-                aria-label={track.hidden ? "Show track" : "Hide track"}
+                aria-label={track.hidden ? t("timeline.track.show") : t("timeline.track.hide")}
                 className="text-fg-muted hover:text-fg-2 transition-colors"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -240,9 +243,9 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
               <>
                 <button
                   type="button"
-                  aria-label={track.muted ? `Unmute ${track.name}` : `Mute ${track.name}`}
+                  aria-label={track.muted ? t("timeline.track.unmuteNamed", { name: track.name }) : t("timeline.layers.muteNamed", { name: track.name })}
                   aria-pressed={track.muted}
-                  title={track.muted ? "Unmute track" : "Mute track"}
+                  title={track.muted ? t("timeline.track.unmute") : t("timeline.track.mute")}
                   className={`transition-colors ${
                     track.muted ? "text-destructive" : "text-fg-muted hover:text-fg-2"
                   }`}
@@ -259,9 +262,9 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
                 </button>
                 <button
                   type="button"
-                  aria-label={track.solo ? `Clear solo ${track.name}` : `Solo ${track.name}`}
+                  aria-label={track.solo ? t("timeline.track.clearSoloNamed", { name: track.name }) : t("timeline.layers.soloNamed", { name: track.name })}
                   aria-pressed={track.solo}
-                  title={track.solo ? "Clear solo" : "Solo track"}
+                  title={track.solo ? t("timeline.track.clearSolo") : t("timeline.track.solo")}
                   className={`flex h-[18px] min-w-[18px] items-center justify-center rounded px-1 text-[9px] font-black transition-colors ${
                     track.solo
                       ? "bg-status-warning text-black"
@@ -278,7 +281,7 @@ export const TrackHeader: React.FC<TrackHeaderProps> = React.memo(function Track
             )}
             <button
               type="button"
-              aria-label={track.locked ? "Unlock" : "Lock"}
+              aria-label={track.locked ? t("timeline.track.unlockShort") : t("timeline.track.lockShort")}
               className={`transition-colors ${
                 track.locked ? "text-fg-2" : "text-fg-muted hover:text-fg-2"
               }`}

@@ -1,8 +1,10 @@
 import { app } from "electron";
 import os from "node:os";
 
-const CRASH_ENDPOINT =
-  process.env.OPENREEL_CRASH_ENDPOINT ?? "https://api.openreel.video/crash";
+// Flameblade Cut never sends crash data anywhere by default (privacy: the
+// upstream OpenReel build posted reports to api.openreel.video). Remote
+// reporting only happens when an endpoint is configured explicitly.
+const CRASH_ENDPOINT = process.env.FLAMEBLADE_CRASH_ENDPOINT ?? null;
 const REPORT_TIMEOUT_MS = 4000;
 
 export interface CrashReportInput {
@@ -55,6 +57,10 @@ async function send(report: CrashReportInput): Promise<void> {
       electronVersion: process.versions.electron,
       timestamp: new Date().toISOString(),
     };
+    if (CRASH_ENDPOINT === null) {
+      console.error("[crash]", JSON.stringify(payload));
+      return;
+    }
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), REPORT_TIMEOUT_MS);
     try {

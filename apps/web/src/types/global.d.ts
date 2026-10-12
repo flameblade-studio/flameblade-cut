@@ -162,6 +162,47 @@ export interface OpenReelRigHumanoidModelResult {
   error?: string;
 }
 
+export interface OpenReelComfyFileRef {
+  filename: string;
+  subfolder: string;
+  type: string;
+}
+
+/** Pushed by the main process; `text: null` means the ComfyUI websocket closed. */
+export interface OpenReelComfyWsEvent {
+  subscriptionId: string;
+  text: string | null;
+}
+
+export type OpenReelVoiceEngine = "windows" | "azure" | "openai";
+
+export interface OpenReelVoiceInfo {
+  engine: OpenReelVoiceEngine;
+  /** Value to pass back as `voice`. */
+  id: string;
+  name: string;
+  /** BCP 47 tag, or "multilingual" (OpenAI). */
+  language: string;
+  gender?: string;
+}
+
+export interface OpenReelVoiceSynthesizeArgs {
+  engine: OpenReelVoiceEngine;
+  text: string;
+  voice: string;
+  /** 1.0 = natural speed; omit to keep the engine default. */
+  rate?: number;
+  instructions?: string;
+  azureRegion?: string;
+}
+
+export interface OpenReelVoiceSynthesizeResult {
+  path: string;
+  durationSec: number;
+  voice: string;
+  bytes: Uint8Array;
+}
+
 export type OpenReelUpdaterStatus =
   | { state: "checking" }
   | { state: "available"; version: string }
@@ -185,6 +226,12 @@ declare global {
         showOpenDialog(opts: {
           filters: { name: string; extensions: string[] }[];
         }): Promise<string | null>;
+        /** Folder picker; resolves to null when cancelled. */
+        showOpenFolderDialog(): Promise<string | null>;
+        /** Multi-select; resolves to [] when cancelled. */
+        showOpenFilesDialog(opts: {
+          filters: { name: string; extensions: string[] }[];
+        }): Promise<string[]>;
         readFile(path: string): Promise<string>;
         readFileBytes(path: string): Promise<ArrayBuffer>;
         tempFilePath(ext: string): Promise<string>;
@@ -248,6 +295,8 @@ declare global {
         toggleMaximize(): Promise<void>;
         close(): Promise<void>;
         isMaximized(): Promise<boolean>;
+        /** Fires whenever the window is maximized or restored; returns an unsubscribe function. */
+        onMaximizedChange?(cb: (maximized: boolean) => void): () => void;
       };
       lifecycle: {
         onQueryUnsaved(handler: () => boolean): () => void;
@@ -282,7 +331,12 @@ declare global {
           videoBitrateKbps?: number;
           audioBitrateKbps?: number;
         }): Promise<{ outPath: string }>;
-        extractAudioWav(args: { srcPath: string; streamIndex?: number }): Promise<{ outPath: string }>;
+        extractAudioWav(args: {
+          srcPath: string;
+          streamIndex?: number;
+          /** "speech" = 16 kHz mono 16-bit (recognition); default "editor" = 48 kHz stereo float. */
+          format?: "editor" | "speech";
+        }): Promise<{ outPath: string }>;
         probeAudioStreams(args: { srcPath: string }): Promise<{
           streams: { index: number; codec: string; channels: number; sampleRate: number; language?: string }[];
         }>;
@@ -294,6 +348,45 @@ declare global {
           body: ArrayBuffer;
           error?: string;
         }>;
+      };
+      comfy?: {
+        request(args: {
+          baseUrl: string;
+          method: "GET" | "POST";
+          path: string;
+          jsonBody?: unknown;
+        }): Promise<{ status: number; body: string }>;
+        uploadImage(args: {
+          baseUrl: string;
+          bytes: Uint8Array;
+          filename: string;
+        }): Promise<OpenReelComfyFileRef>;
+        download(args: { baseUrl: string; file: OpenReelComfyFileRef; destPath: string }): Promise<void>;
+        subscribe(args: { subscriptionId: string; baseUrl: string; clientId: string }): Promise<void>;
+        unsubscribe(subscriptionId: string): Promise<void>;
+        onWsEvent(cb: (event: OpenReelComfyWsEvent) => void): () => void;
+        launch(config: { comfyDir: string; args: string[]; preLaunchScript: string | null }): Promise<void>;
+        stopLaunched(): Promise<void>;
+        libraryDir(): Promise<string>;
+        readFileBytes(path: string): Promise<Uint8Array>;
+        writeTextFile(path: string, contents: string): Promise<void>;
+        readTextFile(path: string): Promise<string | null>;
+      };
+      voice?: {
+        listVoices(args: { engine: OpenReelVoiceEngine; azureRegion?: string }): Promise<OpenReelVoiceInfo[]>;
+        synthesize(args: OpenReelVoiceSynthesizeArgs): Promise<OpenReelVoiceSynthesizeResult>;
+        /** Whether a cloud key is stored; the key itself never reaches the renderer. */
+        keyStatus(): Promise<{ azure: boolean; openai: boolean }>;
+      };
+      openaiText?: {
+        chat(args: {
+          instructions: string;
+          input: string;
+          jsonSchema: { name: string; schema: Record<string, unknown> };
+          maxOutputTokens?: number;
+          reasoningEffort?: "low" | "medium" | "high";
+        }): Promise<{ text: string; model: string }>;
+        keyStatus(): Promise<{ configured: boolean }>;
       };
       rigging?: {
         probeBackend(): Promise<OpenReelRiggingBackendProbe>;

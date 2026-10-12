@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { ToolcraftText as Text, ToolcraftButton as Button } from "@openreel/ui";
 
 import { Toolbar } from "./Toolbar";
@@ -83,6 +84,7 @@ const useAutoSave = () => {
  * properties on the root grid so panels can pick them up.
  */
 export const EditorInterface: React.FC = () => {
+  const { t } = useTranslation();
   const compact = useCompactEditor();
   const [compactPanel, setCompactPanel] = useState<"timeline" | "media" | "inspector" | "chat">("timeline");
   const [hasOpenedChat, setHasOpenedChat] = useState(false);
@@ -317,14 +319,14 @@ export const EditorInterface: React.FC = () => {
         <div className="text-center">
           {initError ? (
             <div role="alert" className="max-w-md space-y-4 px-6">
-              <Text type="body" weight="bold">The editor couldn't start</Text>
+              <Text type="body" weight="bold">{t("editor.init.failed")}</Text>
               <Text type="supporting" className="text-status-error text-xs">{initError}</Text>
-              <Button label="Try again" onClick={retry} variant="primary" />
+              <Button label={t("common.tryAgain")} onClick={retry} variant="primary" />
             </div>
           ) : (
             <div role="status">
               <div className="w-8 h-8 border-2 border-accent border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-              <Text type="supporting" color="primary" className="text-fg-2 text-sm">Initializing editor…</Text>
+              <Text type="supporting" color="primary" className="text-fg-2 text-sm">{t("editor.init.initializing")}</Text>
               <Text type="supporting" color="secondary" className="text-fg-muted text-xs mt-2">{initStatus}</Text>
             </div>
           )}
@@ -513,9 +515,9 @@ export const EditorInterface: React.FC = () => {
       </div>
 
       {compact && (
-        <nav aria-label="Editor workspace" className="editor-workspace-tabs">
+        <nav aria-label={t("editor.workspace.label")} className="editor-workspace-tabs">
           {([
-            ["timeline", "Timeline"], ["media", "Media"], ["inspector", "Edit"], ["chat", "AI"],
+            ["timeline", t("desktop.dock.timeline")], ["media", t("desktop.dock.media")], ["inspector", t("editor.workspace.edit")], ["chat", t("editor.workspace.ai")],
           ] as const).map(([panel, label]) => (
             <button key={panel} type="button" aria-controls={`editor-panel-${panel}`} aria-pressed={compactPanel === panel}
               onClick={() => openCompactPanel(panel)} className={compactPanel === panel ? "text-accent bg-accent/10" : "text-fg-muted"}>

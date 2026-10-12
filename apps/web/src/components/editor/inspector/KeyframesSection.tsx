@@ -23,6 +23,7 @@ import {
   type EasingName,
 } from "@openreel/core";
 import type { Keyframe, EasingType } from "@openreel/core";
+import { useTranslation } from "react-i18next";
 
 const keyframeEngine = new KeyframeEngine();
 
@@ -157,14 +158,16 @@ const PropertySelector: React.FC<{
   onSelect: (propertyId: string) => void;
   existingProperties: string[];
 }> = ({ selectedProperty, onSelect, existingProperties }) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   const categories = [...new Set(ANIMATABLE_PROPERTIES.map((p) => p.category))];
 
   const selectedLabel = selectedProperty
-    ? ANIMATABLE_PROPERTIES.find((p) => p.id === selectedProperty)?.label ||
-      selectedProperty
-    : "Select Property";
+    ? (ANIMATABLE_PROPERTIES.some((p) => p.id === selectedProperty)
+        ? t(`inspector.keyframes.props.${selectedProperty.replace(/\./g, "_")}`)
+        : selectedProperty)
+    : t("inspector.keyframes.selectProperty");
 
   return (
     <Popover
@@ -173,14 +176,14 @@ const PropertySelector: React.FC<{
       placement="below"
       alignment="start"
       width="min(260px, 100vw - 32px)"
-      label="Animate property"
+      label={t("inspector.keyframes.animateProperty")}
       content={
         <div className="max-h-64 overflow-y-auto p-1.5">
           {categories.map((category) => (
             <div key={category} className="space-y-1">
               <div className="px-2 py-1 bg-bg-2">
                 <Text type="supporting" color="secondary" weight="bold">
-                  {category}
+                  {t(`inspector.keyframes.categories.${category}`)}
                 </Text>
               </div>
               {ANIMATABLE_PROPERTIES.filter(
@@ -190,7 +193,7 @@ const PropertySelector: React.FC<{
                 return (
                   <ClickableCard
                     key={prop.id}
-                    label={`Select ${prop.label}`}
+                    label={t("inspector.keyframes.selectProp", { name: t(`inspector.keyframes.props.${prop.id.replace(/\./g, "_")}`) })}
                     onClick={() => {
                       onSelect(prop.id);
                       setIsOpen(false);
@@ -201,7 +204,7 @@ const PropertySelector: React.FC<{
                   >
                     <div className="flex items-center justify-between gap-2">
                       <Text type="supporting" color="primary">
-                        {prop.label}
+                        {t(`inspector.keyframes.props.${prop.id.replace(/\./g, "_")}`)}
                       </Text>
                       {hasKeyframes && (
                         <Diamond
@@ -282,6 +285,7 @@ const EasingSelector: React.FC<{
   value: EasingType;
   onChange: (easing: EasingName) => void;
 }> = ({ value, onChange }) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   const currentLabel = formatEasingLabel(value);
@@ -293,7 +297,7 @@ const EasingSelector: React.FC<{
       placement="below"
       alignment="end"
       width={208}
-      label={`Easing: ${currentLabel}`}
+      label={t("inspector.keyframes.easing", { name: currentLabel })}
       content={
         <div className="max-h-64 overflow-y-auto p-1.5">
           {EASING_CATEGORIES.map((category) => (
@@ -345,6 +349,7 @@ const KeyframeItem: React.FC<{
   onEasingChange: (easing: EasingName) => void;
   property: AnimatableProperty | undefined;
 }> = ({ keyframe, onUpdate, onDelete, onEasingChange, property }) => {
+  const { t } = useTranslation();
   const _formatValue = (value: unknown): string => {
     if (typeof value === "number") {
       return value.toFixed(property?.step && property.step < 1 ? 2 : 0);
@@ -373,7 +378,7 @@ const KeyframeItem: React.FC<{
             •
           </Text>
           <ToolcraftNumberInputControl
-            label="Keyframe value"
+            label={t("inspector.keyframes.keyframeValue")}
             isLabelHidden
             value={typeof keyframe.value === "number" ? keyframe.value : 0}
             onChange={(value) => onUpdate({ value: value ?? 0 })}
@@ -387,7 +392,7 @@ const KeyframeItem: React.FC<{
       </div>
       <EasingSelector value={keyframe.easing} onChange={onEasingChange} />
       <IconButton
-        label="Delete keyframe"
+        label={t("inspector.keyframes.deleteKeyframe")}
         icon={<Trash2 size={12} aria-hidden />}
         variant="ghost"
         size="sm"
@@ -410,6 +415,7 @@ interface KeyframesSectionProps {
 export const KeyframesSection: React.FC<KeyframesSectionProps> = ({
   clipId,
 }) => {
+  const { t } = useTranslation();
   const { getClip, updateClipKeyframes, project } = useProjectStore();
   const playheadPosition = useTimelineStore((state) => state.playheadPosition);
   const getGraphicsEngine = useEngineStore((state) => state.getGraphicsEngine);
@@ -533,7 +539,7 @@ export const KeyframesSection: React.FC<KeyframesSectionProps> = ({
   if (!clip) {
     return (
       <Text type="supporting" color="secondary" className="block text-center py-4">
-        No clip selected
+        {t("inspector.keyframes.noClip")}
       </Text>
     );
   }
@@ -542,7 +548,7 @@ export const KeyframesSection: React.FC<KeyframesSectionProps> = ({
     <div className="space-y-4">
       <div className="space-y-2">
         <Text type="supporting" color="secondary" weight="bold" className="block">
-          Animate Property
+          {t("inspector.keyframes.animatePropertyTitle")}
         </Text>
         <PropertySelector
           selectedProperty={selectedProperty}
@@ -558,7 +564,7 @@ export const KeyframesSection: React.FC<KeyframesSectionProps> = ({
           className="flex items-center justify-between gap-3 border border-border"
         >
           <Text type="supporting" color="secondary">
-            Value at {playheadPosition.toFixed(2)}s
+            {t("inspector.keyframes.valueAt", { time: playheadPosition.toFixed(2) })}
           </Text>
           <Text type="supporting" color="primary" className="font-mono">
             {typeof currentValue === "number"
@@ -572,8 +578,8 @@ export const KeyframesSection: React.FC<KeyframesSectionProps> = ({
         <Button
           label={
             hasKeyframeAtPlayhead
-              ? `Keyframe exists at ${playheadPosition.toFixed(2)}s`
-              : `Add Keyframe at ${playheadPosition.toFixed(2)}s`
+              ? t("inspector.keyframes.exists", { time: playheadPosition.toFixed(2) })
+              : t("inspector.keyframes.add", { time: playheadPosition.toFixed(2) })
           }
           icon={
             hasKeyframeAtPlayhead ? (
@@ -594,7 +600,7 @@ export const KeyframesSection: React.FC<KeyframesSectionProps> = ({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <Text type="supporting" color="secondary" weight="bold">
-              Keyframes ({propertyKeyframes.length})
+              {t("inspector.keyframes.count", { count: propertyKeyframes.length })}
             </Text>
           </div>
           <div className="space-y-1.5 max-h-48 overflow-y-auto">
@@ -616,14 +622,14 @@ export const KeyframesSection: React.FC<KeyframesSectionProps> = ({
         <div className="text-center py-4">
           <Key size={24} className="mx-auto text-fg-3 mb-2" aria-hidden />
           <Text type="supporting" color="secondary">
-            Select a property to animate
+            {t("inspector.keyframes.selectToAnimate")}
           </Text>
         </div>
       )}
 
       {selectedProperty && propertyKeyframes.length === 0 && (
         <Text type="supporting" color="secondary" className="block text-center py-2">
-          No keyframes for this property. Add one to start animating.
+          {t("inspector.keyframes.none")}
         </Text>
       )}
     </div>

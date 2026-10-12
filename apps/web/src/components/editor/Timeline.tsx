@@ -79,23 +79,25 @@ import {
   trimLinkedCaptions,
 } from "../../utils/linked-caption-edit";
 import { CaptionBatchSelectButton } from "./timeline/CaptionBatchSelectButton";
+import { useTranslation } from "react-i18next";
 
 const TRACK_LAYER_FILTERS: readonly {
   id: TrackLayerFilter;
-  label: string;
+  labelKey: string;
 }[] = [
-  { id: "all", label: "All" },
-  { id: "video", label: "Video" },
-  { id: "image", label: "Image" },
-  { id: "audio", label: "Audio" },
-  { id: "text", label: "Text" },
-  { id: "graphics", label: "Graphics" },
+  { id: "all", labelKey: "timeline.filters.all" },
+  { id: "video", labelKey: "timeline.filters.video" },
+  { id: "image", labelKey: "timeline.filters.image" },
+  { id: "audio", labelKey: "timeline.filters.audio" },
+  { id: "text", labelKey: "timeline.filters.text" },
+  { id: "graphics", labelKey: "timeline.filters.graphics" },
 ];
 
 const ADD_TRACK_ROW_HEIGHT = 36;
 const TIMELINE_SCROLLBAR_SIZE = 10;
 
 export const Timeline: React.FC = () => {
+  const { t } = useTranslation();
   const compact = useCompactEditor();
   const headerWidth = compact ? 108 : 170;
   const containerRef = useRef<HTMLDivElement>(null);
@@ -896,12 +898,12 @@ export const Timeline: React.FC = () => {
   const addTrackItems: DropdownMenuOption[] = useMemo(
     () => [
       {
-        label: "Track",
+        label: t("timeline.addTrack.track"),
         icon: <Layers size={16} className="text-foreground" aria-hidden />,
         onClick: () => addTrack("video", undefined, { mode: "standard" }),
       },
       {
-        label: "Dialogue",
+        label: t("timeline.addTrack.dialogue"),
         icon: <Music size={16} className="text-clip-audio" aria-hidden />,
         onClick: () =>
           addTrack("video", undefined, {
@@ -911,7 +913,7 @@ export const Timeline: React.FC = () => {
           }),
       },
       {
-        label: "Music",
+        label: t("timeline.addTrack.music"),
         icon: <Music size={16} className="text-clip-audio" aria-hidden />,
         onClick: () =>
           addTrack("video", undefined, {
@@ -921,7 +923,7 @@ export const Timeline: React.FC = () => {
           }),
       },
       {
-        label: "Captions",
+        label: t("timeline.addTrack.captions"),
         icon: <Type size={16} className="text-clip-text" aria-hidden />,
         onClick: () =>
           addTrack("video", undefined, {
@@ -931,7 +933,7 @@ export const Timeline: React.FC = () => {
           }),
       },
     ],
-    [addTrack],
+    [addTrack, t],
   );
 
   // Small, mockup-styled timeline tool button
@@ -972,10 +974,10 @@ export const Timeline: React.FC = () => {
     >
       {/* ── Timeline toolbar (mock: 48px line-icon tools + emerald zoom slider) ── */}
       <div className="flex items-center h-12 px-4 gap-4 bg-bg-1 border-b border-border shrink-0 relative z-50">
-        <TLTool onClick={undo} disabled={!canUndo()} title="Undo (⌘Z)">
+        <TLTool onClick={undo} disabled={!canUndo()} title={t("timeline.tools.undo")}>
           <Undo2 size={16} aria-hidden />
         </TLTool>
-        <TLTool onClick={redo} disabled={!canRedo()} title="Redo (⇧⌘Z)">
+        <TLTool onClick={redo} disabled={!canRedo()} title={t("timeline.tools.redo")}>
           <Redo2 size={16} aria-hidden />
         </TLTool>
 
@@ -984,42 +986,42 @@ export const Timeline: React.FC = () => {
         <TLTool
           onClick={handleSplit}
           disabled={splittableSelectedClipIds.length === 0}
-          title="Split (S)"
+          title={t("timeline.tools.split")}
         >
           <Scissors size={16} aria-hidden />
         </TLTool>
         <TLTool
           onClick={() => handleTrimToPlayhead(true)}
           disabled={splittableSelectedClipIds.length === 0}
-          title="Trim start to playhead (Q)"
+          title={t("timeline.tools.trimStart")}
         >
           <CornerDownLeft size={16} aria-hidden />
         </TLTool>
         <TLTool
           onClick={() => handleTrimToPlayhead(false)}
           disabled={splittableSelectedClipIds.length === 0}
-          title="Trim end to playhead (W)"
+          title={t("timeline.tools.trimEnd")}
         >
           <CornerDownRight size={16} aria-hidden />
         </TLTool>
         <TLTool
           onClick={handleDelete}
           disabled={selectedClipIds.length === 0}
-          title="Delete (Del)"
+          title={t("timeline.tools.delete")}
         >
           <Trash2 size={16} aria-hidden />
         </TLTool>
         <TLTool
           onClick={handleDuplicate}
           disabled={selectedClipIds.length === 0}
-          title="Duplicate (⌘D)"
+          title={t("timeline.tools.duplicate")}
         >
           <Copy size={16} aria-hidden />
         </TLTool>
         <TLTool
           onClick={handleRippleDelete}
           disabled={!canRippleDelete}
-          title="Ripple delete (⇧Del)"
+          title={t("timeline.tools.rippleDelete")}
         >
           <Delete size={16} aria-hidden />
         </TLTool>
@@ -1032,7 +1034,7 @@ export const Timeline: React.FC = () => {
           menuWidth={192}
           hasChevron
           button={{
-            label: "Add track",
+            label: t("timeline.addTrackLabel"),
             size: "sm",
             variant: "ghost",
             icon: <Plus size={16} aria-hidden />,
@@ -1054,11 +1056,11 @@ export const Timeline: React.FC = () => {
           placement="above"
           alignment="start"
           width={340}
-          label="Track layers"
+          label={t("timeline.layers.label")}
           content={
             <>
               <div className="flex items-center justify-between px-3 py-2.5 border-b border-border bg-bg-2">
-                <span className="text-xs font-semibold text-fg">Track Layers</span>
+                <span className="text-xs font-semibold text-fg">{t("timeline.layers.title")}</span>
                 <span className="text-[10px] tabular-nums text-fg-3">
                   {filteredTrackEntries.length}/{tracks.length}
                 </span>
@@ -1066,14 +1068,14 @@ export const Timeline: React.FC = () => {
               {pendingTrackDelete ? (
                 <div
                   role="alertdialog"
-                  aria-label={`Delete ${pendingTrackDelete.name}`}
+                  aria-label={t("timeline.layers.deleteNamed", { name: pendingTrackDelete.name })}
                   className="border-b border-danger/30 bg-danger/10 px-3 py-2.5"
                 >
                   <p className="text-[11px] font-semibold text-danger">
-                    Delete “{pendingTrackDelete.name}”?
+                    {t("timeline.layers.confirmDelete", { name: pendingTrackDelete.name })}
                   </p>
                   <p className="mt-0.5 text-[10px] leading-relaxed text-fg-3">
-                    Its clips will be removed. You can undo this action.
+                    {t("timeline.layers.confirmDeleteBody")}
                   </p>
                   <div className="mt-2 flex justify-end gap-1.5">
                     <button
@@ -1081,7 +1083,7 @@ export const Timeline: React.FC = () => {
                       onClick={() => setPendingTrackDeleteId(null)}
                       className="h-7 rounded-md border border-border bg-bg-1 px-2.5 text-[10px] font-semibold text-fg-2 hover:bg-hover"
                     >
-                      Cancel
+                      {t("common.cancel")}
                     </button>
                     <button
                       type="button"
@@ -1091,7 +1093,7 @@ export const Timeline: React.FC = () => {
                       }}
                       className="h-7 rounded-md bg-danger px-2.5 text-[10px] font-semibold text-white hover:opacity-90"
                     >
-                      Delete track
+                      {t("timeline.layers.deleteTrack")}
                     </button>
                   </div>
                 </div>
@@ -1101,14 +1103,14 @@ export const Timeline: React.FC = () => {
                   type="search"
                   value={trackLayerQuery}
                   onChange={(event) => setTrackLayerQuery(event.currentTarget.value)}
-                  placeholder="Search tracks"
-                  aria-label="Search track layers"
+                  placeholder={t("timeline.layers.searchPlaceholder")}
+                  aria-label={t("timeline.layers.search")}
                   className="h-8 w-full rounded-md border border-border bg-bg-1 px-2.5 text-[11px] text-fg outline-none placeholder:text-fg-muted focus:border-accent"
                 />
                 <div
                   className="flex gap-1 overflow-x-auto pb-0.5"
                   role="group"
-                  aria-label="Track layer types"
+                  aria-label={t("timeline.layers.types")}
                 >
                   {TRACK_LAYER_FILTERS.map((filter) => {
                     const count =
@@ -1127,7 +1129,7 @@ export const Timeline: React.FC = () => {
                             : "border-border bg-bg-2 text-fg-3 hover:border-accent/50 hover:text-fg"
                         }`}
                       >
-                        {filter.label} {count}
+                        {t(filter.labelKey)} {count}
                       </button>
                     );
                   })}
@@ -1136,7 +1138,7 @@ export const Timeline: React.FC = () => {
               <div className="p-2 max-h-60 overflow-y-auto">
                 {tracks.length === 0 ? (
                   <Text type="supporting" color="secondary" className="text-xs text-fg-muted text-center py-6">
-                    No tracks yet
+                    {t("timeline.layers.empty")}
                   </Text>
                 ) : filteredTrackEntries.length === 0 ? (
                   <Text
@@ -1144,7 +1146,7 @@ export const Timeline: React.FC = () => {
                     color="secondary"
                     className="block py-6 text-center text-xs text-fg-muted"
                   >
-                    No tracks match your filters
+                    {t("timeline.layers.noMatch")}
                   </Text>
                 ) : (
                   <div className="space-y-0.5">
@@ -1166,7 +1168,7 @@ export const Timeline: React.FC = () => {
                           {renamingTrackId === track.id ? (
                             <input
                               autoFocus
-                              aria-label={`Rename ${name}`}
+                              aria-label={t("timeline.layers.renameNamed", { name })}
                               value={trackNameDraft}
                               onChange={(event) =>
                                 setTrackNameDraft(event.currentTarget.value)
@@ -1193,21 +1195,21 @@ export const Timeline: React.FC = () => {
                           )}
                           <div className="flex gap-0.5 opacity-60 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                             <IconButton
-                              label={`Rename ${name}`}
+                              label={t("timeline.layers.renameNamed", { name })}
                               icon={<Pencil size={12} aria-hidden />}
                               size="sm"
                               variant="ghost"
                               onClick={() => startTrackRename(track.id, name)}
                             />
                             <IconButton
-                              label={`Duplicate ${name}`}
+                              label={t("timeline.layers.duplicateNamed", { name })}
                               icon={<Copy size={12} aria-hidden />}
                               size="sm"
                               variant="ghost"
                               onClick={() => void duplicateTrack(track.id)}
                             />
                             <IconButton
-                              label={`Delete ${name}`}
+                              label={t("timeline.layers.deleteNamed", { name })}
                               icon={<Trash2 size={12} aria-hidden />}
                               size="sm"
                               variant="ghost"
@@ -1215,7 +1217,7 @@ export const Timeline: React.FC = () => {
                             />
                             {isVisual ? (
                               <IconButton
-                                label={`Hide ${name}`}
+                                label={t("timeline.layers.hideNamed", { name })}
                                 icon={
                                   track.hidden ? (
                                     <EyeOff size={12} aria-hidden />
@@ -1232,7 +1234,7 @@ export const Timeline: React.FC = () => {
                             {isAudio ? (
                               <>
                                 <IconButton
-                                  label={`Mute ${name}`}
+                                  label={t("timeline.layers.muteNamed", { name })}
                                   icon={
                                     track.muted ? (
                                       <VolumeX size={12} aria-hidden />
@@ -1247,7 +1249,7 @@ export const Timeline: React.FC = () => {
                                 />
                                 <button
                                   type="button"
-                                  aria-label={`Solo ${name}`}
+                                  aria-label={t("timeline.layers.soloNamed", { name })}
                                   aria-pressed={track.solo}
                                   onClick={() => void soloTrack(track.id, !track.solo)}
                                   className={`flex h-7 min-w-7 items-center justify-center rounded-md px-1 text-[10px] font-black transition-colors ${
@@ -1261,7 +1263,7 @@ export const Timeline: React.FC = () => {
                               </>
                             ) : null}
                             <IconButton
-                              label={`Lock ${name}`}
+                              label={t("timeline.layers.lockNamed", { name })}
                               icon={
                                 track.locked ? (
                                   <Unlock size={12} aria-hidden />
@@ -1275,7 +1277,7 @@ export const Timeline: React.FC = () => {
                               onClick={() => void lockTrack(track.id, !track.locked)}
                             />
                             <IconButton
-                              label={`Move ${name} up`}
+                              label={t("timeline.layers.moveUpNamed", { name })}
                               icon={<ChevronUp size={12} aria-hidden />}
                               size="sm"
                               variant="ghost"
@@ -1285,7 +1287,7 @@ export const Timeline: React.FC = () => {
                               isDisabled={index === 0}
                             />
                             <IconButton
-                              label={`Move ${name} down`}
+                              label={t("timeline.layers.moveDownNamed", { name })}
                               icon={<ChevronDown size={12} aria-hidden />}
                               size="sm"
                               variant="ghost"
@@ -1306,7 +1308,7 @@ export const Timeline: React.FC = () => {
           }
         >
           <IconButton
-            label="Manage track layers"
+            label={t("timeline.layers.manage")}
             icon={<Layers size={16} aria-hidden />}
             size="sm"
             variant={showLayersPanel ? "secondary" : "ghost"}
@@ -1319,7 +1321,7 @@ export const Timeline: React.FC = () => {
         <div className="ml-auto flex items-center gap-3">
           {/* Zoom control (mock: minus / emerald slider track + knob / plus) */}
           <div className="flex items-center gap-2.5">
-            <TLTool onClick={zoomOut} title="Zoom out">
+            <TLTool onClick={zoomOut} title={t("timeline.tools.zoomOut")}>
               <ZoomOut size={16} aria-hidden />
             </TLTool>
             <div className="relative h-5 w-[150px]">
@@ -1359,7 +1361,7 @@ export const Timeline: React.FC = () => {
               />
               <input
                 type="range"
-                aria-label="Timeline zoom"
+                aria-label={t("timeline.tools.zoom")}
                 aria-valuetext={`${Math.round(pixelsPerSecond)} pixels per second`}
                 min={ZOOM_PRESETS.MIN}
                 max={ZOOM_PRESETS.MAX}
@@ -1369,7 +1371,7 @@ export const Timeline: React.FC = () => {
                 className="absolute inset-0 h-full w-full cursor-ew-resize opacity-0"
               />
             </div>
-            <TLTool onClick={zoomIn} title="Zoom in">
+            <TLTool onClick={zoomIn} title={t("timeline.tools.zoomIn")}>
               <ZoomIn size={16} aria-hidden />
             </TLTool>
           </div>
@@ -1380,7 +1382,7 @@ export const Timeline: React.FC = () => {
             <TLTool
               onClick={toggleSnap}
               active={snapSettings.enabled}
-              title={snapSettings.enabled ? "Snap on (N)" : "Snap off (N)"}
+              title={snapSettings.enabled ? t("timeline.tools.snapOn") : t("timeline.tools.snapOff")}
             >
               <Magnet size={16} />
             </TLTool>
@@ -1391,7 +1393,7 @@ export const Timeline: React.FC = () => {
                 useTimelineStore.setState({ trackHeights: {} });
               }}
               active={trackHeight >= 52}
-              title="Large tracks"
+              title={t("timeline.tools.largeTracks")}
             >
               <Rows3 size={16} />
             </TLTool>
@@ -1401,7 +1403,7 @@ export const Timeline: React.FC = () => {
                 useTimelineStore.setState({ trackHeights: {} });
               }}
               active={trackHeight < 52}
-              title="Compact tracks"
+              title={t("timeline.tools.compactTracks")}
             >
               <Rows2 size={16} />
             </TLTool>
@@ -1411,8 +1413,8 @@ export const Timeline: React.FC = () => {
               active={timelineMaximized}
               title={
                 timelineMaximized
-                  ? "Restore layout"
-                  : "Maximize timeline (more room)"
+                  ? t("timeline.tools.restoreLayout")
+                  : t("timeline.tools.maximize")
               }
             >
               {timelineMaximized ? (
@@ -1507,7 +1509,7 @@ export const Timeline: React.FC = () => {
                   addTrack("video", undefined, { mode: "standard" })
                 }
                 className="mx-3 my-1 h-7 flex items-center justify-center gap-1.5 rounded-[7px] border border-dashed border-border-strong text-fg-muted hover:text-fg-2 hover:border-fg-3 transition-colors"
-                aria-label="Add track"
+                aria-label={t("timeline.addTrackLabel")}
               >
                 <Plus size={16} aria-hidden />
               </button>
@@ -1617,7 +1619,7 @@ export const Timeline: React.FC = () => {
                             t.clips.some(c => c.mediaId === newItem.id)
                           );
                         if (track) {
-                          toast.success(`Added to ${track.name}`, file.name);
+                          toast.success(t("timeline.addedTo", { name: track.name }), file.name);
                         }
                       }
                     }

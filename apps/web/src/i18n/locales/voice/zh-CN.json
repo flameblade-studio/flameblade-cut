@@ -1,0 +1,105 @@
+{
+  "aiTab": {
+    "title": "AI 工具",
+    "subtitle": "用智能功能加速剪辑",
+    "back": "返回 AI 工具",
+    "sections": {
+      "generation": "内容生成",
+      "templates": "模板与预设",
+      "media": "媒体库",
+      "tools": "工具"
+    },
+    "cards": {
+      "voiceover": { "title": "配音", "description": "文字转语音，直接放到时间线" },
+      "captions": { "title": "自动字幕", "description": "从音频自动生成字幕" },
+      "templates": { "title": "项目模板", "description": "从预先建好的项目结构开始" },
+      "filters": { "title": "滤镜预设", "description": "一键应用电影感调色" },
+      "music": { "title": "音乐与音效", "description": "浏览免版税音频素材" },
+      "multicam": { "title": "多机位剪辑", "description": "同步并切换多个机位" }
+    },
+    "footer": "更多 AI 功能即将推出",
+    "unsavedTitle": "未保存的音频已丢弃",
+    "unsavedBody": "下次请先存入媒体库或下载。"
+  },
+  "panel": {
+    "title": "配音",
+    "subtitle": "选好声音、输入文字，试听后放到时间线",
+    "engine": "配音引擎",
+    "engines": {
+      "windows": "Windows 内置・免费",
+      "azure": "Azure",
+      "openai": "OpenAI",
+      "elevenlabs": "ElevenLabs"
+    },
+    "engineHints": {
+      "windows": "使用 Windows 内置声音，免费、离线，不需要密钥。",
+      "azure": "微软 Azure 云端神经语音，需要密钥与区域，按用量计费。",
+      "openai": "OpenAI 云端语音，需要密钥，按用量计费。",
+      "elevenlabs": "ElevenLabs 云端语音，使用设置中的 ElevenLabs 密钥。"
+    },
+    "voice": "声音",
+    "voicePlaceholder": "选择声音",
+    "searchVoices": "搜索声音",
+    "loadingVoices": "正在加载声音…",
+    "noVoices": "找不到可用的声音",
+    "refreshVoices": "刷新声音列表",
+    "multilingual": "多语言",
+    "text": "配音文字",
+    "textPlaceholder": "输入要朗读的文字…",
+    "rate": "语速",
+    "rateNatural": "自然语速",
+    "instructions": "语气指示（可选）",
+    "instructionsPlaceholder": "例如：温柔、放慢、像讲故事",
+    "preview": "试听",
+    "stopPreview": "停止试听",
+    "generating": "生成中…",
+    "insert": "加到时间线（播放头位置）",
+    "inserted": "已在 {{time}} 加入配音",
+    "duration": "时长 {{seconds}} 秒",
+    "desktopOnly": "配音功能需要炎剑剪辑桌面版。",
+    "trackName": "配音",
+    "clipPrefix": "配音",
+    "subtitles": {
+      "title": "字幕一键配音",
+      "description": "依次为每一句字幕生成配音，放在该句字幕的开始时间。",
+      "start": "为 {{count}} 句字幕配音",
+      "none": "当前项目没有字幕。",
+      "progress": "正在配音 {{done}} / {{total}}",
+      "cancel": "取消",
+      "cancelled": "已取消，完成 {{placed}} / {{total}} 句。",
+      "done": "完成！已放上 {{placed}} 句配音。",
+      "failed": "第 {{index}} 句失败（已完成 {{placed}} / {{total}} 句）：{{message}}"
+    },
+    "setup": {
+      "title": "密钥与区域设置",
+      "configured": "已设置",
+      "notConfigured": "未设置",
+      "azureKey": "Azure Speech 密钥",
+      "openaiKey": "OpenAI 密钥",
+      "keyPlaceholder": "粘贴密钥",
+      "save": "保存",
+      "remove": "移除",
+      "saved": "密钥已加密保存",
+      "removed": "密钥已移除",
+      "saveFailed": "密钥保存失败",
+      "region": "Azure 区域",
+      "regionPlaceholder": "例如 eastasia",
+      "keyHint": "密钥由 Windows 加密保存在这台电脑，界面上不会再显示。"
+    },
+    "errors": {
+      "missing-key": "尚未设置密钥，请在下方“密钥与区域设置”输入。",
+      "invalid-region": "Azure 区域格式不正确，例如 eastasia。",
+      "unsupported-platform": "Windows 内置声音只能在 Windows 上使用。",
+      "voice-missing": "这台电脑找不到所选的声音，请重新选择。",
+      "engine-failed": "语音引擎生成失败。",
+      "timeout": "等待太久，已超时。",
+      "http": "云端服务返回错误。",
+      "bad-audio": "服务没有返回可用的音频。",
+      "too-long": "文字太长，请缩短后再试。",
+      "unavailable": "配音功能需要炎剑剪辑桌面版。",
+      "unknown": "发生意外错误。",
+      "noProject": "请先打开项目。",
+      "placement": "无法把配音放到时间线。"
+    }
+  }
+}

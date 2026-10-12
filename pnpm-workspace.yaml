@@ -21,3 +21,6 @@ allowBuilds:
   protobufjs: false
   sharp: false
   workerd: false
+# Run package scripts through pnpm's cross-platform shell so POSIX-style
+# `VAR=1 cmd` prefixes (used by the desktop build) also work on Windows.
+shellEmulator: true

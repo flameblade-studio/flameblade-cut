@@ -10,6 +10,7 @@ import { ToolcraftClickableCard as ClickableCard } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
 import { RotateCcw } from "@/icons/lucide-compat";
 import type { CurvesValues, CurvePoint } from "@openreel/core";
+import { useTranslation } from "react-i18next";
 
 export const DEFAULT_CURVES: CurvesValues = {
   rgb: [
@@ -57,9 +58,11 @@ const ChannelTab: React.FC<{
   label: string;
   isActive: boolean;
   onClick: () => void;
-}> = ({ channel, label, isActive, onClick }) => (
+}> = ({ channel, label, isActive, onClick }) => {
+  const { t } = useTranslation();
+  return (
   <ClickableCard
-    label={`Select ${label} curve channel`}
+    label={t("inspector.color.selectChannel", { label })}
     onClick={onClick}
     className={`px-3 py-1 text-[10px] font-medium rounded transition-colors ${
       isActive
@@ -72,7 +75,8 @@ const ChannelTab: React.FC<{
   >
     {label}
   </ClickableCard>
-);
+  );
+};
 
 /**
  * Catmull-Rom spline interpolation for smooth curves
@@ -153,6 +157,7 @@ export const CurvesEditor: React.FC<CurvesEditorProps> = ({
   onChange,
   onReset: _onReset,
 }) => {
+  const { t } = useTranslation();
   void _onReset;
   const [activeChannel, setActiveChannel] = useState<keyof CurvesValues>("rgb");
   const [selectedPointIndex, setSelectedPointIndex] = useState<number | null>(
@@ -430,10 +435,10 @@ export const CurvesEditor: React.FC<CurvesEditorProps> = ({
       {/* Controls */}
       <div className="flex justify-between items-center">
         <Text type="supporting" color="secondary" className="text-[9px]">
-          Click to add point • Double-click to remove
+          {t("inspector.color.curvesHint")}
         </Text>
         <Button
-          label="Reset"
+          label={t("inspector.color.reset")}
           icon={<RotateCcw size={10} />}
           variant="ghost"
           size="sm"

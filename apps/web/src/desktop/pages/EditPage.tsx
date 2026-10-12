@@ -2,6 +2,7 @@ import type { JSX } from "react";
 import type React from "react";
 import { lazy, Suspense } from "react";
 import { ToolcraftText as Text } from "@openreel/ui";
+import { useTranslation } from "react-i18next";
 
 import { AssetsPanel } from "../../components/editor/AssetsPanel";
 import { InspectorPanel } from "../../components/editor/InspectorPanel";
@@ -23,10 +24,11 @@ const ChatPanel = lazy(() =>
 );
 
 function PanelLoading(): JSX.Element {
+  const { t } = useTranslation();
   return (
     <div className="grid h-full place-items-center">
       <Text type="supporting" color="secondary" className="text-xs">
-        Loading…
+        {t("common.loading")}
       </Text>
     </div>
   );
@@ -99,6 +101,7 @@ function RowHandle({
 }
 
 export function EditPage(): JSX.Element {
+  const { t } = useTranslation();
   const chatVisible = useUIStore(
     (state) => state.panels.agentChat?.visible ?? false,
   );
@@ -156,18 +159,18 @@ export function EditPage(): JSX.Element {
       style={gridStyle}
       data-testid="desktop-edit-page"
     >
-      <DockRegion label="Media" name="Media" area="media" icon="photo.on.rectangle">
+      <DockRegion label={t("desktop.dock.media")} name="Media" area="media" icon="photo.on.rectangle">
         <AssetsPanel />
         <ColumnHandle edge="right" onPointerDown={mediaW.onHandlePointerDown} />
       </DockRegion>
 
-      <DockRegion label="Viewer" name="Viewer" area="stage" icon="play.fill" className="bg-stage-bg">
+      <DockRegion label={t("desktop.dock.viewer")} name="Viewer" area="stage" icon="play.fill" className="bg-stage-bg">
         <Suspense fallback={<PanelLoading />}>
           <Preview />
         </Suspense>
       </DockRegion>
 
-      <DockRegion label="Inspector" name="Inspector" area="inspector" icon="slider.horizontal.3">
+      <DockRegion label={t("desktop.dock.inspector")} name="Inspector" area="inspector" icon="slider.horizontal.3">
         <InspectorPanel />
         <ColumnHandle edge="left" onPointerDown={inspectorW.onHandlePointerDown} />
       </DockRegion>
@@ -188,7 +191,7 @@ export function EditPage(): JSX.Element {
         </div>
       ) : null}
 
-      <DockRegion label="Timeline" name="Timeline" area="timeline" icon="rectangle.split.3x1" className="bg-tl-bg">
+      <DockRegion label={t("desktop.dock.timeline")} name="Timeline" area="timeline" icon="rectangle.split.3x1" className="bg-tl-bg">
         <Suspense fallback={<PanelLoading />}>
           <Timeline />
         </Suspense>

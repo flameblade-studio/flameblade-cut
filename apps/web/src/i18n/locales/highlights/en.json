@@ -1,0 +1,98 @@
+{
+  "title": "AI Highlights",
+  "subtitle": "Drop in a long video and get the moments most worth turning into short clips.",
+  "source": {
+    "label": "Source video",
+    "pick": "Choose video",
+    "change": "Change video",
+    "hint": "MP4, MOV and WebM; long videos are fine",
+    "noDesktop": "AI Highlights requires the desktop app"
+  },
+  "options": {
+    "length": "Clip length",
+    "lengthShort": "15–30 s",
+    "lengthMedium": "30–60 s",
+    "lengthLong": "1–3 min",
+    "count": "Number of clips",
+    "countValue": "{{count}} clips",
+    "language": "Spoken language",
+    "languageAuto": "Auto-detect",
+    "languageZh": "中文",
+    "languageEn": "English",
+    "languageJa": "日本語",
+    "engine": "Analysis",
+    "engineLocal": "On-device · Free",
+    "engineOpenai": "OpenAI · Smarter",
+    "openaiNoKey": "Add an OpenAI key under “Keys and region” in the voiceover panel to use this.",
+    "openaiUnavailable": "OpenAI analysis is not available in this build."
+  },
+  "run": "Find highlights",
+  "rerun": "Find again",
+  "cancel": "Cancel",
+  "progress": {
+    "audio": "Reading audio…",
+    "model": "Downloading speech model {{percent}}% (one time only)",
+    "transcribe": "Transcribing {{percent}}%",
+    "analyze": "Finding highlights…"
+  },
+  "privacy": {
+    "local": "Video and speech are processed on this computer and never uploaded.",
+    "openai": "Only the transcript text is sent to OpenAI; the video is never uploaded."
+  },
+  "empty": {
+    "title": "Turn long videos into short highlights",
+    "body": "AI listens to your video, then picks the strongest moments by tone, key phrases and pacing. Fine-tune them and add them to the editor in one click.",
+    "step1": "Choose a video with speech",
+    "step2": "Pick a length and count, then press “Find highlights”",
+    "step3": "Tick the clips you like and add them to the editor"
+  },
+  "search": {
+    "placeholder": "Search moments by words",
+    "none": "“{{query}}” is not in the transcript",
+    "count": "{{count}} matches"
+  },
+  "results": {
+    "title": "Highlights",
+    "count": "{{count}} clips",
+    "selectAll": "Select all",
+    "selectNone": "Select none",
+    "noResults": "No moments fit this length. Try another length.",
+    "cached": "Reusing this video’s previous transcript"
+  },
+  "card": {
+    "score": "{{score}} pts",
+    "seconds": "{{seconds}} s",
+    "start": "Start",
+    "end": "End",
+    "earlier": "1 s earlier",
+    "later": "1 s later",
+    "select": "Select this clip",
+    "play": "Play clip",
+    "pause": "Pause",
+    "reasons": {
+      "cue": "Key phrase",
+      "hook": "Strong opening",
+      "question": "Asks a question",
+      "exclaim": "Emotional peak",
+      "dense": "Information-dense",
+      "loud": "Energetic delivery",
+      "dynamic": "Lively pacing"
+    }
+  },
+  "actions": {
+    "selected": "{{count}} selected",
+    "addVertical": "Add to editor (vertical 9:16)",
+    "addOriginal": "Add to editor (original ratio)",
+    "adding": "Adding…",
+    "reframeTip": "After adding, use “Auto Reframe” in the editor’s AI tab so the frame follows the subject.",
+    "projectOpenTip": "A project is open: clips are appended to the first video track and its aspect ratio stays unchanged."
+  },
+  "toast": {
+    "added": "Added {{count}} clips to the timeline",
+    "addFailed": "Could not add to the editor: {{message}}",
+    "failed": "Analysis failed: {{message}}",
+    "noSpeech": "No speech was detected in this video, so highlights cannot be found.",
+    "cancelled": "Analysis cancelled"
+  },
+  "projectName": "AI Highlights"
+}

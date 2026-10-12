@@ -47,6 +47,7 @@ export const transcodeArgsSchema = z.object({
 export const extractAudioArgsSchema = z.object({
   srcPath: z.string(),
   streamIndex: z.number().int().nonnegative().optional(),
+  format: z.enum(["editor", "speech"]).optional(),
 });
 export const probeAudioArgsSchema = z.object({ srcPath: z.string() });
 export const fetchUrlArgsSchema = z.object({
@@ -283,3 +284,143 @@ export const audioStreamInfoSchema = z.object({
   language: z.string().optional(),
 });
 export type AudioStreamInfo = z.infer<typeof audioStreamInfoSchema>;
+
+// --- Local ComfyUI bridge (main-process HTTP/WebSocket client + launcher) ---
+
+/** Drive-letter (`C:\` or `C:/`), UNC (`\\server`) or POSIX absolute path. */
+export const ABSOLUTE_PATH_PATTERN = /^(?:[A-Za-z]:[\\/]|\\\\|\/)/;
+
+const absolutePathSchema = z
+  .string()
+  .min(1)
+  .max(4096)
+  .refine((value) => ABSOLUTE_PATH_PATTERN.test(value), "path must be absolute");
+
+/** Loopback-only enforcement happens in `main/ipc/comfy.ts`; this only checks shape. */
+const comfyBaseUrlSchema = z.string().url().max(256);
+
+export const comfyFileRefSchema = z.object({
+  filename: z.string().min(1).max(512),
+  subfolder: z.string().max(512),
+  type: z.string().min(1).max(32),
+});
+export type ComfyFileRef = z.infer<typeof comfyFileRefSchema>;
+
+export const comfyRequestArgsSchema = z.object({
+  baseUrl: comfyBaseUrlSchema,
+  method: z.enum(["GET", "POST"]),
+  path: z.string().startsWith("/").max(4096),
+  jsonBody: z.unknown().optional(),
+});
+export type ComfyRequestArgs = z.infer<typeof comfyRequestArgsSchema>;
+
+export const comfyUploadImageArgsSchema = z.object({
+  baseUrl: comfyBaseUrlSchema,
+  bytes: z.union([z.instanceof(Uint8Array), z.instanceof(ArrayBuffer)]),
+  filename: z.string().min(1).max(255),
+});
+
+export const comfyDownloadArgsSchema = z.object({
+  baseUrl: comfyBaseUrlSchema,
+  file: comfyFileRefSchema,
+  destPath: absolutePathSchema,
+});
+
+export const comfySubscribeArgsSchema = z.object({
+  subscriptionId: z.string().min(1).max(128),
+  baseUrl: comfyBaseUrlSchema,
+  clientId: z.string().min(1).max(128),
+});
+
+export const comfyUnsubscribeArgsSchema = z.object({
+  subscriptionId: z.string().min(1).max(128),
+});
+
+/** Pushed on `CHANNELS.comfyWsEvent`; `text: null` means the socket closed. */
+export interface ComfyWsEvent {
+  readonly subscriptionId: string;
+  readonly text: string | null;
+}
+
+export const comfyLaunchConfigSchema = z.object({
+  comfyDir: absolutePathSchema,
+  // The first argument must be ComfyUI's entry script so the IPC surface can
+  // only start ComfyUI, never arbitrary Python (`-c ...`).
+  args: z
+    .array(z.string().max(1024))
+    .min(1)
+    .max(64)
+    .refine((args) => args[0] === "main.py", "args must start with main.py"),
+  preLaunchScript: absolutePathSchema
+    .refine((value) => value.toLowerCase().endsWith(".ps1"), "preLaunchScript must be a .ps1 file")
+    .nullable(),
+});
+export type ComfyLaunchConfig = z.infer<typeof comfyLaunchConfigSchema>;
+
+export const comfyPathArgsSchema = z.object({ path: absolutePathSchema });
+
+export const comfyWriteTextFileArgsSchema = z.object({
+  path: absolutePathSchema,
+  contents: z.string(),
+});
+
+// --- Voiceover (text-to-speech; network calls and keys stay in main) ---
+
+export const VOICE_ENGINES = ["windows", "azure", "openai"] as const;
+export const voiceEngineSchema = z.enum(VOICE_ENGINES);
+export type VoiceEngine = z.infer<typeof voiceEngineSchema>;
+
+/** KeyStore ids of the cloud keys; the renderer only ever learns whether they are set. */
+export const VOICE_KEY_IDS = {
+  azure: "flameblade.azure-speech-key",
+  openai: "flameblade.openai-key",
+} as const;
+
+export const VOICE_MAX_TEXT_CHARS = 5000;
+
+const azureRegionSchema = z.string().max(40).optional();
+
+export const voiceListArgsSchema = z.object({
+  engine: voiceEngineSchema,
+  azureRegion: azureRegionSchema,
+});
+export type VoiceListArgs = z.infer<typeof voiceListArgsSchema>;
+
+export const voiceSynthesizeArgsSchema = z.object({
+  engine: voiceEngineSchema,
+  text: z
+    .string()
+    .max(VOICE_MAX_TEXT_CHARS)
+    .refine((value) => value.trim().length > 0, "text must not be empty"),
+  voice: z.string().min(1).max(256),
+  /** 1.0 = natural speed (the default; never applied unless set). */
+  rate: z.number().min(0.5).max(2).optional(),
+  /** OpenAI steerable models only. */
+  instructions: z.string().max(1000).optional(),
+  azureRegion: azureRegionSchema,
+});
+export type VoiceSynthesizeArgs = z.infer<typeof voiceSynthesizeArgsSchema>;
+
+export interface VoiceInfo {
+  readonly engine: VoiceEngine;
+  /** Value to pass back as `voice` (OneCore display name, Azure ShortName, OpenAI voice). */
+  readonly id: string;
+  readonly name: string;
+  /** BCP 47 tag, or "multilingual" for OpenAI. */
+  readonly language: string;
+  readonly gender?: string;
+}
+
+export interface VoiceSynthesizeResult {
+  /** Absolute path of the WAV under `<userData>/voiceover/`. */
+  readonly path: string;
+  readonly durationSec: number;
+  /** Voice actually used (OneCore reports its display name). */
+  readonly voice: string;
+  readonly bytes: Uint8Array;
+}
+
+export interface VoiceKeyStatus {
+  readonly azure: boolean;
+  readonly openai: boolean;
+}

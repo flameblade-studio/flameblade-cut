@@ -1,0 +1,2436 @@
+{
+  "common": {
+    "loading": "載入中…",
+    "width": "寬度",
+    "height": "高度",
+    "apply": "套用",
+    "none": "無",
+    "undo": "復原",
+    "redo": "重做",
+    "tryAgain": "再試一次",
+    "tryAgainLater": "請再試一次。",
+    "time": {
+      "justNow": "剛剛",
+      "minutesAgo": "{{count}} 分鐘前",
+      "hoursAgo": "{{count}} 小時前",
+      "daysAgo": "{{count}} 天前"
+    },
+    "cancel": "取消"
+  },
+  "desktop": {
+    "update": {
+      "available": "有新版本 {{version}} 可以更新",
+      "availableBody": "炎劍剪輯新版本已可下載。",
+      "download": "下載",
+      "later": "稍後再說",
+      "downloading": "正在下載更新…",
+      "ready": "更新 {{version}} 已就緒",
+      "readyBody": "重新啟動即可安裝；若有尚未儲存的變更，會先詢問是否儲存。",
+      "restartInstall": "重新啟動並安裝"
+    },
+    "window": {
+      "minimize": "最小化",
+      "maximize": "最大化",
+      "close": "關閉",
+      "restore": "還原"
+    },
+    "bootstrap": {
+      "failed": "編輯器無法啟動：{{message}}",
+      "loading": "正在載入編輯器…"
+    },
+    "start": {
+      "today": "今天",
+      "yesterday": "昨天",
+      "daysAgo": "{{count}} 天前",
+      "videoEditor": "影片剪輯",
+      "newProject": "新增專案",
+      "chooseFormat": "請選擇畫面比例，之後仍可更改。",
+      "formatCardLabel": "{{format}}{{mode}}",
+      "recent": "最近使用",
+      "loadingRecents": "正在載入最近的專案…",
+      "noRecents": "目前還沒有最近的專案，請從上方新增專案。",
+      "openProject": "開啟「{{name}}」"
+    },
+    "formats": {
+      "vertical": "直式",
+      "horizontal": "橫式",
+      "square": "方形"
+    },
+    "export": {
+      "cancel": "取消匯出",
+      "dismissError": "關閉匯出錯誤訊息",
+      "saved": "已儲存！",
+      "export": "匯出"
+    },
+    "dock": {
+      "media": "素材",
+      "viewer": "預覽",
+      "inspector": "屬性",
+      "timeline": "時間軸"
+    }
+  },
+  "settings": {
+    "title": "設定",
+    "subtitle": "調整偏好設定，並管理外部服務的 API 金鑰。",
+    "tabs": {
+      "general": "一般",
+      "apiKeys": "API 金鑰",
+      "mcp": "MCP"
+    },
+    "general": {
+      "language": "介面語言",
+      "languageHint": "選擇整個編輯器使用的語言。",
+      "composition": "專案畫面",
+      "compositionHint": "設定專案的畫布尺寸。可選擇 TikTok、Reels、YouTube 等預設，或自行輸入數值。",
+      "presets": {
+        "landscape1080": "16:9 橫式（1080p）",
+        "vertical": "9:16 直式（TikTok／Reels）",
+        "square": "1:1 方形",
+        "portrait": "4:5 直式",
+        "standard": "4:3 標準",
+        "cinematic": "21:9 電影寬螢幕",
+        "landscape4k": "4K 橫式"
+      },
+      "editingFrameRate": "剪輯影格率",
+      "editingFrameRateHint": "影響預覽播放、逐格移動與預設匯出影格率；既有片段的時間不會改變。",
+      "backgroundFill": "背景填滿",
+      "backgroundFillHint": "當片段與畫面比例不符時，填滿周圍的畫布。",
+      "noBackgroundFill": "不填滿背景",
+      "blurBackgroundFill": "以模糊畫面填滿背景",
+      "blur": "模糊",
+      "backgroundColor": "背景顏色 {{color}}",
+      "autoSave": "自動儲存",
+      "enableAutoSave": "啟用自動儲存",
+      "enableAutoSaveHint": "定時自動儲存專案",
+      "saveEvery": "儲存間隔",
+      "autoSaveInterval": "自動儲存間隔",
+      "minutes_one": "{{count}} 分鐘",
+      "minutes_other": "{{count}} 分鐘",
+      "aiConnections": "AI 連線",
+      "aiConnectionsHint": "連接由你自行管理的相容端點。炎劍剪輯不會替你選擇服務商或模型。",
+      "ttsLabel": "文字轉語音／語音轉換／音效",
+      "ttsProvider": "文字轉語音服務",
+      "llmFormat": "AI 助理 API 格式",
+      "chooseFormat": "選擇 API 格式…",
+      "anthropicEndpoint": "Anthropic 相容端點",
+      "openaiEndpoint": "OpenAI 相容端點",
+      "endpointHint": "請輸入 API 主機位址，以及該主機提供、支援工具呼叫的完整模型 ID。",
+      "baseUrl": "基礎網址",
+      "modelId": "模型 ID",
+      "modelIdPlaceholder": "輸入端點提供的任一模型 ID",
+      "modelHint": "可在 AI 對話設定中載入可用模型；無法自動偵測時，請手動輸入 ID。API 金鑰為選填。",
+      "chooseFormatHint": "請先選擇 API 格式，再設定主機與模型。",
+      "aggregator": "AI 整合服務",
+      "aggregatorHint": "影片／圖片生成、畫質放大與創作 AI 工具",
+      "aggregatorProvider": "AI 整合服務供應商"
+    },
+    "unknownError": "未知錯誤",
+    "apiKeys": {
+      "masterSet": "已設定主密碼",
+      "masterSetHint": "你的 API 金鑰將以 AES-256-GCM 加密。",
+      "unlocked": "工作階段已解鎖",
+      "unlockedHint": "現在可以管理 API 金鑰。",
+      "passwordChanged": "密碼已變更",
+      "passwordChangedHint": "所有金鑰都已重新加密。",
+      "keySaved": "已儲存 {{name}} 金鑰",
+      "keySavedHint": "API 金鑰已加密並儲存。",
+      "saveFailed": "儲存失敗",
+      "deleteFailed": "刪除失敗",
+      "decryptFailed": "解密失敗",
+      "secureTitle": "安全的 API 金鑰儲存",
+      "secureHint": "設定主密碼，即可在本機加密並儲存你的 API 金鑰。金鑰以 AES-256-GCM 加密，只會在向所選服務發出請求時傳送。",
+      "setUp": "設定主密碼",
+      "locked": "工作階段已鎖定",
+      "lockedHint": "請輸入主密碼以檢視及管理 API 金鑰。",
+      "unlock": "解鎖",
+      "storedCount_one": "已儲存 {{count}} 組金鑰",
+      "storedCount_other": "已儲存 {{count}} 組金鑰",
+      "changePassword": "變更密碼",
+      "lock": "鎖定",
+      "docs": "{{name}} 說明文件",
+      "hideKey": "隱藏金鑰",
+      "showKey": "顯示金鑰",
+      "deleteKey": "刪除金鑰",
+      "addedUpdated": "新增於 {{added}} · 更新於 {{updated}}",
+      "keychain": "已安全儲存在系統鑰匙圈",
+      "addTitleOptional": "新增選用的 {{name}} 金鑰",
+      "addTitle": "新增 {{name}} 金鑰",
+      "apiKey": "API 金鑰",
+      "pasteOptional": "若你的端點需要，請貼上 API 金鑰",
+      "paste": "在此貼上你的 API 金鑰",
+      "cancel": "取消",
+      "saveKey": "儲存金鑰",
+      "addApiKey": "新增 API 金鑰",
+      "addServiceOptional": "新增選用的 {{name}} API 金鑰",
+      "addService": "新增 {{name}} API 金鑰",
+      "optionalSuffix": "（選用金鑰）"
+    },
+    "mcp": {
+      "copied": "已複製{{label}}",
+      "copyFailed": "複製失敗",
+      "clipboardUnavailable": "無法使用剪貼簿。",
+      "tokenRotated": "已更換權杖",
+      "tokenRotatedHint": "請用新的權杖更新你的 MCP 用戶端。",
+      "rotateFailed": "更換失敗",
+      "connectionOk": "連線正常",
+      "toolsResponded": "伺服器回應了 {{count}} 個工具。",
+      "connectionFailed": "連線失敗",
+      "noResponse": "沒有回應",
+      "desktopOnly": "僅限桌面版",
+      "desktopOnlyHint": "MCP 伺服器在炎劍剪輯桌面版內執行，讓外部 AI 用戶端（Claude Desktop、Cursor、Cline）編輯你的專案。請在桌面版開啟炎劍剪輯進行設定。",
+      "server": "MCP 伺服器",
+      "serverHint": "本機 Model Context Protocol 伺服器讓 AI 用戶端能透過與內建聊天相同的工具操作這個編輯器。它只監聽本機迴路，並需要下方的 Bearer 權杖。",
+      "status": "狀態",
+      "running": "執行中",
+      "stopped": "已停止",
+      "tools": "工具",
+      "checking": "正在檢查目錄…",
+      "available": "{{count}} 個可用",
+      "copyUrl": "複製網址",
+      "url": "網址",
+      "token": "權杖",
+      "hideToken": "隱藏權杖",
+      "showToken": "顯示權杖",
+      "copyToken": "複製權杖",
+      "rotateToken": "更換權杖",
+      "testing": "測試中…",
+      "test": "測試連線",
+      "workflows": "可用工作流程",
+      "workflowsHint": "即時目錄包含針對每個桌面工作區的專用工具。",
+      "wfEditor": "影片編輯器",
+      "wfEditorHint": "軌道、片段、效果、轉場、音訊與字幕",
+      "wfMotion": "動態創作",
+      "wfMotionHint": "圖層、動畫、著色器、遮罩、效果與算圖佇列",
+      "wfCreation": "創作與 3D",
+      "wfCreationHint": "場景、產品、材質、攝影機、骨架與預覽",
+      "wfProject": "專案操作",
+      "wfProjectHint": "檢查、匯入、儲存、復原、匯出與診斷",
+      "clientSetup": "用戶端設定",
+      "clientSetupHint": "將以下內容加入你的 MCP 用戶端設定（Claude Desktop、Cursor、Cline）。轉接程式會自動連線到執行中的應用程式。",
+      "copyConfig": "複製設定",
+      "config": "設定",
+      "trusted": "受信任的本機用戶端",
+      "autoAllow": "自動允許破壞性操作",
+      "autoAllowHint": "關閉時，透過 MCP 發出的破壞性或高成本工具呼叫會被拒絕，並顯示需要確認的通知。只有在你信任所有已連線的本機用戶端時才開啟。"
+    },
+    "password": {
+      "min8": "密碼至少需要 8 個字元",
+      "mismatch": "兩次輸入的密碼不一致",
+      "newMin8": "新密碼至少需要 8 個字元",
+      "newMismatch": "兩次輸入的新密碼不一致",
+      "incorrect": "密碼錯誤",
+      "opFailed": "操作失敗，請檢查目前的密碼。",
+      "errorOccurred": "發生錯誤",
+      "titleSetup": "設定主密碼",
+      "titleUnlock": "解鎖設定",
+      "titleChange": "變更主密碼",
+      "descSetup": "建立主密碼來加密你的 API 金鑰。密碼本身不會被儲存，只會保留驗證用的雜湊值。",
+      "descUnlock": "請輸入主密碼以存取加密的 API 金鑰。",
+      "descChange": "變更你的主密碼，所有已儲存的金鑰都會重新加密。",
+      "current": "目前密碼",
+      "enterCurrent": "輸入目前密碼",
+      "hide": "隱藏密碼",
+      "show": "顯示密碼",
+      "password": "密碼",
+      "master": "主密碼",
+      "min8Placeholder": "至少 8 個字元",
+      "enterMaster": "輸入主密碼",
+      "new": "新密碼",
+      "confirm": "確認密碼",
+      "repeat": "再次輸入密碼",
+      "confirmNew": "確認新密碼",
+      "repeatNew": "再次輸入新密碼",
+      "pbkdf2": "你的密碼會透過 PBKDF2（10 萬次迭代）衍生出加密金鑰，API 金鑰則以 AES-256-GCM 加密。如果忘記這組密碼，已儲存的金鑰將無法復原。",
+      "cancel": "取消",
+      "processing": "處理中…",
+      "setPassword": "設定密碼",
+      "unlock": "解鎖",
+      "changePassword": "變更密碼"
+    }
+  },
+  "editor": {
+    "theme": {
+      "system": "跟隨系統",
+      "light": "淺色",
+      "dark": "深色",
+      "auto": "跟隨系統",
+      "action": "主題：{{current}}，切換為{{next}}"
+    },
+    "rail": {
+      "tools": "編輯器工具",
+      "backHome": "回到首頁",
+      "search": "搜尋工具、效果，或詢問 AI",
+      "history": "操作紀錄",
+      "keyframeEditor": "關鍵影格編輯器",
+      "audioMixer": "混音器",
+      "aiChat": "AI 剪輯對話",
+      "projectJsonComments": "專案 JSON／註解",
+      "more": "更多編輯動作",
+      "settings": "設定與 API 金鑰",
+      "screenRecorder": "螢幕錄影",
+      "editorTour": "編輯器導覽",
+      "animationTour": "動畫與效果導覽",
+      "helpShortcuts": "說明與快捷鍵（按 ?）",
+      "projectJson": "專案 JSON",
+      "cmdK": "按 Cmd+K 搜尋"
+    },
+    "toolbar": {
+      "recordingFailed": "錄影失敗",
+      "recordingEmpty": "沒有錄到任何影像，請再試一次。",
+      "screenImportFailed": "無法匯入螢幕錄影",
+      "webcamImportFailed": "無法匯入網路攝影機錄影",
+      "recordingsImported_one": "已匯入 {{count}} 段錄影！",
+      "recordingsImported_other": "已匯入 {{count}} 段錄影！",
+      "screenAndWebcamAdded": "螢幕與網路攝影機畫面已加入素材，可在時間軸上合成。",
+      "screenAdded": "螢幕錄影已加入素材。",
+      "importFailed": "匯入失敗",
+      "export": {
+        "mp4": "MP4 標準",
+        "mp4Desc": "{{resolution}} H.264－網頁與社群",
+        "4k": "4K 標準",
+        "4kDesc": "3840×2160－YouTube 4K",
+        "1080pHigh": "1080p 高畫質",
+        "1080pHighDesc": "1920×1080 30fps－高位元率",
+        "1080p60": "1080p 60fps",
+        "1080p60Desc": "1920×1080－流暢播放",
+        "wav": "僅音訊（WAV）",
+        "wavDesc": "無壓縮音訊"
+      },
+      "projectName": "專案名稱",
+      "chooseExportSettings": "選擇匯出設定",
+      "exportNeedsContent": "請先在時間軸加入素材或文字，才能匯出",
+      "exportOptions": "匯出選項",
+      "bestMatch": "最適合",
+      "estimate": "預估 {{time}}",
+      "customExport": "自訂匯出…",
+      "customExportDesc": "完整設定，含 AI 畫質放大",
+      "compressVideo": "壓縮影片…",
+      "compressVideoDesc": "將影片壓縮到指定檔案大小",
+      "closeHistory": "關閉操作紀錄"
+    },
+    "init": {
+      "failed": "編輯器無法啟動",
+      "initializing": "正在初始化編輯器…"
+    },
+    "workspace": {
+      "label": "編輯工作區",
+      "edit": "編輯",
+      "ai": "AI"
+    },
+    "quickEdit": {
+      "title": "快速剪輯",
+      "splitClip": "分割片段",
+      "trimClipStart": "修剪片段開頭",
+      "trimClipEnd": "修剪片段結尾",
+      "editNotApplied": "無法套用這項編輯，請將播放頭移到片段範圍內再試。",
+      "failed": "{{action}}失敗",
+      "unlockTrack": "請先解除鎖定這個軌道，才能編輯片段。",
+      "trimHint": "在播放頭位置修剪，接著完成你的影片。",
+      "movePlayhead": "將播放頭移到這個片段內，即可分割或修剪。",
+      "splitHere": "在此分割",
+      "trimStart": "修剪開頭",
+      "trimStartHint": "刪除播放頭之前的部分",
+      "trimEnd": "修剪結尾",
+      "trimEndHint": "刪除播放頭之後的部分",
+      "addCaptions": "加入字幕",
+      "cleaning": "處理中…",
+      "cleanAudio": "清理音訊",
+      "reframe": "重新構圖",
+      "exportVideo": "匯出影片",
+      "applying": "正在套用編輯…"
+    },
+    "projectSwitcher": {
+      "current": "目前專案",
+      "saveName": "儲存專案名稱",
+      "rename": "重新命名專案",
+      "newProjectHint": "從全新的畫布開始",
+      "recent": "最近的專案"
+    }
+  },
+  "shortcuts": {
+    "title": "鍵盤快捷鍵",
+    "subtitle": "查詢快捷鍵、選擇預設組合，或自訂按鍵。",
+    "search": "搜尋快捷鍵",
+    "searchPlaceholder": "搜尋快捷鍵…",
+    "preset": "預設組合",
+    "applyPreset": "套用「{{name}}」預設組合",
+    "resetAll": "全部重設",
+    "category": "快捷鍵類別",
+    "all": "全部",
+    "setFor": "設定「{{name}}」的快捷鍵",
+    "pressKeys": "請按下按鍵…",
+    "resetToDefault": "還原為預設值",
+    "noResults": "找不到符合的快捷鍵",
+    "footerBefore": "點選快捷鍵即可自訂 • 按",
+    "footerAfter": "關閉",
+    "conflict": "這組快捷鍵已被「{{name}}」使用，請改用其他按鍵。",
+    "defaultConflict": "預設按鍵已被「{{name}}」使用。請先修改該快捷鍵，或全部重設。",
+    "categories": {
+      "playback": "播放",
+      "editing": "編輯",
+      "selection": "選取",
+      "timeline": "時間軸",
+      "view": "檢視",
+      "file": "檔案",
+      "tools": "工具"
+    },
+    "items": {
+      "playback": {
+        "playPause": {
+          "name": "播放／暫停",
+          "description": "切換播放"
+        },
+        "frameBack": {
+          "name": "上一格",
+          "description": "往回移動一格"
+        },
+        "frameForward": {
+          "name": "下一格",
+          "description": "往前移動一格"
+        },
+        "secondBack": {
+          "name": "倒退 1 秒",
+          "description": "往回移動 1 秒"
+        },
+        "secondForward": {
+          "name": "前進 1 秒",
+          "description": "往前移動 1 秒"
+        },
+        "jump5Back": {
+          "name": "倒退 5 秒",
+          "description": "往回移動 5 秒"
+        },
+        "jump5Forward": {
+          "name": "前進 5 秒",
+          "description": "往前移動 5 秒"
+        },
+        "goToStart": {
+          "name": "跳到開頭",
+          "description": "跳到時間軸開頭"
+        },
+        "goToEnd": {
+          "name": "跳到結尾",
+          "description": "跳到時間軸結尾"
+        },
+        "prevClip": {
+          "name": "上一個片段",
+          "description": "跳到上一個片段邊界"
+        },
+        "nextClip": {
+          "name": "下一個片段",
+          "description": "跳到下一個片段邊界"
+        },
+        "markLoopStart": {
+          "name": "標記循環起點",
+          "description": "在播放頭位置設定預覽循環起點"
+        },
+        "markLoopEnd": {
+          "name": "標記循環終點",
+          "description": "在播放頭位置設定預覽循環終點"
+        },
+        "toggleLoop": {
+          "name": "切換預覽循環",
+          "description": "重複播放標記範圍或整條時間軸"
+        }
+      },
+      "editing": {
+        "undo": {
+          "name": "復原",
+          "description": "復原上一個動作"
+        },
+        "redo": {
+          "name": "重做",
+          "description": "重做剛才復原的動作"
+        },
+        "cut": {
+          "name": "剪下",
+          "description": "剪下選取的片段"
+        },
+        "copy": {
+          "name": "複製",
+          "description": "複製選取的片段"
+        },
+        "paste": {
+          "name": "貼上",
+          "description": "在播放頭位置貼上片段"
+        },
+        "duplicate": {
+          "name": "製作副本",
+          "description": "為選取的片段製作副本"
+        },
+        "delete": {
+          "name": "刪除",
+          "description": "刪除選取的片段"
+        },
+        "rippleDelete": {
+          "name": "波紋刪除",
+          "description": "刪除並自動補齊空隙"
+        },
+        "split": {
+          "name": "分割",
+          "description": "在播放頭位置分割片段"
+        },
+        "trimStart": {
+          "name": "修剪開頭",
+          "description": "將片段開頭修剪到播放頭"
+        },
+        "trimEnd": {
+          "name": "修剪結尾",
+          "description": "將片段結尾修剪到播放頭"
+        }
+      },
+      "selection": {
+        "selectAll": {
+          "name": "全選",
+          "description": "選取所有片段"
+        },
+        "deselect": {
+          "name": "取消選取",
+          "description": "清除目前的選取"
+        }
+      },
+      "timeline": {
+        "toggleSnap": {
+          "name": "切換吸附",
+          "description": "開啟或關閉吸附"
+        },
+        "zoomIn": {
+          "name": "放大",
+          "description": "放大時間軸"
+        },
+        "zoomOut": {
+          "name": "縮小",
+          "description": "縮小時間軸"
+        },
+        "fitTimeline": {
+          "name": "符合時間軸",
+          "description": "讓時間軸符合視窗寬度"
+        }
+      },
+      "view": {
+        "showShortcuts": {
+          "name": "顯示快捷鍵",
+          "description": "顯示鍵盤快捷鍵"
+        }
+      },
+      "file": {
+        "save": {
+          "name": "儲存",
+          "description": "儲存專案"
+        },
+        "export": {
+          "name": "匯出",
+          "description": "匯出影片"
+        }
+      },
+      "tools": {
+        "addText": {
+          "name": "加入文字",
+          "description": "加入文字片段"
+        },
+        "addMarker": {
+          "name": "加入標記",
+          "description": "在播放頭位置加入標記"
+        }
+      }
+    },
+    "presets": {
+      "openreel": {
+        "name": "炎劍剪輯預設",
+        "description": "炎劍剪輯預設快捷鍵"
+      },
+      "capcut": {
+        "name": "CapCut",
+        "description": "CapCut 風格快捷鍵"
+      },
+      "premiere": {
+        "name": "Adobe Premiere",
+        "description": "Premiere Pro 風格快捷鍵"
+      },
+      "finalcut": {
+        "name": "Final Cut Pro",
+        "description": "Final Cut Pro 風格快捷鍵"
+      },
+      "davinci": {
+        "name": "DaVinci Resolve",
+        "description": "DaVinci Resolve 風格快捷鍵"
+      }
+    }
+  },
+  "timeline": {
+    "filters": {
+      "all": "全部",
+      "video": "影片",
+      "image": "圖片",
+      "audio": "音訊",
+      "text": "文字",
+      "graphics": "圖形"
+    },
+    "addTrack": {
+      "track": "軌道",
+      "dialogue": "對白",
+      "music": "音樂",
+      "captions": "字幕"
+    },
+    "addTrackLabel": "新增軌道",
+    "tools": {
+      "undo": "復原（⌘Z）",
+      "redo": "重做（⇧⌘Z）",
+      "split": "分割（S）",
+      "trimStart": "將開頭修剪到播放頭（Q）",
+      "trimEnd": "將結尾修剪到播放頭（W）",
+      "delete": "刪除（Del）",
+      "duplicate": "製作副本（⌘D）",
+      "rippleDelete": "波紋刪除（⇧Del）",
+      "zoomOut": "縮小",
+      "zoomIn": "放大",
+      "zoom": "時間軸縮放",
+      "snapOn": "吸附：開（N）",
+      "snapOff": "吸附：關（N）",
+      "largeTracks": "大軌道",
+      "compactTracks": "精簡軌道",
+      "restoreLayout": "還原版面",
+      "maximize": "放大時間軸（更多空間）"
+    },
+    "layers": {
+      "label": "軌道圖層",
+      "title": "軌道圖層",
+      "manage": "管理軌道圖層",
+      "deleteNamed": "刪除「{{name}}」",
+      "confirmDelete": "要刪除「{{name}}」嗎？",
+      "confirmDeleteBody": "軌道上的片段會一併移除，之後仍可復原。",
+      "deleteTrack": "刪除軌道",
+      "searchPlaceholder": "搜尋軌道",
+      "search": "搜尋軌道圖層",
+      "types": "軌道圖層類型",
+      "empty": "目前還沒有軌道",
+      "noMatch": "沒有符合篩選條件的軌道",
+      "renameNamed": "重新命名「{{name}}」",
+      "duplicateNamed": "為「{{name}}」製作副本",
+      "hideNamed": "隱藏「{{name}}」",
+      "muteNamed": "將「{{name}}」靜音",
+      "soloNamed": "獨奏「{{name}}」",
+      "lockNamed": "鎖定「{{name}}」",
+      "moveUpNamed": "將「{{name}}」上移",
+      "moveDownNamed": "將「{{name}}」下移"
+    },
+    "addedTo": "已加入「{{name}}」",
+    "clipMenu": {
+      "videoClip": "影片片段",
+      "audioClip": "音訊片段",
+      "imageClip": "圖片片段",
+      "clip": "片段",
+      "copyClip": "複製片段",
+      "duplicate": "製作副本",
+      "selectAllOnTrack": "選取此軌道上的所有片段",
+      "selectAllCaptions": "選取所有字幕",
+      "splitAtPlayhead": "在播放頭位置分割",
+      "closeGap": "補齊與前一片段的空隙",
+      "effects": "效果",
+      "copyEffects": "複製效果",
+      "pasteEffects": "貼上效果",
+      "separateAudio": "分離音訊",
+      "copyAudioEffects": "複製音訊效果",
+      "pasteAudioEffects": "貼上音訊效果",
+      "rippleDelete": "波紋刪除",
+      "delete": "刪除",
+      "typedClip": "{{type}}片段",
+      "types": {
+        "shape": "形狀",
+        "svg": "SVG",
+        "sticker": "貼圖",
+        "emoji": "表情符號",
+        "text": "文字",
+        "graphics": "圖形"
+      }
+    },
+    "track": {
+      "rename": "重新命名軌道",
+      "removeGaps": "移除空隙",
+      "ungroup": "取消軌道群組",
+      "groupSection": "一起移動與修剪",
+      "groupWith": "與「{{name}}」組成群組",
+      "name": "軌道名稱",
+      "options": "「{{name}}」選項",
+      "show": "顯示軌道",
+      "hide": "隱藏軌道",
+      "mute": "將軌道靜音",
+      "unmute": "取消軌道靜音",
+      "solo": "獨奏軌道",
+      "clearSolo": "取消獨奏",
+      "lock": "鎖定軌道",
+      "unlock": "解除鎖定軌道",
+      "lockShort": "鎖定",
+      "unlockShort": "解除鎖定",
+      "grouped": "軌道已組成群組",
+      "unmuteNamed": "取消「{{name}}」靜音",
+      "clearSoloNamed": "取消「{{name}}」獨奏"
+    },
+    "transition": {
+      "updated": "轉場已更新",
+      "notReady": "轉場引擎尚未就緒",
+      "tryAgainSoon": "請稍後再試。",
+      "added": "已加入轉場",
+      "failed": "轉場套用失敗",
+      "couldNotCreate": "無法建立轉場",
+      "removed": "已移除轉場",
+      "hardCut": "已恢復為直接切換",
+      "introApplied": "已套用開場轉場",
+      "outroApplied": "已套用結尾轉場",
+      "applied": "已套用轉場"
+    },
+    "effect": {
+      "applied": "已套用效果",
+      "added": "已加入 {{effect}}",
+      "failed": "效果套用失敗",
+      "couldNotApply": "無法套用效果"
+    },
+    "clip": {
+      "select": "選取片段「{{name}}」",
+      "selectText": "選取文字片段「{{name}}」",
+      "selectTyped": "選取{{type}}片段",
+      "move": "移動「{{name}}」",
+      "moveGraphic": "移動圖形",
+      "trimStartOf": "修剪「{{name}}」的開頭",
+      "trimEndOf": "修剪「{{name}}」的結尾",
+      "trimStart": "修剪開頭",
+      "trimEnd": "修剪結尾",
+      "adjustmentLayer": "{{name}}（調整圖層）"
+    },
+    "marker": {
+      "label": "標記名稱",
+      "remove": "移除標記"
+    },
+    "selectAllCaptions": "選取所有字幕（{{count}}）",
+    "trackNames": {
+      "Track": "軌道",
+      "Video": "影片",
+      "Audio": "音訊",
+      "Image": "圖片",
+      "Text": "文字",
+      "Graphics": "圖形",
+      "Dialogue": "對白",
+      "Music": "音樂",
+      "Captions": "字幕",
+      "Effects": "音效"
+    }
+  },
+  "export": {
+    "projectPreset": {
+      "name": "專案設定",
+      "description": "沿用專案的畫布尺寸與影格率"
+    },
+    "title": "匯出影片",
+    "subtitle": "選擇現成的預設，或自行微調每一項設定。",
+    "mode": "匯出模式",
+    "tabs": {
+      "presets": "預設",
+      "reduce": "縮小檔案",
+      "custom": "自訂設定"
+    },
+    "matchSource": "與來源相同",
+    "browserLimitPrefix": "瀏覽器限制：將以下列規格匯出",
+    "quickExport": "快速匯出",
+    "browsePresets": "瀏覽預設",
+    "forYourVideo": "適合你的影片",
+    "recommended": "推薦",
+    "recommendedForVideo": "推薦給這支影片",
+    "selectPresetHint": "選擇預設即可查看預估檔案大小與匯出時間。",
+    "optionsCount_one": "{{count}} 個選項",
+    "optionsCount_other": "{{count}} 個選項",
+    "maxDuration": "最長 {{seconds}} 秒",
+    "reduce": {
+      "intro": "將專案重新編碼成較小的檔案。可選擇畫質等級，或指定目標大小，方便透過電子郵件、WhatsApp 或 Discord 分享。",
+      "by": "縮小方式",
+      "quality": "畫質",
+      "targetSize": "目標大小",
+      "light": "輕度",
+      "lightHint": "稍微縮小",
+      "balanced": "平衡",
+      "balancedHint": "兼顧畫質與大小",
+      "strong": "強力",
+      "strongHint": "檔案最小",
+      "estimatedOutput": "預估輸出",
+      "videoKbps": "影像 {{kbps}} kbps",
+      "audioKbps": "音訊 {{kbps}} kbps",
+      "savings": "比來源小 {{percent}}%",
+      "empty": "請先在時間軸加入片段，才能預估壓縮後的大小。"
+    },
+    "custom": {
+      "title": "自訂匯出",
+      "subtitle": "設定這個檔案的影像、編碼與音訊。",
+      "videoHint": "封裝格式、編碼器、解析度與影格率",
+      "format": "格式",
+      "codec": "編碼器",
+      "resolution": "解析度",
+      "original": "原始尺寸（{{width}}x{{height}}）",
+      "vertical1080": "直式 1080p",
+      "square1080": "方形 1080",
+      "frameRate": "影格率",
+      "qualityEncoding": "畫質與編碼",
+      "qualityEncodingHint": "在畫質、速度與檔案大小之間取得平衡",
+      "bitrate": "位元率（kbps）",
+      "smaller": "較小",
+      "better": "較佳",
+      "exportMode": "匯出模式",
+      "fast": "快速",
+      "fastHint": "硬體編碼，速度最快",
+      "balanced": "平衡",
+      "balancedHint": "硬體編碼，畫質佳且檔案小",
+      "smallest": "最小",
+      "smallestHint": "軟體編碼，檔案最小",
+      "audioHint": "格式、取樣率與位元率",
+      "audioFormat": "音訊格式",
+      "audioCompatible": "與此封裝格式相容",
+      "sampleRate": "取樣率",
+      "audioBitrate": "音訊位元率"
+    },
+    "upscale": {
+      "title": "提升畫質",
+      "hint": "以高於來源的解析度匯出時進行銳利化",
+      "aria": "以畫質放大提升畫質",
+      "qualityMode": "畫質模式",
+      "modes": {
+        "fast": "快速",
+        "balanced": "平衡",
+        "quality": "高畫質"
+      },
+      "sharpening": "銳利化",
+      "max": "最大",
+      "note": "最適合在高於專案解析度匯出時使用，會增加處理時間。"
+    },
+    "device": {
+      "showDetails": "顯示裝置匯出預估詳細資訊",
+      "estimate": "預估",
+      "benchmark": "取得精確預估",
+      "testing": "測試中…",
+      "cores_one": "{{count}} 核心",
+      "cores_other": "{{count}} 核心",
+      "unknown": "未知",
+      "hwEncode": "硬體編碼",
+      "softwareOnly": "僅軟體編碼",
+      "hardwareAccelerated": "硬體加速"
+    },
+    "delivery": {
+      "label": "儲存影片",
+      "download": "下載到這台裝置",
+      "file": "選擇存檔位置",
+      "hint": "匯出時會以選定的畫質使用原始素材。大型匯出建議選擇存檔位置，直接寫入磁碟。"
+    },
+    "capability": {
+      "checking": "正在檢查此瀏覽器支援的編碼器…",
+      "chooseAnother": "請選擇其他格式，才能在此瀏覽器匯出。",
+      "hint": "可用的編碼器取決於瀏覽器。建議使用 H.264／MP4，或搭配 Opus 音訊的 VP9／WebM。"
+    },
+    "browserSafetyLimit": "受瀏覽器安全限制，此影片將以 {{width}}×{{height}} • {{fps}}fps 匯出。",
+    "h264": {
+      "willEncode": "將以不含透明度的 H.264 編碼。",
+      "anyway": "仍以 H.264 匯出"
+    },
+    "compressAndExport": "壓縮並匯出"
+  },
+  "assets": {
+    "tabs": {
+      "media": {
+        "label": "素材",
+        "description": "匯入影片、音訊與靜態圖片。"
+      },
+      "text": {
+        "label": "文字",
+        "description": "加入標題預設與字幕元素。"
+      },
+      "graphics": {
+        "label": "圖形",
+        "description": "建立形狀、箭頭與 SVG 疊加圖層。"
+      },
+      "effects": {
+        "label": "效果",
+        "description": "將效果拖曳到片段上即可套用。"
+      },
+      "transitions": {
+        "label": "轉場",
+        "description": "將轉場拖曳到片段邊緣。"
+      },
+      "ai": {
+        "label": "AI 生成",
+        "description": "生成片段、字幕與輔助剪輯。"
+      },
+      "recipes": {
+        "label": "風格配方",
+        "description": "為片段套用風格、疊加效果與文字組合。"
+      },
+      "templates": {
+        "label": "專案範本",
+        "description": "載入完整專案的起始版面與預設。"
+      }
+    },
+    "media": {
+      "retryGeneration": "重新生成",
+      "generating": "KieAI 生成中…",
+      "generatingShort": "生成中…",
+      "replaceAsset": "替換素材",
+      "createWithKieAI": "用 KieAI 創作",
+      "addToTimeline": "加入時間軸",
+      "failed": "失敗",
+      "missing": "遺失",
+      "emptyTitle": "尚未匯入任何素材",
+      "emptyHint": "將檔案拖曳到這裡，或點選匯入",
+      "importMedia": "匯入素材",
+      "importMediaAria": "匯入素材",
+      "import": "匯入",
+      "record": "錄製",
+      "sort": "排序素材",
+      "showMissing": "只顯示遺失的素材",
+      "relinkFolder": "從資料夾重新連結",
+      "relinkFolderEllipsis": "從資料夾重新連結…",
+      "projectMedia": "專案素材",
+      "addMedia": "加入素材",
+      "dropToImport": "放開即可匯入檔案"
+    },
+    "toast": {
+      "unsavedAudio": "已捨棄未儲存的音訊",
+      "unsavedAudioHint": "下次請先存入素材或下載，才能保留。",
+      "folderPickerUnsupported": "不支援資料夾選取",
+      "folderPickerUnsupportedHint": "請使用每個遺失素材上的重新整理按鈕，逐一重新連結。",
+      "relinked_one": "已重新連結 {{linked}}／{{count}} 個素材",
+      "relinked_other": "已重新連結 {{linked}}／{{count}} 個素材",
+      "noMatches": "找不到相符的檔案",
+      "noMatchesHint": "所選資料夾中沒有檔名與遺失素材相符的檔案。",
+      "assetNotFound": "找不到素材",
+      "assetNotFoundHint": "無法載入此素材的圖片資料。",
+      "kieaiFailed": "無法開啟 KieAI",
+      "unknownError": "未知的錯誤"
+    },
+    "progress": {
+      "importing": "正在匯入 {{name}}（{{current}}/{{total}}）…",
+      "extractingAudio": "正在從 {{name}} 擷取音訊…",
+      "replacing": "正在替換素材…",
+      "relinking": "正在重新連結 {{name}}…",
+      "importingMedia": "正在匯入素材…"
+    },
+    "graphics": {
+      "backgrounds": "背景",
+      "svgImport": "匯入 SVG",
+      "importSvg": "匯入 SVG 檔案",
+      "shapes": "形狀"
+    },
+    "shapes": {
+      "rectangle": "矩形",
+      "circle": "圓形",
+      "triangle": "三角形",
+      "star": "星形",
+      "arrow": "箭頭",
+      "polygon": "多邊形",
+      "cube": "立方體",
+      "sphere": "球體",
+      "torus": "環面",
+      "cone": "圓錐",
+      "cylinder": "圓柱",
+      "icosahedron": "二十面體"
+    },
+    "text": {
+      "addTitle": "加入標題",
+      "newTitle": "新標題",
+      "addTitleHint": "點選即可在時間軸加入文字"
+    },
+    "textPresets": {
+      "Heading": "大標題",
+      "Subtitle": "副標題",
+      "Lower Third": "下方字卡",
+      "Caption": "字幕",
+      "Hero": "主視覺標題",
+      "Quote": "引言",
+      "Outline": "外框字",
+      "Badge": "標籤"
+    },
+    "textPresetText": {
+      "Heading": "標題",
+      "Subtitle": "副標題文字",
+      "LowerThird": "在此輸入名稱",
+      "Caption": "在此輸入說明文字",
+      "Hero": "讓畫面動起來",
+      "Quote": "「說一個更好的故事。」",
+      "Outline": "外框文字",
+      "Badge": "全新發布"
+    },
+    "backgroundPresets": {
+      "solid-black": "黑色",
+      "solid-white": "白色",
+      "solid-slate": "石板灰",
+      "solid-zinc": "鋅灰",
+      "solid-red": "紅色",
+      "solid-blue": "藍色",
+      "solid-green": "綠色",
+      "solid-purple": "紫色",
+      "gradient-sunset": "夕陽",
+      "gradient-ocean": "海洋",
+      "gradient-forest": "森林",
+      "gradient-lavender": "薰衣草",
+      "gradient-midnight": "午夜",
+      "gradient-rose": "玫瑰",
+      "gradient-gold": "金色",
+      "gradient-noir": "黑色電影",
+      "radial-spotlight": "聚光燈",
+      "radial-glow": "光暈",
+      "mesh-aurora": "極光",
+      "mesh-nebula": "星雲",
+      "mesh-candy": "糖果",
+      "mesh-sunset-beach": "海灘",
+      "pattern-grid-dark": "深色格線",
+      "pattern-grid-light": "淺色格線",
+      "pattern-dots-dark": "深色圓點",
+      "pattern-dots-light": "淺色圓點",
+      "pattern-noise-dark": "底片顆粒",
+      "waves-ocean": "海浪",
+      "waves-sunset": "夕陽波浪",
+      "aurora-borealis": "北極光"
+    },
+    "backgroundCategories": {
+      "all": "全部",
+      "solid": "純色",
+      "gradient": "漸層",
+      "mesh": "網格漸層",
+      "pattern": "圖樣"
+    },
+    "effectsPanel": {
+      "cardHint": "{{name}}。拖曳到片段上即可套用，或按兩下套用到所選片段。",
+      "noClip": "未選取片段",
+      "noClipHint": "將效果拖曳到時間軸上的片段，或選取片段後按兩下。",
+      "notApplied": "無法套用效果",
+      "notAppliedHint": "所選圖層不接受這個效果。",
+      "applied": "已套用效果",
+      "appliedCount_one": "已將{{name}}加入 {{count}} 個片段",
+      "appliedCount_other": "已將{{name}}加入 {{count}} 個片段",
+      "skipped": "部分圖層已略過",
+      "skippedCount_one": "有 {{count}} 個所選圖層無法套用這個效果。",
+      "skippedCount_other": "有 {{count}} 個所選圖層無法套用這個效果。",
+      "search": "搜尋效果",
+      "categories": "效果類別",
+      "noMatch": "沒有符合「{{query}}」的效果。"
+    },
+    "transitionsPanel": {
+      "cardHint": "{{name}}。拖曳到片段邊緣，或按兩下套用到所選剪輯點。",
+      "noClipHint": "請選取一個片段或兩個相鄰片段，然後按兩下轉場。",
+      "noCut": "沒有可用的剪輯點",
+      "noCutHint": "所選片段必須在同一條時間軸軌道上相鄰。",
+      "failed": "轉場失敗",
+      "failedHint": "無法在所選剪輯點建立這個轉場。",
+      "saveFailed": "無法儲存轉場。",
+      "applied": "已套用轉場",
+      "appliedHint": "已將{{name}}加入所選剪輯點。",
+      "search": "搜尋轉場",
+      "categories": "轉場類別",
+      "noMatch": "沒有符合「{{query}}」的轉場。"
+    },
+    "recipesPanel": {
+      "selectClip": "請選取片段",
+      "selectClipHint": "配方會套用到一個所選的影片或圖片片段。",
+      "applyFailed": "無法套用配方",
+      "applyFailedHint": "這個配方無法套用到目前的片段。",
+      "applied": "已套用配方",
+      "appliedHint": "已將{{name}}加入{{target}}。",
+      "selectedClip": "所選片段",
+      "selectFirst": "請先選取片段",
+      "selectFirstHint": "在時間軸上選擇影片或圖片，即可套用片段配方、風格與字幕樣式。",
+      "search": "搜尋配方",
+      "searchPlaceholder": "搜尋配方…",
+      "all": "全部",
+      "noMatch": "沒有符合的配方",
+      "noMatchHint": "請試試其他搜尋字詞或類別。",
+      "editControls": "編輯配方控制項",
+      "applying": "套用中",
+      "apply": "套用"
+    },
+    "templatesPanel": {
+      "loading": "正在載入範本…",
+      "search": "搜尋範本",
+      "searchPlaceholder": "搜尋範本…",
+      "all": "全部",
+      "none": "找不到範本"
+    }
+  },
+  "inspector": {
+    "empty": {
+      "title": "尚未選取",
+      "hint": "選取片段即可查看其屬性"
+    },
+    "progress": {
+      "backgroundRemoval": "正在套用背景移除",
+      "audioCleanup": "正在套用音訊清理",
+      "autoColor": "正在套用自動調色"
+    },
+    "toast": {
+      "noiseCleanupFailed": "無法套用降噪",
+      "noiseCleanupApplied": "已套用降噪",
+      "noiseCleanupAppliedHint": "可在「背景噪音移除」中微調或切換預設。",
+      "couldNotCleanAudio": "無法清理音訊",
+      "noiseCleanupNotApplied": "無法對此片段套用降噪。",
+      "captionsImportedWithWarnings": "字幕已匯入，但有警告",
+      "segmentsSkipped": "已略過 {{count}} 段字幕。",
+      "captionsImported": "字幕已匯入",
+      "captionsImportedHint": "每段字幕都已成為「字幕」軌道上可編輯的文字片段。",
+      "captionImportFailed": "字幕匯入失敗",
+      "noValidCaptions": "找不到有效的字幕。",
+      "couldNotReadSubtitle": "無法讀取所選的字幕檔案。",
+      "fontUploadFailed": "字型上傳失敗",
+      "fontUploaded": "已上傳自訂字型",
+      "fontReady": "「{{font}}」已可使用。",
+      "recipeUnavailable": "無法使用此風格配方",
+      "recipeUnavailableHint": "此風格配方的定義已不存在。",
+      "recipeUpdateFailed": "無法更新風格配方",
+      "recipeUpdateFailedHint": "無法為此片段儲存風格配方的設定。",
+      "recipeUpdated": "已更新風格配方",
+      "recipeUpdatedHint": "已更新此片段的「{{name}}」。"
+    },
+    "sections": {
+      "noiseRemoval": "背景噪音移除",
+      "noiseRemovalActive": "背景噪音移除（啟用中）",
+      "noiseRemovalConfigured": "背景噪音移除（已設定）",
+      "multicam": "多機剪輯",
+      "localAutoCaptions": "本機自動字幕",
+      "importSrtFile": "匯入 SRT 或 VTT 檔案",
+      "importSrtAsText": "將 SRT／VTT 匯入為文字",
+      "editableCaptions": "可編輯字幕",
+      "autoReframe": "自動重新構圖",
+      "beatSyncedAutoEdit": "節拍同步自動剪輯",
+      "localHighlights": "本機精華片段",
+      "quickActions": "快速動作",
+      "removeBackground": "去背",
+      "cleaningUp": "清理中…",
+      "noiseReduced": "已降噪",
+      "quickDialogueCleanup": "快速對白清理",
+      "applying": "套用中…",
+      "autoColor": "自動調色",
+      "keyframes": "關鍵影格",
+      "transitions": "轉場",
+      "motionPresets": "動態預設",
+      "motionPath": "運動路徑",
+      "emphasisAnimation": "強調動畫",
+      "textAnimation": "文字動畫",
+      "voiceOver": "旁白",
+      "clipAudio": "片段音訊",
+      "volume": "音量",
+      "fadeIn": "淡入",
+      "fadeOut": "淡出",
+      "autoCutSilence": "自動剪除靜音",
+      "beatSync": "節拍同步",
+      "audioEffects": "音訊效果",
+      "audioDucking": "音訊閃避",
+      "colorGrading": "調色",
+      "applied": "已套用（{{count}}）",
+      "edit": "編輯",
+      "removeRecipe": "移除配方",
+      "recipeRemoveFailed": "無法移除配方",
+      "recipeRemoveFailedHint": "無法從這個片段移除配方。",
+      "reset": "重設",
+      "update": "更新",
+      "on": "開",
+      "off": "關",
+      "backgroundRemoval": "去背",
+      "particleEffects": "粒子效果",
+      "chromaKey": "色度去背（綠幕）",
+      "enableChromaKey": "啟用色度去背",
+      "keyColor": "去背顏色",
+      "tolerance": "容許度",
+      "motionTracking": "動態追蹤",
+      "videoEffects": "影片效果",
+      "greenScreen": "綠幕",
+      "pip": "子母畫面",
+      "masking": "遮罩",
+      "nestedSequences": "巢狀序列",
+      "adjustmentLayers": "調整圖層",
+      "textBehindSubject": "主體後方文字",
+      "speedDirection": "速度與方向",
+      "stabilization": "穩定",
+      "speedCurves": "速度曲線",
+      "textProperties": "文字屬性",
+      "shapeProperties": "形狀屬性",
+      "svgProperties": "SVG 屬性",
+      "transform": "變形",
+      "crop": "裁切",
+      "alignment": "對齊",
+      "transform3d": "3D 變形"
+    },
+    "loadingCameraTools": "正在載入多機工具…",
+    "transition": {
+      "intro": "開場轉場",
+      "outro": "結尾轉場",
+      "between": "轉場",
+      "introHint": "從專案背景過渡到此片段",
+      "outroHint": "從此片段過渡到專案背景",
+      "betweenHint": "兩個片段之間，以剪接點為中心",
+      "direction": "方向",
+      "directions": {
+        "left": "左",
+        "right": "右",
+        "up": "上",
+        "down": "下",
+        "vertical": "垂直",
+        "horizontal": "水平"
+      },
+      "needSecondClipLong": "片段對片段轉場需要第二個片段",
+      "needSecondClip": "需要第二個片段",
+      "applied": "已套用轉場",
+      "failed": "轉場失敗",
+      "couldNotApply": "無法套用轉場",
+      "removed": "已移除轉場",
+      "params": {
+        "centerX": "中心 X",
+        "centerY": "中心 Y",
+        "softness": "柔和度",
+        "pushOut": "推出",
+        "blurStrength": "模糊強度",
+        "motionBlur": "動態模糊",
+        "startAngle": "起始角度",
+        "clockwise": "順時針",
+        "scale": "縮放",
+        "holdDuration": "停留時間",
+        "maxPixel": "最大像素大小",
+        "intensity": "強度",
+        "slices": "切片數",
+        "slats": "葉片數",
+        "rotations": "旋轉圈數",
+        "flashIntensity": "閃光強度",
+        "burnIntensity": "燒灼強度",
+        "warmth": "暖度",
+        "tileColumns": "磁磚欄數",
+        "randomness": "隨機度",
+        "amplitude": "振幅",
+        "waves": "波數",
+        "foldShadow": "摺痕陰影",
+        "maxOffset": "最大位移",
+        "angle": "角度",
+        "duration": "長度"
+      },
+      "background": "背景",
+      "from": "從",
+      "to": "到",
+      "type": "轉場類型",
+      "fadeClipAudio": "淡化片段音訊",
+      "smoothAudio": "平滑轉場音訊",
+      "parameters": "參數",
+      "remove": "移除轉場",
+      "apply": "套用轉場"
+    },
+    "subtitle": {
+      "title": "字幕",
+      "textContent": "文字內容",
+      "text": "字幕文字",
+      "textPlaceholder": "輸入字幕文字…",
+      "timing": "時間",
+      "startTime": "開始時間",
+      "endTime": "結束時間",
+      "position": "位置",
+      "animation": "動畫",
+      "style": "樣式",
+      "animationStyle": "動畫樣式",
+      "animStyles": {
+        "none": "無",
+        "karaoke": "卡拉 OK",
+        "word-highlight": "逐字醒目提示",
+        "word-by-word": "逐字顯示",
+        "bounce": "彈跳",
+        "typewriter": "打字機"
+      },
+      "animHints": {
+        "karaoke": "隨著說話進度為文字填上顏色",
+        "wordHighlight": "目前的字詞會醒目提示並放大",
+        "wordByWord": "一次顯示一個字詞",
+        "bounce": "字詞出現時會彈跳進場",
+        "typewriter": "字詞像打字一樣逐一出現",
+        "none": "靜態文字，沒有動畫"
+      },
+      "noWordTiming": "沒有逐字時間資料，請重新產生字幕以啟用動畫。",
+      "highlightColor": "醒目提示顏色",
+      "selectHighlightColor": "選擇醒目提示顏色",
+      "font": "字型",
+      "fontFamily": "字型",
+      "uploadFont": "上傳自訂字型",
+      "fontSize": "字型大小",
+      "colors": "顏色",
+      "textColor": "文字顏色",
+      "selectTextColor": "選擇字幕文字顏色",
+      "background": "背景",
+      "selectBackgroundColor": "選擇字幕背景顏色",
+      "backgroundOpacity": "背景不透明度",
+      "delete": "刪除字幕"
+    },
+    "transform": {
+      "position": "位置",
+      "canvasPixels": "畫布像素",
+      "offsetPixels": "位移像素",
+      "nudgeGroup": "以一像素微調位置",
+      "nudgeLeft": "向左微移 1 像素",
+      "nudgeUp": "向上微移 1 像素",
+      "nudgeDown": "向下微移 1 像素",
+      "nudgeRight": "向右微移 1 像素",
+      "scale": "縮放",
+      "rotation": "旋轉",
+      "increaseRotation": "增加旋轉角度",
+      "decreaseRotation": "減少旋轉角度",
+      "anchorPoint": "錨點",
+      "opacity": "不透明度",
+      "radius": "圓角",
+      "fitMode": "填滿模式",
+      "setFitMode": "將填滿模式設為{{label}}",
+      "fitModes": {
+        "contain": "符合",
+        "cover": "填滿",
+        "stretch": "延展"
+      }
+    },
+    "common": {
+      "unknownError": "未知錯誤",
+      "hide": "隱藏",
+      "show": "顯示",
+      "save": "儲存"
+    },
+    "speed": {
+      "setSpeed": "將速度設為 {{speed}}",
+      "customSpeed": "自訂速度",
+      "range": "範圍：0.1×（最慢）至 100×（最快）",
+      "applyToAudio": "同時調整音訊速度",
+      "reversed": "已倒轉",
+      "reverseClip": "倒轉片段",
+      "smoothSlowMo": "平滑慢動作",
+      "quality": "品質",
+      "qualityLow": "低（較快）",
+      "qualityMedium": "中",
+      "qualityHigh": "高（較慢）",
+      "opticalFlowHint": "使用光流產生平滑的中間影格",
+      "currentSettings": "目前設定",
+      "speedValue": "速度：{{speed}}×",
+      "reversedSuffix": " • 已倒轉",
+      "smoothSuffix": " • 平滑"
+    },
+    "stabilization": {
+      "failed": "穩定處理失敗",
+      "downloading": "正在下載穩定引擎…",
+      "analyzing": "正在分析動態…",
+      "stabilizing": "正在穩定影片…",
+      "stabilize": "穩定",
+      "enable": "啟用穩定",
+      "strength": "強度",
+      "firstUse": "首次使用需下載一次（約 65 MB）",
+      "restabilize": "重新穩定"
+    },
+    "crop": {
+      "adjust": "調整裁切",
+      "cropVideo": "裁切影片",
+      "region": "裁切區域：",
+      "position": "位置：",
+      "reset": "重設裁切"
+    },
+    "history": {
+      "createText": "建立文字片段",
+      "createShape": "建立形狀",
+      "importSvg": "匯入 SVG",
+      "addSticker": "加入貼圖",
+      "createClip": "建立片段",
+      "title": "歷史紀錄",
+      "toggleSnapshots": "{{action}}快照",
+      "noSnapshots": "尚未儲存快照",
+      "deleteSnapshot": "刪除快照 {{name}}",
+      "snapshotName": "快照名稱",
+      "snapshotPlaceholder": "快照名稱…",
+      "createSnapshot": "建立快照",
+      "noActions": "尚無操作紀錄"
+    },
+    "autoCut": {
+      "initializing": "初始化中…",
+      "noSilence": "未偵測到靜音",
+      "noSilenceHint": "以目前設定找不到靜音段落，請試著降低門檻。",
+      "analysisFailed": "分析失敗",
+      "preparing": "準備中…",
+      "removed": "已移除靜音",
+      "removedCount_one": "已移除 {{count}} 段靜音",
+      "removedCount_other": "已移除 {{count}} 段靜音",
+      "cutFailed": "剪除失敗",
+      "threshold": "靜音門檻",
+      "thresholdHint": "數值越低，偵測到的靜音越多",
+      "minDuration": "最短長度",
+      "minDurationHint": "要偵測的最短靜音長度",
+      "padBefore": "前方保留",
+      "padAfter": "後方保留",
+      "found": "找到的靜音段落",
+      "total": "靜音總長",
+      "totalValue": "{{silence}} 秒／共 {{duration}} 秒（{{percent}}%）",
+      "analyzing": "分析中…",
+      "reanalyze": "重新分析",
+      "analyze": "分析",
+      "cutting": "剪除中…",
+      "cutCount": "剪除 {{count}} 段",
+      "tip": "提示：按 Ctrl+Z 可一次復原所有剪除"
+    },
+    "beatSync": {
+      "noClip": "未選取片段",
+      "title": "節拍同步",
+      "analyzing": "正在分析節拍…",
+      "detect": "從音訊偵測節拍",
+      "detectedBpm": "偵測到的 BPM",
+      "confidence": "可信度",
+      "markers": "節拍標記",
+      "clearMarkers": "清除節拍標記",
+      "hideManual": "隱藏手動 BPM 設定",
+      "showManual": "顯示手動 BPM 設定",
+      "manualBpm": "手動 BPM",
+      "generateGrid": "以 {{bpm}} BPM 產生節拍格線",
+      "selectClip": "請選取影片或音訊片段來分析節拍",
+      "help": "節拍偵測會分析音訊，找出速度與節拍位置。可用來讓剪輯點、轉場或效果對齊音樂。"
+    },
+    "color": {
+      "wb": {
+        "Tungsten": "鎢絲燈",
+        "Fluorescent": "日光燈",
+        "Daylight": "日光",
+        "Cloudy": "陰天",
+        "Shade": "陰影"
+      },
+      "applyWb": "套用{{name}}白平衡",
+      "resetAll": "全部重設",
+      "whiteBalance": "白平衡",
+      "wbHint": "讓偏冷的畫面變暖，或讓偏暖的畫面變冷。色調可修正偏綠或偏洋紅的色偏。",
+      "resetWb": "重設白平衡",
+      "temperature": "色溫",
+      "tint": "色調",
+      "presets": "預設",
+      "colorWheels": "色輪",
+      "curves": "曲線",
+      "wheelHint": "拖曳以調整色彩，按兩下可重設。",
+      "reset": "重設",
+      "shadows": "陰影",
+      "midtones": "中間調",
+      "highlights": "亮部",
+      "lift": "Lift（陰影）",
+      "gamma": "Gamma（中間調）",
+      "gain": "Gain（亮部）",
+      "selectChannel": "選取 {{label}} 曲線色版",
+      "curvesHint": "按一下新增控制點 • 按兩下移除",
+      "hsl": {
+        "reds": "紅色",
+        "oranges": "橙色",
+        "yellows": "黃色",
+        "greens": "綠色",
+        "cyans": "青色",
+        "blues": "藍色",
+        "purples": "紫色",
+        "magentas": "洋紅"
+      },
+      "adjustedSuffix": "（已調整）",
+      "hue": "色相",
+      "saturation": "飽和度",
+      "luminance": "明度",
+      "lut": {
+        "intensity": "強度",
+        "unsupported": "不支援的檔案格式，請使用 .cube 或 .3dl 檔案。",
+        "parseFailed": "無法解析 LUT 檔案",
+        "loadFile": "載入 LUT 檔案",
+        "loading": "載入中…",
+        "load": "載入 LUT（.cube、.3dl）",
+        "loaded": "已載入 LUT",
+        "remove": "移除 LUT",
+        "loadDifferent": "載入其他 LUT"
+      }
+    },
+    "videoEffects": {
+      "params": {
+        "value": "數值",
+        "amount": "量",
+        "radius": "半徑",
+        "midpoint": "中點",
+        "feather": "羽化",
+        "size": "大小",
+        "offsetX": "X 位移",
+        "offsetY": "Y 位移",
+        "blur": "模糊",
+        "opacity": "不透明度",
+        "intensity": "強度",
+        "angle": "角度",
+        "distance": "距離",
+        "centerX": "中心 X",
+        "centerY": "中心 Y"
+      },
+      "unknownShader": "未知的著色器",
+      "reorder": "重新排序{{name}}",
+      "dragToReorder": "拖曳以重新排序效果",
+      "moveUp": "將{{name}}上移",
+      "moveDown": "將{{name}}下移",
+      "disable": "停用效果",
+      "enable": "啟用效果",
+      "duplicate": "複製效果",
+      "remove": "移除效果",
+      "previewAndAdd": "預覽並加入{{name}}",
+      "before": "原始",
+      "effect": "效果",
+      "addVideoEffect": "加入影片效果",
+      "effectsTab": "效果 · {{count}}",
+      "shadersTab": "著色器 · {{count}}",
+      "search": "搜尋視覺效果",
+      "categoryEffects": "{{category}}效果",
+      "noMatch": "沒有符合「{{query}}」的效果。",
+      "shaderPreviews": "著色器效果預覽",
+      "addEffect": "加入效果",
+      "copyStack": "複製效果堆疊",
+      "pasteStack": "貼上效果堆疊",
+      "pasteReplace": "貼上並取代效果",
+      "clearStack": "清除效果堆疊",
+      "none": "尚未套用效果"
+    },
+    "keyframes": {
+      "props": {
+        "position_x": "X 位置",
+        "position_y": "Y 位置",
+        "scale_x": "X 縮放",
+        "scale_y": "Y 縮放",
+        "rotation": "旋轉",
+        "opacity": "不透明度",
+        "effect_brightness": "亮度",
+        "effect_contrast": "對比",
+        "effect_saturation": "飽和度",
+        "effect_blur": "模糊",
+        "volume": "音量",
+        "pan": "聲道平衡"
+      },
+      "categories": {
+        "Transform": "變形",
+        "Effects": "效果",
+        "Audio": "音訊"
+      },
+      "selectProperty": "選取屬性",
+      "animateProperty": "製作動畫的屬性",
+      "selectProp": "選取{{name}}",
+      "easing": "緩動：{{name}}",
+      "keyframeValue": "關鍵影格數值",
+      "deleteKeyframe": "刪除關鍵影格",
+      "noClip": "未選取片段",
+      "animatePropertyTitle": "製作屬性動畫",
+      "valueAt": "{{time}} 秒處的數值",
+      "exists": "{{time}} 秒處已有關鍵影格",
+      "add": "在 {{time}} 秒處加入關鍵影格",
+      "count": "關鍵影格（{{count}}）",
+      "selectToAnimate": "請選取要製作動畫的屬性",
+      "none": "這個屬性還沒有關鍵影格，加入一個即可開始製作動畫。"
+    },
+    "autoReframe": {
+      "initializing": "初始化中…",
+      "loadingEngine": "正在載入 AI 引擎…",
+      "configuring": "正在設定重新構圖…",
+      "applyingCrop": "正在套用智慧裁切設定…",
+      "updatingProject": "正在更新專案設定…",
+      "finalizing": "即將完成…",
+      "complete": "完成！",
+      "configuredFor": "已設定為 {{name}}（{{width}}x{{height}}）",
+      "applied": "已套用自動重新構圖",
+      "resized": "專案已調整為 {{name}}（{{width}}x{{height}}）",
+      "failed": "自動重新構圖失敗",
+      "platformPresets": "平台預設",
+      "platformPreset": "{{name}} 平台預設",
+      "aspectRatio": "長寬比",
+      "ratioLabel": "{{ratio}} 長寬比",
+      "trackingSpeed": "追蹤速度",
+      "smoothing": "平滑度",
+      "centerBias": "置中偏好",
+      "followSubject": "跟隨主體",
+      "analyzing": "分析中…",
+      "reanalyze": "已套用 - 按一下重新分析",
+      "analyze": "分析並重新構圖"
+    },
+    "greenScreen": {
+      "pickColor": "從影片中選取顏色",
+      "presets": {
+        "Green": "綠色",
+        "Blue": "藍色",
+        "Magenta": "洋紅",
+        "Cyan": "青色"
+      },
+      "title": "綠幕",
+      "subtitle": "移除影片中的背景顏色",
+      "disable": "停用色度去背",
+      "enable": "啟用色度去背",
+      "keyColor": "去背顏色",
+      "clickPreview": "在影片預覽上按一下以選取顏色",
+      "tolerance": "容許度",
+      "edgeSoftness": "邊緣柔化",
+      "spill": "溢色抑制",
+      "reset": "重設為預設值",
+      "placeBelow": "將影片片段放在這個片段下方作為背景",
+      "enableHint": "啟用後即可移除背景顏色",
+      "enableGreen": "啟用綠幕"
+    },
+    "mask": {
+      "shapes": {
+        "rectangle": "矩形",
+        "ellipse": "橢圓",
+        "polygon": "多邊形"
+      },
+      "shapeMask": "形狀遮罩",
+      "trackMatte": "軌道遮罩",
+      "drawnMask": "手繪遮罩",
+      "collapse": "收合遮罩",
+      "expand": "展開遮罩",
+      "inverted": "遮罩已反轉",
+      "normal": "遮罩正常",
+      "duplicate": "複製遮罩",
+      "delete": "刪除遮罩",
+      "pathPoints": "路徑點",
+      "addPoint": "新增路徑點",
+      "removePoint": "移除路徑點 {{index}}",
+      "matteSource": "遮罩來源",
+      "pickClip": "選取片段…",
+      "channel": "色版",
+      "feathering": "羽化",
+      "expansion": "擴展",
+      "opacity": "不透明度",
+      "invertedShort": "已反轉",
+      "invert": "反轉",
+      "keyframes": "{{count}} 個關鍵影格",
+      "noKeyframes": "沒有關鍵影格",
+      "title": "遮罩",
+      "subtitle": "控制片段的可見區域",
+      "addShape": "加入遮罩形狀",
+      "addCustom": "加入自訂路徑遮罩",
+      "custom": "自訂",
+      "useTrackMatte": "使用其他片段作為軌道遮罩",
+      "clearAll": "全部清除",
+      "none": "這個片段沒有遮罩",
+      "clickShape": "按一下上方的形狀來加入遮罩",
+      "help": "遮罩用來控制片段的哪些部分可見"
+    },
+    "text": {
+      "font": "字型",
+      "customUploads": "自訂上傳",
+      "searchFonts": "搜尋字型",
+      "noTextClip": "未選取文字片段",
+      "textContent": "文字內容",
+      "enterText": "輸入文字…",
+      "customFont": "自訂字型",
+      "uploadCustomFont": "上傳自訂字型",
+      "size": "大小",
+      "style": "樣式",
+      "bold": "粗體",
+      "italic": "斜體",
+      "underline": "底線",
+      "textAlign": "文字對齊",
+      "left": "靠左",
+      "center": "置中",
+      "right": "靠右",
+      "positionOnCanvas": "畫布上的位置",
+      "alignToCanvas": "對齊畫布",
+      "centerH": "水平置中",
+      "centerV": "垂直置中",
+      "centerBoth": "完全置中",
+      "textColor": "文字顏色",
+      "background": "背景",
+      "stroke": "外框",
+      "color": "顏色",
+      "width": "寬度",
+      "shadow": "陰影",
+      "offsetX": "X 位移",
+      "offsetY": "Y 位移",
+      "blur": "模糊",
+      "lineHeight": "行高",
+      "letterSpacing": "字距",
+      "none": "無",
+      "textMaterial": "文字材質",
+      "materialPreviews": "文字材質預覽",
+      "progress": "進度",
+      "depth": "深度",
+      "bevelThickness": "倒角厚度",
+      "bevelSize": "倒角大小",
+      "bevelSegments": "倒角分段",
+      "material": "材質",
+      "basic": "基本",
+      "physical": "物理",
+      "metalness": "金屬感",
+      "roughness": "粗糙度",
+      "histUpdate": "更新所選文字屬性",
+      "histCenterH": "將所選文字水平置中",
+      "histCenterV": "將所選文字垂直置中",
+      "histCenter": "將所選文字置中",
+      "hist3d": "更新所選文字的 3D 屬性",
+      "fontUploadFailed": "字型上傳失敗",
+      "unknownError": "未知錯誤。",
+      "fontUploaded": "已上傳自訂字型",
+      "fontReady": "{{font}} 已可使用。",
+      "selectColor": "選取{{label}}"
+    },
+    "audioEffects": {
+      "toggle": "{{action}}{{title}}",
+      "collapse": "收合",
+      "expand": "展開",
+      "equalizer": "等化器",
+      "compressor": "壓縮器",
+      "threshold": "門檻",
+      "ratio": "比率",
+      "attack": "起始時間",
+      "release": "釋放時間",
+      "reverb": "殘響",
+      "roomSize": "空間大小",
+      "damping": "阻尼",
+      "delay": "延遲",
+      "time": "時間",
+      "feedback": "回授",
+      "wetLevel": "效果音量"
+    },
+    "tts": {
+      "needKey": "加入你的 ElevenLabs API 金鑰即可啟用語音生成。炎劍剪輯已不再提供語音伺服器。"
+    },
+    "alignment": {
+      "horizontal": "水平",
+      "vertical": "垂直",
+      "alignLeft": "靠左對齊",
+      "centerH": "水平置中",
+      "alignRight": "靠右對齊",
+      "alignTop": "靠上對齊",
+      "centerV": "垂直置中",
+      "alignBottom": "靠下對齊",
+      "centerCanvas": "置於畫布中央",
+      "overlayHint": "在畫布空間中對齊疊加層的錨點",
+      "mediaHint": "以相對中心的像素位移對齊素材錨點"
+    },
+    "blending": {
+      "noClip": "未選取片段",
+      "title": "混合",
+      "mode": "混合模式",
+      "opacity": "混合不透明度"
+    },
+    "bgRemoval": {
+      "modes": {
+        "blur": "模糊",
+        "color": "顏色",
+        "image": "圖片",
+        "transparent": "透明"
+      },
+      "modeLabel": "{{mode}}背景模式",
+      "initModel": "正在初始化 AI 模型…",
+      "preparing": "正在準備背景偵測…",
+      "configuring": "正在設定效果管線…",
+      "finalizing": "正在完成設定…",
+      "ready": "去背已就緒",
+      "readyHint": "效果會在播放時套用",
+      "unknownError": "未知錯誤",
+      "failed": "處理失敗",
+      "failedHint": "無法啟用去背",
+      "disabled": "已停用去背",
+      "on": "開",
+      "off": "關",
+      "mode": "背景模式",
+      "blurAmount": "模糊程度",
+      "color": "背景顏色",
+      "selectColor": "選取替換的背景顏色",
+      "image": "背景圖片",
+      "chooseImage": "選擇圖片",
+      "imageLoaded": "已載入圖片",
+      "edgeSmoothing": "邊緣平滑",
+      "threshold": "偵測門檻",
+      "realtimeHint": "去背會即時處理。為了得到最佳效果，請在預覽後再匯出影片。"
+    },
+    "ducking": {
+      "presets": {
+        "Subtle": "輕微",
+        "Moderate": "適中",
+        "Aggressive": "強烈",
+        "Podcast": "Podcast"
+      },
+      "invalidSource": "請選取有效的觸發來源軌道。",
+      "noSpeech": "沒有語音超過觸發門檻。請降低門檻或選擇音量較大的來源軌道。",
+      "applyFailed": "套用音訊閃避失敗。",
+      "removeFailed": "無法從這個片段移除音訊閃避。",
+      "title": "音訊閃避",
+      "subtitle": "說話時自動降低音樂音量",
+      "enabled": "已啟用音訊閃避",
+      "disabled": "已停用音訊閃避",
+      "enable": "啟用音訊閃避",
+      "triggerSource": "觸發來源（人聲軌道）",
+      "useTrack": "使用{{name}}作為閃避觸發",
+      "addTrackHint": "請加入另一條含有人聲的音訊或影片軌道作為觸發來源",
+      "presetsTitle": "閃避預設",
+      "threshold": "偵測門檻",
+      "thresholdHint": "觸發閃避的人聲音量",
+      "reduction": "音量降低幅度",
+      "reductionHint": "背景音樂要降低多少",
+      "timing": "時間控制",
+      "attack": "起始時間",
+      "attackHint": "人聲開始時音量下降的速度",
+      "release": "釋放時間",
+      "releaseHint": "人聲停止後音量恢復的速度",
+      "hold": "保持時間",
+      "holdHint": "字詞之間維持閃避的最短時間",
+      "analyzing": "分析中…",
+      "apply": "套用音訊閃避",
+      "applied": "已套用音訊閃避",
+      "updating": "更新中…",
+      "update": "更新",
+      "remove": "移除",
+      "footer": "偵測到人聲時自動降低音樂音量"
+    }
+  },
+  "preview": {
+    "canvas": "預覽畫布",
+    "live": "即時預覽",
+    "player": "播放器",
+    "compositionGrid": "構圖格線",
+    "safeMargins": "標題與動作安全框",
+    "titleSafe": "標題安全框",
+    "exporting": "正在匯出影片",
+    "preparing": "準備中…",
+    "exportProgress": "匯出進度",
+    "keepEditing": "匯出完成後即可繼續編輯。",
+    "dragToMove": "拖曳即可移動",
+    "dragToMoveText": "拖曳即可移動文字",
+    "dragToMoveShape": "拖曳即可移動形狀",
+    "unlockAspect": "解除鎖定長寬比",
+    "lockAspect": "鎖定長寬比",
+    "subtitleSelected": "已選取字幕－請在屬性面板編輯",
+    "clickToSelect": "點選即可選取",
+    "skipBack": "倒退 5 秒",
+    "skipForward": "前進 5 秒",
+    "play": "播放",
+    "pause": "暫停",
+    "enableLoop": "啟用預覽循環",
+    "disableLoop": "停用預覽循環",
+    "loopHint": "循環 {{start}} 至 {{end}} • I：標記起點 • O：標記終點 • Shift+L：切換",
+    "mute": "靜音",
+    "unmute": "取消靜音",
+    "aspectRatio": "長寬比",
+    "aspectOption": "{{label}}（{{width}} × {{height}}）",
+    "playbackQuality": "播放畫質",
+    "zoom": "預覽縮放",
+    "canvasSnapping": "畫布吸附",
+    "fullscreen": "全螢幕",
+    "exitFullscreen": "結束全螢幕",
+    "maximize": "放大預覽",
+    "restoreSize": "還原大小",
+    "canvasText": {
+      "dropMedia": "將素材拖放到這裡",
+      "replacePlaceholder": "用你的內容取代這個預留位置",
+      "importToStart": "匯入素材即可開始"
+    },
+    "history": {
+      "nudgeSelection": "微調畫布選取範圍"
+    },
+    "quality": {
+      "auto": "自動",
+      "full": "完整",
+      "half": "½",
+      "quarter": "¼"
+    }
+  },
+  "effects": {
+    "catalog": {
+      "brightness": {
+        "label": "亮度",
+        "description": "提亮中間調與亮部"
+      },
+      "contrast": {
+        "label": "對比",
+        "description": "讓陰影與亮部更有力"
+      },
+      "saturation": {
+        "label": "飽和度",
+        "description": "增強或減弱色彩強度"
+      },
+      "grayscale": {
+        "label": "灰階",
+        "description": "將色彩轉為單色"
+      },
+      "sepia": {
+        "label": "懷舊褐色",
+        "description": "溫暖的復古色調"
+      },
+      "invert": {
+        "label": "負片",
+        "description": "反轉影像色彩數值"
+      },
+      "tonal": {
+        "label": "色調平衡",
+        "description": "調整陰影、中間調與亮部"
+      },
+      "temperature": {
+        "label": "色溫",
+        "description": "冷暖色偏移"
+      },
+      "tint": {
+        "label": "色調",
+        "description": "洋紅／綠色偏移"
+      },
+      "hue": {
+        "label": "色相",
+        "description": "旋轉色輪"
+      },
+      "blur": {
+        "label": "模糊",
+        "description": "柔和的高斯失焦"
+      },
+      "motion-blur": {
+        "label": "動態模糊",
+        "description": "方向性拖影"
+      },
+      "radial-blur": {
+        "label": "放射模糊",
+        "description": "縮放式放射動態"
+      },
+      "sharpen": {
+        "label": "銳利化",
+        "description": "遮色片銳利化強化邊緣"
+      },
+      "vignette": {
+        "label": "暗角",
+        "description": "壓暗邊緣以聚焦"
+      },
+      "grain": {
+        "label": "底片顆粒",
+        "description": "類比底片質感"
+      },
+      "shadow": {
+        "label": "陰影",
+        "description": "投射柔和陰影"
+      },
+      "glow": {
+        "label": "光暈",
+        "description": "明亮的外光暈"
+      },
+      "chromatic-aberration": {
+        "label": "色差",
+        "description": "RGB 色版分離位移"
+      },
+      "chromaKey": {
+        "label": "色度去背",
+        "description": "移除綠幕或藍幕背景"
+      },
+      "cinematic-punch": {
+        "label": "電影感強對比",
+        "description": "適合高衝擊剪輯的強烈對比"
+      },
+      "golden-hour": {
+        "label": "黃金時刻",
+        "description": "溫暖的陽光色調"
+      },
+      "soft-focus": {
+        "label": "柔焦",
+        "description": "適合人像與標題的柔和擴散"
+      },
+      "dream-bloom": {
+        "label": "夢幻光暈",
+        "description": "柔和薰衣草光暈與亮部溢光"
+      },
+      "retro-grain": {
+        "label": "復古顆粒",
+        "description": "適合復古剪輯的細緻單色顆粒"
+      },
+      "rgb-split": {
+        "label": "RGB 分離",
+        "description": "適合數位風剪輯的強烈色版分離"
+      },
+      "shader-vhs": {
+        "label": "VHS",
+        "description": "動態錄影帶抖動、顆粒與掃描線"
+      },
+      "shader-posterize": {
+        "label": "色調分離",
+        "description": "將畫面簡化為大膽的色塊"
+      },
+      "shader-duotone": {
+        "label": "雙色調",
+        "description": "將陰影與亮部對應到兩種自訂色彩"
+      },
+      "shader-prism": {
+        "label": "稜鏡分離",
+        "description": "可調偏移的方向性 RGB 折射"
+      },
+      "shader-fisheye": {
+        "label": "魚眼",
+        "description": "以畫面中心為焦點的曲面鏡頭變形"
+      },
+      "shader-wave-warp": {
+        "label": "波浪扭曲",
+        "description": "動態水平液態扭曲"
+      },
+      "shader-scanlines": {
+        "label": "掃描線",
+        "description": "動態 CRT 掃描線質感"
+      },
+      "shader-edge-glow": {
+        "label": "邊緣發光",
+        "description": "沿影像細節描繪的霓虹色彩"
+      }
+    },
+    "categories": {
+      "Basic": "基本",
+      "Color": "色彩",
+      "Blur": "模糊",
+      "Creative": "創意",
+      "Stylize": "風格化",
+      "All": "全部"
+    },
+    "types": {
+      "brightness": "亮度",
+      "contrast": "對比",
+      "saturation": "飽和度",
+      "grayscale": "灰階",
+      "sepia": "懷舊褐色",
+      "invert": "負片",
+      "hue": "色相",
+      "blur": "模糊",
+      "sharpen": "銳利化",
+      "vignette": "暗角",
+      "grain": "顆粒",
+      "temperature": "色溫",
+      "tint": "色調",
+      "tonal": "色調",
+      "chromaKey": "色度去背",
+      "shadow": "陰影",
+      "glow": "光暈",
+      "motion-blur": "動態模糊",
+      "radial-blur": "放射模糊",
+      "chromatic-aberration": "色差",
+      "shader": "著色器"
+    }
+  },
+  "transitions": {
+    "types": {
+      "crossfade": {
+        "name": "交叉淡化",
+        "description": "片段之間平滑混合"
+      },
+      "dipToBlack": {
+        "name": "黑場過渡",
+        "description": "經過黑畫面淡出淡入"
+      },
+      "dipToWhite": {
+        "name": "白場過渡",
+        "description": "經過白畫面淡出淡入"
+      },
+      "wipe": {
+        "name": "擦除",
+        "description": "從一個片段擦除到另一個片段"
+      },
+      "slide": {
+        "name": "滑入",
+        "description": "新片段滑入覆蓋舊片段"
+      },
+      "zoom": {
+        "name": "縮放",
+        "description": "片段之間的縮放轉場"
+      },
+      "push": {
+        "name": "推移",
+        "description": "新片段推開舊片段"
+      },
+      "circleReveal": {
+        "name": "圓形展開",
+        "description": "從中心以光圈方式展開"
+      },
+      "blur": {
+        "name": "模糊溶解",
+        "description": "先模糊再清晰進入下一個片段"
+      },
+      "whipPan": {
+        "name": "甩鏡",
+        "description": "快速動態模糊平移"
+      },
+      "radialWipe": {
+        "name": "放射擦除",
+        "description": "時鐘式角度掃描"
+      },
+      "pixelate": {
+        "name": "像素化",
+        "description": "以粗像素馬賽克穿越剪輯點"
+      },
+      "glitch": {
+        "name": "故障剪輯",
+        "description": "數位切片錯位"
+      },
+      "blinds": {
+        "name": "百葉窗",
+        "description": "重複的葉片展開"
+      },
+      "diamondReveal": {
+        "name": "菱形展開",
+        "description": "幾何形狀從中心展開"
+      },
+      "spin": {
+        "name": "旋轉",
+        "description": "旋轉縮放交接"
+      },
+      "flip": {
+        "name": "翻轉",
+        "description": "卡片式水平或垂直翻轉"
+      },
+      "splitReveal": {
+        "name": "分割展開",
+        "description": "從中心向外展開"
+      },
+      "flash": {
+        "name": "閃白剪輯",
+        "description": "高能量的白光閃切"
+      },
+      "filmBurn": {
+        "name": "底片燒灼",
+        "description": "穿越剪輯點的溫暖類比漏光"
+      },
+      "mosaic": {
+        "name": "馬賽克展開",
+        "description": "鏡頭之間的打散磁磚展開"
+      },
+      "ripple": {
+        "name": "漣漪",
+        "description": "流動的水平波浪扭曲"
+      },
+      "pageTurn": {
+        "name": "翻頁",
+        "description": "像翻頁一樣折走舊畫面"
+      },
+      "colorSplit": {
+        "name": "色彩分離",
+        "description": "穿越剪輯點的稜鏡色版殘影"
+      }
+    },
+    "labels": {
+      "Crossfade": "交叉淡化",
+      "DiptoBlack": "黑場過渡",
+      "DiptoWhite": "白場過渡",
+      "Wipe": "擦除",
+      "WipeLeft": "向左擦除",
+      "WipeRight": "向右擦除",
+      "WipeUp": "向上擦除",
+      "WipeDown": "向下擦除",
+      "Slide": "滑入",
+      "SlideLeft": "向左滑入",
+      "SlideRight": "向右滑入",
+      "SlideUp": "向上滑入",
+      "SlideDown": "向下滑入",
+      "Push": "推移",
+      "Zoom": "縮放",
+      "CircleReveal": "圓形展開",
+      "BlurDissolve": "模糊溶解",
+      "WhipPan": "甩鏡",
+      "RadialWipe": "放射擦除",
+      "Pixelate": "像素化",
+      "GlitchCut": "故障剪輯",
+      "VenetianBlinds": "百葉窗",
+      "DiamondReveal": "菱形展開",
+      "SpinClockwise": "順時針旋轉",
+      "SpinCounterclockwise": "逆時針旋轉",
+      "FlipHorizontal": "水平翻轉",
+      "FlipVertical": "垂直翻轉",
+      "SplitHorizontal": "水平分割",
+      "SplitVertical": "垂直分割",
+      "FlashCut": "閃白剪輯",
+      "FilmBurn": "底片燒灼",
+      "RedFilmBurn": "紅色底片燒灼",
+      "CoolLightLeak": "冷色漏光",
+      "MosaicReveal": "馬賽克展開",
+      "Ripple": "漣漪",
+      "PageTurnLeft": "向左翻頁",
+      "PageTurnRight": "向右翻頁",
+      "ColorSplit": "色彩分離",
+      "LinearDissolve": "線性溶解",
+      "SlowInDissolve": "緩入溶解",
+      "SlowOutDissolve": "緩出溶解",
+      "SoftWipeLeft": "柔和向左擦除",
+      "SoftWipeRight": "柔和向右擦除",
+      "DiagonalWipe": "對角擦除",
+      "PushLeft": "向左推移",
+      "PushRight": "向右推移",
+      "PushUp": "向上推移",
+      "PushDown": "向下推移",
+      "ZoomTopLeft": "左上縮放",
+      "ZoomBottomRight": "右下縮放",
+      "PunchZoom": "衝擊縮放",
+      "WhipLeft": "向左甩鏡",
+      "WhipRight": "向右甩鏡",
+      "WhipUp": "向上甩鏡",
+      "WhipDown": "向下甩鏡"
+    },
+    "categories": {
+      "Dissolves": "溶解",
+      "Wipes": "擦除",
+      "Movement": "移動",
+      "Stylized": "風格化",
+      "All": "全部"
+    }
+  },
+  "search": {
+    "items": {
+      "transform": {
+        "name": "變形",
+        "description": "位置、縮放與旋轉片段"
+      },
+      "crop": {
+        "name": "裁切",
+        "description": "裁切並取景片段"
+      },
+      "speed": {
+        "name": "速度控制",
+        "description": "控制播放速度與時間重映射"
+      },
+      "video-effects": {
+        "name": "視覺效果",
+        "description": "色彩、模糊、創意、著色器與風格化效果"
+      },
+      "color-grading": {
+        "name": "調色",
+        "description": "色輪、曲線、LUT 與 HSL 調整"
+      },
+      "green-screen": {
+        "name": "綠幕",
+        "description": "綠幕／藍幕色度去背"
+      },
+      "background-removal": {
+        "name": "去背",
+        "description": "AI 自動去背"
+      },
+      "masking": {
+        "name": "遮罩",
+        "description": "用形狀遮罩顯示或隱藏區域"
+      },
+      "motion-tracking": {
+        "name": "動態追蹤",
+        "description": "追蹤動態並附加元素"
+      },
+      "pip": {
+        "name": "子母畫面",
+        "description": "將片段放置為子母畫面疊加"
+      },
+      "blending": {
+        "name": "混合模式",
+        "description": "混合模式與不透明度控制"
+      },
+      "transform-3d": {
+        "name": "3D 變形",
+        "description": "3D 旋轉與透視效果"
+      },
+      "keyframes": {
+        "name": "關鍵影格",
+        "description": "讓屬性隨時間產生動畫"
+      },
+      "transitions": {
+        "name": "轉場",
+        "description": "片段對片段轉場"
+      },
+      "motion-presets": {
+        "name": "動態預設",
+        "description": "預先建立的動態動畫"
+      },
+      "audio-effects": {
+        "name": "音訊效果",
+        "description": "等化器、壓縮器、殘響等"
+      },
+      "audio-ducking": {
+        "name": "音訊閃避",
+        "description": "人聲出現時自動壓低音樂"
+      },
+      "text-properties": {
+        "name": "文字屬性",
+        "description": "字型、大小、顏色與文字樣式"
+      },
+      "text-material": {
+        "name": "文字材質與著色器",
+        "description": "瀏覽文字的即時著色器與 Paper 材質預覽"
+      },
+      "text-animation": {
+        "name": "文字動畫",
+        "description": "用預設為文字製作動畫"
+      },
+      "shape-properties": {
+        "name": "形狀屬性",
+        "description": "形狀填色、外框與效果"
+      },
+      "shape-shader-fill": {
+        "name": "形狀著色器填色",
+        "description": "為所選形狀套用即時著色器材質"
+      }
+    },
+    "categories": {
+      "PositionSize": "位置與大小",
+      "Time": "時間",
+      "Video": "影片",
+      "Animation": "動畫",
+      "Audio": "音訊",
+      "Text": "文字",
+      "Shapes": "形狀",
+      "All": "全部"
+    },
+    "clipTypes": {
+      "video": "影片",
+      "audio": "音訊",
+      "text": "文字",
+      "shape": "形狀",
+      "image": "圖片"
+    },
+    "open": "開啟{{name}}",
+    "title": "搜尋效果",
+    "subtitleClip": "尋找適用於所選{{type}}片段的工具。",
+    "subtitle": "在屬性面板中尋找效果與工具。",
+    "searchLabel": "搜尋效果",
+    "placeholderClip": "搜尋適用於{{type}}片段的效果…",
+    "placeholder": "搜尋所有效果與工具…",
+    "clear": "清除搜尋",
+    "categoryLabel": "效果類別",
+    "emptyTitle": "找不到效果",
+    "emptyHint": "請試試其他搜尋字詞或類別。",
+    "navigate": "瀏覽",
+    "select": "選取"
+  },
+  "compress": {
+    "tiers": {
+      "light": "輕度",
+      "balanced": "平衡",
+      "strong": "強力"
+    },
+    "hints": {
+      "light": "最佳品質",
+      "balanced": "≈720p",
+      "strong": "最小檔案"
+    },
+    "readFailed": "無法讀取這部影片，請換一個檔案試試。",
+    "failed": "壓縮失敗，請改用較輕的設定。",
+    "title": "壓縮影片",
+    "videoFile": "影片檔案",
+    "choose": "選擇要壓縮的影片…",
+    "reading": "讀取中…",
+    "mode": "壓縮模式",
+    "quality": "品質",
+    "targetSize": "目標大小",
+    "customTarget": "自訂目標大小",
+    "custom": "自訂",
+    "estimated": "預估輸出",
+    "from": "原始 {{size}}",
+    "smaller": "縮小 {{percent}}%",
+    "compressing": "壓縮中… {{percent}}%",
+    "progress": "壓縮進度",
+    "cancel": "取消",
+    "close": "關閉",
+    "compress": "壓縮"
+  },
+  "screenRecorder": {
+    "title": "螢幕錄製",
+    "unsupported": "不支援螢幕錄製",
+    "unsupportedHint": "你的瀏覽器不支援螢幕錄製，請使用 Chrome、Edge 或 Firefox。",
+    "error": "錄製錯誤",
+    "videoSettings": "影片設定",
+    "resolution": "解析度",
+    "frameRate": "影格率",
+    "audioSettings": "音訊設定",
+    "systemAudio": "系統音訊",
+    "microphone": "麥克風",
+    "systemAudioHint": "系統音訊擷取僅支援 Chrome 與 Edge 瀏覽器。",
+    "webcam": "網路攝影機錄製",
+    "webcamAria": "網路攝影機錄製",
+    "webcamResolution": "網路攝影機解析度",
+    "webcamHint": "網路攝影機會錄成獨立檔案，讓你在編輯器中完整控制。",
+    "countdown": "倒數 3 秒後開始錄製",
+    "cancel": "取消",
+    "requesting": "正在要求存取權限…",
+    "start": "開始錄製"
+  },
+  "tour": {
+    "skip": "略過導覽",
+    "skipTitle": "略過導覽",
+    "goToStep": "前往第 {{step}} 步",
+    "back": "上一步",
+    "getStarted": "開始使用",
+    "next": "下一步",
+    "mographProgress": "動態圖像導覽 • 第 {{step}} 步，共 {{total}} 步",
+    "steps": {
+      "welcome": {
+        "title": "歡迎使用炎劍剪輯",
+        "description": "快速認識目前的編輯器配置：左側是工具、中央是播放、下方是時間軸、右側是屬性。"
+      },
+      "assets": {
+        "title": "素材與創作工具",
+        "description": "左側面板會隨工具列切換：可以在這裡匯入素材、加入文字、圖形、效果與轉場。",
+        "tips": {
+          "0": "素材區存放匯入的影片、音訊與圖片",
+          "1": "使用左側工具列切換到文字、圖形、效果或轉場",
+          "2": "把素材從這個面板拖曳到時間軸",
+          "3": "匯入與錄製控制位於這個面板頂端"
+        }
+      },
+      "timeline": {
+        "title": "時間軸",
+        "description": "在軌道上排列片段、修剪邊緣、分割選取範圍，並使用時間軸列右側的縮放控制。",
+        "tips": {
+          "0": "按 S 分割所選片段",
+          "1": "拖曳片段邊緣即可修剪",
+          "2": "需要更多影片或音訊軌道時，使用「新增軌道」"
+        }
+      },
+      "preview": {
+        "title": "播放器",
+        "description": "中央播放器顯示目前影格與播放控制。匯出前可在這裡裁切、調整填滿並檢查變更。",
+        "tips": {
+          "0": "使用畫布下方的播放控制",
+          "1": "綠點代表即時預覽已啟用",
+          "2": "全螢幕與填滿工具位於播放器控制列"
+        }
+      },
+      "inspector": {
+        "title": "屬性面板",
+        "description": "選取片段即可編輯其屬性。變形、色彩、效果、速度與動畫控制都會顯示在這裡。",
+        "tips": {
+          "0": "使用上方分頁切換屬性群組",
+          "1": "調色與效果是針對個別片段",
+          "2": "選取片段時，支援關鍵影格的控制會顯示動畫選項"
+        }
+      },
+      "complete": {
+        "title": "準備就緒",
+        "description": "你已經知道主要工具的位置。使用最左側的動作列，可重新開啟導覽、設定與專案工具。"
+      }
+    }
+  },
+  "chat": {
+    "suggestions": {
+      "welcomeTitle": "在前 3 秒加入寫著「Welcome」的標題",
+      "trimEnd": "把第一個片段的結尾剪掉 2 秒",
+      "fadeIn": "為開場片段加入淡入",
+      "listTimeline": "列出目前時間軸上的所有內容"
+    },
+    "setupEndpoint": "請選擇 API 格式，然後輸入端點網址與模型 ID。",
+    "setupPassword": "請設定主密碼，然後加入供應商的 API 金鑰。",
+    "setupLocked": "解鎖加密的 API 金鑰即可啟用 AI 編輯器。",
+    "setupOptional": "加入選用的端點 API 金鑰即可開始編輯。",
+    "intro": "用日常語言描述想做的編輯，AI 會在你的時間軸上完成。",
+    "introNoProject": "請開啟或建立專案，再用日常語言描述編輯。",
+    "unlockKeys": "解鎖 API 金鑰",
+    "configureEndpoint": "設定端點",
+    "setUpChat": "設定 AI 聊天",
+    "dryRunOn": "試跑模式開啟：只規劃不實際套用編輯",
+    "dryRunOff": "試跑模式關閉",
+    "autoOn": "自動核准開啟：破壞性操作不需確認即執行",
+    "autoOff": "自動核准關閉：破壞性操作會先詢問",
+    "undoTurn": "復原上一輪 AI 操作",
+    "history": "對話紀錄",
+    "newChat": "新對話",
+    "close": "關閉",
+    "connectAny": "連接任何相容的模型",
+    "connectAnyHint": "請選擇 API 格式，再使用你自己的主機與模型。炎劍剪輯不會替你選擇服務商或模型。"
+  },
+  "whisper": {
+    "models": {
+      "accurate": {
+        "label": "精準 · Large V3 Turbo",
+        "downloadSize": "約 760 MB",
+        "description": "本機準確度最佳；建議使用 WebGPU"
+      },
+      "fast": {
+        "label": "快速 · Whisper Tiny",
+        "downloadSize": "約 100 MB",
+        "description": "最快的選項，適合草稿與記憶體較少的裝置"
+      }
+    }
+  },
+  "notifications": {
+    "mediaNotSaved": "無法將素材儲存到瀏覽器儲存空間",
+    "replacementNotSaved": "無法將替換的素材儲存到瀏覽器儲存空間",
+    "keepOriginal": "請保留原始檔案 {{name}}，重新載入後才能重新連結。",
+    "autoSaveUnavailable": "無法自動儲存",
+    "autoSaveUnavailableHint": "你的編輯仍保留在這個分頁中。關閉前請儲存一份專案副本，並保留原始素材檔案。"
+  },
+  "mobile": {
+    "title": "你的瀏覽器需要更新",
+    "body": "炎劍剪輯需要本機檔案存取與畫布繪製功能。請用新版瀏覽器開啟此頁面，即可在手機、平板或電腦上編輯。"
+  }
+}

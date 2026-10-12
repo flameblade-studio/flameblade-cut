@@ -45,6 +45,7 @@ coverage/
 docs/*
 !docs/superpowers/
 !docs/android-port/
+!docs/README.*.md
 .worktrees/
 # Project-specific
 /public/projects/
@@ -101,3 +102,6 @@ xcuserdata/
 /Openreel Video Android/
 /apps/ios/
 /apps/android/
+
+# Local agent tooling
+.claude/

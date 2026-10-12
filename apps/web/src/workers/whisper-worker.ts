@@ -8,7 +8,9 @@ import {
   type WhisperModelKey,
 } from "./whisper-models";
 
-const MODEL_HOST = "https://media.openreel.video/models/";
+// Official Hugging Face hub (the upstream build used an OpenReel mirror). Both
+// models derive from openai/whisper-* (MIT); verified 2026-10-12.
+const MODEL_HOST = "https://huggingface.co/";
 
 env.allowLocalModels = false;
 env.allowRemoteModels = true;
@@ -118,9 +120,11 @@ self.onmessage = async (
     audio?: Float32Array;
     language?: string;
     model?: WhisperModelKey;
+    /** Ask for word-level timestamps (needs a `_timestamped` model). */
+    wordTimestamps?: boolean;
   }>,
 ) => {
-  const { requestId, type, audio, language } = event.data;
+  const { requestId, type, audio, language, wordTimestamps } = event.data;
   const modelKey = isWhisperModelKey(event.data.model)
     ? event.data.model
     : DEFAULT_WHISPER_MODEL;
@@ -133,18 +137,32 @@ self.onmessage = async (
     if (!audio?.length) throw new Error("The selected clip has no decodable audio.");
 
     post(requestId, { type: "transcription-progress", progress: 0.05 });
-    const output = await transcriber(audio, {
+    const options = {
       language,
       task: "transcribe",
-      return_timestamps: true,
       chunk_length_s: 30,
       stride_length_s: 5,
-    });
+    };
+    let granularity: "word" | "segment" = "segment";
+    let output: WhisperOutput | WhisperOutput[];
+    if (wordTimestamps && WHISPER_MODELS[modelKey].id.endsWith("_timestamped")) {
+      try {
+        output = await transcriber(audio, { ...options, return_timestamps: "word" });
+        granularity = "word";
+      } catch (error) {
+        // Word alignment is optional; segment timestamps always work.
+        console.warn("[Whisper] word timestamps unavailable; using segments", error);
+        output = await transcriber(audio, { ...options, return_timestamps: true });
+      }
+    } else {
+      output = await transcriber(audio, { ...options, return_timestamps: true });
+    }
     const result = Array.isArray(output) ? output[0] : output;
     post(requestId, {
       type: "result",
       text: result.text,
       chunks: result.chunks ?? [],
+      granularity,
       model: modelKey,
       backend,
     });

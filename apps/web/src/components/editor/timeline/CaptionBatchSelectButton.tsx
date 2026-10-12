@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React, { useMemo } from "react";
 import { ListChecks } from "@/icons/lucide-compat";
 import { ToolcraftButton as Button } from "@openreel/ui";
@@ -6,6 +7,7 @@ import { useUIStore } from "../../../stores/ui-store";
 import { getTimelineTrackSelection } from "../../../utils/timeline-item-actions";
 
 export const CaptionBatchSelectButton: React.FC = () => {
+  const { t } = useTranslation();
   const project = useProjectStore((state) => state.project);
   const getFullProject = useProjectStore((state) => state.getFullProject);
   const selectMultiple = useUIStore((state) => state.selectMultiple);
@@ -28,7 +30,7 @@ export const CaptionBatchSelectButton: React.FC = () => {
 
   return (
     <Button
-      label={`Select all captions (${captionSelection.length})`}
+      label={t("timeline.selectAllCaptions", { count: captionSelection.length })}
       icon={<ListChecks size={14} aria-hidden />}
       size="sm"
       variant="secondary"

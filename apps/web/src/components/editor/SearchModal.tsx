@@ -34,6 +34,7 @@ import { ToolcraftText as Text } from "@openreel/ui";
 import { ToolcraftTextInputControl } from "@openreel/ui";
 import { useUIStore } from "../../stores/ui-store";
 import { useProjectStore } from "../../stores/project-store";
+import { useTranslation } from "react-i18next";
 
 interface SearchItem {
   id: string;
@@ -311,6 +312,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   isOpen,
   onClose,
 }) => {
+  const { t } = useTranslation();
   const [query, setQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -465,11 +467,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       <Layout
         header={
           <DialogHeader
-            title="Search Effects"
+            title={t("search.title")}
             subtitle={
               selectedClipType
-                ? `Find tools for the selected ${selectedClipType} clip.`
-                : "Find effects and tools across the inspector."
+                ? t("search.subtitleClip", { type: t(`search.clipTypes.${selectedClipType}`, { defaultValue: selectedClipType }) })
+                : t("search.subtitle")
             }
             onOpenChange={(open) => !open && onClose()}
             startContent={<Search size={18} className="text-primary" aria-hidden />}
@@ -482,15 +484,15 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 <div className="min-w-0 flex-1">
                   <ToolcraftTextInputControl
                     ref={inputRef}
-                    label="Search effects"
+                    label={t("search.searchLabel")}
                     isLabelHidden
                     type="text"
                     value={query}
                     onChange={setQuery}
                     placeholder={
                       selectedClipType
-                        ? `Search effects for ${selectedClipType} clip...`
-                        : "Search all effects and tools..."
+                        ? t("search.placeholderClip", { type: t(`search.clipTypes.${selectedClipType}`, { defaultValue: selectedClipType }) })
+                        : t("search.placeholder")
                     }
                     startIcon={<Search size={16} aria-hidden />}
                     width="100%"
@@ -499,7 +501,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 </div>
                 {query && (
                   <IconButton
-                    label="Clear search"
+                    label={t("search.clear")}
                     onClick={() => setQuery("")}
                     variant="ghost"
                     size="sm"
@@ -510,14 +512,14 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               </div>
 
               <ToolcraftSegmentedControl
-                ariaLabel="Effect category"
+                ariaLabel={t("search.categoryLabel")}
                 value={selectedCategory}
                 onChange={setSelectedCategory}
                 options={CATEGORIES.map((cat) => {
                   const CategoryIcon = cat.icon;
                   return {
                     value: cat.id,
-                    label: cat.name,
+                    label: t(`search.categories.${cat.name}`),
                     icon: CategoryIcon ? (
                       <CategoryIcon size={14} aria-hidden />
                     ) : undefined,
@@ -528,8 +530,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               <div ref={listRef} className="max-h-[50vh] overflow-y-auto">
                 {filteredEffects.length === 0 ? (
                   <EmptyState
-                    title="No effects found"
-                    description="Try a different search term or category."
+                    title={t("search.emptyTitle")}
+                    description={t("search.emptyHint")}
                     icon={<Search size={32} className="text-text-muted opacity-50" aria-hidden />}
                     isCompact
                   />
@@ -541,7 +543,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                       return (
                         <ClickableCard
                           key={effect.id}
-                          label={`Open ${effect.name}`}
+                          label={t("search.open", { name: t(`search.items.${effect.id}.name`) })}
                           onClick={() => handleSelect(effect)}
                           padding={3}
                           variant={selected ? "green" : "default"}
@@ -567,7 +569,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                                   color={selected ? "active" : "primary"}
                                   maxLines={1}
                                 >
-                                  {effect.name}
+                                  {t(`search.items.${effect.id}.name`)}
                                 </Text>
                                 <Card variant="muted" padding={1} className="shrink-0">
                                   <Text
@@ -575,7 +577,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                                     color="secondary"
                                     className="text-[10px]"
                                   >
-                                    {effect.category}
+                                    {t(`search.categories.${effect.category.replace(/[^A-Za-z]/g, "")}`)}
                                   </Text>
                                 </Card>
                               </div>
@@ -586,7 +588,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                                 maxLines={1}
                                 className="mt-0.5"
                               >
-                                {effect.description}
+                                {t(`search.items.${effect.id}.description`)}
                               </Text>
                             </div>
                             <Kbd keys="enter" />
@@ -611,11 +613,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 <Kbd keys="up" />
                 <Kbd keys="down" />
                 <Text type="supporting" color="secondary" className="text-[10px]">
-                  Navigate
+                  {t("search.navigate")}
                 </Text>
                 <Kbd keys="enter" />
                 <Text type="supporting" color="secondary" className="text-[10px]">
-                  Select
+                  {t("search.select")}
                 </Text>
               </div>
             </div>

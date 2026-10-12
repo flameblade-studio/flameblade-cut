@@ -1,5 +1,6 @@
 import type { JSX } from "react";
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { DesktopTitleBar } from "./shell/DesktopTitleBar";
 import { Workspace } from "./shell/Workspace";
 import { DesktopStartScreen } from "./start/DesktopStartScreen";
@@ -15,10 +16,39 @@ import { getLiveEditorHost } from "../services/agent/host-singleton";
 import { createExportJobRunner } from "../services/agent/export-job-runner";
 import { useUIStore } from "../stores/ui-store";
 import { useSettingsStore } from "../stores/settings-store";
+import { useThemeStore } from "../stores/theme-store";
 import { SettingsDialog } from "../components/editor/settings/SettingsDialog";
 import { ToolcraftButton as Button } from "@openreel/ui";
-import { Settings, Sparkles } from "@/icons/lucide-compat";
+import { Film, Scissors, Settings, Sparkles, Wand2 } from "@/icons/lucide-compat";
+import { useWorkspaceMode } from "../stores/workspace-mode-store";
 import "./theme/desktop-theme.css";
+import "../components/create/create.css";
+
+const CreatePage = lazy(() => import("./pages/CreatePage").then((module) => ({ default: module.CreatePage })));
+const HighlightsPage = lazy(() => import("./pages/HighlightsPage").then((module) => ({ default: module.HighlightsPage })));
+
+/** Title-bar switch between the AI generation page and the editor. */
+function WorkspaceSwitch(): JSX.Element {
+  const { t } = useTranslation();
+  const mode = useWorkspaceMode((state) => state.mode);
+  const setMode = useWorkspaceMode((state) => state.setMode);
+  return (
+    <div className="fc-workspace-switch mr-3" role="group">
+      <button type="button" aria-pressed={mode === "create"} onClick={() => setMode("create")}>
+        <Wand2 size={13} aria-hidden />
+        {t("create.workspace.create")}
+      </button>
+      <button type="button" aria-pressed={mode === "highlights"} onClick={() => setMode("highlights")}>
+        <Film size={13} aria-hidden />
+        {t("create.workspace.highlights")}
+      </button>
+      <button type="button" aria-pressed={mode === "edit"} onClick={() => setMode("edit")}>
+        <Scissors size={13} aria-hidden />
+        {t("create.workspace.edit")}
+      </button>
+    </div>
+  );
+}
 
 function detectPlatform(): string {
   if (typeof navigator !== "undefined" && /Mac/i.test(navigator.platform)) return "darwin";
@@ -27,12 +57,14 @@ function detectPlatform(): string {
 }
 
 export function DesktopApp(): JSX.Element {
+  const { t } = useTranslation();
   const platform = detectPlatform();
   const hasProject = useProjectStore((state) => state.hasOpenProject);
   const agentChatVisible = useUIStore(
     (state) => state.panels.agentChat?.visible ?? false,
   );
   const togglePanel = useUIStore((state) => state.togglePanel);
+  const workspaceMode = useWorkspaceMode((state) => state.mode);
 
   // Drive native-menu actions into the app: undo/redo hit the project store
   // directly; new/open/export are broadcast as events for the relevant UI to
@@ -64,6 +96,15 @@ export function DesktopApp(): JSX.Element {
   // collector so editor-side faults are captured alongside main-process crashes.
   useEffect(() => installRendererCrashHandlers(), []);
 
+  // The desktop app is designed dark. Dialogs, menus and toasts render in
+  // portals outside this component's root, so the dark mode and the desktop
+  // design tokens must be applied to the whole document, not just our div.
+  useEffect(() => {
+    useThemeStore.getState().setMode("dark");
+    document.body.classList.add("openreel-desktop");
+    return () => document.body.classList.remove("openreel-desktop");
+  }, []);
+
   // Serve main-process MCP tool calls against the live editor so external MCP
   // clients drive the open project through the same tool layer as the chat panel.
   // Also back the export_* job tools with a runner that renders via the export
@@ -93,9 +134,10 @@ export function DesktopApp(): JSX.Element {
   return (
     <div className="openreel-desktop isolate flex h-screen w-screen flex-col overflow-hidden bg-bg text-fg">
       <DesktopTitleBar platform={platform}>
-        {hasProject ? (
+        <WorkspaceSwitch />
+        {hasProject && workspaceMode === "edit" ? (
           <Button
-            label="AI Editor"
+            label={t("create.workspace.aiEditor")}
             variant={agentChatVisible ? "primary" : "secondary"}
             size="sm"
             icon={<Sparkles size={15} aria-hidden />}
@@ -104,9 +146,9 @@ export function DesktopApp(): JSX.Element {
             aria-pressed={agentChatVisible}
           />
         ) : null}
-        {hasProject ? <DesktopExportButton /> : null}
+        {hasProject && workspaceMode === "edit" ? <DesktopExportButton /> : null}
         <Button
-          label="Settings"
+          label={t("create.workspace.settings")}
           variant="secondary"
           size="sm"
           icon={<Settings size={15} aria-hidden />}
@@ -125,7 +167,15 @@ export function DesktopApp(): JSX.Element {
             })
           }
         >
-          {hasProject ? (
+          {workspaceMode === "create" ? (
+            <Suspense fallback={null}>
+              <CreatePage />
+            </Suspense>
+          ) : workspaceMode === "highlights" ? (
+            <Suspense fallback={null}>
+              <HighlightsPage />
+            </Suspense>
+          ) : hasProject ? (
             <EditorBootstrapGate>
               <Workspace />
             </EditorBootstrapGate>

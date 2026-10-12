@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React, {
   useRef,
   useEffect,
@@ -27,6 +28,7 @@ import { ToolcraftIconButton as IconButton } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
 import { useProjectStore } from "../../stores/project-store";
 import { previewProxyCache, usePreviewProxyStore } from "../../stores/preview-proxy-store";
+import { SocialSafeAreaOverlay, SocialSafeAreaToolbarButton } from "./preview/SocialSafeAreaGuide";
 import { useTimelineStore } from "../../stores/timeline-store";
 import { useUIStore } from "../../stores/ui-store";
 import { useThemeStore } from "../../stores/theme-store";
@@ -404,6 +406,9 @@ const drawBlurredBackdrop = (
   ctx.drawImage(source, drawX, drawY, drawWidth, drawHeight);
   ctx.restore();
 };
+
+/** Follow-up still-frame renders after opening or changing a project (media decode settles). */
+const PREVIEW_SETTLE_RENDER_DELAYS_MS = [400, 1200] as const;
 
 const renderFrameWithGPU = async (
   renderer: Renderer,
@@ -835,6 +840,7 @@ interface ClipWithPlaceholder {
 }
 
 export const Preview: React.FC = () => {
+  const { t } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const videoAreaRef = useRef<HTMLDivElement>(null);
@@ -3322,14 +3328,14 @@ export const Preview: React.FC = () => {
                 ctx.font = "bold 20px Inter, sans-serif";
                 ctx.textAlign = "center";
                 ctx.fillText(
-                  "Drop media here",
+                  t("preview.canvasText.dropMedia"),
                   canvas.width / 2,
                   canvas.height / 2,
                 );
                 ctx.font = "14px Inter, sans-serif";
                 ctx.fillStyle = emptyText;
                 ctx.fillText(
-                  "Replace this placeholder with your content",
+                  t("preview.canvasText.replacePlaceholder"),
                   canvas.width / 2,
                   canvas.height / 2 + 28,
                 );
@@ -3399,13 +3405,13 @@ export const Preview: React.FC = () => {
         ctx.font = "24px Inter, sans-serif";
         ctx.textAlign = "center";
         ctx.fillText(
-          "Import media to get started",
+          t("preview.canvasText.importToStart"),
           canvas.width / 2,
           canvas.height / 2,
         );
       }
     },
-    [
+    [t, 
       timelineTracks,
       getMediaItem,
       previewRes.width,
@@ -6100,7 +6106,10 @@ export const Preview: React.FC = () => {
 
   const lastProjectForRenderRef = useRef(project);
   const lastProxyRevisionForRenderRef = useRef(proxySourceRevision);
-  const lastPlayheadForRenderRef = useRef<number>(playheadPosition);
+  // NaN = "never rendered", so the first effect run draws the frame at the
+  // current playhead. Seeding it with the playhead made a freshly opened
+  // project show a black preview until the user scrubbed or pressed play.
+  const lastPlayheadForRenderRef = useRef<number>(Number.NaN);
   const modifiedRenderTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const renderInFlightRef = useRef<boolean>(false);
   const pendingRenderTimeRef = useRef<number | null>(null);
@@ -6116,6 +6125,7 @@ export const Preview: React.FC = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const isFirstRender = Number.isNaN(lastPlayheadForRenderRef.current);
     const playheadChanged = playheadPosition !== lastPlayheadForRenderRef.current;
     const projectChanged = project !== lastProjectForRenderRef.current;
     const sourceChanged = proxySourceRevision !== lastProxyRevisionForRenderRef.current;
@@ -6171,7 +6181,17 @@ export const Preview: React.FC = () => {
       }, 150);
     }
 
+    // Newly opened or newly imported media usually finishes decoding a moment
+    // after the first render, which then shows black until the user scrubs.
+    // Re-render the still frame twice while the media settles; any scrub,
+    // play or edit re-runs this effect and cancels these follow-ups.
+    const settleTimers =
+      projectChanged || sourceChanged || isFirstRender
+        ? PREVIEW_SETTLE_RENDER_DELAYS_MS.map((delay) => setTimeout(() => doRender(playheadPosition), delay))
+        : [];
+
     return () => {
+      settleTimers.forEach((timer) => clearTimeout(timer));
       if (modifiedRenderTimerRef.current) {
         clearTimeout(modifiedRenderTimerRef.current);
         modifiedRenderTimerRef.current = null;
@@ -6479,7 +6499,7 @@ export const Preview: React.FC = () => {
       const pending: Promise<unknown>[] = [];
       let changed = false;
 
-      beginHistoryGroup("Nudge canvas selection");
+      beginHistoryGroup(t("preview.history.nudgeSelection"));
       for (const item of selectedItems) {
         if (item.type === "clip") {
           const clip = timelineTracks
@@ -6531,7 +6551,7 @@ export const Preview: React.FC = () => {
       event.preventDefault();
       void Promise.all(pending).finally(endHistoryGroup);
     },
-    [
+    [t, 
       allShapeClips,
       allTextClips,
       beginHistoryGroup,
@@ -7634,7 +7654,7 @@ export const Preview: React.FC = () => {
       ref={containerRef}
       data-tour="preview"
       tabIndex={0}
-      aria-label="Preview canvas"
+      aria-label={t("preview.canvas")}
       onKeyDown={handlePreviewKeyDown}
       onPointerDownCapture={(event) => {
         const target = event.target as HTMLElement;
@@ -7647,9 +7667,9 @@ export const Preview: React.FC = () => {
       {/* ── Panel bar header (mockup: 'Player') ───────────────── */}
       {!isMaximized && !isFullscreen && (
         <div className="flex items-center px-3.5 py-2 border-b border-border bg-bg-1 gap-2.5 min-h-[38px] shrink-0">
-          <Text type="label" color="primary" weight="semibold" className="text-[13px] tracking-tight text-fg m-0">Player</Text>
+          <Text type="label" color="primary" weight="semibold" className="text-[13px] tracking-tight text-fg m-0">{t("preview.player")}</Text>
           <div className="ml-auto flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent" title="Live preview" />
+            <span className="w-1.5 h-1.5 rounded-full bg-accent" title={t("preview.live")} />
           </div>
         </div>
       )}
@@ -7717,7 +7737,7 @@ export const Preview: React.FC = () => {
 
           {showCompositionGrid && !cropMode ? (
             <div
-              aria-label="Composition grid"
+              aria-label={t("preview.compositionGrid")}
               className="pointer-events-none absolute inset-0 z-20"
             >
               {[1, 2].map((line) => (
@@ -7737,16 +7757,18 @@ export const Preview: React.FC = () => {
 
           {showSafeMargins && !cropMode ? (
             <div
-              aria-label="Title and action safe margins"
+              aria-label={t("preview.safeMargins")}
               className="pointer-events-none absolute inset-0 z-20"
             >
               <span className="absolute inset-[5%] border border-dashed border-white/60 shadow-[0_0_1px_rgba(0,0,0,0.9)]" />
               <span className="absolute inset-[10%] border border-white/75 shadow-[0_0_1px_rgba(0,0,0,0.9)]" />
               <span className="absolute left-[10%] top-[10%] rounded-br bg-black/55 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-white/80">
-                Title safe
+                {t("preview.titleSafe")}
               </span>
             </div>
           ) : null}
+
+          {!cropMode ? <SocialSafeAreaOverlay /> : null}
 
           {canvasSnapGuides.x !== null && !cropMode ? (
             <span
@@ -7816,7 +7838,7 @@ export const Preview: React.FC = () => {
                       display="block"
                       className="text-sm leading-5 text-white"
                     >
-                      Exporting Video
+                      {t("preview.exporting")}
                     </Text>
                     <Text
                       type="supporting"
@@ -7824,7 +7846,7 @@ export const Preview: React.FC = () => {
                       maxLines={2}
                       className="mt-1 text-xs leading-4 text-white/75"
                     >
-                      {exportState.phase || "Preparing..."}
+                      {exportState.phase || t("preview.preparing")}
                     </Text>
                   </div>
                 </div>
@@ -7832,7 +7854,7 @@ export const Preview: React.FC = () => {
                 <div className="mb-4 min-w-0">
                   <div className="mb-2 flex items-center justify-between gap-3">
                     <span className="text-[11px] font-medium text-white/80">
-                      Export Progress
+                      {t("preview.exportProgress")}
                     </span>
                     <span className="shrink-0 font-mono text-[11px] font-semibold text-white">
                       {Math.round(exportState.progress)}%
@@ -7853,7 +7875,7 @@ export const Preview: React.FC = () => {
                   display="block"
                   className="text-center text-[11px] leading-4 text-white/70"
                 >
-                  You can keep editing once the export finishes.
+                  {t("preview.keepEditing")}
                 </Text>
               </div>
             </div>
@@ -7877,14 +7899,14 @@ export const Preview: React.FC = () => {
               <div
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-primary/80 rounded-full flex items-center justify-center cursor-move pointer-events-auto hover:bg-primary transition-colors"
                 onMouseDown={handleClipMouseDown}
-                title="Drag to move"
+                title={t("preview.dragToMove")}
               >
                 <Move size={14} className="text-white" />
               </div>
 
               {/* Aspect ratio lock toggle */}
               <Button
-                label={lockAspectRatio ? "Unlock aspect ratio" : "Lock aspect ratio"}
+                label={lockAspectRatio ? t("preview.unlockAspect") : t("preview.lockAspect")}
                 variant="ghost"
                 className={`absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 text-[10px] rounded pointer-events-auto transition-colors ${
                   lockAspectRatio
@@ -7952,14 +7974,14 @@ export const Preview: React.FC = () => {
               <div
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-cyan-500/80 rounded-full flex items-center justify-center cursor-move pointer-events-auto hover:bg-cyan-500 transition-colors"
                 onMouseDown={handleTextClipMouseDown}
-                title="Drag to move text"
+                title={t("preview.dragToMoveText")}
               >
                 <Move size={14} className="text-white" />
               </div>
 
               {/* Aspect ratio lock toggle */}
               <Button
-                label={lockAspectRatio ? "Unlock aspect ratio" : "Lock aspect ratio"}
+                label={lockAspectRatio ? t("preview.unlockAspect") : t("preview.lockAspect")}
                 variant="ghost"
                 className={`absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 text-[10px] rounded pointer-events-auto transition-colors ${
                   lockAspectRatio
@@ -8028,14 +8050,14 @@ export const Preview: React.FC = () => {
               <div
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-green-500/80 rounded-full flex items-center justify-center cursor-move pointer-events-auto hover:bg-green-500 transition-colors"
                 onMouseDown={handleShapeClipMouseDown}
-                title="Drag to move shape"
+                title={t("preview.dragToMoveShape")}
               >
                 <Move size={14} className="text-white" />
               </div>
 
               {/* Aspect ratio lock toggle */}
               <Button
-                label={lockAspectRatio ? "Unlock aspect ratio" : "Lock aspect ratio"}
+                label={lockAspectRatio ? t("preview.unlockAspect") : t("preview.lockAspect")}
                 variant="ghost"
                 className={`absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 text-[10px] rounded pointer-events-auto transition-colors ${
                   lockAspectRatio
@@ -8099,7 +8121,7 @@ export const Preview: React.FC = () => {
               {/* Selection border - yellow/orange for subtitles */}
               <div className="absolute inset-0 border-2 border-yellow-500 rounded-lg pointer-events-none animate-pulse" />
               <div className="absolute -top-6 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-yellow-500 rounded text-[10px] font-medium text-black whitespace-nowrap">
-                Subtitle Selected - Edit in Inspector
+                {t("preview.subtitleSelected")}
               </div>
             </div>
           )}
@@ -8128,7 +8150,7 @@ export const Preview: React.FC = () => {
                     aria-hidden="true"
                     className="absolute -top-6 left-1/2 -translate-x-1/2 px-2 py-0.5 bg-black/70 rounded text-[10px] text-white whitespace-nowrap"
                   >
-                    Click to select
+                    {t("preview.clickToSelect")}
                   </div>
                 </div>
               );
@@ -8169,7 +8191,7 @@ export const Preview: React.FC = () => {
 
         <div className="flex items-center gap-4 mx-auto">
           <IconButton
-            label="Skip back 5s"
+            label={t("preview.skipBack")}
             icon={<SkipBack size={18} />}
             variant="ghost"
             size="sm"
@@ -8177,7 +8199,7 @@ export const Preview: React.FC = () => {
             className="w-8 h-8 grid place-items-center rounded-md text-fg-2 hover:bg-hover hover:text-fg transition-colors"
           />
           <IconButton
-            label={playbackLockedReason ?? (isPlaying ? "Pause" : "Play")}
+            label={playbackLockedReason ?? (isPlaying ? t("preview.pause") : t("preview.play"))}
             icon={
               isPlaying ? (
                 <Pause size={18} fill="currentColor" />
@@ -8200,7 +8222,7 @@ export const Preview: React.FC = () => {
             }`}
           />
           <IconButton
-            label="Skip forward 5s"
+            label={t("preview.skipForward")}
             icon={<SkipForward size={18} />}
             variant="ghost"
             size="sm"
@@ -8211,8 +8233,8 @@ export const Preview: React.FC = () => {
 
         <div className="flex gap-1.5 items-center">
           <IconButton
-            label={loopEnabled ? "Disable preview loop" : "Enable preview loop"}
-            title={`Loop ${formatTime(previewLoopRange?.start ?? 0)} to ${formatTime(previewLoopRange?.end ?? 0)} • I: mark start • O: mark end • Shift+L: toggle`}
+            label={loopEnabled ? t("preview.disableLoop") : t("preview.enableLoop")}
+            title={t("preview.loopHint", { start: formatTime(previewLoopRange?.start ?? 0), end: formatTime(previewLoopRange?.end ?? 0) })}
             icon={<Repeat size={16} />}
             aria-pressed={loopEnabled}
             variant="ghost"
@@ -8222,7 +8244,7 @@ export const Preview: React.FC = () => {
             className={`w-[34px] h-[34px] grid place-items-center rounded-[7px] transition-colors ${loopEnabled ? "bg-accent/15 text-accent" : "bg-bg-2 text-fg-2 hover:bg-bg-3 hover:text-fg"}`}
           />
           <IconButton
-            label={isMuted ? "Unmute" : "Mute"}
+            label={isMuted ? t("preview.unmute") : t("preview.mute")}
             icon={isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
             variant="ghost"
             size="sm"
@@ -8237,7 +8259,7 @@ export const Preview: React.FC = () => {
           {/* Aspect ratio (project canvas size) */}
           <div className="relative">
             <Button
-              label="Aspect ratio"
+              label={t("preview.aspectRatio")}
               variant="ghost"
               onClick={() => setShowAspectMenu(!showAspectMenu)}
               className="flex items-center gap-1.5 rounded-[7px] bg-bg-2 px-[11px] py-[7px] text-[12px] font-medium text-fg-2 hover:bg-bg-3 hover:text-fg transition-colors"
@@ -8261,7 +8283,7 @@ export const Preview: React.FC = () => {
                     return (
                       <Button
                         key={opt.label}
-                        label={`${opt.label} ${opt.width} by ${opt.height}`}
+                        label={t("preview.aspectOption", { label: opt.label, width: opt.width, height: opt.height })}
                         variant="ghost"
                         onClick={() => {
                           void updateSettings({
@@ -8289,13 +8311,12 @@ export const Preview: React.FC = () => {
           {/* Playback Quality (render resolution) */}
           <div className="relative">
             <Button
-              label="Playback quality"
+              label={t("preview.playbackQuality")}
               variant="ghost"
               onClick={() => setShowQualityMenu(!showQualityMenu)}
-              className="rounded-[7px] bg-bg-2 px-[11px] py-[7px] text-[12px] font-medium text-fg-2 hover:bg-bg-3 hover:text-fg transition-colors"
+              className="whitespace-nowrap rounded-[7px] bg-bg-2 px-[11px] py-[7px] text-[12px] font-medium text-fg-2 hover:bg-bg-3 hover:text-fg transition-colors"
             >
-              {PREVIEW_QUALITY_OPTIONS.find((o) => o.value === playbackQuality)
-                ?.label ?? "Auto"}
+              {t(`preview.quality.${PREVIEW_QUALITY_OPTIONS.find((o) => o.value === playbackQuality)?.value ?? "auto"}`)}
             </Button>
             {showQualityMenu && (
               <>
@@ -8307,7 +8328,7 @@ export const Preview: React.FC = () => {
                   {PREVIEW_QUALITY_OPTIONS.map((opt) => (
                     <Button
                       key={opt.value}
-                      label={opt.label}
+                      label={t(`preview.quality.${opt.value}`)}
                       variant="ghost"
                       onClick={() => {
                         setPlaybackQuality(opt.value);
@@ -8319,7 +8340,7 @@ export const Preview: React.FC = () => {
                           : "text-fg-2"
                       }`}
                     >
-                      {opt.label}
+                      {t(`preview.quality.${opt.value}`)}
                     </Button>
                   ))}
                 </div>
@@ -8330,7 +8351,7 @@ export const Preview: React.FC = () => {
           {/* Zoom Control */}
           <div className="relative">
             <Button
-              label="Preview Zoom"
+              label={t("preview.zoom")}
               variant="ghost"
               onClick={() => setShowZoomMenu(!showZoomMenu)}
               className="flex items-center gap-1.5 rounded-[7px] bg-bg-2 px-[11px] py-[7px] text-[12px] font-medium text-fg-2 hover:bg-bg-3 hover:text-fg transition-colors"
@@ -8371,7 +8392,7 @@ export const Preview: React.FC = () => {
           </div>
 
           <IconButton
-            label="Canvas snapping"
+            label={t("preview.canvasSnapping")}
             icon={<Magnet size={16} />}
             variant="ghost"
             size="sm"
@@ -8387,7 +8408,7 @@ export const Preview: React.FC = () => {
             }`}
           />
           <IconButton
-            label="Composition grid"
+            label={t("preview.compositionGrid")}
             icon={<Move size={16} />}
             variant="ghost"
             size="sm"
@@ -8400,7 +8421,7 @@ export const Preview: React.FC = () => {
             }`}
           />
           <IconButton
-            label="Title and action safe margins"
+            label={t("preview.safeMargins")}
             icon={<Proportions size={16} />}
             variant="ghost"
             size="sm"
@@ -8412,9 +8433,10 @@ export const Preview: React.FC = () => {
                 : "bg-bg-2 text-fg-2 hover:text-fg hover:bg-bg-3"
             }`}
           />
+          <SocialSafeAreaToolbarButton />
 
           <IconButton
-            label={isFullscreen ? "Exit Full Screen" : "Full Screen"}
+            label={isFullscreen ? t("preview.exitFullscreen") : t("preview.fullscreen")}
             icon={<Monitor size={16} />}
             variant="ghost"
             size="sm"
@@ -8426,7 +8448,7 @@ export const Preview: React.FC = () => {
             }`}
           />
           <IconButton
-            label={isMaximized ? "Restore Size" : "Maximize Preview"}
+            label={isMaximized ? t("preview.restoreSize") : t("preview.maximize")}
             icon={isMaximized ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
             variant="ghost"
             size="sm"

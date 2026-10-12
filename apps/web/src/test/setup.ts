@@ -362,3 +362,7 @@ Object.defineProperty(globalThis, "OffscreenCanvas", {
   writable: true,
   value: OffscreenCanvasMock,
 });
+
+// Initialise i18next so components using useTranslation() render the
+// English locale (jsdom reports navigator.language "en-US").
+import "@/i18n";

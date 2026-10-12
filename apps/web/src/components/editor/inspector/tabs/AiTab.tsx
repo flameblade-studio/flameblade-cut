@@ -10,6 +10,7 @@ import { CaptionEditorPanel } from "../CaptionEditorPanel";
 import { AutoEditPanel } from "../../panels/AutoEditPanel";
 import { HighlightExtractorPanel } from "../../panels/HighlightExtractorPanel";
 import { InspectorSection } from "../shell/InspectorSection";
+import { useTranslation } from "react-i18next";
 
 export interface AiTabProps {
   clipId: string;
@@ -48,12 +49,13 @@ export const AiTab: React.FC<AiTabProps> = ({
   captionWordsPerLine,
   onCaptionWordsPerLineChange,
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       {(clipType === "video" || clipType === "audio") && showAudioEffects && (
         <>
           <InspectorSection
-            title="Local Auto-Captions"
+            title={t("inspector.sections.localAutoCaptions")}
             sectionId="auto-captions"
             defaultOpen={false}
           >
@@ -64,7 +66,7 @@ export const AiTab: React.FC<AiTabProps> = ({
               />
               <FileInput
                 ref={srtInputRef}
-                label="Import SRT or VTT file"
+                label={t("inspector.sections.importSrtFile")}
                 isLabelHidden
                 value={null}
                 accept=".srt,.vtt,text/srt,text/vtt,text/plain"
@@ -78,7 +80,7 @@ export const AiTab: React.FC<AiTabProps> = ({
                 className="hidden"
               />
               <Button
-                label="Import SRT / VTT as Text"
+                label={t("inspector.sections.importSrtAsText")}
                 onClick={() => srtInputRef.current?.click()}
                 variant="secondary"
                 size="sm"
@@ -92,7 +94,7 @@ export const AiTab: React.FC<AiTabProps> = ({
 
       {(clipType === "video" || clipType === "audio") && showAudioEffects && (
         <InspectorSection
-          title="Editable Captions"
+          title={t("inspector.sections.editableCaptions")}
           sectionId="editable-captions"
           defaultOpen={false}
         >
@@ -105,7 +107,7 @@ export const AiTab: React.FC<AiTabProps> = ({
 
       {clipType === "video" && (
         <InspectorSection
-          title="Auto Reframe"
+          title={t("inspector.sections.autoReframe")}
           sectionId="auto-reframe"
           defaultOpen={false}
         >
@@ -115,7 +117,7 @@ export const AiTab: React.FC<AiTabProps> = ({
 
       {showAudioEffects && (
         <InspectorSection
-          title="Beat-Synced Auto-Edit"
+          title={t("inspector.sections.beatSyncedAutoEdit")}
           sectionId="auto-edit"
           defaultOpen={false}
         >
@@ -125,7 +127,7 @@ export const AiTab: React.FC<AiTabProps> = ({
 
       {showAudioEffects && (
         <InspectorSection
-          title="Local Highlights"
+          title={t("inspector.sections.localHighlights")}
           sectionId="ai-highlights"
           defaultOpen={false}
         >
@@ -142,13 +144,13 @@ export const AiTab: React.FC<AiTabProps> = ({
           <div className="flex items-center gap-2 text-primary mb-3">
             <Zap size={14} />
             <Text type="supporting" color="active" className="text-xs font-bold">
-              Quick Actions
+              {t("inspector.sections.quickActions")}
             </Text>
           </div>
           <div className="space-y-2">
             {showVideoControls && (
               <Button
-                label="Remove Background"
+                label={t("inspector.sections.removeBackground")}
                 onClick={handleRemoveBackground}
                 isDisabled={isApplyingSelectedClipEffect}
                 variant="secondary"
@@ -164,10 +166,10 @@ export const AiTab: React.FC<AiTabProps> = ({
               <Button
                 label={
                   isEnhancingAudio
-                    ? "Cleaning up..."
+                    ? t("inspector.sections.cleaningUp")
                     : audioEnhanced
-                      ? "Noise Reduced"
-                      : "Quick Dialogue Cleanup"
+                      ? t("inspector.sections.noiseReduced")
+                      : t("inspector.sections.quickDialogueCleanup")
                 }
                 onClick={handleEnhanceAudio}
                 isDisabled={isEnhancingAudio || isApplyingSelectedClipEffect}
@@ -185,7 +187,7 @@ export const AiTab: React.FC<AiTabProps> = ({
             )}
             {showVideoEffects && (
               <Button
-                label={isApplyingSelectedClipEffect ? "Applying..." : "Auto-Color"}
+                label={isApplyingSelectedClipEffect ? t("inspector.sections.applying") : t("inspector.sections.autoColor")}
                 onClick={handleAutoColor}
                 isDisabled={isApplyingSelectedClipEffect}
                 variant="secondary"

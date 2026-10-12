@@ -20,8 +20,10 @@ import { VoiceBrowser } from "./VoiceBrowser";
 import { ModelSelector } from "./ModelSelector";
 import { EnhancedTextPreview } from "./EnhancedTextPreview";
 import { AudioResult } from "./AudioResult";
+import { useTranslation } from "react-i18next";
 
 export const TextToSpeechPanel: React.FC = () => {
+  const { t } = useTranslation();
   const {
     defaultLlmProvider,
     llmBaseUrl,
@@ -131,7 +133,7 @@ export const TextToSpeechPanel: React.FC = () => {
       {!hasElevenLabsKey && (
         <Card variant="yellow" padding={2} className="border border-amber-500/30">
           <Text type="supporting" className="text-[10px] text-amber-400">
-            Add your ElevenLabs API key to enable speech generation. OpenReel no longer hosts a speech server.
+            {t("inspector.tts.needKey")}
           </Text>
         </Card>
       )}

@@ -28,6 +28,7 @@ import { useEngineStore } from "../../../stores/engine-store";
 import { useProjectStore } from "../../../stores/project-store";
 import type { BezierPath, Mask, MaskShape } from "@openreel/core";
 import { boundsPathFromTransform } from "@openreel/core";
+import { useTranslation } from "react-i18next";
 
 interface MaskSectionProps {
   clipId: string;
@@ -82,6 +83,7 @@ const MaskItem: React.FC<{
   onUpdatePath,
   onSetMatteSource,
 }) => {
+  const { t } = useTranslation();
   const maskTypeIcon =
     mask.type === "shape"
       ? Square
@@ -91,10 +93,10 @@ const MaskItem: React.FC<{
   const MaskIcon = maskTypeIcon;
   const maskLabel =
     mask.type === "shape"
-      ? "Shape Mask"
+      ? t("inspector.mask.shapeMask")
       : mask.type === "track-matte"
-        ? "Track Matte"
-        : "Drawn Mask";
+        ? t("inspector.mask.trackMatte")
+        : t("inspector.mask.drawnMask");
   // Avoid self-referential mattes
   const availableSources = matteSourceOptions.filter(
     (opt) => opt.id !== ownClipId,
@@ -121,7 +123,7 @@ const MaskItem: React.FC<{
         }}
       >
         <IconButton
-          label={isExpanded ? "Collapse mask" : "Expand mask"}
+          label={isExpanded ? t("inspector.mask.collapse") : t("inspector.mask.expand")}
           onClick={(e) => {
             e.stopPropagation();
             onToggleExpand();
@@ -145,7 +147,7 @@ const MaskItem: React.FC<{
           {maskLabel}
         </Text>
         <IconButton
-          label={mask.inverted ? "Mask Inverted" : "Mask Normal"}
+          label={mask.inverted ? t("inspector.mask.inverted") : t("inspector.mask.normal")}
           onClick={(e) => {
             e.stopPropagation();
             onToggleInvert();
@@ -160,7 +162,7 @@ const MaskItem: React.FC<{
           }
         />
         <IconButton
-          label="Duplicate Mask"
+          label={t("inspector.mask.duplicate")}
           onClick={(e) => {
             e.stopPropagation();
             onDuplicate();
@@ -171,7 +173,7 @@ const MaskItem: React.FC<{
           className="text-fg-3 hover:text-fg"
         />
         <IconButton
-          label="Delete Mask"
+          label={t("inspector.mask.delete")}
           onClick={(e) => {
             e.stopPropagation();
             onDelete();
@@ -189,10 +191,10 @@ const MaskItem: React.FC<{
             <div className="space-y-2 rounded border border-border bg-bg-1 p-2">
               <div className="flex items-center justify-between gap-2">
                 <Text type="supporting" color="primary" className="text-[9.5px] font-medium">
-                  Path points
+                  {t("inspector.mask.pathPoints")}
                 </Text>
                 <Button
-                  label="Add path point"
+                  label={t("inspector.mask.addPoint")}
                   onClick={() => {
                     const last = mask.path.points.at(-1) ?? { x: 0.5, y: 0.5 };
                     onUpdatePath({
@@ -250,7 +252,7 @@ const MaskItem: React.FC<{
                       }}
                     />
                     <IconButton
-                      label={`Remove path point ${index + 1}`}
+                      label={t("inspector.mask.removePoint", { index: index + 1 })}
                       onClick={() =>
                         onUpdatePath({
                           ...mask.path,
@@ -277,11 +279,11 @@ const MaskItem: React.FC<{
               <div className="flex items-center gap-1.5">
                 <Layers size={11} className="text-primary" />
                 <Text type="supporting" color="primary" className="text-[9.5px] font-medium">
-                  Matte source
+                  {t("inspector.mask.matteSource")}
                 </Text>
               </div>
               <Selector
-                label="Matte source"
+                label={t("inspector.mask.matteSource")}
                 isLabelHidden
                 size="sm"
                 width="100%"
@@ -289,7 +291,7 @@ const MaskItem: React.FC<{
                 onChange={(v) =>
                   onSetMatteSource(v, mask.matteSource ?? "bounds")
                 }
-                placeholder="Pick a clip..."
+                placeholder={t("inspector.mask.pickClip")}
                 isDisabled={availableSources.length === 0}
                 options={availableSources.map((opt) => ({
                   label: opt.label,
@@ -298,7 +300,7 @@ const MaskItem: React.FC<{
               />
               <div className="flex items-center justify-between">
                 <Text type="supporting" color="secondary" className="text-[9px]">
-                  Channel
+                  {t("inspector.mask.channel")}
                 </Text>
                 <div className="flex gap-1">
                   {(["bounds", "alpha", "luminance"] as const).map((m) => (
@@ -329,7 +331,7 @@ const MaskItem: React.FC<{
           )}
 
           <PropertySlider
-            label="Feathering"
+            label={t("inspector.mask.feathering")}
             min={0}
             max={100}
             step={1}
@@ -339,7 +341,7 @@ const MaskItem: React.FC<{
           />
 
           <PropertySlider
-            label="Expansion"
+            label={t("inspector.mask.expansion")}
             min={-100}
             max={100}
             step={1}
@@ -349,7 +351,7 @@ const MaskItem: React.FC<{
           />
 
           <PropertySlider
-            label="Opacity"
+            label={t("inspector.mask.opacity")}
             min={0}
             max={100}
             step={1}
@@ -360,7 +362,7 @@ const MaskItem: React.FC<{
 
           <div className="flex items-center gap-2 pt-2 border-t border-border">
             <Button
-              label={mask.inverted ? "Inverted" : "Invert"}
+              label={mask.inverted ? t("inspector.mask.invertedShort") : t("inspector.mask.invert")}
               onClick={onToggleInvert}
               variant="secondary"
               size="sm"
@@ -373,8 +375,8 @@ const MaskItem: React.FC<{
             />
             <Text type="supporting" color="secondary" className="text-[8px]">
               {mask.keyframes.length > 0
-                ? `${mask.keyframes.length} keyframes`
-                : "No keyframes"}
+                ? t("inspector.mask.keyframes", { count: mask.keyframes.length })
+                : t("inspector.mask.noKeyframes")}
             </Text>
           </div>
         </div>
@@ -384,6 +386,7 @@ const MaskItem: React.FC<{
 };
 
 export const MaskSection: React.FC<MaskSectionProps> = ({ clipId }) => {
+  const { t } = useTranslation();
   const getMaskEngine = useEngineStore((state) => state.getMaskEngine);
   const project = useProjectStore((s) => s.project);
   const getAllTextClips = useProjectStore((s) => s.getAllTextClips);
@@ -697,10 +700,10 @@ export const MaskSection: React.FC<MaskSectionProps> = ({ clipId }) => {
         <Square size={16} className="text-primary" />
         <div className="flex flex-1 flex-col gap-0.5">
           <Text type="supporting" color="primary" className="text-[11px] font-medium">
-            Masking
+            {t("inspector.mask.title")}
           </Text>
           <Text type="supporting" color="secondary" className="text-[9px]">
-            Control visible regions of clip
+            {t("inspector.mask.subtitle")}
           </Text>
         </div>
       </Card>
@@ -708,7 +711,7 @@ export const MaskSection: React.FC<MaskSectionProps> = ({ clipId }) => {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <Text type="supporting" color="secondary" className="text-[10px] font-medium">
-            Add Mask Shape
+            {t("inspector.mask.addShape")}
           </Text>
         </div>
         <div className="grid grid-cols-5 gap-1">
@@ -717,7 +720,7 @@ export const MaskSection: React.FC<MaskSectionProps> = ({ clipId }) => {
             return (
               <ClickableCard
                 key={shape.id}
-                label={shape.name}
+                label={t(`inspector.mask.shapes.${shape.id}`)}
                 onClick={() => handleAddShapeMask(shape.id)}
                 padding={2}
                 variant="muted"
@@ -725,13 +728,13 @@ export const MaskSection: React.FC<MaskSectionProps> = ({ clipId }) => {
               >
                 <Icon size={14} className="text-fg-2" />
                 <Text type="supporting" color="secondary" className="text-[8px]">
-                  {shape.name}
+                  {t(`inspector.mask.shapes.${shape.id}`)}
                 </Text>
               </ClickableCard>
             );
           })}
           <ClickableCard
-            label="Add custom path mask"
+            label={t("inspector.mask.addCustom")}
             onClick={handleAddDrawnMask}
             padding={2}
             variant="muted"
@@ -739,11 +742,11 @@ export const MaskSection: React.FC<MaskSectionProps> = ({ clipId }) => {
           >
             <Pen size={14} className="text-fg-2" />
             <Text type="supporting" color="secondary" className="text-[8px]">
-              Custom
+              {t("inspector.mask.custom")}
             </Text>
           </ClickableCard>
           <ClickableCard
-            label="Use another clip as a track matte"
+            label={t("inspector.mask.useTrackMatte")}
             onClick={handleAddTrackMatte}
             padding={2}
             variant="muted"
@@ -751,7 +754,7 @@ export const MaskSection: React.FC<MaskSectionProps> = ({ clipId }) => {
           >
             <Layers size={14} className="text-fg-2" />
             <Text type="supporting" color="secondary" className="text-[8px]">
-              Track Matte
+              {t("inspector.mask.trackMatte")}
             </Text>
           </ClickableCard>
         </div>
@@ -764,7 +767,7 @@ export const MaskSection: React.FC<MaskSectionProps> = ({ clipId }) => {
               Masks ({masks.length})
             </Text>
             <Button
-              label="Clear All"
+              label={t("inspector.mask.clearAll")}
               onClick={handleResetMasks}
               variant="ghost"
               size="sm"
@@ -805,17 +808,17 @@ export const MaskSection: React.FC<MaskSectionProps> = ({ clipId }) => {
             className="mx-auto mb-2 text-fg-3 opacity-50"
           />
           <Text type="supporting" color="secondary" className="block text-[10px]">
-            No masks on this clip
+            {t("inspector.mask.none")}
           </Text>
           <Text type="supporting" color="secondary" className="mt-1 block text-[9px]">
-            Click a shape above to add a mask
+            {t("inspector.mask.clickShape")}
           </Text>
         </div>
       )}
 
       <div className="pt-2 border-t border-border">
         <Text type="supporting" color="secondary" className="text-center text-[9px]">
-          Masks control which parts of the clip are visible
+          {t("inspector.mask.help")}
         </Text>
       </div>
     </div>

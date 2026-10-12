@@ -1,0 +1,105 @@
+{
+  "aiTab": {
+    "title": "AI Tools",
+    "subtitle": "Speed up editing with intelligent features",
+    "back": "Back to AI Tools",
+    "sections": {
+      "generation": "Content Generation",
+      "templates": "Templates & Presets",
+      "media": "Media Library",
+      "tools": "Tools"
+    },
+    "cards": {
+      "voiceover": { "title": "Voiceover", "description": "Turn text into speech right on the timeline" },
+      "captions": { "title": "Auto Captions", "description": "Automatically generate subtitles from audio" },
+      "templates": { "title": "Project Templates", "description": "Start with pre-built project structures" },
+      "filters": { "title": "Filter Presets", "description": "Apply cinematic color grades instantly" },
+      "music": { "title": "Music & Sound Effects", "description": "Browse royalty-free audio for your projects" },
+      "multicam": { "title": "Multi-Camera Editing", "description": "Sync and switch between multiple angles" }
+    },
+    "footer": "More AI features coming soon",
+    "unsavedTitle": "Unsaved audio discarded",
+    "unsavedBody": "Save to media or download next time to keep it."
+  },
+  "panel": {
+    "title": "Voiceover",
+    "subtitle": "Pick a voice, type your text, preview, then add it to the timeline",
+    "engine": "Voice engine",
+    "engines": {
+      "windows": "Windows built-in · Free",
+      "azure": "Azure",
+      "openai": "OpenAI",
+      "elevenlabs": "ElevenLabs"
+    },
+    "engineHints": {
+      "windows": "Built-in Windows voices: free, offline, no key needed.",
+      "azure": "Microsoft Azure neural voices in the cloud. Needs a key and region; billed by usage.",
+      "openai": "OpenAI cloud voices. Needs a key; billed by usage.",
+      "elevenlabs": "ElevenLabs cloud voices, using the ElevenLabs key from Settings."
+    },
+    "voice": "Voice",
+    "voicePlaceholder": "Choose a voice",
+    "searchVoices": "Search voices",
+    "loadingVoices": "Loading voices…",
+    "noVoices": "No voices available",
+    "refreshVoices": "Refresh voice list",
+    "multilingual": "Multilingual",
+    "text": "Script",
+    "textPlaceholder": "Type the text to be spoken…",
+    "rate": "Speed",
+    "rateNatural": "Natural speed",
+    "instructions": "Delivery instructions (optional)",
+    "instructionsPlaceholder": "e.g. gentle, slower, like telling a story",
+    "preview": "Preview",
+    "stopPreview": "Stop preview",
+    "generating": "Generating…",
+    "insert": "Add to timeline (at playhead)",
+    "inserted": "Voiceover added at {{time}}",
+    "duration": "{{seconds}} s",
+    "desktopOnly": "Voiceover requires the Flameblade Cut desktop app.",
+    "trackName": "Voiceover",
+    "clipPrefix": "Voiceover",
+    "subtitles": {
+      "title": "Voice all subtitles",
+      "description": "Generates one voice clip per subtitle line, in order, placed at each line's start time.",
+      "start": "Voice {{count}} subtitle lines",
+      "none": "This project has no subtitles.",
+      "progress": "Voicing {{done}} / {{total}}",
+      "cancel": "Cancel",
+      "cancelled": "Cancelled after {{placed}} / {{total}} lines.",
+      "done": "Done! Placed {{placed}} voice clips.",
+      "failed": "Line {{index}} failed ({{placed}} / {{total}} done): {{message}}"
+    },
+    "setup": {
+      "title": "Keys & region",
+      "configured": "Configured",
+      "notConfigured": "Not configured",
+      "azureKey": "Azure Speech key",
+      "openaiKey": "OpenAI key",
+      "keyPlaceholder": "Paste key",
+      "save": "Save",
+      "remove": "Remove",
+      "saved": "Key stored encrypted",
+      "removed": "Key removed",
+      "saveFailed": "Could not store the key",
+      "region": "Azure region",
+      "regionPlaceholder": "e.g. eastasia",
+      "keyHint": "Keys are encrypted by Windows on this computer and never shown again."
+    },
+    "errors": {
+      "missing-key": "No key is configured. Enter it under “Keys & region” below.",
+      "invalid-region": "Invalid Azure region, e.g. eastasia.",
+      "unsupported-platform": "Windows built-in voices only work on Windows.",
+      "voice-missing": "The selected voice is not installed on this computer. Choose another.",
+      "engine-failed": "The speech engine failed.",
+      "timeout": "The request timed out.",
+      "http": "The cloud service returned an error.",
+      "bad-audio": "The service did not return usable audio.",
+      "too-long": "The text is too long. Shorten it and try again.",
+      "unavailable": "Voiceover requires the Flameblade Cut desktop app.",
+      "unknown": "An unexpected error occurred.",
+      "noProject": "Open a project first.",
+      "placement": "Could not place the voiceover on the timeline."
+    }
+  }
+}

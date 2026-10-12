@@ -18,19 +18,16 @@ import {
   isMasterPasswordSet,
   isSessionUnlocked,
 } from "../../../services/secure-storage";
+import { useTranslation } from "react-i18next";
 
-const SUGGESTIONS: ReadonlyArray<string> = [
-  "Add a title that says 'Welcome' for the first 3 seconds",
-  "Trim 2 seconds off the end of the first clip",
-  "Add a fade-in to the opening clip",
-  "List everything currently on my timeline",
-];
+const SUGGESTIONS: ReadonlyArray<string> = ["welcomeTitle", "trimEnd", "fadeIn", "listTimeline"];
 
 function EmptyState({
   hasOpenProject,
 }: {
   hasOpenProject: boolean;
 }): JSX.Element {
+  const { t } = useTranslation();
   const send = useChatStore((s) => s.send);
   const provider = useSettingsStore((s) => s.defaultLlmProvider);
   const openSettings = useSettingsStore((s) => s.openSettings);
@@ -74,12 +71,12 @@ function EmptyState({
 
   const setupMessage =
     setup === "endpoint"
-      ? "Choose an API format, then enter your endpoint URL and model ID."
+      ? t("chat.setupEndpoint")
       : setup === "setup"
-      ? "Set a master password, then add your provider API key."
+      ? t("chat.setupPassword")
       : setup === "locked"
-        ? "Unlock your encrypted API keys to start the AI editor."
-        : "Add the optional endpoint API key to start editing.";
+        ? t("chat.setupLocked")
+        : t("chat.setupOptional");
 
   return (
     <div className="flex h-full flex-col items-center justify-center px-2 text-center">
@@ -89,8 +86,8 @@ function EmptyState({
       <div className="text-[13px] font-medium text-fg">Edit by chatting</div>
       <Text type="supporting" color="secondary" className="mt-1 max-w-[14rem] text-[11px] leading-relaxed text-fg-muted">
         {hasOpenProject
-          ? "Describe an edit in plain language and the AI will perform it on your timeline."
-          : "Open or create a project, then describe edits in plain language."}
+          ? t("chat.intro")
+          : t("chat.introNoProject")}
       </Text>
       {hasOpenProject && setup !== "loading" && setup !== "ready" && (
         <div className="mt-4 w-full rounded-lg border border-accent/30 bg-accent-soft/50 p-3 text-left">
@@ -101,10 +98,10 @@ function EmptyState({
           <Button
             label={
               setup === "locked"
-                ? "Unlock API keys"
+                ? t("chat.unlockKeys")
                 : setup === "endpoint"
-                  ? "Configure endpoint"
-                  : "Set up AI chat"
+                  ? t("chat.configureEndpoint")
+                  : t("chat.setUpChat")
             }
             variant="primary"
             size="sm"
@@ -118,10 +115,10 @@ function EmptyState({
           {SUGGESTIONS.map((s) => (
             <Button
               key={s}
-              label={s}
+              label={t(`chat.suggestions.${s}`)}
               variant="ghost"
               size="sm"
-              onClick={() => void send(s)}
+              onClick={() => void send(t(`chat.suggestions.${s}`))}
               className="w-full rounded-md border border-border bg-bg-1/60 px-2.5 py-1.5 text-left text-[11px] text-fg-2 transition-colors hover:border-accent/50 hover:bg-hover hover:text-fg"
             />
           ))}
@@ -136,6 +133,7 @@ export function ChatPanel({
 }: {
   onClose?: () => void;
 }): JSX.Element {
+  const { t } = useTranslation();
   const messages = useChatStore((s) => s.messages);
   const status = useChatStore((s) => s.status);
   const error = useChatStore((s) => s.error);
@@ -190,7 +188,7 @@ export function ChatPanel({
         )}
         <div className="ml-auto flex items-center gap-1">
           <IconButton
-            label={dryRun ? "Dry-run on: plans without applying edits" : "Dry-run off"}
+            label={dryRun ? t("chat.dryRunOn") : t("chat.dryRunOff")}
             icon={<FlaskConical size={14} aria-hidden />}
             size="sm"
             variant={dryRun ? "secondary" : "ghost"}
@@ -203,8 +201,8 @@ export function ChatPanel({
           <IconButton
             label={
               autoConfirm
-                ? "Auto-approve on: destructive actions run without confirmation"
-                : "Auto-approve off: destructive actions ask first"
+                ? t("chat.autoOn")
+                : t("chat.autoOff")
             }
             icon={<ShieldCheck size={14} aria-hidden />}
             size="sm"
@@ -218,7 +216,7 @@ export function ChatPanel({
           <ProviderModelPicker disabled={busy} />
           {lastTurnCommitted && (
             <IconButton
-              label="Undo last AI turn"
+              label={t("chat.undoTurn")}
               icon={<Undo2 size={14} aria-hidden />}
               size="sm"
               variant="ghost"
@@ -227,7 +225,7 @@ export function ChatPanel({
             />
           )}
           <IconButton
-            label="Conversation history"
+            label={t("chat.history")}
             icon={<History size={14} aria-hidden />}
             size="sm"
             variant={historyOpen ? "secondary" : "ghost"}
@@ -237,7 +235,7 @@ export function ChatPanel({
             className="grid h-7 w-7 place-items-center rounded-md text-fg-2 transition-colors hover:bg-hover hover:text-fg disabled:opacity-40"
           />
           <Button
-            label="New chat"
+            label={t("chat.newChat")}
             size="sm"
             variant="secondary"
             onClick={() => {
@@ -251,7 +249,7 @@ export function ChatPanel({
           </Button>
           {onClose && (
             <IconButton
-              label="Close"
+              label={t("chat.close")}
               icon={<X size={14} aria-hidden />}
               size="sm"
               variant="ghost"

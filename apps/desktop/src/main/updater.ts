@@ -34,7 +34,11 @@ function runCheckWhenLoaded(win: BrowserWindow, run: () => void): void {
 // changes guard first (autoInstallOnAppQuit fires on the normal quit sequence),
 // so updates never bypass the save prompt. No-op in dev (no published feed).
 export function initAutoUpdater(): void {
-  if (!app.isPackaged) return;
+  // Disabled until Flameblade Cut publishes its own release feed: the inherited
+  // configuration pointed at OpenReel's servers, which would "update" this app
+  // into upstream OpenReel. Set FLAMEBLADE_ENABLE_UPDATER=1 only with a feed
+  // of our own configured in electron-builder.yml.
+  if (!app.isPackaged || process.env.FLAMEBLADE_ENABLE_UPDATER !== "1") return;
 
   // Notify → (user-consented) download → install on quit. The download is not
   // automatic; the renderer triggers it after telling the user an update

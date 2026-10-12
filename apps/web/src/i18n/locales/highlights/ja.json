@@ -1,0 +1,98 @@
+{
+  "title": "AI ハイライト",
+  "subtitle": "長い動画を入れるだけで、ショート動画にしたい見どころを自動で見つけます。",
+  "source": {
+    "label": "元の動画",
+    "pick": "動画を選択",
+    "change": "動画を変更",
+    "hint": "MP4・MOV・WebM に対応。長い動画でも大丈夫です",
+    "noDesktop": "AI ハイライトはデスクトップ版でご利用ください"
+  },
+  "options": {
+    "length": "クリップの長さ",
+    "lengthShort": "15〜30 秒",
+    "lengthMedium": "30〜60 秒",
+    "lengthLong": "1〜3 分",
+    "count": "クリップ数",
+    "countValue": "{{count}} 本",
+    "language": "話している言語",
+    "languageAuto": "自動検出",
+    "languageZh": "中文",
+    "languageEn": "English",
+    "languageJa": "日本語",
+    "engine": "分析方法",
+    "engineLocal": "ローカル分析・無料",
+    "engineOpenai": "OpenAI・より賢く",
+    "openaiNoKey": "ナレーションパネルの「キーとリージョンの設定」で OpenAI キーを登録すると使えます。",
+    "openaiUnavailable": "このバージョンでは OpenAI 分析は使えません。"
+  },
+  "run": "見どころを探す",
+  "rerun": "もう一度探す",
+  "cancel": "キャンセル",
+  "progress": {
+    "audio": "音声を読み込み中…",
+    "model": "音声認識モデルをダウンロード中 {{percent}}%（初回のみ）",
+    "transcribe": "音声認識中 {{percent}}%",
+    "analyze": "見どころを分析中…"
+  },
+  "privacy": {
+    "local": "動画と音声はすべてこのパソコン内で処理され、アップロードされません。",
+    "openai": "OpenAI に送るのは文字起こしのテキストだけで、動画はアップロードされません。"
+  },
+  "empty": {
+    "title": "長い動画を見どころショートに",
+    "body": "AI が動画の内容を聞き取り、話し方・キーワード・テンポから一番おもしろい場面を選びます。微調整したら、ワンクリックで編集に追加できます。",
+    "step1": "人が話している動画を選ぶ",
+    "step2": "長さと本数を選んで「見どころを探す」を押す",
+    "step3": "気に入ったクリップにチェックして編集に追加"
+  },
+  "search": {
+    "placeholder": "言葉で場面を検索",
+    "none": "文字起こしに「{{query}}」は見つかりません",
+    "count": "{{count}} 件見つかりました"
+  },
+  "results": {
+    "title": "見どころ",
+    "count": "全 {{count}} 本",
+    "selectAll": "すべて選択",
+    "selectNone": "選択を解除",
+    "noResults": "この長さに合う場面が見つかりません。別の長さをお試しください。",
+    "cached": "この動画の前回の文字起こしを再利用しています"
+  },
+  "card": {
+    "score": "{{score}} 点",
+    "seconds": "{{seconds}} 秒",
+    "start": "開始",
+    "end": "終了",
+    "earlier": "1 秒早く",
+    "later": "1 秒遅く",
+    "select": "このクリップを選択",
+    "play": "クリップを再生",
+    "pause": "一時停止",
+    "reasons": {
+      "cue": "キーワードあり",
+      "hook": "冒頭で惹きつける",
+      "question": "問いかけあり",
+      "exclaim": "感情の盛り上がり",
+      "dense": "情報量が多い",
+      "loud": "声に勢いがある",
+      "dynamic": "テンポに抑揚がある"
+    }
+  },
+  "actions": {
+    "selected": "{{count}} 本を選択中",
+    "addVertical": "編集に追加（縦型 9:16）",
+    "addOriginal": "編集に追加（元の比率）",
+    "adding": "追加中…",
+    "reframeTip": "追加後、編集画面の「AI」タブにある「自動リフレーム」で、被写体を自動で追いかけられます。",
+    "projectOpenTip": "プロジェクトを開いているため、クリップは最初のビデオトラックの最後に追加され、比率は変わりません。"
+  },
+  "toast": {
+    "added": "{{count}} 本のクリップをタイムラインに追加しました",
+    "addFailed": "編集に追加できませんでした：{{message}}",
+    "failed": "分析に失敗しました：{{message}}",
+    "noSpeech": "この動画では音声が検出されなかったため、見どころを分析できません。",
+    "cancelled": "分析をキャンセルしました"
+  },
+  "projectName": "AI ハイライト"
+}

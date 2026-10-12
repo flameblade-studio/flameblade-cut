@@ -1,40 +1,42 @@
 /* ============================================================
-   OpenReel Desktop — DaVinci-Resolve-style charcoal/emerald tokens
+   Flameblade Cut Desktop — ink-navy charcoal / flame tokens
+   (colours taken from the Flameblade Studio crest: crimson flame,
+   antique gold, ink navy).
    Scoped under .openreel-desktop. Overrides the same CSS variable
    names index.css defines so desktop components reuse the existing
    Tailwind utilities and inherit the Resolve look.
-   Surfaces: charcoal-neutral (hue ~250, low chroma).
-   Accent: emerald (hue ~162).
+   Surfaces: ink-navy charcoal (hue ~255, low chroma).
+   Accent: flame vermilion (hue ~33); highlight: antique gold (hue ~75).
    ============================================================ */
 .openreel-desktop {
   color-scheme: dark;
 
-  --bg: oklch(0.16 0.004 250);
-  --bg-1: oklch(0.185 0.004 250);
-  --bg-2: oklch(0.21 0.004 250);
-  --bg-3: oklch(0.25 0.004 250);
-  --bg-elev: oklch(0.235 0.004 250);
-  --border: oklch(0.3 0.004 250);
-  --border-strong: oklch(0.38 0.005 250);
+  --bg: oklch(0.155 0.008 255);
+  --bg-1: oklch(0.18 0.009 255);
+  --bg-2: oklch(0.205 0.01 255);
+  --bg-3: oklch(0.245 0.011 255);
+  --bg-elev: oklch(0.225 0.011 255);
+  --border: oklch(0.29 0.012 255);
+  --border-strong: oklch(0.37 0.014 255);
 
-  --fg: oklch(0.93 0.004 250);
-  --fg-2: oklch(0.72 0.006 250);
-  --fg-3: oklch(0.58 0.006 250);
-  --fg-muted: oklch(0.46 0.006 250);
+  --fg: oklch(0.945 0.006 80);
+  --fg-2: oklch(0.75 0.01 255);
+  --fg-3: oklch(0.6 0.012 255);
+  --fg-muted: oklch(0.48 0.012 255);
 
-  --hover: oklch(0.27 0.004 250);
-  --selected: oklch(0.3 0.03 162);
+  --hover: oklch(0.26 0.012 255);
+  --selected: oklch(0.3 0.06 33);
 
-  --accent: oklch(0.7 0.15 162);
-  --accent-strong: oklch(0.63 0.16 162);
-  --accent-soft: oklch(0.3 0.05 162);
-  --accent-fg: oklch(0.16 0.004 250);
-  --accent-glow: oklch(0.7 0.15 162 / 0.35);
+  --accent: oklch(0.68 0.18 36);
+  --accent-strong: oklch(0.6 0.2 30);
+  --accent-soft: oklch(0.3 0.07 33);
+  --accent-fg: oklch(0.985 0.005 80);
+  --accent-glow: oklch(0.68 0.18 36 / 0.35);
 
-  --track-bg: oklch(0.2 0.004 250);
-  --tl-bg: oklch(0.15 0.004 250);
-  --waveform: oklch(0.7 0.15 162 / 0.55);
-  --stage-bg: oklch(0.12 0.003 250);
+  --track-bg: oklch(0.195 0.01 255);
+  --tl-bg: oklch(0.145 0.008 255);
+  --waveform: oklch(0.78 0.12 75 / 0.6);
+  --stage-bg: oklch(0.115 0.007 255);
   --screen-bg: oklch(0 0 0);
 
   --shadow-sm: 0 1px 0 oklch(0 0 0 / 0.4), 0 1px 2px oklch(0 0 0 / 0.3);
@@ -46,13 +48,19 @@
   --c-audio: oklch(0.7 0.1 195);
   --c-music: oklch(0.7 0.14 295);
 
-  --background: 220 8% 10%;
+  /* Flameblade brand extras */
+  --gold: oklch(0.74 0.11 75);
+  --gold-soft: oklch(0.32 0.05 75);
+  --flame-gradient: linear-gradient(120deg, oklch(0.6 0.22 25) 0%, oklch(0.68 0.2 40) 55%, oklch(0.8 0.15 70) 100%);
+  --flame-gradient-hover: linear-gradient(120deg, oklch(0.64 0.22 25) 0%, oklch(0.72 0.2 40) 55%, oklch(0.84 0.15 70) 100%);
+
+  --background: 222 14% 10%;
   --foreground: 0 0% 93%;
-  --card: 220 7% 14%;
+  --card: 222 12% 14%;
   --card-foreground: 0 0% 93%;
-  --popover: 220 7% 14%;
+  --popover: 222 12% 14%;
   --popover-foreground: 0 0% 93%;
-  --primary: 158 64% 52%;
+  --primary: 14 82% 56%;
   --primary-foreground: 220 8% 10%;
   --secondary: 220 6% 19%;
   --secondary-foreground: 0 0% 93%;
@@ -63,5 +71,5 @@
   --destructive: 0 62% 50%;
   --destructive-foreground: 0 0% 95%;
   --input: 220 6% 25%;
-  --ring: 158 64% 52%;
+  --ring: 14 82% 56%;
 }

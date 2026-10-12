@@ -66,6 +66,25 @@ export async function showOpenDialog(args: {
   return res.canceled || res.filePaths.length === 0 ? null : res.filePaths[0];
 }
 
+/** Multi-select variant; returns the chosen paths in the dialog's order (empty if cancelled). */
+export async function showOpenFilesDialog(args: {
+  filters: { name: string; extensions: string[] }[];
+}): Promise<string[]> {
+  const win = BrowserWindow.getFocusedWindow() ?? undefined;
+  const res = await dialog.showOpenDialog(win!, {
+    filters: args.filters,
+    properties: ["openFile", "multiSelections"],
+  });
+  return res.canceled ? [] : res.filePaths;
+}
+
+/** Folder picker; resolves to the chosen folder or null when cancelled. */
+export async function showOpenFolderDialog(): Promise<string | null> {
+  const win = BrowserWindow.getFocusedWindow() ?? undefined;
+  const res = await dialog.showOpenDialog(win!, { properties: ["openDirectory", "createDirectory"] });
+  return res.canceled || res.filePaths.length === 0 ? null : res.filePaths[0];
+}
+
 export async function readTextFile(args: { path: string }): Promise<string> {
   return fs.readFile(args.path, "utf8");
 }

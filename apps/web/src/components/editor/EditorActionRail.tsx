@@ -5,6 +5,7 @@ import {
   ToolcraftTooltip as Tooltip,
 } from "@openreel/ui";
 import { Icon } from "@/icons/Icon";
+import { useTranslation } from "react-i18next";
 import {
   House,
   Sun,
@@ -60,13 +61,18 @@ export const EditorActionRail: React.FC = () => {
   const { mode: themeMode, toggleTheme } = useThemeStore();
   const { openSettings } = useSettingsStore();
   const { navigate } = useRouter();
+  const { t } = useTranslation();
 
   const themeLabel =
     themeMode === "auto"
-      ? "System"
-      : themeMode.charAt(0).toUpperCase() + themeMode.slice(1);
+      ? t("editor.theme.system")
+      : t(`editor.theme.${themeMode}`);
   const nextThemeLabel =
-    themeMode === "light" ? "Dark" : themeMode === "dark" ? "System" : "Light";
+    themeMode === "light"
+      ? t("editor.theme.dark")
+      : themeMode === "dark"
+        ? t("editor.theme.system")
+        : t("editor.theme.light");
   const themeIcon =
     themeMode === "light" ? (
       <Sun size={16} aria-hidden />
@@ -75,17 +81,17 @@ export const EditorActionRail: React.FC = () => {
     ) : (
       <SunMoon size={16} aria-hidden />
     );
-  const themeActionLabel = `Theme: ${themeLabel}. Switch to ${nextThemeLabel}`;
+  const themeActionLabel = t("editor.theme.action", { current: themeLabel, next: nextThemeLabel });
 
   return (
     <nav
       data-tour="toolbar"
-      aria-label="Editor tools"
+      aria-label={t("editor.rail.tools")}
       className="flex w-12 shrink-0 flex-col items-center gap-1 border-r border-border bg-bg-1 py-3"
     >
-      <Tooltip content="Back to home" placement="end">
+      <Tooltip content={t("editor.rail.backHome")} placement="end">
         <IconButton
-          label="Back to home"
+          label={t("editor.rail.backHome")}
           icon={<House size={16} aria-hidden />}
           size="sm"
           variant="ghost"
@@ -96,17 +102,17 @@ export const EditorActionRail: React.FC = () => {
       <div className="my-1.5 h-px w-6 bg-border" />
 
       <RailButton
-        label="Search tools, effects, or ask AI"
+        label={t("editor.rail.search")}
         icon="magnifyingglass"
         onClick={() => openModal("search")}
       />
       <RailButton
-        label="Undo"
+        label={t("common.undo")}
         icon="arrow.uturn.backward"
         onClick={() => void undo()}
       />
       <RailButton
-        label="Redo"
+        label={t("common.redo")}
         icon="arrow.uturn.forward"
         onClick={() => void redo()}
       />
@@ -114,31 +120,31 @@ export const EditorActionRail: React.FC = () => {
       <div className="my-1.5 h-px w-6 bg-border" />
 
       <RailButton
-        label="Action history"
+        label={t("editor.rail.history")}
         icon="clock"
         onClick={() => openModal("history")}
         active={activeModal === "history"}
       />
       <RailButton
-        label="Keyframe editor"
+        label={t("editor.rail.keyframeEditor")}
         icon="diamond"
         onClick={toggleKeyframeEditor}
         active={keyframeEditorOpen}
       />
       <RailButton
-        label="Audio mixer"
+        label={t("editor.rail.audioMixer")}
         icon="music.note"
         onClick={() => togglePanel("audioMixer")}
         active={Boolean(panels.audioMixer?.visible)}
       />
       <RailButton
-        label="AI Editor chat"
+        label={t("editor.rail.aiChat")}
         icon="bubble.left.and.text.bubble.right"
         onClick={() => togglePanel("agentChat")}
         active={Boolean(panels.agentChat?.visible)}
       />
       <RailButton
-        label="Project JSON / Comments"
+        label={t("editor.rail.projectJsonComments")}
         icon="curlybraces"
         onClick={() => openModal("scriptView")}
       />
@@ -158,7 +164,7 @@ export const EditorActionRail: React.FC = () => {
       <DropdownMenu
         placement="end"
         button={{
-          label: "More editor actions",
+          label: t("editor.rail.more"),
           icon: <Icon name="star" size={16} ariaHidden />,
           size: "sm",
           variant: "ghost",
@@ -168,12 +174,12 @@ export const EditorActionRail: React.FC = () => {
         menuWidth={224}
         items={[
           {
-            label: "Settings & API keys",
+            label: t("editor.rail.settings"),
             icon: <Settings size={14} aria-hidden />,
             onClick: () => openSettings(),
           },
           {
-            label: "Screen recorder",
+            label: t("editor.rail.screenRecorder"),
             icon: (
               <Circle
                 size={14}
@@ -185,7 +191,7 @@ export const EditorActionRail: React.FC = () => {
           },
           { type: "divider" },
           {
-            label: "Editor tour",
+            label: t("editor.rail.editorTour"),
             icon: <Play size={14} aria-hidden />,
             onClick: () => {
               localStorage.removeItem(ONBOARDING_KEY);
@@ -193,7 +199,7 @@ export const EditorActionRail: React.FC = () => {
             },
           },
           {
-            label: "Animation & effects tour",
+            label: t("editor.rail.animationTour"),
             icon: <Sparkles size={14} className="text-accent" aria-hidden />,
             onClick: () => {
               localStorage.removeItem(MOGRAPH_TOUR_KEY);
@@ -202,17 +208,17 @@ export const EditorActionRail: React.FC = () => {
           },
           { type: "divider" },
           {
-            label: "Help & shortcuts (press ?)",
+            label: t("editor.rail.helpShortcuts"),
             icon: <HelpCircle size={14} aria-hidden />,
             isDisabled: true,
           },
           {
-            label: "Project JSON",
+            label: t("editor.rail.projectJson"),
             icon: <FileCode size={14} aria-hidden />,
             isDisabled: true,
           },
           {
-            label: "Cmd+K to search",
+            label: t("editor.rail.cmdK"),
             icon: <Command size={14} aria-hidden />,
             isDisabled: true,
           },

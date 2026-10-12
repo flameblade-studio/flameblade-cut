@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useTimelineTouchGesture, listenTimelineGesture } from "./touch-gestures";
 import { TimelineTouchMoveHandle } from "./TimelineTouchMoveHandle";
 import React, { useRef, useState, useEffect, useCallback } from "react";
@@ -65,6 +66,7 @@ export const ClipComponent: React.FC<ClipComponentProps> = ({
   onSnapIndicator,
   onTrimClip,
 }) => {
+  const { t } = useTranslation();
   const mediaItem = useProjectStore((state) => state.getMediaItem(clip.mediaId));
   const snapSettings = useUIStore((state) => state.snapSettings);
   const effectApplicationClipId = useUIStore(
@@ -284,7 +286,7 @@ export const ClipComponent: React.FC<ClipComponentProps> = ({
 
       const bridge = getTransitionBridge();
       if (!bridge.isInitialized()) {
-        toast.error("Transition engine not ready", "Try again in a moment.");
+        toast.error(t("timeline.transition.notReady"), t("timeline.transition.tryAgainSoon"));
         return;
       }
       const defaultParams = {
@@ -313,21 +315,21 @@ export const ClipComponent: React.FC<ClipComponentProps> = ({
           projectState.addClipTransition(transition);
           toast.success(
             transition.edge === "in"
-              ? "Intro transition applied"
+              ? t("timeline.transition.introApplied")
               : transition.edge === "out"
-                ? "Outro transition applied"
-                : "Transition applied",
+                ? t("timeline.transition.outroApplied")
+                : t("timeline.transition.applied"),
             `${transitionType} • ${transition.duration.toFixed(1)}s`,
           );
           return;
         }
       }
       toast.error(
-        "Transition failed",
-        result.error || "Could not create transition",
+        t("timeline.transition.failed"),
+        result.error || t("timeline.transition.couldNotCreate"),
       );
     },
-    [clip.id],
+    [clip.id, t],
   );
 
   const handleDrop = useCallback(
@@ -374,12 +376,12 @@ export const ClipComponent: React.FC<ClipComponentProps> = ({
           .getState()
           .addVideoEffect(clip.id, effectType, effectPayload?.effectParams);
         if (result) {
-          toast.success("Effect applied", `${effectType} added`);
+          toast.success(t("timeline.effect.applied"), t("timeline.effect.added", { effect: effectType }));
           // Auto-select the clip so the user sees the new effect in
           // the inspector.
           useUIStore.getState().select({ id: clip.id, type: "clip" });
         } else {
-          toast.error("Effect failed", "Could not apply effect");
+          toast.error(t("timeline.effect.failed"), t("timeline.effect.couldNotApply"));
         }
         return;
       }
@@ -393,7 +395,7 @@ export const ClipComponent: React.FC<ClipComponentProps> = ({
         );
       }
     },
-    [clip.id, applyTransitionAt, computeTransitionEdge],
+    [clip.id, applyTransitionAt, computeTransitionEdge, t],
   );
 
   const handleTrimMouseDown =
@@ -781,7 +783,7 @@ export const ClipComponent: React.FC<ClipComponentProps> = ({
           ref={clipRef}
           role="button"
           tabIndex={track.locked ? -1 : 0}
-          aria-label={`Select clip ${clipName}`}
+          aria-label={t("timeline.clip.select", { name: clipName })}
           aria-pressed={isSelected}
           onClick={handleClick}
           data-timeline-clip
@@ -819,7 +821,7 @@ export const ClipComponent: React.FC<ClipComponentProps> = ({
             pointerEvents: isDragging ? 'none' : 'auto',
           }}
         >
-      {isSelected && !track.locked && <TimelineTouchMoveHandle label={`Move ${clipName}`} onPointerDown={(event) => touchGesture.start(event, handleMouseDown)} />}
+      {isSelected && !track.locked && <TimelineTouchMoveHandle label={t("timeline.clip.move", { name: clipName })} onPointerDown={(event) => touchGesture.start(event, handleMouseDown)} />}
       {isApplyingEffect && (
         <>
           <div className="absolute -inset-px rounded-lg border border-amber-300/80 shadow-[0_0_18px_rgba(251,191,36,0.55)] pointer-events-none animate-pulse" />
@@ -988,7 +990,7 @@ export const ClipComponent: React.FC<ClipComponentProps> = ({
         <>
           <div
             data-timeline-trim="left"
-            aria-label={`Trim start of ${clipName}`}
+            aria-label={t("timeline.clip.trimStartOf", { name: clipName })}
             onPointerDown={(event) => touchGesture.start(event, handleTrimMouseDown("left"))}
             onMouseDown={handleTrimMouseDown("left")}
             className={`absolute left-0 top-0 bottom-0 w-2 cursor-ew-resize z-20 flex items-center justify-center transition-opacity ${
@@ -1003,7 +1005,7 @@ export const ClipComponent: React.FC<ClipComponentProps> = ({
           </div>
           <div
             data-timeline-trim="right"
-            aria-label={`Trim end of ${clipName}`}
+            aria-label={t("timeline.clip.trimEndOf", { name: clipName })}
             onPointerDown={(event) => touchGesture.start(event, handleTrimMouseDown("right"))}
             onMouseDown={handleTrimMouseDown("right")}
             className={`absolute right-0 top-0 bottom-0 w-2 cursor-ew-resize z-20 flex items-center justify-center transition-opacity ${

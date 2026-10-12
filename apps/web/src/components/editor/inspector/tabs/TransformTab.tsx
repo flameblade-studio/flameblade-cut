@@ -14,6 +14,7 @@ import {
   MockSlider,
   NumberField,
 } from "../shell/InspectorControls";
+import { useTranslation } from "react-i18next";
 
 interface TransformTabClip {
   id: string;
@@ -56,6 +57,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
   canvasHeight,
   handleTransformChange,
 }) => {
+  const { t } = useTranslation();
   const usesNormalizedPosition =
     clipType === "text" ||
     clipType === "shape" ||
@@ -96,13 +98,13 @@ export const TransformTab: React.FC<TransformTabProps> = ({
       {showTransformControls && (
         <>
           <InspectorSection
-            title="Transform"
+            title={t("inspector.sections.transform")}
             sectionId="transform"
             defaultOpen
           >
             <div className="space-y-3">
               <NumberField
-                label="Position"
+                label={t("inspector.transform.position")}
                 fields={[
                   {
                     axis: "X",
@@ -126,14 +128,14 @@ export const TransformTab: React.FC<TransformTabProps> = ({
               />
               <div className="flex items-center gap-2">
                 <span className="w-[90px] flex-none text-[11px] font-medium text-fg-muted">
-                  {usesNormalizedPosition ? "Canvas pixels" : "Offset pixels"}
+                  {usesNormalizedPosition ? t("inspector.transform.canvasPixels") : t("inspector.transform.offsetPixels")}
                 </span>
-                <div className="grid flex-1 grid-cols-4 gap-1" role="group" aria-label="Nudge position by one pixel">
+                <div className="grid flex-1 grid-cols-4 gap-1" role="group" aria-label={t("inspector.transform.nudgeGroup")}>
                   {([
-                    ["Nudge left 1 pixel", ArrowLeft, -1, 0],
-                    ["Nudge up 1 pixel", ArrowUp, 0, -1],
-                    ["Nudge down 1 pixel", ArrowDown, 0, 1],
-                    ["Nudge right 1 pixel", ArrowRight, 1, 0],
+                    [t("inspector.transform.nudgeLeft"), ArrowLeft, -1, 0],
+                    [t("inspector.transform.nudgeUp"), ArrowUp, 0, -1],
+                    [t("inspector.transform.nudgeDown"), ArrowDown, 0, 1],
+                    [t("inspector.transform.nudgeRight"), ArrowRight, 1, 0],
                   ] as const).map(([label, Icon, x, y]) => (
                     <button
                       key={label}
@@ -151,7 +153,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
 
               <div className="flex items-center">
                 <span className="w-[90px] flex-none text-[13px] font-medium text-fg-3">
-                  Scale
+                  {t("inspector.transform.scale")}
                 </span>
                 <MockSlider
                   className="flex-1"
@@ -170,7 +172,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
 
               <div className="flex items-center">
                 <span className="w-[90px] flex-none text-[13px] font-medium text-fg-3">
-                  Rotation
+                  {t("inspector.transform.rotation")}
                 </span>
                 <div className="flex flex-1 items-center justify-between rounded-[7px] border border-border px-[10px] py-[7px] focus-within:border-accent">
                   <input
@@ -190,7 +192,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
                   <div className="flex flex-none flex-col">
                     <button
                       type="button"
-                      aria-label="Increase rotation"
+                      aria-label={t("inspector.transform.increaseRotation")}
                       onClick={() =>
                         handleTransformChange({
                           rotation: stepRotation(transform.rotation, 1),
@@ -211,7 +213,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
                     </button>
                     <button
                       type="button"
-                      aria-label="Decrease rotation"
+                      aria-label={t("inspector.transform.decreaseRotation")}
                       onClick={() =>
                         handleTransformChange({
                           rotation: stepRotation(transform.rotation, -1),
@@ -235,7 +237,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
               </div>
 
               <NumberField
-                label="Anchor Point"
+                label={t("inspector.transform.anchorPoint")}
                 fields={[
                   {
                     axis: "X",
@@ -266,7 +268,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
 
               <div className="flex items-center">
                 <span className="w-[90px] flex-none text-[13px] font-medium text-fg-3">
-                  Opacity
+                  {t("inspector.transform.opacity")}
                 </span>
                 <MockSlider
                   className="flex-1"
@@ -283,7 +285,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
 
               <div className="flex items-center">
                 <span className="w-[90px] flex-none text-[13px] font-medium text-fg-3">
-                  Radius
+                  {t("inspector.transform.radius")}
                 </span>
                 <MockSlider
                   className="flex-1"
@@ -305,7 +307,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
                     color="secondary"
                     className="text-[11px] text-fg-3"
                   >
-                    Fit Mode
+                    {t("inspector.transform.fitMode")}
                   </Text>
                   <div className="grid grid-cols-3 gap-1.5">
                     {(["contain", "cover", "stretch"] as FitMode[]).map(
@@ -317,7 +319,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
                         return (
                           <ClickableCard
                             key={mode}
-                            label={`Set fit mode to ${mode}`}
+                            label={t("inspector.transform.setFitMode", { mode, label: t(`inspector.transform.fitModes.${mode}`) })}
                             onClick={() =>
                               handleTransformChange({ fitMode: mode })
                             }
@@ -327,11 +329,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
                                 : "bg-bg-2 border border-border text-fg-3 hover:text-fg"
                             }`}
                           >
-                            {mode === "contain"
-                              ? "Fit"
-                              : mode === "cover"
-                                ? "Fill"
-                                : mode}
+                            {t(`inspector.transform.fitModes.${mode}`)}
                           </ClickableCard>
                         );
                       },
@@ -350,7 +348,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
         !selectedClip.mediaId.startsWith("shape-") &&
         !selectedClip.mediaId.startsWith("svg-") &&
         !selectedClip.mediaId.startsWith("sticker-") && (
-          <InspectorSection title="Crop" sectionId="crop" defaultOpen={false}>
+          <InspectorSection title={t("inspector.sections.crop")} sectionId="crop" defaultOpen={false}>
             <CropSection clip={selectedClip as Clip} />
           </InspectorSection>
         )}
@@ -362,7 +360,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
         clipType === "svg" ||
         clipType === "sticker") && (
         <InspectorSection
-          title="Alignment"
+          title={t("inspector.sections.alignment")}
           sectionId="alignment"
           defaultOpen={false}
         >
@@ -394,7 +392,7 @@ export const TransformTab: React.FC<TransformTabProps> = ({
         clipType === "svg" ||
         clipType === "sticker") && (
         <InspectorSection
-          title="3D Transforms"
+          title={t("inspector.sections.transform3d")}
           sectionId="transform-3d"
           defaultOpen={false}
         >

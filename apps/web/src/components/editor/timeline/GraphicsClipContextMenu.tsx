@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React from "react";
 import type { ToolcraftContextMenuOption as ContextMenuOption } from "@openreel/ui";
 import {
@@ -29,6 +30,7 @@ export function useGraphicsClipContextMenuItems({
   onDelete,
   onDuplicate,
 }: GraphicsClipContextMenuProps): ContextMenuOption[] {
+  const { t } = useTranslation();
   const {
     deleteShapeClip,
     deleteSVGClip,
@@ -85,17 +87,17 @@ export function useGraphicsClipContextMenuItems({
   const getClipTypeLabel = () => {
     switch (clipType) {
       case "shape":
-        return "Shape";
+        return t("timeline.clipMenu.types.shape");
       case "svg":
-        return "SVG";
+        return t("timeline.clipMenu.types.svg");
       case "sticker":
-        return "Sticker";
+        return t("timeline.clipMenu.types.sticker");
       case "emoji":
-        return "Emoji";
+        return t("timeline.clipMenu.types.emoji");
       case "text":
-        return "Text";
+        return t("timeline.clipMenu.types.text");
       default:
-        return "Graphics";
+        return t("timeline.clipMenu.types.graphics");
     }
   };
 
@@ -111,10 +113,10 @@ export function useGraphicsClipContextMenuItems({
   const items: ContextMenuOption[] = [
     {
       type: "section",
-      title: `${getClipTypeLabel()} Clip`,
+      title: t("timeline.clipMenu.typedClip", { type: getClipTypeLabel() }),
       items: [
         {
-          label: `${getClipTypeLabel()} Clip`,
+          label: t("timeline.clipMenu.typedClip", { type: getClipTypeLabel() }),
           icon: getClipTypeIcon(),
           isDisabled: true,
         },
@@ -126,7 +128,7 @@ export function useGraphicsClipContextMenuItems({
   if (onDuplicate) {
     items.push(
       {
-        label: "Duplicate",
+        label: t("timeline.clipMenu.duplicate"),
         icon: <Layers size={14} aria-hidden />,
         onClick: handleDuplicate,
       },
@@ -136,7 +138,7 @@ export function useGraphicsClipContextMenuItems({
 
   items.push(
     {
-      label: isCaption ? "Select All Captions" : "Select All Clips on Track",
+      label: isCaption ? t("timeline.clipMenu.selectAllCaptions") : t("timeline.clipMenu.selectAllOnTrack"),
       icon: <ListChecks size={14} aria-hidden />,
       onClick: handleSelectTrackClips,
     },
@@ -144,7 +146,7 @@ export function useGraphicsClipContextMenuItems({
   );
 
   items.push({
-    label: "Delete",
+    label: t("timeline.clipMenu.delete"),
     icon: <Trash2 size={14} aria-hidden />,
     onClick: handleDelete,
   });

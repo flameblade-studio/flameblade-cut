@@ -4,7 +4,7 @@ import type {
   ScriptableTemplate,
 } from "@openreel/core";
 
-import { OPENREEL_CLOUD_URL } from "../config/api-endpoints";
+import { CLOUD_SERVICES_ENABLED, CloudServicesDisabledError, OPENREEL_CLOUD_URL } from "../config/api-endpoints";
 
 const CLOUD_API_URL = OPENREEL_CLOUD_URL;
 
@@ -14,12 +14,16 @@ export interface CloudTemplate extends TemplateSummary {
 
 export class TemplateCloudService {
   private apiUrl: string;
+  /** False in local-only builds unless a server URL is injected explicitly. */
+  private readonly enabled: boolean;
 
-  constructor(apiUrl: string = CLOUD_API_URL) {
-    this.apiUrl = apiUrl;
+  constructor(apiUrl?: string) {
+    this.apiUrl = apiUrl ?? CLOUD_API_URL;
+    this.enabled = apiUrl !== undefined || CLOUD_SERVICES_ENABLED;
   }
 
   async listTemplates(): Promise<CloudTemplate[]> {
+    if (!this.enabled) return [];
     try {
       const response = await fetch(`${this.apiUrl}/templates`);
       if (!response.ok) {
@@ -34,6 +38,7 @@ export class TemplateCloudService {
   }
 
   async getTemplate(id: string): Promise<Template | null> {
+    if (!this.enabled) return null;
     try {
       const response = await fetch(`${this.apiUrl}/templates/${id}`);
       if (!response.ok) {
@@ -50,6 +55,7 @@ export class TemplateCloudService {
   async uploadTemplate(
     template: Template,
   ): Promise<{ success: boolean; error?: string }> {
+    if (!this.enabled) return { success: false, error: new CloudServicesDisabledError().message };
     try {
       const response = await fetch(`${this.apiUrl}/templates`, {
         method: "POST",
@@ -78,6 +84,7 @@ export class TemplateCloudService {
   async deleteTemplate(
     id: string,
   ): Promise<{ success: boolean; error?: string }> {
+    if (!this.enabled) return { success: false, error: new CloudServicesDisabledError().message };
     try {
       const response = await fetch(`${this.apiUrl}/templates/${id}`, {
         method: "DELETE",
@@ -100,6 +107,7 @@ export class TemplateCloudService {
   }
 
   async checkHealth(): Promise<boolean> {
+    if (!this.enabled) return false;
     try {
       const response = await fetch(`${this.apiUrl}/health`);
       return response.ok;
@@ -109,6 +117,7 @@ export class TemplateCloudService {
   }
 
   async listScriptableTemplates(): Promise<ScriptableTemplate[]> {
+    if (!this.enabled) return [];
     try {
       const response = await fetch(`${this.apiUrl}/templates/scriptable`);
       if (!response.ok) {
@@ -123,6 +132,7 @@ export class TemplateCloudService {
   }
 
   async getScriptableTemplate(id: string): Promise<ScriptableTemplate | null> {
+    if (!this.enabled) return null;
     try {
       const response = await fetch(`${this.apiUrl}/templates/scriptable/${id}`);
       if (!response.ok) {

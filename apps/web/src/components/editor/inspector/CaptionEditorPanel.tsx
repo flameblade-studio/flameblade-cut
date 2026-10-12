@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { splitCaptionIntoSingleLineCues } from "@openreel/core";
 import {
   ToolcraftButton as Button,
@@ -8,6 +9,7 @@ import {
 } from "@openreel/ui";
 import { Check, WrapText } from "@/icons/lucide-compat";
 import { useProjectStore } from "../../../stores/project-store";
+import { CaptionToolsPanel } from "./CaptionToolsPanel";
 
 interface CaptionEditorPanelProps {
   maxWordsPerLine: number;
@@ -18,6 +20,7 @@ export const CaptionEditorPanel: React.FC<CaptionEditorPanelProps> = ({
   maxWordsPerLine,
   onMaxWordsPerLineChange,
 }) => {
+  const { t } = useTranslation();
   const project = useProjectStore((state) => state.project);
   const getAllTextClips = useProjectStore((state) => state.getAllTextClips);
   const updateTextContent = useProjectStore((state) => state.updateTextContent);
@@ -134,14 +137,14 @@ export const CaptionEditorPanel: React.FC<CaptionEditorPanelProps> = ({
         <div className="flex items-center justify-between gap-3">
           <div>
             <Text type="supporting" weight="bold" className="block text-[11px] text-fg">
-              Single-line captions
+              {t("captions.editor.singleLine")}
             </Text>
             <Text type="supporting" color="secondary" className="block text-[9px]">
-              Split each cue into timed clips for vertical video.
+              {t("captions.editor.singleLineHint")}
             </Text>
           </div>
           <Selector
-            label="Maximum words per caption"
+            label={t("captions.editor.maxWords")}
             isLabelHidden
             size="sm"
             width={84}
@@ -156,8 +159,8 @@ export const CaptionEditorPanel: React.FC<CaptionEditorPanelProps> = ({
         <Button
           label={
             selectedCount > 0
-              ? `Make ${selectedCount} selected single-line`
-              : `Make all ${captions.length} single-line`
+              ? t("captions.editor.makeSelected", { count: selectedCount })
+              : t("captions.editor.makeAll", { count: captions.length })
           }
           icon={<WrapText size={13} aria-hidden />}
           variant="secondary"
@@ -168,9 +171,11 @@ export const CaptionEditorPanel: React.FC<CaptionEditorPanelProps> = ({
         />
       </Card>
 
+      <CaptionToolsPanel captions={captions} selectedIds={selectedIds} />
+
       {captions.length === 0 ? (
         <Text type="supporting" color="secondary" className="block py-3 text-center text-[10px]">
-          Import SRT/VTT or transcribe the selected clip to create editable caption text.
+          {t("captions.editor.empty")}
         </Text>
       ) : (
         <>
@@ -180,10 +185,10 @@ export const CaptionEditorPanel: React.FC<CaptionEditorPanelProps> = ({
               onClick={toggleAll}
               className="text-[10px] font-semibold text-accent hover:underline"
             >
-              {allSelected ? "Clear selection" : "Select all"}
+              {allSelected ? t("captions.editor.clearSelection") : t("captions.editor.selectAll")}
             </button>
             <Text type="supporting" color="secondary" className="text-[9px]">
-              {captions.length} editable text clip{captions.length === 1 ? "" : "s"}
+              {t("captions.editor.clipCount", { count: captions.length })}
             </Text>
           </div>
           <div className="max-h-72 space-y-2 overflow-y-auto pr-1">
@@ -199,7 +204,10 @@ export const CaptionEditorPanel: React.FC<CaptionEditorPanelProps> = ({
                   <div className="mb-1.5 flex items-center justify-between gap-2">
                     <button
                       type="button"
-                      aria-label={`${selected ? "Deselect" : "Select"} caption ${index + 1}`}
+                      aria-label={t(
+                        selected ? "captions.editor.deselectCaption" : "captions.editor.selectCaption",
+                        { index: index + 1 },
+                      )}
                       aria-pressed={selected}
                       onClick={() => toggleCaption(caption.id)}
                       className={`grid h-4 w-4 place-items-center rounded border ${
@@ -215,7 +223,7 @@ export const CaptionEditorPanel: React.FC<CaptionEditorPanelProps> = ({
                     </Text>
                   </div>
                   <textarea
-                    aria-label={`Caption ${index + 1} text`}
+                    aria-label={t("captions.editor.captionText", { index: index + 1 })}
                     rows={Math.max(2, (drafts[caption.id]?.split("\n").length ?? 1))}
                     value={drafts[caption.id] ?? caption.text}
                     onChange={(event) =>

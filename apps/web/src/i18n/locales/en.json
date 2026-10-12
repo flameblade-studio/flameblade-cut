@@ -1,0 +1,2436 @@
+{
+  "common": {
+    "loading": "Loading…",
+    "width": "Width",
+    "height": "Height",
+    "apply": "Apply",
+    "none": "None",
+    "undo": "Undo",
+    "redo": "Redo",
+    "tryAgain": "Try again",
+    "tryAgainLater": "Please try again.",
+    "time": {
+      "justNow": "just now",
+      "minutesAgo": "{{count}}m ago",
+      "hoursAgo": "{{count}}h ago",
+      "daysAgo": "{{count}}d ago"
+    },
+    "cancel": "Cancel"
+  },
+  "desktop": {
+    "update": {
+      "available": "Update {{version}} available",
+      "availableBody": "A new version of Flameblade Cut is ready to download.",
+      "download": "Download",
+      "later": "Later",
+      "downloading": "Downloading update…",
+      "ready": "Update {{version}} ready",
+      "readyBody": "Restart to install — you’ll be asked to save any unsaved changes first.",
+      "restartInstall": "Restart & Install"
+    },
+    "window": {
+      "minimize": "Minimize",
+      "maximize": "Maximize",
+      "close": "Close",
+      "restore": "Restore"
+    },
+    "bootstrap": {
+      "failed": "Editor failed to start: {{message}}",
+      "loading": "Loading editor…"
+    },
+    "start": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "daysAgo": "{{count}} days ago",
+      "videoEditor": "Video Editor",
+      "newProject": "New Project",
+      "chooseFormat": "Choose a format. You can change this later.",
+      "formatCardLabel": "{{format}} {{mode}}",
+      "recent": "Recent",
+      "loadingRecents": "Loading recent projects...",
+      "noRecents": "No recent projects yet. Start a new project above.",
+      "openProject": "Open {{name}}"
+    },
+    "formats": {
+      "vertical": "Vertical",
+      "horizontal": "Horizontal",
+      "square": "Square"
+    },
+    "export": {
+      "cancel": "Cancel export",
+      "dismissError": "Dismiss export error",
+      "saved": "Saved!",
+      "export": "Export"
+    },
+    "dock": {
+      "media": "Media",
+      "viewer": "Viewer",
+      "inspector": "Inspector",
+      "timeline": "Timeline"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Configure preferences and manage API keys for external services.",
+    "tabs": {
+      "general": "General",
+      "apiKeys": "API Keys",
+      "mcp": "MCP"
+    },
+    "general": {
+      "language": "Language",
+      "languageHint": "Choose the language used throughout the editor.",
+      "composition": "Project Composition",
+      "compositionHint": "Set the canvas dimensions for your project. Pick a preset for TikTok, Reels, YouTube, or enter custom values.",
+      "presets": {
+        "landscape1080": "16:9 Landscape (1080p)",
+        "vertical": "9:16 Vertical (TikTok/Reels)",
+        "square": "1:1 Square",
+        "portrait": "4:5 Portrait",
+        "standard": "4:3 Standard",
+        "cinematic": "21:9 Cinematic",
+        "landscape4k": "4K Landscape"
+      },
+      "editingFrameRate": "Editing frame rate",
+      "editingFrameRateHint": "Controls preview playback, frame stepping, and the default export rate. Existing clip timing stays unchanged.",
+      "backgroundFill": "Background fill",
+      "backgroundFillHint": "Fills the canvas around clips that don't match the aspect ratio.",
+      "noBackgroundFill": "No background fill",
+      "blurBackgroundFill": "Blur background fill",
+      "blur": "Blur",
+      "backgroundColor": "Background color {{color}}",
+      "autoSave": "Auto-Save",
+      "enableAutoSave": "Enable auto-save",
+      "enableAutoSaveHint": "Automatically save your project at regular intervals",
+      "saveEvery": "Save every",
+      "autoSaveInterval": "Auto-save interval",
+      "minutes_one": "{{count}} minute",
+      "minutes_other": "{{count}} minutes",
+      "aiConnections": "AI Connections",
+      "aiConnectionsHint": "Connect a compatible endpoint you control. Flameblade Cut does not choose a vendor or model for you.",
+      "ttsLabel": "Text to Speech/Voice To Speech/Sound Effects",
+      "ttsProvider": "Text to Speech provider",
+      "llmFormat": "AI Assistant API format",
+      "chooseFormat": "Choose API format…",
+      "anthropicEndpoint": "Anthropic-compatible endpoint",
+      "openaiEndpoint": "OpenAI-compatible endpoint",
+      "endpointHint": "Enter your API host and the exact tool-capable model ID exposed by that host.",
+      "baseUrl": "Base URL",
+      "modelId": "Model ID",
+      "modelIdPlaceholder": "Enter any model ID from your endpoint",
+      "modelHint": "Load available models from the AI chat settings, or enter an ID manually when discovery is unavailable. API keys are optional.",
+      "chooseFormatHint": "Choose an API format to configure your host and model.",
+      "aggregator": "AI Aggregator",
+      "aggregatorHint": "Video/image generation, upscaling, and creative AI tools",
+      "aggregatorProvider": "AI Aggregator provider"
+    },
+    "unknownError": "Unknown error",
+    "apiKeys": {
+      "masterSet": "Master password set",
+      "masterSetHint": "Your API keys will be encrypted with AES-256-GCM.",
+      "unlocked": "Session unlocked",
+      "unlockedHint": "You can now manage API keys.",
+      "passwordChanged": "Password changed",
+      "passwordChangedHint": "All keys have been re-encrypted.",
+      "keySaved": "{{name}} key saved",
+      "keySavedHint": "API key encrypted and stored.",
+      "saveFailed": "Failed to save",
+      "deleteFailed": "Failed to delete",
+      "decryptFailed": "Failed to decrypt",
+      "secureTitle": "Secure API Key Storage",
+      "secureHint": "Set up a master password to encrypt and store your API keys locally. Keys are encrypted with AES-256-GCM and are only sent when making a request to the selected service.",
+      "setUp": "Set Up Master Password",
+      "locked": "Session Locked",
+      "lockedHint": "Enter your master password to view and manage API keys.",
+      "unlock": "Unlock",
+      "storedCount_one": "{{count}} key stored",
+      "storedCount_other": "{{count}} keys stored",
+      "changePassword": "Change Password",
+      "lock": "Lock",
+      "docs": "{{name}} documentation",
+      "hideKey": "Hide key",
+      "showKey": "Show key",
+      "deleteKey": "Delete key",
+      "addedUpdated": "Added {{added}} · Updated {{updated}}",
+      "keychain": "Stored securely in the system keychain",
+      "addTitleOptional": "Add Optional {{name}} Key",
+      "addTitle": "Add {{name}} Key",
+      "apiKey": "API key",
+      "pasteOptional": "Paste an API key if your endpoint requires one",
+      "paste": "Paste your API key here",
+      "cancel": "Cancel",
+      "saveKey": "Save Key",
+      "addApiKey": "Add API Key",
+      "addServiceOptional": "Add optional {{name}} API key",
+      "addService": "Add {{name}} API key",
+      "optionalSuffix": " (optional key)"
+    },
+    "mcp": {
+      "copied": "{{label}} copied",
+      "copyFailed": "Copy failed",
+      "clipboardUnavailable": "Clipboard is unavailable.",
+      "tokenRotated": "Token rotated",
+      "tokenRotatedHint": "Update your MCP clients with the new token.",
+      "rotateFailed": "Rotate failed",
+      "connectionOk": "Connection OK",
+      "toolsResponded": "Server responded with {{count}} tools.",
+      "connectionFailed": "Connection failed",
+      "noResponse": "No response",
+      "desktopOnly": "Desktop only",
+      "desktopOnlyHint": "The MCP server runs inside the Flameblade Cut desktop app, letting external AI clients (Claude Desktop, Cursor, Cline) edit your project. Open Flameblade Cut on desktop to configure it.",
+      "server": "MCP Server",
+      "serverHint": "A local Model Context Protocol server lets AI clients drive this editor through the same tools as the built-in chat. It listens on loopback only and requires the bearer token below.",
+      "status": "Status",
+      "running": "Running",
+      "stopped": "Stopped",
+      "tools": "Tools",
+      "checking": "Checking catalog…",
+      "available": "{{count}} available",
+      "copyUrl": "Copy URL",
+      "url": "URL",
+      "token": "Token",
+      "hideToken": "Hide token",
+      "showToken": "Show token",
+      "copyToken": "Copy token",
+      "rotateToken": "Rotate token",
+      "testing": "Testing...",
+      "test": "Test connection",
+      "workflows": "Available Workflows",
+      "workflowsHint": "The live catalog includes focused tools for each desktop workspace.",
+      "wfEditor": "Video Editor",
+      "wfEditorHint": "Tracks, clips, effects, transitions, audio and subtitles",
+      "wfMotion": "Motion Creator",
+      "wfMotionHint": "Layers, animation, shaders, masks, effects and render queue",
+      "wfCreation": "Creation & 3D",
+      "wfCreationHint": "Scenes, products, materials, cameras, rigging and previews",
+      "wfProject": "Project Operations",
+      "wfProjectHint": "Inspect, import, save, undo, export and diagnostics",
+      "clientSetup": "Client Setup",
+      "clientSetupHint": "Add this to your MCP client config (Claude Desktop, Cursor, Cline). The shim connects to the running app automatically.",
+      "copyConfig": "Copy config",
+      "config": "Config",
+      "trusted": "Trusted Local",
+      "autoAllow": "Auto-allow destructive actions",
+      "autoAllowHint": "When off, destructive or expensive tool calls over MCP are refused with a confirmation-required notice. Turn on only if you trust every connected local client."
+    },
+    "password": {
+      "min8": "Password must be at least 8 characters",
+      "mismatch": "Passwords do not match",
+      "newMin8": "New password must be at least 8 characters",
+      "newMismatch": "New passwords do not match",
+      "incorrect": "Incorrect password",
+      "opFailed": "Operation failed. Check your current password.",
+      "errorOccurred": "An error occurred",
+      "titleSetup": "Set Master Password",
+      "titleUnlock": "Unlock Settings",
+      "titleChange": "Change Master Password",
+      "descSetup": "Create a master password to encrypt your API keys. This password is never stored — only a verification hash is kept.",
+      "descUnlock": "Enter your master password to access encrypted API keys.",
+      "descChange": "Change your master password. All stored keys will be re-encrypted.",
+      "current": "Current Password",
+      "enterCurrent": "Enter current password",
+      "hide": "Hide password",
+      "show": "Show password",
+      "password": "Password",
+      "master": "Master Password",
+      "min8Placeholder": "Min. 8 characters",
+      "enterMaster": "Enter master password",
+      "new": "New Password",
+      "confirm": "Confirm Password",
+      "repeat": "Repeat password",
+      "confirmNew": "Confirm New Password",
+      "repeatNew": "Repeat new password",
+      "pbkdf2": "Your password is used to derive an encryption key via PBKDF2 (100k iterations). API keys are encrypted with AES-256-GCM. If you forget this password, stored keys cannot be recovered.",
+      "cancel": "Cancel",
+      "processing": "Processing...",
+      "setPassword": "Set Password",
+      "unlock": "Unlock",
+      "changePassword": "Change Password"
+    }
+  },
+  "editor": {
+    "theme": {
+      "system": "System",
+      "light": "Light",
+      "dark": "Dark",
+      "auto": "System",
+      "action": "Theme: {{current}}. Switch to {{next}}"
+    },
+    "rail": {
+      "tools": "Editor tools",
+      "backHome": "Back to home",
+      "search": "Search tools, effects, or ask AI",
+      "history": "Action history",
+      "keyframeEditor": "Keyframe editor",
+      "audioMixer": "Audio mixer",
+      "aiChat": "AI Editor chat",
+      "projectJsonComments": "Project JSON / Comments",
+      "more": "More editor actions",
+      "settings": "Settings & API keys",
+      "screenRecorder": "Screen recorder",
+      "editorTour": "Editor tour",
+      "animationTour": "Animation & effects tour",
+      "helpShortcuts": "Help & shortcuts (press ?)",
+      "projectJson": "Project JSON",
+      "cmdK": "Cmd+K to search"
+    },
+    "toolbar": {
+      "recordingFailed": "Recording failed",
+      "recordingEmpty": "No video data was captured. Please try again.",
+      "screenImportFailed": "Failed to import screen recording",
+      "webcamImportFailed": "Failed to import webcam recording",
+      "recordingsImported_one": "{{count}} recording imported!",
+      "recordingsImported_other": "{{count}} recordings imported!",
+      "screenAndWebcamAdded": "Screen and webcam added to assets. Use the timeline to composite them.",
+      "screenAdded": "Screen recording added to assets.",
+      "importFailed": "Import failed",
+      "export": {
+        "mp4": "MP4 Standard",
+        "mp4Desc": "{{resolution}} H.264 - Web & social",
+        "4k": "4K Standard",
+        "4kDesc": "3840×2160 - YouTube 4K",
+        "1080pHigh": "1080p High Quality",
+        "1080pHighDesc": "1920×1080 30fps - High bitrate",
+        "1080p60": "1080p 60fps",
+        "1080p60Desc": "1920×1080 - Smooth playback",
+        "wav": "Audio Only (WAV)",
+        "wavDesc": "Uncompressed audio"
+      },
+      "projectName": "Project name",
+      "chooseExportSettings": "Choose export settings",
+      "exportNeedsContent": "Add media or text to the timeline to export",
+      "exportOptions": "Export options",
+      "bestMatch": "Best match",
+      "estimate": "Est. {{time}}",
+      "customExport": "Custom export...",
+      "customExportDesc": "Full settings with AI upscaling",
+      "compressVideo": "Compress video...",
+      "compressVideoDesc": "Shrink any video to a target size",
+      "closeHistory": "Close action history"
+    },
+    "init": {
+      "failed": "The editor couldn't start",
+      "initializing": "Initializing editor…"
+    },
+    "workspace": {
+      "label": "Editor workspace",
+      "edit": "Edit",
+      "ai": "AI"
+    },
+    "quickEdit": {
+      "title": "Quick edit",
+      "splitClip": "Split clip",
+      "trimClipStart": "Trim clip start",
+      "trimClipEnd": "Trim clip end",
+      "editNotApplied": "The edit could not be applied. Try moving the playhead inside the clip.",
+      "failed": "{{action}} failed",
+      "unlockTrack": "Unlock this track to edit the clip.",
+      "trimHint": "Trim at the playhead, then finish your video.",
+      "movePlayhead": "Move the playhead inside this clip to split or trim.",
+      "splitHere": "Split here",
+      "trimStart": "Trim start",
+      "trimStartHint": "Remove the part before the playhead",
+      "trimEnd": "Trim end",
+      "trimEndHint": "Remove the part after the playhead",
+      "addCaptions": "Add captions",
+      "cleaning": "Cleaning…",
+      "cleanAudio": "Clean audio",
+      "reframe": "Reframe",
+      "exportVideo": "Export video",
+      "applying": "Applying edit…"
+    },
+    "projectSwitcher": {
+      "current": "Current Project",
+      "saveName": "Save project name",
+      "rename": "Rename project",
+      "newProjectHint": "Start fresh with a new canvas",
+      "recent": "Recent Projects"
+    }
+  },
+  "shortcuts": {
+    "title": "Keyboard Shortcuts",
+    "subtitle": "Find shortcuts, choose a preset, or customize your keys.",
+    "search": "Search shortcuts",
+    "searchPlaceholder": "Search shortcuts...",
+    "preset": "Preset",
+    "applyPreset": "Apply {{name}} preset",
+    "resetAll": "Reset All",
+    "category": "Shortcut category",
+    "all": "All",
+    "setFor": "Set shortcut for {{name}}",
+    "pressKeys": "Press keys...",
+    "resetToDefault": "Reset to default",
+    "noResults": "No shortcuts found",
+    "footerBefore": "Click a shortcut key to customize • Press",
+    "footerAfter": "to close",
+    "conflict": "This shortcut is used by {{name}}. Choose a different key.",
+    "defaultConflict": "The default key is used by {{name}}. Change that shortcut first or reset all shortcuts.",
+    "categories": {
+      "playback": "Playback",
+      "editing": "Editing",
+      "selection": "Selection",
+      "timeline": "Timeline",
+      "view": "View",
+      "file": "File",
+      "tools": "Tools"
+    },
+    "items": {
+      "playback": {
+        "playPause": {
+          "name": "Play/Pause",
+          "description": "Toggle playback"
+        },
+        "frameBack": {
+          "name": "Frame Back",
+          "description": "Move back one frame"
+        },
+        "frameForward": {
+          "name": "Frame Forward",
+          "description": "Move forward one frame"
+        },
+        "secondBack": {
+          "name": "Second Back",
+          "description": "Move back one second"
+        },
+        "secondForward": {
+          "name": "Second Forward",
+          "description": "Move forward one second"
+        },
+        "jump5Back": {
+          "name": "Jump 5s Back",
+          "description": "Move back 5 seconds"
+        },
+        "jump5Forward": {
+          "name": "Jump 5s Forward",
+          "description": "Move forward 5 seconds"
+        },
+        "goToStart": {
+          "name": "Go to Start",
+          "description": "Jump to timeline start"
+        },
+        "goToEnd": {
+          "name": "Go to End",
+          "description": "Jump to timeline end"
+        },
+        "prevClip": {
+          "name": "Previous Clip",
+          "description": "Jump to previous clip edge"
+        },
+        "nextClip": {
+          "name": "Next Clip",
+          "description": "Jump to next clip edge"
+        },
+        "markLoopStart": {
+          "name": "Mark Loop Start",
+          "description": "Set the preview loop start at the playhead"
+        },
+        "markLoopEnd": {
+          "name": "Mark Loop End",
+          "description": "Set the preview loop end at the playhead"
+        },
+        "toggleLoop": {
+          "name": "Toggle Preview Loop",
+          "description": "Repeat the marked range or the full timeline"
+        }
+      },
+      "editing": {
+        "undo": {
+          "name": "Undo",
+          "description": "Undo last action"
+        },
+        "redo": {
+          "name": "Redo",
+          "description": "Redo last undone action"
+        },
+        "cut": {
+          "name": "Cut",
+          "description": "Cut selected clips"
+        },
+        "copy": {
+          "name": "Copy",
+          "description": "Copy selected clips"
+        },
+        "paste": {
+          "name": "Paste",
+          "description": "Paste clips at playhead"
+        },
+        "duplicate": {
+          "name": "Duplicate",
+          "description": "Duplicate selected clip"
+        },
+        "delete": {
+          "name": "Delete",
+          "description": "Delete selected clips"
+        },
+        "rippleDelete": {
+          "name": "Ripple Delete",
+          "description": "Delete and close gap"
+        },
+        "split": {
+          "name": "Split",
+          "description": "Split clip at playhead"
+        },
+        "trimStart": {
+          "name": "Trim Start",
+          "description": "Trim clip start to playhead"
+        },
+        "trimEnd": {
+          "name": "Trim End",
+          "description": "Trim clip end to playhead"
+        }
+      },
+      "selection": {
+        "selectAll": {
+          "name": "Select All",
+          "description": "Select all clips"
+        },
+        "deselect": {
+          "name": "Deselect",
+          "description": "Clear selection"
+        }
+      },
+      "timeline": {
+        "toggleSnap": {
+          "name": "Toggle Snap",
+          "description": "Toggle snapping"
+        },
+        "zoomIn": {
+          "name": "Zoom In",
+          "description": "Zoom in timeline"
+        },
+        "zoomOut": {
+          "name": "Zoom Out",
+          "description": "Zoom out timeline"
+        },
+        "fitTimeline": {
+          "name": "Fit Timeline",
+          "description": "Fit timeline to view"
+        }
+      },
+      "view": {
+        "showShortcuts": {
+          "name": "Show Shortcuts",
+          "description": "Show keyboard shortcuts"
+        }
+      },
+      "file": {
+        "save": {
+          "name": "Save",
+          "description": "Save project"
+        },
+        "export": {
+          "name": "Export",
+          "description": "Export video"
+        }
+      },
+      "tools": {
+        "addText": {
+          "name": "Add Text",
+          "description": "Add text clip"
+        },
+        "addMarker": {
+          "name": "Add Marker",
+          "description": "Add marker at playhead"
+        }
+      }
+    },
+    "presets": {
+      "openreel": {
+        "name": "Flameblade Cut Default",
+        "description": "Default Flameblade Cut shortcuts"
+      },
+      "capcut": {
+        "name": "CapCut",
+        "description": "CapCut-style shortcuts"
+      },
+      "premiere": {
+        "name": "Adobe Premiere",
+        "description": "Premiere Pro-style shortcuts"
+      },
+      "finalcut": {
+        "name": "Final Cut Pro",
+        "description": "Final Cut Pro-style shortcuts"
+      },
+      "davinci": {
+        "name": "DaVinci Resolve",
+        "description": "DaVinci Resolve-style shortcuts"
+      }
+    }
+  },
+  "timeline": {
+    "filters": {
+      "all": "All",
+      "video": "Video",
+      "image": "Image",
+      "audio": "Audio",
+      "text": "Text",
+      "graphics": "Graphics"
+    },
+    "addTrack": {
+      "track": "Track",
+      "dialogue": "Dialogue",
+      "music": "Music",
+      "captions": "Captions"
+    },
+    "addTrackLabel": "Add track",
+    "tools": {
+      "undo": "Undo (⌘Z)",
+      "redo": "Redo (⇧⌘Z)",
+      "split": "Split (S)",
+      "trimStart": "Trim start to playhead (Q)",
+      "trimEnd": "Trim end to playhead (W)",
+      "delete": "Delete (Del)",
+      "duplicate": "Duplicate (⌘D)",
+      "rippleDelete": "Ripple delete (⇧Del)",
+      "zoomOut": "Zoom out",
+      "zoomIn": "Zoom in",
+      "zoom": "Timeline zoom",
+      "snapOn": "Snap on (N)",
+      "snapOff": "Snap off (N)",
+      "largeTracks": "Large tracks",
+      "compactTracks": "Compact tracks",
+      "restoreLayout": "Restore layout",
+      "maximize": "Maximize timeline (more room)"
+    },
+    "layers": {
+      "label": "Track layers",
+      "title": "Track Layers",
+      "manage": "Manage track layers",
+      "deleteNamed": "Delete {{name}}",
+      "confirmDelete": "Delete “{{name}}”?",
+      "confirmDeleteBody": "Its clips will be removed. You can undo this action.",
+      "deleteTrack": "Delete track",
+      "searchPlaceholder": "Search tracks",
+      "search": "Search track layers",
+      "types": "Track layer types",
+      "empty": "No tracks yet",
+      "noMatch": "No tracks match your filters",
+      "renameNamed": "Rename {{name}}",
+      "duplicateNamed": "Duplicate {{name}}",
+      "hideNamed": "Hide {{name}}",
+      "muteNamed": "Mute {{name}}",
+      "soloNamed": "Solo {{name}}",
+      "lockNamed": "Lock {{name}}",
+      "moveUpNamed": "Move {{name}} up",
+      "moveDownNamed": "Move {{name}} down"
+    },
+    "addedTo": "Added to {{name}}",
+    "clipMenu": {
+      "videoClip": "Video Clip",
+      "audioClip": "Audio Clip",
+      "imageClip": "Image Clip",
+      "clip": "Clip",
+      "copyClip": "Copy Clip",
+      "duplicate": "Duplicate",
+      "selectAllOnTrack": "Select All Clips on Track",
+      "selectAllCaptions": "Select All Captions",
+      "splitAtPlayhead": "Split at Playhead",
+      "closeGap": "Close Gap to Previous",
+      "effects": "Effects",
+      "copyEffects": "Copy Effects",
+      "pasteEffects": "Paste Effects",
+      "separateAudio": "Separate Audio",
+      "copyAudioEffects": "Copy Audio Effects",
+      "pasteAudioEffects": "Paste Audio Effects",
+      "rippleDelete": "Ripple Delete",
+      "delete": "Delete",
+      "typedClip": "{{type}} Clip",
+      "types": {
+        "shape": "Shape",
+        "svg": "SVG",
+        "sticker": "Sticker",
+        "emoji": "Emoji",
+        "text": "Text",
+        "graphics": "Graphics"
+      }
+    },
+    "track": {
+      "rename": "Rename Track",
+      "removeGaps": "Remove Gaps",
+      "ungroup": "Ungroup Track",
+      "groupSection": "Move & trim together",
+      "groupWith": "Group with {{name}}",
+      "name": "Track name",
+      "options": "Options for {{name}}",
+      "show": "Show track",
+      "hide": "Hide track",
+      "mute": "Mute track",
+      "unmute": "Unmute track",
+      "solo": "Solo track",
+      "clearSolo": "Clear solo",
+      "lock": "Lock track",
+      "unlock": "Unlock track",
+      "lockShort": "Lock",
+      "unlockShort": "Unlock",
+      "grouped": "Track is grouped",
+      "unmuteNamed": "Unmute {{name}}",
+      "clearSoloNamed": "Clear solo {{name}}"
+    },
+    "transition": {
+      "updated": "Transition updated",
+      "notReady": "Transition engine not ready",
+      "tryAgainSoon": "Try again in a moment.",
+      "added": "Transition added",
+      "failed": "Transition failed",
+      "couldNotCreate": "Could not create transition",
+      "removed": "Transition removed",
+      "hardCut": "Hard cut restored",
+      "introApplied": "Intro transition applied",
+      "outroApplied": "Outro transition applied",
+      "applied": "Transition applied"
+    },
+    "effect": {
+      "applied": "Effect applied",
+      "added": "{{effect}} added",
+      "failed": "Effect failed",
+      "couldNotApply": "Could not apply effect"
+    },
+    "clip": {
+      "select": "Select clip {{name}}",
+      "selectText": "Select text clip {{name}}",
+      "selectTyped": "Select {{type}} clip",
+      "move": "Move {{name}}",
+      "moveGraphic": "Move graphic",
+      "trimStartOf": "Trim start of {{name}}",
+      "trimEndOf": "Trim end of {{name}}",
+      "trimStart": "Trim start",
+      "trimEnd": "Trim end",
+      "adjustmentLayer": "{{name}}, adjustment layer"
+    },
+    "marker": {
+      "label": "Marker label",
+      "remove": "Remove marker"
+    },
+    "selectAllCaptions": "Select all captions ({{count}})",
+    "trackNames": {
+      "Track": "Track",
+      "Video": "Video",
+      "Audio": "Audio",
+      "Image": "Image",
+      "Text": "Text",
+      "Graphics": "Graphics",
+      "Dialogue": "Dialogue",
+      "Music": "Music",
+      "Captions": "Captions",
+      "Effects": "Effects"
+    }
+  },
+  "export": {
+    "projectPreset": {
+      "name": "Project settings",
+      "description": "Keep your canvas size and frame rate"
+    },
+    "title": "Export Video",
+    "subtitle": "Choose a ready-made preset or fine-tune every setting.",
+    "mode": "Export mode",
+    "tabs": {
+      "presets": "Presets",
+      "reduce": "Smaller File",
+      "custom": "Custom Settings"
+    },
+    "matchSource": "Match source",
+    "browserLimitPrefix": "Browser limit: exports at",
+    "quickExport": "Quick Export",
+    "browsePresets": "Browse presets",
+    "forYourVideo": "For Your Video",
+    "recommended": "Recommended",
+    "recommendedForVideo": "Recommended for this video",
+    "selectPresetHint": "Select a preset to see its estimated size and export time.",
+    "optionsCount_one": "{{count}} option",
+    "optionsCount_other": "{{count}} options",
+    "maxDuration": "Max {{seconds}}s",
+    "reduce": {
+      "intro": "Re-encode your project to a smaller file. Pick a quality tier, or a target size for sharing on email, WhatsApp, or Discord.",
+      "by": "Reduce by",
+      "quality": "Quality",
+      "targetSize": "Target size",
+      "light": "Light",
+      "lightHint": "Trim a little",
+      "balanced": "Balanced",
+      "balancedHint": "Best of both",
+      "strong": "Strong",
+      "strongHint": "Smallest file",
+      "estimatedOutput": "Estimated output",
+      "videoKbps": "{{kbps}} kbps video",
+      "audioKbps": "{{kbps}} kbps audio",
+      "savings": "−{{percent}}% vs source",
+      "empty": "Add clips to the timeline to estimate a compressed size."
+    },
+    "custom": {
+      "title": "Custom export",
+      "subtitle": "Control the video, encoding, and audio settings for this file.",
+      "videoHint": "Container, codec, resolution, and frame rate",
+      "format": "Format",
+      "codec": "Codec",
+      "resolution": "Resolution",
+      "original": "Original ({{width}}x{{height}})",
+      "vertical1080": "Vertical 1080p",
+      "square1080": "Square 1080",
+      "frameRate": "Frame rate",
+      "qualityEncoding": "Quality & encoding",
+      "qualityEncodingHint": "Balance output quality, speed, and file size",
+      "bitrate": "Bitrate (kbps)",
+      "smaller": "Smaller",
+      "better": "Better",
+      "exportMode": "Export mode",
+      "fast": "Fast",
+      "fastHint": "Hardware, quickest",
+      "balanced": "Balanced",
+      "balancedHint": "Hardware, great quality + small",
+      "smallest": "Smallest",
+      "smallestHint": "Software, smallest file",
+      "audioHint": "Format, sample rate, and bitrate",
+      "audioFormat": "Audio format",
+      "audioCompatible": "Compatible with this container",
+      "sampleRate": "Sample rate",
+      "audioBitrate": "Audio bitrate"
+    },
+    "upscale": {
+      "title": "Enhance quality",
+      "hint": "Sharpen exports above the source resolution",
+      "aria": "Enhance quality with upscaling",
+      "qualityMode": "Quality Mode",
+      "modes": {
+        "fast": "Fast",
+        "balanced": "Balanced",
+        "quality": "Quality"
+      },
+      "sharpening": "Sharpening",
+      "max": "Max",
+      "note": "Best used when exporting above the project resolution. It adds processing time."
+    },
+    "device": {
+      "showDetails": "Show device export estimate details",
+      "estimate": "Estimate",
+      "benchmark": "Get accurate estimate",
+      "testing": "Testing...",
+      "cores_one": "{{count}} core",
+      "cores_other": "{{count}} cores",
+      "unknown": "Unknown",
+      "hwEncode": "HW Encode",
+      "softwareOnly": "Software only",
+      "hardwareAccelerated": "Hardware accelerated"
+    },
+    "delivery": {
+      "label": "Save video",
+      "download": "Download to this device",
+      "file": "Choose a file location",
+      "hint": "Export uses your original media at the selected quality. Choose a file location to stream large exports directly to disk."
+    },
+    "capability": {
+      "checking": "Checking this browser’s encoder support…",
+      "chooseAnother": "Choose another format to export in this browser.",
+      "hint": "Codec availability depends on this browser. Try H.264 / MP4 or VP9 / WebM with Opus audio."
+    },
+    "browserSafetyLimit": "Browser safety limits will export this video at {{width}}×{{height}} • {{fps}}fps.",
+    "h264": {
+      "willEncode": "Will encode H.264 without transparency.",
+      "anyway": "Export as H.264 anyway"
+    },
+    "compressAndExport": "Compress & Export"
+  },
+  "assets": {
+    "tabs": {
+      "media": {
+        "label": "Media",
+        "description": "Import footage, audio, and stills."
+      },
+      "text": {
+        "label": "Text",
+        "description": "Add title presets and caption elements."
+      },
+      "graphics": {
+        "label": "Graphics",
+        "description": "Create shapes, arrows, and SVG overlays."
+      },
+      "effects": {
+        "label": "Effects",
+        "description": "Drag effects onto a clip to apply them."
+      },
+      "transitions": {
+        "label": "Transitions",
+        "description": "Drag transitions onto a clip's edge."
+      },
+      "ai": {
+        "label": "AI Generate",
+        "description": "Generate clips, captions, and assisted edits."
+      },
+      "recipes": {
+        "label": "Recipes",
+        "description": "Apply clip-scoped looks, overlays, and text stacks."
+      },
+      "templates": {
+        "label": "Project Templates",
+        "description": "Load full-project starter layouts and presets."
+      }
+    },
+    "media": {
+      "retryGeneration": "Retry generation",
+      "generating": "KieAI generation in progress…",
+      "generatingShort": "Generating…",
+      "replaceAsset": "Replace asset",
+      "createWithKieAI": "Create with KieAI",
+      "addToTimeline": "Add to timeline",
+      "failed": "Failed",
+      "missing": "Missing",
+      "emptyTitle": "No media imported",
+      "emptyHint": "Drag files here or click to import",
+      "importMedia": "Import Media",
+      "importMediaAria": "Import media",
+      "import": "Import",
+      "record": "Record",
+      "sort": "Sort media",
+      "showMissing": "Show Only Missing Assets",
+      "relinkFolder": "Relink from Folder",
+      "relinkFolderEllipsis": "Relink from Folder…",
+      "projectMedia": "Project Media",
+      "addMedia": "Add media",
+      "dropToImport": "Drop files to import"
+    },
+    "toast": {
+      "unsavedAudio": "Unsaved audio discarded",
+      "unsavedAudioHint": "Save to media or download next time to keep it.",
+      "folderPickerUnsupported": "Folder picker not supported",
+      "folderPickerUnsupportedHint": "Please relink assets individually using the refresh button on each missing asset.",
+      "relinked_one": "Relinked {{linked}} of {{count}} asset",
+      "relinked_other": "Relinked {{linked}} of {{count}} assets",
+      "noMatches": "No matches found",
+      "noMatchesHint": "None of the files in the selected folder matched the missing assets by filename.",
+      "assetNotFound": "Asset not found",
+      "assetNotFoundHint": "Cannot load the image data for this asset.",
+      "kieaiFailed": "Failed to open KieAI",
+      "unknownError": "Unknown error"
+    },
+    "progress": {
+      "importing": "Importing {{name}} ({{current}}/{{total}})...",
+      "extractingAudio": "Extracting audio from {{name}}...",
+      "replacing": "Replacing asset...",
+      "relinking": "Relinking {{name}}…",
+      "importingMedia": "Importing media..."
+    },
+    "graphics": {
+      "backgrounds": "Backgrounds",
+      "svgImport": "SVG Import",
+      "importSvg": "Import SVG File",
+      "shapes": "Shapes"
+    },
+    "shapes": {
+      "rectangle": "Rectangle",
+      "circle": "Circle",
+      "triangle": "Triangle",
+      "star": "Star",
+      "arrow": "Arrow",
+      "polygon": "Polygon",
+      "cube": "Cube",
+      "sphere": "Sphere",
+      "torus": "Torus",
+      "cone": "Cone",
+      "cylinder": "Cylinder",
+      "icosahedron": "Icosahedron"
+    },
+    "text": {
+      "addTitle": "Add Title",
+      "newTitle": "New Title",
+      "addTitleHint": "Click to add text to timeline"
+    },
+    "textPresets": {
+      "Heading": "Heading",
+      "Subtitle": "Subtitle",
+      "Lower Third": "Lower Third",
+      "Caption": "Caption",
+      "Hero": "Hero",
+      "Quote": "Quote",
+      "Outline": "Outline",
+      "Badge": "Badge"
+    },
+    "textPresetText": {
+      "Heading": "Heading",
+      "Subtitle": "Subtitle text",
+      "LowerThird": "Name Here",
+      "Caption": "Caption text here",
+      "Hero": "MAKE IT MOVE",
+      "Quote": "“Tell a better story.”",
+      "Outline": "OUTLINE",
+      "Badge": "NEW RELEASE"
+    },
+    "backgroundPresets": {
+      "solid-black": "Black",
+      "solid-white": "White",
+      "solid-slate": "Slate",
+      "solid-zinc": "Zinc",
+      "solid-red": "Red",
+      "solid-blue": "Blue",
+      "solid-green": "Green",
+      "solid-purple": "Purple",
+      "gradient-sunset": "Sunset",
+      "gradient-ocean": "Ocean",
+      "gradient-forest": "Forest",
+      "gradient-lavender": "Lavender",
+      "gradient-midnight": "Midnight",
+      "gradient-rose": "Rose",
+      "gradient-gold": "Gold",
+      "gradient-noir": "Noir",
+      "radial-spotlight": "Spotlight",
+      "radial-glow": "Glow",
+      "mesh-aurora": "Aurora",
+      "mesh-nebula": "Nebula",
+      "mesh-candy": "Candy",
+      "mesh-sunset-beach": "Beach",
+      "pattern-grid-dark": "Grid Dark",
+      "pattern-grid-light": "Grid Light",
+      "pattern-dots-dark": "Dots Dark",
+      "pattern-dots-light": "Dots Light",
+      "pattern-noise-dark": "Film Grain",
+      "waves-ocean": "Ocean Waves",
+      "waves-sunset": "Sunset Waves",
+      "aurora-borealis": "Borealis"
+    },
+    "backgroundCategories": {
+      "all": "All",
+      "solid": "Solid",
+      "gradient": "Gradient",
+      "mesh": "Mesh",
+      "pattern": "Pattern"
+    },
+    "effectsPanel": {
+      "cardHint": "{{name}}. Drag onto a clip to apply, or double-click to apply to selected clip.",
+      "noClip": "No clip selected",
+      "noClipHint": "Drag the effect onto a clip in the timeline, or select a clip and double-click.",
+      "notApplied": "Effect could not be applied",
+      "notAppliedHint": "The selected layers did not accept this effect.",
+      "applied": "Effect applied",
+      "appliedCount_one": "{{name}} added to {{count}} clip",
+      "appliedCount_other": "{{name}} added to {{count}} clips",
+      "skipped": "Some layers were skipped",
+      "skippedCount_one": "{{count}} selected layer could not accept the effect.",
+      "skippedCount_other": "{{count}} selected layers could not accept the effect.",
+      "search": "Search effects",
+      "categories": "Effect categories",
+      "noMatch": "No effects match \"{{query}}\"."
+    },
+    "transitionsPanel": {
+      "cardHint": "{{name}}. Drag onto a clip edge, or double-click to apply to the selected cut.",
+      "noClipHint": "Select a clip or two adjacent clips, then double-click the transition.",
+      "noCut": "No compatible cut",
+      "noCutHint": "The selected clips must be adjacent on the same timeline track.",
+      "failed": "Transition failed",
+      "failedHint": "Could not create this transition at the selected cut.",
+      "saveFailed": "Could not save the transition.",
+      "applied": "Transition applied",
+      "appliedHint": "{{name}} added to the selected cut.",
+      "search": "Search transitions",
+      "categories": "Transition categories",
+      "noMatch": "No transitions match \"{{query}}\"."
+    },
+    "recipesPanel": {
+      "selectClip": "Select a clip",
+      "selectClipHint": "Recipes apply to one selected video or image clip.",
+      "applyFailed": "Could not apply recipe",
+      "applyFailedHint": "This recipe could not be applied to the current clip.",
+      "applied": "Recipe applied",
+      "appliedHint": "{{name}} was added to {{target}}.",
+      "selectedClip": "the selected clip",
+      "selectFirst": "Select a clip first",
+      "selectFirstHint": "Choose a video or image in the timeline to apply clip-scoped recipes, looks, and caption treatments.",
+      "search": "Search recipes",
+      "searchPlaceholder": "Search recipes...",
+      "all": "ALL",
+      "noMatch": "No recipes match",
+      "noMatchHint": "Try a different search or category.",
+      "editControls": "Edit recipe controls",
+      "applying": "Applying",
+      "apply": "Apply"
+    },
+    "templatesPanel": {
+      "loading": "Loading templates...",
+      "search": "Search templates",
+      "searchPlaceholder": "Search templates...",
+      "all": "All",
+      "none": "No templates found"
+    }
+  },
+  "inspector": {
+    "empty": {
+      "title": "No selection",
+      "hint": "Select a clip to view its properties"
+    },
+    "progress": {
+      "backgroundRemoval": "Applying background removal",
+      "audioCleanup": "Applying audio cleanup",
+      "autoColor": "Applying auto color"
+    },
+    "toast": {
+      "noiseCleanupFailed": "Failed to apply noise cleanup",
+      "noiseCleanupApplied": "Noise cleanup applied",
+      "noiseCleanupAppliedHint": "Fine-tune or switch presets in Background Noise Removal.",
+      "couldNotCleanAudio": "Could not clean up audio",
+      "noiseCleanupNotApplied": "Noise cleanup could not be applied to this clip.",
+      "captionsImportedWithWarnings": "Captions imported with warnings",
+      "segmentsSkipped": "{{count}} subtitle segment(s) were skipped.",
+      "captionsImported": "Captions imported",
+      "captionsImportedHint": "Each cue is now an editable text clip on the Captions track.",
+      "captionImportFailed": "Caption import failed",
+      "noValidCaptions": "No valid captions found.",
+      "couldNotReadSubtitle": "Could not read the selected subtitle file.",
+      "fontUploadFailed": "Font upload failed",
+      "fontUploaded": "Custom font uploaded",
+      "fontReady": "{{font}} is ready to use.",
+      "recipeUnavailable": "Recipe unavailable",
+      "recipeUnavailableHint": "This recipe definition is no longer available.",
+      "recipeUpdateFailed": "Could not update recipe",
+      "recipeUpdateFailedHint": "The recipe controls could not be saved for this clip.",
+      "recipeUpdated": "Recipe updated",
+      "recipeUpdatedHint": "{{name}} was updated on this clip."
+    },
+    "sections": {
+      "noiseRemoval": "Background Noise Removal",
+      "noiseRemovalActive": "Background Noise Removal (Active)",
+      "noiseRemovalConfigured": "Background Noise Removal (Configured)",
+      "multicam": "Multi-Camera Editing",
+      "localAutoCaptions": "Local Auto-Captions",
+      "importSrtFile": "Import SRT or VTT file",
+      "importSrtAsText": "Import SRT / VTT as Text",
+      "editableCaptions": "Editable Captions",
+      "autoReframe": "Auto Reframe",
+      "beatSyncedAutoEdit": "Beat-Synced Auto-Edit",
+      "localHighlights": "Local Highlights",
+      "quickActions": "Quick Actions",
+      "removeBackground": "Remove Background",
+      "cleaningUp": "Cleaning up...",
+      "noiseReduced": "Noise Reduced",
+      "quickDialogueCleanup": "Quick Dialogue Cleanup",
+      "applying": "Applying...",
+      "autoColor": "Auto-Color",
+      "keyframes": "Keyframes",
+      "transitions": "Transitions",
+      "motionPresets": "Motion Presets",
+      "motionPath": "Motion Path",
+      "emphasisAnimation": "Emphasis Animation",
+      "textAnimation": "Text Animation",
+      "voiceOver": "Voice Over",
+      "clipAudio": "Clip Audio",
+      "volume": "Volume",
+      "fadeIn": "Fade in",
+      "fadeOut": "Fade out",
+      "autoCutSilence": "Auto Cut Silence",
+      "beatSync": "Beat Sync",
+      "audioEffects": "Audio Effects",
+      "audioDucking": "Audio Ducking",
+      "colorGrading": "Color Grading",
+      "applied": "Applied ({{count}})",
+      "edit": "Edit",
+      "removeRecipe": "Remove recipe",
+      "recipeRemoveFailed": "Could not remove recipe",
+      "recipeRemoveFailedHint": "The recipe could not be removed from this clip.",
+      "reset": "Reset",
+      "update": "Update",
+      "on": "On",
+      "off": "Off",
+      "backgroundRemoval": "Background Removal",
+      "particleEffects": "Particle Effects",
+      "chromaKey": "Chroma Key (Green Screen)",
+      "enableChromaKey": "Enable chroma key",
+      "keyColor": "Key Color",
+      "tolerance": "Tolerance",
+      "motionTracking": "Motion Tracking",
+      "videoEffects": "Video Effects",
+      "greenScreen": "Green Screen",
+      "pip": "Picture-in-Picture",
+      "masking": "Masking",
+      "nestedSequences": "Nested Sequences",
+      "adjustmentLayers": "Adjustment Layers",
+      "textBehindSubject": "Text Behind Subject",
+      "speedDirection": "Speed & Direction",
+      "stabilization": "Stabilization",
+      "speedCurves": "Speed Curves",
+      "textProperties": "Text Properties",
+      "shapeProperties": "Shape Properties",
+      "svgProperties": "SVG Properties",
+      "transform": "Transform",
+      "crop": "Crop",
+      "alignment": "Alignment",
+      "transform3d": "3D Transforms"
+    },
+    "loadingCameraTools": "Loading camera tools…",
+    "transition": {
+      "intro": "Intro Transition",
+      "outro": "Outro Transition",
+      "between": "Transition",
+      "introHint": "From the project background into this clip",
+      "outroHint": "From this clip into the project background",
+      "betweenHint": "Between two clips - centered on the cut",
+      "direction": "Direction",
+      "directions": {
+        "left": "Left",
+        "right": "Right",
+        "up": "Up",
+        "down": "Down",
+        "vertical": "Vertical",
+        "horizontal": "Horizontal"
+      },
+      "needSecondClipLong": "A second clip is required for clip-to-clip transitions",
+      "needSecondClip": "A second clip is required",
+      "applied": "Transition Applied",
+      "failed": "Transition Failed",
+      "couldNotApply": "Could not apply transition",
+      "removed": "Transition Removed",
+      "params": {
+        "centerX": "Center X",
+        "centerY": "Center Y",
+        "softness": "Softness",
+        "pushOut": "Push Out",
+        "blurStrength": "Blur Strength",
+        "motionBlur": "Motion Blur",
+        "startAngle": "Start Angle",
+        "clockwise": "Clockwise",
+        "scale": "Scale",
+        "holdDuration": "Hold Duration",
+        "maxPixel": "Maximum Pixel Size",
+        "intensity": "Intensity",
+        "slices": "Slices",
+        "slats": "Slats",
+        "rotations": "Rotations",
+        "flashIntensity": "Flash Intensity",
+        "burnIntensity": "Burn Intensity",
+        "warmth": "Warmth",
+        "tileColumns": "Tile Columns",
+        "randomness": "Randomness",
+        "amplitude": "Amplitude",
+        "waves": "Waves",
+        "foldShadow": "Fold Shadow",
+        "maxOffset": "Maximum Offset",
+        "angle": "Angle",
+        "duration": "Duration"
+      },
+      "background": "Background",
+      "from": "From",
+      "to": "To",
+      "type": "Transition Type",
+      "fadeClipAudio": "Fade clip audio",
+      "smoothAudio": "Smooth transition audio",
+      "parameters": "Parameters",
+      "remove": "Remove Transition",
+      "apply": "Apply Transition"
+    },
+    "subtitle": {
+      "title": "Subtitle",
+      "textContent": "Text Content",
+      "text": "Subtitle text",
+      "textPlaceholder": "Enter subtitle text...",
+      "timing": "Timing",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "position": "Position",
+      "animation": "Animation",
+      "style": "Style",
+      "animationStyle": "Animation style",
+      "animStyles": {
+        "none": "None",
+        "karaoke": "Karaoke",
+        "word-highlight": "Word Highlight",
+        "word-by-word": "Word by Word",
+        "bounce": "Bounce",
+        "typewriter": "Typewriter"
+      },
+      "animHints": {
+        "karaoke": "Words fill with color as they're spoken",
+        "wordHighlight": "Current word is highlighted and scaled",
+        "wordByWord": "Shows one word at a time",
+        "bounce": "Words bounce in as they appear",
+        "typewriter": "Words appear progressively like typing",
+        "none": "Static text, no animation"
+      },
+      "noWordTiming": "No word-level timing data. Re-generate captions to enable animation.",
+      "highlightColor": "Highlight Color",
+      "selectHighlightColor": "Select highlight color",
+      "font": "Font",
+      "fontFamily": "Font Family",
+      "uploadFont": "Upload Custom Font",
+      "fontSize": "Font Size",
+      "colors": "Colors",
+      "textColor": "Text Color",
+      "selectTextColor": "Select subtitle text color",
+      "background": "Background",
+      "selectBackgroundColor": "Select subtitle background color",
+      "backgroundOpacity": "Background opacity",
+      "delete": "Delete Subtitle"
+    },
+    "transform": {
+      "position": "Position",
+      "canvasPixels": "Canvas pixels",
+      "offsetPixels": "Offset pixels",
+      "nudgeGroup": "Nudge position by one pixel",
+      "nudgeLeft": "Nudge left 1 pixel",
+      "nudgeUp": "Nudge up 1 pixel",
+      "nudgeDown": "Nudge down 1 pixel",
+      "nudgeRight": "Nudge right 1 pixel",
+      "scale": "Scale",
+      "rotation": "Rotation",
+      "increaseRotation": "Increase rotation",
+      "decreaseRotation": "Decrease rotation",
+      "anchorPoint": "Anchor Point",
+      "opacity": "Opacity",
+      "radius": "Radius",
+      "fitMode": "Fit Mode",
+      "setFitMode": "Set fit mode to {{mode}}",
+      "fitModes": {
+        "contain": "Fit",
+        "cover": "Fill",
+        "stretch": "stretch"
+      }
+    },
+    "common": {
+      "unknownError": "Unknown error",
+      "hide": "Hide",
+      "show": "Show",
+      "save": "Save"
+    },
+    "speed": {
+      "setSpeed": "Set speed to {{speed}}",
+      "customSpeed": "Custom Speed",
+      "range": "Range: 0.1× (slowest) to 100× (fastest)",
+      "applyToAudio": "Apply speed to audio",
+      "reversed": "Reversed",
+      "reverseClip": "Reverse Clip",
+      "smoothSlowMo": "Smooth Slow Motion",
+      "quality": "Quality",
+      "qualityLow": "Low (faster)",
+      "qualityMedium": "Medium",
+      "qualityHigh": "High (slower)",
+      "opticalFlowHint": "Uses optical flow to generate smooth in-between frames",
+      "currentSettings": "Current Settings",
+      "speedValue": "Speed: {{speed}}×",
+      "reversedSuffix": " • Reversed",
+      "smoothSuffix": " • Smooth"
+    },
+    "stabilization": {
+      "failed": "Stabilization failed",
+      "downloading": "Downloading stabilization engine...",
+      "analyzing": "Analyzing motion...",
+      "stabilizing": "Stabilizing video...",
+      "stabilize": "Stabilize",
+      "enable": "Enable stabilization",
+      "strength": "Strength",
+      "firstUse": "First use requires a one-time download (~65 MB)",
+      "restabilize": "Re-stabilize"
+    },
+    "crop": {
+      "adjust": "Adjust Crop",
+      "cropVideo": "Crop Video",
+      "region": "Crop Region:",
+      "position": "Position:",
+      "reset": "Reset Crop"
+    },
+    "history": {
+      "createText": "Create text clip",
+      "createShape": "Create shape",
+      "importSvg": "Import SVG",
+      "addSticker": "Add sticker",
+      "createClip": "Create clip",
+      "title": "History",
+      "toggleSnapshots": "{{action}} snapshots",
+      "noSnapshots": "No snapshots saved",
+      "deleteSnapshot": "Delete snapshot {{name}}",
+      "snapshotName": "Snapshot name",
+      "snapshotPlaceholder": "Snapshot name...",
+      "createSnapshot": "Create Snapshot",
+      "noActions": "No actions yet"
+    },
+    "autoCut": {
+      "initializing": "Initializing...",
+      "noSilence": "No Silence Detected",
+      "noSilenceHint": "No silent sections found with current settings. Try lowering the threshold.",
+      "analysisFailed": "Analysis Failed",
+      "preparing": "Preparing...",
+      "removed": "Silence Removed",
+      "removedCount_one": "Removed {{count}} silent section",
+      "removedCount_other": "Removed {{count}} silent sections",
+      "cutFailed": "Cut Failed",
+      "threshold": "Silence Threshold",
+      "thresholdHint": "Lower values detect more silence",
+      "minDuration": "Min Duration",
+      "minDurationHint": "Minimum silence length to detect",
+      "padBefore": "Pad Before",
+      "padAfter": "Pad After",
+      "found": "Silent Sections Found",
+      "total": "Total Silence",
+      "totalValue": "{{silence}}s of {{duration}}s ({{percent}}%)",
+      "analyzing": "Analyzing...",
+      "reanalyze": "Re-analyze",
+      "analyze": "Analyze",
+      "cutting": "Cutting...",
+      "cutCount": "Cut {{count}}",
+      "tip": "Tip: Use Ctrl+Z to undo all cuts at once"
+    },
+    "beatSync": {
+      "noClip": "No clip selected",
+      "title": "Beat Sync",
+      "analyzing": "Analyzing beats...",
+      "detect": "Detect Beats from Audio",
+      "detectedBpm": "Detected BPM",
+      "confidence": "Confidence",
+      "markers": "Beat Markers",
+      "clearMarkers": "Clear Beat Markers",
+      "hideManual": "Hide Manual BPM Settings",
+      "showManual": "Show Manual BPM Settings",
+      "manualBpm": "Manual BPM",
+      "generateGrid": "Generate Beat Grid at {{bpm}} BPM",
+      "selectClip": "Select a video or audio clip to analyze beats",
+      "help": "Beat detection analyzes audio to find the tempo and beat positions. Use it to sync cuts, transitions, or effects to the music."
+    },
+    "color": {
+      "wb": {
+        "Tungsten": "Tungsten",
+        "Fluorescent": "Fluorescent",
+        "Daylight": "Daylight",
+        "Cloudy": "Cloudy",
+        "Shade": "Shade"
+      },
+      "applyWb": "Apply {{name}} white balance",
+      "resetAll": "Reset All",
+      "whiteBalance": "White Balance",
+      "wbHint": "Warm up cool shots or cool down warm ones. Tint corrects green or magenta casts.",
+      "resetWb": "Reset white balance",
+      "temperature": "Temperature",
+      "tint": "Tint",
+      "presets": "Presets",
+      "colorWheels": "Color Wheels",
+      "curves": "Curves",
+      "wheelHint": "Drag to adjust color. Double-click to reset.",
+      "reset": "Reset",
+      "shadows": "Shadows",
+      "midtones": "Midtones",
+      "highlights": "Highlights",
+      "lift": "Lift (Shadows)",
+      "gamma": "Gamma (Midtones)",
+      "gain": "Gain (Highlights)",
+      "selectChannel": "Select {{label}} curve channel",
+      "curvesHint": "Click to add point • Double-click to remove",
+      "hsl": {
+        "reds": "Reds",
+        "oranges": "Oranges",
+        "yellows": "Yellows",
+        "greens": "Greens",
+        "cyans": "Cyans",
+        "blues": "Blues",
+        "purples": "Purples",
+        "magentas": "Magentas"
+      },
+      "adjustedSuffix": " (adjusted)",
+      "hue": "Hue",
+      "saturation": "Saturation",
+      "luminance": "Luminance",
+      "lut": {
+        "intensity": "Intensity",
+        "unsupported": "Unsupported file format. Please use .cube or .3dl files.",
+        "parseFailed": "Failed to parse LUT file",
+        "loadFile": "Load LUT file",
+        "loading": "Loading...",
+        "load": "Load LUT (.cube, .3dl)",
+        "loaded": "LUT Loaded",
+        "remove": "Remove LUT",
+        "loadDifferent": "Load Different LUT"
+      }
+    },
+    "videoEffects": {
+      "params": {
+        "value": "Value",
+        "amount": "Amount",
+        "radius": "Radius",
+        "midpoint": "Midpoint",
+        "feather": "Feather",
+        "size": "Size",
+        "offsetX": "Offset X",
+        "offsetY": "Offset Y",
+        "blur": "Blur",
+        "opacity": "Opacity",
+        "intensity": "Intensity",
+        "angle": "Angle",
+        "distance": "Distance",
+        "centerX": "Center X",
+        "centerY": "Center Y"
+      },
+      "unknownShader": "Unknown shader",
+      "reorder": "Reorder {{name}}",
+      "dragToReorder": "Drag to reorder effect",
+      "moveUp": "Move {{name}} up",
+      "moveDown": "Move {{name}} down",
+      "disable": "Disable effect",
+      "enable": "Enable effect",
+      "duplicate": "Duplicate effect",
+      "remove": "Remove effect",
+      "previewAndAdd": "Preview and add {{name}}",
+      "before": "Before",
+      "effect": "Effect",
+      "addVideoEffect": "Add video effect",
+      "effectsTab": "Effects · {{count}}",
+      "shadersTab": "Shaders · {{count}}",
+      "search": "Search visual effects",
+      "categoryEffects": "{{category}} effects",
+      "noMatch": "No effects match “{{query}}”.",
+      "shaderPreviews": "Shader effect previews",
+      "addEffect": "Add Effect",
+      "copyStack": "Copy effect stack",
+      "pasteStack": "Paste effect stack",
+      "pasteReplace": "Paste and replace effects",
+      "clearStack": "Clear effect stack",
+      "none": "No effects applied"
+    },
+    "keyframes": {
+      "props": {
+        "position_x": "Position X",
+        "position_y": "Position Y",
+        "scale_x": "Scale X",
+        "scale_y": "Scale Y",
+        "rotation": "Rotation",
+        "opacity": "Opacity",
+        "effect_brightness": "Brightness",
+        "effect_contrast": "Contrast",
+        "effect_saturation": "Saturation",
+        "effect_blur": "Blur",
+        "volume": "Volume",
+        "pan": "Pan"
+      },
+      "categories": {
+        "Transform": "Transform",
+        "Effects": "Effects",
+        "Audio": "Audio"
+      },
+      "selectProperty": "Select Property",
+      "animateProperty": "Animate property",
+      "selectProp": "Select {{name}}",
+      "easing": "Easing: {{name}}",
+      "keyframeValue": "Keyframe value",
+      "deleteKeyframe": "Delete keyframe",
+      "noClip": "No clip selected",
+      "animatePropertyTitle": "Animate Property",
+      "valueAt": "Value at {{time}}s",
+      "exists": "Keyframe exists at {{time}}s",
+      "add": "Add Keyframe at {{time}}s",
+      "count": "Keyframes ({{count}})",
+      "selectToAnimate": "Select a property to animate",
+      "none": "No keyframes for this property. Add one to start animating."
+    },
+    "autoReframe": {
+      "initializing": "Initializing...",
+      "loadingEngine": "Loading AI engine...",
+      "configuring": "Configuring reframe settings...",
+      "applyingCrop": "Applying smart crop configuration...",
+      "updatingProject": "Updating project settings...",
+      "finalizing": "Finalizing...",
+      "complete": "Complete!",
+      "configuredFor": "Configured for {{name}} ({{width}}x{{height}})",
+      "applied": "Auto Reframe Applied",
+      "resized": "Project resized to {{name}} ({{width}}x{{height}})",
+      "failed": "Auto Reframe Failed",
+      "platformPresets": "Platform Presets",
+      "platformPreset": "{{name}} platform preset",
+      "aspectRatio": "Aspect Ratio",
+      "ratioLabel": "{{ratio}} aspect ratio",
+      "trackingSpeed": "Tracking Speed",
+      "smoothing": "Smoothing",
+      "centerBias": "Center Bias",
+      "followSubject": "Follow Subject",
+      "analyzing": "Analyzing...",
+      "reanalyze": "Applied - Click to Reanalyze",
+      "analyze": "Analyze & Reframe"
+    },
+    "greenScreen": {
+      "pickColor": "Pick color from video",
+      "presets": {
+        "Green": "Green",
+        "Blue": "Blue",
+        "Magenta": "Magenta",
+        "Cyan": "Cyan"
+      },
+      "title": "Green Screen",
+      "subtitle": "Remove background color from video",
+      "disable": "Disable chroma key",
+      "enable": "Enable chroma key",
+      "keyColor": "Key Color",
+      "clickPreview": "Click on the video preview to pick a color",
+      "tolerance": "Tolerance",
+      "edgeSoftness": "Edge Softness",
+      "spill": "Spill Suppression",
+      "reset": "Reset to Defaults",
+      "placeBelow": "Place video clips below this one to use as background",
+      "enableHint": "Enable to remove background color",
+      "enableGreen": "Enable Green Screen"
+    },
+    "mask": {
+      "shapes": {
+        "rectangle": "Rectangle",
+        "ellipse": "Ellipse",
+        "polygon": "Polygon"
+      },
+      "shapeMask": "Shape Mask",
+      "trackMatte": "Track Matte",
+      "drawnMask": "Drawn Mask",
+      "collapse": "Collapse mask",
+      "expand": "Expand mask",
+      "inverted": "Mask Inverted",
+      "normal": "Mask Normal",
+      "duplicate": "Duplicate Mask",
+      "delete": "Delete Mask",
+      "pathPoints": "Path points",
+      "addPoint": "Add path point",
+      "removePoint": "Remove path point {{index}}",
+      "matteSource": "Matte source",
+      "pickClip": "Pick a clip...",
+      "channel": "Channel",
+      "feathering": "Feathering",
+      "expansion": "Expansion",
+      "opacity": "Opacity",
+      "invertedShort": "Inverted",
+      "invert": "Invert",
+      "keyframes": "{{count}} keyframes",
+      "noKeyframes": "No keyframes",
+      "title": "Masking",
+      "subtitle": "Control visible regions of clip",
+      "addShape": "Add Mask Shape",
+      "addCustom": "Add custom path mask",
+      "custom": "Custom",
+      "useTrackMatte": "Use another clip as a track matte",
+      "clearAll": "Clear All",
+      "none": "No masks on this clip",
+      "clickShape": "Click a shape above to add a mask",
+      "help": "Masks control which parts of the clip are visible"
+    },
+    "text": {
+      "font": "Font",
+      "customUploads": "Custom Uploads",
+      "searchFonts": "Search fonts",
+      "noTextClip": "No text clip selected",
+      "textContent": "Text Content",
+      "enterText": "Enter text...",
+      "customFont": "Custom Font",
+      "uploadCustomFont": "Upload custom font",
+      "size": "Size",
+      "style": "Style",
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "textAlign": "Text Align",
+      "left": "Left",
+      "center": "Center",
+      "right": "Right",
+      "positionOnCanvas": "Position on Canvas",
+      "alignToCanvas": "Align to Canvas",
+      "centerH": "Center Horizontally",
+      "centerV": "Center Vertically",
+      "centerBoth": "Center Both",
+      "textColor": "Text Color",
+      "background": "Background",
+      "stroke": "Stroke",
+      "color": "Color",
+      "width": "Width",
+      "shadow": "Shadow",
+      "offsetX": "Offset X",
+      "offsetY": "Offset Y",
+      "blur": "Blur",
+      "lineHeight": "Line Height",
+      "letterSpacing": "Letter Spacing",
+      "none": "None",
+      "textMaterial": "Text Material",
+      "materialPreviews": "Text material previews",
+      "progress": "Progress",
+      "depth": "Depth",
+      "bevelThickness": "Bevel Thickness",
+      "bevelSize": "Bevel Size",
+      "bevelSegments": "Bevel Segments",
+      "material": "Material",
+      "basic": "Basic",
+      "physical": "Physical",
+      "metalness": "Metalness",
+      "roughness": "Roughness",
+      "histUpdate": "Update selected text properties",
+      "histCenterH": "Center selected text horizontally",
+      "histCenterV": "Center selected text vertically",
+      "histCenter": "Center selected text",
+      "hist3d": "Update selected 3D text properties",
+      "fontUploadFailed": "Font upload failed",
+      "unknownError": "Unknown error.",
+      "fontUploaded": "Custom font uploaded",
+      "fontReady": "{{font}} is ready to use.",
+      "selectColor": "Select {{label}}"
+    },
+    "audioEffects": {
+      "toggle": "{{action}} {{title}}",
+      "collapse": "Collapse",
+      "expand": "Expand",
+      "equalizer": "Equalizer",
+      "compressor": "Compressor",
+      "threshold": "Threshold",
+      "ratio": "Ratio",
+      "attack": "Attack",
+      "release": "Release",
+      "reverb": "Reverb",
+      "roomSize": "Room Size",
+      "damping": "Damping",
+      "delay": "Delay",
+      "time": "Time",
+      "feedback": "Feedback",
+      "wetLevel": "Wet Level"
+    },
+    "tts": {
+      "needKey": "Add your ElevenLabs API key to enable speech generation. Flameblade Cut no longer hosts a speech server."
+    },
+    "alignment": {
+      "horizontal": "Horizontal",
+      "vertical": "Vertical",
+      "alignLeft": "Align Left",
+      "centerH": "Center Horizontally",
+      "alignRight": "Align Right",
+      "alignTop": "Align Top",
+      "centerV": "Center Vertically",
+      "alignBottom": "Align Bottom",
+      "centerCanvas": "Center on Canvas",
+      "overlayHint": "Aligns the overlay anchor in canvas space",
+      "mediaHint": "Aligns the media anchor using pixel offsets from center"
+    },
+    "blending": {
+      "noClip": "No clip selected",
+      "title": "Blending",
+      "mode": "Blend mode",
+      "opacity": "Blend Opacity"
+    },
+    "bgRemoval": {
+      "modes": {
+        "blur": "Blur",
+        "color": "Color",
+        "image": "Image",
+        "transparent": "Transparent"
+      },
+      "modeLabel": "{{mode}} background mode",
+      "initModel": "Initializing AI model...",
+      "preparing": "Preparing background detection...",
+      "configuring": "Configuring effect pipeline...",
+      "finalizing": "Finalizing setup...",
+      "ready": "Background Removal Ready",
+      "readyHint": "Effect will be applied during playback",
+      "unknownError": "Unknown error",
+      "failed": "Processing Failed",
+      "failedHint": "Could not enable background removal",
+      "disabled": "Background Removal Disabled",
+      "on": "On",
+      "off": "Off",
+      "mode": "Background Mode",
+      "blurAmount": "Blur Amount",
+      "color": "Background Color",
+      "selectColor": "Select replacement background color",
+      "image": "Background Image",
+      "chooseImage": "Choose Image",
+      "imageLoaded": "Image loaded",
+      "edgeSmoothing": "Edge Smoothing",
+      "threshold": "Detection Threshold",
+      "realtimeHint": "Background removal is processed in real-time. For best results, export your video after previewing."
+    },
+    "ducking": {
+      "presets": {
+        "Subtle": "Subtle",
+        "Moderate": "Moderate",
+        "Aggressive": "Aggressive",
+        "Podcast": "Podcast"
+      },
+      "invalidSource": "Select a valid trigger source track.",
+      "noSpeech": "No speech crossed the trigger threshold. Lower the threshold or choose a louder source track.",
+      "applyFailed": "Failed to apply ducking.",
+      "removeFailed": "Failed to remove ducking from this clip.",
+      "title": "Audio Ducking",
+      "subtitle": "Auto-lower music when speech plays",
+      "enabled": "Ducking Enabled",
+      "disabled": "Ducking Disabled",
+      "enable": "Enable audio ducking",
+      "triggerSource": "Trigger Source (Voice Track)",
+      "useTrack": "Use {{name}} as ducking trigger",
+      "addTrackHint": "Add another audio or video track with speech to use as trigger",
+      "presetsTitle": "Ducking Presets",
+      "threshold": "Detection Threshold",
+      "thresholdHint": "Voice level that triggers ducking",
+      "reduction": "Volume Reduction",
+      "reductionHint": "How much to lower background music",
+      "timing": "Timing Controls",
+      "attack": "Attack",
+      "attackHint": "How fast volume drops when voice starts",
+      "release": "Release",
+      "releaseHint": "How fast volume returns after voice stops",
+      "hold": "Hold Time",
+      "holdHint": "Minimum time to stay ducked between words",
+      "analyzing": "Analyzing...",
+      "apply": "Apply Ducking",
+      "applied": "Ducking Applied",
+      "updating": "Updating...",
+      "update": "Update",
+      "remove": "Remove",
+      "footer": "Automatically reduces music volume when voice is detected"
+    }
+  },
+  "preview": {
+    "canvas": "Preview canvas",
+    "live": "Live preview",
+    "player": "Player",
+    "compositionGrid": "Composition grid",
+    "safeMargins": "Title and action safe margins",
+    "titleSafe": "Title safe",
+    "exporting": "Exporting Video",
+    "preparing": "Preparing...",
+    "exportProgress": "Export Progress",
+    "keepEditing": "You can keep editing once the export finishes.",
+    "dragToMove": "Drag to move",
+    "dragToMoveText": "Drag to move text",
+    "dragToMoveShape": "Drag to move shape",
+    "unlockAspect": "Unlock aspect ratio",
+    "lockAspect": "Lock aspect ratio",
+    "subtitleSelected": "Subtitle Selected - Edit in Inspector",
+    "clickToSelect": "Click to select",
+    "skipBack": "Skip back 5s",
+    "skipForward": "Skip forward 5s",
+    "play": "Play",
+    "pause": "Pause",
+    "enableLoop": "Enable preview loop",
+    "disableLoop": "Disable preview loop",
+    "loopHint": "Loop {{start}} to {{end}} • I: mark start • O: mark end • Shift+L: toggle",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "aspectRatio": "Aspect ratio",
+    "aspectOption": "{{label}} {{width}} by {{height}}",
+    "playbackQuality": "Playback quality",
+    "zoom": "Preview Zoom",
+    "canvasSnapping": "Canvas snapping",
+    "fullscreen": "Full Screen",
+    "exitFullscreen": "Exit Full Screen",
+    "maximize": "Maximize Preview",
+    "restoreSize": "Restore Size",
+    "canvasText": {
+      "dropMedia": "Drop media here",
+      "replacePlaceholder": "Replace this placeholder with your content",
+      "importToStart": "Import media to get started"
+    },
+    "history": {
+      "nudgeSelection": "Nudge canvas selection"
+    },
+    "quality": {
+      "auto": "Auto",
+      "full": "Full",
+      "half": "½",
+      "quarter": "¼"
+    }
+  },
+  "effects": {
+    "catalog": {
+      "brightness": {
+        "label": "Brightness",
+        "description": "Lift midtones and highlights"
+      },
+      "contrast": {
+        "label": "Contrast",
+        "description": "Punchier shadows and highlights"
+      },
+      "saturation": {
+        "label": "Saturation",
+        "description": "Boost or mute color intensity"
+      },
+      "grayscale": {
+        "label": "Grayscale",
+        "description": "Convert color to monochrome"
+      },
+      "sepia": {
+        "label": "Sepia",
+        "description": "Warm vintage color treatment"
+      },
+      "invert": {
+        "label": "Invert",
+        "description": "Reverse image color values"
+      },
+      "tonal": {
+        "label": "Tonal Balance",
+        "description": "Shape shadows, mids, and highlights"
+      },
+      "temperature": {
+        "label": "Temperature",
+        "description": "Warm / cool color shift"
+      },
+      "tint": {
+        "label": "Tint",
+        "description": "Magenta / green color shift"
+      },
+      "hue": {
+        "label": "Hue",
+        "description": "Rotate the color wheel"
+      },
+      "blur": {
+        "label": "Blur",
+        "description": "Soft gaussian defocus"
+      },
+      "motion-blur": {
+        "label": "Motion Blur",
+        "description": "Directional smear"
+      },
+      "radial-blur": {
+        "label": "Radial Blur",
+        "description": "Zoom-style radial motion"
+      },
+      "sharpen": {
+        "label": "Sharpen",
+        "description": "Unsharp-mask edge enhance"
+      },
+      "vignette": {
+        "label": "Vignette",
+        "description": "Darkened edges for focus"
+      },
+      "grain": {
+        "label": "Film Grain",
+        "description": "Analog film texture"
+      },
+      "shadow": {
+        "label": "Drop Shadow",
+        "description": "Cast a soft shadow"
+      },
+      "glow": {
+        "label": "Glow",
+        "description": "Bright outer halo"
+      },
+      "chromatic-aberration": {
+        "label": "Chromatic Aberration",
+        "description": "RGB-channel split offset"
+      },
+      "chromaKey": {
+        "label": "Chroma Key",
+        "description": "Remove green or blue screen backgrounds"
+      },
+      "cinematic-punch": {
+        "label": "Cinematic Punch",
+        "description": "Bold contrast for high-impact edits"
+      },
+      "golden-hour": {
+        "label": "Golden Hour",
+        "description": "Warm sunlit color treatment"
+      },
+      "soft-focus": {
+        "label": "Soft Focus",
+        "description": "Gentle diffusion for portraits and titles"
+      },
+      "dream-bloom": {
+        "label": "Dream Bloom",
+        "description": "Soft lavender halo and highlight bloom"
+      },
+      "retro-grain": {
+        "label": "Retro Grain",
+        "description": "Fine monochrome texture for vintage edits"
+      },
+      "rgb-split": {
+        "label": "RGB Split",
+        "description": "Strong channel separation for digital cuts"
+      },
+      "shader-vhs": {
+        "label": "VHS",
+        "description": "Animated tape jitter, grain, and scanlines"
+      },
+      "shader-posterize": {
+        "label": "Posterize",
+        "description": "Reduce footage into bold graphic color bands"
+      },
+      "shader-duotone": {
+        "label": "Duotone",
+        "description": "Map shadows and highlights to two custom colors"
+      },
+      "shader-prism": {
+        "label": "Prism Split",
+        "description": "Directional RGB refraction with adjustable offset"
+      },
+      "shader-fisheye": {
+        "label": "Fisheye",
+        "description": "Curved lens distortion focused at frame center"
+      },
+      "shader-wave-warp": {
+        "label": "Wave Warp",
+        "description": "Animated horizontal liquid distortion"
+      },
+      "shader-scanlines": {
+        "label": "Scanlines",
+        "description": "Animated CRT line texture"
+      },
+      "shader-edge-glow": {
+        "label": "Edge Glow",
+        "description": "Neon color traced along image detail"
+      }
+    },
+    "categories": {
+      "Basic": "Basic",
+      "Color": "Color",
+      "Blur": "Blur",
+      "Creative": "Creative",
+      "Stylize": "Stylize",
+      "All": "All"
+    },
+    "types": {
+      "brightness": "Brightness",
+      "contrast": "Contrast",
+      "saturation": "Saturation",
+      "grayscale": "Grayscale",
+      "sepia": "Sepia",
+      "invert": "Invert",
+      "hue": "Hue",
+      "blur": "Blur",
+      "sharpen": "Sharpen",
+      "vignette": "Vignette",
+      "grain": "Grain",
+      "temperature": "Temperature",
+      "tint": "Tint",
+      "tonal": "Tonal",
+      "chromaKey": "Chroma Key",
+      "shadow": "Drop Shadow",
+      "glow": "Glow",
+      "motion-blur": "Motion Blur",
+      "radial-blur": "Radial Blur",
+      "chromatic-aberration": "Chromatic Aberration",
+      "shader": "Shader"
+    }
+  },
+  "transitions": {
+    "types": {
+      "crossfade": {
+        "name": "Crossfade",
+        "description": "Smooth blend between clips"
+      },
+      "dipToBlack": {
+        "name": "Dip to Black",
+        "description": "Fade through black"
+      },
+      "dipToWhite": {
+        "name": "Dip to White",
+        "description": "Fade through white"
+      },
+      "wipe": {
+        "name": "Wipe",
+        "description": "Wipe from one clip to another"
+      },
+      "slide": {
+        "name": "Slide",
+        "description": "Slide incoming clip over outgoing"
+      },
+      "zoom": {
+        "name": "Zoom",
+        "description": "Zoom transition between clips"
+      },
+      "push": {
+        "name": "Push",
+        "description": "Push outgoing clip with incoming"
+      },
+      "circleReveal": {
+        "name": "Circle Reveal",
+        "description": "Iris reveal from the center"
+      },
+      "blur": {
+        "name": "Blur Dissolve",
+        "description": "Blur out and back into the next clip"
+      },
+      "whipPan": {
+        "name": "Whip Pan",
+        "description": "Fast motion-blurred pan"
+      },
+      "radialWipe": {
+        "name": "Radial Wipe",
+        "description": "Clock-style angular sweep"
+      },
+      "pixelate": {
+        "name": "Pixelate",
+        "description": "Chunky pixel mosaic through the cut"
+      },
+      "glitch": {
+        "name": "Glitch Cut",
+        "description": "Digital slice displacement"
+      },
+      "blinds": {
+        "name": "Venetian Blinds",
+        "description": "Repeating slat reveal"
+      },
+      "diamondReveal": {
+        "name": "Diamond Reveal",
+        "description": "Geometric center reveal"
+      },
+      "spin": {
+        "name": "Spin",
+        "description": "Rotating scale handoff"
+      },
+      "flip": {
+        "name": "Flip",
+        "description": "Card-style horizontal or vertical flip"
+      },
+      "splitReveal": {
+        "name": "Split Reveal",
+        "description": "Reveal outward from the center"
+      },
+      "flash": {
+        "name": "Flash Cut",
+        "description": "High-energy white flash edit"
+      },
+      "filmBurn": {
+        "name": "Film Burn",
+        "description": "Warm analog light leak through the edit"
+      },
+      "mosaic": {
+        "name": "Mosaic Reveal",
+        "description": "Shuffled tile reveal between shots"
+      },
+      "ripple": {
+        "name": "Ripple",
+        "description": "Fluid horizontal wave distortion"
+      },
+      "pageTurn": {
+        "name": "Page Turn",
+        "description": "Fold the outgoing shot away like a page"
+      },
+      "colorSplit": {
+        "name": "Color Split",
+        "description": "Prismatic channel ghosts through the cut"
+      }
+    },
+    "labels": {
+      "Crossfade": "Crossfade",
+      "DiptoBlack": "Dip to Black",
+      "DiptoWhite": "Dip to White",
+      "Wipe": "Wipe",
+      "WipeLeft": "Wipe Left",
+      "WipeRight": "Wipe Right",
+      "WipeUp": "Wipe Up",
+      "WipeDown": "Wipe Down",
+      "Slide": "Slide",
+      "SlideLeft": "Slide Left",
+      "SlideRight": "Slide Right",
+      "SlideUp": "Slide Up",
+      "SlideDown": "Slide Down",
+      "Push": "Push",
+      "Zoom": "Zoom",
+      "CircleReveal": "Circle Reveal",
+      "BlurDissolve": "Blur Dissolve",
+      "WhipPan": "Whip Pan",
+      "RadialWipe": "Radial Wipe",
+      "Pixelate": "Pixelate",
+      "GlitchCut": "Glitch Cut",
+      "VenetianBlinds": "Venetian Blinds",
+      "DiamondReveal": "Diamond Reveal",
+      "SpinClockwise": "Spin Clockwise",
+      "SpinCounterclockwise": "Spin Counterclockwise",
+      "FlipHorizontal": "Flip Horizontal",
+      "FlipVertical": "Flip Vertical",
+      "SplitHorizontal": "Split Horizontal",
+      "SplitVertical": "Split Vertical",
+      "FlashCut": "Flash Cut",
+      "FilmBurn": "Film Burn",
+      "RedFilmBurn": "Red Film Burn",
+      "CoolLightLeak": "Cool Light Leak",
+      "MosaicReveal": "Mosaic Reveal",
+      "Ripple": "Ripple",
+      "PageTurnLeft": "Page Turn Left",
+      "PageTurnRight": "Page Turn Right",
+      "ColorSplit": "Color Split",
+      "LinearDissolve": "Linear Dissolve",
+      "SlowInDissolve": "Slow In Dissolve",
+      "SlowOutDissolve": "Slow Out Dissolve",
+      "SoftWipeLeft": "Soft Wipe Left",
+      "SoftWipeRight": "Soft Wipe Right",
+      "DiagonalWipe": "Diagonal Wipe",
+      "PushLeft": "Push Left",
+      "PushRight": "Push Right",
+      "PushUp": "Push Up",
+      "PushDown": "Push Down",
+      "ZoomTopLeft": "Zoom Top Left",
+      "ZoomBottomRight": "Zoom Bottom Right",
+      "PunchZoom": "Punch Zoom",
+      "WhipLeft": "Whip Left",
+      "WhipRight": "Whip Right",
+      "WhipUp": "Whip Up",
+      "WhipDown": "Whip Down"
+    },
+    "categories": {
+      "Dissolves": "Dissolves",
+      "Wipes": "Wipes",
+      "Movement": "Movement",
+      "Stylized": "Stylized",
+      "All": "All"
+    }
+  },
+  "search": {
+    "items": {
+      "transform": {
+        "name": "Transform",
+        "description": "Position, scale, and rotate the clip"
+      },
+      "crop": {
+        "name": "Crop",
+        "description": "Crop and frame the clip"
+      },
+      "speed": {
+        "name": "Speed Control",
+        "description": "Control playback speed and time remapping"
+      },
+      "video-effects": {
+        "name": "Visual Effects",
+        "description": "Color, blur, creative, shader, and stylize effects"
+      },
+      "color-grading": {
+        "name": "Color Grading",
+        "description": "Color wheels, curves, LUTs, and HSL adjustments"
+      },
+      "green-screen": {
+        "name": "Green Screen",
+        "description": "Chroma key for green/blue screen removal"
+      },
+      "background-removal": {
+        "name": "Background Removal",
+        "description": "AI-powered background removal"
+      },
+      "masking": {
+        "name": "Masking",
+        "description": "Shape masks to reveal or hide areas"
+      },
+      "motion-tracking": {
+        "name": "Motion Tracking",
+        "description": "Track motion and attach elements"
+      },
+      "pip": {
+        "name": "Picture-in-Picture",
+        "description": "Position clips as picture-in-picture overlays"
+      },
+      "blending": {
+        "name": "Blend Mode",
+        "description": "Blend modes and opacity controls"
+      },
+      "transform-3d": {
+        "name": "3D Transform",
+        "description": "3D rotation and perspective effects"
+      },
+      "keyframes": {
+        "name": "Keyframes",
+        "description": "Animate properties over time"
+      },
+      "transitions": {
+        "name": "Transitions",
+        "description": "Clip-to-clip transitions"
+      },
+      "motion-presets": {
+        "name": "Motion Presets",
+        "description": "Pre-built motion animations"
+      },
+      "audio-effects": {
+        "name": "Audio Effects",
+        "description": "EQ, compressor, reverb, and more"
+      },
+      "audio-ducking": {
+        "name": "Audio Ducking",
+        "description": "Auto-duck music under voice"
+      },
+      "text-properties": {
+        "name": "Text Properties",
+        "description": "Font, size, color, and text styling"
+      },
+      "text-material": {
+        "name": "Text Materials & Shaders",
+        "description": "Browse live shader and Paper material previews for text"
+      },
+      "text-animation": {
+        "name": "Text Animation",
+        "description": "Animate text with presets"
+      },
+      "shape-properties": {
+        "name": "Shape Properties",
+        "description": "Shape fill, stroke, and effects"
+      },
+      "shape-shader-fill": {
+        "name": "Shape Shader Fill",
+        "description": "Apply a live shader material to the selected shape"
+      }
+    },
+    "categories": {
+      "PositionSize": "Position & Size",
+      "Time": "Time",
+      "Video": "Video",
+      "Animation": "Animation",
+      "Audio": "Audio",
+      "Text": "Text",
+      "Shapes": "Shapes",
+      "All": "All"
+    },
+    "clipTypes": {
+      "video": "video",
+      "audio": "audio",
+      "text": "text",
+      "shape": "shape",
+      "image": "image"
+    },
+    "open": "Open {{name}}",
+    "title": "Search Effects",
+    "subtitleClip": "Find tools for the selected {{type}} clip.",
+    "subtitle": "Find effects and tools across the inspector.",
+    "searchLabel": "Search effects",
+    "placeholderClip": "Search effects for {{type}} clip...",
+    "placeholder": "Search all effects and tools...",
+    "clear": "Clear search",
+    "categoryLabel": "Effect category",
+    "emptyTitle": "No effects found",
+    "emptyHint": "Try a different search term or category.",
+    "navigate": "Navigate",
+    "select": "Select"
+  },
+  "compress": {
+    "tiers": {
+      "light": "Light",
+      "balanced": "Balanced",
+      "strong": "Strong"
+    },
+    "hints": {
+      "light": "Best quality",
+      "balanced": "≈720p",
+      "strong": "Smallest"
+    },
+    "readFailed": "Couldn't read that video — try a different file.",
+    "failed": "Compression failed — try a lighter setting.",
+    "title": "Compress Video",
+    "videoFile": "Video file",
+    "choose": "Choose a video to compress...",
+    "reading": "Reading...",
+    "mode": "Compression mode",
+    "quality": "Quality",
+    "targetSize": "Target size",
+    "customTarget": "Custom target size",
+    "custom": "Custom",
+    "estimated": "Estimated output",
+    "from": "from {{size}}",
+    "smaller": "-{{percent}}% smaller",
+    "compressing": "Compressing… {{percent}}%",
+    "progress": "Compression progress",
+    "cancel": "Cancel",
+    "close": "Close",
+    "compress": "Compress"
+  },
+  "screenRecorder": {
+    "title": "Screen Recording",
+    "unsupported": "Screen recording not supported",
+    "unsupportedHint": "Your browser doesn't support screen recording. Please use Chrome, Edge, or Firefox.",
+    "error": "Recording Error",
+    "videoSettings": "Video Settings",
+    "resolution": "Resolution",
+    "frameRate": "Frame Rate",
+    "audioSettings": "Audio Settings",
+    "systemAudio": "System Audio",
+    "microphone": "Microphone",
+    "systemAudioHint": "System audio capture is only available in Chrome and Edge browsers.",
+    "webcam": "Webcam Recording",
+    "webcamAria": "Webcam recording",
+    "webcamResolution": "Webcam Resolution",
+    "webcamHint": "Webcam will be recorded as a separate file, giving you full control in the editor.",
+    "countdown": "Recording will start after a 3-second countdown",
+    "cancel": "Cancel",
+    "requesting": "Requesting Access...",
+    "start": "Start Recording"
+  },
+  "tour": {
+    "skip": "Skip tour",
+    "skipTitle": "Skip Tour",
+    "goToStep": "Go to step {{step}}",
+    "back": "Back",
+    "getStarted": "Get Started",
+    "next": "Next",
+    "mographProgress": "Motion Graphics Tour • Step {{step}} of {{total}}",
+    "steps": {
+      "welcome": {
+        "title": "Welcome to Flameblade Cut",
+        "description": "A quick map of the current editor layout: tools on the left, playback in the center, timeline below, and properties on the right."
+      },
+      "assets": {
+        "title": "Media and Creative Tools",
+        "description": "This left panel changes with the tool rail: import media, add text, graphics, effects, and transitions from here.",
+        "tips": {
+          "0": "Media holds imported videos, audio, and images",
+          "1": "Use the left rail to switch to Text, Graphics, Effects, or Transitions",
+          "2": "Drag assets from this panel onto the timeline",
+          "3": "The import and record controls live at the top of this panel"
+        }
+      },
+      "timeline": {
+        "title": "Timeline",
+        "description": "Arrange clips on tracks, trim edges, split selections, and use the zoom controls on the right side of the timeline bar.",
+        "tips": {
+          "0": "Press S to split the selected clip",
+          "1": "Drag clip edges to trim",
+          "2": "Use Add track when you need another video or audio lane"
+        }
+      },
+      "preview": {
+        "title": "Player",
+        "description": "The center player shows the current frame and playback controls. Crop, fit, and review changes here before export.",
+        "tips": {
+          "0": "Use playback controls under the canvas",
+          "1": "The green dot means live preview is active",
+          "2": "Fullscreen and fit tools are in the player controls"
+        }
+      },
+      "inspector": {
+        "title": "Inspector",
+        "description": "Select a clip to edit its properties. Transform, color, effects, speed, and animation controls appear here.",
+        "tips": {
+          "0": "Use the top tabs to switch between property groups",
+          "1": "Color grading and effects are clip-specific",
+          "2": "Keyframe-capable controls show animation options when a clip is selected"
+        }
+      },
+      "complete": {
+        "title": "You're Ready",
+        "description": "You now know where the main tools live. Use the action rail on the far left to reopen tours, settings, and project utilities."
+      }
+    }
+  },
+  "chat": {
+    "suggestions": {
+      "welcomeTitle": "Add a title that says 'Welcome' for the first 3 seconds",
+      "trimEnd": "Trim 2 seconds off the end of the first clip",
+      "fadeIn": "Add a fade-in to the opening clip",
+      "listTimeline": "List everything currently on my timeline"
+    },
+    "setupEndpoint": "Choose an API format, then enter your endpoint URL and model ID.",
+    "setupPassword": "Set a master password, then add your provider API key.",
+    "setupLocked": "Unlock your encrypted API keys to start the AI editor.",
+    "setupOptional": "Add the optional endpoint API key to start editing.",
+    "intro": "Describe an edit in plain language and the AI will perform it on your timeline.",
+    "introNoProject": "Open or create a project, then describe edits in plain language.",
+    "unlockKeys": "Unlock API keys",
+    "configureEndpoint": "Configure endpoint",
+    "setUpChat": "Set up AI chat",
+    "dryRunOn": "Dry-run on: plans without applying edits",
+    "dryRunOff": "Dry-run off",
+    "autoOn": "Auto-approve on: destructive actions run without confirmation",
+    "autoOff": "Auto-approve off: destructive actions ask first",
+    "undoTurn": "Undo last AI turn",
+    "history": "Conversation history",
+    "newChat": "New chat",
+    "close": "Close",
+    "connectAny": "Connect any compatible model",
+    "connectAnyHint": "Choose the API format, then use your own host and model. Flameblade Cut does not select a vendor or model for you."
+  },
+  "whisper": {
+    "models": {
+      "accurate": {
+        "label": "Accurate · Large V3 Turbo",
+        "downloadSize": "About 760 MB",
+        "description": "Best local accuracy; WebGPU recommended"
+      },
+      "fast": {
+        "label": "Fast · Whisper Tiny",
+        "downloadSize": "About 100 MB",
+        "description": "Fastest option for drafts and lower-memory devices"
+      }
+    }
+  },
+  "notifications": {
+    "mediaNotSaved": "Media could not be saved in browser storage",
+    "replacementNotSaved": "Replacement media could not be saved in browser storage",
+    "keepOriginal": "Keep the original {{name}} so you can relink it after reloading.",
+    "autoSaveUnavailable": "Automatic saving is unavailable",
+    "autoSaveUnavailableHint": "Your edits are still in this tab. Save a project copy and keep the original media files before closing it."
+  },
+  "mobile": {
+    "title": "Your browser needs an update",
+    "body": "Flameblade Cut needs local file access and canvas rendering. Open this page in a current browser to edit on your phone, tablet or computer."
+  }
+}

@@ -8,6 +8,7 @@ import { useProjectStore } from "../stores/project-store";
 import type { ProjectState } from "../stores/project-store";
 import { useUIStore } from "../stores/ui-store";
 import { useSettingsStore } from "../stores/settings-store";
+import { useWorkspaceMode } from "../stores/workspace-mode-store";
 
 vi.mock("../stores/project-store", () => ({
   useProjectStore: vi.fn(),
@@ -21,6 +22,10 @@ vi.mock("./editor/EditorBootstrapGate", () => ({
 
 vi.mock("./pages/EditPage", () => ({
   EditPage: () => null,
+}));
+
+vi.mock("./pages/CreatePage", () => ({
+  CreatePage: () => <div data-testid="desktop-create-page" />,
 }));
 
 vi.mock("./editor/DesktopExportButton", () => ({
@@ -49,6 +54,8 @@ beforeEach(() => {
     },
   });
   useSettingsStore.setState({ settingsOpen: false, settingsTab: "general" });
+  // The app opens on the AI page; the editor-centric cases below start in "edit".
+  useWorkspaceMode.setState({ mode: "edit" });
   (window as unknown as { openreel: unknown }).openreel = {
     platform: "desktop",
     win: { minimize: () => {}, toggleMaximize: () => {}, close: () => {}, isMaximized: async () => false },
@@ -60,6 +67,25 @@ afterEach(() => {
 });
 
 describe("DesktopApp", () => {
+  it("opens on the AI generation page by default", async () => {
+    useWorkspaceMode.setState({ mode: "create" });
+    mockHasProject(false);
+    const view = render(<DesktopApp />);
+    expect(await view.findByTestId("desktop-create-page")).toBeTruthy();
+    expect(view.queryByTestId("desktop-workspace")).toBeNull();
+  });
+
+  it("switches between the AI page and the editor from the title bar", async () => {
+    useWorkspaceMode.setState({ mode: "create" });
+    mockHasProject(true);
+    const view = render(<DesktopApp />);
+    fireEvent.click(view.getByRole("button", { name: /Edit/ }));
+    expect(useWorkspaceMode.getState().mode).toBe("edit");
+    expect(view.getByTestId("desktop-workspace")).toBeTruthy();
+    fireEvent.click(view.getByRole("button", { name: /AI Create/ }));
+    expect(await view.findByTestId("desktop-create-page")).toBeTruthy();
+  });
+
   it("applies the desktop theme class to its root", () => {
     mockHasProject(false);
     const { container } = render(<DesktopApp />);
@@ -76,7 +102,7 @@ describe("DesktopApp", () => {
   it("renders the title bar and workspace when a project is open", () => {
     mockHasProject(true);
     const { getByText, getByTestId } = render(<DesktopApp />);
-    expect(getByText("OpenReel")).toBeTruthy();
+    expect(getByText("Flameblade Cut")).toBeTruthy();
     expect(getByTestId("desktop-workspace")).toBeTruthy();
   });
 

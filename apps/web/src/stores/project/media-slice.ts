@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { i18next } from "@/i18n";
 import type { StoreApi } from "zustand";
 import type { Action, MediaItem } from "@openreel/core";
 import type { ProjectState } from "../project-store";
@@ -173,8 +174,8 @@ export function createMediaSlice(set: Set, get: Get): MediaSlice {
         } catch (err) {
           console.error("[ProjectStore] Failed to persist media blob:", err);
           toast.warning(
-            "Media could not be saved in browser storage",
-            `Keep the original ${file.name} so you can relink it after reloading.`,
+            i18next.t("notifications.mediaNotSaved"),
+            i18next.t("notifications.keepOriginal", { name: file.name }),
           );
         }
 
@@ -409,8 +410,8 @@ export function createMediaSlice(set: Set, get: Get): MediaSlice {
         } catch (error) {
           console.error("[ProjectStore] Failed to persist replacement media:", error);
           toast.warning(
-            "Replacement media could not be saved in browser storage",
-            `Keep the original ${file.name} so you can relink it after reloading.`,
+            i18next.t("notifications.replacementNotSaved"),
+            i18next.t("notifications.keepOriginal", { name: file.name }),
           );
         }
 

@@ -24,6 +24,7 @@ import {
   runCompression,
   formatBytes,
 } from "../../services/video-compressor";
+import { useTranslation } from "react-i18next";
 
 interface CompressDialogProps {
   isOpen: boolean;
@@ -43,6 +44,7 @@ const QUALITY_TIERS: {
 const MB = 1024 * 1024;
 
 export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
+  const { t } = useTranslation();
   const abortRef = useRef<AbortController | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [source, setSource] = useState<CompressionSource | null>(null);
@@ -71,15 +73,15 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
     try {
       const probed = await probeCompressionSource(picked);
       if (!probed) {
-        setError("Couldn't read that video — try a different file.");
+        setError(t("compress.readFailed"));
       }
       setSource(probed);
     } catch {
-      setError("Couldn't read that video — try a different file.");
+      setError(t("compress.readFailed"));
     } finally {
       setProbing(false);
     }
-  }, []);
+  }, [t]);
 
   const targetBytes = (() => {
     if (sizePresetId === "custom") {
@@ -126,13 +128,13 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
       onClose();
     } catch (err) {
       if ((err as Error)?.name !== "AbortError") {
-        setError("Compression failed — try a lighter setting.");
+        setError(t("compress.failed"));
       }
     } finally {
       setCompressing(false);
       abortRef.current = null;
     }
-  }, [file, source, plan, onClose]);
+  }, [t, file, source, plan, onClose]);
 
   if (!isOpen) return null;
 
@@ -151,7 +153,7 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
       <Layout
         header={
           <DialogHeader
-            title="Compress Video"
+            title={t("compress.title")}
             onOpenChange={(open) => {
               if (!open && !compressing) {
                 resetSource();
@@ -165,7 +167,7 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
           <LayoutContent>
         <div className="space-y-4">
           <FileInput
-            label="Video file"
+            label={t("compress.videoFile")}
             isLabelHidden
             value={file}
             onChange={(picked) => {
@@ -177,14 +179,14 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
             }}
             accept="video/*"
             mode="dropzone"
-            placeholder="Choose a video to compress..."
+            placeholder={t("compress.choose")}
             isDisabled={compressing}
             isLoading={probing}
             width="100%"
             description={
               file
                 ? probing
-                  ? "Reading..."
+                  ? t("compress.reading")
                   : source
                     ? `${source.width}x${source.height} - ${formatBytes(originalBytes)}`
                     : formatBytes(originalBytes)
@@ -195,12 +197,12 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
           {source && !compressing && (
             <>
               <ToolcraftSegmentedControl<"quality" | "size">
-                ariaLabel="Compression mode"
+                ariaLabel={t("compress.mode")}
                 value={mode}
                 onChange={setMode}
                 options={[
-                  { value: "quality", label: "Quality" },
-                  { value: "size", label: "Target size" },
+                  { value: "quality", label: t("compress.quality") },
+                  { value: "size", label: t("compress.targetSize") },
                 ]}
               />
 
@@ -209,7 +211,7 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
                   {QUALITY_TIERS.map((tier) => (
                     <SelectableCard
                       key={tier.value}
-                      label={tier.label}
+                      label={t(`compress.tiers.${tier.value}`)}
                       isSelected={quality === tier.value}
                       onChange={() => setQuality(tier.value)}
                       padding={2}
@@ -217,10 +219,10 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
                       className="text-center"
                     >
                       <Text type="label" weight="bold" display="block">
-                        {tier.label}
+                        {t(`compress.tiers.${tier.value}`)}
                       </Text>
                       <Text type="supporting" color="secondary" display="block" className="text-[10px]">
-                        {tier.hint}
+                        {t(`compress.hints.${tier.value}`)}
                       </Text>
                     </SelectableCard>
                   ))}
@@ -246,20 +248,20 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
                   </div>
                   <div className="flex items-center gap-2">
                     <SelectableCard
-                      label="Custom target size"
+                      label={t("compress.customTarget")}
                       isSelected={sizePresetId === "custom"}
                       onChange={() => setSizePresetId("custom")}
                       padding={2}
                       variant={sizePresetId === "custom" ? "green" : "default"}
                     >
                       <Text type="label" weight="bold">
-                        Custom
+                        {t("compress.custom")}
                       </Text>
                     </SelectableCard>
                     {sizePresetId === "custom" && (
                       <div className="flex-1">
                         <ToolcraftNumberInputControl
-                          label="Custom target size"
+                          label={t("compress.customTarget")}
                           isLabelHidden
                           min={1}
                           value={customMB ? Number(customMB) : null}
@@ -279,7 +281,7 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
                 <Card variant="muted" padding={3} className="border border-border">
                   <div className="flex items-center justify-between">
                     <Text type="supporting" color="secondary">
-                      Estimated output
+                      {t("compress.estimated")}
                     </Text>
                     <Text type="label" weight="bold">
                       {plan.width}x{plan.height} - ~{formatBytes(estimated)}
@@ -288,10 +290,10 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
                   {savings > 0 && originalBytes > 0 && (
                     <div className="mt-1 flex items-center justify-between">
                       <Text type="supporting" color="secondary">
-                        from {formatBytes(originalBytes)}
+                        {t("compress.from", { size: formatBytes(originalBytes) })}
                       </Text>
                       <Text type="supporting" color="active" weight="bold">
-                        -{savings}% smaller
+                        {t("compress.smaller", { percent: savings })}
                       </Text>
                     </div>
                   )}
@@ -305,11 +307,11 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
               <div className="flex items-center gap-2">
                 <Loader2 size={16} className="animate-spin text-primary" aria-hidden />
                 <Text type="body" weight="bold">
-                Compressing… {Math.round(progress * 100)}%
+                {t("compress.compressing", { percent: Math.round(progress * 100) })}
                 </Text>
               </div>
               <ProgressBar
-                label="Compression progress"
+                label={t("compress.progress")}
                 isLabelHidden
                 value={Math.round(progress * 100)}
                 max={100}
@@ -333,14 +335,14 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
         <div className="flex justify-end gap-2">
           {compressing ? (
             <Button
-              label="Cancel"
+              label={t("compress.cancel")}
               variant="ghost"
               onClick={() => abortRef.current?.abort()}
             />
           ) : (
             <>
               <Button
-                label="Close"
+                label={t("compress.close")}
                 variant="ghost"
                 onClick={() => {
                   resetSource();
@@ -348,7 +350,7 @@ export function CompressDialog({ isOpen, onClose }: CompressDialogProps) {
                 }}
               />
               <Button
-                label="Compress"
+                label={t("compress.compress")}
                 variant="primary"
                 onClick={handleCompress}
                 isDisabled={!source || probing}

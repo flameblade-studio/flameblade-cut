@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import React from "react";
 import type { ToolcraftContextMenuOption as ContextMenuOption } from "@openreel/ui";
 import {
@@ -30,6 +31,7 @@ export function useClipContextMenuItems({
   track,
   onClose,
 }: ClipContextMenuProps): ContextMenuOption[] {
+  const { t } = useTranslation();
   const {
     copyClips,
     duplicateClip,
@@ -131,10 +133,10 @@ export function useClipContextMenuItems({
   };
 
   const getClipTypeLabel = () => {
-    if (isVideo) return "Video Clip";
-    if (isAudio) return "Audio Clip";
-    if (isImage) return "Image Clip";
-    return "Clip";
+    if (isVideo) return t("timeline.clipMenu.videoClip");
+    if (isAudio) return t("timeline.clipMenu.audioClip");
+    if (isImage) return t("timeline.clipMenu.imageClip");
+    return t("timeline.clipMenu.clip");
   };
 
   const getClipTypeIcon = () => {
@@ -158,29 +160,29 @@ export function useClipContextMenuItems({
     },
     { type: "divider" },
     {
-      label: "Copy Clip",
+      label: t("timeline.clipMenu.copyClip"),
       icon: <Copy size={14} aria-hidden />,
       onClick: handleCopy,
     },
     {
-      label: "Duplicate",
+      label: t("timeline.clipMenu.duplicate"),
       icon: <Layers size={14} aria-hidden />,
       onClick: handleDuplicate,
     },
     {
-      label: "Select All Clips on Track",
+      label: t("timeline.clipMenu.selectAllOnTrack"),
       icon: <ListChecks size={14} aria-hidden />,
       onClick: handleSelectTrackClips,
     },
     { type: "divider" },
     {
-      label: "Split at Playhead",
+      label: t("timeline.clipMenu.splitAtPlayhead"),
       icon: <Scissors size={14} aria-hidden />,
       isDisabled: !isPlayheadOnClip,
       onClick: handleSplit,
     },
     {
-      label: "Close Gap to Previous",
+      label: t("timeline.clipMenu.closeGap"),
       icon: <ArrowLeftToLine size={14} aria-hidden />,
       isDisabled: !hasGapBeforeClip,
       onClick: handleCloseGap,
@@ -190,16 +192,16 @@ export function useClipContextMenuItems({
   if (isVideo || isImage) {
     items.push({
       type: "section",
-      title: "Effects",
+      title: t("timeline.clipMenu.effects"),
       items: [
         {
-          label: "Copy Effects",
+          label: t("timeline.clipMenu.copyEffects"),
           icon: <Sparkles size={14} aria-hidden />,
           isDisabled: !hasEffects,
           onClick: handleCopyEffects,
         },
         {
-          label: "Paste Effects",
+          label: t("timeline.clipMenu.pasteEffects"),
           icon: <Sparkles size={14} aria-hidden />,
           isDisabled: !hasCopiedEffects,
           onClick: handlePasteEffects,
@@ -210,7 +212,7 @@ export function useClipContextMenuItems({
 
   if (isVideoWithAudio) {
     items.push({
-      label: "Separate Audio",
+      label: t("timeline.clipMenu.separateAudio"),
       icon: <Music size={14} aria-hidden />,
       onClick: handleSeparateAudio,
     });
@@ -219,16 +221,16 @@ export function useClipContextMenuItems({
   if (isAudio) {
     items.push({
       type: "section",
-      title: "Audio",
+      title: t("timeline.filters.audio"),
       items: [
         {
-          label: "Copy Audio Effects",
+          label: t("timeline.clipMenu.copyAudioEffects"),
           icon: <Volume2 size={14} aria-hidden />,
           isDisabled: !hasEffects,
           onClick: handleCopyEffects,
         },
         {
-          label: "Paste Audio Effects",
+          label: t("timeline.clipMenu.pasteAudioEffects"),
           icon: <Volume2 size={14} aria-hidden />,
           isDisabled: !hasCopiedEffects,
           onClick: handlePasteEffects,
@@ -240,12 +242,12 @@ export function useClipContextMenuItems({
   items.push(
     { type: "divider" },
     {
-      label: "Ripple Delete",
+      label: t("timeline.clipMenu.rippleDelete"),
       icon: <Trash2 size={14} aria-hidden />,
       onClick: handleRippleDelete,
     },
     {
-      label: "Delete",
+      label: t("timeline.clipMenu.delete"),
       icon: <Trash2 size={14} aria-hidden />,
       onClick: handleDelete,
     },

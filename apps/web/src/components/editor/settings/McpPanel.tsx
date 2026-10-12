@@ -6,7 +6,9 @@ import { ToolcraftIconButton as IconButton } from "@openreel/ui";
 import { ToolcraftText as Text } from "@openreel/ui";
 import { useSettingsStore } from "../../../stores/settings-store";
 import { toast } from "../../../stores/notification-store";
+import { i18next } from "@/i18n";
 import type { OpenReelMcpStatus } from "../../../types/global";
+import { useTranslation } from "react-i18next";
 
 const isDesktop = (): boolean =>
   typeof window !== "undefined" && window.openreel?.platform === "desktop";
@@ -29,13 +31,14 @@ function clientConfigSnippet(shimPath: string): string {
 async function copy(value: string, label: string): Promise<void> {
   try {
     await navigator.clipboard.writeText(value);
-    toast.success(`${label} copied`);
+    toast.success(i18next.t("settings.mcp.copied", { label }));
   } catch {
-    toast.error("Copy failed", "Clipboard is unavailable.");
+    toast.error(i18next.t("settings.mcp.copyFailed"), i18next.t("settings.mcp.clipboardUnavailable"));
   }
 }
 
 export const McpPanel: React.FC = () => {
+  const { t } = useTranslation();
   const mcpAutoAllow = useSettingsStore((s) => s.mcpAutoAllowTrustedLocal);
   const setMcpAutoAllow = useSettingsStore((s) => s.setMcpAutoAllowTrustedLocal);
 
@@ -71,11 +74,11 @@ export const McpPanel: React.FC = () => {
     if (!bridge) return;
     try {
       setStatus(await bridge.rotateToken());
-      toast.success("Token rotated", "Update your MCP clients with the new token.");
+      toast.success(t("settings.mcp.tokenRotated"), t("settings.mcp.tokenRotatedHint"));
     } catch (err) {
-      toast.error("Rotate failed", err instanceof Error ? err.message : "Unknown error");
+      toast.error(t("settings.mcp.rotateFailed"), err instanceof Error ? err.message : t("settings.unknownError"));
     }
-  }, []);
+  }, [t]);
 
   const handleTest = useCallback(async () => {
     const bridge = window.openreel?.mcp;
@@ -86,31 +89,29 @@ export const McpPanel: React.FC = () => {
       if (result.ok) {
         setToolCount(result.toolCount ?? 0);
         toast.success(
-          "Connection OK",
-          `Server responded with ${result.toolCount ?? 0} tools.`,
+          t("settings.mcp.connectionOk"),
+          t("settings.mcp.toolsResponded", { count: result.toolCount ?? 0 }),
         );
       } else {
         setToolCount(null);
-        toast.error("Connection failed", result.message ?? "No response");
+        toast.error(t("settings.mcp.connectionFailed"), result.message ?? t("settings.mcp.noResponse"));
       }
     } catch (err) {
-      toast.error("Connection failed", err instanceof Error ? err.message : "Unknown error");
+      toast.error(t("settings.mcp.connectionFailed"), err instanceof Error ? err.message : t("settings.unknownError"));
     } finally {
       setTesting(false);
     }
-  }, []);
+  }, [t]);
 
   if (!isDesktop()) {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
         <Plug size={28} className="mb-3 text-text-muted" />
         <Text type="body" color="primary" className="text-sm font-medium">
-          Desktop only
+          {t("settings.mcp.desktopOnly")}
         </Text>
         <Text type="supporting" color="secondary" className="mt-1 max-w-sm text-xs">
-          The MCP server runs inside the OpenReel desktop app, letting external AI
-          clients (Claude Desktop, Cursor, Cline) edit your project. Open OpenReel
-          on desktop to configure it.
+          {t("settings.mcp.desktopOnlyHint")}
         </Text>
       </div>
     );
@@ -127,18 +128,16 @@ export const McpPanel: React.FC = () => {
       <div className="space-y-4">
         <div>
           <Text type="body" color="primary" className="text-sm font-medium">
-            MCP Server
+            {t("settings.mcp.server")}
           </Text>
           <Text type="supporting" color="secondary" className="mt-0.5 text-xs">
-            A local Model Context Protocol server lets AI clients drive this
-            editor through the same tools as the built-in chat. It listens on
-            loopback only and requires the bearer token below.
+            {t("settings.mcp.serverHint")}
           </Text>
         </div>
 
         <div className="flex items-center gap-2">
           <Text type="supporting" color="secondary" className="w-20 shrink-0 text-xs">
-            Status
+            {t("settings.mcp.status")}
           </Text>
           <Text
             type="supporting"
@@ -152,20 +151,20 @@ export const McpPanel: React.FC = () => {
                 status?.running ? "bg-status-success" : "bg-text-muted"
               }`}
             />
-            {status?.running ? "Running" : "Stopped"}
+            {status?.running ? t("settings.mcp.running") : t("settings.mcp.stopped")}
           </Text>
         </div>
 
         <div className="flex items-center gap-2">
           <Text type="supporting" color="secondary" className="w-20 shrink-0 text-xs">
-            Tools
+            {t("settings.mcp.tools")}
           </Text>
           <Text type="supporting" color="secondary" className="text-xs">
             {toolCount === null
               ? status?.running
-                ? "Checking catalog…"
+                ? t("settings.mcp.checking")
                 : "—"
-              : `${toolCount} available`}
+              : t("settings.mcp.available", { count: toolCount })}
           </Text>
         </div>
 
@@ -177,8 +176,8 @@ export const McpPanel: React.FC = () => {
             {status?.url || "—"}
           </code>
           <IconButton
-            label="Copy URL"
-            onClick={() => status?.url && copy(status.url, "URL")}
+            label={t("settings.mcp.copyUrl")}
+            onClick={() => status?.url && copy(status.url, t("settings.mcp.url"))}
             variant="ghost"
             size="sm"
             icon={<Copy size={14} aria-hidden />}
@@ -188,13 +187,13 @@ export const McpPanel: React.FC = () => {
 
         <div className="flex items-center gap-2">
           <Text type="supporting" color="secondary" className="w-20 shrink-0 text-xs">
-            Token
+            {t("settings.mcp.token")}
           </Text>
           <code className="flex-1 font-mono text-xs bg-background rounded px-3 py-2 text-text-secondary truncate">
             {tokenDisplay}
           </code>
           <IconButton
-            label={revealToken ? "Hide token" : "Show token"}
+            label={revealToken ? t("settings.mcp.hideToken") : t("settings.mcp.showToken")}
             onClick={() => setRevealToken((v) => !v)}
             variant="ghost"
             size="sm"
@@ -202,15 +201,15 @@ export const McpPanel: React.FC = () => {
             className="text-text-muted hover:bg-background-tertiary hover:text-text-primary"
           />
           <IconButton
-            label="Copy token"
-            onClick={() => status?.token && copy(status.token, "Token")}
+            label={t("settings.mcp.copyToken")}
+            onClick={() => status?.token && copy(status.token, t("settings.mcp.token"))}
             variant="ghost"
             size="sm"
             icon={<Copy size={14} aria-hidden />}
             className="text-text-muted hover:bg-background-tertiary hover:text-text-primary"
           />
           <IconButton
-            label="Rotate token"
+            label={t("settings.mcp.rotateToken")}
             onClick={handleRotate}
             variant="ghost"
             size="sm"
@@ -220,7 +219,7 @@ export const McpPanel: React.FC = () => {
         </div>
 
         <Button
-          label={testing ? "Testing..." : "Test connection"}
+          label={testing ? t("settings.mcp.testing") : t("settings.mcp.test")}
           size="sm"
           variant="secondary"
           onClick={handleTest}
@@ -234,18 +233,18 @@ export const McpPanel: React.FC = () => {
       <div className="space-y-3">
         <div>
           <Text type="body" color="primary" className="text-sm font-medium">
-            Available Workflows
+            {t("settings.mcp.workflows")}
           </Text>
           <Text type="supporting" color="secondary" className="mt-0.5 text-xs">
-            The live catalog includes focused tools for each desktop workspace.
+            {t("settings.mcp.workflowsHint")}
           </Text>
         </div>
         <div className="grid grid-cols-2 gap-2">
           {[
-            ["Video Editor", "Tracks, clips, effects, transitions, audio and subtitles"],
-            ["Motion Creator", "Layers, animation, shaders, masks, effects and render queue"],
-            ["Creation & 3D", "Scenes, products, materials, cameras, rigging and previews"],
-            ["Project Operations", "Inspect, import, save, undo, export and diagnostics"],
+            [t("settings.mcp.wfEditor"), t("settings.mcp.wfEditorHint")],
+            [t("settings.mcp.wfMotion"), t("settings.mcp.wfMotionHint")],
+            [t("settings.mcp.wfCreation"), t("settings.mcp.wfCreationHint")],
+            [t("settings.mcp.wfProject"), t("settings.mcp.wfProjectHint")],
           ].map(([label, description]) => (
             <div key={label} className="rounded-md border border-border bg-background px-3 py-2.5">
               <Text type="supporting" color="primary" className="text-xs font-medium">
@@ -264,11 +263,10 @@ export const McpPanel: React.FC = () => {
       <div className="space-y-4">
         <div>
           <Text type="body" color="primary" className="text-sm font-medium">
-            Client Setup
+            {t("settings.mcp.clientSetup")}
           </Text>
           <Text type="supporting" color="secondary" className="mt-0.5 text-xs">
-            Add this to your MCP client config (Claude Desktop, Cursor, Cline).
-            The shim connects to the running app automatically.
+            {t("settings.mcp.clientSetupHint")}
           </Text>
         </div>
         <div className="relative">
@@ -276,9 +274,9 @@ export const McpPanel: React.FC = () => {
             {clientConfigSnippet(status?.shimPath ?? "")}
           </pre>
           <IconButton
-            label="Copy config"
+            label={t("settings.mcp.copyConfig")}
             onClick={() =>
-              copy(clientConfigSnippet(status?.shimPath ?? ""), "Config")
+              copy(clientConfigSnippet(status?.shimPath ?? ""), t("settings.mcp.config"))
             }
             variant="ghost"
             size="sm"
@@ -292,21 +290,19 @@ export const McpPanel: React.FC = () => {
 
       <div className="space-y-4">
         <Text type="body" color="primary" className="text-sm font-medium">
-          Trusted Local
+          {t("settings.mcp.trusted")}
         </Text>
         <div className="flex items-center justify-between">
           <div>
             <Text type="supporting" color="secondary" className="text-sm">
-              Auto-allow destructive actions
+              {t("settings.mcp.autoAllow")}
             </Text>
             <Text type="supporting" color="secondary" className="mt-0.5 max-w-md text-xs">
-              When off, destructive or expensive tool calls over MCP
-              are refused with a confirmation-required notice. Turn on only if you
-              trust every connected local client.
+              {t("settings.mcp.autoAllowHint")}
             </Text>
           </div>
           <ToolcraftSwitchControl
-            ariaLabel="Auto-allow destructive actions"
+            ariaLabel={t("settings.mcp.autoAllow")}
             checked={mcpAutoAllow}
             onCheckedChange={setMcpAutoAllow}
             showLabel={false}

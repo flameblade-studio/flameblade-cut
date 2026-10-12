@@ -23,6 +23,9 @@ import {
 } from "./ipc/aurora";
 import { getKeyStore } from "./ipc/keychain";
 import { cloudFetch } from "./ipc/cloud";
+import { registerComfyIpc, stopLaunchedComfy } from "./ipc/comfy";
+import { registerVoiceIpc } from "./ipc/voice";
+import { registerOpenAiTextIpc } from "./ipc/openai-text";
 import { applyWindowControl, windowIsMaximized } from "./window-controls";
 import { installApplicationMenu, sendMenuAction } from "./app-menu";
 import { attachUnsavedGuard, markQuitting } from "./lifecycle";
@@ -40,6 +43,8 @@ import {
   fileWriters,
   showSaveDialog,
   showOpenDialog,
+  showOpenFilesDialog,
+  showOpenFolderDialog,
   readTextFile,
   readFileBytes,
   writeTextFile,
@@ -134,6 +139,13 @@ function createWindow(): void {
   });
   attachUnsavedGuard(win);
   installNavigationGuard(win, APP_INDEX);
+  // Keep the custom title bar's maximize/restore glyph in sync with the window
+  // (double-click on the title bar, Win+Up, snapping all change it too).
+  const sendMaximized = (): void => {
+    if (!win.isDestroyed()) win.webContents.send(CHANNELS.windowMaximizedChanged, win.isMaximized());
+  };
+  win.on("maximize", sendMaximized);
+  win.on("unmaximize", sendMaximized);
   win.loadURL(APP_INDEX);
 }
 
@@ -143,6 +155,8 @@ app.whenReady().then(() => {
   handle(CHANNELS.probeHardware, z.undefined(), () => collectHardwareInfo());
   handle(CHANNELS.fsShowSaveDialog, saveDialogArgsSchema, showSaveDialog);
   handle(CHANNELS.fsShowOpenDialog, openDialogArgsSchema, showOpenDialog);
+  handle(CHANNELS.fsShowOpenFilesDialog, openDialogArgsSchema, showOpenFilesDialog);
+  handle(CHANNELS.fsShowOpenFolderDialog, z.undefined(), () => showOpenFolderDialog());
   handle(CHANNELS.fsReadFile, readFileArgsSchema, readTextFile);
   handle(CHANNELS.fsWriteFile, writeFileArgsSchema, writeTextFile);
   handle(CHANNELS.fsOpenWrite, z.object({ path: z.string() }), ({ path }) => fileWriters.open(path));
@@ -258,6 +272,9 @@ app.whenReady().then(() => {
   handle(CHANNELS.mcpGetStatus, z.undefined(), () => getMcpStatus());
   handle(CHANNELS.mcpRotateToken, z.undefined(), () => rotateMcpToken());
   handle(CHANNELS.mcpTestConnection, z.undefined(), () => testMcpConnection());
+  registerComfyIpc();
+  registerVoiceIpc();
+  registerOpenAiTextIpc({ chat: CHANNELS.openaiTextChat, keyStatus: CHANNELS.openaiTextKeyStatus });
   createWindow();
   initAutoUpdater();
   startMcpServer().catch((error) =>
@@ -309,4 +326,6 @@ app.on("will-quit", () => {
   disposeAuroraClient();
   cancelAllExports();
   void stopMcpServer();
+  // A ComfyUI started by this app must not outlive it (taskkill /T on Windows).
+  void stopLaunchedComfy().catch((error) => console.error("[comfy] stop on quit failed:", error));
 });

@@ -1,5 +1,6 @@
 import { cloneProjectForEdit } from "./project/clone-project-for-edit";
 import { create } from "zustand";
+import { i18next } from "@/i18n";
 import { subscribeWithSelector } from "zustand/middleware";
 import type {
   Project,
@@ -367,6 +368,11 @@ export interface ProjectState {
   updateTextAnimation: (
     clipId: string,
     animation: TextAnimation,
+  ) => TextClip | null;
+  /** Replaces a text clip's metadata (undoable). */
+  updateTextMetadata: (
+    clipId: string,
+    metadata: import("@openreel/core").ClipMetadata,
   ) => TextClip | null;
   updateTextTransform: (
     clipId: string,
@@ -2966,8 +2972,8 @@ export const useProjectStore = create<ProjectState>()(
               if (failureNotificationId) return;
               failureNotificationId = useNotificationStore.getState().addNotification({
                 type: "warning",
-                title: "Automatic saving is unavailable",
-                message: "Your edits are still in this tab. Save a project copy and keep the original media files before closing it.",
+                title: i18next.t("notifications.autoSaveUnavailable"),
+                message: i18next.t("notifications.autoSaveUnavailableHint"),
                 duration: 0,
               });
             });

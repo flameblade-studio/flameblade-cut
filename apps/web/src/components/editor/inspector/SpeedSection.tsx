@@ -10,6 +10,7 @@ import type { Clip } from "@openreel/core";
 import { getMediaItemCapabilities, getSpeedEngine } from "@openreel/core";
 import { useProjectStore } from "../../../stores/project-store";
 import { MockToggle } from "./shell/InspectorControls";
+import { useTranslation } from "react-i18next";
 
 interface SpeedSectionProps {
   clip: Clip;
@@ -28,6 +29,7 @@ const SPEED_PRESETS = [
 ];
 
 export const SpeedSection: React.FC<SpeedSectionProps> = ({ clip }) => {
+  const { t } = useTranslation();
   const speedEngine = getSpeedEngine();
   const { project } = useProjectStore();
 
@@ -149,7 +151,7 @@ export const SpeedSection: React.FC<SpeedSectionProps> = ({ clip }) => {
         {SPEED_PRESETS.map((preset) => (
           <ClickableCard
             key={preset.value}
-            label={`Set speed to ${preset.label}`}
+            label={t("inspector.speed.setSpeed", { speed: preset.label })}
             onClick={() => handleSpeedPreset(preset.value)}
             className={`px-3 py-2 text-xs font-medium rounded-lg transition-all ${
               currentSpeed === preset.value
@@ -165,7 +167,7 @@ export const SpeedSection: React.FC<SpeedSectionProps> = ({ clip }) => {
       <div className="space-y-2">
         <div className="flex gap-2">
           <ToolcraftTextInputControl
-            label="Custom Speed"
+            label={t("inspector.speed.customSpeed")}
             value={customSpeed}
             onChange={setCustomSpeed}
             onBlur={handleCustomSpeed}
@@ -182,7 +184,7 @@ export const SpeedSection: React.FC<SpeedSectionProps> = ({ clip }) => {
           </Text>
         </div>
         <Text type="supporting" color="secondary" className="text-xs">
-          Range: 0.1× (slowest) to 100× (fastest)
+          {t("inspector.speed.range")}
         </Text>
       </div>
 
@@ -193,18 +195,18 @@ export const SpeedSection: React.FC<SpeedSectionProps> = ({ clip }) => {
           className="flex items-center justify-between border border-border"
         >
           <Text type="supporting" color="secondary" className="text-xs">
-            Apply speed to audio
+            {t("inspector.speed.applyToAudio")}
           </Text>
           <MockToggle
             checked={affectAudio}
             onChange={setAffectAudio}
-            ariaLabel="Apply speed to audio"
+            ariaLabel={t("inspector.speed.applyToAudio")}
           />
         </Card>
       )}
 
       <Button
-        label={isReversed ? "Reversed" : "Reverse Clip"}
+        label={isReversed ? t("inspector.speed.reversed") : t("inspector.speed.reverseClip")}
         icon={<RotateCcw size={14} />}
         variant={isReversed ? "primary" : "secondary"}
         size="sm"
@@ -218,11 +220,11 @@ export const SpeedSection: React.FC<SpeedSectionProps> = ({ clip }) => {
             <div className="flex items-center gap-2">
               <Sparkles size={14} className="text-primary" />
               <Text type="supporting" color="secondary" className="text-xs">
-                Smooth Slow Motion
+                {t("inspector.speed.smoothSlowMo")}
               </Text>
             </div>
             <MockToggle
-              ariaLabel="Smooth Slow Motion"
+              ariaLabel={t("inspector.speed.smoothSlowMo")}
               checked={clip.smoothSlowMo ?? false}
               onChange={(checked) => {
                 const tracks = project.timeline.tracks.map((track) => {
@@ -246,14 +248,14 @@ export const SpeedSection: React.FC<SpeedSectionProps> = ({ clip }) => {
           {clip.smoothSlowMo && (
             <div className="space-y-1">
               <Selector
-                label="Quality"
+                label={t("inspector.speed.quality")}
                 size="sm"
                 width="100%"
                 value={clip.interpolationQuality ?? "medium"}
                 options={[
-                  { label: "Low (faster)", value: "low" },
-                  { label: "Medium", value: "medium" },
-                  { label: "High (slower)", value: "high" },
+                  { label: t("inspector.speed.qualityLow"), value: "low" },
+                  { label: t("inspector.speed.qualityMedium"), value: "medium" },
+                  { label: t("inspector.speed.qualityHigh"), value: "high" },
                 ]}
                 onChange={(value) => {
                   const tracks = project.timeline.tracks.map((track) => {
@@ -277,7 +279,7 @@ export const SpeedSection: React.FC<SpeedSectionProps> = ({ clip }) => {
                 }}
               />
               <Text type="supporting" color="secondary" className="text-[10px]">
-                Uses optical flow to generate smooth in-between frames
+                {t("inspector.speed.opticalFlowHint")}
               </Text>
             </div>
           )}
@@ -287,11 +289,11 @@ export const SpeedSection: React.FC<SpeedSectionProps> = ({ clip }) => {
       {(currentSpeed !== 1 || isReversed) && (
         <Card variant="muted" padding={3} className="border border-border">
           <Text type="supporting" color="secondary" className="mb-1 block text-xs">
-            Current Settings
+            {t("inspector.speed.currentSettings")}
           </Text>
           <Text type="body" color="primary" className="block text-sm">
-            Speed: {currentSpeed}× {isReversed && "• Reversed"}
-            {clip.smoothSlowMo && " • Smooth"}
+            {t("inspector.speed.speedValue", { speed: currentSpeed })}{isReversed && t("inspector.speed.reversedSuffix")}
+            {clip.smoothSlowMo && t("inspector.speed.smoothSuffix")}
           </Text>
         </Card>
       )}

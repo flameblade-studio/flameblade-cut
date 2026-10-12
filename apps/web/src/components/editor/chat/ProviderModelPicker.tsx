@@ -18,6 +18,7 @@ import {
   getSecret,
   isSessionUnlocked,
 } from "../../../services/secure-storage";
+import { useTranslation } from "react-i18next";
 
 const PROVIDERS: ReadonlyArray<{ id: LlmProvider; label: string }> = [
   { id: "openai-compatible", label: "OpenAI-compatible" },
@@ -31,6 +32,7 @@ interface ProviderModelPickerProps {
 export function ProviderModelPicker({
   disabled = false,
 }: ProviderModelPickerProps): JSX.Element {
+  const { t } = useTranslation();
   const provider = useSettingsStore((s) => s.defaultLlmProvider);
   const baseUrl = useSettingsStore((s) => s.llmBaseUrl);
   const model = useSettingsStore((s) => s.llmModel);
@@ -108,10 +110,10 @@ export function ProviderModelPicker({
         <div className="space-y-3 p-3">
           <div>
             <Text type="body" color="primary" className="text-[12px] font-medium">
-              Connect any compatible model
+              {t("chat.connectAny")}
             </Text>
             <Text type="supporting" color="secondary" className="mt-0.5 block text-[10px] leading-relaxed">
-              Choose the API format, then use your own host and model. OpenReel does not select a vendor or model for you.
+              {t("chat.connectAnyHint")}
             </Text>
           </div>
 

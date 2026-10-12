@@ -11,6 +11,7 @@ import {
   AlignVerticalJustifyEnd,
 } from "@/icons/lucide-compat";
 import type { Transform } from "@openreel/core";
+import { useTranslation } from "react-i18next";
 
 interface AlignmentSectionProps {
   clipType: string | null;
@@ -27,6 +28,7 @@ export const AlignmentSection: React.FC<AlignmentSectionProps> = ({
   canvasHeight,
   onTransformChange,
 }) => {
+  const { t } = useTranslation();
   const usesNormalizedPosition =
     clipType === "text" ||
     clipType === "shape" ||
@@ -62,25 +64,25 @@ export const AlignmentSection: React.FC<AlignmentSectionProps> = ({
     <div className="space-y-3">
       <div className="flex items-center gap-2">
         <Text type="supporting" color="secondary" className="w-16">
-          Horizontal
+          {t("inspector.alignment.horizontal")}
         </Text>
         <div className="flex gap-1">
           <IconButton
-            label="Align Left"
+            label={t("inspector.alignment.alignLeft")}
             icon={<AlignHorizontalJustifyStart size={14} aria-hidden />}
             size="sm"
             variant="ghost"
             onClick={() => handleAlign("x", 0)}
           />
           <IconButton
-            label="Center Horizontally"
+            label={t("inspector.alignment.centerH")}
             icon={<AlignHorizontalJustifyCenter size={14} aria-hidden />}
             size="sm"
             variant="ghost"
             onClick={() => handleAlign("x", 0.5)}
           />
           <IconButton
-            label="Align Right"
+            label={t("inspector.alignment.alignRight")}
             icon={<AlignHorizontalJustifyEnd size={14} aria-hidden />}
             size="sm"
             variant="ghost"
@@ -90,25 +92,25 @@ export const AlignmentSection: React.FC<AlignmentSectionProps> = ({
       </div>
       <div className="flex items-center gap-2">
         <Text type="supporting" color="secondary" className="w-16">
-          Vertical
+          {t("inspector.alignment.vertical")}
         </Text>
         <div className="flex gap-1">
           <IconButton
-            label="Align Top"
+            label={t("inspector.alignment.alignTop")}
             icon={<AlignVerticalJustifyStart size={14} aria-hidden />}
             size="sm"
             variant="ghost"
             onClick={() => handleAlign("y", 0)}
           />
           <IconButton
-            label="Center Vertically"
+            label={t("inspector.alignment.centerV")}
             icon={<AlignVerticalJustifyCenter size={14} aria-hidden />}
             size="sm"
             variant="ghost"
             onClick={() => handleAlign("y", 0.5)}
           />
           <IconButton
-            label="Align Bottom"
+            label={t("inspector.alignment.alignBottom")}
             icon={<AlignVerticalJustifyEnd size={14} aria-hidden />}
             size="sm"
             variant="ghost"
@@ -117,7 +119,7 @@ export const AlignmentSection: React.FC<AlignmentSectionProps> = ({
         </div>
       </div>
       <Button
-        label="Center on Canvas"
+        label={t("inspector.alignment.centerCanvas")}
         variant="secondary"
         size="sm"
         onClick={handleCenterBoth}
@@ -125,8 +127,8 @@ export const AlignmentSection: React.FC<AlignmentSectionProps> = ({
       />
       <Text type="supporting" color="secondary" className="block text-center text-[9px] text-fg-muted">
         {usesNormalizedPosition
-          ? "Aligns the overlay anchor in canvas space"
-          : "Aligns the media anchor using pixel offsets from center"}
+          ? t("inspector.alignment.overlayHint")
+          : t("inspector.alignment.mediaHint")}
       </Text>
     </div>
   );
