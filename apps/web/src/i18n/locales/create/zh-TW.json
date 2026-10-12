@@ -78,16 +78,16 @@
       "ref2v": "參考生影片"
     },
     "references": "參考圖（角色、道具、場景）",
-    "referencesTip": "每張只放一個主體：人物（正面／側面／背面最好）、道具或場景，背景乾淨、不要有文字。宣傳海報、設定集整頁放進來會被縮得很小，AI 幾乎看不清。在每張旁邊寫一句「這是誰／什麼、長什麼樣」，效果會好很多。",
+    "referencesTip": "設定集、海報、截圖都可以直接放；開啟「AI 整理」時，AI 會自己認出每張圖的人物與重點。想更準的話，在旁邊寫一句「這是誰」。",
     "add": "新增",
     "addReferences": "新增參考圖",
     "removeReference": "移除第 {{index}} 張參考圖",
     "needReferences": "請至少加入 1 張參考圖",
     "tooManyReferences": "參考圖最多 12 張",
     "referenceCount": "參考圖 ×{{count}}",
-    "referenceDescribe": "這張是什麼？例：角色 Lin Keyun，長棕髮、白襯衫、黑長褲",
+    "referenceDescribe": "這是誰／什麼？（選填）例：林可芸的設定圖",
     "referenceDescribeLabel": "第 {{index}} 張參考圖的說明",
-    "ref2vPromptTip": "寫成一個連續鏡頭：誰在哪裡、穿什麼、做什麼、說什麼。人名請寫英文或拼音（例：Lin Keyun），並和參考圖說明用同一個名字。不要寫分鏡表或多段劇情；建議 5–10 秒。"
+    "ref2vPromptTip": "照你的習慣寫就好，整段劇本也可以；AI 會濃縮成一個連續鏡頭。建議 5–10 秒。"
   },
   "feed": {
     "title": "生成紀錄",
@@ -196,25 +196,17 @@
     "minutesSeconds": "{{minutes}} 分 {{seconds}} 秒"
   },
   "translate": {
-    "toggle": "送出前自動翻成英文（建議）",
-    "toggleHint": "LTX 看英文較能準確畫出物件、顏色與數量；你的中文原文會留在紀錄裡",
-    "noChinese": "目前沒有中文，會照原文送出",
-    "engine": "翻譯引擎",
-    "engineLocal": "本機翻譯・免費",
-    "engineOpenai": "OpenAI",
+    "toggle": "送出前讓 AI 整理成模型看得懂的英文（建議）",
+    "toggleHint": "照你的習慣寫就好：中文、整段劇本都可以，海報和設定集也能直接當參考圖。AI 會翻成英文、濃縮成一個鏡頭、整理每張參考圖；你的原文會留在紀錄裡。",
+    "directorHint": "每個鏡頭都會由 AI 各自整理成英文",
+    "engine": "整理方式",
+    "engineLocal": "本機 Gemma・免費",
+    "engineOpenai": "OpenAI・更聰明",
+    "localNote": "用 LTX 內建的 Gemma 小模型在你的電腦上整理，不會上傳；每次約多花 30 秒。",
+    "openaiNote": "提示詞和參考圖會傳給 OpenAI；它會自動裁掉參考圖上的文字與多餘部分，效果最好。",
     "openaiNoKey": "尚未設定 OpenAI 金鑰，請到「設定 → API 金鑰」輸入",
-    "localNote": "第一次使用會下載翻譯模型（{{size}}），之後可離線使用",
-    "preview": "英文提示詞",
-    "previewButton": "預覽翻譯",
-    "previewEmpty": "按「預覽翻譯」看看實際送出的英文；可以直接修改，改過的版本會照樣送出",
-    "edited": "已手動修改，會照這段英文送出",
-    "stale": "中文已修改，送出時會重新翻譯",
-    "translating": "翻譯中…",
-    "downloading": "下載翻譯模型 {{loaded}} / {{total}} MB",
-    "failed": "翻譯失敗，未送出：{{message}}",
     "sentChip": "英文",
-    "sentTitle": "實際送出的英文：{{prompt}}（點一下複製）",
-    "directorHint": "每個鏡頭都會依這個設定各自翻譯"
+    "sentTitle": "實際送出的英文：{{prompt}}（點一下複製）"
   },
   "errors": {
     "model": {

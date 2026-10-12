@@ -385,6 +385,8 @@ declare global {
           jsonSchema: { name: string; schema: Record<string, unknown> };
           maxOutputTokens?: number;
           reasoningEffort?: "low" | "medium" | "high";
+          /** Vision input: at most 12 base64 png/jpeg/webp data URLs, 8 MB each, 24 MB total. */
+          images?: readonly { dataUrl: string; detail?: "low" | "high" | "auto" }[];
         }): Promise<{ text: string; model: string }>;
         keyStatus(): Promise<{ configured: boolean }>;
       };

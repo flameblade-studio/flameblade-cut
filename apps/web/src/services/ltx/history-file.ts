@@ -74,14 +74,23 @@ function isImageInput(value: unknown): value is ImageInput {
 /**
  * Fills request fields added after a record was written: `referenceImages`
  * (added with `ref2v`) is `[]` when missing, invalid entries are dropped;
- * `promptOriginal` (added with prompt translation) is null unless a string.
+ * `promptOriginal` (added with prompt translation) is null unless a string;
+ * `autoPlan` (added with shot planning) is null unless a known engine.
  */
 function normalizeRequest(request: GenerationRecord["request"]): GenerationRequest {
   const raw = (request as { referenceImages?: unknown }).referenceImages;
   const referenceImages = Array.isArray(raw) ? raw.filter(isImageInput) : [];
   const original = (request as { promptOriginal?: unknown }).promptOriginal;
   const promptOriginal = typeof original === "string" && original.trim() !== "" ? original : null;
-  return { ...request, referenceImages, promptOriginal };
+  const plan = (request as { autoPlan?: unknown }).autoPlan;
+  const autoPlan = plan === "openai" || plan === "local" ? plan : null;
+  return { ...request, referenceImages, promptOriginal, autoPlan };
+}
+
+/** `sentPrompt` was added with shot planning; older records have none. */
+function normalizeRecord(record: GenerationRecord): GenerationRecord {
+  const sent = (record as { sentPrompt?: unknown }).sentPrompt;
+  return { ...record, request: normalizeRequest(record.request), sentPrompt: typeof sent === "string" ? sent : null };
 }
 
 function isShot(value: unknown): value is StoryboardShot {
@@ -129,7 +138,7 @@ export function parseHistoryFile(text: string, finishedAt: string): HistoryFileD
   if (!isRecord(json)) throw new Error("history file is not a JSON object");
   const records = (Array.isArray(json.records) ? json.records : [])
     .filter(isGenerationRecord)
-    .map((record) => ({ ...record, request: normalizeRequest(record.request) }))
+    .map(normalizeRecord)
     .map((record) =>
       isInFlight(record.status)
         ? { ...record, status: "failed" as const, error: "interrupted", finishedAt: record.finishedAt ?? finishedAt }

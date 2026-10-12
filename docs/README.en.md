@@ -18,13 +18,13 @@
 
 ---
 
-> **In development (0.2.0 preview).** Features and UI are still being polished; bug reports are welcome.
+> **In development (0.3.0 preview).** Features and UI are still being polished; bug reports are welcome.
 
 ## What it does
 
 | Feature | Description |
 |---|---|
-| **AI generation** | Text-to-video, image-to-video, first/last frame, video extension, and multi-image reference-to-video. Runs [LTX-2.5](https://huggingface.co/Lightricks) on your own PC (through ComfyUI); videos come with sound. |
+| **AI generation** | Text-to-video, image-to-video, first/last frame, video extension, and multi-image reference-to-video. Runs [LTX-2.5](https://huggingface.co/Lightricks) on your own PC (through ComfyUI); videos come with sound. Write the way you like — any language, a whole screenplay, posters or design sheets as references — and "AI tidy-up" turns it into an English shot and reference descriptions the model understands (local Gemma, free and offline; or your OpenAI key, which also crops text off the references). |
 | **Director board** | Write one line per shot, generate every shot with one click, and have the results placed on the editing timeline in order. |
 | **Editing** | Multi-track timeline, trim and split, transitions, filters and color, keyframes, speed changes, green-screen removal, automatic vertical reframing, automatic silence removal. |
 | **Captions** | Local speech recognition (Whisper) for automatic captions, Traditional Chinese conversion, line breaking, bilingual captions, word highlighting, social-media safe frames, SRT and transcript export. |

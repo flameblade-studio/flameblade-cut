@@ -7,12 +7,24 @@
  */
 import type { HighlightClip, LengthRange, TranscriptSegment } from "./types";
 
+/**
+ * One vision input. `dataUrl` must be `data:image/(png|jpeg|webp);base64,...`;
+ * the main process allows at most 12 images, 8 MB of base64 each and 24 MB in
+ * total, and rejects anything else.
+ */
+export interface OpenAiTextImageInput {
+  readonly dataUrl: string;
+  readonly detail?: "low" | "high" | "auto";
+}
+
 export interface OpenAiTextChatRequest {
   readonly instructions: string;
   readonly input: string;
   readonly jsonSchema: { readonly name: string; readonly schema: Record<string, unknown> };
   readonly maxOutputTokens?: number;
   readonly reasoningEffort?: "low" | "medium" | "high";
+  /** Optional images sent after `input` in one user message. */
+  readonly images?: readonly OpenAiTextImageInput[];
 }
 
 /** Shape of `window.openreel.openaiText` (preload namespace). */

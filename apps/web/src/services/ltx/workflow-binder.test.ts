@@ -32,6 +32,7 @@ function request(overrides: Partial<GenerationRequest> = {}): GenerationRequest 
     referenceImages: [],
     extendFromRecordId: null,
     enhancePrompt: true,
+    autoPlan: null,
     ...overrides,
   };
 }

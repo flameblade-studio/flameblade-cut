@@ -206,7 +206,7 @@ export function RecordCard({ record, queuePosition, active, ...actions }: Record
       <div className="px-5 pb-3 pt-3">
         <PromptText
           prompt={request.promptOriginal ?? request.prompt}
-          sent={request.promptOriginal === null ? null : request.prompt}
+          sent={record.sentPrompt ?? (request.promptOriginal === null ? null : request.prompt)}
         />
       </div>
       <div className="px-5">

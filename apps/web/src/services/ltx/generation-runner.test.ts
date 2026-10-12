@@ -9,6 +9,7 @@ import {
 } from "./generation-runner";
 import { FakeComfyTransport } from "./fake-comfy-transport";
 import { LTX_TRANSFORMER_FILES, modelErrorKind } from "./model-choice";
+import type { ShotPlanner } from "./shot-plan/types";
 import type { ComfyApiPrompt } from "./workflow-binder";
 import type { ReferenceSheetComposer } from "./reference-sheet";
 import {
@@ -36,6 +37,7 @@ function request(overrides: Partial<GenerationRequest> = {}): GenerationRequest 
     referenceImages: [],
     extendFromRecordId: null,
     enhancePrompt: false,
+    autoPlan: null,
     ...overrides,
   };
 }
@@ -53,6 +55,7 @@ function record(id: string, req: GenerationRequest, extra: Partial<GenerationRec
     startedAt: null,
     finishedAt: null,
     comfyPromptId: null,
+    sentPrompt: null,
     ...extra,
   };
 }
@@ -72,6 +75,10 @@ interface Harness {
   composeReferenceSheet: ReturnType<typeof vi.fn<Parameters<ReferenceSheetComposer>, ReturnType<ReferenceSheetComposer>>>;
   add(r: GenerationRecord): void;
   postedPrompt(index?: number): ComfyApiPrompt;
+  /** The last prompt posted to ComfyUI (the video job comes after any planning jobs). */
+  videoPrompt(): ComfyApiPrompt;
+  setOpenAiPlanner(planner: ShotPlanner | null): void;
+  translateFallback: ReturnType<typeof vi.fn<[string], Promise<string>>>;
 }
 
 function harness(settingsOverride: Partial<LtxSettings> = {}): Harness {
@@ -86,8 +93,12 @@ function harness(settingsOverride: Partial<LtxSettings> = {}): Harness {
       positions: sources.map((_, i) => `Panel ${i + 1}`),
     }),
   );
+  let openAiPlanner: ShotPlanner | null = null;
+  const translateFallback = vi.fn<[string], Promise<string>>(async (text) => `EN(${text})`);
   const runner = new GenerationRunner({
     transport,
+    openAiPlanner: () => openAiPlanner,
+    translateFallback,
     getSettings: () => settings,
     now: () => NOW,
     newId: () => "session-1",
@@ -111,6 +122,14 @@ function harness(settingsOverride: Partial<LtxSettings> = {}): Harness {
     add: (r) => records.set(r.id, r),
     postedPrompt: (index = 0) =>
       (transport.requestsTo("POST", "/prompt")[index].body as { prompt: ComfyApiPrompt }).prompt,
+    videoPrompt: () => {
+      const posts = transport.requestsTo("POST", "/prompt");
+      return (posts[posts.length - 1].body as { prompt: ComfyApiPrompt }).prompt;
+    },
+    setOpenAiPlanner: (planner) => {
+      openAiPlanner = planner;
+    },
+    translateFallback,
   };
 }
 
@@ -495,5 +514,108 @@ describe("launchArgsWithMain", () => {
   it("guarantees a single leading main.py", () => {
     expect(launchArgsWithMain(["main.py", "--port", "8188"])).toEqual(["main.py", "--port", "8188"]);
     expect(launchArgsWithMain(["--port", "8188"])).toEqual(["main.py", "--port", "8188"]);
+  });
+});
+
+describe("shot planning", () => {
+  /** Lets the planning jobs (polled once a second) and the video queueing run. */
+  async function runPlanning(): Promise<void> {
+    for (let i = 0; i < 6; i += 1) {
+      await vi.advanceTimersByTimeAsync(1_000);
+      await flush();
+    }
+  }
+
+  function promptText(prompt: ComfyApiPrompt): string {
+    return String(nodeByTitle(prompt, "PrimitiveStringMultiline", "Prompt")?.inputs.value);
+  }
+
+  it("lets the local Gemma planner write the shot from the user's own words", async () => {
+    const h = harness();
+    h.transport.textJobReply = () => ({ "plan.text.shot": "Lin Keyun stands by Kaohsiung harbour at dusk." });
+    h.add(record("rec-1", request({ prompt: "林可芸站在傍晚的高雄港邊", autoPlan: "local" })));
+    h.runner.enqueue("rec-1");
+    await runPlanning();
+
+    const planning = h.postedPrompt(0);
+    expect(Object.values(planning).some((node) => node.class_type === "TextGenerate")).toBe(true);
+    expect(promptText(h.videoPrompt())).toBe("Lin Keyun stands by Kaohsiung harbour at dusk.");
+    expect(h.records.get("rec-1")?.error ?? null).toBeNull();
+    expect(h.records.get("rec-1")).toMatchObject({ status: "running", sentPrompt: "Lin Keyun stands by Kaohsiung harbour at dusk." });
+    // The record keeps the user's own words.
+    expect(h.records.get("rec-1")?.request.prompt).toBe("林可芸站在傍晚的高雄港邊");
+  });
+
+  it("describes each ref2v reference locally and sends the Ingredients prompt", async () => {
+    const h = harness();
+    const images = [0, 1].map((i) => ({ path: `D:/refs/ref-${i}.png`, name: `ref-${i}.png` }));
+    images.forEach((image, i) => h.transport.binaryFiles.set(image.path, new Uint8Array([i])));
+    h.transport.textJobReply = (prompt): Record<string, string> =>
+      "plan.text.shot" in prompt
+        ? { "plan.text.shot": "SHOT: Both walk along the harbour." }
+        : { "plan.text.0": "A woman with long brown hair.", "plan.text.1": "PANEL 2: A man in a blue jacket." };
+    h.add(record("rec-1", request({ mode: "ref2v", referenceImages: images, autoPlan: "local" })));
+    h.runner.enqueue("rec-1");
+    await runPlanning();
+
+    expect(h.transport.uploads.map((upload) => upload.filename)).toEqual(["rec-1-ref-1.png", "rec-1-ref-2.png", "rec-1-sheet.png"]);
+    expect(promptText(h.videoPrompt())).toBe(
+      [
+        "### Reference Sheet Description",
+        "**Panel 1:** A woman with long brown hair.",
+        "**Panel 2:** A man in a blue jacket.",
+        "### Target Description",
+        "Both walk along the harbour.",
+      ].join("\n"),
+    );
+  });
+
+  it("uses the OpenAI planner's crops when it has a key", async () => {
+    const h = harness();
+    const images = [{ path: "D:/refs/sheet.png", name: "sheet.png" }];
+    h.transport.binaryFiles.set("D:/refs/sheet.png", new Uint8Array([7]));
+    const crop = { x: 0.1, y: 0.2, width: 0.5, height: 0.6 };
+    h.setOpenAiPlanner({
+      plan: async () => ({ shot: "She smiles at the camera.", panels: [{ description: "A woman in a white shirt.", crop }] }),
+    });
+    h.add(record("rec-1", request({ mode: "ref2v", referenceImages: images, autoPlan: "openai" })));
+    h.runner.enqueue("rec-1");
+    await runPlanning();
+
+    const [sources] = h.composeReferenceSheet.mock.calls[0];
+    expect(sources[0]?.image).toMatchObject({ description: "A woman in a white shirt.", crop });
+    expect(promptText(h.videoPrompt())).toContain("**Panel 1:** A woman in a white shirt.");
+  });
+
+  it("falls back to the local planner when OpenAI fails", async () => {
+    const h = harness();
+    h.setOpenAiPlanner({ plan: async () => Promise.reject(new Error("openai-text:http: 500")) });
+    h.transport.textJobReply = () => ({ "plan.text.shot": "A lantern sways in the breeze." });
+    h.add(record("rec-1", request({ prompt: "燈籠在風中搖晃", autoPlan: "openai" })));
+    h.runner.enqueue("rec-1");
+    await runPlanning();
+
+    expect(promptText(h.videoPrompt())).toBe("A lantern sways in the breeze.");
+  });
+
+  it("falls back to plain translation when no planner works", async () => {
+    const h = harness();
+    h.transport.textJobReply = () => ({});
+    h.add(record("rec-1", request({ prompt: "燈籠在風中搖晃", autoPlan: "local" })));
+    h.runner.enqueue("rec-1");
+    await runPlanning();
+
+    expect(h.translateFallback).toHaveBeenCalledWith("燈籠在風中搖晃");
+    expect(promptText(h.videoPrompt())).toBe("EN(燈籠在風中搖晃)");
+  });
+
+  it("sends the prompt unchanged and records no planned text when planning is off", async () => {
+    const h = harness();
+    h.add(record("rec-1", request()));
+    h.runner.enqueue("rec-1");
+    await flush();
+
+    expect(h.transport.requestsTo("POST", "/prompt")).toHaveLength(1);
+    expect(h.records.get("rec-1")?.sentPrompt).toBeNull();
   });
 });

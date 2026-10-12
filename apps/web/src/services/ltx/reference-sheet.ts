@@ -20,6 +20,7 @@ import {
   MIN_REFERENCE_IMAGES,
   type GenerationAspect,
   type ImageInput,
+  type NormalizedRect,
 } from "./types";
 
 export interface ImageSize {
@@ -272,13 +273,35 @@ export type ReferenceSheetComposer = (
   aspect: GenerationAspect,
 ) => Promise<ComposedReferenceSheet>;
 
+/** Pixel box of a 0..1 crop, at least 1×1 and inside the image. */
+export function cropPixels(crop: NormalizedRect, width: number, height: number): { sx: number; sy: number; sw: number; sh: number } {
+  const sx = Math.min(width - 1, Math.max(0, Math.round(crop.x * width)));
+  const sy = Math.min(height - 1, Math.max(0, Math.round(crop.y * height)));
+  const sw = Math.max(1, Math.min(width - sx, Math.round(crop.width * width)));
+  const sh = Math.max(1, Math.min(height - sy, Math.round(crop.height * height)));
+  return { sx, sy, sw, sh };
+}
+
+/** Decodes a reference image, keeping only its `crop` when the shot planner set one. */
+async function decodeCropped(source: ReferenceSheetSource): Promise<ImageBitmap> {
+  const full = await createImageBitmap(new Blob([source.bytes]));
+  const crop = source.image.crop;
+  if (crop === undefined) return full;
+  try {
+    const { sx, sy, sw, sh } = cropPixels(crop, full.width, full.height);
+    return await createImageBitmap(full, sx, sy, sw, sh);
+  } finally {
+    full.close();
+  }
+}
+
 /** Browser implementation of `ReferenceSheetComposer` (createImageBitmap + OffscreenCanvas). */
 export const composeReferenceSheetPng: ReferenceSheetComposer = async (sources, aspect) => {
   const bitmaps: ImageBitmap[] = [];
   try {
     for (const source of sources) {
       try {
-        bitmaps.push(await createImageBitmap(new Blob([source.bytes])));
+        bitmaps.push(await decodeCropped(source));
       } catch (error) {
         const reason = error instanceof Error ? error.message : String(error);
         throw new ReferenceSheetError(`Could not read reference image "${source.image.name}": ${reason}`);

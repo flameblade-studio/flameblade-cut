@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { draftProblem, draftToRequest, promptPatch, translationPlan, type CreateDraft } from "./draft-store";
+import { draftProblem, draftToRequest, promptPatch, type CreateDraft } from "./draft-store";
 
 const REFS = Array.from({ length: 8 }, (_, i) => ({ path: `D:/refs/${i}.png`, name: `${i}.png` }));
 
@@ -18,9 +18,6 @@ function draft(overrides: Partial<CreateDraft> = {}): CreateDraft {
     fixedSeed: 42,
     autoTranslate: true,
     translationEngine: "local",
-    englishPreview: null,
-    englishPreviewSource: null,
-    englishEdited: false,
     ...overrides,
   };
 }
@@ -47,31 +44,19 @@ describe("draft-store ref2v", () => {
   });
 });
 
-describe("translationPlan", () => {
+describe("shot planning", () => {
   const zh = "一輛紅色機車";
 
-  it("sends text as written when translation is off or there is no Chinese", () => {
-    expect(translationPlan(draft({ prompt: zh, autoTranslate: false }))).toEqual({ kind: "none" });
-    expect(translationPlan(draft({ prompt: "A red scooter" }))).toEqual({ kind: "none" });
+  it("sends the prompt as written and asks for the chosen planner when AI tidying is on", () => {
+    const request = draftToRequest(draft({ tab: "t2v", prompt: zh, translationEngine: "openai" }), "t2v");
+    expect(request).toMatchObject({ prompt: zh, promptOriginal: null, autoPlan: "openai" });
   });
 
-  it("translates when there is no preview or the prompt changed since the preview", () => {
-    expect(translationPlan(draft({ prompt: zh }))).toEqual({ kind: "translate" });
-    expect(translationPlan(draft({ prompt: `${zh}駛過`, englishPreview: "A red scooter", englishPreviewSource: zh, englishEdited: true }))).toEqual({
-      kind: "translate",
-    });
-    expect(translationPlan(draft({ prompt: zh, englishPreview: "   ", englishPreviewSource: zh }))).toEqual({ kind: "translate" });
+  it("asks for no planner when AI tidying is off", () => {
+    expect(draftToRequest(draft({ tab: "t2v", prompt: zh, autoTranslate: false }), "t2v").autoPlan).toBeNull();
   });
 
-  it("sends the (possibly edited) preview made for this exact prompt", () => {
-    expect(translationPlan(draft({ prompt: ` ${zh} `, englishPreview: " A red scooter ", englishPreviewSource: zh, englishEdited: true }))).toEqual({
-      kind: "use",
-      english: "A red scooter",
-    });
-  });
-
-  it("requests carry no original until translated, and restoring a prompt drops the preview", () => {
-    expect(draftToRequest(draft({ tab: "t2v", prompt: zh }), "t2v").promptOriginal).toBeNull();
-    expect(promptPatch(zh)).toEqual({ prompt: zh, englishPreview: null, englishPreviewSource: null, englishEdited: false });
+  it("puts a prompt back into the form", () => {
+    expect(promptPatch(zh)).toEqual({ prompt: zh });
   });
 });
